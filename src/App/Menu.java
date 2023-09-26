@@ -115,8 +115,6 @@ public class Menu extends javax.swing.JFrame {
             }
         });
         jPanel2.add(ventas, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 380, 250, 40));
-
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/fondoopciones.jpg"))); // NOI18N
         jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 250, 640));
 
         panelprincipal.setBackground(new java.awt.Color(255, 255, 255));
