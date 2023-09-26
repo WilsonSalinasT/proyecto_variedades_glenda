@@ -34,7 +34,7 @@ public class Nueva_venta extends javax.swing.JPanel {
         jLabel1.setBackground(new java.awt.Color(51, 0, 255));
         jLabel1.setFont(new java.awt.Font("Segoe UI", 2, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(51, 51, 255));
-        jLabel1.setText("Nueva Ventas");
+        jLabel1.setText("Nueva Venta");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -43,7 +43,7 @@ public class Nueva_venta extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(420, 420, 420)
                 .addComponent(jLabel1)
-                .addContainerGap(460, Short.MAX_VALUE))
+                .addContainerGap(469, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
