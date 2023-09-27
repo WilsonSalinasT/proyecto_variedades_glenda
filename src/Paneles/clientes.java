@@ -4,17 +4,32 @@
  */
 package Paneles;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author novastar
  */
 public class clientes extends javax.swing.JPanel {
 
+    int filasPorPagina = 20; // Cantidad de filas que se mostrarán en cada página
+    int paginaActual = 1; // Página actual
+    int totalPaginas = 1; // Total de páginas
+    String terminoBusqueda = ""; // Término de búsqueda actual
+
     /**
      * Creates new form Nueva_venta
      */
     public clientes() {
         initComponents();
+        cargarTabla();
     }
 
     /**
@@ -29,7 +44,7 @@ public class clientes extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tableClientes = new javax.swing.JTable();
         jTextField1 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
@@ -64,15 +79,28 @@ public class clientes extends javax.swing.JPanel {
                 .addContainerGap(28, Short.MAX_VALUE))
         );
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tableClientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
                 "N°", "Nombre", "Apellido", "Genero", "Correo eletronico"
             }
-        ));
-        jScrollPane1.setViewportView(jTable1);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, true, true, true, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tableClientes);
+        if (tableClientes.getColumnModel().getColumnCount() > 0) {
+            tableClientes.getColumnModel().getColumn(0).setMinWidth(60);
+            tableClientes.getColumnModel().getColumn(0).setPreferredWidth(50);
+            tableClientes.getColumnModel().getColumn(0).setMaxWidth(70);
+        }
 
         jButton1.setText("Buscar");
 
@@ -90,23 +118,23 @@ public class clientes extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(165, 165, 165)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 30, 30)
-                        .addComponent(jButton5))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(23, 23, 23)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 786, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 819, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton2)
-                            .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(137, Short.MAX_VALUE))
+                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE)
+                            .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(180, 180, 180)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(29, 29, 29)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30)
+                        .addComponent(jButton5)))
+                .addContainerGap(48, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -122,13 +150,86 @@ public class clientes extends javax.swing.JPanel {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButton2)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton3)
                         .addGap(18, 18, 18)
                         .addComponent(jButton4)))
                 .addGap(93, 93, 93))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void cargarTabla() {
+        DefaultTableModel modeloTabla = (DefaultTableModel) tableClientes.getModel();
+        modeloTabla.setRowCount(0); // Limpiar los datos existentes en la tabla
+
+        PreparedStatement ps;
+        ResultSet rs;
+        ResultSetMetaData rsmd;
+        int columnas;
+        boolean foundData = false;
+
+        try
+        {
+            Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
+
+            ps = conn.prepareStatement("SELECT COUNT(*) AS TotalFilas FROM Cliente WHERE nombre LIKE ? OR apellido LIKE ?");
+            ps.setString(1, "%" + terminoBusqueda + "%");
+            ps.setString(2, "%" + terminoBusqueda + "%");
+            rs = ps.executeQuery();
+
+            int cantidadFilas = 0;
+            if (rs.next())
+            {
+                cantidadFilas = rs.getInt("TotalFilas");
+            }
+
+            totalPaginas = (int) Math.ceil((double) cantidadFilas / filasPorPagina);
+
+            if (paginaActual < 1)
+            {
+                paginaActual = 1;
+            } else if (paginaActual > totalPaginas)
+            {
+                paginaActual = totalPaginas;
+            }
+
+            int offset = (paginaActual - 1) * filasPorPagina;
+            if (offset < 0)
+            {
+                offset = 0;
+            }
+
+            ps = conn.prepareStatement("SELECT ROW_NUMBER() OVER(ORDER BY nombre) AS NumRegistro, nombre, apellido, genero, correo_electronico FROM Cliente WHERE nombre LIKE ? OR apellido LIKE ? ORDER BY nombre OFFSET ? ROWS FETCH NEXT ? ROWS ONLY");
+            ps.setString(1, "%" + terminoBusqueda + "%");
+            ps.setString(2, "%" + terminoBusqueda + "%");
+            ps.setInt(3, offset);
+            ps.setInt(4, filasPorPagina);
+            rs = ps.executeQuery();
+            rsmd = rs.getMetaData();
+            columnas = rsmd.getColumnCount();
+
+            while (rs.next())
+            {
+                Object[] fila = new Object[columnas];
+                for (int indice = 0; indice < columnas; indice++)
+                {
+                    fila[indice] = rs.getObject(indice + 1);
+                }
+                modeloTabla.addRow(fila);
+                foundData = true;
+            }
+
+            if (!foundData)
+            {
+                JOptionPane.showMessageDialog(null, "No se encontraron datos");
+            }
+
+//        Contable_Registro.setText("Cantidad de filas: " + cantidadFilas + " - Página " + paginaActual + " de " + totalPaginas);
+        } catch (SQLException e)
+        {
+            JOptionPane.showMessageDialog(null, e.toString());
+        }
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -140,7 +241,7 @@ public class clientes extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JTable tableClientes;
     // End of variables declaration//GEN-END:variables
 }
