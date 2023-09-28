@@ -4,6 +4,7 @@
  */
 package App;
 
+import Paneles.Listado_Productos;
 import Paneles.Nueva_venta;
 import Paneles.clientes;
 import Paneles.productos;
@@ -204,7 +205,10 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_proveedorActionPerformed
 
     private void productosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_productosActionPerformed
-        productos p2 = new productos();
+       // jTabbedPane1.setSelectedIndex(11);
+       
+        
+        Listado_Productos p2 = new Listado_Productos();
         p2.setSize(1024, 640);
         p2.setLocation(0, 0);
 
