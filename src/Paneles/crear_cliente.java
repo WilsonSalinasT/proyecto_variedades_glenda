@@ -4,6 +4,7 @@
  */
 package Paneles;
 
+import static App.Menu.panelprincipal;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -29,13 +30,18 @@ import javax.swing.ButtonGroup;
  */
 public class crear_cliente extends javax.swing.JPanel {
 
-     ButtonGroup rg_Sexo = new ButtonGroup();
+    TextPrompt holder;
+    ButtonGroup rg_Sexo = new ButtonGroup();
+
     /**
+     *
      * Creates new form crear_cliente
      */
     public crear_cliente() {
         initComponents();
-        
+        TextPrompt holder = new TextPrompt("####-####", txttelefono);
+        TextPrompt holdere = new TextPrompt("alguien@example.com", txtcorreo);
+
         rg_Sexo.add(rbfemenino);
         rg_Sexo.add(rbmasculino);
 
@@ -155,6 +161,11 @@ public class crear_cliente extends javax.swing.JPanel {
         });
 
         btnatras.setText("Atras");
+        btnatras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnatrasActionPerformed(evt);
+            }
+        });
 
         txtnombre.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -205,6 +216,9 @@ public class crear_cliente extends javax.swing.JPanel {
                 txtcorreoKeyTyped(evt);
             }
         });
+
+        lbfecha.setBackground(new java.awt.Color(255, 255, 255));
+        lbfecha.setForeground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -315,7 +329,6 @@ public class crear_cliente extends javax.swing.JPanel {
         String telefono = txttelefono.getText().trim();
         String correo = txtcorreo.getText().trim();
         String fechaRegistro = lbfecha.getText().trim();
-        
 
         StringBuilder camposVacios = new StringBuilder("Los siguientes campos están vacíos:");
 
@@ -392,65 +405,67 @@ public class crear_cliente extends javax.swing.JPanel {
     private void txtcorreoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtcorreoFocusLost
         String correo = txtcorreo.getText().trim();
 
-        if (isValidEmailAddress(correo)) {
+        if (isValidEmailAddress(correo))
+        {
             // La dirección de correo electrónico es válida.
             // Puedes realizar acciones adicionales aquí si es necesario.
-        } else {
+        } else
+        {
             // La dirección de correo electrónico no es válida.
             // Muestra un mensaje de error o realiza alguna acción de retroalimentación.
             JOptionPane.showMessageDialog(null, "Correo electrónico no válido", "Error", JOptionPane.ERROR_MESSAGE);
             txtcorreo.requestFocus(); // Devuelve el foco al campo de correo electrónico.
         }
-    
+
     }//GEN-LAST:event_txtcorreoFocusLost
 
     private void txtnombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtnombreKeyTyped
-       char c = evt.getKeyChar(); // Obtener el carácter ingresado
+        char c = evt.getKeyChar(); // Obtener el carácter ingresado
 
-    if (txtnombre.getText().isEmpty() && Character.isWhitespace(c))
-    {
-        evt.consume(); // Consumir el evento si es un espacio en blanco en la primera letra
-    } else if (!Character.isLetter(c) && !Character.isWhitespace(c))
-    {
-        evt.consume(); // Consumir el evento si no es una letra o espacio en blanco
-    } else if (txtnombre.getText().length() >= 50)
-    {
-        evt.consume(); // Consumir el evento si se ha alcanzado la longitud máxima
-    }
+        if (txtnombre.getText().isEmpty() && Character.isWhitespace(c))
+        {
+            evt.consume(); // Consumir el evento si es un espacio en blanco en la primera letra
+        } else if (!Character.isLetter(c) && !Character.isWhitespace(c))
+        {
+            evt.consume(); // Consumir el evento si no es una letra o espacio en blanco
+        } else if (txtnombre.getText().length() >= 50)
+        {
+            evt.consume(); // Consumir el evento si se ha alcanzado la longitud máxima
+        }
     }//GEN-LAST:event_txtnombreKeyTyped
 
     private void txtapellidoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtapellidoKeyTyped
-            char c = evt.getKeyChar(); // Obtener el carácter ingresado
+        char c = evt.getKeyChar(); // Obtener el carácter ingresado
 
-    if (txtapellido.getText().isEmpty() && Character.isWhitespace(c))
-    {
-        evt.consume(); // Consumir el evento si es un espacio en blanco en la primera letra
-    } else if (!Character.isLetter(c) && !Character.isWhitespace(c))
-    {
-        evt.consume(); // Consumir el evento si no es una letra o espacio en blanco
-    } else if (txtapellido.getText().length() >= 50)
-    {
-        evt.consume(); // Consumir el evento si se ha alcanzado la longitud máxima
-    }
+        if (txtapellido.getText().isEmpty() && Character.isWhitespace(c))
+        {
+            evt.consume(); // Consumir el evento si es un espacio en blanco en la primera letra
+        } else if (!Character.isLetter(c) && !Character.isWhitespace(c))
+        {
+            evt.consume(); // Consumir el evento si no es una letra o espacio en blanco
+        } else if (txtapellido.getText().length() >= 50)
+        {
+            evt.consume(); // Consumir el evento si se ha alcanzado la longitud máxima
+        }
     }//GEN-LAST:event_txtapellidoKeyTyped
 
     private void jtadireccionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtadireccionKeyTyped
         char c = evt.getKeyChar(); // Obtener el carácter ingresado
 
-    if (jtadireccion.getText().isEmpty() && Character.isWhitespace(c))
-    {
-        evt.consume(); // Consumir el evento si es un espacio en blanco en la primera letra
-    } else if (!Character.isLetterOrDigit(c) && !Character.isWhitespace(c))
-    {
-        evt.consume(); // Consumir el evento si no es una letra, un número o espacio en blanco
-    } else if (jtadireccion.getText().length() >= 300)
-    {
-        evt.consume(); // Consumir el evento si se ha alcanzado la longitud máxima
-    }
+        if (jtadireccion.getText().isEmpty() && Character.isWhitespace(c))
+        {
+            evt.consume(); // Consumir el evento si es un espacio en blanco en la primera letra
+        } else if (!Character.isLetterOrDigit(c) && !Character.isWhitespace(c))
+        {
+            evt.consume(); // Consumir el evento si no es una letra, un número o espacio en blanco
+        } else if (jtadireccion.getText().length() >= 300)
+        {
+            evt.consume(); // Consumir el evento si se ha alcanzado la longitud máxima
+        }
     }//GEN-LAST:event_jtadireccionKeyTyped
 
     private void txttelefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txttelefonoKeyTyped
-       String input = txttelefono.getText();
+        String input = txttelefono.getText();
         char c = evt.getKeyChar();
         String texto = txttelefono.getText();
 
@@ -469,25 +484,36 @@ public class crear_cliente extends javax.swing.JPanel {
     }//GEN-LAST:event_txttelefonoKeyTyped
 
     private void txtcorreoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtcorreoKeyTyped
-    char c = evt.getKeyChar(); // Obtener el carácter ingresado
+        char c = evt.getKeyChar(); // Obtener el carácter ingresado
 
-    if (!Character.isLetterOrDigit(c) && c != '@' && c != '.' && c != '&' && c != '#' && c != '$' && c != '?' && c != '-')
-    {
-        evt.consume(); // Consumir el evento si no es una letra, un número, '@' o '.'
-    } else if (txtcorreo.getText().length() >= 30)
-    {
-        evt.consume(); // Consumir el evento si se ha alcanzado la longitud máxima
-    }
+        if (!Character.isLetterOrDigit(c) && c != '@' && c != '.' && c != '&' && c != '#' && c != '$' && c != '?' && c != '-')
+        {
+            evt.consume(); // Consumir el evento si no es una letra, un número, '@' o '.'
+        } else if (txtcorreo.getText().length() >= 30)
+        {
+            evt.consume(); // Consumir el evento si se ha alcanzado la longitud máxima
+        }
     }//GEN-LAST:event_txtcorreoKeyTyped
 
+    private void btnatrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnatrasActionPerformed
+        clientes p2 = new clientes();
+        p2.setSize(1024, 640);
+        p2.setLocation(0, 0);
+
+        jPanel1.removeAll();
+        jPanel1.add(p2, BorderLayout.CENTER);
+        jPanel1.revalidate();
+        jPanel1.repaint();
+    }//GEN-LAST:event_btnatrasActionPerformed
+
     public boolean isValidEmailAddress(String email) {
-    // Define una expresión regular para validar direcciones de correo electrónico.
-    // Esta es una implementación básica y puede necesitar ser ajustada.
-    String regex = "^[A-Za-z0-9+_.-]+@(.+)$";
-    Pattern pattern = Pattern.compile(regex);
-    Matcher matcher = pattern.matcher(email);
-    return matcher.matches();
-}
+        // Define una expresión regular para validar direcciones de correo electrónico.
+        // Esta es una implementación básica y puede necesitar ser ajustada.
+        String regex = "^[A-Za-z0-9+_.-]+@(.+)$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(email);
+        return matcher.matches();
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnatras;

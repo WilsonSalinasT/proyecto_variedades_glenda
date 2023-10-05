@@ -27,6 +27,7 @@ public class clientes extends javax.swing.JPanel {
     int paginaActual = 1; // Página actual
     int totalPaginas = 1; // Total de páginas
     String terminoBusqueda = ""; // Término de búsqueda actual
+       TextPrompt holder;
 
     /**
      * Creates new form Nueva_venta
@@ -34,6 +35,7 @@ public class clientes extends javax.swing.JPanel {
     public clientes() {
         initComponents();
         cargarTabla();
+        TextPrompt holder = new TextPrompt("Busque por nombre/apellido", txtbuscar);
 
         tableClientes.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 12));
         tableClientes.getTableHeader().setOpaque(false);
