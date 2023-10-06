@@ -30,21 +30,13 @@ public class editar_cliente extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        txttelefono = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        txtcorreo = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        txtfecharegistro = new javax.swing.JTextField();
         btncrear = new javax.swing.JButton();
-        txtnombre = new javax.swing.JTextField();
-        txtapellido = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        rbmasculino = new javax.swing.JRadioButton();
         jLabel3 = new javax.swing.JLabel();
-        rbfemenino = new javax.swing.JRadioButton();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jtadireccion = new javax.swing.JTextArea();
 
         jPanel2.setBackground(new java.awt.Color(153, 255, 153));
 
@@ -203,49 +195,6 @@ public class editar_cliente extends javax.swing.JPanel {
 
     private void btncrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncrearActionPerformed
 
-        String direccion = jtadireccion.getText();
-
-        String sexo;
-        if (rbmasculino.isSelected() == true)
-        {
-            sexo = "Masculino";
-        } else if (rbfemenino.isSelected() == true)
-        {
-            sexo = "Femenino";
-        } else
-        {
-            sexo = "Masculino";
-        }
-
-        String fechaTexto = txtfecharegistro.getText();
-        SimpleDateFormat formato = new SimpleDateFormat();
-
-        Date fecha_Tramite = null;
-        try
-
-        {
-            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
-            PreparedStatement insertPs = conn.prepareStatement("INSERT INTO Cliente (nombre, apellido, genero, direccion, numero_telefono, correo_electronico, fecha_registro) VALUES (?,?,?,?,?,?,?)");
-            insertPs.setString(1, txtnombre.getText());
-            insertPs.setString(2, txtapellido.getText());
-            insertPs.setString(3, sexo);
-            insertPs.setObject(4, direccion);
-            insertPs.setString(5, txttelefono.getText());
-            insertPs.setString(6, txtcorreo.getText());
-            //            insertPs.setDate(7, new java.sql.Date(fecha_Tramite.getTime()));
-            insertPs.setString(7, txtfecharegistro.getText());
-
-            insertPs.executeUpdate();
-            JOptionPane.showMessageDialog(null, "Registro guardado");
-
-        } catch (SQLException e)
-        {
-            JOptionPane.showMessageDialog(null, e.toString());
-        } catch (ClassNotFoundException ex)
-        {
-
-        }
     }//GEN-LAST:event_btncrearActionPerformed
 
 
@@ -261,13 +210,13 @@ public class editar_cliente extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jtadireccion;
-    private javax.swing.JRadioButton rbfemenino;
-    private javax.swing.JRadioButton rbmasculino;
-    private javax.swing.JTextField txtapellido;
-    private javax.swing.JTextField txtcorreo;
-    private javax.swing.JTextField txtfecharegistro;
-    private javax.swing.JTextField txtnombre;
-    private javax.swing.JTextField txttelefono;
+    public static final javax.swing.JTextArea jtadireccion = new javax.swing.JTextArea();
+    public static final javax.swing.JRadioButton rbfemenino = new javax.swing.JRadioButton();
+    public static final javax.swing.JRadioButton rbmasculino = new javax.swing.JRadioButton();
+    public static final javax.swing.JTextField txtapellido = new javax.swing.JTextField();
+    public static final javax.swing.JTextField txtcorreo = new javax.swing.JTextField();
+    public static final javax.swing.JTextField txtfecharegistro = new javax.swing.JTextField();
+    public static final javax.swing.JTextField txtnombre = new javax.swing.JTextField();
+    public static final javax.swing.JTextField txttelefono = new javax.swing.JTextField();
     // End of variables declaration//GEN-END:variables
 }

@@ -4,10 +4,13 @@
  */
 package Paneles;
 
+import javax.swing.ButtonGroup;
+
 /**
  *
  * @author Sergio Salinas
  */
+
 public class ver_cliente extends javax.swing.JPanel {
 
     /**
@@ -15,6 +18,9 @@ public class ver_cliente extends javax.swing.JPanel {
      */
     public ver_cliente() {
         initComponents();
+        ButtonGroup grup = new ButtonGroup();
+        grup.add(rbmasculino);
+        grup.add(rbfemenino);
     }
 
     /**
@@ -26,6 +32,10 @@ public class ver_cliente extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
+        buttonGroup2 = new javax.swing.ButtonGroup();
+        buttonGroup3 = new javax.swing.ButtonGroup();
+        buttonGroup4 = new javax.swing.ButtonGroup();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -34,16 +44,10 @@ public class ver_cliente extends javax.swing.JPanel {
         jLabel8 = new javax.swing.JLabel();
         btncrear = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        rbmasculino = new javax.swing.JRadioButton();
         jLabel3 = new javax.swing.JLabel();
-        rbfemenino = new javax.swing.JRadioButton();
         jLabel4 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
+
+        setBackground(new java.awt.Color(255, 255, 255));
 
         jPanel2.setBackground(new java.awt.Color(153, 255, 153));
 
@@ -97,28 +101,36 @@ public class ver_cliente extends javax.swing.JPanel {
         jLabel1.setText("Nombre:");
 
         rbmasculino.setText("Masculino");
+        rbmasculino.setEnabled(false);
+        rbmasculino.setRolloverEnabled(false);
+        rbmasculino.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbmasculinoActionPerformed(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Apellido:");
 
         rbfemenino.setText("Femenino");
+        rbfemenino.setEnabled(false);
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("Genero:");
 
-        jLabel9.setText("jLabel9");
+        nombreL.setText("jLabel9");
 
-        jLabel10.setText("jLabel10");
+        apellidoL.setText("jLabel10");
 
-        jLabel11.setText("jLabel11");
+        direccionL.setText("jLabel11");
 
-        jLabel12.setText("jLabel12");
+        numeroL.setText("jLabel12");
 
-        jLabel13.setText("jLabel13");
+        correoL.setText("jLabel13");
 
-        jLabel14.setText("jLabel14");
+        fechaL.setText("jLabel14");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -130,21 +142,24 @@ public class ver_cliente extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(237, 237, 237)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel9)
-                                .addComponent(btncrear, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(99, 99, 99)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel11)
-                                    .addComponent(jLabel10)))))
+                                    .addComponent(direccionL)
+                                    .addComponent(apellidoL)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(nombreL)
+                                    .addComponent(btncrear, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 442, Short.MAX_VALUE)
+                                .addComponent(idL))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(376, 376, 376)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel13)
-                            .addComponent(jLabel12)
-                            .addComponent(jLabel14))))
-                .addContainerGap(563, Short.MAX_VALUE))
+                            .addComponent(correoL)
+                            .addComponent(numeroL)
+                            .addComponent(fechaL))))
+                .addGap(168, 168, 168))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(240, 240, 240)
@@ -169,17 +184,19 @@ public class ver_cliente extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel9)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(nombreL)
+                    .addComponent(idL))
                 .addGap(18, 18, 18)
-                .addComponent(jLabel10)
+                .addComponent(apellidoL)
                 .addGap(69, 69, 69)
-                .addComponent(jLabel11)
+                .addComponent(direccionL)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 122, Short.MAX_VALUE)
-                .addComponent(jLabel12)
+                .addComponent(numeroL)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel13)
+                .addComponent(correoL)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel14)
+                .addComponent(fechaL)
                 .addGap(29, 29, 29)
                 .addComponent(btncrear)
                 .addGap(130, 130, 130))
@@ -204,64 +221,31 @@ public class ver_cliente extends javax.swing.JPanel {
                     .addComponent(jLabel8)
                     .addGap(175, 175, 175)))
         );
+
+        rbfemenino.setSelected(false);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btncrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncrearActionPerformed
 
-        String direccion = jtadireccion.getText();
-
-        String sexo;
-        if (rbmasculino.isSelected() == true)
-        {
-            sexo = "Masculino";
-        } else if (rbfemenino.isSelected() == true)
-        {
-            sexo = "Femenino";
-        } else
-        {
-            sexo = "Masculino";
-        }
-
-        String fechaTexto = txtfecharegistro.getText();
-        SimpleDateFormat formato = new SimpleDateFormat();
-
-        Date fecha_Tramite = null;
-        try
-
-        {
-            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
-            PreparedStatement insertPs = conn.prepareStatement("INSERT INTO Cliente (nombre, apellido, genero, direccion, numero_telefono, correo_electronico, fecha_registro) VALUES (?,?,?,?,?,?,?)");
-            insertPs.setString(1, txtnombre.getText());
-            insertPs.setString(2, txtapellido.getText());
-            insertPs.setString(3, sexo);
-            insertPs.setObject(4, direccion);
-            insertPs.setString(5, txttelefono.getText());
-            insertPs.setString(6, txtcorreo.getText());
-            //            insertPs.setDate(7, new java.sql.Date(fecha_Tramite.getTime()));
-            insertPs.setString(7, txtfecharegistro.getText());
-
-            insertPs.executeUpdate();
-            JOptionPane.showMessageDialog(null, "Registro guardado");
-
-        } catch (SQLException e)
-        {
-            JOptionPane.showMessageDialog(null, e.toString());
-        } catch (ClassNotFoundException ex)
-        {
-
-        }
     }//GEN-LAST:event_btncrearActionPerformed
+
+    private void rbmasculinoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbmasculinoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rbmasculinoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public static final javax.swing.JLabel apellidoL = new javax.swing.JLabel();
     private javax.swing.JButton btncrear;
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.ButtonGroup buttonGroup2;
+    private javax.swing.ButtonGroup buttonGroup3;
+    private javax.swing.ButtonGroup buttonGroup4;
+    public static final javax.swing.JLabel correoL = new javax.swing.JLabel();
+    public static final javax.swing.JLabel direccionL = new javax.swing.JLabel();
+    public static final javax.swing.JLabel fechaL = new javax.swing.JLabel();
+    public static final javax.swing.JLabel idL = new javax.swing.JLabel();
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -269,9 +253,10 @@ public class ver_cliente extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JRadioButton rbfemenino;
-    private javax.swing.JRadioButton rbmasculino;
+    public static final javax.swing.JLabel nombreL = new javax.swing.JLabel();
+    public static final javax.swing.JLabel numeroL = new javax.swing.JLabel();
+    public static final javax.swing.JRadioButton rbfemenino = new javax.swing.JRadioButton();
+    public static final javax.swing.JRadioButton rbmasculino = new javax.swing.JRadioButton();
     // End of variables declaration//GEN-END:variables
 }

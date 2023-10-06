@@ -5,6 +5,14 @@
 package Paneles;
 
 import static App.Menu.panelprincipal;
+import static Paneles.editar_cliente.jtadireccion;
+import static Paneles.editar_cliente.rbfemenino;
+import static Paneles.editar_cliente.rbmasculino;
+import static Paneles.editar_cliente.txtapellido;
+import static Paneles.editar_cliente.txtcorreo;
+import static Paneles.editar_cliente.txtfecharegistro;
+import static Paneles.editar_cliente.txtnombre;
+import static Paneles.editar_cliente.txttelefono;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
@@ -140,8 +148,18 @@ public class clientes extends javax.swing.JPanel {
         });
 
         jButton3.setText("Editar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setText("ver");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jButton5.setText("Refrescar");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
@@ -268,6 +286,81 @@ public class clientes extends javax.swing.JPanel {
         // Cargar la tabla con los datos actualizados
         cargarTabla();
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        String nombre = txtnombre.getText().trim();
+String apellido = txtapellido.getText().trim();
+String direccion = jtadireccion.getText().trim();
+String telefono = txttelefono.getText().trim();
+String correo = txtcorreo.getText().trim();
+String fechaRegistro = txtfecharegistro.getText().trim();
+
+StringBuilder camposVacios = new StringBuilder("Los siguientes campos están vacíos:");
+
+if (nombre.isEmpty()) {
+    camposVacios.append("\n - Nombre");
+}
+if (apellido.isEmpty()) {
+    camposVacios.append("\n - Apellido");
+}
+if (direccion.isEmpty()) {
+    camposVacios.append("\n - Dirección");
+}
+if (telefono.isEmpty()) {
+    camposVacios.append("\n - Teléfono");
+}
+if (correo.isEmpty()) {
+    camposVacios.append("\n - Correo");
+}
+
+if (!camposVacios.toString().equals("Los siguientes campos están vacíos:")) {
+    JOptionPane.showMessageDialog(null, camposVacios.toString(), "Campos Vacíos", JOptionPane.ERROR_MESSAGE);
+} else {
+    String sexo;
+    if (rbmasculino.isSelected()) {
+        sexo = "Masculino";
+    } else if (rbfemenino.isSelected()) {
+        sexo = "Femenino";
+    } else {
+        sexo = "Masculino"; // Valor predeterminado si no se selecciona un sexo
+    }
+
+    try {
+        // Resto del código para la actualización en la base de datos
+        Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+        Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
+
+        PreparedStatement updatePs = conn.prepareStatement("UPDATE Cliente SET nombre=?, apellido=?, genero=?, direccion=?, numero_telefono=?, correo_electronico=?, fecha_registro=? WHERE id=?");
+        updatePs.setString(1, nombre);
+        updatePs.setString(2, apellido);
+        updatePs.setString(3, sexo);
+        updatePs.setObject(4, direccion);
+        updatePs.setString(5, telefono);
+        updatePs.setString(6, correo);
+        updatePs.setString(7, fechaRegistro);
+        // Aquí deberías proporcionar el ID del cliente que deseas actualizar en lugar de "?".
+        // Puedes obtener este ID desde algún lugar de tu aplicación, por ejemplo, un campo oculto en tu interfaz de usuario.
+
+        int rowsUpdated = updatePs.executeUpdate();
+        if (rowsUpdated > 0) {
+            JOptionPane.showMessageDialog(null, "Registro actualizado");
+        } else {
+            JOptionPane.showMessageDialog(null, "No se encontró el registro para actualizar", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(null, e.toString(), "Error de SQL", JOptionPane.ERROR_MESSAGE);
+    } catch (ClassNotFoundException ex) {
+        JOptionPane.showMessageDialog(null, "Error de conexión a la base de datos", "Error de Conexión", JOptionPane.ERROR_MESSAGE);
+    }
+}
+
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     private void siguientePagina() {
         if (paginaActual < totalPaginas)
