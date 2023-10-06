@@ -15,6 +15,8 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import Paneles.verProducto;
+import Paneles.EditarProducto;
 
 /**
  *
@@ -85,6 +87,11 @@ public class Listado_Productos extends javax.swing.JPanel {
         btnver.setForeground(new java.awt.Color(0, 0, 0));
         btnver.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/ver (1).png"))); // NOI18N
         btnver.setText("Ver");
+        btnver.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnverMouseClicked(evt);
+            }
+        });
         btnver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnverActionPerformed(evt);
@@ -328,34 +335,73 @@ public class Listado_Productos extends javax.swing.JPanel {
     }//GEN-LAST:event_btnSiguienteActionPerformed
 
     private void btnverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnverActionPerformed
-     // Obtener la fila seleccionada de la tabla
-        int filaSeleccionada = tabla_productos.getSelectedRow();
+    // Obtener la fila seleccionada
+    int filaSeleccionada = tabla_productos.getSelectedRow();
+    
+    // Verificar si se ha seleccionado una fila
+    if (filaSeleccionada >= 0) {
+        // Obtener los valores de las celdas en la fila seleccionada
+        Object idProducto = tabla_productos.getValueAt(filaSeleccionada, 0); // Supongamos que la columna 0 contiene el ID del producto
+        Object nombreProducto = tabla_productos.getValueAt(filaSeleccionada, 1); // Supongamos que la columna 1 contiene el nombre del producto
+        Object precioProducto = tabla_productos.getValueAt(filaSeleccionada, 2); // Supongamos que la columna 2 contiene el precio del producto
+        
+        // Luego puedes usar estos valores como desees, por ejemplo, para pasarlos a la ventana verProducto
+        verProducto p2 = new verProducto();
+        p2.setSize(1024, 640);
+        p2.setLocation(0, 0);
 
-        // Verificar si se ha seleccionado una fila
-        if (filaSeleccionada != -1) {
-            // Obtener los datos de la fila seleccionada
-            String nombre = tabla_productos.getValueAt(filaSeleccionada, 0).toString();
-            String descripcion = tabla_productos.getValueAt(filaSeleccionada, 1).toString();
-            String categoria = tabla_productos.getValueAt(filaSeleccionada, 2).toString();
+        // Puedes pasar los datos recuperados a la ventana verProducto
+        p2.mostrarDatos(idProducto, nombreProducto, precioProducto);
 
-           
-        } else {
-            // Si no se ha seleccionado ninguna fila, puedes mostrar un mensaje de error o realizar otra acción.
-            JOptionPane.showMessageDialog(this, "Por favor, seleccione una fila en la tabla.");
-        }
+        // Remover el contenido actual del panel principal
+        panelprincipal.removeAll();
+
+        // Agregar la ventana verProducto al panel principal
+        panelprincipal.add(p2, BorderLayout.CENTER);
+
+        // Revalidar y repintar el panel principal para mostrar la nueva ventana
+        panelprincipal.revalidate();
+        panelprincipal.repaint();
+    }
     }//GEN-LAST:event_btnverActionPerformed
 
     private void btneditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btneditarActionPerformed
-       // Crear una instancia de la ventana de editarproducto
-    EditarProductoVentana EditarProducto = new EditarProductoVentana();
-    
-    // Hacer la ventana de editarproducto visible
-    EditarProducto.setVisible(true);
+       EditarProducto p2 = new EditarProducto();
+        p2.setSize(1024, 640);
+        p2.setLocation(0, 0);
+
+        panelprincipal.removeAll();
+        panelprincipal.add(p2, BorderLayout.CENTER);
+        panelprincipal.revalidate();
+        panelprincipal.repaint();
     }//GEN-LAST:event_btneditarActionPerformed
 
     private void btneditarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btneditarMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_btneditarMouseClicked
+
+    private void btnverMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnverMouseClicked
+        // Obtener la fila seleccionada
+    int filaSeleccionada = tabla_productos.getSelectedRow();
+    
+    // Verificar si se ha seleccionado una fila
+    if (filaSeleccionada >= 0) {
+        // Crear una instancia de la ventana verProducto
+        verProducto p2 = new verProducto();
+        p2.setSize(1024, 640);
+        p2.setLocation(0, 0);
+
+        // Remover el contenido actual del panel principal
+        panelprincipal.removeAll();
+        
+        // Agregar la ventana verProducto al panel principal
+        panelprincipal.add(p2, BorderLayout.CENTER);
+        
+        // Revalidar y repintar el panel principal para mostrar la nueva ventana
+        panelprincipal.revalidate();
+        panelprincipal.repaint();
+    }
+    }//GEN-LAST:event_btnverMouseClicked
 
     String terminoBusqueda = ""; // Término de búsqueda actual
 
