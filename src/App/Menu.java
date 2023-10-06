@@ -66,9 +66,9 @@ public class Menu extends javax.swing.JFrame {
         });
         jPanel2.add(clientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 200, 260, 40));
 
-        nueva_venta.setBackground(new java.awt.Color(204, 0, 255));
+        nueva_venta.setBackground(new java.awt.Color(255, 153, 102));
         nueva_venta.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        nueva_venta.setForeground(new java.awt.Color(204, 255, 255));
+        nueva_venta.setForeground(new java.awt.Color(255, 255, 255));
         nueva_venta.setText("Nueva venta");
         nueva_venta.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         nueva_venta.addActionListener(new java.awt.event.ActionListener() {
@@ -115,6 +115,8 @@ public class Menu extends javax.swing.JFrame {
             }
         });
         jPanel2.add(ventas, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 380, 250, 40));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Hyper.png"))); // NOI18N
         jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 250, 640));
 
         panelprincipal.setBackground(new java.awt.Color(255, 255, 255));
