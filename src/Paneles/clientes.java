@@ -115,7 +115,8 @@ public class clientes extends javax.swing.JPanel {
             }
         ));
         tableClientes.setGridColor(new java.awt.Color(255, 51, 51));
-        tableClientes.setSelectionForeground(new java.awt.Color(255, 51, 51));
+        tableClientes.setSelectionBackground(new java.awt.Color(255, 102, 102));
+        tableClientes.setSelectionForeground(new java.awt.Color(0, 0, 0));
         tableClientes.setShowHorizontalLines(true);
         tableClientes.setShowVerticalLines(true);
         jScrollPane1.setViewportView(tableClientes);

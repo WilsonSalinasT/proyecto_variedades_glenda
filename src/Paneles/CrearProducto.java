@@ -50,7 +50,7 @@ public class CrearProducto extends javax.swing.JPanel {
             }
         });
 
-        jPanel2.setBackground(new java.awt.Color(153, 255, 153));
+        jPanel2.setBackground(new java.awt.Color(255, 102, 102));
 
         jLabel1.setFont(new java.awt.Font("Arial Black", 3, 36)); // NOI18N
         jLabel1.setText("Creación del Producto");
@@ -111,7 +111,7 @@ public class CrearProducto extends javax.swing.JPanel {
 
         jTextField6.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Fecha de adquisión:", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12))); // NOI18N
 
-        jButton1.setBackground(new java.awt.Color(153, 255, 153));
+        jButton1.setBackground(new java.awt.Color(255, 0, 51));
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jButton1.setText("GUARDAR");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -120,8 +120,8 @@ public class CrearProducto extends javax.swing.JPanel {
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(153, 255, 153));
-        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButton2.setBackground(new java.awt.Color(255, 0, 51));
+        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButton2.setText("VOLVER");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -188,7 +188,7 @@ public class CrearProducto extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(91, Short.MAX_VALUE))
+                .addContainerGap(90, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

@@ -76,19 +76,19 @@ public class EditarProducto extends javax.swing.JPanel {
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
-        btnguardar.setBackground(new java.awt.Color(255, 102, 102));
+        btnguardar.setBackground(new java.awt.Color(255, 0, 51));
         btnguardar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnguardar.setForeground(new java.awt.Color(0, 0, 0));
         btnguardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/disco-flexible (1).png"))); // NOI18N
         btnguardar.setText("Guardar");
 
-        btneditar.setBackground(new java.awt.Color(255, 102, 102));
+        btneditar.setBackground(new java.awt.Color(255, 0, 51));
         btneditar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btneditar.setForeground(new java.awt.Color(0, 0, 0));
         btneditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/editar-codigo.png"))); // NOI18N
         btneditar.setText("Editar");
 
-        btnvolver.setBackground(new java.awt.Color(255, 102, 102));
+        btnvolver.setBackground(new java.awt.Color(255, 0, 51));
         btnvolver.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnvolver.setForeground(new java.awt.Color(0, 0, 0));
         btnvolver.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/flecha-atras.png"))); // NOI18N
