@@ -289,10 +289,10 @@ public class Listado_Productos extends javax.swing.JPanel {
                         .addComponent(btnver))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Texto_Contable, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnAnterior, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSiguiente, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnSiguiente, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Texto_Contable, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(144, Short.MAX_VALUE))
         );
 
@@ -358,36 +358,112 @@ public class Listado_Productos extends javax.swing.JPanel {
         siguientePaginario();
     }//GEN-LAST:event_btnSiguienteActionPerformed
 
+    int selectedRow1;
     private void btnverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnverActionPerformed
-        // Obtener la fila seleccionada
-        int filaSeleccionada = tabla_productos.getSelectedRow();
+//        // Obtener la fila seleccionada
+//        int filaSeleccionada = tabla_productos.getSelectedRow();
+//
+//        // Verificar si se ha seleccionado una fila
+//        if (filaSeleccionada >= 0)
+//        {
+//            // Obtener los valores de las celdas en la fila seleccionada
+//            Object idProducto = tabla_productos.getValueAt(filaSeleccionada, 0); // Supongamos que la columna 0 contiene el ID del producto
+//            Object nombreProducto = tabla_productos.getValueAt(filaSeleccionada, 1); // Supongamos que la columna 1 contiene el nombre del producto
+//            Object precioProducto = tabla_productos.getValueAt(filaSeleccionada, 2); // Supongamos que la columna 2 contiene el precio del producto
+//
+//            // Luego puedes usar estos valores como desees, por ejemplo, para pasarlos a la ventana verProducto
+//            verProducto p2 = new verProducto();
+//            p2.setSize(1024, 640);
+//            p2.setLocation(0, 0);
+//
+//            // Puedes pasar los datos recuperados a la ventana verProducto
+//            p2.mostrarDatos(idProducto, nombreProducto, precioProducto);
+//
+//            // Remover el contenido actual del panel principal
+//            panelprincipal.removeAll();
+//
+//            // Agregar la ventana verProducto al panel principal
+//            panelprincipal.add(p2, BorderLayout.CENTER);
+//
+//            // Revalidar y repintar el panel principal para mostrar la nueva ventana
+//            panelprincipal.revalidate();
+//            panelprincipal.repaint();
+//        }
 
-        // Verificar si se ha seleccionado una fila
-        if (filaSeleccionada >= 0)
+        selectedRow1 = tabla_productos.getSelectedRow();
+        if (selectedRow1 == -1)
         {
-            // Obtener los valores de las celdas en la fila seleccionada
-            Object idProducto = tabla_productos.getValueAt(filaSeleccionada, 0); // Supongamos que la columna 0 contiene el ID del producto
-            Object nombreProducto = tabla_productos.getValueAt(filaSeleccionada, 1); // Supongamos que la columna 1 contiene el nombre del producto
-            Object precioProducto = tabla_productos.getValueAt(filaSeleccionada, 2); // Supongamos que la columna 2 contiene el precio del producto
-
-            // Luego puedes usar estos valores como desees, por ejemplo, para pasarlos a la ventana verProducto
-            verProducto p2 = new verProducto();
-            p2.setSize(1024, 640);
-            p2.setLocation(0, 0);
-
-            // Puedes pasar los datos recuperados a la ventana verProducto
-            p2.mostrarDatos(idProducto, nombreProducto, precioProducto);
-
-            // Remover el contenido actual del panel principal
-            panelprincipal.removeAll();
-
-            // Agregar la ventana verProducto al panel principal
-            panelprincipal.add(p2, BorderLayout.CENTER);
-
-            // Revalidar y repintar el panel principal para mostrar la nueva ventana
-            panelprincipal.revalidate();
-            panelprincipal.repaint();
+            JOptionPane.showMessageDialog(null, "Debes seleccionar una celda para poder modificar");
+            return;
         }
+
+        try
+        {
+
+            int fila = tabla_productos.getSelectedRow();
+            String valorCelda = tabla_productos.getValueAt(fila, 1).toString();
+            String valorCelda2 = tabla_productos.getValueAt(fila, 2).toString();
+            String valorCelda3 = tabla_productos.getValueAt(fila, 3).toString();
+            PreparedStatement ps;
+            ResultSet rs;
+
+            Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
+            ps = conn.prepareStatement("SELECT * FROM Producto WHERE nombre=? and descripcion=? and categoria=?");
+            ps.setString(1, valorCelda);
+            ps.setString(2, valorCelda2);
+            ps.setString(3, valorCelda3);
+            rs = ps.executeQuery();
+
+            while (rs.next())
+            {
+
+                String nombre = rs.getString("nombre");
+                String descripcion = rs.getString("descripcion");
+                String existencias = rs.getString("existencia");
+                String precio = rs.getString("precio");
+                String categoria = rs.getString("categoria");
+                String proveedor = rs.getString("proveedor");
+                String fecha = rs.getString("fecha_adquisicion");
+                String Id = rs.getString("cod_producto");
+
+                verProducto mostrar = new verProducto();
+                
+                mostrar.txtNombre.setText(nombre);
+                mostrar.AreaDescripcion.setText(descripcion);
+                mostrar.txtExistencia.setText(existencias);
+                mostrar.txtPrecio.setText(precio);
+                mostrar.txtCategoria.setText(categoria);
+                mostrar.txtProveedor.setText(proveedor);
+                mostrar.txtFechaAdquision.setText(fecha);
+                mostrar.txtId.setText(Id);
+
+                
+                mostrar.setSize(1024, 640);
+                mostrar.setLocation(0, 0);
+
+                jPanel2.revalidate();
+                jPanel2.repaint();
+                jPanel2.removeAll();
+                jPanel2.add(mostrar, BorderLayout.CENTER);
+
+                jPanel2.revalidate();
+                jPanel2.repaint();
+
+                break; // Salir del bucle después de encontrar el elemento seleccionado
+
+            }
+
+            rs.close();
+            ps.close();
+            conn.close();
+
+        } catch (SQLException e)
+        {
+            e.printStackTrace();
+            // Manejar cualquier excepción que pueda ocurrir durante la consulta a la base de datos
+        }
+
+
     }//GEN-LAST:event_btnverActionPerformed
 
     private void btneditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btneditarActionPerformed
