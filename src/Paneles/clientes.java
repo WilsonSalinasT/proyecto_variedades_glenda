@@ -47,8 +47,8 @@ public class clientes extends javax.swing.JPanel {
 
         tableClientes.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 12));
         tableClientes.getTableHeader().setOpaque(false);
-        tableClientes.getTableHeader().setBackground(new Color(32, 136, 203));
-        tableClientes.getTableHeader().setForeground(new Color(128, 0, 128));
+        tableClientes.getTableHeader().setBackground(new Color(255,0,0));
+        tableClientes.getTableHeader().setForeground(new Color(255,0,0));
         tableClientes.setRowHeight(25);
 
         tableClientes.setRowSelectionAllowed(true);
@@ -86,7 +86,7 @@ public class clientes extends javax.swing.JPanel {
         jLabel2.setBackground(new java.awt.Color(0, 0, 0));
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel2.setText("Listado de Clientes");
+        jLabel2.setText("Listado de clientes");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -113,26 +113,22 @@ public class clientes extends javax.swing.JPanel {
             new String [] {
                 "N°", "Nombre", "Apellido", "Género", "Correo electrónico"
             }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, true, true, true, true
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        tableClientes.setGridColor(new java.awt.Color(51, 255, 204));
-        tableClientes.setSelectionForeground(new java.awt.Color(51, 255, 153));
+        ));
+        tableClientes.setGridColor(new java.awt.Color(255, 51, 51));
+        tableClientes.setSelectionForeground(new java.awt.Color(255, 51, 51));
         tableClientes.setShowHorizontalLines(true);
         tableClientes.setShowVerticalLines(true);
         jScrollPane1.setViewportView(tableClientes);
         if (tableClientes.getColumnModel().getColumnCount() > 0) {
-            tableClientes.getColumnModel().getColumn(0).setMinWidth(60);
+            tableClientes.getColumnModel().getColumn(0).setMinWidth(100);
             tableClientes.getColumnModel().getColumn(0).setPreferredWidth(50);
-            tableClientes.getColumnModel().getColumn(0).setMaxWidth(70);
+            tableClientes.getColumnModel().getColumn(0).setMaxWidth(100);
+            tableClientes.getColumnModel().getColumn(2).setResizable(false);
+            tableClientes.getColumnModel().getColumn(4).setResizable(false);
         }
 
+        jButton1.setBackground(new java.awt.Color(255, 0, 51));
+        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButton1.setText("Buscar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -140,6 +136,8 @@ public class clientes extends javax.swing.JPanel {
             }
         });
 
+        jButton2.setBackground(new java.awt.Color(255, 0, 51));
+        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButton2.setText("Crear");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -147,6 +145,8 @@ public class clientes extends javax.swing.JPanel {
             }
         });
 
+        jButton3.setBackground(new java.awt.Color(255, 0, 51));
+        jButton3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButton3.setText("Editar");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -154,6 +154,8 @@ public class clientes extends javax.swing.JPanel {
             }
         });
 
+        jButton4.setBackground(new java.awt.Color(255, 0, 51));
+        jButton4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButton4.setText("ver");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -161,6 +163,8 @@ public class clientes extends javax.swing.JPanel {
             }
         });
 
+        jButton5.setBackground(new java.awt.Color(255, 0, 51));
+        jButton5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButton5.setText("Refrescar");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -183,6 +187,8 @@ public class clientes extends javax.swing.JPanel {
                 btnSiguienteActionPerformed(evt);
             }
         });
+
+        Contable_Registro.setForeground(new java.awt.Color(0, 0, 0));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -224,7 +230,7 @@ public class clientes extends javax.swing.JPanel {
                     .addComponent(txtbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
