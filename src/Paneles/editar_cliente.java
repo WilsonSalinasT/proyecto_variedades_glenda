@@ -4,11 +4,22 @@
  */
 package Paneles;
 
+import static App.Menu.panelprincipal;
+import java.awt.BorderLayout;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Sergio Salinas
  */
 public class editar_cliente extends javax.swing.JPanel {
+
+    private String id_cliente;
+    private String numeracion;
 
     /**
      * Creates new form editar_cliente
@@ -152,16 +163,23 @@ public class editar_cliente extends javax.swing.JPanel {
                             .addComponent(jLabel8)
                             .addGap(18, 18, 18)
                             .addComponent(txtfecharegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(78, 78, 78)
+                .addComponent(id_editar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(txtnombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(txtnombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(128, 128, 128)
+                        .addComponent(id_editar)))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -194,12 +212,110 @@ public class editar_cliente extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btncrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncrearActionPerformed
+        String id = id_editar.getText().trim();
+        String nombre = txtnombre.getText().trim();
+        String apellido = txtapellido.getText().trim();
+        String direccion = jtadireccion.getText().trim();
+        String telefono = txttelefono.getText().trim();
+        String correo = txtcorreo.getText().trim();
+        String fechaRegistro = txtfecharegistro.getText().trim();
+
+        StringBuilder camposVacios = new StringBuilder("Los siguientes campos están vacíos:");
+
+        if (nombre.isEmpty())
+        {
+            camposVacios.append("\n - Nombre");
+        }
+        if (apellido.isEmpty())
+        {
+            camposVacios.append("\n - Apellido");
+        }
+        if (direccion.isEmpty())
+        {
+            camposVacios.append("\n - Dirección");
+        }
+        if (telefono.isEmpty())
+        {
+            camposVacios.append("\n - Teléfono");
+        }
+        if (correo.isEmpty())
+        {
+            camposVacios.append("\n - Correo");
+        }
+
+        if (!camposVacios.toString().equals("Los siguientes campos están vacíos:"))
+        {
+            JOptionPane.showMessageDialog(null, camposVacios.toString(), "Campos Vacíos", JOptionPane.ERROR_MESSAGE);
+        } else
+        {
+            String sexo;
+            if (rbmasculino.isSelected())
+            {
+                sexo = "Masculino";
+            } else if (rbfemenino.isSelected())
+            {
+                sexo = "Femenino";
+            } else
+            {
+                sexo = "Masculino"; // Valor predeterminado si no se selecciona un sexo
+            }
+            try
+            {
+                // Resto del código para la actualización en la base de datos
+                Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+                Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
+
+                PreparedStatement updatePs = conn.prepareStatement("UPDATE Cliente SET nombre=?, apellido=?, genero=?, direccion=?, numero_telefono=?, correo_electronico=?, fecha_registro=? WHERE id_cliente=?");
+                
+                int numeracion = Integer.parseInt(id_editar.getText());
+                
+                // Configura los primeros 7 parámetros
+                updatePs.setString(1, nombre);
+                updatePs.setString(2, apellido);
+                updatePs.setString(3, sexo);
+                updatePs.setObject(4, direccion);
+                updatePs.setString(5, telefono);
+                updatePs.setString(6, correo);
+                updatePs.setString(7, fechaRegistro);
+                
+                // Configura el octavo parámetro (id_cliente)
+                updatePs.setInt(8, numeracion); // Asumiendo que id_cliente es un valor numérico
+
+                int rowsUpdated = updatePs.executeUpdate();
+
+                if (rowsUpdated > 0)
+                {
+                    JOptionPane.showMessageDialog(null, "Registro actualizado");
+                    clientes cli = new clientes();
+
+                    cli.setSize(1080, 640);
+                    cli.setLocation(0, 0);
+
+                    panelprincipal.revalidate();
+                    panelprincipal.repaint();
+                    panelprincipal.removeAll();
+                    panelprincipal.add(cli, BorderLayout.CENTER);
+                    panelprincipal.revalidate();
+                    panelprincipal.repaint();
+                } else
+                {
+                    JOptionPane.showMessageDialog(null, "No se encontró el registro para actualizar", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            } catch (SQLException e)
+            {
+                JOptionPane.showMessageDialog(null, e.toString(), "Error de SQL", JOptionPane.ERROR_MESSAGE);
+            } catch (ClassNotFoundException ex)
+            {
+                JOptionPane.showMessageDialog(null, "Error de conexión a la base de datos", "Error de Conexión", JOptionPane.ERROR_MESSAGE);
+            }
+
 
     }//GEN-LAST:event_btncrearActionPerformed
-
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btncrear;
+    public static final javax.swing.JLabel id_editar = new javax.swing.JLabel();
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -219,4 +335,8 @@ public class editar_cliente extends javax.swing.JPanel {
     public static final javax.swing.JTextField txtnombre = new javax.swing.JTextField();
     public static final javax.swing.JTextField txttelefono = new javax.swing.JTextField();
     // End of variables declaration//GEN-END:variables
+
+    private int obtenerIdCliente() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }
