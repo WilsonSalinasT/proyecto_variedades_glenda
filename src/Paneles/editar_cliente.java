@@ -51,6 +51,7 @@ public class editar_cliente extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
+        Id_cl = new javax.swing.JTextField();
 
         jPanel2.setBackground(new java.awt.Color(153, 255, 153));
 
@@ -121,13 +122,21 @@ public class editar_cliente extends javax.swing.JPanel {
         jtadireccion.setWrapStyleWord(true);
         jScrollPane1.setViewportView(jtadireccion);
 
+        Id_cl.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Id_clActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(236, 236, 236)
+                .addGap(68, 68, 68)
+                .addComponent(Id_cl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(98, 98, 98)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(250, 250, 250)
@@ -166,27 +175,25 @@ public class editar_cliente extends javax.swing.JPanel {
                             .addComponent(jLabel8)
                             .addGap(18, 18, 18)
                             .addComponent(txtfecharegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(78, 78, 78)
-                .addComponent(id_editar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(txtnombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(128, 128, 128)
-                        .addComponent(id_editar)))
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(txtapellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel1)
+                    .addComponent(txtnombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(txtapellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addComponent(Id_cl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
@@ -215,7 +222,7 @@ public class editar_cliente extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btncrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncrearActionPerformed
-        String id = id_editar.getText().trim();
+        String id = Id_cl.getText().trim();
         String nombre = txtnombre.getText().trim();
         String apellido = txtapellido.getText().trim();
         String direccion = jtadireccion.getText().trim();
@@ -270,7 +277,7 @@ public class editar_cliente extends javax.swing.JPanel {
 
                 PreparedStatement updatePs = conn.prepareStatement("UPDATE Cliente SET nombre=?, apellido=?, genero=?, direccion=?, numero_telefono=?, correo_electronico=?, fecha_registro=? WHERE id_cliente=?");
 
-                int numeracion = Integer.parseInt(id_editar.getText());
+                int numeracion = Integer.parseInt(Id_cl.getText());
 
                 // Configura los primeros 7 parámetros
                 updatePs.setString(1, nombre);
@@ -316,10 +323,14 @@ public class editar_cliente extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btncrearActionPerformed
 
+    private void Id_clActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Id_clActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Id_clActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JTextField Id_cl;
     private javax.swing.JButton btncrear;
-    public static final javax.swing.JLabel id_editar = new javax.swing.JLabel();
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

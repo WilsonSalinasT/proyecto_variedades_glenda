@@ -330,6 +330,7 @@ public class clientes extends javax.swing.JPanel {
                 String telefono = rs.getString("numero_telefono");
                 String correo = rs.getString("correo_electronico");
                 String fecha = rs.getString("fecha_registro");
+                 String id = rs.getString("id_cliente");
 
                 editar_cliente editar = new editar_cliente();
                 
@@ -348,6 +349,7 @@ public class clientes extends javax.swing.JPanel {
                 editar.txttelefono.setText(telefono);
                 editar.txtcorreo.setText(correo);
                 editar.txtfecharegistro.setText(fecha);
+                 editar.Id_cl.setText(id);
 
 
                 
