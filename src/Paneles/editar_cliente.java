@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
 
 /**
@@ -17,7 +18,7 @@ import javax.swing.JOptionPane;
  * @author Sergio Salinas
  */
 public class editar_cliente extends javax.swing.JPanel {
-
+ ButtonGroup rg_sexo = new ButtonGroup();
     private String id_cliente;
     private String numeracion;
 
@@ -26,6 +27,8 @@ public class editar_cliente extends javax.swing.JPanel {
      */
     public editar_cliente() {
         initComponents();
+          rg_sexo.add(rbfemenino);
+        rg_sexo.add(rbmasculino);
     }
 
     /**
@@ -266,9 +269,9 @@ public class editar_cliente extends javax.swing.JPanel {
                 Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
 
                 PreparedStatement updatePs = conn.prepareStatement("UPDATE Cliente SET nombre=?, apellido=?, genero=?, direccion=?, numero_telefono=?, correo_electronico=?, fecha_registro=? WHERE id_cliente=?");
-                
+
                 int numeracion = Integer.parseInt(id_editar.getText());
-                
+
                 // Configura los primeros 7 parámetros
                 updatePs.setString(1, nombre);
                 updatePs.setString(2, apellido);
@@ -277,7 +280,7 @@ public class editar_cliente extends javax.swing.JPanel {
                 updatePs.setString(5, telefono);
                 updatePs.setString(6, correo);
                 updatePs.setString(7, fechaRegistro);
-                
+
                 // Configura el octavo parámetro (id_cliente)
                 updatePs.setInt(8, numeracion); // Asumiendo que id_cliente es un valor numérico
 
@@ -309,9 +312,9 @@ public class editar_cliente extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(null, "Error de conexión a la base de datos", "Error de Conexión", JOptionPane.ERROR_MESSAGE);
             }
 
-
+        }
     }//GEN-LAST:event_btncrearActionPerformed
-    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btncrear;
