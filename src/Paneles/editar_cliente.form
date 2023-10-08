@@ -265,9 +265,6 @@
     </Component>
     <Component class="javax.swing.JRadioButton" name="rbmasculino">
       <Properties>
-        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-          <ComponentRef name="default"/>
-        </Property>
         <Property name="text" type="java.lang.String" value="Masculino"/>
       </Properties>
       <AuxValues>
@@ -287,9 +284,6 @@
     </Component>
     <Component class="javax.swing.JRadioButton" name="rbfemenino">
       <Properties>
-        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-          <ComponentRef name="default"/>
-        </Property>
         <Property name="text" type="java.lang.String" value="Femenino"/>
       </Properties>
       <AuxValues>

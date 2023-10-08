@@ -302,6 +302,7 @@ public class editar_cliente extends javax.swing.JPanel {
                     panelprincipal.repaint();
                 } else
                 {
+                    //hola
                     JOptionPane.showMessageDialog(null, "No se encontró el registro para actualizar", "Error", JOptionPane.ERROR_MESSAGE);
                 }
             } catch (SQLException e)
