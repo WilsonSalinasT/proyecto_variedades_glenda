@@ -51,7 +51,7 @@ public class Menu extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(51, 255, 204));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        clientes.setBackground(new java.awt.Color(204, 0, 255));
+        clientes.setBackground(new java.awt.Color(255, 153, 102));
         clientes.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         clientes.setForeground(new java.awt.Color(204, 255, 255));
         clientes.setText("Clientes");
@@ -78,7 +78,7 @@ public class Menu extends javax.swing.JFrame {
         });
         jPanel2.add(nueva_venta, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 250, 40));
 
-        proveedor.setBackground(new java.awt.Color(204, 0, 255));
+        proveedor.setBackground(new java.awt.Color(255, 153, 102));
         proveedor.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         proveedor.setForeground(new java.awt.Color(204, 255, 255));
         proveedor.setText("Proveedor");
@@ -90,7 +90,7 @@ public class Menu extends javax.swing.JFrame {
         });
         jPanel2.add(proveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 260, 250, 40));
 
-        productos.setBackground(new java.awt.Color(204, 0, 255));
+        productos.setBackground(new java.awt.Color(255, 153, 102));
         productos.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         productos.setForeground(new java.awt.Color(204, 255, 255));
         productos.setText("Productos");
@@ -104,7 +104,7 @@ public class Menu extends javax.swing.JFrame {
         });
         jPanel2.add(productos, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 320, 250, 40));
 
-        ventas.setBackground(new java.awt.Color(204, 0, 255));
+        ventas.setBackground(new java.awt.Color(255, 153, 102));
         ventas.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         ventas.setForeground(new java.awt.Color(204, 255, 255));
         ventas.setText("Ventas");
