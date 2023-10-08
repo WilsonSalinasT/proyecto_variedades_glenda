@@ -311,7 +311,7 @@ public class editar_cliente extends javax.swing.JPanel {
             {
                 JOptionPane.showMessageDialog(null, "Error de conexión a la base de datos", "Error de Conexión", JOptionPane.ERROR_MESSAGE);
             }
-
+//hola
         }
     }//GEN-LAST:event_btncrearActionPerformed
 
