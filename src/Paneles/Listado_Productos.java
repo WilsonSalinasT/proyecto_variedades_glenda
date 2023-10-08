@@ -381,14 +381,12 @@ public class Listado_Productos extends javax.swing.JPanel {
 //        }
 
         selectedRow1 = tabla_productos.getSelectedRow();
-        if (selectedRow1 == -1)
-        {
+        if (selectedRow1 == -1) {
             JOptionPane.showMessageDialog(null, "Debes seleccionar una celda para poder modificar");
             return;
         }
 
-        try
-        {
+        try {
 
             int fila = tabla_productos.getSelectedRow();
             String valorCelda = tabla_productos.getValueAt(fila, 1).toString();
@@ -404,8 +402,7 @@ public class Listado_Productos extends javax.swing.JPanel {
             ps.setString(3, valorCelda3);
             rs = ps.executeQuery();
 
-            while (rs.next())
-            {
+            while (rs.next()) {
 
                 String nombre = rs.getString("nombre");
                 String descripcion = rs.getString("descripcion");
@@ -417,7 +414,7 @@ public class Listado_Productos extends javax.swing.JPanel {
                 String Id = rs.getString("cod_producto");
 
                 verProducto mostrar = new verProducto();
-                
+
                 mostrar.txtNombre.setText(nombre);
                 mostrar.AreaDescripcion.setText(descripcion);
                 mostrar.txtExistencia.setText(existencias);
@@ -427,7 +424,6 @@ public class Listado_Productos extends javax.swing.JPanel {
                 mostrar.txtFechaAdquision.setText(fecha);
                 mostrar.txtId.setText(Id);
 
-                
                 mostrar.setSize(1024, 640);
                 mostrar.setLocation(0, 0);
 
@@ -447,8 +443,7 @@ public class Listado_Productos extends javax.swing.JPanel {
             ps.close();
             conn.close();
 
-        } catch (SQLException e)
-        {
+        } catch (SQLException e) {
             e.printStackTrace();
             // Manejar cualquier excepción que pueda ocurrir durante la consulta a la base de datos
         }
@@ -457,14 +452,70 @@ public class Listado_Productos extends javax.swing.JPanel {
     }//GEN-LAST:event_btnverActionPerformed
 
     private void btneditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btneditarActionPerformed
-        EditarProducto p2 = new EditarProducto();
-        p2.setSize(1024, 640);
-        p2.setLocation(0, 0);
 
-        panelprincipal.removeAll();
-        panelprincipal.add(p2, BorderLayout.CENTER);
-        panelprincipal.revalidate();
-        panelprincipal.repaint();
+        selectedRow1 = tabla_productos.getSelectedRow();
+        if (selectedRow1 == -1) {
+            JOptionPane.showMessageDialog(null, "Debes seleccionar una celda para poder modificar");
+            return;
+        }
+
+        try {
+            int fila = tabla_productos.getSelectedRow();
+            String valorCelda = tabla_productos.getValueAt(fila, 1).toString();
+            String valorCelda2 = tabla_productos.getValueAt(fila, 2).toString();
+            String valorCelda3 = tabla_productos.getValueAt(fila, 3).toString();
+
+            // Verificar que todos los campos sean obligatorios
+            if (valorCelda.isEmpty() || valorCelda2.isEmpty() || valorCelda3.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios. Por favor, completa todos los campos antes de actualizar.");
+                return;
+            }
+
+            // Crear una conexión y un PreparedStatement usando try-with-resources
+            try (Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789"); PreparedStatement ps = conn.prepareStatement("SELECT * FROM Producto WHERE nombre=? AND descripcion=? AND categoria=?")) {
+
+                ps.setString(1, valorCelda);
+                ps.setString(2, valorCelda2);
+                ps.setString(3, valorCelda3);
+
+                try (ResultSet rs = ps.executeQuery()) {
+                    if (rs.next()) {
+                        String nombre = rs.getString("nombre");
+                        String descripcion = rs.getString("descripcion");
+                        String existencias = rs.getString("existencia");
+                        String precio = rs.getString("precio");
+                        String categoria = rs.getString("categoria");
+                        String proveedor = rs.getString("proveedor");
+                        String fecha = rs.getString("fecha_adquisicion");
+                        String Id = rs.getString("cod_producto");
+
+                        EditarProducto mostrar = new EditarProducto();
+                        mostrar.txtnombre.setText(nombre);
+                        mostrar.txtdescripcion.setText(descripcion);
+                        mostrar.txtexistencia.setText(existencias);
+                        mostrar.txtprecio.setText(precio);
+                        mostrar.txtcategoria.setText(categoria);
+                        mostrar.txtproveedor.setText(proveedor);
+                        mostrar.txtfecha.setText(fecha);
+                        mostrar.txtId.setText(Id);
+
+                        mostrar.setSize(1024, 640);
+                        mostrar.setLocation(0, 0);
+
+                        jPanel2.revalidate();
+                        jPanel2.repaint();
+                        jPanel2.removeAll();
+                        jPanel2.add(mostrar, BorderLayout.CENTER);
+
+                        jPanel2.revalidate();
+                        jPanel2.repaint();
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error al consultar la base de datos: " + e.getMessage());
+        }
     }//GEN-LAST:event_btneditarActionPerformed
 
     private void btneditarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btneditarMouseClicked
@@ -476,8 +527,7 @@ public class Listado_Productos extends javax.swing.JPanel {
         int filaSeleccionada = tabla_productos.getSelectedRow();
 
         // Verificar si se ha seleccionado una fila
-        if (filaSeleccionada >= 0)
-        {
+        if (filaSeleccionada >= 0) {
             // Crear una instancia de la ventana verProducto
             verProducto p2 = new verProducto();
             p2.setSize(1024, 640);
@@ -508,30 +558,25 @@ public class Listado_Productos extends javax.swing.JPanel {
         ResultSetMetaData rsmd;
         int columnas;
 
-        try
-        {
+        try {
             Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
 
             // Consulta para contar el número total de filas
             ps = conn.prepareStatement("SELECT COUNT(*) FROM Producto");
             rs = ps.executeQuery();
-            if (rs.next())
-            {
+            if (rs.next()) {
                 totalFilas = rs.getInt(1);
             }
             totalPaginas = (int) Math.ceil((double) totalFilas / filasPorPagina);
 
-            if (paginaActual < 1)
-            {
+            if (paginaActual < 1) {
                 paginaActual = 1;
-            } else if (paginaActual > totalPaginas)
-            {
+            } else if (paginaActual > totalPaginas) {
                 paginaActual = totalPaginas;
             }
 
             int offset = (paginaActual - 1) * filasPorPagina;
-            if (offset < 0)
-            {
+            if (offset < 0) {
                 offset = 0;
             }
 
@@ -545,11 +590,9 @@ public class Listado_Productos extends javax.swing.JPanel {
             rsmd = rs.getMetaData();
             columnas = rsmd.getColumnCount();
 
-            while (rs.next())
-            {
+            while (rs.next()) {
                 Object[] fila = new Object[columnas];
-                for (int indice = 0; indice < columnas; indice++)
-                {
+                for (int indice = 0; indice < columnas; indice++) {
                     fila[indice] = rs.getObject(indice + 1);
                 }
                 modeloTabla.addRow(fila);
@@ -558,20 +601,16 @@ public class Listado_Productos extends javax.swing.JPanel {
             ajustarTabla(filasPorPagina);
 
             // Eliminar filas vacías del modelo
-            for (int i = modeloTabla.getRowCount() - 1; i >= 0; i--)
-            {
+            for (int i = modeloTabla.getRowCount() - 1; i >= 0; i--) {
                 boolean isEmptyRow = true;
-                for (int j = 0; j < modeloTabla.getColumnCount(); j++)
-                {
+                for (int j = 0; j < modeloTabla.getColumnCount(); j++) {
                     Object value = modeloTabla.getValueAt(i, j);
-                    if (value != null && !value.toString().isEmpty())
-                    {
+                    if (value != null && !value.toString().isEmpty()) {
                         isEmptyRow = false;
                         break;
                     }
                 }
-                if (isEmptyRow)
-                {
+                if (isEmptyRow) {
                     modeloTabla.removeRow(i);
                 }
             }
@@ -580,8 +619,7 @@ public class Listado_Productos extends javax.swing.JPanel {
             int rowCount = modeloTabla.getRowCount();
             Texto_Contable.setText("Cantidad de filas: " + rowCount + " - Página " + paginaActual + "/" + totalPaginas);
 
-        } catch (SQLException e)
-        {
+        } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e.toString());
         }
 
@@ -596,44 +634,35 @@ public class Listado_Productos extends javax.swing.JPanel {
 
         // Consulta SQL principal
         String sqlQuery;
-        if ("Todas".equals(categoriaSeleccionada))
-        {
+        if ("Todas".equals(categoriaSeleccionada)) {
             sqlQuery = "SELECT ROW_NUMBER() OVER(ORDER BY cod_producto) AS NumRegistro, nombre, descripcion, categoria"
                     + " FROM Producto WHERE nombre LIKE ? OR descripcion LIKE ?";
-        } else
-        {
+        } else {
             sqlQuery = "SELECT ROW_NUMBER() OVER(ORDER BY cod_producto) AS NumRegistro, nombre, descripcion, categoria"
                     + " FROM Producto WHERE categoria = ? AND (nombre LIKE ? OR descripcion LIKE ?)";
         }
 
-        try (Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789"); PreparedStatement ps = conn.prepareStatement(sqlQuery))
-        {
+        try (Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789"); PreparedStatement ps = conn.prepareStatement(sqlQuery)) {
 
             // Configurar los parámetros de la consulta
-            if (!"Todas".equals(categoriaSeleccionada))
-            {
+            if (!"Todas".equals(categoriaSeleccionada)) {
                 ps.setString(1, categoriaSeleccionada);
                 ps.setString(2, "%" + texto + "%");
                 ps.setString(3, "%" + texto + "%");
-            } else
-            {
+            } else {
                 ps.setString(1, "%" + texto + "%");
                 ps.setString(2, "%" + texto + "%");
             }
 
-            try (ResultSet rs = ps.executeQuery())
-            {
-                while (rs.next())
-                {
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
                     int numRegistro = rs.getInt("NumRegistro");
                     String nombre = rs.getString("nombre");
                     String descripcion = rs.getString("descripcion");
                     String categoria = rs.getString("categoria");
 
-                    if (nombre != null && descripcion != null && categoria != null)
-                    {
-                        modelTabla.addRow(new Object[]
-                        {
+                    if (nombre != null && descripcion != null && categoria != null) {
+                        modelTabla.addRow(new Object[]{
                             numRegistro, nombre, descripcion, categoria
                         });
                         foundData = true;
@@ -646,27 +675,23 @@ public class Listado_Productos extends javax.swing.JPanel {
             Texto_Contable.setText("Cantidad de filas: " + rowCount + " - Página " + (rowCount > 0 ? "1/1" : "0/0"));
 
             // Bloquea o desbloquea los botones de paginación según sea necesario
-            if (rowCount <= filasPorPagina)
-            {
+            if (rowCount <= filasPorPagina) {
                 // Si hay una página o menos, bloquea los botones de paginación
                 btnAnterior.setEnabled(false);
                 btnSiguiente.setEnabled(false);
-            } else
-            {
+            } else {
                 // Si hay más de una página, habilita los botones de paginación
                 btnAnterior.setEnabled(true);
                 btnSiguiente.setEnabled(true);
             }
 
-        } catch (SQLException e)
-        {
+        } catch (SQLException e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error al buscar datos: " + e.getMessage());
         }
 
         // Si no se encontraron datos, puedes mostrar un mensaje de advertencia
-        if (!foundData)
-        {
+        if (!foundData) {
             JOptionPane.showMessageDialog(null, "No se encontraron datos.");
         }
     }
@@ -677,8 +702,7 @@ public class Listado_Productos extends javax.swing.JPanel {
     }
 
     private void siguientePaginario() {
-        if (paginaActual < totalPaginas)
-        {
+        if (paginaActual < totalPaginas) {
             paginaActual++;
 
             cargarTablaProductos();
@@ -687,8 +711,7 @@ public class Listado_Productos extends javax.swing.JPanel {
     }
 
     private void paginaAnteriores() {
-        if (paginaActual > 1)
-        {
+        if (paginaActual > 1) {
             paginaActual--;
 
             cargarTablaProductos();
