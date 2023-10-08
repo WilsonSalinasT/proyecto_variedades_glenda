@@ -380,8 +380,88 @@ public class clientes extends javax.swing.JPanel {
 
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    int selectedRow1;
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
+        selectedRow1 = tableClientes.getSelectedRow();
+        if (selectedRow1 == -1)
+        {
+            JOptionPane.showMessageDialog(null, "Debes seleccionar una celda para poder modificar");
+            return;
+        }
+
+        try
+        {
+
+            int fila = tableClientes.getSelectedRow();
+            String valorCelda = tableClientes.getValueAt(fila, 1).toString();
+            String valorCelda2 = tableClientes.getValueAt(fila, 2).toString();
+            String valorCelda3 = tableClientes.getValueAt(fila, 4).toString();
+            PreparedStatement ps;
+            ResultSet rs;
+
+            Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
+            ps = conn.prepareStatement("SELECT * FROM Cliente WHERE nombre=? and apellido=? and correo_electronico=?");
+            ps.setString(1, valorCelda);
+            ps.setString(2, valorCelda2);
+            ps.setString(3, valorCelda3);
+            rs = ps.executeQuery();
+
+            while (rs.next())
+            {
+
+                String nombre = rs.getString("nombre");
+                String apellido = rs.getString("apellido");
+                
+                String direccion = rs.getString("direccion");
+                String telefono = rs.getString("numero_telefono");
+                String correo = rs.getString("correo_electronico");
+                String fecha = rs.getString("fecha_registro");
+
+                ver_cliente mostrar = new ver_cliente();
+                
+                mostrar.txtnombre.setText(nombre);
+                mostrar.txtapellido.setText(apellido);
+                String sexo = rs.getString("genero");
+               
+                if (sexo.equals("Masculino"))
+                {
+                   mostrar.rbmasculino.setSelected(true);
+                } else if (sexo.equals("Femenino"))
+                {
+                    mostrar.rbfemenino.setSelected(true);
+                }
+                mostrar.jtadireccion.setText(direccion);
+                mostrar.txttelefono.setText(telefono);
+                mostrar.txtcorreo.setText(correo);
+                mostrar.fecha_registro.setText(fecha);
+
+
+                
+                mostrar.setSize(1024, 640);
+                mostrar.setLocation(0, 0);
+
+                panelprincipal.revalidate();
+                panelprincipal.repaint();
+                panelprincipal.removeAll();
+                panelprincipal.add(mostrar, BorderLayout.CENTER);
+
+                panelprincipal.revalidate();
+                panelprincipal.repaint();
+
+                break; // Salir del bucle después de encontrar el elemento seleccionado
+
+            }
+
+            rs.close();
+            ps.close();
+            conn.close();
+
+        } catch (SQLException e)
+        {
+            e.printStackTrace();
+            // Manejar cualquier excepción que pueda ocurrir durante la consulta a la base de datos
+        }
+
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void siguientePagina() {
