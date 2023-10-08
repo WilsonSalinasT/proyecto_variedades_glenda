@@ -386,7 +386,7 @@ public class clientes extends javax.swing.JPanel {
         selectedRow1 = tableClientes.getSelectedRow();
         if (selectedRow1 == -1)
         {
-            JOptionPane.showMessageDialog(null, "Debes seleccionar una celda para poder ver");
+            JOptionPane.showMessageDialog(null, "Debes seleccionar una celda para poder modificar");
             return;
         }
 
