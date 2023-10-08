@@ -87,7 +87,6 @@ public class Listado_Productos extends javax.swing.JPanel {
 
         jButton1.setBackground(new java.awt.Color(255, 0, 51));
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(0, 0, 0));
         jButton1.setText("Crear Producto");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -97,7 +96,6 @@ public class Listado_Productos extends javax.swing.JPanel {
 
         btnver.setBackground(new java.awt.Color(255, 0, 51));
         btnver.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnver.setForeground(new java.awt.Color(0, 0, 0));
         btnver.setText("Ver");
         btnver.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -113,7 +111,6 @@ public class Listado_Productos extends javax.swing.JPanel {
         jPanel1.setBackground(new java.awt.Color(255, 102, 102));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Listado de productos");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -133,7 +130,6 @@ public class Listado_Productos extends javax.swing.JPanel {
                 .addGap(26, 26, 26))
         );
 
-        tabla_productos.setForeground(new java.awt.Color(0, 0, 0));
         tabla_productos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -152,7 +148,6 @@ public class Listado_Productos extends javax.swing.JPanel {
         });
         tabla_productos.setGridColor(new java.awt.Color(255, 51, 51));
         tabla_productos.setSelectionBackground(new java.awt.Color(255, 102, 102));
-        tabla_productos.setSelectionForeground(new java.awt.Color(0, 0, 0));
         tabla_productos.setShowHorizontalLines(true);
         tabla_productos.setShowVerticalLines(true);
         jScrollPane1.setViewportView(tabla_productos);
@@ -164,7 +159,6 @@ public class Listado_Productos extends javax.swing.JPanel {
         }
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Buscar:");
 
         txtbusqueda.addActionListener(new java.awt.event.ActionListener() {
@@ -194,13 +188,11 @@ public class Listado_Productos extends javax.swing.JPanel {
         });
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Categoria:");
 
         Texto_Contable.setText("0");
 
         btnAnterior.setBackground(new java.awt.Color(255, 102, 102));
-        btnAnterior.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/previous.png"))); // NOI18N
         btnAnterior.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAnteriorActionPerformed(evt);
@@ -208,7 +200,6 @@ public class Listado_Productos extends javax.swing.JPanel {
         });
 
         btnSiguiente.setBackground(new java.awt.Color(255, 102, 102));
-        btnSiguiente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/next.png"))); // NOI18N
         btnSiguiente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSiguienteActionPerformed(evt);
@@ -217,7 +208,6 @@ public class Listado_Productos extends javax.swing.JPanel {
 
         btneditar.setBackground(new java.awt.Color(255, 0, 51));
         btneditar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btneditar.setForeground(new java.awt.Color(0, 0, 0));
         btneditar.setText("Editar");
         btneditar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
