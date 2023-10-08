@@ -10,7 +10,7 @@ import static Paneles.editar_cliente.rbfemenino;
 import static Paneles.editar_cliente.rbmasculino;
 import static Paneles.editar_cliente.txtapellido;
 import static Paneles.editar_cliente.txtcorreo;
-import static Paneles.editar_cliente.txtfecharegistro;
+
 import static Paneles.editar_cliente.txtnombre;
 import static Paneles.editar_cliente.txttelefono;
 import java.awt.BorderLayout;
@@ -329,7 +329,7 @@ public class clientes extends javax.swing.JPanel {
                 String direccion = rs.getString("direccion");
                 String telefono = rs.getString("numero_telefono");
                 String correo = rs.getString("correo_electronico");
-                String fecha = rs.getString("fecha_registro");
+//                String fecha = rs.getString("fecha_registro");
                  String id = rs.getString("id_cliente");
 
                 editar_cliente editar = new editar_cliente();
@@ -348,7 +348,7 @@ public class clientes extends javax.swing.JPanel {
                 editar.jtadireccion.setText(direccion);
                 editar.txttelefono.setText(telefono);
                 editar.txtcorreo.setText(correo);
-                editar.txtfecharegistro.setText(fecha);
+               
                  editar.Id_cl.setText(id);
 
 

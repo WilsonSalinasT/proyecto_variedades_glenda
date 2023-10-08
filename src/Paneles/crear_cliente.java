@@ -163,10 +163,12 @@ public class crear_cliente extends javax.swing.JPanel {
         });
 
         rbmasculino.setFont(new java.awt.Font("Arial Black", 1, 12)); // NOI18N
+        rbmasculino.setForeground(new java.awt.Color(0, 0, 0));
         rbmasculino.setSelected(true);
         rbmasculino.setText("Masculino");
 
         rbfemenino.setFont(new java.awt.Font("Arial Black", 1, 12)); // NOI18N
+        rbfemenino.setForeground(new java.awt.Color(0, 0, 0));
         rbfemenino.setText("Femenino");
 
         jtadireccion.setColumns(20);
