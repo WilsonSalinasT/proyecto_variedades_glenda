@@ -4,6 +4,8 @@
  */
 package App;
 
+import Paneles.Crear_Empleado;
+import Paneles.Listado_Empleados;
 import Paneles.Listado_Productos;
 import Paneles.Nueva_venta;
 import Paneles.clientes;
@@ -172,7 +174,7 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_ventasActionPerformed
 
     private void nueva_ventaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nueva_ventaActionPerformed
-        Nueva_venta p2 = new Nueva_venta();
+        Listado_Empleados p2 = new Listado_Empleados();
         p2.setSize(1024, 640);
         p2.setLocation(0, 0);
 
@@ -219,9 +221,7 @@ public class Menu extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_productosActionPerformed
-     
-    
-    
+ 
     /**
      * @param args the command line arguments
      */
