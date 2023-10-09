@@ -47,12 +47,12 @@ public class EditarProducto extends javax.swing.JPanel {
         txtnombre = new javax.swing.JTextField();
         txtprecio = new javax.swing.JTextField();
         txtcategoria = new javax.swing.JTextField();
-        txtexistencia = new javax.swing.JTextField();
         txtproveedor = new javax.swing.JTextField();
         txtfecha = new javax.swing.JTextField();
         btnGuardar = new javax.swing.JButton();
         btnvolver = new javax.swing.JButton();
-        txtdescripcion = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txtdescripcion = new javax.swing.JTextArea();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -125,14 +125,6 @@ public class EditarProducto extends javax.swing.JPanel {
             }
         });
 
-        txtexistencia.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtexistencia.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Existencia:", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12))); // NOI18N
-        txtexistencia.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtexistenciaKeyTyped(evt);
-            }
-        });
-
         txtproveedor.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtproveedor.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Proveedor:", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12))); // NOI18N
         txtproveedor.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -174,18 +166,17 @@ public class EditarProducto extends javax.swing.JPanel {
         txtId.setText("jTextField2");
         txtId.setBorder(null);
 
-        txtdescripcion.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtdescripcion.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Descripción:", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12))); // NOI18N
-        txtdescripcion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtdescripcionActionPerformed(evt);
-            }
-        });
+        txtdescripcion.setColumns(20);
+        txtdescripcion.setLineWrap(true);
+        txtdescripcion.setRows(5);
+        txtdescripcion.setWrapStyleWord(true);
+        txtdescripcion.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Descripción:", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 0, 12))); // NOI18N
         txtdescripcion.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtdescripcionKeyTyped(evt);
             }
         });
+        jScrollPane1.setViewportView(txtdescripcion);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -200,19 +191,14 @@ public class EditarProducto extends javax.swing.JPanel {
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(63, 63, 63)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtdescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtexistencia, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(86, 86, 86)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtcategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtproveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addComponent(txtnombre, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txtprecio, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtnombre, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(86, 86, 86)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtprecio, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtcategoria, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtproveedor, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
                 .addComponent(btnvolver, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27))
@@ -226,23 +212,20 @@ public class EditarProducto extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtprecio, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtnombre, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(3, 3, 3)
-                        .addComponent(btnvolver)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(66, 66, 66)
-                        .addComponent(txtdescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(3, 3, 3)
+                        .addComponent(btnvolver))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtprecio, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtnombre, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(97, 97, 97)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(97, 97, 97)
-                        .addComponent(txtcategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(59, 59, 59)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtexistencia, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtproveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtcategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(108, 108, 108)
+                        .addComponent(txtproveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtfecha, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -288,7 +271,7 @@ public class EditarProducto extends javax.swing.JPanel {
     // Obtener los valores modificados de los campos de texto
     String nuevoNombre = txtnombre.getText();
     String nuevaDescripcion = txtdescripcion.getText();
-    String nuevaExistencia = txtexistencia.getText();
+//    String nuevaExistencia = txtexistencia.getText();
     String nuevoPrecio = txtprecio.getText();
     String nuevaCategoria = txtcategoria.getText();
     String nuevoProveedor = txtproveedor.getText();
@@ -296,23 +279,22 @@ public class EditarProducto extends javax.swing.JPanel {
     String nuevoId = txtId.getText();
 
     // Verificar que todos los campos sean obligatorios
-    if (nuevoNombre.isEmpty() || nuevaDescripcion.isEmpty() || nuevaExistencia.isEmpty() || nuevoPrecio.isEmpty() || nuevaCategoria.isEmpty() || nuevoProveedor.isEmpty() || nuevaFecha.isEmpty() || nuevoId.isEmpty()) {
+    if (nuevoNombre.isEmpty() || nuevaDescripcion.isEmpty() || nuevoPrecio.isEmpty() || nuevaCategoria.isEmpty() || nuevoProveedor.isEmpty() || nuevaFecha.isEmpty() || nuevoId.isEmpty()) {
         JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios. Por favor, completa todos los campos antes de actualizar.");
         return;
     }
 
     try {
         Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
-        PreparedStatement ps = conn.prepareStatement("UPDATE Producto SET nombre=?, descripcion=?, existencia=?, precio=?, categoria=?, proveedor=?, fecha_adquisicion=? WHERE cod_producto=?");
+        PreparedStatement ps = conn.prepareStatement("UPDATE Producto SET nombre=?, descripcion=?, precio=?, categoria=?, proveedor=?, fecha_adquisicion=? WHERE cod_producto=?");
 
         ps.setString(1, nuevoNombre);
         ps.setString(2, nuevaDescripcion);
-        ps.setString(3, nuevaExistencia);
-        ps.setString(4, nuevoPrecio);
-        ps.setString(5, nuevaCategoria);
-        ps.setString(6, nuevoProveedor);
-        ps.setString(7, nuevaFecha);
-        ps.setString(8, nuevoId);
+        ps.setString(3, nuevoPrecio);
+        ps.setString(4, nuevaCategoria);
+        ps.setString(5, nuevoProveedor);
+        ps.setString(6, nuevaFecha);
+        ps.setString(7, nuevoId);
 
         int rowCount = ps.executeUpdate();
         if (rowCount > 0) {
@@ -344,10 +326,6 @@ public class EditarProducto extends javax.swing.JPanel {
 
     }//GEN-LAST:event_btnGuardarActionPerformed
 
-    private void txtdescripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtdescripcionActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtdescripcionActionPerformed
-
     private void txtnombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtnombreKeyTyped
         char c = evt.getKeyChar();
     
@@ -370,33 +348,6 @@ public class EditarProducto extends javax.swing.JPanel {
         evt.consume(); // Consumir el evento si ya hay un punto decimal
     }
     }//GEN-LAST:event_txtprecioKeyTyped
-
-    private void txtdescripcionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtdescripcionKeyTyped
-        char c = evt.getKeyChar();
-    
-    // Verificar si el carácter es un espacio
-    if (Character.isSpaceChar(c)) {
-        evt.consume(); // Consumir el evento (ignorar los espacios)
-        return;
-    }
-    
-    // Obtener el texto actual del campo
-    String textoActual = txtdescripcion.getText();
-    
-    // Verificar si la longitud actual más el nuevo carácter supera los 250 caracteres
-    if (textoActual.length() + 1 > 250) {
-        evt.consume(); // Consumir el evento si supera los 250 caracteres
-    }
-    }//GEN-LAST:event_txtdescripcionKeyTyped
-
-    private void txtexistenciaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtexistenciaKeyTyped
-      char c = evt.getKeyChar();
-
-    // Verificar si el carácter es un número
-    if (!(Character.isDigit(c))) {
-        evt.consume(); // Consumir el evento (ignorar caracteres que no son números)
-    }
-    }//GEN-LAST:event_txtexistenciaKeyTyped
 
     private void txtcategoriaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtcategoriaKeyTyped
        char c = evt.getKeyChar();
@@ -432,16 +383,28 @@ public class EditarProducto extends javax.swing.JPanel {
     }
     }//GEN-LAST:event_txtfechaKeyTyped
 
+    private void txtdescripcionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtdescripcionKeyTyped
+     char c = evt.getKeyChar(); // Obtener el carácter ingresado
+
+        if (txtdescripcion.getText().isEmpty() && Character.isWhitespace(c))
+        {
+            evt.consume(); // Consumir el evento si es un espacio en blanco en la primera letra
+        } else if (txtdescripcion.getText().length() >= 300)
+        {
+            evt.consume(); // Consumir el evento si se ha alcanzado la longitud máxima
+        }
+    }//GEN-LAST:event_txtdescripcionKeyTyped
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnvolver;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField1;
     public static final javax.swing.JTextField txtId = new javax.swing.JTextField();
     public javax.swing.JTextField txtcategoria;
-    public javax.swing.JTextField txtdescripcion;
-    public javax.swing.JTextField txtexistencia;
+    public javax.swing.JTextArea txtdescripcion;
     public javax.swing.JTextField txtfecha;
     public javax.swing.JTextField txtnombre;
     public javax.swing.JTextField txtprecio;

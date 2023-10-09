@@ -420,7 +420,7 @@ try
 
         String nombre = rs.getString("nombre");
         String descripcion = rs.getString("descripcion");
-        String existencias = rs.getString("existencia");
+//        String existencias = rs.getString("existencia");
         String precio = rs.getString("precio");
         String categoria = rs.getString("categoria");
         String proveedor = rs.getString("proveedor");
@@ -435,8 +435,8 @@ try
         mostrar.AreaDescripcion.setText(descripcion);
         mostrar.AreaDescripcion.setEditable(false); // Establece el área de texto como no editable
 
-        mostrar.txtExistencia.setText(existencias);
-        mostrar.txtExistencia.setEditable(false); // Establece el campo de texto como no editable
+//        mostrar.txtExistencia.setText(existencias);
+//        mostrar.txtExistencia.setEditable(false); // Establece el campo de texto como no editable
 
         mostrar.txtPrecio.setText(precio);
         mostrar.txtPrecio.setEditable(false); // Establece el campo de texto como no editable
@@ -513,7 +513,7 @@ try {
             if (rs.next()) {
                 String nombre = rs.getString("nombre");
                 String descripcion = rs.getString("descripcion");
-                String existencias = rs.getString("existencia");
+              
                 String precio = rs.getString("precio");
                 String categoria = rs.getString("categoria");
                 String proveedor = rs.getString("proveedor");
@@ -523,7 +523,7 @@ try {
                 EditarProducto mostrar = new EditarProducto();
                 mostrar.txtnombre.setText(nombre);
                 mostrar.txtdescripcion.setText(descripcion);
-                mostrar.txtexistencia.setText(existencias);
+               
                 mostrar.txtprecio.setText(precio);
                 mostrar.txtcategoria.setText(categoria);
                 mostrar.txtproveedor.setText(proveedor);
