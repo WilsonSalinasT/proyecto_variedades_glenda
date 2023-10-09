@@ -213,6 +213,7 @@ public class Listado_Empleados extends javax.swing.JPanel {
         Texto_Contable.setText("0");
 
         btnAnterior.setBackground(new java.awt.Color(255, 102, 102));
+        btnAnterior.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/previous.png"))); // NOI18N
         btnAnterior.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAnteriorActionPerformed(evt);
@@ -220,6 +221,7 @@ public class Listado_Empleados extends javax.swing.JPanel {
         });
 
         btnSiguiente.setBackground(new java.awt.Color(255, 102, 102));
+        btnSiguiente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/next.png"))); // NOI18N
         btnSiguiente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSiguienteActionPerformed(evt);

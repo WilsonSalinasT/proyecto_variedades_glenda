@@ -376,14 +376,11 @@ public class editar_cliente extends javax.swing.JPanel {
     }//GEN-LAST:event_txtapellidoKeyTyped
 
     private void jtadireccionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtadireccionKeyTyped
-       char c = evt.getKeyChar(); // Obtener el carácter ingresado
+        char c = evt.getKeyChar(); // Obtener el carácter ingresado
 
         if (jtadireccion.getText().isEmpty() && Character.isWhitespace(c))
         {
             evt.consume(); // Consumir el evento si es un espacio en blanco en la primera letra
-        } else if (!Character.isLetterOrDigit(c) && !Character.isWhitespace(c))
-        {
-            evt.consume(); // Consumir el evento si no es una letra, un número o espacio en blanco
         } else if (jtadireccion.getText().length() >= 300)
         {
             evt.consume(); // Consumir el evento si se ha alcanzado la longitud máxima

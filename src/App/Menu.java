@@ -9,6 +9,7 @@ import Paneles.Listado_Empleados;
 import Paneles.Listado_Productos;
 import Paneles.Nueva_venta;
 import Paneles.clientes;
+import Paneles.crear_proveedor;
 import Paneles.productos;
 import Paneles.proveedor;
 import Paneles.ventas;
@@ -71,7 +72,7 @@ public class Menu extends javax.swing.JFrame {
         nueva_venta.setBackground(new java.awt.Color(255, 153, 102));
         nueva_venta.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         nueva_venta.setForeground(new java.awt.Color(255, 255, 255));
-        nueva_venta.setText("Nueva venta");
+        nueva_venta.setText("Empleados");
         nueva_venta.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         nueva_venta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -117,6 +118,8 @@ public class Menu extends javax.swing.JFrame {
             }
         });
         jPanel2.add(ventas, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 380, 250, 40));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Hyper.png"))); // NOI18N
         jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 250, 640));
 
         panelprincipal.setBackground(new java.awt.Color(255, 255, 255));
@@ -196,7 +199,7 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_clientesActionPerformed
 
     private void proveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_proveedorActionPerformed
-        proveedor p2 = new proveedor();
+        crear_proveedor p2 = new crear_proveedor();
         p2.setSize(1024, 640);
         p2.setLocation(0, 0);
 

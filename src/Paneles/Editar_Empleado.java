@@ -294,6 +294,11 @@ public class Editar_Empleado extends javax.swing.JPanel {
 
         jdFechaNac.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Fecha de nacimiento:", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12))); // NOI18N
 
+        id_empleado.setEditable(false);
+        id_empleado.setBackground(new java.awt.Color(255, 255, 255));
+        id_empleado.setForeground(new java.awt.Color(255, 255, 255));
+        id_empleado.setBorder(null);
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -344,10 +349,7 @@ public class Editar_Empleado extends javax.swing.JPanel {
                         .addGap(75, 75, 75))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(lbl_id, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(49, 49, 49)
-                                .addComponent(id_empleado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lbl_id, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -366,19 +368,20 @@ public class Editar_Empleado extends javax.swing.JPanel {
                                         .addGap(41, 41, 41)
                                         .addComponent(cbxSexo, javax.swing.GroupLayout.PREFERRED_SIZE, 393, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                         .addGap(0, 136, Short.MAX_VALUE))))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(id_empleado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lbl_id, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addComponent(id_empleado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(50, 50, 50)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lbl_id, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(id_empleado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(38, 38, 38)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtNombre1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtApellido1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -389,7 +392,7 @@ public class Editar_Empleado extends javax.swing.JPanel {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(cbxSexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jdFechaNac, javax.swing.GroupLayout.DEFAULT_SIZE, 62, Short.MAX_VALUE))
+                    .addComponent(jdFechaNac, javax.swing.GroupLayout.DEFAULT_SIZE, 68, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtDni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1052,54 +1055,54 @@ public class Editar_Empleado extends javax.swing.JPanel {
 
         } else {
 
-            try {
-                Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-                Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
+           try {
+    Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+    Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
 
-                PreparedStatement ps = conn.prepareStatement("UPDATE Empleado SET nombre1=?, nombre2=?, apellido1=?, apellido2=?, fecha_nacimiento=?, sexo=?,"
-                    + "dni=?, rtn=?, estado_civil=?, nacionalidad=?, barrio=?, municipio=?, aldea=?, referenciaDomicilio=?, celular=?, fijo=?, salario=? WHERE id=?");
+    PreparedStatement ps = conn.prepareStatement("UPDATE Empleado SET nombre1=?, nombre2=?, apellido1=?, apellido2=?, fecha_nacimiento=?, sexo=?,"
+            + "dni=?, rtn=?, estado_civil=?, nacionalidad=?, barrio=?, municipio=?, aldea=?, referenciaDomicilio=?, celular=?, fijo=?, salario=? WHERE id=?");
 
-                ps.setString(1, nombre1);
-                ps.setString(2, nombre2);
-                ps.setString(3, apellido1);
-                ps.setString(4, apellido2);
-                ps.setDate(5, new java.sql.Date(fecha_na.getTime()));
-                ps.setString(6, sexo);
-                ps.setString(7, dni);
-                ps.setString(8, rtn);
-                ps.setString(9, estado_civil);
-                ps.setString(10, nacionalidad);
-                ps.setString(11, barrio);
-                ps.setString(12, municipioD);
-                ps.setString(13, aldea);
-                ps.setString(14, refe_direccion);
-                ps.setString(15, celular);
-                ps.setString(16, fijo_cel);
-                ps.setString(17, salario);
+    ps.setString(1, nombre1);
+    ps.setString(2, nombre2);
+    ps.setString(3, apellido1);
+    ps.setString(4, apellido2);
+    ps.setDate(5, new java.sql.Date(fecha_na.getTime()));
+    ps.setString(6, sexo);
+    ps.setString(7, dni);
+    ps.setString(8, rtn);
+    ps.setString(9, estado_civil);
+    ps.setString(10, nacionalidad);
+    ps.setString(11, barrio);
+    ps.setString(12, municipioD);
+    ps.setString(13, aldea);
+    ps.setString(14, refe_direccion);
+    ps.setString(15, celular);
+    ps.setString(16, fijo_cel);
+    ps.setString(17, salario);
 
-                // Establece el valor de la clave primaria
-                int numeracion = Integer.parseInt(lbl_id.getText());
-                ps.setInt(18, numeracion);
+    // Establece el valor de la clave primaria
+    int numeracion = Integer.parseInt(id_empleado.getText());
+    ps.setInt(18, numeracion);
 
-                int rowsUpdated = ps.executeUpdate();
+    int rowsUpdated = ps.executeUpdate();
 
-                if (rowsUpdated > 0) {
-                    JOptionPane.showMessageDialog(null, "Empleado modificado exitosamente");
+    if (rowsUpdated > 0) {
+        JOptionPane.showMessageDialog(null, "Empleado modificado exitosamente");
 
-                    Listado_Empleados abrir = new Listado_Empleados();
-                    abrir.setVisible(true);
-                    //this.dispose();
-                } else {
-                    JOptionPane.showMessageDialog(null, "No se encontró el empleado para modificar");
-                }
+        Listado_Empleados abrir = new Listado_Empleados();
+        abrir.setVisible(true);
+        //this.dispose();
+    } else {
+        JOptionPane.showMessageDialog(null, "No se encontró el empleado para modificar");
+    }
 
-            } catch (SQLException e) {
-                JOptionPane.showMessageDialog(null, e.toString());
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(Crear_Empleado.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
-        }
+} catch (SQLException e) {
+    JOptionPane.showMessageDialog(null, "Error SQL: " + e.getMessage());
+    e.printStackTrace();
+} catch (ClassNotFoundException ex) {
+    JOptionPane.showMessageDialog(null, "Error de clase: " + ex.getMessage());
+    ex.printStackTrace();
+}}
     }//GEN-LAST:event_btn_editarbtn_crearActionPerformed
 
     private void txtDnitxtDniKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDnitxtDniKeyReleased

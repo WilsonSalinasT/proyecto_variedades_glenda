@@ -85,7 +85,7 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="0" pref="727" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="729" max="32767" attributes="0"/>
                       </Group>
                       <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
@@ -117,10 +117,7 @@
                                               <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
                                               <Component id="txtNombre6" min="-2" pref="194" max="-2" attributes="0"/>
                                           </Group>
-                                          <Group type="102" attributes="0">
-                                              <EmptySpace min="39" pref="39" max="-2" attributes="0"/>
-                                              <Component id="jdFechaNac" min="-2" pref="355" max="-2" attributes="0"/>
-                                          </Group>
+                                          <Component id="jdFechaNac" min="-2" pref="379" max="-2" attributes="0"/>
                                       </Group>
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Group type="102" alignment="0" attributes="0">
@@ -207,9 +204,18 @@
                                   <Component id="txtApellido6" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="txtNombre6" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
-                              <Component id="cbx_sexo" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="13" max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                                      <Component id="cbx_sexo" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace pref="13" max="32767" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" attributes="0">
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="jdFechaNac" max="32767" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="txtRtn" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="txtDni" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -248,11 +254,6 @@
                                   <Component id="jButton3" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="351" max="-2" attributes="0"/>
-                              <Component id="jdFechaNac" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -620,6 +621,15 @@
                       </AuxValues>
                     </Component>
                     <Component class="com.toedter.calendar.JDateChooser" name="jdFechaNac">
+                      <Properties>
+                        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                          <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+                            <TitledBorder justification="2" position="2" title="Fecha de nacimiento:">
+                              <Font PropertyName="font" name="Arial Black" size="12" style="2"/>
+                            </TitledBorder>
+                          </Border>
+                        </Property>
+                      </Properties>
                     </Component>
                   </SubComponents>
                 </Container>
