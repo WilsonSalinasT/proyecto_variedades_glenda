@@ -4,6 +4,8 @@
  */
 package Paneles;
 
+import java.awt.BorderLayout;
+
 /**
  *
  * @author Admin
@@ -207,7 +209,7 @@ public class Ver_Empleado extends javax.swing.JPanel {
         salario.setText("AQUI");
         salario.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        btnregresar.setBackground(new java.awt.Color(255, 0, 153));
+        btnregresar.setBackground(new java.awt.Color(255, 0, 51));
         btnregresar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnregresar.setForeground(new java.awt.Color(51, 51, 51));
         btnregresar.setText("ATRÁS");
@@ -456,10 +458,14 @@ public class Ver_Empleado extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnregresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnregresarActionPerformed
-        // Acción a realizar al presionar el botón de volver
-        Listado_Empleados volver = new Listado_Empleados();
-        volver.setVisible(true);
-        //this.dispose();
+        Listado_Empleados p2 = new Listado_Empleados();
+        p2.setSize(1024, 640);
+        p2.setLocation(0, 0);
+
+        jPanel1.removeAll();
+        jPanel1.add(p2, BorderLayout.CENTER);
+        jPanel1.revalidate();
+        jPanel1.repaint();
     }//GEN-LAST:event_btnregresarActionPerformed
 
 

@@ -177,8 +177,8 @@ public class Listado_Empleados extends javax.swing.JPanel {
         tblEmpleados.setGridColor(new java.awt.Color(255, 51, 51));
         tblEmpleados.setSelectionBackground(new java.awt.Color(255, 102, 102));
         tblEmpleados.setSelectionForeground(new java.awt.Color(0, 0, 0));
+        tblEmpleados.setShowHorizontalLines(true);
         tblEmpleados.setShowVerticalLines(true);
-        tblEmpleados.setSurrendersFocusOnKeystroke(true);
         jScrollPane2.setViewportView(tblEmpleados);
 
         txtBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -267,7 +267,7 @@ public class Listado_Empleados extends javax.swing.JPanel {
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 193, Short.MAX_VALUE))
+                        .addGap(0, 187, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(122, 122, 122)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -276,8 +276,8 @@ public class Listado_Empleados extends javax.swing.JPanel {
                             .addComponent(Btn_Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(refrescarbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(36, 36, 36)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(Texto_Contable, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnAnterior, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -362,17 +362,23 @@ public class Listado_Empleados extends javax.swing.JPanel {
             try
             {
 
-                Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+                int fila = tblEmpleados.getSelectedRow();
+                String valorCelda = tblEmpleados.getValueAt(fila, 1).toString();
+                String valorCelda2 = tblEmpleados.getValueAt(fila, 2).toString();
+                String valorCelda3 = tblEmpleados.getValueAt(fila, 3).toString();
+                PreparedStatement ps;
+                ResultSet rs;
                 Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
 
-                String sql = "SELECT * FROM Empleado WHERE id = ?";
-                PreparedStatement ps = conn.prepareStatement(sql);
+                ps = conn.prepareStatement("SELECT * FROM Empleado WHERE nombre1=? and apellido1=? and celular=?");
 
                 // Obtener el valor del "id" de la fila seleccionada en la tabla
-                String id = tblEmpleados.getValueAt(selectedRow, 0).toString(); // Suponiendo que el ID está en la primera columna (columna 0)
-
-                ps.setString(1, id);
-                ResultSet rs = ps.executeQuery();
+                // Suponiendo que el ID está en la primera columna (columna 0)
+//                ps.setString(1, id);
+                ps.setString(1, valorCelda);
+                ps.setString(2, valorCelda2);
+                ps.setString(3, valorCelda3);
+                rs = ps.executeQuery();
 
                 while (rs.next())
                 {
@@ -490,9 +496,6 @@ public class Listado_Empleados extends javax.swing.JPanel {
             } catch (SQLException e)
             {
                 e.printStackTrace();
-            } catch (ClassNotFoundException ex)
-            {
-                Logger.getLogger(Listado_Empleados.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }//GEN-LAST:event_verbtnActionPerformed
@@ -508,17 +511,23 @@ public class Listado_Empleados extends javax.swing.JPanel {
             try
             {
 
-                Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+                int fila = tblEmpleados.getSelectedRow();
+                String valorCelda = tblEmpleados.getValueAt(fila, 1).toString();
+                String valorCelda2 = tblEmpleados.getValueAt(fila, 2).toString();
+                String valorCelda3 = tblEmpleados.getValueAt(fila, 3).toString();
+                PreparedStatement ps;
+                ResultSet rs;
                 Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
 
-                String sql = "SELECT * FROM Empleado WHERE id = ?";
-                PreparedStatement ps = conn.prepareStatement(sql);
+                ps = conn.prepareStatement("SELECT * FROM Empleado WHERE nombre1=? and apellido1=? and celular=?");
 
                 // Obtener el valor del "id" de la fila seleccionada en la tabla
-                String id = tblEmpleados.getValueAt(selectedRow, 0).toString(); // Suponiendo que el ID está en la primera columna (columna 0)
-
-                ps.setString(1, id);
-                ResultSet rs = ps.executeQuery();
+                // Suponiendo que el ID está en la primera columna (columna 0)
+//                ps.setString(1, id);
+                ps.setString(1, valorCelda);
+                ps.setString(2, valorCelda2);
+                ps.setString(3, valorCelda3);
+                rs = ps.executeQuery();
 
                 while (rs.next())
                 {
@@ -570,7 +579,7 @@ public class Listado_Empleados extends javax.swing.JPanel {
 
                     /*this.dispose();
                     mostrar.pack();*/
-                    mostrar.id_empleado.setText(id);
+                    mostrar.id_empleado.setText(id_empleado);
                     mostrar.txtNombre1.setText(nombre1);
                     mostrar.txtNombre2.setText(nombre2);
                     mostrar.txtApellido1.setText(apellido1);
@@ -604,9 +613,6 @@ public class Listado_Empleados extends javax.swing.JPanel {
             } catch (SQLException e)
             {
                 e.printStackTrace();
-            } catch (ClassNotFoundException ex)
-            {
-                Logger.getLogger(Listado_Empleados.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }//GEN-LAST:event_editarbtnActionPerformed

@@ -5,6 +5,7 @@
 package Paneles;
 
 import com.toedter.calendar.JDateChooser;
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.ItemEvent;
 import java.sql.Connection;
@@ -26,7 +27,8 @@ import javax.swing.UIManager;
  */
 public class Crear_Empleado extends javax.swing.JPanel {
 
-     TextPrompt holder;
+    TextPrompt holder;
+
     /**
      * Creates new form Crear_Empleado
      */
@@ -39,7 +41,6 @@ public class Crear_Empleado extends javax.swing.JPanel {
         holder = new TextPrompt("####-####", txt_FijoCel);
 
 //        setLocationRelativeTo(null);
-
         // Poner como fecha Maxima el 1/01/2005 para que registre desde personas mayores de 18 años como empleados
         // y personas como maximo con 70 años
         Calendar maxDate = Calendar.getInstance();
@@ -208,7 +209,7 @@ public class Crear_Empleado extends javax.swing.JPanel {
             }
         });
 
-        btn_crear4.setBackground(new java.awt.Color(255, 0, 204));
+        btn_crear4.setBackground(new java.awt.Color(255, 0, 51));
         btn_crear4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btn_crear4.setForeground(new java.awt.Color(51, 51, 51));
         btn_crear4.setText("CREAR");
@@ -256,7 +257,7 @@ public class Crear_Empleado extends javax.swing.JPanel {
         jLabel7.setFont(new java.awt.Font("Arial Black", 2, 12)); // NOI18N
         jLabel7.setText("Dirección de Domicilio Exacta");
 
-        jButton3.setBackground(new java.awt.Color(255, 0, 204));
+        jButton3.setBackground(new java.awt.Color(255, 0, 51));
         jButton3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jButton3.setText("ATRÁS");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -279,72 +280,77 @@ public class Crear_Empleado extends javax.swing.JPanel {
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(53, 53, 53)
-                                .addComponent(txtNombre6, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jdFechaNac, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtApellido6))
-                            .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addGap(42, 42, 42)
-                                .addComponent(cbx_sexo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtDni)
-                            .addComponent(cbx_estC, 0, 427, Short.MAX_VALUE))
-                        .addGap(33, 33, 33)
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtRtn)
-                            .addComponent(txtNacionalidad)))
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                                .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18))
-                            .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addComponent(txt_RefeDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(29, 29, 29)))
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(txtCelular)
-                            .addComponent(cbxMuni, 0, 252, Short.MAX_VALUE))
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(cbxAldea, 0, 290, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                                .addGap(24, 24, 24)
-                                .addComponent(txt_FijoCel, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addGap(75, 75, 75))
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(453, 453, 453)
+                .addComponent(btn_crear4)
+                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                         .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(298, 298, 298))
+                        .addGap(313, 313, 313))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                         .addComponent(txtSalario, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(288, 288, 288))))
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addComponent(jButton3)
-                .addGap(336, 336, 336)
-                .addComponent(btn_crear4)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton3))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGap(15, 15, 15)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel5Layout.createSequentialGroup()
+                                        .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(53, 53, 53)
+                                        .addComponent(txtNombre6, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jdFechaNac, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel5Layout.createSequentialGroup()
+                                        .addGap(18, 18, 18)
+                                        .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(txtApellido6))
+                                    .addGroup(jPanel5Layout.createSequentialGroup()
+                                        .addGap(42, 42, 42)
+                                        .addComponent(cbx_sexo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtDni)
+                                    .addComponent(cbx_estC, 0, 427, Short.MAX_VALUE))
+                                .addGap(33, 33, 33)
+                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtRtn)
+                                    .addComponent(txtNacionalidad)))
+                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                                        .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18))
+                                    .addGroup(jPanel5Layout.createSequentialGroup()
+                                        .addComponent(txt_RefeDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(29, 29, 29)))
+                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(txtCelular)
+                                    .addComponent(cbxMuni, 0, 252, Short.MAX_VALUE))
+                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel5Layout.createSequentialGroup()
+                                        .addGap(18, 18, 18)
+                                        .addComponent(cbxAldea, 0, 290, Short.MAX_VALUE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                                        .addGap(24, 24, 24)
+                                        .addComponent(txt_FijoCel, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
+                .addGap(75, 75, 75))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(277, 277, 277)
+                .addGap(193, 193, 193)
+                .addComponent(jButton3)
+                .addGap(53, 53, 53)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -385,9 +391,7 @@ public class Crear_Empleado extends javax.swing.JPanel {
                 .addGap(39, 39, 39)
                 .addComponent(txtSalario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(34, 34, 34)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn_crear4)
-                    .addComponent(jButton3))
+                .addComponent(btn_crear4)
                 .addGap(12, 12, 12))
         );
 
@@ -490,7 +494,7 @@ public class Crear_Empleado extends javax.swing.JPanel {
         // validación en el campo de nombre para que acepte solo letra y letras tildades, se utiliza el codigo ASCII para las letras tildades
         char c = evt.getKeyChar();
         if ((c < 'a' || c > 'z') && (c < 'A' || c > 'Z') && ((int) evt.getKeyChar() <= 160) || txtNombre.getText().length() >= 20)
-        evt.consume();
+            evt.consume();
     }//GEN-LAST:event_txtNombretxtNombre1KeyTyped
 
     private void txtNombre6txtNombre2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombre6txtNombre2ActionPerformed
@@ -501,7 +505,7 @@ public class Crear_Empleado extends javax.swing.JPanel {
         // validación en el campo de nombre para que acepte solo letra y letras tildades, se utiliza el codigo ASCII para las letras tildades
         char c = evt.getKeyChar();
         if ((c < 'a' || c > 'z') && (c < 'A' || c > 'Z') && ((int) evt.getKeyChar() <= 160) || txtNombre6.getText().length() >= 20)
-        evt.consume();
+            evt.consume();
     }//GEN-LAST:event_txtNombre6txtNombre2KeyTyped
 
     private void txtApellidotxtApellido1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtApellidotxtApellido1ActionPerformed
@@ -512,14 +516,14 @@ public class Crear_Empleado extends javax.swing.JPanel {
         // validación en el campo de nombre para que acepte solo letra y letras tildades, se utiliza el codigo ASCII para las letras tildades
         char c = evt.getKeyChar();
         if ((c < 'a' || c > 'z') && (c < 'A' || c > 'Z') && ((int) evt.getKeyChar() <= 160) || txtApellido.getText().length() >= 20)
-        evt.consume();
+            evt.consume();
     }//GEN-LAST:event_txtApellidotxtApellido1KeyTyped
 
     private void txtApellido6txtApellido2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApellido6txtApellido2KeyTyped
         // validación en el campo de nombre para que acepte solo letra y letras tildades, se utiliza el codigo ASCII para las letras tildades
         char c = evt.getKeyChar();
         if ((c < 'a' || c > 'z') && (c < 'A' || c > 'Z') && ((int) evt.getKeyChar() <= 160) || txtApellido6.getText().length() >= 20)
-        evt.consume();
+            evt.consume();
     }//GEN-LAST:event_txtApellido6txtApellido2KeyTyped
 
     private void txtRtntxtRtnKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRtntxtRtnKeyTyped
@@ -528,11 +532,14 @@ public class Crear_Empleado extends javax.swing.JPanel {
         String texto = txtRtn.getText();
 
         // Verificar si se ingresó un dígito y el número de caracteres no excede el formato esperado
-        if (Character.isDigit(c) && texto.length() < 16) {
-            if (texto.length() == 4 || texto.length() == 9) {
+        if (Character.isDigit(c) && texto.length() < 16)
+        {
+            if (texto.length() == 4 || texto.length() == 9)
+            {
                 txtRtn.setText(texto + "-");
             }
-        } else {
+        } else
+        {
             evt.consume();  // Ignorar el carácter ingresado si no cumple con el formato esperado
         }
     }//GEN-LAST:event_txtRtntxtRtnKeyTyped
@@ -541,7 +548,7 @@ public class Crear_Empleado extends javax.swing.JPanel {
         // validación en el campo de nombre para que acepte solo letra y letras tildades, se utiliza el codigo ASCII para las letras tildades
         char c = evt.getKeyChar();
         if ((c < 'a' || c > 'z') && (c < 'A' || c > 'Z') && ((int) evt.getKeyChar() <= 160) || txtNacionalidad.getText().length() >= 20)
-        evt.consume();
+            evt.consume();
     }//GEN-LAST:event_txtNacionalidadtxtNacionalidadKeyTyped
 
     private void txtDirecciontxtDireccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDirecciontxtDireccionActionPerformed
@@ -553,19 +560,22 @@ public class Crear_Empleado extends javax.swing.JPanel {
         String text = txtDireccion.getText();
 
         // Verificar si el carácter es un espacio y si es el primer carácter en el campo
-        if (c == ' ' && text.length() == 0) {
+        if (c == ' ' && text.length() == 0)
+        {
             evt.consume();
             return;
         }
 
         // Verificar si el carácter es una letra sin tilde, letra con tilde, número o punto
-        if (!((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c >= '0' && c <= '9') || c == '.' || ((int) c <= 160))) {
+        if (!((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c >= '0' && c <= '9') || c == '.' || ((int) c <= 160)))
+        {
             evt.consume();
             return;
         }
 
         // Verificar si la longitud del texto es mayor o igual a 20
-        if (text.length() >= 50) {
+        if (text.length() >= 50)
+        {
             evt.consume();
             return;
         }
@@ -580,19 +590,22 @@ public class Crear_Empleado extends javax.swing.JPanel {
         String text = txt_RefeDireccion.getText();
 
         // Verificar si el carácter es un espacio y si es el primer carácter en el campo
-        if (c == ' ' && text.length() == 0) {
+        if (c == ' ' && text.length() == 0)
+        {
             evt.consume();
             return;
         }
 
         // Verificar si el carácter es una letra sin tilde, letra con tilde, número o punto
-        if (!((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c >= '0' && c <= '9') || c == '.' || ((int) c <= 160))) {
+        if (!((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c >= '0' && c <= '9') || c == '.' || ((int) c <= 160)))
+        {
             evt.consume();
             return;
         }
 
         // Verificar si la longitud del texto es mayor o igual a 20
-        if (text.length() >= 200) {
+        if (text.length() >= 200)
+        {
             evt.consume();
             return;
         }
@@ -611,9 +624,11 @@ public class Crear_Empleado extends javax.swing.JPanel {
         String texto = txtCelular.getText().trim();
         char c = evt.getKeyChar();
 
-        if (texto.startsWith("9") || texto.startsWith("8") || texto.startsWith("3") || c == 9 && c == 8 & c == 3) {
+        if (texto.startsWith("9") || texto.startsWith("8") || texto.startsWith("3") || c == 9 && c == 8 & c == 3)
+        {
             txtCelular.setBackground(Color.green);
-        } else {
+        } else
+        {
             // El texto no cumple con la validación
             evt.consume(); // Bloquea el carácter
             JOptionPane.showMessageDialog(this, "El número de celular debe comenzar con 9, 8 o 3", "Error", JOptionPane.ERROR_MESSAGE);
@@ -628,12 +643,15 @@ public class Crear_Empleado extends javax.swing.JPanel {
         String texto = txtCelular.getText();
 
         // Verificar si se ingresó un dígito y el número de caracteres no excede el formato esperado
-        if (Character.isDigit(c) && texto.length() < 9 || texto.startsWith("9") && c == 9 && c == 8 & c == 3) {
+        if (Character.isDigit(c) && texto.length() < 9 || texto.startsWith("9") && c == 9 && c == 8 & c == 3)
+        {
             // Formato: XXXX-XXXX (4 dígitos seguidos de un guion y otros 4 dígitos)
-            if (texto.length() == 4) {
+            if (texto.length() == 4)
+            {
                 txtCelular.setText(texto + "-");
             }
-        } else {
+        } else
+        {
             txtCelular.setText("");
             evt.consume();  // Ignorar el carácter ingresado si no cumple con el formato esperado
         }
@@ -646,9 +664,11 @@ public class Crear_Empleado extends javax.swing.JPanel {
     private void txt_FijoCeltxt_FijoCelKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_FijoCeltxt_FijoCelKeyReleased
         String texto = txt_FijoCel.getText().trim();
 
-        if (texto.startsWith("2")) {
+        if (texto.startsWith("2"))
+        {
             txt_FijoCel.setBackground(Color.green);
-        } else {
+        } else
+        {
             // El texto no cumple con la validación
             JOptionPane.showMessageDialog(this, "El número de teléfono fijo debe iniciar con 2", "Error", JOptionPane.ERROR_MESSAGE);
             txt_FijoCel.setBackground(Color.red);
@@ -661,12 +681,15 @@ public class Crear_Empleado extends javax.swing.JPanel {
         String texto = txt_FijoCel.getText();
 
         // Verificar si se ingresó un dígito y el número de caracteres no excede el formato esperado
-        if (Character.isDigit(c) && texto.length() < 9) {
+        if (Character.isDigit(c) && texto.length() < 9)
+        {
             // Formato: XXXX-XXXX (4 dígitos seguidos de un guion y otros 4 dígitos)
-            if (texto.length() == 4) {
+            if (texto.length() == 4)
+            {
                 txt_FijoCel.setText(texto + "-");
             }
-        } else {
+        } else
+        {
             evt.consume();
             txt_FijoCel.setText("");
         }
@@ -686,33 +709,46 @@ public class Crear_Empleado extends javax.swing.JPanel {
         String rtn = txtRtn.getText().trim();
 
         if (primerNombre.isEmpty() || primerApellido.isEmpty() || nacionalidad.isEmpty() || direccion.isEmpty()
-            || celular.isEmpty() || salario.isEmpty() || dni.isEmpty()
-            || rtn.isEmpty() || jdFechaNac.getDate() == null) {
+                || celular.isEmpty() || salario.isEmpty() || dni.isEmpty()
+                || rtn.isEmpty() || jdFechaNac.getDate() == null)
+        {
             // El campo está vacío, muestra un mensaje de error
             JOptionPane.showMessageDialog(this, "Llene todos los espacios necesarios", "Error", JOptionPane.ERROR_MESSAGE);
 
             // Verifica los campos de texto y resalta el primero vacío
-            JTextField[] textFields = {txtNombre, txtApellido, txtDireccion, txtCelular, txtDni, txtRtn,
-                txtNacionalidad, txtSalario};
+            JTextField[] textFields =
+            {
+                txtNombre, txtApellido, txtDireccion, txtCelular, txtDni, txtRtn,
+                txtNacionalidad, txtSalario
+            };
             boolean foundEmpty = false;
 
-            for (JTextField textField : textFields) {
-                if (textField.getText().isEmpty()) {
+            for (JTextField textField : textFields)
+            {
+                if (textField.getText().isEmpty())
+                {
                     textField.setBackground(Color.RED); // Establece el color de resaltado en rojo
-                } else {
+                } else
+                {
                     textField.setBackground(UIManager.getColor("TextField.background")); // Restaura el color por defecto
                 }
             }
 
             // Verifica los JDateChooser y resalta el primero vacío
-            JDateChooser[] dateChoosers = {jdFechaNac};
+            JDateChooser[] dateChoosers =
+            {
+                jdFechaNac
+            };
 
-            for (JDateChooser dateChooser : dateChoosers) {
-                if (dateChooser.getDate() == null) {
+            for (JDateChooser dateChooser : dateChoosers)
+            {
+                if (dateChooser.getDate() == null)
+                {
                     // Cambia el color del borde a rojo para resaltarlo
                     dateChooser.setBorder(BorderFactory.createLineBorder(Color.RED));
                     foundEmpty = true;
-                } else {
+                } else
+                {
                     // Restaura el borde por defecto
                     dateChooser.setBorder(BorderFactory.createLineBorder(UIManager.getColor("TextField.border")));
                 }
@@ -720,9 +756,11 @@ public class Crear_Empleado extends javax.swing.JPanel {
 
             // VALIDACIÓN PARA EL NÚMERO DE DNI y RTN
             // Verificar el formato del RTN
-            if (!rtn.matches("^[0-9]{4}-[0-9]{4}-[0-9]{6}$")) {
+            if (!rtn.matches("^[0-9]{4}-[0-9]{4}-[0-9]{6}$"))
+            {
                 JOptionPane.showMessageDialog(this, "Ingrese un formato de RTN correcto", "Error", JOptionPane.ERROR_MESSAGE);
-            } else {
+            } else
+            {
                 // Obtener los valores de departamento, municipio y año
                 String depto = rtn.substring(0, 2);
                 String municipio = rtn.substring(2, 4);
@@ -739,44 +777,63 @@ public class Crear_Empleado extends javax.swing.JPanel {
                 boolean departamentoValido = false;
                 boolean municipioValido = false;
 
-                if (deptoN == 7 && municipioN >= 1 && municipioN <= 5) {
+                if (deptoN == 7 && municipioN >= 1 && municipioN <= 5)
+                {
                     departamentoValido = true;
                     municipioValido = true;
-                } else if ((deptoN >= 1 && deptoN <= 6) || (deptoN >= 8 && deptoN <= 18)) {
+                } else if ((deptoN >= 1 && deptoN <= 6) || (deptoN >= 8 && deptoN <= 18))
+                {
                     departamentoValido = true;
-                    if (deptoN == 1 && municipioN >= 1 && municipioN <= 8) {
+                    if (deptoN == 1 && municipioN >= 1 && municipioN <= 8)
+                    {
                         municipioValido = true;
-                    } else if (deptoN == 2 && municipioN >= 1 && municipioN <= 10) {
+                    } else if (deptoN == 2 && municipioN >= 1 && municipioN <= 10)
+                    {
                         municipioValido = true;
-                    } else if (deptoN == 3 && municipioN >= 1 && municipioN <= 21) {
+                    } else if (deptoN == 3 && municipioN >= 1 && municipioN <= 21)
+                    {
                         municipioValido = true;
-                    } else if (deptoN == 4 && municipioN >= 1 && municipioN <= 23) {
+                    } else if (deptoN == 4 && municipioN >= 1 && municipioN <= 23)
+                    {
                         municipioValido = true;
-                    } else if (deptoN == 5 && municipioN >= 1 && municipioN <= 12) {
+                    } else if (deptoN == 5 && municipioN >= 1 && municipioN <= 12)
+                    {
                         municipioValido = true;
-                    } else if (deptoN == 6 && municipioN >= 1 && municipioN <= 16) {
+                    } else if (deptoN == 6 && municipioN >= 1 && municipioN <= 16)
+                    {
                         municipioValido = true;
-                    } else if (deptoN == 8 && municipioN >= 1 && municipioN <= 28) {
+                    } else if (deptoN == 8 && municipioN >= 1 && municipioN <= 28)
+                    {
                         municipioValido = true;
-                    } else if (deptoN == 9 && municipioN >= 1 && municipioN <= 6) {
+                    } else if (deptoN == 9 && municipioN >= 1 && municipioN <= 6)
+                    {
                         municipioValido = true;
-                    } else if (deptoN == 10 && municipioN >= 1 && municipioN <= 17) {
+                    } else if (deptoN == 10 && municipioN >= 1 && municipioN <= 17)
+                    {
                         municipioValido = true;
-                    } else if (deptoN == 11 && municipioN >= 1 && municipioN <= 4) {
+                    } else if (deptoN == 11 && municipioN >= 1 && municipioN <= 4)
+                    {
                         municipioValido = true;
-                    } else if (deptoN == 12 && municipioN >= 1 && municipioN <= 19) {
+                    } else if (deptoN == 12 && municipioN >= 1 && municipioN <= 19)
+                    {
                         municipioValido = true;
-                    } else if (deptoN == 13 && municipioN >= 1 && municipioN <= 28) {
+                    } else if (deptoN == 13 && municipioN >= 1 && municipioN <= 28)
+                    {
                         municipioValido = true;
-                    } else if (deptoN == 14 && municipioN >= 1 && municipioN <= 16) {
+                    } else if (deptoN == 14 && municipioN >= 1 && municipioN <= 16)
+                    {
                         municipioValido = true;
-                    } else if (deptoN == 15 && municipioN >= 1 && municipioN <= 23) {
+                    } else if (deptoN == 15 && municipioN >= 1 && municipioN <= 23)
+                    {
                         municipioValido = true;
-                    } else if (deptoN == 16 && municipioN >= 1 && municipioN <= 28) {
+                    } else if (deptoN == 16 && municipioN >= 1 && municipioN <= 28)
+                    {
                         municipioValido = true;
-                    } else if (deptoN == 17 && municipioN >= 1 && municipioN <= 9) {
+                    } else if (deptoN == 17 && municipioN >= 1 && municipioN <= 9)
+                    {
                         municipioValido = true;
-                    } else if (deptoN == 18 && municipioN >= 1 && municipioN <= 11) {
+                    } else if (deptoN == 18 && municipioN >= 1 && municipioN <= 11)
+                    {
                         municipioValido = true;
                     }
                 }
@@ -784,18 +841,22 @@ public class Crear_Empleado extends javax.swing.JPanel {
                 boolean anioValido = anioN >= 1960 && anioN <= 2005;
                 boolean correlativoValido = correlativoN >= 1 && correlativoN <= 999999;
 
-                if (!departamentoValido || !municipioValido || !anioValido || !correlativoValido) {
+                if (!departamentoValido || !municipioValido || !anioValido || !correlativoValido)
+                {
                     JOptionPane.showMessageDialog(this, "Ingrese un RTN válido", "Error", JOptionPane.ERROR_MESSAGE);
-                } else {
+                } else
+                {
                     // El RTN es válido, realizar la acción deseada aquí
                 }
             }
 
             //DNI
             // Verificar el formato del DNI
-            if (!dni.matches("^[0-9]{4}-[0-9]{4}-[0-9]{5}$")) {
+            if (!dni.matches("^[0-9]{4}-[0-9]{4}-[0-9]{5}$"))
+            {
                 JOptionPane.showMessageDialog(this, "Ingrese un formato de DNI correcto", "Error", JOptionPane.ERROR_MESSAGE);
-            } else {
+            } else
+            {
                 // Obtener los valores de departamento, municipio y año
                 String depto = dni.substring(0, 2);
                 String municipio = dni.substring(2, 4);
@@ -812,44 +873,63 @@ public class Crear_Empleado extends javax.swing.JPanel {
                 boolean departamentoValido = false;
                 boolean municipioValido = false;
 
-                if (deptoN == 7 && municipioN >= 1 && municipioN <= 5) {
+                if (deptoN == 7 && municipioN >= 1 && municipioN <= 5)
+                {
                     departamentoValido = true;
                     municipioValido = true;
-                } else if ((deptoN >= 1 && deptoN <= 6) || (deptoN >= 8 && deptoN <= 18)) {
+                } else if ((deptoN >= 1 && deptoN <= 6) || (deptoN >= 8 && deptoN <= 18))
+                {
                     departamentoValido = true;
-                    if (deptoN == 1 && municipioN >= 1 && municipioN <= 8) {
+                    if (deptoN == 1 && municipioN >= 1 && municipioN <= 8)
+                    {
                         municipioValido = true;
-                    } else if (deptoN == 2 && municipioN >= 1 && municipioN <= 10) {
+                    } else if (deptoN == 2 && municipioN >= 1 && municipioN <= 10)
+                    {
                         municipioValido = true;
-                    } else if (deptoN == 3 && municipioN >= 1 && municipioN <= 21) {
+                    } else if (deptoN == 3 && municipioN >= 1 && municipioN <= 21)
+                    {
                         municipioValido = true;
-                    } else if (deptoN == 4 && municipioN >= 1 && municipioN <= 23) {
+                    } else if (deptoN == 4 && municipioN >= 1 && municipioN <= 23)
+                    {
                         municipioValido = true;
-                    } else if (deptoN == 5 && municipioN >= 1 && municipioN <= 12) {
+                    } else if (deptoN == 5 && municipioN >= 1 && municipioN <= 12)
+                    {
                         municipioValido = true;
-                    } else if (deptoN == 6 && municipioN >= 1 && municipioN <= 16) {
+                    } else if (deptoN == 6 && municipioN >= 1 && municipioN <= 16)
+                    {
                         municipioValido = true;
-                    } else if (deptoN == 8 && municipioN >= 1 && municipioN <= 28) {
+                    } else if (deptoN == 8 && municipioN >= 1 && municipioN <= 28)
+                    {
                         municipioValido = true;
-                    } else if (deptoN == 9 && municipioN >= 1 && municipioN <= 6) {
+                    } else if (deptoN == 9 && municipioN >= 1 && municipioN <= 6)
+                    {
                         municipioValido = true;
-                    } else if (deptoN == 10 && municipioN >= 1 && municipioN <= 17) {
+                    } else if (deptoN == 10 && municipioN >= 1 && municipioN <= 17)
+                    {
                         municipioValido = true;
-                    } else if (deptoN == 11 && municipioN >= 1 && municipioN <= 4) {
+                    } else if (deptoN == 11 && municipioN >= 1 && municipioN <= 4)
+                    {
                         municipioValido = true;
-                    } else if (deptoN == 12 && municipioN >= 1 && municipioN <= 19) {
+                    } else if (deptoN == 12 && municipioN >= 1 && municipioN <= 19)
+                    {
                         municipioValido = true;
-                    } else if (deptoN == 13 && municipioN >= 1 && municipioN <= 28) {
+                    } else if (deptoN == 13 && municipioN >= 1 && municipioN <= 28)
+                    {
                         municipioValido = true;
-                    } else if (deptoN == 14 && municipioN >= 1 && municipioN <= 16) {
+                    } else if (deptoN == 14 && municipioN >= 1 && municipioN <= 16)
+                    {
                         municipioValido = true;
-                    } else if (deptoN == 15 && municipioN >= 1 && municipioN <= 23) {
+                    } else if (deptoN == 15 && municipioN >= 1 && municipioN <= 23)
+                    {
                         municipioValido = true;
-                    } else if (deptoN == 16 && municipioN >= 1 && municipioN <= 28) {
+                    } else if (deptoN == 16 && municipioN >= 1 && municipioN <= 28)
+                    {
                         municipioValido = true;
-                    } else if (deptoN == 17 && municipioN >= 1 && municipioN <= 9) {
+                    } else if (deptoN == 17 && municipioN >= 1 && municipioN <= 9)
+                    {
                         municipioValido = true;
-                    } else if (deptoN == 18 && municipioN >= 1 && municipioN <= 11) {
+                    } else if (deptoN == 18 && municipioN >= 1 && municipioN <= 11)
+                    {
                         municipioValido = true;
                     }
                 }
@@ -857,26 +937,33 @@ public class Crear_Empleado extends javax.swing.JPanel {
                 boolean anioValido = anioN >= 1960 && anioN <= 2005;
                 boolean correlativoValido = correlativoN >= 1 && correlativoN <= 99999;
 
-                if (!departamentoValido || !municipioValido || !anioValido || !correlativoValido) {
+                if (!departamentoValido || !municipioValido || !anioValido || !correlativoValido)
+                {
                     JOptionPane.showMessageDialog(this, "Ingrese un DNI válido", "Error", JOptionPane.ERROR_MESSAGE);
-                } else {
+                } else
+                {
                     // El DNI es válido, enviar a la base de Datos
                 }
             }
 
-            if (!salario.isEmpty()) {
-                try {
+            if (!salario.isEmpty())
+            {
+                try
+                {
                     int sal = Integer.parseInt(salario);
 
-                    if (sal > 99999 || sal < 1000) {
+                    if (sal > 99999 || sal < 1000)
+                    {
                         JOptionPane.showMessageDialog(this, "El salario debe ser mayor de 1000 y menor de 5 cifras", "Error", JOptionPane.ERROR_MESSAGE);
                     }
-                } catch (NumberFormatException e) {
+                } catch (NumberFormatException e)
+                {
                     // Manejar el caso en el que 'salario' no es un número válido
                 }
             }
 
-        } else {
+        } else
+        {
             JOptionPane.showMessageDialog(this, "Registro Guardado", "Guardado", JOptionPane.OK_OPTION);
 
 //            Listado_Empleados abrir = new Listado_Empleados();
@@ -908,48 +995,65 @@ public class Crear_Empleado extends javax.swing.JPanel {
         String salario = txtSalario.getText();
 
         if (nombre1.isEmpty() || apellido1.isEmpty() || fecha_na.equals(null) || barrio.isEmpty()
-            || celular.isEmpty() || dni.isEmpty() || rtn.isEmpty() || nacionalidad.isEmpty() ) {
+                || celular.isEmpty() || dni.isEmpty() || rtn.isEmpty() || nacionalidad.isEmpty())
+        {
             JOptionPane.showMessageDialog(this, "Llene todos los espacios necesarios", "Error", JOptionPane.ERROR_MESSAGE);
 
             // Verifica los campos de texto y resalta el primero vacío
-            JTextField[] textFields = {txtNombre, txtApellido, txtDireccion, txtCelular, txtDni, txtRtn,
-                txtNacionalidad, txtSalario};
+            JTextField[] textFields =
+            {
+                txtNombre, txtApellido, txtDireccion, txtCelular, txtDni, txtRtn,
+                txtNacionalidad, txtSalario
+            };
             boolean foundEmpty = false;
 
-            for (JTextField textField : textFields) {
-                if (textField.getText().isEmpty()) {
+            for (JTextField textField : textFields)
+            {
+                if (textField.getText().isEmpty())
+                {
                     textField.setBackground(Color.RED); // Establece el color de resaltado en rojo
-                } else {
+                } else
+                {
                     textField.setBackground(UIManager.getColor("TextField.background")); // Restaura el color por defecto
                 }
             }
 
             // Verifica los JDateChooser y resalta el primero vacío
-            JDateChooser[] dateChoosers = {jdFechaNac};
+            JDateChooser[] dateChoosers =
+            {
+                jdFechaNac
+            };
 
-            for (JDateChooser dateChooser : dateChoosers) {
-                if (dateChooser.getDate() == null) {
+            for (JDateChooser dateChooser : dateChoosers)
+            {
+                if (dateChooser.getDate() == null)
+                {
                     // Cambia el color del borde a rojo para resaltarlo
                     dateChooser.setBorder(BorderFactory.createLineBorder(Color.RED));
                     foundEmpty = true;
-                } else {
+                } else
+                {
                     // Restaura el borde por defecto
                     dateChooser.setBorder(BorderFactory.createLineBorder(UIManager.getColor("TextField.border")));
                 }
             }
-            if(cbx_sexo.getSelectedIndex() == -1){
+            if (cbx_sexo.getSelectedIndex() == -1)
+            {
                 JOptionPane.showMessageDialog(this, "Selecione un genero", "Error", JOptionPane.ERROR_MESSAGE);
             }
 
-            if(cbx_estC.getSelectedIndex() == -1){
+            if (cbx_estC.getSelectedIndex() == -1)
+            {
                 JOptionPane.showMessageDialog(this, "Selecione un estado civil", "Error", JOptionPane.ERROR_MESSAGE);
             }
 
             // VALIDACIÓN PARA EL NÚMERO DE DNI y RTN
             // Verificar el formato del RTN
-            if (!rtn.matches("^[0-9]{4}-[0-9]{4}-[0-9]{6}$")) {
+            if (!rtn.matches("^[0-9]{4}-[0-9]{4}-[0-9]{6}$"))
+            {
                 JOptionPane.showMessageDialog(this, "Ingrese un formato de RTN correcto", "Error", JOptionPane.ERROR_MESSAGE);
-            } else {
+            } else
+            {
                 // Obtener los valores de departamento, municipio y año
                 String depto = rtn.substring(0, 2);
                 String municipio = rtn.substring(2, 4);
@@ -966,44 +1070,63 @@ public class Crear_Empleado extends javax.swing.JPanel {
                 boolean departamentoValido = false;
                 boolean municipioValido = false;
 
-                if (deptoN == 7 && municipioN >= 1 && municipioN <= 5) {
+                if (deptoN == 7 && municipioN >= 1 && municipioN <= 5)
+                {
                     departamentoValido = true;
                     municipioValido = true;
-                } else if ((deptoN >= 1 && deptoN <= 6) || (deptoN >= 8 && deptoN <= 18)) {
+                } else if ((deptoN >= 1 && deptoN <= 6) || (deptoN >= 8 && deptoN <= 18))
+                {
                     departamentoValido = true;
-                    if (deptoN == 1 && municipioN >= 1 && municipioN <= 8) {
+                    if (deptoN == 1 && municipioN >= 1 && municipioN <= 8)
+                    {
                         municipioValido = true;
-                    } else if (deptoN == 2 && municipioN >= 1 && municipioN <= 10) {
+                    } else if (deptoN == 2 && municipioN >= 1 && municipioN <= 10)
+                    {
                         municipioValido = true;
-                    } else if (deptoN == 3 && municipioN >= 1 && municipioN <= 21) {
+                    } else if (deptoN == 3 && municipioN >= 1 && municipioN <= 21)
+                    {
                         municipioValido = true;
-                    } else if (deptoN == 4 && municipioN >= 1 && municipioN <= 23) {
+                    } else if (deptoN == 4 && municipioN >= 1 && municipioN <= 23)
+                    {
                         municipioValido = true;
-                    } else if (deptoN == 5 && municipioN >= 1 && municipioN <= 12) {
+                    } else if (deptoN == 5 && municipioN >= 1 && municipioN <= 12)
+                    {
                         municipioValido = true;
-                    } else if (deptoN == 6 && municipioN >= 1 && municipioN <= 16) {
+                    } else if (deptoN == 6 && municipioN >= 1 && municipioN <= 16)
+                    {
                         municipioValido = true;
-                    } else if (deptoN == 8 && municipioN >= 1 && municipioN <= 28) {
+                    } else if (deptoN == 8 && municipioN >= 1 && municipioN <= 28)
+                    {
                         municipioValido = true;
-                    } else if (deptoN == 9 && municipioN >= 1 && municipioN <= 6) {
+                    } else if (deptoN == 9 && municipioN >= 1 && municipioN <= 6)
+                    {
                         municipioValido = true;
-                    } else if (deptoN == 10 && municipioN >= 1 && municipioN <= 17) {
+                    } else if (deptoN == 10 && municipioN >= 1 && municipioN <= 17)
+                    {
                         municipioValido = true;
-                    } else if (deptoN == 11 && municipioN >= 1 && municipioN <= 4) {
+                    } else if (deptoN == 11 && municipioN >= 1 && municipioN <= 4)
+                    {
                         municipioValido = true;
-                    } else if (deptoN == 12 && municipioN >= 1 && municipioN <= 19) {
+                    } else if (deptoN == 12 && municipioN >= 1 && municipioN <= 19)
+                    {
                         municipioValido = true;
-                    } else if (deptoN == 13 && municipioN >= 1 && municipioN <= 28) {
+                    } else if (deptoN == 13 && municipioN >= 1 && municipioN <= 28)
+                    {
                         municipioValido = true;
-                    } else if (deptoN == 14 && municipioN >= 1 && municipioN <= 16) {
+                    } else if (deptoN == 14 && municipioN >= 1 && municipioN <= 16)
+                    {
                         municipioValido = true;
-                    } else if (deptoN == 15 && municipioN >= 1 && municipioN <= 23) {
+                    } else if (deptoN == 15 && municipioN >= 1 && municipioN <= 23)
+                    {
                         municipioValido = true;
-                    } else if (deptoN == 16 && municipioN >= 1 && municipioN <= 28) {
+                    } else if (deptoN == 16 && municipioN >= 1 && municipioN <= 28)
+                    {
                         municipioValido = true;
-                    } else if (deptoN == 17 && municipioN >= 1 && municipioN <= 9) {
+                    } else if (deptoN == 17 && municipioN >= 1 && municipioN <= 9)
+                    {
                         municipioValido = true;
-                    } else if (deptoN == 18 && municipioN >= 1 && municipioN <= 11) {
+                    } else if (deptoN == 18 && municipioN >= 1 && municipioN <= 11)
+                    {
                         municipioValido = true;
                     }
                 }
@@ -1011,18 +1134,22 @@ public class Crear_Empleado extends javax.swing.JPanel {
                 boolean anioValido = anioN >= 1960 && anioN <= 2005;
                 boolean correlativoValido = correlativoN >= 1 && correlativoN <= 99999;
 
-                if (!departamentoValido || !municipioValido || !anioValido || !correlativoValido) {
+                if (!departamentoValido || !municipioValido || !anioValido || !correlativoValido)
+                {
                     JOptionPane.showMessageDialog(this, "Ingrese un RTN válido", "Error", JOptionPane.ERROR_MESSAGE);
-                } else {
+                } else
+                {
                     // El DNI es válido, realizar la acción deseada aquí
                 }
             }
 
             //RTN
             // Verificar el formato del DNI
-            if (!dni.matches("^[0-9]{4}-[0-9]{4}-[0-9]{5}$")) {
+            if (!dni.matches("^[0-9]{4}-[0-9]{4}-[0-9]{5}$"))
+            {
                 JOptionPane.showMessageDialog(this, "Ingrese un formato de DNI correcto", "Error", JOptionPane.ERROR_MESSAGE);
-            } else {
+            } else
+            {
                 // Obtener los valores de departamento, municipio y año
                 String depto = dni.substring(0, 2);
                 String municipio = dni.substring(2, 4);
@@ -1039,44 +1166,63 @@ public class Crear_Empleado extends javax.swing.JPanel {
                 boolean departamentoValido = false;
                 boolean municipioValido = false;
 
-                if (deptoN == 7 && municipioN >= 1 && municipioN <= 5) {
+                if (deptoN == 7 && municipioN >= 1 && municipioN <= 5)
+                {
                     departamentoValido = true;
                     municipioValido = true;
-                } else if ((deptoN >= 1 && deptoN <= 6) || (deptoN >= 8 && deptoN <= 18)) {
+                } else if ((deptoN >= 1 && deptoN <= 6) || (deptoN >= 8 && deptoN <= 18))
+                {
                     departamentoValido = true;
-                    if (deptoN == 1 && municipioN >= 1 && municipioN <= 8) {
+                    if (deptoN == 1 && municipioN >= 1 && municipioN <= 8)
+                    {
                         municipioValido = true;
-                    } else if (deptoN == 2 && municipioN >= 1 && municipioN <= 10) {
+                    } else if (deptoN == 2 && municipioN >= 1 && municipioN <= 10)
+                    {
                         municipioValido = true;
-                    } else if (deptoN == 3 && municipioN >= 1 && municipioN <= 21) {
+                    } else if (deptoN == 3 && municipioN >= 1 && municipioN <= 21)
+                    {
                         municipioValido = true;
-                    } else if (deptoN == 4 && municipioN >= 1 && municipioN <= 23) {
+                    } else if (deptoN == 4 && municipioN >= 1 && municipioN <= 23)
+                    {
                         municipioValido = true;
-                    } else if (deptoN == 5 && municipioN >= 1 && municipioN <= 12) {
+                    } else if (deptoN == 5 && municipioN >= 1 && municipioN <= 12)
+                    {
                         municipioValido = true;
-                    } else if (deptoN == 6 && municipioN >= 1 && municipioN <= 16) {
+                    } else if (deptoN == 6 && municipioN >= 1 && municipioN <= 16)
+                    {
                         municipioValido = true;
-                    } else if (deptoN == 8 && municipioN >= 1 && municipioN <= 28) {
+                    } else if (deptoN == 8 && municipioN >= 1 && municipioN <= 28)
+                    {
                         municipioValido = true;
-                    } else if (deptoN == 9 && municipioN >= 1 && municipioN <= 6) {
+                    } else if (deptoN == 9 && municipioN >= 1 && municipioN <= 6)
+                    {
                         municipioValido = true;
-                    } else if (deptoN == 10 && municipioN >= 1 && municipioN <= 17) {
+                    } else if (deptoN == 10 && municipioN >= 1 && municipioN <= 17)
+                    {
                         municipioValido = true;
-                    } else if (deptoN == 11 && municipioN >= 1 && municipioN <= 4) {
+                    } else if (deptoN == 11 && municipioN >= 1 && municipioN <= 4)
+                    {
                         municipioValido = true;
-                    } else if (deptoN == 12 && municipioN >= 1 && municipioN <= 19) {
+                    } else if (deptoN == 12 && municipioN >= 1 && municipioN <= 19)
+                    {
                         municipioValido = true;
-                    } else if (deptoN == 13 && municipioN >= 1 && municipioN <= 28) {
+                    } else if (deptoN == 13 && municipioN >= 1 && municipioN <= 28)
+                    {
                         municipioValido = true;
-                    } else if (deptoN == 14 && municipioN >= 1 && municipioN <= 16) {
+                    } else if (deptoN == 14 && municipioN >= 1 && municipioN <= 16)
+                    {
                         municipioValido = true;
-                    } else if (deptoN == 15 && municipioN >= 1 && municipioN <= 23) {
+                    } else if (deptoN == 15 && municipioN >= 1 && municipioN <= 23)
+                    {
                         municipioValido = true;
-                    } else if (deptoN == 16 && municipioN >= 1 && municipioN <= 28) {
+                    } else if (deptoN == 16 && municipioN >= 1 && municipioN <= 28)
+                    {
                         municipioValido = true;
-                    } else if (deptoN == 17 && municipioN >= 1 && municipioN <= 9) {
+                    } else if (deptoN == 17 && municipioN >= 1 && municipioN <= 9)
+                    {
                         municipioValido = true;
-                    } else if (deptoN == 18 && municipioN >= 1 && municipioN <= 11) {
+                    } else if (deptoN == 18 && municipioN >= 1 && municipioN <= 11)
+                    {
                         municipioValido = true;
                     }
                 }
@@ -1084,33 +1230,41 @@ public class Crear_Empleado extends javax.swing.JPanel {
                 boolean anioValido = anioN >= 1960 && anioN <= 2005;
                 boolean correlativoValido = correlativoN >= 1 && correlativoN <= 99999;
 
-                if (!departamentoValido || !municipioValido || !anioValido || !correlativoValido) {
+                if (!departamentoValido || !municipioValido || !anioValido || !correlativoValido)
+                {
                     JOptionPane.showMessageDialog(this, "Ingrese un DNI válido", "Error", JOptionPane.ERROR_MESSAGE);
-                } else {
+                } else
+                {
                     // El DNI es válido, enviar a la base de Datos
                 }
             }
 
-            if (!salario.isEmpty()) {
-                try {
+            if (!salario.isEmpty())
+            {
+                try
+                {
                     int sal = Integer.parseInt(salario);
 
-                    if (sal > 99999 || sal < 1000) {
+                    if (sal > 99999 || sal < 1000)
+                    {
                         JOptionPane.showMessageDialog(this, "El salario debe ser mayor de 1000 y menor de 5 cifras", "Error", JOptionPane.ERROR_MESSAGE);
                     }
-                } catch (NumberFormatException e) {
+                } catch (NumberFormatException e)
+                {
                     // Manejar el caso en el que 'salario' no es un número válido
                 }
             }
 
-        } else {
+        } else
+        {
 
-            try {
+            try
+            {
                 Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
                 Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
 
                 PreparedStatement ps = conn.prepareStatement("INSERT INTO Empleado (nombre1, nombre2, apellido1, apellido2, fecha_nacimiento, sexo,"
-                    + "dni, rtn, estado_civil, nacionalidad, barrio, municipio, aldea, referenciaDomicilio, celular, fijo, salario) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
+                        + "dni, rtn, estado_civil, nacionalidad, barrio, municipio, aldea, referenciaDomicilio, celular, fijo, salario) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
                 ps.setString(1, nombre1);
                 ps.setString(2, nombre2);
                 ps.setString(3, apellido1);
@@ -1131,9 +1285,11 @@ public class Crear_Empleado extends javax.swing.JPanel {
 
                 ps.execute();
 
-            } catch (SQLException e) {
+            } catch (SQLException e)
+            {
                 JOptionPane.showMessageDialog(null, e.toString());
-            } catch (ClassNotFoundException ex) {
+            } catch (ClassNotFoundException ex)
+            {
                 Logger.getLogger(Crear_Empleado.class.getName()).log(Level.SEVERE, null, ex);
             }
 
@@ -1150,17 +1306,21 @@ public class Crear_Empleado extends javax.swing.JPanel {
         String texto = txtDni.getText();
 
         // Verificar si se ingresó un dígito y el número de caracteres no excede el formato esperado
-        if (Character.isDigit(c) && texto.length() < 15) {
-            if (texto.length() == 4 || texto.length() == 9) {
+        if (Character.isDigit(c) && texto.length() < 15)
+        {
+            if (texto.length() == 4 || texto.length() == 9)
+            {
                 txtDni.setText(texto + "-");
             }
-        } else {
+        } else
+        {
             evt.consume();  // Ignorar el carácter ingresado si no cumple con el formato esperado
         }
     }//GEN-LAST:event_txtDnitxtDniKeyTyped
 
     private void cbxMunicbxMuniItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxMunicbxMuniItemStateChanged
-        if (evt.getStateChange() == ItemEvent.SELECTED) {
+        if (evt.getStateChange() == ItemEvent.SELECTED)
+        {
             // Obtener el ítem seleccionado en comboBox1
             String seleccion = cbxMuni.getSelectedItem().toString();
 
@@ -1188,9 +1348,10 @@ public class Crear_Empleado extends javax.swing.JPanel {
             Potrerillos
             Yauyupe
 
-            */
+             */
             // Llenar comboBox2 en función de la selección en comboBox1
-            if (seleccion.equals("Trojes")) {
+            if (seleccion.equals("Trojes"))
+            {
                 cbxAldea.addItem("Trojes");
                 cbxAldea.addItem("Arenales");
                 cbxAldea.addItem("Capire");
@@ -1198,7 +1359,8 @@ public class Crear_Empleado extends javax.swing.JPanel {
                 cbxAldea.addItem("El Guineo");
                 cbxAldea.addItem("Talpachí");
                 cbxAldea.addItem("Yamales");
-            } else if (seleccion.equals("Danlí")) {
+            } else if (seleccion.equals("Danlí"))
+            {
                 cbxAldea.addItem("Danlí");
                 cbxAldea.addItem("Agua Fría");
                 cbxAldea.addItem("Apalí");
@@ -1236,7 +1398,8 @@ public class Crear_Empleado extends javax.swing.JPanel {
                 cbxAldea.addItem("San Marcos Abajo");
                 cbxAldea.addItem("Santa María");
                 cbxAldea.addItem("Villa Santa");
-            } else if (seleccion.equals("El Paraíso")) {
+            } else if (seleccion.equals("El Paraíso"))
+            {
                 cbxAldea.addItem("El Paraíso");
                 cbxAldea.addItem("Cuyalí");
                 cbxAldea.addItem("Dificultades");
@@ -1250,7 +1413,8 @@ public class Crear_Empleado extends javax.swing.JPanel {
                 cbxAldea.addItem("Los Volcanes");
                 cbxAldea.addItem("San Antonio de Conchagua");
                 cbxAldea.addItem("Santa Cruz");
-            } else if (seleccion.equals("Teupasenti")) {
+            } else if (seleccion.equals("Teupasenti"))
+            {
                 cbxAldea.addItem("Teupasenti");
                 cbxAldea.addItem("Agua Fría");
                 cbxAldea.addItem("Bañaderos");
@@ -1290,7 +1454,8 @@ public class Crear_Empleado extends javax.swing.JPanel {
                 cbxAldea.addItem("Santa Cruz");
                 cbxAldea.addItem("Santa Rosa N.º 1");
                 cbxAldea.addItem("Santa Rosa N.º 2");
-            } else if (seleccion.equals("Morocelí")) {
+            } else if (seleccion.equals("Morocelí"))
+            {
                 cbxAldea.addItem("Morocelí");
                 cbxAldea.addItem("Buena Vista");
                 cbxAldea.addItem("El Chile o Quebrada Grande");
@@ -1307,7 +1472,8 @@ public class Crear_Empleado extends javax.swing.JPanel {
                 cbxAldea.addItem("Los Pozos");
                 cbxAldea.addItem("Mata de Plátano");
                 cbxAldea.addItem("Valle Arriba");
-            } else if (seleccion.equals("Yuscarán")) {
+            } else if (seleccion.equals("Yuscarán"))
+            {
                 cbxAldea.addItem("Yuscarán");
                 cbxAldea.addItem("El Barro");
                 cbxAldea.addItem("El Cordoncillo");
@@ -1326,13 +1492,15 @@ public class Crear_Empleado extends javax.swing.JPanel {
                 cbxAldea.addItem("Los Laínez");
                 cbxAldea.addItem("Ojo de Agua");
                 cbxAldea.addItem("Sabana Redonda");
-            } else if (seleccion.equals("Liure")) {
+            } else if (seleccion.equals("Liure"))
+            {
                 cbxAldea.addItem("Asunción");
                 cbxAldea.addItem("Bocuire");
                 cbxAldea.addItem("Monte Grande");
                 cbxAldea.addItem("San Ramón");
                 cbxAldea.addItem("Santa Cruz");
-            } else if (seleccion.equals("Soledad")) {
+            } else if (seleccion.equals("Soledad"))
+            {
                 cbxAldea.addItem("Soledad Centro");
                 cbxAldea.addItem("La Paz o Rodeíto");
                 cbxAldea.addItem("La Victoria");
@@ -1341,7 +1509,8 @@ public class Crear_Empleado extends javax.swing.JPanel {
                 cbxAldea.addItem("San Diego");
                 cbxAldea.addItem("San Marcos");
                 cbxAldea.addItem("Santo Domingo");
-            } else if (seleccion.equals("Texiguat")) {
+            } else if (seleccion.equals("Texiguat"))
+            {
                 cbxAldea.addItem("Texiguat");
                 cbxAldea.addItem("Asunción");
                 cbxAldea.addItem("El Zapotal");
@@ -1351,7 +1520,8 @@ public class Crear_Empleado extends javax.swing.JPanel {
                 cbxAldea.addItem("San Lorenzo");
                 cbxAldea.addItem("San Sebastián");
                 cbxAldea.addItem("Cunaire");
-            } else if (seleccion.equals("Alauca")) {
+            } else if (seleccion.equals("Alauca"))
+            {
                 cbxAldea.addItem("Alauca");
                 cbxAldea.addItem("Buena Vista");
                 cbxAldea.addItem("Chaguite Grande");
@@ -1368,7 +1538,8 @@ public class Crear_Empleado extends javax.swing.JPanel {
                 cbxAldea.addItem("Los Matasanos de Río Arriba");
                 cbxAldea.addItem("San Antonio");
                 cbxAldea.addItem("Sabana Redonda");
-            } else if (seleccion.equals("Güinope")) {
+            } else if (seleccion.equals("Güinope"))
+            {
                 cbxAldea.addItem("Güinope");
                 cbxAldea.addItem("Arrayanes");
                 cbxAldea.addItem("Casitas");
@@ -1383,7 +1554,8 @@ public class Crear_Empleado extends javax.swing.JPanel {
                 cbxAldea.addItem("La Arocha");
                 cbxAldea.addItem("Ocotales");
                 cbxAldea.addItem("Loma Verde");
-            } else if (seleccion.equals("San Lucas")) {
+            } else if (seleccion.equals("San Lucas"))
+            {
                 cbxAldea.addItem("San Lucas");
                 cbxAldea.addItem("Apalípi");
                 cbxAldea.addItem("Candelaria");
@@ -1394,7 +1566,8 @@ public class Crear_Empleado extends javax.swing.JPanel {
                 cbxAldea.addItem("Navijupe");
                 cbxAldea.addItem("Surule");
                 cbxAldea.addItem("Tapahuasca");
-            } else if (seleccion.equals("Oropolí")) {
+            } else if (seleccion.equals("Oropolí"))
+            {
                 cbxAldea.addItem("Oropolí");
                 cbxAldea.addItem("Chaguite Grande");
                 cbxAldea.addItem("El Barro");
@@ -1410,7 +1583,8 @@ public class Crear_Empleado extends javax.swing.JPanel {
                 cbxAldea.addItem("Quebrada grande");
                 cbxAldea.addItem("El Carrizal");
                 cbxAldea.addItem("El Hisopo");
-            } else if (seleccion.equals("San Antonio de Flores")) {
+            } else if (seleccion.equals("San Antonio de Flores"))
+            {
                 cbxAldea.addItem("San Antonio de Flores");
                 cbxAldea.addItem("Apalípi");
                 cbxAldea.addItem("Comunidad");
@@ -1420,7 +1594,8 @@ public class Crear_Empleado extends javax.swing.JPanel {
                 cbxAldea.addItem("Orlica");
                 cbxAldea.addItem("Quebrada Grande");
                 cbxAldea.addItem("Tolobrito");
-            } else if (seleccion.equals("San Matías")) {
+            } else if (seleccion.equals("San Matías"))
+            {
                 cbxAldea.addItem("San Matías");
                 cbxAldea.addItem("Corral Falso");
                 cbxAldea.addItem("El Espinito");
@@ -1430,17 +1605,20 @@ public class Crear_Empleado extends javax.swing.JPanel {
                 cbxAldea.addItem("Las Tunas");
                 cbxAldea.addItem("San Jerónimo");
                 cbxAldea.addItem("Santa Rosa");
-            } else if (seleccion.equals("Vado Ancho")) {
+            } else if (seleccion.equals("Vado Ancho"))
+            {
                 cbxAldea.addItem("Vado Ancho");
                 cbxAldea.addItem("Chaperna");
                 cbxAldea.addItem("Las Uvillas");
                 cbxAldea.addItem("San Jerónimo de Vado Ancho");
                 cbxAldea.addItem("Tolobre");
-            } else if (seleccion.equals("Jacaleapa")) {
+            } else if (seleccion.equals("Jacaleapa"))
+            {
                 cbxAldea.addItem("Jacaleapa");
                 cbxAldea.addItem("La Chorrera");
                 cbxAldea.addItem("Lomas Limpias");
-            } else if (seleccion.equals("Potrerillos")) {
+            } else if (seleccion.equals("Potrerillos"))
+            {
                 cbxAldea.addItem("Potrerillos");
                 cbxAldea.addItem("El Junquillo");
                 cbxAldea.addItem("El Limoncillo");
@@ -1449,14 +1627,16 @@ public class Crear_Empleado extends javax.swing.JPanel {
                 cbxAldea.addItem("Loma de Enmedio");
                 cbxAldea.addItem("Lomanillos");
                 cbxAldea.addItem("Sabana Redonda");
-            } else if (seleccion.equals("Yauyupe")) {
+            } else if (seleccion.equals("Yauyupe"))
+            {
                 cbxAldea.addItem("Yauyupe");
                 cbxAldea.addItem("Chaguitillos (El Río)");
                 cbxAldea.addItem("El Hornito");
                 cbxAldea.addItem("El Picadero");
                 cbxAldea.addItem("La Cuevita");
                 cbxAldea.addItem("Cusmatu");
-            } else {
+            } else
+            {
                 cbxAldea.addItem("Selección no válida");
             }
         }
@@ -1465,15 +1645,22 @@ public class Crear_Empleado extends javax.swing.JPanel {
     private void txtSalarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSalarioKeyTyped
         char c = evt.getKeyChar();
         String texto = txtSalario.getText();
-        if ((c < '0' || c > '9') && (texto.length() <= 5) || txtSalario.getText().length() >= 5) {
+        if ((c < '0' || c > '9') && (texto.length() <= 5) || txtSalario.getText().length() >= 5)
+        {
             evt.consume();
         }
     }//GEN-LAST:event_txtSalarioKeyTyped
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-//        Listado_Empleados abrir = new Listado_Empleados();
-//        abrir.setVisible(true);
-        
+        Listado_Empleados p2 = new Listado_Empleados();
+        p2.setSize(1024, 640);
+        p2.setLocation(0, 0);
+
+        jPanel3.removeAll();
+        jPanel3.add(p2, BorderLayout.CENTER);
+        jPanel3.revalidate();
+        jPanel3.repaint();
+
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
