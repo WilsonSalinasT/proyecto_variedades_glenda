@@ -1284,6 +1284,18 @@ public class Crear_Empleado extends javax.swing.JPanel {
                 ps.setString(17, salario);
 
                 ps.execute();
+                JOptionPane.showMessageDialog(null, "Registro guardado");
+                 Listado_Empleados cli = new Listado_Empleados();
+
+                    cli.setSize(1024, 640);
+                    cli.setLocation(0, 0);
+
+                    jPanel3.revalidate();
+                    jPanel3.repaint();
+                    jPanel3.removeAll();
+                    jPanel3.add(cli, BorderLayout.CENTER);
+                    jPanel3.revalidate();
+                    jPanel3.repaint();
 
             } catch (SQLException e)
             {
