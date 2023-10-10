@@ -139,7 +139,7 @@ public class ver_cliente extends javax.swing.JPanel {
 
         txttelefono.setEditable(false);
         txttelefono.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txttelefono.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Numero de celular:", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12), new java.awt.Color(59, 59, 59))); // NOI18N
+        txttelefono.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Número de celular:", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12), new java.awt.Color(59, 59, 59))); // NOI18N
         txttelefono.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txttelefonoKeyTyped(evt);

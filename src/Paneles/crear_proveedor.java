@@ -10,6 +10,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 
 
@@ -20,6 +22,8 @@ public class crear_proveedor extends javax.swing.JPanel {
      */
     public crear_proveedor() {
         initComponents();
+        TextPrompt holder = new TextPrompt("####-####", txttel);
+        TextPrompt holdere = new TextPrompt("alguien@example.com", txtcorreo);
     }
 
     /**
@@ -54,7 +58,8 @@ public class crear_proveedor extends javax.swing.JPanel {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setPreferredSize(new java.awt.Dimension(1024, 640));
 
-        txtcompan.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Nombre de la Compañia del Proveedor", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial", 3, 12))); // NOI18N
+        txtcompan.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtcompan.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Nombre de la Compañia del Proveedor", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12))); // NOI18N
         txtcompan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtcompanActionPerformed(evt);
@@ -66,7 +71,8 @@ public class crear_proveedor extends javax.swing.JPanel {
             }
         });
 
-        txt1nom.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Primer Nombre", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial", 3, 12))); // NOI18N
+        txt1nom.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txt1nom.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Primer Nombre", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12))); // NOI18N
         txt1nom.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt1nomActionPerformed(evt);
@@ -78,7 +84,8 @@ public class crear_proveedor extends javax.swing.JPanel {
             }
         });
 
-        txt1ape.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(""), "Primer Apellido", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial", 3, 12))); // NOI18N
+        txt1ape.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txt1ape.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(""), "Primer Apellido", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12))); // NOI18N
         txt1ape.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt1apeActionPerformed(evt);
@@ -94,14 +101,26 @@ public class crear_proveedor extends javax.swing.JPanel {
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("Persona de Contacto");
 
-        txtcorreo.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Email", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial", 3, 12))); // NOI18N
+        txtcorreo.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtcorreo.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Email", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12))); // NOI18N
+        txtcorreo.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtcorreoFocusLost(evt);
+            }
+        });
         txtcorreo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtcorreoActionPerformed(evt);
             }
         });
+        txtcorreo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtcorreoKeyTyped(evt);
+            }
+        });
 
-        txt2nom.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Segundo Nombre", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial", 3, 12))); // NOI18N
+        txt2nom.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txt2nom.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Segundo Nombre", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12))); // NOI18N
         txt2nom.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt2nomActionPerformed(evt);
@@ -116,7 +135,8 @@ public class crear_proveedor extends javax.swing.JPanel {
             }
         });
 
-        txt2ape.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(""), "Segundo Apellido", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial", 3, 12))); // NOI18N
+        txt2ape.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txt2ape.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(""), "Segundo Apellido", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12))); // NOI18N
         txt2ape.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt2apeActionPerformed(evt);
@@ -128,7 +148,8 @@ public class crear_proveedor extends javax.swing.JPanel {
             }
         });
 
-        txttel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Número de Teléfono", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial", 3, 12))); // NOI18N
+        txttel.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txttel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Número de Teléfono", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12))); // NOI18N
         txttel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txttelActionPerformed(evt);
@@ -144,7 +165,12 @@ public class crear_proveedor extends javax.swing.JPanel {
         txtdire.setLineWrap(true);
         txtdire.setRows(5);
         txtdire.setWrapStyleWord(true);
-        txtdire.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Dirección ", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial", 3, 12))); // NOI18N
+        txtdire.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Dirección ", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12))); // NOI18N
+        txtdire.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtdireKeyTyped(evt);
+            }
+        });
         jScrollPane2.setViewportView(txtdire);
 
         btnguardar.setBackground(new java.awt.Color(255, 0, 51));
@@ -200,27 +226,26 @@ public class crear_proveedor extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(274, 274, 274)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 479, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(33, 33, 33)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(txt1nom, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(48, 48, 48)
-                                .addComponent(txt2nom, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(43, 43, 43)
-                                .addComponent(txt1ape, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(txtcompan, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(57, 57, 57)
-                                .addComponent(txtcorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 479, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(txt1nom, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(48, 48, 48)
+                                    .addComponent(txt2nom, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(43, 43, 43)
+                                    .addComponent(txt1ape, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(txtcompan, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(57, 57, 57)
+                                    .addComponent(txtcorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(40, 40, 40)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txttel, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txt2ape, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(453, 453, 453)
+                        .addGap(452, 452, 452)
                         .addComponent(btnguardar)))
                 .addContainerGap(33, Short.MAX_VALUE))
         );
@@ -241,11 +266,11 @@ public class crear_proveedor extends javax.swing.JPanel {
                     .addComponent(txtcompan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtcorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txttel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(50, 50, 50)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(44, 44, 44)
+                .addGap(35, 35, 35)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(btnguardar, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(89, Short.MAX_VALUE))
+                .addContainerGap(99, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -328,22 +353,36 @@ public class crear_proveedor extends javax.swing.JPanel {
     }//GEN-LAST:event_txttelActionPerformed
 
     private void txttelKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txttelKeyTyped
-        // TODO add your handling code here:
-        String input = txttel.getText();
-        char c = evt.getKeyChar();
         String texto = txttel.getText();
+        char c = evt.getKeyChar();
 
-        // Verificar si se ingresó un dígito y el número de caracteres no excede el formato esperado
-        if (Character.isDigit(c) && texto.length() < 9)
+// Verificar si el número de caracteres no excede el formato esperado
+        if (texto.length() < 9)
         {
-            // Formato: XXXX-XXXX (4 dígitos seguidos de un guion y otros 4 dígitos)
-            if (texto.length() == 4)
+            if (texto.isEmpty())
             {
-                txttel.setText(texto + "-");
+                // Permitir solo 9, 8 o 3 como primer carácter
+                if (c == '9' || c == '8' || c == '3')
+                {
+                    txttel.setText(String.valueOf(c));
+                } else
+                {
+                    evt.consume(); // Ignorar cualquier otro carácter al principio
+                }
+            } else if (Character.isDigit(c))
+            {
+                // Formato: XXXX-XXXX (4 dígitos seguidos de un guion y otros 4 dígitos)
+                if (texto.length() == 4)
+                {
+                    txttel.setText(texto + "-");
+                }
+            } else
+            {
+                evt.consume(); // Ignorar el carácter ingresado si no cumple con el formato esperado
             }
         } else
         {
-            evt.consume();  // Ignorar el carácter ingresado si no cumple con el formato esperado
+            evt.consume(); // Ignorar el carácter ingresado si ya se alcanzó la longitud máxima
         }
     }//GEN-LAST:event_txttelKeyTyped
 
@@ -388,6 +427,55 @@ public class crear_proveedor extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnguardarActionPerformed
 
+    private void txtcorreoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtcorreoKeyTyped
+      char c = evt.getKeyChar(); // Obtener el carácter ingresado
+
+        if (!Character.isLetterOrDigit(c) && c != '@' && c != '.' && c != '&' && c != '#' && c != '$' && c != '?' && c != '-')
+        {
+            evt.consume(); // Consumir el evento si no es una letra, un número, '@' o '.'
+        } else if (txtcorreo.getText().length() >= 30)
+        {
+            evt.consume(); // Consumir el evento si se ha alcanzado la longitud máxima
+        }
+    }//GEN-LAST:event_txtcorreoKeyTyped
+
+    private void txtcorreoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtcorreoFocusLost
+            String correo = txtcorreo.getText().trim();
+
+        if (isValidEmailAddress(correo))
+        {
+            // La dirección de correo electrónico es válida.
+            // Puedes realizar acciones adicionales aquí si es necesario.
+        } else
+        {
+            // La dirección de correo electrónico no es válida.
+            // Muestra un mensaje de error o realiza alguna acción de retroalimentación.
+            JOptionPane.showMessageDialog(null, "Correo electrónico no válido", "Error", JOptionPane.ERROR_MESSAGE);
+            txtcorreo.requestFocus(); // Devuelve el foco al campo de correo electrónico.
+        }
+    }//GEN-LAST:event_txtcorreoFocusLost
+
+    private void txtdireKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtdireKeyTyped
+        char c = evt.getKeyChar(); // Obtener el carácter ingresado
+
+        if (txtdire.getText().isEmpty() && Character.isWhitespace(c))
+        {
+            evt.consume(); // Consumir el evento si es un espacio en blanco en la primera letra
+        } else if (txtdire.getText().length() >= 300)
+        {
+            evt.consume(); // Consumir el evento si se ha alcanzado la longitud máxima
+        }
+    }//GEN-LAST:event_txtdireKeyTyped
+
+    
+     public boolean isValidEmailAddress(String email) {
+        // Define una expresión regular para validar direcciones de correo electrónico.
+        // Esta es una implementación básica y puede necesitar ser ajustada.
+        String regex = "^[A-Za-z0-9+_.-]+@(.+)$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(email);
+        return matcher.matches();
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnguardar;
