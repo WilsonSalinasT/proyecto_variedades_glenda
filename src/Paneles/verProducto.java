@@ -33,9 +33,6 @@ public class verProducto extends javax.swing.JPanel {
         btnvolver = new javax.swing.JButton();
         txtCategoria = new javax.swing.JTextField();
         txtNombre = new javax.swing.JTextField();
-        txtPrecio = new javax.swing.JTextField();
-        txtProveedor = new javax.swing.JTextField();
-        txtFechaAdquision = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         jTextField1 = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -66,20 +63,6 @@ public class verProducto extends javax.swing.JPanel {
         txtNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNombreActionPerformed(evt);
-            }
-        });
-
-        txtPrecio.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtPrecio.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Precio:", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12))); // NOI18N
-
-        txtProveedor.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtProveedor.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Proveedor:", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12))); // NOI18N
-
-        txtFechaAdquision.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtFechaAdquision.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Fecha de adquisión:", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12))); // NOI18N
-        txtFechaAdquision.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtFechaAdquisionActionPerformed(evt);
             }
         });
 
@@ -135,21 +118,16 @@ public class verProducto extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(33, 33, 33)
-                        .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(149, 149, 149)
-                        .addComponent(txtFechaAdquision, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(52, 52, 52)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 389, Short.MAX_VALUE)
-                            .addComponent(jScrollPane1))
-                        .addGap(51, 51, 51)
+                        .addGap(273, 273, 273)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 389, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(txtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtCategoria)
+                                    .addComponent(txtNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 389, Short.MAX_VALUE))
+                                .addGap(197, 197, 197)
                                 .addComponent(btnvolver, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(26, Short.MAX_VALUE))
         );
@@ -160,21 +138,14 @@ public class verProducto extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnvolver)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(77, 77, 77)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(txtCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(112, 112, 112)
-                        .addComponent(txtProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1))
-                .addGap(56, 56, 56)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtFechaAdquision, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(21, 21, 21)
+                .addComponent(txtCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(44, 44, 44)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(31, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -203,10 +174,6 @@ public class verProducto extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNombreActionPerformed
 
-    private void txtFechaAdquisionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFechaAdquisionActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtFechaAdquisionActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JTextArea AreaDescripcion;
@@ -215,11 +182,8 @@ public class verProducto extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField1;
     public javax.swing.JTextField txtCategoria;
-    public javax.swing.JTextField txtFechaAdquision;
     public static final javax.swing.JTextField txtId = new javax.swing.JTextField();
     public javax.swing.JTextField txtNombre;
-    public javax.swing.JTextField txtPrecio;
-    public javax.swing.JTextField txtProveedor;
     // End of variables declaration//GEN-END:variables
 
     void mostrarDatos(Object idProducto, Object nombreProducto, Object precioProducto) {

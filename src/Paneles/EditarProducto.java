@@ -4,6 +4,7 @@
  */
 package Paneles;
 
+import static App.Menu.panelprincipal;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -12,7 +13,7 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
-import static App.Menu.panelprincipal;
+import static Paneles.editar_cliente.txtnombre;
 import java.awt.BorderLayout;
 import java.util.Locale;
 
@@ -21,9 +22,6 @@ import java.util.Locale;
  * @author 19fre
  */
 public class EditarProducto extends javax.swing.JPanel {
-
-    
-    
 
     /**
      * Creates new form EditarProducto
@@ -45,14 +43,12 @@ public class EditarProducto extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         jTextField1 = new javax.swing.JTextField();
         txtnombre = new javax.swing.JTextField();
-        txtprecio = new javax.swing.JTextField();
-        txtcategoria = new javax.swing.JTextField();
-        txtproveedor = new javax.swing.JTextField();
-        txtfecha = new javax.swing.JTextField();
         btnGuardar = new javax.swing.JButton();
         btnvolver = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtdescripcion = new javax.swing.JTextArea();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jLabel5 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -99,48 +95,6 @@ public class EditarProducto extends javax.swing.JPanel {
             }
         });
 
-        txtprecio.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtprecio.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Precio:", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12))); // NOI18N
-        txtprecio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtprecioActionPerformed(evt);
-            }
-        });
-        txtprecio.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtprecioKeyTyped(evt);
-            }
-        });
-
-        txtcategoria.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtcategoria.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Categoria:", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12))); // NOI18N
-        txtcategoria.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtcategoriaActionPerformed(evt);
-            }
-        });
-        txtcategoria.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtcategoriaKeyTyped(evt);
-            }
-        });
-
-        txtproveedor.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtproveedor.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Proveedor:", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12))); // NOI18N
-        txtproveedor.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtproveedorKeyTyped(evt);
-            }
-        });
-
-        txtfecha.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtfecha.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Fecha de adquisión:", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12))); // NOI18N
-        txtfecha.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtfechaKeyTyped(evt);
-            }
-        });
-
         btnGuardar.setBackground(new java.awt.Color(255, 0, 51));
         btnGuardar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnGuardar.setForeground(new java.awt.Color(0, 0, 0));
@@ -178,6 +132,12 @@ public class EditarProducto extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(txtdescripcion);
 
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "Arreglos", "Sastrería", "Sublimación" }));
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel5.setText("Seleccione la categoría del producto");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -186,68 +146,60 @@ public class EditarProducto extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(76, 76, 76)
                 .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(145, 145, 145)
-                .addComponent(txtfecha, javax.swing.GroupLayout.PREFERRED_SIZE, 409, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(63, 63, 63)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtnombre, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(86, 86, 86)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(278, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtprecio, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtcategoria, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtproveedor, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
-                .addComponent(btnvolver, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(416, 416, 416)
-                .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 531, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(215, 215, 215))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(398, 398, 398))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtnombre, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(171, 171, 171)
+                        .addComponent(btnvolver, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(27, 27, 27))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(434, 434, 434))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(3, 3, 3)
-                        .addComponent(btnvolver))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtprecio, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txtnombre, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(97, 97, 97)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGap(30, 30, 30)
+                        .addComponent(btnvolver)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(108, 108, 108))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(txtcategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(108, 108, 108)
-                        .addComponent(txtproveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtfecha, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
-                .addComponent(btnGuardar)
-                .addGap(40, 40, 40))
+                        .addGap(46, 46, 46)
+                        .addComponent(txtnombre, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(35, 35, 35)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(33, 33, 33)
+                        .addComponent(btnGuardar)
+                        .addContainerGap(77, Short.MAX_VALUE))))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtnombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtnombreActionPerformed
-         
 
-    
+
     }//GEN-LAST:event_txtnombreActionPerformed
 
-    private void txtcategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtcategoriaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtcategoriaActionPerformed
-
     private void btnvolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnvolverActionPerformed
-     Listado_Productos l2 = new Listado_Productos();
+        Listado_Productos l2 = new Listado_Productos();
         l2.setSize(1024, 640);
         l2.setLocation(0, 0);
 
@@ -261,130 +213,87 @@ public class EditarProducto extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
 
-    private void txtprecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtprecioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtprecioActionPerformed
-
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-                                              
-                                             
-    // Obtener los valores modificados de los campos de texto
-    String nuevoNombre = txtnombre.getText();
-    String nuevaDescripcion = txtdescripcion.getText();
-//    String nuevaExistencia = txtexistencia.getText();
-    String nuevoPrecio = txtprecio.getText();
-    String nuevaCategoria = txtcategoria.getText();
-    String nuevoProveedor = txtproveedor.getText();
-    String nuevaFecha = txtfecha.getText();
-    String nuevoId = txtId.getText();
 
-    // Verificar que todos los campos sean obligatorios
-    if (nuevoNombre.isEmpty() || nuevaDescripcion.isEmpty() || nuevoPrecio.isEmpty() || nuevaCategoria.isEmpty() || nuevoProveedor.isEmpty() || nuevaFecha.isEmpty() || nuevoId.isEmpty()) {
-        JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios. Por favor, completa todos los campos antes de actualizar.");
-        return;
-    }
+        String nombre = txtnombre.getText().trim();
+        String descripcion = txtdescripcion.getText().trim();
+        String categoria = (String) jComboBox1.getSelectedItem();
+        String id = txtId.getText().trim();
 
-    try {
-        Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
-        PreparedStatement ps = conn.prepareStatement("UPDATE Producto SET nombre=?, descripcion=?, precio=?, categoria=?, proveedor=?, fecha_adquisicion=? WHERE cod_producto=?");
+        StringBuilder camposVacios = new StringBuilder("Los siguientes campos están vacíos:");
 
-        ps.setString(1, nuevoNombre);
-        ps.setString(2, nuevaDescripcion);
-        ps.setString(3, nuevoPrecio);
-        ps.setString(4, nuevaCategoria);
-        ps.setString(5, nuevoProveedor);
-        ps.setString(6, nuevaFecha);
-        ps.setString(7, nuevoId);
-
-        int rowCount = ps.executeUpdate();
-        if (rowCount > 0) {
-            JOptionPane.showMessageDialog(null, "Producto actualizado con éxito");
-
-            // Después de guardar el registro, volver al listado de productos
-            Listado_Productos l2 = new Listado_Productos();
-            l2.setSize(1024, 640);
-            l2.setLocation(0, 0);
-
-            panelprincipal.removeAll();
-            panelprincipal.add(l2, BorderLayout.CENTER);
-            panelprincipal.revalidate();
-            panelprincipal.repaint();
-        } else {
-            JOptionPane.showMessageDialog(null, "No se pudo actualizar el producto");
+        if (nombre.isEmpty())
+        {
+            camposVacios.append("\n - Nombre");
         }
+        if (descripcion.isEmpty())
+        {
+            camposVacios.append("\n - Descripcion");
+        }
+        String categorias = jComboBox1.getSelectedItem().toString(); // Obtiene el elemento seleccionado en el JComboBox
 
-        ps.close();
-        conn.close();
+        if (categorias.equals("Seleccione"))
+        {
+            camposVacios.append("\n - Categoria");
+        }
+        if (!camposVacios.toString().equals("Los siguientes campos están vacíos:"))
+        {
+            JOptionPane.showMessageDialog(null, camposVacios.toString(), "Campos Vacíos", JOptionPane.ERROR_MESSAGE);
+        } else
+        {
 
-    } catch (SQLException ex) {
-        ex.printStackTrace();
-        JOptionPane.showMessageDialog(null, "Error al actualizar el producto: " + ex.getMessage());
-    }
+            try
+            {
+                // Resto del código para la inserción en la base de datos
+                Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+                Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
 
+                PreparedStatement insertPs = conn.prepareStatement("UPDATE Producto SET nombre=?, descripcion=?,categoria=? WHERE cod_producto=?");
+                insertPs.setString(1, nombre);
+                insertPs.setString(2, descripcion);
+                insertPs.setString(3, categoria);
+                 insertPs.setString(4, id);
+                
 
+                insertPs.executeUpdate();
+                JOptionPane.showMessageDialog(null, "Producto actualizado con éxito");
+
+                Listado_Productos cli = new Listado_Productos();
+
+                cli.setSize(1024, 640);
+                cli.setLocation(0, 0);
+
+                panelprincipal.revalidate();
+                panelprincipal.repaint();
+                panelprincipal.removeAll();
+                panelprincipal.add(cli, BorderLayout.CENTER);
+                panelprincipal.revalidate();
+                panelprincipal.repaint();
+
+            } catch (SQLException e)
+            {
+                JOptionPane.showMessageDialog(null, e.toString(), "Error de SQL", JOptionPane.ERROR_MESSAGE);
+            } catch (ClassNotFoundException ex)
+            {
+                JOptionPane.showMessageDialog(null, "Error de conexión a la base de datos", "Error de Conexión", JOptionPane.ERROR_MESSAGE);
+            }
+        }
 
 
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void txtnombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtnombreKeyTyped
         char c = evt.getKeyChar();
-    
-    // Verificar si el carácter es una letra (mayúscula o minúscula)
-    if (!(Character.isLetter(c))) {
-        evt.consume(); // Consumir el evento (ignorar la entrada del usuario)
-    }
+
+        // Verificar si el carácter es una letra (mayúscula o minúscula)
+        if (!(Character.isLetter(c)))
+        {
+            evt.consume(); // Consumir el evento (ignorar la entrada del usuario)
+        }
     }//GEN-LAST:event_txtnombreKeyTyped
 
-    private void txtprecioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtprecioKeyTyped
-        char c = evt.getKeyChar();
-    
-    // Verificar si el carácter es un número o el punto decimal
-    if (!(Character.isDigit(c) || c == '.')) {
-        evt.consume(); // Consumir el evento (ignorar la entrada del usuario)
-    }
-    
-    // Verificar que no haya más de un punto decimal
-    if (c == '.' && txtprecio.getText().contains(".")) {
-        evt.consume(); // Consumir el evento si ya hay un punto decimal
-    }
-    }//GEN-LAST:event_txtprecioKeyTyped
-
-    private void txtcategoriaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtcategoriaKeyTyped
-       char c = evt.getKeyChar();
-    
-    // Verificar si el carácter es una letra (mayúscula o minúscula)
-    if (!(Character.isLetter(c))) {
-        evt.consume(); // Consumir el evento (ignorar la entrada del usuario)
-    }
-    }//GEN-LAST:event_txtcategoriaKeyTyped
-
-    private void txtproveedorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtproveedorKeyTyped
-         char c = evt.getKeyChar();
-    
-    // Verificar si el carácter es una letra (mayúscula o minúscula)
-    if (!(Character.isLetter(c))) {
-        evt.consume(); // Consumir el evento (ignorar la entrada del usuario)
-    }
-    }//GEN-LAST:event_txtproveedorKeyTyped
-
-    private void txtfechaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtfechaKeyTyped
-        char c = evt.getKeyChar();
-    String textoActual = txtfecha.getText();
-
-    // Verificar si el carácter es un número o la barra ("/") y si el texto tiene un formato válido de fecha
-    if (!(Character.isDigit(c) || c == '/') || textoActual.length() >= 10) {
-        evt.consume(); // Consumir el evento (ignorar caracteres no válidos o exceso de longitud)
-        return;
-    }
-
-    // Verificar si el carácter es un número y si la longitud actual indica un espacio para día, mes o año
-    if (Character.isDigit(c) && (textoActual.length() == 2 || textoActual.length() == 5)) {
-        txtfecha.setText(textoActual + '/'); // Agregar automáticamente la barra "/"
-    }
-    }//GEN-LAST:event_txtfechaKeyTyped
-
     private void txtdescripcionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtdescripcionKeyTyped
-     char c = evt.getKeyChar(); // Obtener el carácter ingresado
+        char c = evt.getKeyChar(); // Obtener el carácter ingresado
 
         if (txtdescripcion.getText().isEmpty() && Character.isWhitespace(c))
         {
@@ -399,16 +308,14 @@ public class EditarProducto extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnvolver;
+    public javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField1;
     public static final javax.swing.JTextField txtId = new javax.swing.JTextField();
-    public javax.swing.JTextField txtcategoria;
     public javax.swing.JTextArea txtdescripcion;
-    public javax.swing.JTextField txtfecha;
     public javax.swing.JTextField txtnombre;
-    public javax.swing.JTextField txtprecio;
-    public javax.swing.JTextField txtproveedor;
     // End of variables declaration//GEN-END:variables
 
     void cargarDatos(Object idProducto) {
@@ -419,6 +326,4 @@ public class EditarProducto extends javax.swing.JPanel {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-    
 }
-

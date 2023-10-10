@@ -27,22 +27,17 @@
                   <Group type="102" attributes="0">
                       <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
                       <Component id="txtId" min="-2" pref="90" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="149" max="-2" attributes="0"/>
-                      <Component id="txtFechaAdquision" min="-2" pref="375" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" attributes="0">
-                      <EmptySpace min="52" pref="52" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="txtNombre" pref="389" max="32767" attributes="0"/>
-                          <Component id="jScrollPane1" max="32767" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="273" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="txtCategoria" min="-2" pref="349" max="-2" attributes="0"/>
-                          <Component id="txtProveedor" min="-2" pref="349" max="-2" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="txtPrecio" min="-2" pref="349" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="jScrollPane1" min="-2" pref="389" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="txtCategoria" max="32767" attributes="0"/>
+                                  <Component id="txtNombre" pref="389" max="32767" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="197" max="-2" attributes="0"/>
                               <Component id="btnvolver" min="-2" pref="126" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -59,26 +54,15 @@
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="btnvolver" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="txtNombre" alignment="3" min="-2" pref="51" max="-2" attributes="0"/>
-                      <Component id="txtPrecio" alignment="3" min="-2" pref="52" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="txtNombre" min="-2" pref="51" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="77" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Group type="102" attributes="0">
-                      <Component id="txtCategoria" min="-2" pref="51" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="112" max="-2" attributes="0"/>
-                      <Component id="txtProveedor" min="-2" pref="52" max="-2" attributes="0"/>
-                  </Group>
-                  <Component id="jScrollPane1" max="32767" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="txtId" min="-2" pref="30" max="-2" attributes="0"/>
-                  <Component id="txtFechaAdquision" min="-2" pref="55" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
+              <Component id="txtCategoria" min="-2" pref="51" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
+              <Component id="jScrollPane1" min="-2" pref="215" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+              <Component id="txtId" min="-2" pref="30" max="-2" attributes="0"/>
+              <EmptySpace pref="31" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -132,54 +116,6 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtNombreActionPerformed"/>
-      </Events>
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
-      </AuxValues>
-    </Component>
-    <Component class="javax.swing.JTextField" name="txtPrecio">
-      <Properties>
-        <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-          <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-            <TitledBorder justification="2" position="2" title="Precio:">
-              <Font PropertyName="font" name="Arial Black" size="12" style="2"/>
-            </TitledBorder>
-          </Border>
-        </Property>
-      </Properties>
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
-      </AuxValues>
-    </Component>
-    <Component class="javax.swing.JTextField" name="txtProveedor">
-      <Properties>
-        <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-          <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-            <TitledBorder justification="2" position="2" title="Proveedor:">
-              <Font PropertyName="font" name="Arial Black" size="12" style="2"/>
-            </TitledBorder>
-          </Border>
-        </Property>
-      </Properties>
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
-      </AuxValues>
-    </Component>
-    <Component class="javax.swing.JTextField" name="txtFechaAdquision">
-      <Properties>
-        <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-          <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-            <TitledBorder justification="2" position="2" title="Fecha&#xa0;de&#xa0;adquisi&#xf3;n:">
-              <Font PropertyName="font" name="Arial Black" size="12" style="2"/>
-            </TitledBorder>
-          </Border>
-        </Property>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtFechaAdquisionActionPerformed"/>
       </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>

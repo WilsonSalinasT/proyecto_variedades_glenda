@@ -438,17 +438,17 @@ try
 //        mostrar.txtExistencia.setText(existencias);
 //        mostrar.txtExistencia.setEditable(false); // Establece el campo de texto como no editable
 
-        mostrar.txtPrecio.setText(precio);
-        mostrar.txtPrecio.setEditable(false); // Establece el campo de texto como no editable
+//        mostrar.txtPrecio.setText(precio);
+//        mostrar.txtPrecio.setEditable(false); // Establece el campo de texto como no editable
 
         mostrar.txtCategoria.setText(categoria);
         mostrar.txtCategoria.setEditable(false); // Establece el campo de texto como no editable
 
-        mostrar.txtProveedor.setText(proveedor);
-        mostrar.txtProveedor.setEditable(false); // Establece el campo de texto como no editable
+//        mostrar.txtProveedor.setText(proveedor);
+//        mostrar.txtProveedor.setEditable(false); // Establece el campo de texto como no editable
 
-        mostrar.txtFechaAdquision.setText(fecha);
-        mostrar.txtFechaAdquision.setEditable(false); // Establece el campo de texto como no editable
+//        mostrar.txtFechaAdquision.setText(fecha);
+//        mostrar.txtFechaAdquision.setEditable(false); // Establece el campo de texto como no editable
 
         mostrar.txtId.setText(Id);
         mostrar.txtId.setEditable(false); // Establece el campo de texto como no editable
@@ -513,21 +513,14 @@ try {
             if (rs.next()) {
                 String nombre = rs.getString("nombre");
                 String descripcion = rs.getString("descripcion");
-              
-                String precio = rs.getString("precio");
-                String categoria = rs.getString("categoria");
-                String proveedor = rs.getString("proveedor");
-                String fecha = rs.getString("fecha_adquisicion");
+  
                 String Id = rs.getString("cod_producto");
 
                 EditarProducto mostrar = new EditarProducto();
                 mostrar.txtnombre.setText(nombre);
                 mostrar.txtdescripcion.setText(descripcion);
-               
-                mostrar.txtprecio.setText(precio);
-                mostrar.txtcategoria.setText(categoria);
-                mostrar.txtproveedor.setText(proveedor);
-                mostrar.txtfecha.setText(fecha);
+               mostrar.jComboBox1.setSelectedItem(rs.getString("categoria"));
+
                 mostrar.txtId.setText(Id);
 
                 mostrar.setSize(1024, 640);
