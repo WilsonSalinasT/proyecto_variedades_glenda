@@ -35,7 +35,6 @@ public class Crear_Empleado extends javax.swing.JPanel {
     public Crear_Empleado() {
         initComponents();
         holder = new TextPrompt("XXXX-XXXX-XXXXX", txtDni);
-        holder = new TextPrompt("XXXX-XXXX-XXXXXX", txtRtn);
         holder = new TextPrompt("####-####", txtCelular);
         holder = new TextPrompt("##,###", txtSalario);
         holder = new TextPrompt("####-####", txt_FijoCel);
@@ -68,8 +67,6 @@ public class Crear_Empleado extends javax.swing.JPanel {
         txtNombre6 = new javax.swing.JTextField();
         txtApellido = new javax.swing.JTextField();
         txtApellido6 = new javax.swing.JTextField();
-        txtRtn = new javax.swing.JTextField();
-        txtNacionalidad = new javax.swing.JTextField();
         txtDireccion = new javax.swing.JTextField();
         txt_RefeDireccion = new javax.swing.JTextField();
         txtCelular = new javax.swing.JTextField();
@@ -83,6 +80,10 @@ public class Crear_Empleado extends javax.swing.JPanel {
         cbx_sexo = new javax.swing.JComboBox<>();
         cbx_estC = new javax.swing.JComboBox<>();
         jdFechaNac = new com.toedter.calendar.JDateChooser();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel59 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel58 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -134,21 +135,6 @@ public class Crear_Empleado extends javax.swing.JPanel {
         txtApellido6.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtApellido6txtApellido2KeyTyped(evt);
-            }
-        });
-
-        txtRtn.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtRtn.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "RTN", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12))); // NOI18N
-        txtRtn.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtRtntxtRtnKeyTyped(evt);
-            }
-        });
-
-        txtNacionalidad.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Nacionalidad", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12))); // NOI18N
-        txtNacionalidad.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtNacionalidadtxtNacionalidadKeyTyped(evt);
             }
         });
 
@@ -276,123 +262,134 @@ public class Crear_Empleado extends javax.swing.JPanel {
 
         jdFechaNac.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Fecha de nacimiento:", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12))); // NOI18N
 
+        jPanel4.setBackground(new java.awt.Color(255, 102, 102));
+
+        jLabel59.setFont(new java.awt.Font("Arial Black", 3, 36)); // NOI18N
+        jLabel59.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel59.setText("Datos del Personal");
+
+        jLabel10.setFont(new java.awt.Font("Segoe Print", 1, 14)); // NOI18N
+        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel10.setText("9801-4550/3308-9197");
+
+        jLabel11.setFont(new java.awt.Font("Segoe Print", 1, 14)); // NOI18N
+        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel11.setText("Trojes, El Paraíso");
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel59, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addComponent(jLabel59, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel10)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel11)
+                .addGap(31, 31, 31))
+        );
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(453, 453, 453)
-                .addComponent(btn_crear4)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(313, 313, 313))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                        .addComponent(txtSalario, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(288, 288, 288))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton3))
+                        .addGap(456, 456, 456)
+                        .addComponent(btn_crear4))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGap(15, 15, 15)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jButton3)
+                            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(jPanel5Layout.createSequentialGroup()
+                                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(44, 44, 44)
+                                    .addComponent(txtNombre6, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(txtApellido6, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel5Layout.createSequentialGroup()
+                                    .addComponent(jdFechaNac, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(38, 38, 38)
+                                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(cbx_estC, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(cbx_sexo, 0, 259, Short.MAX_VALUE))
+                                    .addGap(18, 18, 18)
+                                    .addComponent(txtDni))))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(321, 321, 321))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txt_RefeDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel5Layout.createSequentialGroup()
-                                        .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(53, 53, 53)
-                                        .addComponent(txtNombre6, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jdFechaNac, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel5Layout.createSequentialGroup()
-                                        .addGap(18, 18, 18)
-                                        .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(txtApellido6))
-                                    .addGroup(jPanel5Layout.createSequentialGroup()
-                                        .addGap(42, 42, 42)
-                                        .addComponent(cbx_sexo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addComponent(cbxMuni, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(cbxAldea, 0, 315, Short.MAX_VALUE))
                             .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtDni)
-                                    .addComponent(cbx_estC, 0, 427, Short.MAX_VALUE))
-                                .addGap(33, 33, 33)
-                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtRtn)
-                                    .addComponent(txtNacionalidad)))
-                            .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                                        .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18))
-                                    .addGroup(jPanel5Layout.createSequentialGroup()
-                                        .addComponent(txt_RefeDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(29, 29, 29)))
                                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(txtCelular)
-                                    .addComponent(cbxMuni, 0, 252, Short.MAX_VALUE))
-                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel5Layout.createSequentialGroup()
-                                        .addGap(18, 18, 18)
-                                        .addComponent(cbxAldea, 0, 290, Short.MAX_VALUE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                                        .addGap(24, 24, 24)
-                                        .addComponent(txt_FijoCel, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
-                .addGap(75, 75, 75))
+                                    .addComponent(txtSalario, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtCelular, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 252, Short.MAX_VALUE))
+                                .addGap(18, 18, 18)
+                                .addComponent(txt_FijoCel)))
+                        .addGap(84, 84, 84))))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(193, 193, 193)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton3)
-                .addGap(53, 53, 53)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtApellido6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtNombre6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE, false)
+                    .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtApellido6, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNombre6, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(cbx_sexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE))
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jdFechaNac, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtRtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtDni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(36, 36, 36)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtNacionalidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbx_estC, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(35, 35, 35)
+                    .addComponent(txtDni, javax.swing.GroupLayout.DEFAULT_SIZE, 63, Short.MAX_VALUE)
+                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(cbx_sexo)
+                        .addComponent(jdFechaNac, javax.swing.GroupLayout.DEFAULT_SIZE, 63, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                .addComponent(cbx_estC, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(63, 63, 63)
                 .addComponent(jLabel7)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGap(15, 15, 15)
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtDireccion, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cbxAldea, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(cbxMuni, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(30, 30, 30)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtDireccion)
+                    .addComponent(cbxMuni, javax.swing.GroupLayout.DEFAULT_SIZE, 57, Short.MAX_VALUE)
+                    .addComponent(cbxAldea))
+                .addGap(27, 27, 27)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txt_RefeDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtCelular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txt_FijoCel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(39, 39, 39)
-                .addComponent(txtSalario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34)
+                    .addComponent(txt_RefeDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCelular, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_FijoCel, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(txtSalario, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(btn_crear4)
-                .addGap(12, 12, 12))
+                .addGap(113, 113, 113))
         );
 
         jPanel2.setBackground(new java.awt.Color(255, 102, 102));
@@ -525,31 +522,6 @@ public class Crear_Empleado extends javax.swing.JPanel {
         if ((c < 'a' || c > 'z') && (c < 'A' || c > 'Z') && ((int) evt.getKeyChar() <= 160) || txtApellido6.getText().length() >= 20)
             evt.consume();
     }//GEN-LAST:event_txtApellido6txtApellido2KeyTyped
-
-    private void txtRtntxtRtnKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRtntxtRtnKeyTyped
-        char c = evt.getKeyChar();
-
-        String texto = txtRtn.getText();
-
-        // Verificar si se ingresó un dígito y el número de caracteres no excede el formato esperado
-        if (Character.isDigit(c) && texto.length() < 16)
-        {
-            if (texto.length() == 4 || texto.length() == 9)
-            {
-                txtRtn.setText(texto + "-");
-            }
-        } else
-        {
-            evt.consume();  // Ignorar el carácter ingresado si no cumple con el formato esperado
-        }
-    }//GEN-LAST:event_txtRtntxtRtnKeyTyped
-
-    private void txtNacionalidadtxtNacionalidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNacionalidadtxtNacionalidadKeyTyped
-        // validación en el campo de nombre para que acepte solo letra y letras tildades, se utiliza el codigo ASCII para las letras tildades
-        char c = evt.getKeyChar();
-        if ((c < 'a' || c > 'z') && (c < 'A' || c > 'Z') && ((int) evt.getKeyChar() <= 160) || txtNacionalidad.getText().length() >= 20)
-            evt.consume();
-    }//GEN-LAST:event_txtNacionalidadtxtNacionalidadKeyTyped
 
     private void txtDirecciontxtDireccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDirecciontxtDireccionActionPerformed
         // TODO add your handling code here:
@@ -700,17 +672,17 @@ public class Crear_Empleado extends javax.swing.JPanel {
 
         String primerNombre = txtNombre.getText().trim();
         String primerApellido = txtApellido.getText().trim();
-        String nacionalidad = txtNacionalidad.getText().trim();
+       
         String direccion = txtDireccion.getText().trim();
         String celular = txtCelular.getText().trim();
 
         String salario = txtSalario.getText().trim();
         String dni = txtDni.getText().trim();
-        String rtn = txtRtn.getText().trim();
+       
 
-        if (primerNombre.isEmpty() || primerApellido.isEmpty() || nacionalidad.isEmpty() || direccion.isEmpty()
+        if (primerNombre.isEmpty() || primerApellido.isEmpty() || direccion.isEmpty()
                 || celular.isEmpty() || salario.isEmpty() || dni.isEmpty()
-                || rtn.isEmpty() || jdFechaNac.getDate() == null)
+                 || jdFechaNac.getDate() == null)
         {
             // El campo está vacío, muestra un mensaje de error
             JOptionPane.showMessageDialog(this, "Llene todos los espacios necesarios", "Error", JOptionPane.ERROR_MESSAGE);
@@ -718,8 +690,7 @@ public class Crear_Empleado extends javax.swing.JPanel {
             // Verifica los campos de texto y resalta el primero vacío
             JTextField[] textFields =
             {
-                txtNombre, txtApellido, txtDireccion, txtCelular, txtDni, txtRtn,
-                txtNacionalidad, txtSalario
+                txtNombre, txtApellido, txtDireccion, txtCelular, txtDni,
             };
             boolean foundEmpty = false;
 
@@ -756,99 +727,6 @@ public class Crear_Empleado extends javax.swing.JPanel {
 
             // VALIDACIÓN PARA EL NÚMERO DE DNI y RTN
             // Verificar el formato del RTN
-            if (!rtn.matches("^[0-9]{4}-[0-9]{4}-[0-9]{6}$"))
-            {
-                JOptionPane.showMessageDialog(this, "Ingrese un formato de RTN correcto", "Error", JOptionPane.ERROR_MESSAGE);
-            } else
-            {
-                // Obtener los valores de departamento, municipio y año
-                String depto = rtn.substring(0, 2);
-                String municipio = rtn.substring(2, 4);
-                String anio = rtn.substring(5, 9);
-                String correlativo = rtn.substring(10);
-
-                // Convertir todos los valores a números
-                int deptoN = Integer.parseInt(depto);
-                int municipioN = Integer.parseInt(municipio);
-                int anioN = Integer.parseInt(anio);
-                int correlativoN = Integer.parseInt(correlativo);
-
-                // Validar los rangos para departamento y municipio
-                boolean departamentoValido = false;
-                boolean municipioValido = false;
-
-                if (deptoN == 7 && municipioN >= 1 && municipioN <= 5)
-                {
-                    departamentoValido = true;
-                    municipioValido = true;
-                } else if ((deptoN >= 1 && deptoN <= 6) || (deptoN >= 8 && deptoN <= 18))
-                {
-                    departamentoValido = true;
-                    if (deptoN == 1 && municipioN >= 1 && municipioN <= 8)
-                    {
-                        municipioValido = true;
-                    } else if (deptoN == 2 && municipioN >= 1 && municipioN <= 10)
-                    {
-                        municipioValido = true;
-                    } else if (deptoN == 3 && municipioN >= 1 && municipioN <= 21)
-                    {
-                        municipioValido = true;
-                    } else if (deptoN == 4 && municipioN >= 1 && municipioN <= 23)
-                    {
-                        municipioValido = true;
-                    } else if (deptoN == 5 && municipioN >= 1 && municipioN <= 12)
-                    {
-                        municipioValido = true;
-                    } else if (deptoN == 6 && municipioN >= 1 && municipioN <= 16)
-                    {
-                        municipioValido = true;
-                    } else if (deptoN == 8 && municipioN >= 1 && municipioN <= 28)
-                    {
-                        municipioValido = true;
-                    } else if (deptoN == 9 && municipioN >= 1 && municipioN <= 6)
-                    {
-                        municipioValido = true;
-                    } else if (deptoN == 10 && municipioN >= 1 && municipioN <= 17)
-                    {
-                        municipioValido = true;
-                    } else if (deptoN == 11 && municipioN >= 1 && municipioN <= 4)
-                    {
-                        municipioValido = true;
-                    } else if (deptoN == 12 && municipioN >= 1 && municipioN <= 19)
-                    {
-                        municipioValido = true;
-                    } else if (deptoN == 13 && municipioN >= 1 && municipioN <= 28)
-                    {
-                        municipioValido = true;
-                    } else if (deptoN == 14 && municipioN >= 1 && municipioN <= 16)
-                    {
-                        municipioValido = true;
-                    } else if (deptoN == 15 && municipioN >= 1 && municipioN <= 23)
-                    {
-                        municipioValido = true;
-                    } else if (deptoN == 16 && municipioN >= 1 && municipioN <= 28)
-                    {
-                        municipioValido = true;
-                    } else if (deptoN == 17 && municipioN >= 1 && municipioN <= 9)
-                    {
-                        municipioValido = true;
-                    } else if (deptoN == 18 && municipioN >= 1 && municipioN <= 11)
-                    {
-                        municipioValido = true;
-                    }
-                }
-
-                boolean anioValido = anioN >= 1960 && anioN <= 2005;
-                boolean correlativoValido = correlativoN >= 1 && correlativoN <= 999999;
-
-                if (!departamentoValido || !municipioValido || !anioValido || !correlativoValido)
-                {
-                    JOptionPane.showMessageDialog(this, "Ingrese un RTN válido", "Error", JOptionPane.ERROR_MESSAGE);
-                } else
-                {
-                    // El RTN es válido, realizar la acción deseada aquí
-                }
-            }
 
             //DNI
             // Verificar el formato del DNI
@@ -989,21 +867,20 @@ public class Crear_Empleado extends javax.swing.JPanel {
         String celular = txtCelular.getText();
         String fijo_cel = txt_FijoCel.getText();
         String dni = txtDni.getText();
-        String rtn = txtRtn.getText();
+       
         String estado_civil = (String) cbx_estC.getSelectedItem();
-        String nacionalidad = txtNacionalidad.getText();
+       
         String salario = txtSalario.getText();
 
         if (nombre1.isEmpty() || apellido1.isEmpty() || fecha_na.equals(null) || barrio.isEmpty()
-                || celular.isEmpty() || dni.isEmpty() || rtn.isEmpty() || nacionalidad.isEmpty())
+                || celular.isEmpty() || dni.isEmpty())
         {
             JOptionPane.showMessageDialog(this, "Llene todos los espacios necesarios", "Error", JOptionPane.ERROR_MESSAGE);
 
             // Verifica los campos de texto y resalta el primero vacío
             JTextField[] textFields =
             {
-                txtNombre, txtApellido, txtDireccion, txtCelular, txtDni, txtRtn,
-                txtNacionalidad, txtSalario
+                txtNombre, txtApellido, txtDireccion, txtCelular, txtDni, txtSalario
             };
             boolean foundEmpty = false;
 
@@ -1049,99 +926,7 @@ public class Crear_Empleado extends javax.swing.JPanel {
 
             // VALIDACIÓN PARA EL NÚMERO DE DNI y RTN
             // Verificar el formato del RTN
-            if (!rtn.matches("^[0-9]{4}-[0-9]{4}-[0-9]{6}$"))
-            {
-                JOptionPane.showMessageDialog(this, "Ingrese un formato de RTN correcto", "Error", JOptionPane.ERROR_MESSAGE);
-            } else
-            {
-                // Obtener los valores de departamento, municipio y año
-                String depto = rtn.substring(0, 2);
-                String municipio = rtn.substring(2, 4);
-                String anio = rtn.substring(5, 9);
-                String correlativo = rtn.substring(10);
-
-                // Convertir todos los valores a números
-                int deptoN = Integer.parseInt(depto);
-                int municipioN = Integer.parseInt(municipio);
-                int anioN = Integer.parseInt(anio);
-                int correlativoN = Integer.parseInt(correlativo);
-
-                // Validar los rangos para departamento y municipio
-                boolean departamentoValido = false;
-                boolean municipioValido = false;
-
-                if (deptoN == 7 && municipioN >= 1 && municipioN <= 5)
-                {
-                    departamentoValido = true;
-                    municipioValido = true;
-                } else if ((deptoN >= 1 && deptoN <= 6) || (deptoN >= 8 && deptoN <= 18))
-                {
-                    departamentoValido = true;
-                    if (deptoN == 1 && municipioN >= 1 && municipioN <= 8)
-                    {
-                        municipioValido = true;
-                    } else if (deptoN == 2 && municipioN >= 1 && municipioN <= 10)
-                    {
-                        municipioValido = true;
-                    } else if (deptoN == 3 && municipioN >= 1 && municipioN <= 21)
-                    {
-                        municipioValido = true;
-                    } else if (deptoN == 4 && municipioN >= 1 && municipioN <= 23)
-                    {
-                        municipioValido = true;
-                    } else if (deptoN == 5 && municipioN >= 1 && municipioN <= 12)
-                    {
-                        municipioValido = true;
-                    } else if (deptoN == 6 && municipioN >= 1 && municipioN <= 16)
-                    {
-                        municipioValido = true;
-                    } else if (deptoN == 8 && municipioN >= 1 && municipioN <= 28)
-                    {
-                        municipioValido = true;
-                    } else if (deptoN == 9 && municipioN >= 1 && municipioN <= 6)
-                    {
-                        municipioValido = true;
-                    } else if (deptoN == 10 && municipioN >= 1 && municipioN <= 17)
-                    {
-                        municipioValido = true;
-                    } else if (deptoN == 11 && municipioN >= 1 && municipioN <= 4)
-                    {
-                        municipioValido = true;
-                    } else if (deptoN == 12 && municipioN >= 1 && municipioN <= 19)
-                    {
-                        municipioValido = true;
-                    } else if (deptoN == 13 && municipioN >= 1 && municipioN <= 28)
-                    {
-                        municipioValido = true;
-                    } else if (deptoN == 14 && municipioN >= 1 && municipioN <= 16)
-                    {
-                        municipioValido = true;
-                    } else if (deptoN == 15 && municipioN >= 1 && municipioN <= 23)
-                    {
-                        municipioValido = true;
-                    } else if (deptoN == 16 && municipioN >= 1 && municipioN <= 28)
-                    {
-                        municipioValido = true;
-                    } else if (deptoN == 17 && municipioN >= 1 && municipioN <= 9)
-                    {
-                        municipioValido = true;
-                    } else if (deptoN == 18 && municipioN >= 1 && municipioN <= 11)
-                    {
-                        municipioValido = true;
-                    }
-                }
-
-                boolean anioValido = anioN >= 1960 && anioN <= 2005;
-                boolean correlativoValido = correlativoN >= 1 && correlativoN <= 99999;
-
-                if (!departamentoValido || !municipioValido || !anioValido || !correlativoValido)
-                {
-                    JOptionPane.showMessageDialog(this, "Ingrese un RTN válido", "Error", JOptionPane.ERROR_MESSAGE);
-                } else
-                {
-                    // El DNI es válido, realizar la acción deseada aquí
-                }
-            }
+            
 
             //RTN
             // Verificar el formato del DNI
@@ -1254,7 +1039,6 @@ public class Crear_Empleado extends javax.swing.JPanel {
                     // Manejar el caso en el que 'salario' no es un número válido
                 }
             }
-
         } else
         {
 
@@ -1264,7 +1048,7 @@ public class Crear_Empleado extends javax.swing.JPanel {
                 Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
 
                 PreparedStatement ps = conn.prepareStatement("INSERT INTO Empleado (nombre1, nombre2, apellido1, apellido2, fecha_nacimiento, sexo,"
-                        + "dni, rtn, estado_civil, nacionalidad, barrio, municipio, aldea, referenciaDomicilio, celular, fijo, salario) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
+                        + "dni, estado_civil, barrio, municipio, aldea, referenciaDomicilio, celular, fijo, salario) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
                 ps.setString(1, nombre1);
                 ps.setString(2, nombre2);
                 ps.setString(3, apellido1);
@@ -1272,16 +1056,16 @@ public class Crear_Empleado extends javax.swing.JPanel {
                 ps.setDate(5, new java.sql.Date(fecha_na.getTime()));
                 ps.setString(6, sexo);
                 ps.setString(7, dni);
-                ps.setString(8, rtn);
-                ps.setString(9, estado_civil);
-                ps.setString(10, nacionalidad);
-                ps.setString(11, barrio);
-                ps.setString(12, municipioD);
-                ps.setString(13, aldea);
-                ps.setString(14, refe_direccion);
-                ps.setString(15, celular);
-                ps.setString(16, fijo_cel);
-                ps.setString(17, salario);
+               
+                ps.setString(8, estado_civil);
+               
+                ps.setString(9, barrio);
+                ps.setString(10, municipioD);
+                ps.setString(11, aldea);
+                ps.setString(12, refe_direccion);
+                ps.setString(13, celular);
+                ps.setString(14, fijo_cel);
+                ps.setString(15, salario);
 
                 ps.execute();
                 JOptionPane.showMessageDialog(null, "Registro guardado");
@@ -1687,13 +1471,17 @@ public class Crear_Empleado extends javax.swing.JPanel {
     public javax.swing.JComboBox<String> cbx_estC;
     public static javax.swing.JComboBox<String> cbx_sexo;
     private javax.swing.JButton jButton3;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel58;
+    private javax.swing.JLabel jLabel59;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private com.toedter.calendar.JDateChooser jdFechaNac;
@@ -1702,10 +1490,8 @@ public class Crear_Empleado extends javax.swing.JPanel {
     private javax.swing.JTextField txtCelular;
     public javax.swing.JTextField txtDireccion;
     public static javax.swing.JTextField txtDni;
-    public javax.swing.JTextField txtNacionalidad;
     public javax.swing.JTextField txtNombre;
     public javax.swing.JTextField txtNombre6;
-    public javax.swing.JTextField txtRtn;
     private javax.swing.JTextField txtSalario;
     public javax.swing.JTextField txt_FijoCel;
     public javax.swing.JTextField txt_RefeDireccion;

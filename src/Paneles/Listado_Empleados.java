@@ -409,9 +409,9 @@ public class Listado_Empleados extends javax.swing.JPanel {
                     String fecha_nacimiento = rs.getDate("fecha_nacimiento").toString();
                     String sexo = rs.getString("sexo");
                     String dni = rs.getString("dni").trim();
-                    String rtn = rs.getString("rtn").trim();
+                    
                     String estado_civil = rs.getString("estado_civil");
-                    String nacionalidad = rs.getString("nacionalidad").trim();
+                   
                     String barrio = rs.getString("barrio").trim();
                     String municipio = rs.getString("municipio");
                     String aldea = rs.getString("aldea");
@@ -459,9 +459,9 @@ public class Listado_Empleados extends javax.swing.JPanel {
                     mostrar.fecha_nacimiento.setText(fecha_nacimiento);
                     mostrar.sexo.setText(sexo);
                     mostrar.dni.setText(dni);
-                    mostrar.rtn.setText(rtn);
+                  
                     mostrar.estado_civil.setText(estado_civil);
-                    mostrar.nacionalidad.setText(nacionalidad);
+                   
                     mostrar.barrio.setText(barrio);
                     mostrar.municipio.setText(municipio);
                     mostrar.aldea.setText(aldea);
@@ -558,9 +558,9 @@ public class Listado_Empleados extends javax.swing.JPanel {
                     Date fecha_nacimiento = rs.getDate("fecha_nacimiento");
                     String sexo = rs.getString("sexo");
                     String dni = rs.getString("dni").trim();
-                    String rtn = rs.getString("rtn").trim();
+                    
                     String estado_civil = rs.getString("estado_civil");
-                    String nacionalidad = rs.getString("nacionalidad").trim();
+                    
                     String barrio = rs.getString("barrio").trim();
                     String municipio = rs.getString("municipio");
                     String aldea = rs.getString("aldea");
@@ -592,9 +592,9 @@ public class Listado_Empleados extends javax.swing.JPanel {
                     mostrar.jdFechaNac.setDate(fecha_nacimiento);
                     mostrar.cbxSexo.setSelectedItem(sexo);
                     mostrar.txtDni.setText(dni);
-                    mostrar.txtRtn.setText(rtn);
+                    
                     mostrar.cbxEstC.setSelectedItem(estado_civil);
-                    mostrar.txtNacionalidad.setText(nacionalidad);
+                   
                     mostrar.txtDireccion.setText(barrio);
                     mostrar.cbxMuni.setSelectedItem(municipio);
                     mostrar.cbxAldea.setSelectedItem(aldea);
