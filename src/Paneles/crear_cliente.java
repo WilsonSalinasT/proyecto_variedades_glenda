@@ -447,22 +447,29 @@ public class crear_cliente extends javax.swing.JPanel {
     }//GEN-LAST:event_jtadireccionKeyTyped
 
     private void txttelefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txttelefonoKeyTyped
-        String input = txttelefono.getText();
-        char c = evt.getKeyChar();
-        String texto = txttelefono.getText();
+     String texto = txttelefono.getText();
+char c = evt.getKeyChar();
 
-        // Verificar si se ingresó un dígito y el número de caracteres no excede el formato esperado
-        if (Character.isDigit(c) && texto.length() < 9)
-        {
-            // Formato: XXXX-XXXX (4 dígitos seguidos de un guion y otros 4 dígitos)
-            if (texto.length() == 4)
-            {
-                txttelefono.setText(texto + "-");
-            }
-        } else
-        {
-            evt.consume();  // Ignorar el carácter ingresado si no cumple con el formato esperado
+// Verificar si el número de caracteres no excede el formato esperado
+if (texto.length() < 9) {
+    if (texto.isEmpty()) {
+        // Permitir solo 9, 8 o 3 como primer carácter
+        if (c == '9' || c == '8' || c == '3') {
+            txttelefono.setText(String.valueOf(c));
+        } else {
+            evt.consume(); // Ignorar cualquier otro carácter al principio
         }
+    } else if (Character.isDigit(c)) {
+        // Formato: XXXX-XXXX (4 dígitos seguidos de un guion y otros 4 dígitos)
+        if (texto.length() == 4) {
+            txttelefono.setText(texto + "-");
+        }
+    } else {
+        evt.consume(); // Ignorar el carácter ingresado si no cumple con el formato esperado
+    }
+} else {
+    evt.consume(); // Ignorar el carácter ingresado si ya se alcanzó la longitud máxima
+}
     }//GEN-LAST:event_txttelefonoKeyTyped
 
     private void txtcorreoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtcorreoKeyTyped

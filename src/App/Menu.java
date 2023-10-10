@@ -15,15 +15,8 @@ import Paneles.proveedor;
 import Paneles.ventas;
 import java.awt.BorderLayout;
 
-/**
- *
- * @author novastar
- */
 public class Menu extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Menu
-     */
     public Menu() {
         initComponents();
     }

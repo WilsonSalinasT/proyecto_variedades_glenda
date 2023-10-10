@@ -316,8 +316,7 @@ public class Listado_Empleados extends javax.swing.JPanel {
         //Validacion del texto ingresado
         if (!texto.isEmpty())
         {
-            // Llamada al método con paginación (página 1, 10 registros por página)
-            buscarDatos(texto, 1, 10);
+            buscarDatos(texto);
         } else
         {
             JOptionPane.showMessageDialog(null, "El texto ingresado es erroneo");
@@ -325,8 +324,14 @@ public class Listado_Empleados extends javax.swing.JPanel {
     }//GEN-LAST:event_Btn_BuscarActionPerformed
 
     private void refrescarbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refrescarbtnActionPerformed
-        cargarTablaEmpleados();
+        paginaActual = 1;
+        terminoBusqueda = "";
+
+        // Limpiar el campo de búsqueda
         txtBuscar.setText("");
+
+        // Cargar la tabla con los datos actualizados
+        cargarTablaEmpleados();
     }//GEN-LAST:event_refrescarbtnActionPerformed
 
     private void btnAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnteriorActionPerformed
@@ -617,43 +622,61 @@ public class Listado_Empleados extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_editarbtnActionPerformed
 
+    int filasPorPagina = 20; // Cantidad de filas que se mostrarán en cada página
     int paginaActual = 1; // Página actual
-    int filasPorPagina = 15; // Número de filas a mostrar por página
-    int totalFilas = 0; // Total de filas en la tabla
-    int totalPaginas = 0; // Total de páginas en la tabla
+    int totalPaginas = 1; // Total de páginas
+    String terminoBusqueda = ""; // Término de búsqueda actual
 
     private void cargarTablaEmpleados() {
         DefaultTableModel modeloTabla = (DefaultTableModel) tblEmpleados.getModel();
-        modeloTabla.setRowCount(0); // Eliminar las filas existentes
+        modeloTabla.setRowCount(0); // Limpiar los datos existentes en la tabla
 
         PreparedStatement ps;
         ResultSet rs;
         ResultSetMetaData rsmd;
         int columnas;
+        boolean foundData = false;
+
         try
         {
             Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
 
-            ps = conn.prepareStatement("SELECT COUNT(*) FROM Empleado");
+            ps = conn.prepareStatement("SELECT COUNT(*) AS TotalFilas FROM Empleado WHERE nombre1 LIKE ? OR apellido1 LIKE ?");
+            ps.setString(1, "%" + terminoBusqueda + "%");
+            ps.setString(2, "%" + terminoBusqueda + "%");
             rs = ps.executeQuery();
-            rs.next();
-            totalFilas = rs.getInt(1);
-            totalPaginas = (int) Math.ceil((double) totalFilas / filasPorPagina);
 
-            // Cambiar filasPorPagina a 15
-            int filasPorPagina = 15;
+            int cantidadFilas = 0;
+            if (rs.next())
+            {
+                cantidadFilas = rs.getInt("TotalFilas");
+            }
+
+            totalPaginas = (int) Math.ceil((double) cantidadFilas / filasPorPagina);
+
+            if (paginaActual < 1)
+            {
+                paginaActual = 1;
+            } else if (paginaActual > totalPaginas)
+            {
+                paginaActual = totalPaginas;
+            }
 
             int offset = (paginaActual - 1) * filasPorPagina;
-            ps = conn.prepareStatement("SELECT id, nombre1, apellido1, celular, barrio "
-                    + "FROM Empleado ORDER BY id OFFSET ? ROWS FETCH NEXT ? ROWS ONLY");
-            ps.setInt(1, offset);
-            ps.setInt(2, filasPorPagina);
-            rs = ps.executeQuery();
+            if (offset < 0)
+            {
+                offset = 0;
+            }
 
+            ps = conn.prepareStatement("SELECT ROW_NUMBER() OVER(ORDER BY nombre1) AS NumRegistro, nombre1, apellido1, celular, barrio FROM Empleado WHERE nombre1 LIKE ? OR apellido1 LIKE ? ORDER BY nombre1 OFFSET ? ROWS FETCH NEXT ? ROWS ONLY");
+            ps.setString(1, "%" + terminoBusqueda + "%");
+            ps.setString(2, "%" + terminoBusqueda + "%");
+            ps.setInt(3, offset);
+            ps.setInt(4, filasPorPagina);
+            rs = ps.executeQuery();
             rsmd = rs.getMetaData();
             columnas = rsmd.getColumnCount();
 
-            // Remover el contador de fila si ya no es necesario
             while (rs.next())
             {
                 Object[] fila = new Object[columnas];
@@ -662,20 +685,20 @@ public class Listado_Empleados extends javax.swing.JPanel {
                     fila[indice] = rs.getObject(indice + 1);
                 }
                 modeloTabla.addRow(fila);
+                foundData = true;
             }
 
-            ajustarTabla(filasPorPagina);
+            if (!foundData)
+            {
+                JOptionPane.showMessageDialog(null, "No se encontraron datos");
+            }
+
+            Texto_Contable.setText("Cantidad de filas: " + cantidadFilas + " - Página " + paginaActual + " de " + totalPaginas);
 
         } catch (SQLException e)
         {
             JOptionPane.showMessageDialog(null, e.toString());
         }
-
-        // Obtener el número de filas actualizado
-        int rowCount = modeloTabla.getRowCount();
-
-        Texto_Contable.setText(
-                "Cantidad de filas: " + rowCount + " - Página " + paginaActual + "/" + totalPaginas);
     }
 
     private void siguientePagina() {
@@ -694,76 +717,69 @@ public class Listado_Empleados extends javax.swing.JPanel {
         }
     }
 
-    private void ajustarTabla(int filasDeseadas) {
-        tblEmpleados.setPreferredScrollableViewportSize(new Dimension(tblEmpleados.getPreferredSize().width, tblEmpleados.getRowHeight() * filasDeseadas));
-        tblEmpleados.setFillsViewportHeight(true);
-    }
+//    private void ajustarTabla(int filasDeseadas) {
+//        tblEmpleados.setPreferredScrollableViewportSize(new Dimension(tblEmpleados.getPreferredSize().width, tblEmpleados.getRowHeight() * filasDeseadas));
+//        tblEmpleados.setFillsViewportHeight(true);
+//    }
 
-    private void buscarDatos(String texto, int pagina, int registrosPorPagina) {
+      private void buscarDatos(String texto) {
         DefaultTableModel modelTabla = (DefaultTableModel) tblEmpleados.getModel();
         modelTabla.setRowCount(0);
+        boolean foundData = false;
 
         try
         {
-            // Conexión a la base de datos
-            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
-
             if (conn != null && !conn.isClosed())
             {
-                // Consulta SQL con paginación
-                String consulta = "SELECT id, nombre1, apellido1, celular, barrio FROM Empleado WHERE nombre1 LIKE ? OR apellido1 LIKE ? "
-                        + "ORDER BY id OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
+                PreparedStatement ps = conn.prepareStatement("SELECT ROW_NUMBER() OVER(ORDER BY nombre1) AS NumRegistro, nombre1, apellido1, celular, barrio FROM Empleado WHERE nombre1 LIKE ? OR apellido1 LIKE ?");
 
-                PreparedStatement ps = conn.prepareStatement(consulta);
-                ps.setString(1, "%" + texto + "%");
-                ps.setString(2, "%" + texto + "%");
-
-                // Calcular el offset (desplazamiento) y el número de registros a obtener
-                int offset = (pagina - 1) * registrosPorPagina;
-                ps.setInt(3, offset);
-                ps.setInt(4, registrosPorPagina);
+                if (texto != null && !texto.isEmpty())
+                {
+                    ps.setString(1, "%" + texto + "%");
+                    ps.setString(2, "%" + texto + "%");
+                    terminoBusqueda = texto; // Actualizar el término de búsqueda
+                } else
+                {
+                    ps.setString(1, "%");
+                    ps.setString(2, "%");
+                    terminoBusqueda = ""; // Limpiar el término de búsqueda
+                }
 
                 ResultSet rs = ps.executeQuery();
 
-                int totalRegistros = 0;
-
-                while (rs.next())
+                if (rs != null)
                 {
-                    String id = rs.getString("id");
-                    String nombre = rs.getString("nombre1");
-                    String apellido = rs.getString("apellido1");
-                    String celular = rs.getString("celular");
-                    String direccion = rs.getString("barrio");
-
-                    if (id != null && nombre != null && apellido != null && celular != null && direccion != null)
+                    while (rs.next())
                     {
-                        modelTabla.addRow(new Object[]
+                        int numRegistro = rs.getInt("NumRegistro");
+                        String nombre = rs.getString("nombre1");
+                        String Dni = rs.getString("apellido1");
+                        String departamento = rs.getString("celular");
+                        String deducciones = rs.getString("barrio");
+
+                        if (nombre != null && Dni != null && departamento != null)
                         {
-                            id, nombre, apellido, celular, direccion
-                        });
-                        totalRegistros++;
+                            modelTabla.addRow(new Object[]
+                            {
+                                numRegistro, nombre, Dni, departamento, deducciones
+                            });
+                            foundData = true;
+                        }
                     }
+
+                    rs.close();
                 }
 
-                rs.close();
                 ps.close();
-
-                // Mostrar la página actual
-                Texto_Contable.setText("Total de registros encontrados: " + totalRegistros + "-" + "Página " + pagina + "/" + totalPaginas);
-
-                // Realizar una acción apropiada cuando no se encuentran datos
-                if (totalRegistros == 0)
-                {
-                    JOptionPane.showMessageDialog(null, "No se encontraron datos");
-                }
+                conn.close();
             }
-
-            conn.close();
         } catch (Exception e)
         {
             JOptionPane.showMessageDialog(null, e.toString());
         }
+
+        cargarTablaEmpleados(); // Recargar la tabla después de la búsqueda
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton Btn_Buscar;
