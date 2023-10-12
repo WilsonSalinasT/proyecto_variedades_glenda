@@ -106,6 +106,7 @@ public class Listado_Empleados extends javax.swing.JPanel {
 
         crearbtn.setBackground(new java.awt.Color(255, 153, 51));
         crearbtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        crearbtn.setForeground(new java.awt.Color(0, 0, 0));
         crearbtn.setText("CREAR");
         crearbtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -115,6 +116,7 @@ public class Listado_Empleados extends javax.swing.JPanel {
 
         editarbtn.setBackground(new java.awt.Color(255, 153, 51));
         editarbtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        editarbtn.setForeground(new java.awt.Color(0, 0, 0));
         editarbtn.setText("EDITAR");
         editarbtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -124,6 +126,7 @@ public class Listado_Empleados extends javax.swing.JPanel {
 
         verbtn.setBackground(new java.awt.Color(255, 153, 51));
         verbtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        verbtn.setForeground(new java.awt.Color(0, 0, 0));
         verbtn.setText("VER");
         verbtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -194,6 +197,7 @@ public class Listado_Empleados extends javax.swing.JPanel {
 
         Btn_Buscar.setBackground(new java.awt.Color(255, 153, 51));
         Btn_Buscar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        Btn_Buscar.setForeground(new java.awt.Color(0, 0, 0));
         Btn_Buscar.setText("Buscar");
         Btn_Buscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -203,6 +207,7 @@ public class Listado_Empleados extends javax.swing.JPanel {
 
         refrescarbtn.setBackground(new java.awt.Color(255, 153, 51));
         refrescarbtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        refrescarbtn.setForeground(new java.awt.Color(0, 0, 0));
         refrescarbtn.setText("Refrescar");
         refrescarbtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -360,7 +365,7 @@ public class Listado_Empleados extends javax.swing.JPanel {
         selectedRow = tblEmpleados.getSelectedRow();
         if (selectedRow == -1)
         {
-            JOptionPane.showMessageDialog(null, "Debes seleccionar una celda para poder ver el empleado");
+            JOptionPane.showMessageDialog(null, "Seleccione un empleado para poder visualizarlo");
             return;
         } else
         {
@@ -509,7 +514,7 @@ public class Listado_Empleados extends javax.swing.JPanel {
         selectedRow = tblEmpleados.getSelectedRow();
         if (selectedRow == -1)
         {
-            JOptionPane.showMessageDialog(null, "Debes seleccionar una celda para poder modificar el empleado");
+            JOptionPane.showMessageDialog(null, "Seleccione un empleado para poder editarlo");
             return;
         } else
         {

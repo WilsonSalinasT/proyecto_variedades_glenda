@@ -175,6 +175,7 @@ public class crear_proveedor extends javax.swing.JPanel {
 
         btnguardar.setBackground(new java.awt.Color(255, 153, 51));
         btnguardar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        btnguardar.setForeground(new java.awt.Color(0, 0, 0));
         btnguardar.setText("GUARDAR");
         btnguardar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnguardar.addActionListener(new java.awt.event.ActionListener() {

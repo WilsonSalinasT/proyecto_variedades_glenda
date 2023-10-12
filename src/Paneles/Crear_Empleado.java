@@ -70,26 +70,22 @@ public class Crear_Empleado extends javax.swing.JPanel {
         txtApellido6 = new javax.swing.JTextField();
         txtDireccion = new javax.swing.JTextField();
         txt_RefeDireccion = new javax.swing.JTextField();
-        txtCelular = new javax.swing.JTextField();
         txt_FijoCel = new javax.swing.JTextField();
         txtDni = new javax.swing.JTextField();
         cbxAldea = new javax.swing.JComboBox<>();
         cbxMuni = new javax.swing.JComboBox<>();
         txtSalario = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
         cbx_sexo = new javax.swing.JComboBox<>();
         cbx_estC = new javax.swing.JComboBox<>();
         jdFechaNac = new com.toedter.calendar.JDateChooser();
         jPanel4 = new javax.swing.JPanel();
+        jButton3 = new javax.swing.JButton();
         jLabel59 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel58 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
+        txtCelular = new javax.swing.JTextField();
 
         jPanel3.setPreferredSize(new java.awt.Dimension(1024, 640));
 
@@ -164,24 +160,6 @@ public class Crear_Empleado extends javax.swing.JPanel {
             }
         });
 
-        txtCelular.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Celular", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12))); // NOI18N
-        txtCelular.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCelulartxtCelularActionPerformed(evt);
-            }
-        });
-        txtCelular.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtCelulartxtCelularKeyPressed(evt);
-            }
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtCelulartxtCelularKeyReleased(evt);
-            }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtCelulartxtCelularKeyTyped(evt);
-            }
-        });
-
         txt_FijoCel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Télefono Fijo", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12))); // NOI18N
         txt_FijoCel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -236,17 +214,10 @@ public class Crear_Empleado extends javax.swing.JPanel {
             }
         });
 
-        jLabel7.setFont(new java.awt.Font("Arial Black", 2, 12)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Arial Black", 2, 18)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText("Dirección de Domicilio Exacta");
-
-        jButton3.setBackground(new java.awt.Color(255, 153, 51));
-        jButton3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton3.setText("ATRÁS");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
 
         cbx_sexo.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         cbx_sexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "Femenino", "Masculino" }));
@@ -259,15 +230,28 @@ public class Crear_Empleado extends javax.swing.JPanel {
 
         jPanel4.setBackground(new java.awt.Color(255, 102, 102));
 
+        jButton3.setBackground(new java.awt.Color(255, 153, 51));
+        jButton3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jButton3.setForeground(new java.awt.Color(0, 0, 0));
+        jButton3.setText("VOLVER");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
         jLabel59.setFont(new java.awt.Font("Arial Black", 3, 36)); // NOI18N
+        jLabel59.setForeground(new java.awt.Color(0, 0, 0));
         jLabel59.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel59.setText("Datos del Personal");
 
         jLabel10.setFont(new java.awt.Font("Segoe Print", 1, 14)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(0, 0, 0));
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel10.setText("9801-4550/3308-9197");
 
         jLabel11.setFont(new java.awt.Font("Segoe Print", 1, 14)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(0, 0, 0));
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel11.setText("Trojes, El Paraíso");
 
@@ -275,28 +259,60 @@ public class Crear_Empleado extends javax.swing.JPanel {
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel59, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton3)
+                .addGap(62, 62, 62))
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel59, javax.swing.GroupLayout.DEFAULT_SIZE, 1012, Short.MAX_VALUE)
+                    .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, 1012, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addComponent(jLabel59, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(10, 10, 10)
+                .addComponent(jButton3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel59, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel10)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel11)
-                .addGap(31, 31, 31))
+                .addContainerGap())
         );
 
         jButton1.setBackground(new java.awt.Color(255, 153, 51));
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(0, 0, 0));
         jButton1.setText("CREAR");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
+            }
+        });
+
+        txtCelular.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtCelular.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Celular", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12))); // NOI18N
+        txtCelular.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtCelularFocusLost(evt);
+            }
+        });
+        txtCelular.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCelularActionPerformed(evt);
+            }
+        });
+        txtCelular.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtCelularKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCelularKeyTyped(evt);
             }
         });
 
@@ -305,156 +321,98 @@ public class Crear_Empleado extends javax.swing.JPanel {
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(321, 321, 321))
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txt_RefeDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addComponent(cbxMuni, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(cbxAldea, 0, 315, Short.MAX_VALUE))
-                            .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(txtSalario, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtCelular, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 252, Short.MAX_VALUE))
-                                .addGap(18, 18, 18)
-                                .addComponent(txt_FijoCel)))
-                        .addGap(84, 84, 84))))
+            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGap(15, 15, 15)
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButton3)
-                            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(jPanel5Layout.createSequentialGroup()
-                                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(44, 44, 44)
-                                    .addComponent(txtNombre6, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(txtApellido6, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(jPanel5Layout.createSequentialGroup()
-                                    .addComponent(jdFechaNac, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(38, 38, 38)
-                                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(cbx_estC, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(cbx_sexo, 0, 259, Short.MAX_VALUE))
-                                    .addGap(18, 18, 18)
-                                    .addComponent(txtDni)))))
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addComponent(jdFechaNac, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(38, 38, 38)
+                                .addComponent(cbx_sexo, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtDni, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtNombre6, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtApellido6))))
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGap(468, 468, 468)
-                        .addComponent(jButton1)))
+                        .addGap(311, 311, 311)
+                        .addComponent(cbx_estC, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(txt_RefeDireccion, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 308, Short.MAX_VALUE)
+                            .addComponent(txtDireccion, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addGap(32, 32, 32)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtSalario)
+                            .addComponent(cbxMuni, 0, 270, Short.MAX_VALUE)
+                            .addComponent(txtCelular))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(cbxAldea, 0, 293, Short.MAX_VALUE)
+                            .addComponent(txt_FijoCel)))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGap(416, 416, 416)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton3)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGap(29, 29, 29)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtNombre6, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txtApellido6, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
+                    .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtApellido6, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtDni, javax.swing.GroupLayout.DEFAULT_SIZE, 63, Short.MAX_VALUE)
-                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(cbx_sexo)
-                        .addComponent(jdFechaNac, javax.swing.GroupLayout.DEFAULT_SIZE, 63, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(cbx_sexo, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtDni, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jdFechaNac, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(29, 29, 29)
                 .addComponent(cbx_estC, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(63, 63, 63)
+                .addGap(31, 31, 31)
                 .addComponent(jLabel7)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtDireccion)
-                    .addComponent(cbxMuni, javax.swing.GroupLayout.DEFAULT_SIZE, 57, Short.MAX_VALUE)
-                    .addComponent(cbxAldea))
-                .addGap(27, 27, 27)
+                .addGap(30, 30, 30)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbxMuni, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbxAldea, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(37, 37, 37)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txt_RefeDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtCelular, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txt_FijoCel, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(44, 44, 44)
                 .addComponent(txtSalario, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
+                .addGap(35, 35, 35)
                 .addComponent(jButton1)
-                .addGap(111, 111, 111))
-        );
-
-        jPanel2.setBackground(new java.awt.Color(255, 102, 102));
-
-        jLabel58.setFont(new java.awt.Font("Arial Black", 3, 36)); // NOI18N
-        jLabel58.setText("Datos del Personal");
-
-        jLabel8.setFont(new java.awt.Font("Segoe Print", 1, 14)); // NOI18N
-        jLabel8.setText("9801-4550/3308-9197");
-
-        jLabel9.setFont(new java.awt.Font("Segoe Print", 1, 14)); // NOI18N
-        jLabel9.setText("Trojes, El Paraíso");
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(272, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel58, javax.swing.GroupLayout.PREFERRED_SIZE, 424, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(340, 340, 340))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel8)
-                        .addGap(436, 436, 436))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel9)
-                        .addGap(458, 458, 458))))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jLabel58)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel8)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel9)
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addContainerGap(69, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 6, Short.MAX_VALUE)))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 6, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 729, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 8, Short.MAX_VALUE)))
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 8, Short.MAX_VALUE))
         );
 
         jScrollPane1.setViewportView(jPanel1);
@@ -588,52 +546,6 @@ public class Crear_Empleado extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_txt_RefeDirecciontxt_RefeDireccionKeyTyped
 
-    private void txtCelulartxtCelularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCelulartxtCelularActionPerformed
-
-    }//GEN-LAST:event_txtCelulartxtCelularActionPerformed
-
-    private void txtCelulartxtCelularKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCelulartxtCelularKeyPressed
-
-    }//GEN-LAST:event_txtCelulartxtCelularKeyPressed
-
-    private void txtCelulartxtCelularKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCelulartxtCelularKeyReleased
-
-        String texto = txtCelular.getText().trim();
-        char c = evt.getKeyChar();
-
-        if (texto.startsWith("9") || texto.startsWith("8") || texto.startsWith("3") || c == 9 && c == 8 & c == 3)
-        {
-            txtCelular.setBackground(Color.green);
-        } else
-        {
-            // El texto no cumple con la validación
-            evt.consume(); // Bloquea el carácter
-            JOptionPane.showMessageDialog(this, "El número de celular debe comenzar con 9, 8 o 3", "Error", JOptionPane.ERROR_MESSAGE);
-            txtCelular.setBackground(Color.red);
-            txtCelular.setText("");
-
-        }
-    }//GEN-LAST:event_txtCelulartxtCelularKeyReleased
-
-    private void txtCelulartxtCelularKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCelulartxtCelularKeyTyped
-        char c = evt.getKeyChar();
-        String texto = txtCelular.getText();
-
-        // Verificar si se ingresó un dígito y el número de caracteres no excede el formato esperado
-        if (Character.isDigit(c) && texto.length() < 9 || texto.startsWith("9") && c == 9 && c == 8 & c == 3)
-        {
-            // Formato: XXXX-XXXX (4 dígitos seguidos de un guion y otros 4 dígitos)
-            if (texto.length() == 4)
-            {
-                txtCelular.setText(texto + "-");
-            }
-        } else
-        {
-            txtCelular.setText("");
-            evt.consume();  // Ignorar el carácter ingresado si no cumple con el formato esperado
-        }
-    }//GEN-LAST:event_txtCelulartxtCelularKeyTyped
-
     private void txt_FijoCeltxt_FijoCelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_FijoCeltxt_FijoCelActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_FijoCeltxt_FijoCelActionPerformed
@@ -654,21 +566,37 @@ public class Crear_Empleado extends javax.swing.JPanel {
     }//GEN-LAST:event_txt_FijoCeltxt_FijoCelKeyReleased
 
     private void txt_FijoCeltxt_FijoCelKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_FijoCeltxt_FijoCelKeyTyped
-        char c = evt.getKeyChar();
-        String texto = txt_FijoCel.getText();
 
-        // Verificar si se ingresó un dígito y el número de caracteres no excede el formato esperado
-        if (Character.isDigit(c) && texto.length() < 9)
+        String texto = txt_FijoCel.getText();
+        char c = evt.getKeyChar();
+
+// Verificar si el número de caracteres no excede el formato esperado
+        if (texto.length() < 9)
         {
-            // Formato: XXXX-XXXX (4 dígitos seguidos de un guion y otros 4 dígitos)
-            if (texto.length() == 4)
+            if (texto.isEmpty())
             {
-                txt_FijoCel.setText(texto + "-");
+                // Permitir solo 9, 8 o 3 como primer carácter
+                if (c == '2')
+                {
+                    txt_FijoCel.setText(String.valueOf(c));
+                } else
+                {
+                    evt.consume(); // Ignorar cualquier otro carácter al principio
+                }
+            } else if (Character.isDigit(c))
+            {
+                // Formato: XXXX-XXXX (4 dígitos seguidos de un guion y otros 4 dígitos)
+                if (texto.length() == 4)
+                {
+                    txt_FijoCel.setText(texto + "-");
+                }
+            } else
+            {
+                evt.consume(); // Ignorar el carácter ingresado si no cumple con el formato esperado
             }
         } else
         {
-            evt.consume();
-            txt_FijoCel.setText("");
+            evt.consume(); // Ignorar el carácter ingresado si ya se alcanzó la longitud máxima
         }
     }//GEN-LAST:event_txt_FijoCeltxt_FijoCelKeyTyped
 
@@ -1045,9 +973,8 @@ public class Crear_Empleado extends javax.swing.JPanel {
 
     private void txtDniFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDniFocusLost
 
-      String dni = txtDni.getText();        
-        
-        
+        String dni = txtDni.getText();
+
         if (!dni.matches("^[0-9]{4}-[0-9]{4}-[0-9]{5}$"))
         {
             JOptionPane.showMessageDialog(this, "Ingrese un formato de DNI correcto", "Error", JOptionPane.ERROR_MESSAGE);
@@ -1144,8 +1071,8 @@ public class Crear_Empleado extends javax.swing.JPanel {
     }//GEN-LAST:event_txtDniFocusLost
 
     private void txtSalarioFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSalarioFocusLost
-          String salario = txtSalario.getText();
-        
+        String salario = txtSalario.getText();
+
         if (!salario.isEmpty())
         {
             try
@@ -1183,110 +1110,169 @@ public class Crear_Empleado extends javax.swing.JPanel {
 
         String salario = txtSalario.getText();
 
-            StringBuilder camposVacios = new StringBuilder("Los siguientes campos están vacíos:");
+        StringBuilder camposVacios = new StringBuilder("Los siguientes campos están vacíos:");
 
-            if (nombre1.isEmpty())
+        if (nombre1.isEmpty())
+        {
+            camposVacios.append("\n - Primer Nombre");
+        }
+        if (apellido1.isEmpty())
+        {
+            camposVacios.append("\n - Primer apellido");
+        }
+        if (fecha_na == null)
+        {
+            camposVacios.append("\n - Fecha Nacimiento");
+        }
+
+        String categorias = cbx_sexo.getSelectedItem().toString(); // Obtiene el elemento seleccionado en el JComboBox
+
+        if (categorias.equals("Seleccione"))
+        {
+            camposVacios.append("\n - Sexo");
+        }
+        if (dni.isEmpty())
+        {
+            camposVacios.append("\n - DNI");
+        }
+        String estado = cbx_estC.getSelectedItem().toString(); // Obtiene el elemento seleccionado en el JComboBox
+
+        if (estado.equals("Seleccione"))
+        {
+            camposVacios.append("\n - Estado Civil");
+        }
+        if (barrio.isEmpty())
+        {
+            camposVacios.append("\n - Barrio");
+        }
+        String muni = cbxMuni.getSelectedItem().toString(); // Obtiene el elemento seleccionado en el JComboBox
+
+        if (muni.equals("Seleccione"))
+        {
+            camposVacios.append("\n - Municipio");
+        }
+        if (celular.isEmpty())
+        {
+            camposVacios.append("\n - Celular");
+        }
+        if (salario.isEmpty())
+        {
+            camposVacios.append("\n - Salario");
+        }
+
+        if (!camposVacios.toString().equals("Los siguientes campos están vacíos:"))
+        {
+            JOptionPane.showMessageDialog(null, camposVacios.toString(), "Campos Vacíos", JOptionPane.ERROR_MESSAGE);
+        } else
+        {
+            try
             {
-                camposVacios.append("\n - Primer Nombre");
-            }
-            if (apellido1.isEmpty())
+                Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+                Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
+
+                PreparedStatement ps = conn.prepareStatement("INSERT INTO Empleado (nombre1, nombre2, apellido1, apellido2, fecha_nacimiento, sexo,"
+                        + "dni, estado_civil, barrio, municipio, aldea, referenciaDomicilio, celular, fijo, salario) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
+                ps.setString(1, nombre1);
+                ps.setString(2, nombre2);
+                ps.setString(3, apellido1);
+                ps.setString(4, apellido2);
+                ps.setDate(5, new java.sql.Date(fecha_na.getTime()));
+                ps.setString(6, sexo);
+                ps.setString(7, dni);
+
+                ps.setString(8, estado_civil);
+
+                ps.setString(9, barrio);
+                ps.setString(10, municipioD);
+                ps.setString(11, aldea);
+                ps.setString(12, refe_direccion);
+                ps.setString(13, celular);
+                ps.setString(14, fijo_cel);
+                ps.setString(15, salario);
+
+                ps.execute();
+                JOptionPane.showMessageDialog(null, "Registro guardado");
+                Listado_Empleados cli = new Listado_Empleados();
+
+                cli.setSize(1024, 640);
+                cli.setLocation(0, 0);
+
+                jPanel3.revalidate();
+                jPanel3.repaint();
+                jPanel3.removeAll();
+                jPanel3.add(cli, BorderLayout.CENTER);
+                jPanel3.revalidate();
+                jPanel3.repaint();
+
+            } catch (SQLException e)
             {
-                camposVacios.append("\n - Primer apellido");
-            }
-            if (fecha_na == null)
+                JOptionPane.showMessageDialog(null, e.toString());
+            } catch (ClassNotFoundException ex)
             {
-                camposVacios.append("\n - Fecha Nacimiento");
+                Logger.getLogger(Crear_Empleado.class.getName()).log(Level.SEVERE, null, ex);
             }
 
-            String categorias = cbx_sexo.getSelectedItem().toString(); // Obtiene el elemento seleccionado en el JComboBox
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
-            if (categorias.equals("Seleccione"))
-            {
-                camposVacios.append("\n - Sexo");
-            }
-            if (dni.isEmpty())
-            {
-                camposVacios.append("\n - DNI");
-            }
-             String estado = cbx_estC.getSelectedItem().toString(); // Obtiene el elemento seleccionado en el JComboBox
+    private void txtCelularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCelularActionPerformed
+       
+    }//GEN-LAST:event_txtCelularActionPerformed
 
-            if (estado.equals("Seleccione"))
-            {
-                camposVacios.append("\n - Estado Civil");
-            }
-            if (barrio.isEmpty())
-            {
-                camposVacios.append("\n - Barrio");
-            }
-             String muni = cbxMuni.getSelectedItem().toString(); // Obtiene el elemento seleccionado en el JComboBox
+    private void txtCelularKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCelularKeyTyped
+         String texto = txtCelular.getText();
+        char c = evt.getKeyChar();
 
-            if (muni.equals("Seleccione"))
+// Verificar si el número de caracteres no excede el formato esperado
+        if (texto.length() < 9)
+        {
+            if (texto.isEmpty())
             {
-                camposVacios.append("\n - Municipio");
-            }
-             if (celular.isEmpty())
+                // Permitir solo 9, 8 o 3 como primer carácter
+                if (c == '9' || c == '8' || c == '3')
+                {
+                    txtCelular.setText(String.valueOf(c));
+                } else
+                {
+                    evt.consume(); // Ignorar cualquier otro carácter al principio
+                }
+            } else if (Character.isDigit(c))
             {
-                camposVacios.append("\n - Celular");
-            }
-              if (salario.isEmpty())
-            {
-                camposVacios.append("\n - Salario");
-            }
-            
-            if (!camposVacios.toString().equals("Los siguientes campos están vacíos:"))
-            {
-                JOptionPane.showMessageDialog(null, camposVacios.toString(), "Campos Vacíos", JOptionPane.ERROR_MESSAGE);
+                // Formato: XXXX-XXXX (4 dígitos seguidos de un guion y otros 4 dígitos)
+                if (texto.length() == 4)
+                {
+                    txtCelular.setText(texto + "-");
+                }
             } else
             {
-                try
-                {
-                    Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-                    Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
-
-                    PreparedStatement ps = conn.prepareStatement("INSERT INTO Empleado (nombre1, nombre2, apellido1, apellido2, fecha_nacimiento, sexo,"
-                            + "dni, estado_civil, barrio, municipio, aldea, referenciaDomicilio, celular, fijo, salario) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
-                    ps.setString(1, nombre1);
-                    ps.setString(2, nombre2);
-                    ps.setString(3, apellido1);
-                    ps.setString(4, apellido2);
-                    ps.setDate(5, new java.sql.Date(fecha_na.getTime()));
-                    ps.setString(6, sexo);
-                    ps.setString(7, dni);
-
-                    ps.setString(8, estado_civil);
-
-                    ps.setString(9, barrio);
-                    ps.setString(10, municipioD);
-                    ps.setString(11, aldea);
-                    ps.setString(12, refe_direccion);
-                    ps.setString(13, celular);
-                    ps.setString(14, fijo_cel);
-                    ps.setString(15, salario);
-
-                    ps.execute();
-                    JOptionPane.showMessageDialog(null, "Registro guardado");
-                    Listado_Empleados cli = new Listado_Empleados();
-
-                    cli.setSize(1024, 640);
-                    cli.setLocation(0, 0);
-
-                    jPanel3.revalidate();
-                    jPanel3.repaint();
-                    jPanel3.removeAll();
-                    jPanel3.add(cli, BorderLayout.CENTER);
-                    jPanel3.revalidate();
-                    jPanel3.repaint();
-
-                } catch (SQLException e)
-                {
-                    JOptionPane.showMessageDialog(null, e.toString());
-                } catch (ClassNotFoundException ex)
-                {
-                    Logger.getLogger(Crear_Empleado.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            
+                evt.consume(); // Ignorar el carácter ingresado si no cumple con el formato esperado
             }
-    }//GEN-LAST:event_jButton1ActionPerformed
+        } else
+        {
+            evt.consume(); // Ignorar el carácter ingresado si ya se alcanzó la longitud máxima
+        }
+    }//GEN-LAST:event_txtCelularKeyTyped
+
+    private void txtCelularFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCelularFocusLost
+         
+    }//GEN-LAST:event_txtCelularFocusLost
+
+    private void txtCelularKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCelularKeyReleased
+        String texto = txtCelular.getText().trim();
+        char c = evt.getKeyChar();
+
+        if (texto.startsWith("9") || texto.startsWith("8") || texto.startsWith("3") || c == 9 && c == 8 & c == 3)
+        {
+            txtCelular.setBackground(Color.green);
+        } else
+        {
+            // El texto no cumple con la validación
+            evt.consume(); // Bloquea el carácter
+            JOptionPane.showMessageDialog(this, "El número de celular debe comenzar con 9, 8 o 3", "Error", JOptionPane.ERROR_MESSAGE);
+            txtCelular.setBackground(Color.red);
+            txtCelular.setText("");
+        }
+    }//GEN-LAST:event_txtCelularKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1298,13 +1284,9 @@ public class Crear_Empleado extends javax.swing.JPanel {
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel58;
     private javax.swing.JLabel jLabel59;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;

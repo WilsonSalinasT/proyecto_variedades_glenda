@@ -46,11 +46,11 @@ public class editar_cliente extends javax.swing.JPanel {
 
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
+        btnatras = new javax.swing.JButton();
         btncrear = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         Id_cl = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        btnatras = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -61,6 +61,16 @@ public class editar_cliente extends javax.swing.JPanel {
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Editar cliente");
 
+        btnatras.setBackground(new java.awt.Color(255, 153, 51));
+        btnatras.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnatras.setForeground(new java.awt.Color(0, 0, 0));
+        btnatras.setText("VOLVER");
+        btnatras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnatrasActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -68,7 +78,9 @@ public class editar_cliente extends javax.swing.JPanel {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel2)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnatras)
+                .addGap(19, 19, 19))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -76,6 +88,10 @@ public class editar_cliente extends javax.swing.JPanel {
                 .addContainerGap(33, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addGap(28, 28, 28))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addComponent(btnatras)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         txttelefono.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -95,7 +111,8 @@ public class editar_cliente extends javax.swing.JPanel {
         });
 
         btncrear.setBackground(new java.awt.Color(255, 153, 51));
-        btncrear.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btncrear.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btncrear.setForeground(new java.awt.Color(0, 0, 0));
         btncrear.setText("Editar");
         btncrear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -152,15 +169,6 @@ public class editar_cliente extends javax.swing.JPanel {
         jLabel4.setForeground(new java.awt.Color(59, 59, 59));
         jLabel4.setText("Género:");
 
-        btnatras.setBackground(new java.awt.Color(255, 153, 51));
-        btnatras.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnatras.setText("Atras");
-        btnatras.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnatrasActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -174,7 +182,7 @@ public class editar_cliente extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(60, 60, 60)
                         .addComponent(Id_cl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 231, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 214, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(rbmasculino)
@@ -188,9 +196,7 @@ public class editar_cliente extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(txtcorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txttelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(201, 201, 201)
-                .addComponent(btnatras)
-                .addGap(34, 34, 34))
+                .addGap(317, 317, 317))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -207,7 +213,6 @@ public class editar_cliente extends javax.swing.JPanel {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnatras)
                     .addComponent(txtnombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Id_cl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
@@ -226,7 +231,7 @@ public class editar_cliente extends javax.swing.JPanel {
                 .addComponent(txtcorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btncrear)
-                .addContainerGap(67, Short.MAX_VALUE))
+                .addContainerGap(62, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

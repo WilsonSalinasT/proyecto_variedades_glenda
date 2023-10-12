@@ -30,26 +30,17 @@ public class verProducto extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnvolver = new javax.swing.JButton();
         txtCategoria = new javax.swing.JTextField();
         txtNombre = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         jTextField1 = new javax.swing.JTextField();
+        btnvolver = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         AreaDescripcion = new javax.swing.JTextArea();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
-        btnvolver.setBackground(new java.awt.Color(255, 153, 51));
-        btnvolver.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btnvolver.setForeground(new java.awt.Color(0, 0, 0));
-        btnvolver.setText("Atras");
-        btnvolver.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnvolverActionPerformed(evt);
-            }
-        });
-
+        txtCategoria.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtCategoria.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtCategoria.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Categoria:", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12))); // NOI18N
         txtCategoria.addActionListener(new java.awt.event.ActionListener() {
@@ -58,6 +49,7 @@ public class verProducto extends javax.swing.JPanel {
             }
         });
 
+        txtNombre.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtNombre.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtNombre.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Nombre:", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12))); // NOI18N
         txtNombre.addActionListener(new java.awt.event.ActionListener() {
@@ -81,6 +73,16 @@ public class verProducto extends javax.swing.JPanel {
             }
         });
 
+        btnvolver.setBackground(new java.awt.Color(255, 153, 51));
+        btnvolver.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnvolver.setForeground(new java.awt.Color(0, 0, 0));
+        btnvolver.setText("VOLVER");
+        btnvolver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnvolverActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -88,7 +90,9 @@ public class verProducto extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnvolver, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(16, 16, 16))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -96,6 +100,10 @@ public class verProducto extends javax.swing.JPanel {
                 .addContainerGap(30, Short.MAX_VALUE)
                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(22, 22, 22))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addComponent(btnvolver)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         txtId.setEditable(false);
@@ -105,6 +113,7 @@ public class verProducto extends javax.swing.JPanel {
 
         AreaDescripcion.setEditable(false);
         AreaDescripcion.setColumns(20);
+        AreaDescripcion.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         AreaDescripcion.setRows(5);
         AreaDescripcion.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Descripción:", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12))); // NOI18N
         jScrollPane1.setViewportView(AreaDescripcion);
@@ -123,25 +132,20 @@ public class verProducto extends javax.swing.JPanel {
                         .addGap(273, 273, 273)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 389, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtCategoria)
-                                    .addComponent(txtNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 389, Short.MAX_VALUE))
-                                .addGap(197, 197, 197)
-                                .addComponent(btnvolver, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(26, Short.MAX_VALUE))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(txtCategoria)
+                                .addComponent(txtNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 389, Short.MAX_VALUE)))))
+                .addContainerGap(349, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnvolver)
-                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(21, 21, 21)
-                .addComponent(txtCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(44, 44, 44)
+                .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(38, 38, 38)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)

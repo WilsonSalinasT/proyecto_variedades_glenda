@@ -4,18 +4,15 @@
  */
 package App;
 
-import Paneles.Crear_Empleado;
 import Paneles.Listado_Empleados;
 import Paneles.Listado_Productos;
-import Paneles.Nueva_venta;
+
 import Paneles.clientes;
 import Paneles.crear_proveedor;
-import Paneles.productos;
-import Paneles.proveedor;
+
 import Paneles.ventas;
 import java.awt.BorderLayout;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
+
 
 public class Menu extends javax.swing.JFrame {
 

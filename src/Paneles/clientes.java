@@ -131,6 +131,7 @@ public class clientes extends javax.swing.JPanel {
 
         jButton1.setBackground(new java.awt.Color(255, 153, 51));
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(0, 0, 0));
         jButton1.setText("Buscar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -140,6 +141,7 @@ public class clientes extends javax.swing.JPanel {
 
         jButton2.setBackground(new java.awt.Color(255, 153, 51));
         jButton2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(0, 0, 0));
         jButton2.setText("Crear");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -149,6 +151,7 @@ public class clientes extends javax.swing.JPanel {
 
         jButton3.setBackground(new java.awt.Color(255, 153, 51));
         jButton3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButton3.setForeground(new java.awt.Color(0, 0, 0));
         jButton3.setText("Editar");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -158,6 +161,7 @@ public class clientes extends javax.swing.JPanel {
 
         jButton4.setBackground(new java.awt.Color(255, 153, 51));
         jButton4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButton4.setForeground(new java.awt.Color(0, 0, 0));
         jButton4.setText("ver");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -167,6 +171,7 @@ public class clientes extends javax.swing.JPanel {
 
         jButton5.setBackground(new java.awt.Color(255, 153, 51));
         jButton5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButton5.setForeground(new java.awt.Color(0, 0, 0));
         jButton5.setText("Refrescar");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -307,7 +312,7 @@ public class clientes extends javax.swing.JPanel {
       selectedRow2 = tableClientes.getSelectedRow();
         if (selectedRow2 == -1)
         {
-            JOptionPane.showMessageDialog(null, "Debes seleccionar una celda para poder modificar el cliente");
+            JOptionPane.showMessageDialog(null, "Seleccione un cliente para poder editarlo");
             return;
         }
 
@@ -394,7 +399,7 @@ public class clientes extends javax.swing.JPanel {
         selectedRow1 = tableClientes.getSelectedRow();
         if (selectedRow1 == -1)
         {
-            JOptionPane.showMessageDialog(null, "Debes seleccionar una celda para poder ver el cliente");
+            JOptionPane.showMessageDialog(null, "Seleccione un cliente para poder visualizarlo");
             return;
         }
 
