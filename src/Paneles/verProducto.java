@@ -40,7 +40,7 @@ public class verProducto extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(255, 255, 255));
 
-        btnvolver.setBackground(new java.awt.Color(255, 102, 102));
+        btnvolver.setBackground(new java.awt.Color(255, 153, 51));
         btnvolver.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnvolver.setForeground(new java.awt.Color(0, 0, 0));
         btnvolver.setText("Atras");

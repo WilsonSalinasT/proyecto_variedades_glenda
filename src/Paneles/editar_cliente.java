@@ -94,7 +94,7 @@ public class editar_cliente extends javax.swing.JPanel {
             }
         });
 
-        btncrear.setBackground(new java.awt.Color(255, 0, 51));
+        btncrear.setBackground(new java.awt.Color(255, 153, 51));
         btncrear.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btncrear.setText("Editar");
         btncrear.addActionListener(new java.awt.event.ActionListener() {
@@ -152,7 +152,7 @@ public class editar_cliente extends javax.swing.JPanel {
         jLabel4.setForeground(new java.awt.Color(59, 59, 59));
         jLabel4.setText("Género:");
 
-        btnatras.setBackground(new java.awt.Color(255, 0, 51));
+        btnatras.setBackground(new java.awt.Color(255, 153, 51));
         btnatras.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnatras.setText("Atras");
         btnatras.addActionListener(new java.awt.event.ActionListener() {

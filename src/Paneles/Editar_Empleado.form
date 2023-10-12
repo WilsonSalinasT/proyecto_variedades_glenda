@@ -114,11 +114,11 @@
                                           <Component id="cbxSexo" min="-2" pref="261" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
-                                  <EmptySpace type="separate" max="32767" attributes="0"/>
+                                  <EmptySpace type="separate" pref="78" max="32767" attributes="0"/>
                                   <Component id="txtDni" min="-2" pref="222" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace pref="83" max="32767" attributes="0"/>
+                          <EmptySpace pref="102" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
@@ -140,8 +140,8 @@
                       <Component id="jLabel1" alignment="0" max="32767" attributes="0"/>
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace max="32767" attributes="0"/>
-                          <Component id="btn_editar" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="410" max="-2" attributes="0"/>
+                          <Component id="jButton2" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="453" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -191,9 +191,9 @@
                           </Group>
                           <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
                           <Component id="txtSalario" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-                          <Component id="btn_editar" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
+                          <EmptySpace pref="26" max="32767" attributes="0"/>
+                          <Component id="jButton2" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -344,27 +344,6 @@
                     <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
                   </AuxValues>
                 </Component>
-                <Component class="javax.swing.JButton" name="btn_editar">
-                  <Properties>
-                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="33" green="0" red="ff" type="rgb"/>
-                    </Property>
-                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Segoe UI" size="18" style="1"/>
-                    </Property>
-                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="33" green="33" red="33" type="rgb"/>
-                    </Property>
-                    <Property name="text" type="java.lang.String" value="EDITAR"/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btn_editarbtn_crearMouseClicked"/>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_editarbtn_crearActionPerformed"/>
-                  </Events>
-                  <AuxValues>
-                    <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="25"/>
-                  </AuxValues>
-                </Component>
                 <Component class="javax.swing.JTextField" name="txtDni">
                   <Properties>
                     <Property name="horizontalAlignment" type="int" value="0"/>
@@ -377,6 +356,7 @@
                     </Property>
                   </Properties>
                   <Events>
+                    <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtDniFocusLost"/>
                     <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtDnitxtDniKeyReleased"/>
                     <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtDnitxtDniKeyTyped"/>
                   </Events>
@@ -405,30 +385,28 @@
                 <Component class="javax.swing.JComboBox" name="cbxMuni">
                   <Properties>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                      <StringArray count="19">
-                        <StringItem index="0" value="Trojes"/>
-                        <StringItem index="1" value="Danl&#xed;"/>
-                        <StringItem index="2" value="El Para&#xed;so"/>
-                        <StringItem index="3" value="Teupasenti"/>
-                        <StringItem index="4" value="Morocel&#xed;"/>
-                        <StringItem index="5" value="Yuscar&#xe1;n"/>
-                        <StringItem index="6" value="Liure"/>
-                        <StringItem index="7" value="Soledad"/>
-                        <StringItem index="8" value="Texiguat"/>
-                        <StringItem index="9" value="Alauca"/>
-                        <StringItem index="10" value="G&#xfc;inope"/>
-                        <StringItem index="11" value="San Lucas"/>
-                        <StringItem index="12" value="Oropol&#xed;"/>
-                        <StringItem index="13" value="San Antonio de Flores"/>
-                        <StringItem index="14" value="San Mat&#xed;as"/>
-                        <StringItem index="15" value="Vado Ancho"/>
-                        <StringItem index="16" value="Jacaleapa"/>
-                        <StringItem index="17" value="Potrerillos"/>
-                        <StringItem index="18" value="Yauyupe"/>
+                      <StringArray count="20">
+                        <StringItem index="0" value="Seleccione"/>
+                        <StringItem index="1" value="Trojes"/>
+                        <StringItem index="2" value="Danl&#xed;"/>
+                        <StringItem index="3" value="El Para&#xed;so"/>
+                        <StringItem index="4" value="Teupasenti"/>
+                        <StringItem index="5" value="Morocel&#xed;"/>
+                        <StringItem index="6" value="Yuscar&#xe1;n"/>
+                        <StringItem index="7" value="Liure"/>
+                        <StringItem index="8" value="Soledad"/>
+                        <StringItem index="9" value="Texiguat"/>
+                        <StringItem index="10" value="Alauca"/>
+                        <StringItem index="11" value="G&#xfc;inope"/>
+                        <StringItem index="12" value="San Lucas"/>
+                        <StringItem index="13" value="Oropol&#xed;"/>
+                        <StringItem index="14" value="San Antonio de Flores"/>
+                        <StringItem index="15" value="San Mat&#xed;as"/>
+                        <StringItem index="16" value="Vado Ancho"/>
+                        <StringItem index="17" value="Jacaleapa"/>
+                        <StringItem index="18" value="Potrerillos"/>
+                        <StringItem index="19" value="Yauyupe"/>
                       </StringArray>
-                    </Property>
-                    <Property name="selectedIndex" type="int" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                      <Connection code="-1" type="code"/>
                     </Property>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
@@ -457,6 +435,7 @@
                     </Property>
                   </Properties>
                   <Events>
+                    <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtSalarioFocusLost"/>
                     <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtSalarioKeyTyped"/>
                   </Events>
                   <AuxValues>
@@ -475,7 +454,7 @@
                 <Component class="javax.swing.JButton" name="jButton1">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="33" green="0" red="ff" type="rgb"/>
+                      <Color blue="33" green="99" red="ff" type="rgb"/>
                     </Property>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Segoe UI" size="18" style="1"/>
@@ -495,10 +474,11 @@
                 <Component class="javax.swing.JComboBox" name="cbxEstC">
                   <Properties>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                      <StringArray count="3">
-                        <StringItem index="0" value="Soltero"/>
-                        <StringItem index="1" value="Casado"/>
-                        <StringItem index="2" value="Viudo"/>
+                      <StringArray count="4">
+                        <StringItem index="0" value="Seleccione"/>
+                        <StringItem index="1" value="Soltero"/>
+                        <StringItem index="2" value="Casado"/>
+                        <StringItem index="3" value="Viudo"/>
                       </StringArray>
                     </Property>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
@@ -509,6 +489,9 @@
                       </Border>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbxEstCActionPerformed"/>
+                  </Events>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
                     <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
@@ -517,9 +500,10 @@
                 <Component class="javax.swing.JComboBox" name="cbxSexo">
                   <Properties>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                      <StringArray count="2">
-                        <StringItem index="0" value="Femenino"/>
-                        <StringItem index="1" value="Masculino"/>
+                      <StringArray count="3">
+                        <StringItem index="0" value="Seleccione"/>
+                        <StringItem index="1" value="Femenino"/>
+                        <StringItem index="2" value="Masculino"/>
                       </StringArray>
                     </Property>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
@@ -606,7 +590,7 @@
                           <Color blue="66" green="66" red="ff" type="rgb"/>
                         </Property>
                         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="66" green="66" red="ff" type="rgb"/>
+                          <Color blue="0" green="0" red="0" type="rgb"/>
                         </Property>
                         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                           <Border info="null"/>
@@ -631,6 +615,14 @@
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
                   </AuxValues>
+                </Component>
+                <Component class="javax.swing.JButton" name="jButton2">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Editar"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>

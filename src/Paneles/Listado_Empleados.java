@@ -104,7 +104,7 @@ public class Listado_Empleados extends javax.swing.JPanel {
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
-        crearbtn.setBackground(new java.awt.Color(255, 0, 51));
+        crearbtn.setBackground(new java.awt.Color(255, 153, 51));
         crearbtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         crearbtn.setText("CREAR");
         crearbtn.addActionListener(new java.awt.event.ActionListener() {
@@ -113,7 +113,7 @@ public class Listado_Empleados extends javax.swing.JPanel {
             }
         });
 
-        editarbtn.setBackground(new java.awt.Color(255, 0, 51));
+        editarbtn.setBackground(new java.awt.Color(255, 153, 51));
         editarbtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         editarbtn.setText("EDITAR");
         editarbtn.addActionListener(new java.awt.event.ActionListener() {
@@ -122,7 +122,7 @@ public class Listado_Empleados extends javax.swing.JPanel {
             }
         });
 
-        verbtn.setBackground(new java.awt.Color(255, 0, 51));
+        verbtn.setBackground(new java.awt.Color(255, 153, 51));
         verbtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         verbtn.setText("VER");
         verbtn.addActionListener(new java.awt.event.ActionListener() {
@@ -192,7 +192,7 @@ public class Listado_Empleados extends javax.swing.JPanel {
             }
         });
 
-        Btn_Buscar.setBackground(new java.awt.Color(255, 0, 51));
+        Btn_Buscar.setBackground(new java.awt.Color(255, 153, 51));
         Btn_Buscar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         Btn_Buscar.setText("Buscar");
         Btn_Buscar.addActionListener(new java.awt.event.ActionListener() {
@@ -201,7 +201,7 @@ public class Listado_Empleados extends javax.swing.JPanel {
             }
         });
 
-        refrescarbtn.setBackground(new java.awt.Color(255, 0, 51));
+        refrescarbtn.setBackground(new java.awt.Color(255, 153, 51));
         refrescarbtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         refrescarbtn.setText("Refrescar");
         refrescarbtn.addActionListener(new java.awt.event.ActionListener() {

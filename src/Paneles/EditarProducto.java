@@ -95,7 +95,7 @@ public class EditarProducto extends javax.swing.JPanel {
             }
         });
 
-        btnGuardar.setBackground(new java.awt.Color(255, 0, 51));
+        btnGuardar.setBackground(new java.awt.Color(255, 153, 51));
         btnGuardar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnGuardar.setForeground(new java.awt.Color(0, 0, 0));
         btnGuardar.setText("Editar");
@@ -105,7 +105,7 @@ public class EditarProducto extends javax.swing.JPanel {
             }
         });
 
-        btnvolver.setBackground(new java.awt.Color(255, 0, 51));
+        btnvolver.setBackground(new java.awt.Color(255, 153, 51));
         btnvolver.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnvolver.setForeground(new java.awt.Color(0, 0, 0));
         btnvolver.setText("Atras");

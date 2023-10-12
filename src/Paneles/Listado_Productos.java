@@ -87,7 +87,7 @@ public class Listado_Productos extends javax.swing.JPanel {
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
-        jButton1.setBackground(new java.awt.Color(255, 0, 51));
+        jButton1.setBackground(new java.awt.Color(255, 153, 51));
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButton1.setForeground(new java.awt.Color(0, 0, 0));
         jButton1.setText("Crear Producto");
@@ -97,7 +97,7 @@ public class Listado_Productos extends javax.swing.JPanel {
             }
         });
 
-        btnver.setBackground(new java.awt.Color(255, 0, 51));
+        btnver.setBackground(new java.awt.Color(255, 153, 51));
         btnver.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnver.setForeground(new java.awt.Color(0, 0, 0));
         btnver.setText("Ver");
@@ -175,7 +175,7 @@ public class Listado_Productos extends javax.swing.JPanel {
             }
         });
 
-        btn_buscar.setBackground(new java.awt.Color(255, 0, 51));
+        btn_buscar.setBackground(new java.awt.Color(255, 153, 51));
         btn_buscar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btn_buscar.setText("Buscar");
         btn_buscar.addActionListener(new java.awt.event.ActionListener() {
@@ -186,7 +186,7 @@ public class Listado_Productos extends javax.swing.JPanel {
 
         comboBoxCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todas", "sastreria", "sublimacion", "arreglos" }));
 
-        btn_refrescar.setBackground(new java.awt.Color(255, 0, 51));
+        btn_refrescar.setBackground(new java.awt.Color(255, 153, 51));
         btn_refrescar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btn_refrescar.setText("Refrescar");
         btn_refrescar.addActionListener(new java.awt.event.ActionListener() {
@@ -217,7 +217,7 @@ public class Listado_Productos extends javax.swing.JPanel {
             }
         });
 
-        btneditar.setBackground(new java.awt.Color(255, 0, 51));
+        btneditar.setBackground(new java.awt.Color(255, 153, 51));
         btneditar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btneditar.setForeground(new java.awt.Color(0, 0, 0));
         btneditar.setText("Editar");
@@ -394,7 +394,7 @@ public class Listado_Productos extends javax.swing.JPanel {
        selectedRow1 = tabla_productos.getSelectedRow();
 if (selectedRow1 == -1)
 {
-    JOptionPane.showMessageDialog(null, "Debes seleccionar una celda para poder Ver");
+    JOptionPane.showMessageDialog(null, "Debes seleccionar una celda para poder Ver el producto");
     return;
 }
 
@@ -420,11 +420,10 @@ try
 
         String nombre = rs.getString("nombre");
         String descripcion = rs.getString("descripcion");
-//        String existencias = rs.getString("existencia");
-        String precio = rs.getString("precio");
+
+    
         String categoria = rs.getString("categoria");
-        String proveedor = rs.getString("proveedor");
-        String fecha = rs.getString("fecha_adquisicion");
+
         String Id = rs.getString("cod_producto");
 
         verProducto mostrar = new verProducto();
@@ -485,7 +484,7 @@ try
    
   selectedRow1 = tabla_productos.getSelectedRow();
 if (selectedRow1 == -1) {
-    JOptionPane.showMessageDialog(null, "Debes seleccionar una celda para poder modificar");
+    JOptionPane.showMessageDialog(null, "Debes seleccionar una celda para poder modificar el producto");
     return;
 }
 

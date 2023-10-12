@@ -14,6 +14,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.BorderFactory;
@@ -84,6 +85,7 @@ public class Crear_Empleado extends javax.swing.JPanel {
         jLabel59 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel58 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -195,23 +197,13 @@ public class Crear_Empleado extends javax.swing.JPanel {
             }
         });
 
-        btn_crear4.setBackground(new java.awt.Color(255, 0, 51));
-        btn_crear4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btn_crear4.setForeground(new java.awt.Color(51, 51, 51));
-        btn_crear4.setText("CREAR");
-        btn_crear4.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btn_crear4btn_crearMouseClicked(evt);
-            }
-        });
-        btn_crear4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_crear4btn_crearActionPerformed(evt);
-            }
-        });
-
         txtDni.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtDni.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "DNI", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12))); // NOI18N
+        txtDni.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtDniFocusLost(evt);
+            }
+        });
         txtDni.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtDnitxtDniKeyReleased(evt);
@@ -224,8 +216,7 @@ public class Crear_Empleado extends javax.swing.JPanel {
         cbxAldea.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Aldea/Comunidad", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12))); // NOI18N
 
         cbxMuni.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
-        cbxMuni.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Trojes", "Danlí", "El Paraíso", "Teupasenti", "Morocelí", "Yuscarán", "Liure", "Soledad", "Texiguat", "Alauca", "Güinope", "San Lucas", "Oropolí", "San Antonio de Flores", "San Matías", "Vado Ancho", "Jacaleapa", "Potrerillos", "Yauyupe" }));
-        cbxMuni.setSelectedIndex(-1);
+        cbxMuni.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "Trojes", "Danlí", "El Paraíso", "Teupasenti", "Morocelí", "Yuscarán", "Liure", "Soledad", "Texiguat", "Alauca", "Güinope", "San Lucas", "Oropolí", "San Antonio de Flores", "San Matías", "Vado Ancho", "Jacaleapa", "Potrerillos", "Yauyupe" }));
         cbxMuni.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Municipio", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12))); // NOI18N
         cbxMuni.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -234,6 +225,11 @@ public class Crear_Empleado extends javax.swing.JPanel {
         });
 
         txtSalario.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Salario", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12))); // NOI18N
+        txtSalario.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtSalarioFocusLost(evt);
+            }
+        });
         txtSalario.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtSalarioKeyTyped(evt);
@@ -243,7 +239,7 @@ public class Crear_Empleado extends javax.swing.JPanel {
         jLabel7.setFont(new java.awt.Font("Arial Black", 2, 12)); // NOI18N
         jLabel7.setText("Dirección de Domicilio Exacta");
 
-        jButton3.setBackground(new java.awt.Color(255, 0, 51));
+        jButton3.setBackground(new java.awt.Color(255, 153, 51));
         jButton3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jButton3.setText("ATRÁS");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -253,11 +249,10 @@ public class Crear_Empleado extends javax.swing.JPanel {
         });
 
         cbx_sexo.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
-        cbx_sexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Femenino", "Masculino" }));
-        cbx_sexo.setSelectedIndex(-1);
+        cbx_sexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "Femenino", "Masculino" }));
         cbx_sexo.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Sexo", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12))); // NOI18N
 
-        cbx_estC.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Soltero", "Casado", "Viudo" }));
+        cbx_estC.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "Soltero", "Casado", "Viudo" }));
         cbx_estC.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Estado Civil", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 1, 12))); // NOI18N
 
         jdFechaNac.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Fecha de nacimiento:", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12))); // NOI18N
@@ -296,38 +291,20 @@ public class Crear_Empleado extends javax.swing.JPanel {
                 .addGap(31, 31, 31))
         );
 
+        jButton1.setBackground(new java.awt.Color(255, 153, 51));
+        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButton1.setText("CREAR");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGap(456, 456, 456)
-                        .addComponent(btn_crear4))
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGap(15, 15, 15)
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButton3)
-                            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(jPanel5Layout.createSequentialGroup()
-                                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(44, 44, 44)
-                                    .addComponent(txtNombre6, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(txtApellido6, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(jPanel5Layout.createSequentialGroup()
-                                    .addComponent(jdFechaNac, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(38, 38, 38)
-                                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(cbx_estC, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(cbx_sexo, 0, 259, Short.MAX_VALUE))
-                                    .addGap(18, 18, 18)
-                                    .addComponent(txtDni))))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -352,6 +329,33 @@ public class Crear_Empleado extends javax.swing.JPanel {
                                 .addGap(18, 18, 18)
                                 .addComponent(txt_FijoCel)))
                         .addGap(84, 84, 84))))
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGap(15, 15, 15)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jButton3)
+                            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(jPanel5Layout.createSequentialGroup()
+                                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(44, 44, 44)
+                                    .addComponent(txtNombre6, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(txtApellido6, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel5Layout.createSequentialGroup()
+                                    .addComponent(jdFechaNac, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(38, 38, 38)
+                                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(cbx_estC, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(cbx_sexo, 0, 259, Short.MAX_VALUE))
+                                    .addGap(18, 18, 18)
+                                    .addComponent(txtDni)))))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGap(468, 468, 468)
+                        .addComponent(jButton1)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -360,18 +364,19 @@ public class Crear_Empleado extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton3)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE, false)
-                    .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtApellido6, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtNombre6, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtNombre6, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtApellido6, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtDni, javax.swing.GroupLayout.DEFAULT_SIZE, 63, Short.MAX_VALUE)
                     .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(cbx_sexo)
                         .addComponent(jdFechaNac, javax.swing.GroupLayout.DEFAULT_SIZE, 63, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
                 .addComponent(cbx_estC, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(63, 63, 63)
                 .addComponent(jLabel7)
@@ -387,9 +392,9 @@ public class Crear_Empleado extends javax.swing.JPanel {
                     .addComponent(txt_FijoCel, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(txtSalario, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btn_crear4)
-                .addGap(113, 113, 113))
+                .addGap(29, 29, 29)
+                .addComponent(jButton1)
+                .addGap(111, 111, 111))
         );
 
         jPanel2.setBackground(new java.awt.Color(255, 102, 102));
@@ -666,431 +671,6 @@ public class Crear_Empleado extends javax.swing.JPanel {
             txt_FijoCel.setText("");
         }
     }//GEN-LAST:event_txt_FijoCeltxt_FijoCelKeyTyped
-
-    private void btn_crear4btn_crearMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_crear4btn_crearMouseClicked
-        // PARA VALIDAR
-
-        String primerNombre = txtNombre.getText().trim();
-        String primerApellido = txtApellido.getText().trim();
-       
-        String direccion = txtDireccion.getText().trim();
-        String celular = txtCelular.getText().trim();
-
-        String salario = txtSalario.getText().trim();
-        String dni = txtDni.getText().trim();
-       
-
-        if (primerNombre.isEmpty() || primerApellido.isEmpty() || direccion.isEmpty()
-                || celular.isEmpty() || salario.isEmpty() || dni.isEmpty()
-                 || jdFechaNac.getDate() == null)
-        {
-            // El campo está vacío, muestra un mensaje de error
-            JOptionPane.showMessageDialog(this, "Llene todos los espacios necesarios", "Error", JOptionPane.ERROR_MESSAGE);
-
-            // Verifica los campos de texto y resalta el primero vacío
-            JTextField[] textFields =
-            {
-                txtNombre, txtApellido, txtDireccion, txtCelular, txtDni,
-            };
-            boolean foundEmpty = false;
-
-            for (JTextField textField : textFields)
-            {
-                if (textField.getText().isEmpty())
-                {
-                    textField.setBackground(Color.RED); // Establece el color de resaltado en rojo
-                } else
-                {
-                    textField.setBackground(UIManager.getColor("TextField.background")); // Restaura el color por defecto
-                }
-            }
-
-            // Verifica los JDateChooser y resalta el primero vacío
-            JDateChooser[] dateChoosers =
-            {
-                jdFechaNac
-            };
-
-            for (JDateChooser dateChooser : dateChoosers)
-            {
-                if (dateChooser.getDate() == null)
-                {
-                    // Cambia el color del borde a rojo para resaltarlo
-                    dateChooser.setBorder(BorderFactory.createLineBorder(Color.RED));
-                    foundEmpty = true;
-                } else
-                {
-                    // Restaura el borde por defecto
-                    dateChooser.setBorder(BorderFactory.createLineBorder(UIManager.getColor("TextField.border")));
-                }
-            }
-
-            // VALIDACIÓN PARA EL NÚMERO DE DNI y RTN
-            // Verificar el formato del RTN
-
-            //DNI
-            // Verificar el formato del DNI
-            if (!dni.matches("^[0-9]{4}-[0-9]{4}-[0-9]{5}$"))
-            {
-                JOptionPane.showMessageDialog(this, "Ingrese un formato de DNI correcto", "Error", JOptionPane.ERROR_MESSAGE);
-            } else
-            {
-                // Obtener los valores de departamento, municipio y año
-                String depto = dni.substring(0, 2);
-                String municipio = dni.substring(2, 4);
-                String anio = dni.substring(5, 9);
-                String correlativo = dni.substring(10);
-
-                // Convertir todos los valores a números
-                int deptoN = Integer.parseInt(depto);
-                int municipioN = Integer.parseInt(municipio);
-                int anioN = Integer.parseInt(anio);
-                int correlativoN = Integer.parseInt(correlativo);
-
-                // Validar los rangos para departamento y municipio
-                boolean departamentoValido = false;
-                boolean municipioValido = false;
-
-                if (deptoN == 7 && municipioN >= 1 && municipioN <= 5)
-                {
-                    departamentoValido = true;
-                    municipioValido = true;
-                } else if ((deptoN >= 1 && deptoN <= 6) || (deptoN >= 8 && deptoN <= 18))
-                {
-                    departamentoValido = true;
-                    if (deptoN == 1 && municipioN >= 1 && municipioN <= 8)
-                    {
-                        municipioValido = true;
-                    } else if (deptoN == 2 && municipioN >= 1 && municipioN <= 10)
-                    {
-                        municipioValido = true;
-                    } else if (deptoN == 3 && municipioN >= 1 && municipioN <= 21)
-                    {
-                        municipioValido = true;
-                    } else if (deptoN == 4 && municipioN >= 1 && municipioN <= 23)
-                    {
-                        municipioValido = true;
-                    } else if (deptoN == 5 && municipioN >= 1 && municipioN <= 12)
-                    {
-                        municipioValido = true;
-                    } else if (deptoN == 6 && municipioN >= 1 && municipioN <= 16)
-                    {
-                        municipioValido = true;
-                    } else if (deptoN == 8 && municipioN >= 1 && municipioN <= 28)
-                    {
-                        municipioValido = true;
-                    } else if (deptoN == 9 && municipioN >= 1 && municipioN <= 6)
-                    {
-                        municipioValido = true;
-                    } else if (deptoN == 10 && municipioN >= 1 && municipioN <= 17)
-                    {
-                        municipioValido = true;
-                    } else if (deptoN == 11 && municipioN >= 1 && municipioN <= 4)
-                    {
-                        municipioValido = true;
-                    } else if (deptoN == 12 && municipioN >= 1 && municipioN <= 19)
-                    {
-                        municipioValido = true;
-                    } else if (deptoN == 13 && municipioN >= 1 && municipioN <= 28)
-                    {
-                        municipioValido = true;
-                    } else if (deptoN == 14 && municipioN >= 1 && municipioN <= 16)
-                    {
-                        municipioValido = true;
-                    } else if (deptoN == 15 && municipioN >= 1 && municipioN <= 23)
-                    {
-                        municipioValido = true;
-                    } else if (deptoN == 16 && municipioN >= 1 && municipioN <= 28)
-                    {
-                        municipioValido = true;
-                    } else if (deptoN == 17 && municipioN >= 1 && municipioN <= 9)
-                    {
-                        municipioValido = true;
-                    } else if (deptoN == 18 && municipioN >= 1 && municipioN <= 11)
-                    {
-                        municipioValido = true;
-                    }
-                }
-
-                boolean anioValido = anioN >= 1960 && anioN <= 2005;
-                boolean correlativoValido = correlativoN >= 1 && correlativoN <= 99999;
-
-                if (!departamentoValido || !municipioValido || !anioValido || !correlativoValido)
-                {
-                    JOptionPane.showMessageDialog(this, "Ingrese un DNI válido", "Error", JOptionPane.ERROR_MESSAGE);
-                } else
-                {
-                    // El DNI es válido, enviar a la base de Datos
-                }
-            }
-
-            if (!salario.isEmpty())
-            {
-                try
-                {
-                    int sal = Integer.parseInt(salario);
-
-                    if (sal > 99999 || sal < 1000)
-                    {
-                        JOptionPane.showMessageDialog(this, "El salario debe ser mayor de 1000 y menor de 5 cifras", "Error", JOptionPane.ERROR_MESSAGE);
-                    }
-                } catch (NumberFormatException e)
-                {
-                    // Manejar el caso en el que 'salario' no es un número válido
-                }
-            }
-
-        } else
-        {
-            JOptionPane.showMessageDialog(this, "Registro Guardado", "Guardado", JOptionPane.OK_OPTION);
-
-//            Listado_Empleados abrir = new Listado_Empleados();
-//            abrir.setVisible(true);
-//            //this.dispose();
-        }
-
-    }//GEN-LAST:event_btn_crear4btn_crearMouseClicked
-
-    private void btn_crear4btn_crearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_crear4btn_crearActionPerformed
-
-        String nombre1 = txtNombre.getText();
-        String nombre2 = txtNombre6.getText();
-        String apellido1 = txtApellido.getText();
-        String apellido2 = txtApellido6.getText();
-
-        java.util.Date fecha_na = jdFechaNac.getDate();
-        String sexo = (String) cbx_sexo.getSelectedItem();
-        String barrio = txtDireccion.getText();
-        String municipioD = (String) cbxMuni.getSelectedItem();
-        String aldea = (String) cbxAldea.getSelectedItem();
-        String refe_direccion = txt_RefeDireccion.getText();
-        String celular = txtCelular.getText();
-        String fijo_cel = txt_FijoCel.getText();
-        String dni = txtDni.getText();
-       
-        String estado_civil = (String) cbx_estC.getSelectedItem();
-       
-        String salario = txtSalario.getText();
-
-        if (nombre1.isEmpty() || apellido1.isEmpty() || fecha_na.equals(null) || barrio.isEmpty()
-                || celular.isEmpty() || dni.isEmpty())
-        {
-            JOptionPane.showMessageDialog(this, "Llene todos los espacios necesarios", "Error", JOptionPane.ERROR_MESSAGE);
-
-            // Verifica los campos de texto y resalta el primero vacío
-            JTextField[] textFields =
-            {
-                txtNombre, txtApellido, txtDireccion, txtCelular, txtDni, txtSalario
-            };
-            boolean foundEmpty = false;
-
-            for (JTextField textField : textFields)
-            {
-                if (textField.getText().isEmpty())
-                {
-                    textField.setBackground(Color.RED); // Establece el color de resaltado en rojo
-                } else
-                {
-                    textField.setBackground(UIManager.getColor("TextField.background")); // Restaura el color por defecto
-                }
-            }
-
-            // Verifica los JDateChooser y resalta el primero vacío
-            JDateChooser[] dateChoosers =
-            {
-                jdFechaNac
-            };
-
-            for (JDateChooser dateChooser : dateChoosers)
-            {
-                if (dateChooser.getDate() == null)
-                {
-                    // Cambia el color del borde a rojo para resaltarlo
-                    dateChooser.setBorder(BorderFactory.createLineBorder(Color.RED));
-                    foundEmpty = true;
-                } else
-                {
-                    // Restaura el borde por defecto
-                    dateChooser.setBorder(BorderFactory.createLineBorder(UIManager.getColor("TextField.border")));
-                }
-            }
-            if (cbx_sexo.getSelectedIndex() == -1)
-            {
-                JOptionPane.showMessageDialog(this, "Selecione un genero", "Error", JOptionPane.ERROR_MESSAGE);
-            }
-
-            if (cbx_estC.getSelectedIndex() == -1)
-            {
-                JOptionPane.showMessageDialog(this, "Selecione un estado civil", "Error", JOptionPane.ERROR_MESSAGE);
-            }
-
-            // VALIDACIÓN PARA EL NÚMERO DE DNI y RTN
-            // Verificar el formato del RTN
-            
-
-            //RTN
-            // Verificar el formato del DNI
-            if (!dni.matches("^[0-9]{4}-[0-9]{4}-[0-9]{5}$"))
-            {
-                JOptionPane.showMessageDialog(this, "Ingrese un formato de DNI correcto", "Error", JOptionPane.ERROR_MESSAGE);
-            } else
-            {
-                // Obtener los valores de departamento, municipio y año
-                String depto = dni.substring(0, 2);
-                String municipio = dni.substring(2, 4);
-                String anio = dni.substring(5, 9);
-                String correlativo = dni.substring(10);
-
-                // Convertir todos los valores a números
-                int deptoN = Integer.parseInt(depto);
-                int municipioN = Integer.parseInt(municipio);
-                int anioN = Integer.parseInt(anio);
-                int correlativoN = Integer.parseInt(correlativo);
-
-                // Validar los rangos para departamento y municipio
-                boolean departamentoValido = false;
-                boolean municipioValido = false;
-
-                if (deptoN == 7 && municipioN >= 1 && municipioN <= 5)
-                {
-                    departamentoValido = true;
-                    municipioValido = true;
-                } else if ((deptoN >= 1 && deptoN <= 6) || (deptoN >= 8 && deptoN <= 18))
-                {
-                    departamentoValido = true;
-                    if (deptoN == 1 && municipioN >= 1 && municipioN <= 8)
-                    {
-                        municipioValido = true;
-                    } else if (deptoN == 2 && municipioN >= 1 && municipioN <= 10)
-                    {
-                        municipioValido = true;
-                    } else if (deptoN == 3 && municipioN >= 1 && municipioN <= 21)
-                    {
-                        municipioValido = true;
-                    } else if (deptoN == 4 && municipioN >= 1 && municipioN <= 23)
-                    {
-                        municipioValido = true;
-                    } else if (deptoN == 5 && municipioN >= 1 && municipioN <= 12)
-                    {
-                        municipioValido = true;
-                    } else if (deptoN == 6 && municipioN >= 1 && municipioN <= 16)
-                    {
-                        municipioValido = true;
-                    } else if (deptoN == 8 && municipioN >= 1 && municipioN <= 28)
-                    {
-                        municipioValido = true;
-                    } else if (deptoN == 9 && municipioN >= 1 && municipioN <= 6)
-                    {
-                        municipioValido = true;
-                    } else if (deptoN == 10 && municipioN >= 1 && municipioN <= 17)
-                    {
-                        municipioValido = true;
-                    } else if (deptoN == 11 && municipioN >= 1 && municipioN <= 4)
-                    {
-                        municipioValido = true;
-                    } else if (deptoN == 12 && municipioN >= 1 && municipioN <= 19)
-                    {
-                        municipioValido = true;
-                    } else if (deptoN == 13 && municipioN >= 1 && municipioN <= 28)
-                    {
-                        municipioValido = true;
-                    } else if (deptoN == 14 && municipioN >= 1 && municipioN <= 16)
-                    {
-                        municipioValido = true;
-                    } else if (deptoN == 15 && municipioN >= 1 && municipioN <= 23)
-                    {
-                        municipioValido = true;
-                    } else if (deptoN == 16 && municipioN >= 1 && municipioN <= 28)
-                    {
-                        municipioValido = true;
-                    } else if (deptoN == 17 && municipioN >= 1 && municipioN <= 9)
-                    {
-                        municipioValido = true;
-                    } else if (deptoN == 18 && municipioN >= 1 && municipioN <= 11)
-                    {
-                        municipioValido = true;
-                    }
-                }
-
-                boolean anioValido = anioN >= 1960 && anioN <= 2005;
-                boolean correlativoValido = correlativoN >= 1 && correlativoN <= 99999;
-
-                if (!departamentoValido || !municipioValido || !anioValido || !correlativoValido)
-                {
-                    JOptionPane.showMessageDialog(this, "Ingrese un DNI válido", "Error", JOptionPane.ERROR_MESSAGE);
-                } else
-                {
-                    // El DNI es válido, enviar a la base de Datos
-                }
-            }
-
-            if (!salario.isEmpty())
-            {
-                try
-                {
-                    int sal = Integer.parseInt(salario);
-
-                    if (sal > 99999 || sal < 1000)
-                    {
-                        JOptionPane.showMessageDialog(this, "El salario debe ser mayor de 1000 y menor de 5 cifras", "Error", JOptionPane.ERROR_MESSAGE);
-                    }
-                } catch (NumberFormatException e)
-                {
-                    // Manejar el caso en el que 'salario' no es un número válido
-                }
-            }
-        } else
-        {
-
-            try
-            {
-                Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-                Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
-
-                PreparedStatement ps = conn.prepareStatement("INSERT INTO Empleado (nombre1, nombre2, apellido1, apellido2, fecha_nacimiento, sexo,"
-                        + "dni, estado_civil, barrio, municipio, aldea, referenciaDomicilio, celular, fijo, salario) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
-                ps.setString(1, nombre1);
-                ps.setString(2, nombre2);
-                ps.setString(3, apellido1);
-                ps.setString(4, apellido2);
-                ps.setDate(5, new java.sql.Date(fecha_na.getTime()));
-                ps.setString(6, sexo);
-                ps.setString(7, dni);
-               
-                ps.setString(8, estado_civil);
-               
-                ps.setString(9, barrio);
-                ps.setString(10, municipioD);
-                ps.setString(11, aldea);
-                ps.setString(12, refe_direccion);
-                ps.setString(13, celular);
-                ps.setString(14, fijo_cel);
-                ps.setString(15, salario);
-
-                ps.execute();
-                JOptionPane.showMessageDialog(null, "Registro guardado");
-                 Listado_Empleados cli = new Listado_Empleados();
-
-                    cli.setSize(1024, 640);
-                    cli.setLocation(0, 0);
-
-                    jPanel3.revalidate();
-                    jPanel3.repaint();
-                    jPanel3.removeAll();
-                    jPanel3.add(cli, BorderLayout.CENTER);
-                    jPanel3.revalidate();
-                    jPanel3.repaint();
-
-            } catch (SQLException e)
-            {
-                JOptionPane.showMessageDialog(null, e.toString());
-            } catch (ClassNotFoundException ex)
-            {
-                Logger.getLogger(Crear_Empleado.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
-        }
-    }//GEN-LAST:event_btn_crear4btn_crearActionPerformed
 
     private void txtDnitxtDniKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDnitxtDniKeyReleased
 
@@ -1463,13 +1043,258 @@ public class Crear_Empleado extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNombreActionPerformed
 
+    private void txtDniFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDniFocusLost
+
+      String dni = txtDni.getText();        
+        
+        
+        if (!dni.matches("^[0-9]{4}-[0-9]{4}-[0-9]{5}$"))
+        {
+            JOptionPane.showMessageDialog(this, "Ingrese un formato de DNI correcto", "Error", JOptionPane.ERROR_MESSAGE);
+        } else
+        {
+            // Obtener los valores de departamento, municipio y año
+            String depto = dni.substring(0, 2);
+            String municipio = dni.substring(2, 4);
+            String anio = dni.substring(5, 9);
+            String correlativo = dni.substring(10);
+
+            // Convertir todos los valores a números
+            int deptoN = Integer.parseInt(depto);
+            int municipioN = Integer.parseInt(municipio);
+            int anioN = Integer.parseInt(anio);
+            int correlativoN = Integer.parseInt(correlativo);
+
+            // Validar los rangos para departamento y municipio
+            boolean departamentoValido = false;
+            boolean municipioValido = false;
+
+            if (deptoN == 7 && municipioN >= 1 && municipioN <= 5)
+            {
+                departamentoValido = true;
+                municipioValido = true;
+            } else if ((deptoN >= 1 && deptoN <= 6) || (deptoN >= 8 && deptoN <= 18))
+            {
+                departamentoValido = true;
+                if (deptoN == 1 && municipioN >= 1 && municipioN <= 8)
+                {
+                    municipioValido = true;
+                } else if (deptoN == 2 && municipioN >= 1 && municipioN <= 10)
+                {
+                    municipioValido = true;
+                } else if (deptoN == 3 && municipioN >= 1 && municipioN <= 21)
+                {
+                    municipioValido = true;
+                } else if (deptoN == 4 && municipioN >= 1 && municipioN <= 23)
+                {
+                    municipioValido = true;
+                } else if (deptoN == 5 && municipioN >= 1 && municipioN <= 12)
+                {
+                    municipioValido = true;
+                } else if (deptoN == 6 && municipioN >= 1 && municipioN <= 16)
+                {
+                    municipioValido = true;
+                } else if (deptoN == 8 && municipioN >= 1 && municipioN <= 28)
+                {
+                    municipioValido = true;
+                } else if (deptoN == 9 && municipioN >= 1 && municipioN <= 6)
+                {
+                    municipioValido = true;
+                } else if (deptoN == 10 && municipioN >= 1 && municipioN <= 17)
+                {
+                    municipioValido = true;
+                } else if (deptoN == 11 && municipioN >= 1 && municipioN <= 4)
+                {
+                    municipioValido = true;
+                } else if (deptoN == 12 && municipioN >= 1 && municipioN <= 19)
+                {
+                    municipioValido = true;
+                } else if (deptoN == 13 && municipioN >= 1 && municipioN <= 28)
+                {
+                    municipioValido = true;
+                } else if (deptoN == 14 && municipioN >= 1 && municipioN <= 16)
+                {
+                    municipioValido = true;
+                } else if (deptoN == 15 && municipioN >= 1 && municipioN <= 23)
+                {
+                    municipioValido = true;
+                } else if (deptoN == 16 && municipioN >= 1 && municipioN <= 28)
+                {
+                    municipioValido = true;
+                } else if (deptoN == 17 && municipioN >= 1 && municipioN <= 9)
+                {
+                    municipioValido = true;
+                } else if (deptoN == 18 && municipioN >= 1 && municipioN <= 11)
+                {
+                    municipioValido = true;
+                }
+            }
+
+            boolean anioValido = anioN >= 1960 && anioN <= 2005;
+            boolean correlativoValido = correlativoN >= 1 && correlativoN <= 99999;
+
+            if (!departamentoValido || !municipioValido || !anioValido || !correlativoValido)
+            {
+                JOptionPane.showMessageDialog(this, "Ingrese un DNI válido", "Error", JOptionPane.ERROR_MESSAGE);
+            } else
+            {
+                // El DNI es válido, enviar a la base de Datos
+            }
+        }
+    }//GEN-LAST:event_txtDniFocusLost
+
+    private void txtSalarioFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSalarioFocusLost
+          String salario = txtSalario.getText();
+        
+        if (!salario.isEmpty())
+        {
+            try
+            {
+                int sal = Integer.parseInt(salario);
+
+                if (sal > 99999 || sal < 1000)
+                {
+                    JOptionPane.showMessageDialog(this, "El salario debe ser mayor de 1000 y menor de 5 cifras", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            } catch (NumberFormatException e)
+            {
+                // Manejar el caso en el que 'salario' no es un número válido
+            }
+        }
+    }//GEN-LAST:event_txtSalarioFocusLost
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        String nombre1 = txtNombre.getText();
+        String nombre2 = txtNombre6.getText();
+        String apellido1 = txtApellido.getText();
+        String apellido2 = txtApellido6.getText();
+
+        Date fecha_na = jdFechaNac.getDate();
+        String sexo = (String) cbx_sexo.getSelectedItem();
+        String barrio = txtDireccion.getText();
+        String municipioD = (String) cbxMuni.getSelectedItem();
+        String aldea = (String) cbxAldea.getSelectedItem();
+        String refe_direccion = txt_RefeDireccion.getText();
+        String celular = txtCelular.getText();
+        String fijo_cel = txt_FijoCel.getText();
+        String dni = txtDni.getText();
+
+        String estado_civil = (String) cbx_estC.getSelectedItem();
+
+        String salario = txtSalario.getText();
+
+            StringBuilder camposVacios = new StringBuilder("Los siguientes campos están vacíos:");
+
+            if (nombre1.isEmpty())
+            {
+                camposVacios.append("\n - Primer Nombre");
+            }
+            if (apellido1.isEmpty())
+            {
+                camposVacios.append("\n - Primer apellido");
+            }
+            if (fecha_na == null)
+            {
+                camposVacios.append("\n - Fecha Nacimiento");
+            }
+
+            String categorias = cbx_sexo.getSelectedItem().toString(); // Obtiene el elemento seleccionado en el JComboBox
+
+            if (categorias.equals("Seleccione"))
+            {
+                camposVacios.append("\n - Sexo");
+            }
+            if (dni.isEmpty())
+            {
+                camposVacios.append("\n - DNI");
+            }
+             String estado = cbx_estC.getSelectedItem().toString(); // Obtiene el elemento seleccionado en el JComboBox
+
+            if (estado.equals("Seleccione"))
+            {
+                camposVacios.append("\n - Estado Civil");
+            }
+            if (barrio.isEmpty())
+            {
+                camposVacios.append("\n - Barrio");
+            }
+             String muni = cbxMuni.getSelectedItem().toString(); // Obtiene el elemento seleccionado en el JComboBox
+
+            if (muni.equals("Seleccione"))
+            {
+                camposVacios.append("\n - Municipio");
+            }
+             if (celular.isEmpty())
+            {
+                camposVacios.append("\n - Celular");
+            }
+              if (salario.isEmpty())
+            {
+                camposVacios.append("\n - Salario");
+            }
+            
+            if (!camposVacios.toString().equals("Los siguientes campos están vacíos:"))
+            {
+                JOptionPane.showMessageDialog(null, camposVacios.toString(), "Campos Vacíos", JOptionPane.ERROR_MESSAGE);
+            } else
+            {
+                try
+                {
+                    Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+                    Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
+
+                    PreparedStatement ps = conn.prepareStatement("INSERT INTO Empleado (nombre1, nombre2, apellido1, apellido2, fecha_nacimiento, sexo,"
+                            + "dni, estado_civil, barrio, municipio, aldea, referenciaDomicilio, celular, fijo, salario) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
+                    ps.setString(1, nombre1);
+                    ps.setString(2, nombre2);
+                    ps.setString(3, apellido1);
+                    ps.setString(4, apellido2);
+                    ps.setDate(5, new java.sql.Date(fecha_na.getTime()));
+                    ps.setString(6, sexo);
+                    ps.setString(7, dni);
+
+                    ps.setString(8, estado_civil);
+
+                    ps.setString(9, barrio);
+                    ps.setString(10, municipioD);
+                    ps.setString(11, aldea);
+                    ps.setString(12, refe_direccion);
+                    ps.setString(13, celular);
+                    ps.setString(14, fijo_cel);
+                    ps.setString(15, salario);
+
+                    ps.execute();
+                    JOptionPane.showMessageDialog(null, "Registro guardado");
+                    Listado_Empleados cli = new Listado_Empleados();
+
+                    cli.setSize(1024, 640);
+                    cli.setLocation(0, 0);
+
+                    jPanel3.revalidate();
+                    jPanel3.repaint();
+                    jPanel3.removeAll();
+                    jPanel3.add(cli, BorderLayout.CENTER);
+                    jPanel3.revalidate();
+                    jPanel3.repaint();
+
+                } catch (SQLException e)
+                {
+                    JOptionPane.showMessageDialog(null, e.toString());
+                } catch (ClassNotFoundException ex)
+                {
+                    Logger.getLogger(Crear_Empleado.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            
+            }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public static final javax.swing.JButton btn_crear4 = new javax.swing.JButton();
     private javax.swing.JComboBox<String> cbxAldea;
     private javax.swing.JComboBox<String> cbxMuni;
-    public javax.swing.JComboBox<String> cbx_estC;
+    public static javax.swing.JComboBox<String> cbx_estC;
     public static javax.swing.JComboBox<String> cbx_sexo;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

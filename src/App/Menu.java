@@ -14,11 +14,20 @@ import Paneles.productos;
 import Paneles.proveedor;
 import Paneles.ventas;
 import java.awt.BorderLayout;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 
 public class Menu extends javax.swing.JFrame {
 
     public Menu() {
         initComponents();
+
+        
+//        ImageIcon icon = new ImageIcon(getClass().getResource("/img/Hyper.png"));
+//        jLabel1 = new JLabel(icon);
+//        String filePath = "img/Hyper.png";
+//        ImageIcon icon = new ImageIcon(filePath);
+//        jLabel1.setIcon(icon);
     }
 
     /**
@@ -37,7 +46,7 @@ public class Menu extends javax.swing.JFrame {
         proveedor = new javax.swing.JButton();
         productos = new javax.swing.JButton();
         ventas = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        javax.swing.JLabel jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -203,9 +212,8 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_proveedorActionPerformed
 
     private void productosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_productosActionPerformed
-       // jTabbedPane1.setSelectedIndex(11);
-       
-        
+        // jTabbedPane1.setSelectedIndex(11);
+
         Listado_Productos p2 = new Listado_Productos();
         p2.setSize(1024, 640);
         p2.setLocation(0, 0);
@@ -214,10 +222,10 @@ public class Menu extends javax.swing.JFrame {
         panelprincipal.add(p2, BorderLayout.CENTER);
         panelprincipal.revalidate();
         panelprincipal.repaint();
-        
-        
+
+
     }//GEN-LAST:event_productosActionPerformed
- 
+
     /**
      * @param args the command line arguments
      */
@@ -262,7 +270,6 @@ public class Menu extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton clientes;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JButton nueva_venta;
