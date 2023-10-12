@@ -559,7 +559,6 @@ public class Crear_Empleado extends javax.swing.JPanel {
         } else
         {
             // El texto no cumple con la validación
-            JOptionPane.showMessageDialog(this, "El número de teléfono fijo debe iniciar con 2", "Error", JOptionPane.ERROR_MESSAGE);
             txt_FijoCel.setBackground(Color.red);
             txt_FijoCel.setText("");
         }
@@ -1071,23 +1070,7 @@ public class Crear_Empleado extends javax.swing.JPanel {
     }//GEN-LAST:event_txtDniFocusLost
 
     private void txtSalarioFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSalarioFocusLost
-        String salario = txtSalario.getText();
-
-        if (!salario.isEmpty())
-        {
-            try
-            {
-                int sal = Integer.parseInt(salario);
-
-                if (sal > 99999 || sal < 1000)
-                {
-                    JOptionPane.showMessageDialog(this, "El salario debe ser mayor de 1000 y menor de 5 cifras", "Error", JOptionPane.ERROR_MESSAGE);
-                }
-            } catch (NumberFormatException e)
-            {
-                // Manejar el caso en el que 'salario' no es un número válido
-            }
-        }
+     
     }//GEN-LAST:event_txtSalarioFocusLost
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -1114,7 +1097,7 @@ public class Crear_Empleado extends javax.swing.JPanel {
 
         if (nombre1.isEmpty())
         {
-            camposVacios.append("\n - Primer Nombre");
+            camposVacios.append("\n - Primer nombre");
         }
         if (apellido1.isEmpty())
         {
@@ -1122,7 +1105,7 @@ public class Crear_Empleado extends javax.swing.JPanel {
         }
         if (fecha_na == null)
         {
-            camposVacios.append("\n - Fecha Nacimiento");
+            camposVacios.append("\n - Fecha de nacimiento");
         }
 
         String categorias = cbx_sexo.getSelectedItem().toString(); // Obtiene el elemento seleccionado en el JComboBox
@@ -1139,7 +1122,7 @@ public class Crear_Empleado extends javax.swing.JPanel {
 
         if (estado.equals("Seleccione"))
         {
-            camposVacios.append("\n - Estado Civil");
+            camposVacios.append("\n - Estado civil");
         }
         if (barrio.isEmpty())
         {
@@ -1155,9 +1138,12 @@ public class Crear_Empleado extends javax.swing.JPanel {
         {
             camposVacios.append("\n - Celular");
         }
-        if (salario.isEmpty())
+        if (Integer.parseInt(salario) > 1000)
         {
-            camposVacios.append("\n - Salario");
+        //Ta bueno
+        }
+        else{
+            camposVacios.append("\n - El salario debe ser mayor a 1000\n\t y menor de 5 cifras");
         }
 
         if (!camposVacios.toString().equals("Los siguientes campos están vacíos:"))
@@ -1268,7 +1254,6 @@ public class Crear_Empleado extends javax.swing.JPanel {
         {
             // El texto no cumple con la validación
             evt.consume(); // Bloquea el carácter
-            JOptionPane.showMessageDialog(this, "El número de celular debe comenzar con 9, 8 o 3", "Error", JOptionPane.ERROR_MESSAGE);
             txtCelular.setBackground(Color.red);
             txtCelular.setText("");
         }
