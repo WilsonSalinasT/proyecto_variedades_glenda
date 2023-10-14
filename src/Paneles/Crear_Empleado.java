@@ -1070,7 +1070,7 @@ public class Crear_Empleado extends javax.swing.JPanel {
     }//GEN-LAST:event_txtDniFocusLost
 
     private void txtSalarioFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSalarioFocusLost
-     
+  
     }//GEN-LAST:event_txtSalarioFocusLost
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -1138,12 +1138,19 @@ public class Crear_Empleado extends javax.swing.JPanel {
         {
             camposVacios.append("\n - Celular");
         }
-        if (Integer.parseInt(salario) > 1000)
+       if (salario != null && !salario.isEmpty())
         {
-        //Ta bueno
-        }
-        else{
-            camposVacios.append("\n - El salario debe ser mayor a 1000\n\t y menor de 5 cifras");
+            int salarioNumerico = Integer.parseInt(salario);
+            if (salarioNumerico > 1000 && salario.length() < 5)
+            {
+                // El salario es válido
+            } else
+            {
+                camposVacios.append("\n - El salario debe ser mayor a 1000\n\t y menor de 5 cifras");
+            }
+        } else
+        {
+            camposVacios.append("\n - El salario está vacío");
         }
 
         if (!camposVacios.toString().equals("Los siguientes campos están vacíos:"))

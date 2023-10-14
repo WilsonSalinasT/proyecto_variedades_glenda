@@ -22,6 +22,7 @@ import javax.swing.JOptionPane;
 public class Editar_Empleado extends javax.swing.JPanel {
 
     TextPrompt holder;
+    int salario = 0;
 
     public Editar_Empleado() {
         initComponents();
@@ -216,7 +217,6 @@ public class Editar_Empleado extends javax.swing.JPanel {
         });
 
         jLabel1.setFont(new java.awt.Font("Arial Black", 2, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Dirección de Domicilio Exacta");
 
@@ -234,23 +234,19 @@ public class Editar_Empleado extends javax.swing.JPanel {
         jPanel4.setBackground(new java.awt.Color(255, 102, 102));
 
         jLabel10.setFont(new java.awt.Font("Segoe Print", 1, 14)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(0, 0, 0));
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel10.setText("9801-4550/3308-9197");
 
         jLabel11.setFont(new java.awt.Font("Segoe Print", 1, 14)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(0, 0, 0));
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel11.setText("Trojes, El Paraíso");
 
         jLabel59.setFont(new java.awt.Font("Arial Black", 3, 36)); // NOI18N
-        jLabel59.setForeground(new java.awt.Color(0, 0, 0));
         jLabel59.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel59.setText("Datos del Personal");
 
         jButton1.setBackground(new java.awt.Color(255, 153, 51));
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(0, 0, 0));
         jButton1.setText("VOLVER");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -260,7 +256,6 @@ public class Editar_Empleado extends javax.swing.JPanel {
 
         id_empleado.setEditable(false);
         id_empleado.setBackground(new java.awt.Color(255, 102, 102));
-        id_empleado.setForeground(new java.awt.Color(0, 0, 0));
         id_empleado.setBorder(null);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -308,7 +303,6 @@ public class Editar_Empleado extends javax.swing.JPanel {
 
         jButton2.setBackground(new java.awt.Color(255, 153, 51));
         jButton2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(0, 0, 0));
         jButton2.setText("Editar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -388,7 +382,7 @@ public class Editar_Empleado extends javax.swing.JPanel {
                         .addComponent(txtApellido2, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(10, 10, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jdFechaNac, javax.swing.GroupLayout.DEFAULT_SIZE, 62, Short.MAX_VALUE)
+                    .addComponent(jdFechaNac, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(cbxSexo)
                     .addComponent(txtDni))
                 .addGap(27, 27, 27)
@@ -424,7 +418,9 @@ public class Editar_Empleado extends javax.swing.JPanel {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 640, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 640, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -1019,7 +1015,7 @@ public class Editar_Empleado extends javax.swing.JPanel {
     }//GEN-LAST:event_txtDniFocusLost
 
     private void txtSalarioFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSalarioFocusLost
-
+    
     }//GEN-LAST:event_txtSalarioFocusLost
 
     private void cbxEstCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxEstCActionPerformed
@@ -1082,10 +1078,19 @@ public class Editar_Empleado extends javax.swing.JPanel {
         if (celular.isEmpty()) {
             camposVacios.append("\n - Celular");
         }
-        if (Integer.parseInt(salario) > 1000) {
-            //Ta bueno
-        } else {
-            camposVacios.append("\n - El salario debe ser mayor a 1000\n\t y menor de 5 cifras");
+       if (salario != null && !salario.isEmpty())
+        {
+            int salarioNumerico = Integer.parseInt(salario);
+            if (salarioNumerico > 1000 && salario.length() < 5)
+            {
+                // El salario es válido
+            } else
+            {
+                camposVacios.append("\n - El salario debe ser mayor a 1000\n\t y menor de 5 cifras");
+            }
+        } else
+        {
+            camposVacios.append("\n - El salario está vacío");
         }
 
         if (!camposVacios.toString().equals("Los siguientes campos están vacíos:")) {
