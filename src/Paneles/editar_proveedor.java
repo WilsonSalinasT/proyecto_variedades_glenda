@@ -16,12 +16,12 @@ import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 
 
-public class crear_proveedor extends javax.swing.JPanel {
+public class editar_proveedor extends javax.swing.JPanel {
 
     /**
      * Creates new form Nueva_venta
      */
-    public crear_proveedor() {
+    public editar_proveedor() {
         initComponents();
         TextPrompt holder = new TextPrompt("####-####", txttel);
         TextPrompt holdere = new TextPrompt("alguien@example.com", txtcorreo);
@@ -53,6 +53,7 @@ public class crear_proveedor extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jButton6 = new javax.swing.JButton();
+        txtid = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setForeground(new java.awt.Color(255, 255, 255));
@@ -269,14 +270,19 @@ public class crear_proveedor extends javax.swing.JPanel {
                             .addComponent(txt2ape, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(452, 452, 452)
-                        .addComponent(btnguardar)))
-                .addContainerGap(33, Short.MAX_VALUE))
+                        .addComponent(btnguardar))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(34, 34, 34)
+                        .addComponent(txtid, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(4, 4, 4)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -521,13 +527,14 @@ public class crear_proveedor extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField txt1ape;
-    private javax.swing.JTextField txt1nom;
-    private javax.swing.JTextField txt2ape;
-    private javax.swing.JTextField txt2nom;
-    private javax.swing.JTextField txtcompan;
-    private javax.swing.JTextField txtcorreo;
-    private javax.swing.JTextArea txtdire;
-    private javax.swing.JTextField txttel;
+    public javax.swing.JTextField txt1ape;
+    public javax.swing.JTextField txt1nom;
+    public javax.swing.JTextField txt2ape;
+    public javax.swing.JTextField txt2nom;
+    public javax.swing.JTextField txtcompan;
+    public javax.swing.JTextField txtcorreo;
+    public javax.swing.JTextArea txtdire;
+    public javax.swing.JTextField txtid;
+    public javax.swing.JTextField txttel;
     // End of variables declaration//GEN-END:variables
 }

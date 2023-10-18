@@ -22,7 +22,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author novastar
  */
-public class clientes extends javax.swing.JPanel {
+public class listado_proveedores extends javax.swing.JPanel {
 
     int filasPorPagina = 20; // Cantidad de filas que se mostrarán en cada página
     int paginaActual = 1; // Página actual
@@ -33,15 +33,15 @@ public class clientes extends javax.swing.JPanel {
     /**
      * Creates new form Nueva_venta
      */
-    public clientes() {
+    public listado_proveedores() {
         initComponents();
         cargarTabla();
         TextPrompt holder = new TextPrompt("Busque por nombre/apellido", txtbuscar);
 
         tableClientes.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 12));
         tableClientes.getTableHeader().setOpaque(false);
-        tableClientes.getTableHeader().setBackground(new Color(255,0,0));
-        tableClientes.getTableHeader().setForeground(new Color(255,0,0));
+        tableClientes.getTableHeader().setBackground(new Color(255, 0, 0));
+        tableClientes.getTableHeader().setForeground(new Color(255, 0, 0));
         tableClientes.setRowHeight(25);
 
         tableClientes.setRowSelectionAllowed(true);
@@ -80,7 +80,7 @@ public class clientes extends javax.swing.JPanel {
         jLabel2.setBackground(new java.awt.Color(0, 0, 0));
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel2.setText("Listado de clientes");
+        jLabel2.setText("Listado de proveedores");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -89,7 +89,7 @@ public class clientes extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addComponent(jLabel2)
-                .addContainerGap(799, Short.MAX_VALUE))
+                .addContainerGap(743, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -105,7 +105,7 @@ public class clientes extends javax.swing.JPanel {
 
             },
             new String [] {
-                "N°", "Nombre", "Apellido", "Género", "Correo electrónico"
+                "N°", "nombre", "apellido", "teléfono", "Nombre compañía"
             }
         ));
         tableClientes.setGridColor(new java.awt.Color(255, 51, 51));
@@ -256,7 +256,7 @@ public class clientes extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        crear_cliente p2 = new crear_cliente();
+        crear_proveedor p2 = new crear_proveedor();
         p2.setSize(1024, 640);
         p2.setLocation(0, 0);
 
@@ -299,10 +299,10 @@ public class clientes extends javax.swing.JPanel {
         // Cargar la tabla con los datos actualizados
         cargarTabla();
     }//GEN-LAST:event_jButton5ActionPerformed
-   int selectedRow2;
+    int selectedRow2;
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-      selectedRow2 = tableClientes.getSelectedRow();
+        selectedRow2 = tableClientes.getSelectedRow();
         if (selectedRow2 == -1)
         {
             JOptionPane.showMessageDialog(null, "Seleccione un cliente para poder editarlo");
@@ -314,51 +314,50 @@ public class clientes extends javax.swing.JPanel {
 
             int fila = tableClientes.getSelectedRow();
             String valorCelda = tableClientes.getValueAt(fila, 1).toString();
-            String valorCelda2 = tableClientes.getValueAt(fila, 2).toString();
-            String valorCelda3 = tableClientes.getValueAt(fila, 4).toString();
+//            String valorCelda2 = tableClientes.getValueAt(fila, 2).toString();
+//            String valorCelda3 = tableClientes.getValueAt(fila, 3).toString();
             PreparedStatement ps;
             ResultSet rs;
 
             Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
-            ps = conn.prepareStatement("SELECT * FROM Cliente WHERE nombre=? and apellido=? and correo_electronico=?");
+            ps = conn.prepareStatement("SELECT * FROM Proveedor WHERE primer_nombre=?");
             ps.setString(1, valorCelda);
-            ps.setString(2, valorCelda2);
-            ps.setString(3, valorCelda3);
+//            ps.setString(2, valorCelda2);
+//            ps.setString(3, valorCelda3);
             rs = ps.executeQuery();
 
             while (rs.next())
             {
 
-                String nombre = rs.getString("nombre");
-                String apellido = rs.getString("apellido");
+                String nombre1 = rs.getString("primer_nombre");
+                String nombre2 = rs.getString("segundo_nombre");
+
+                String apellido1 = rs.getString("primer_apellido");
+                String apellido2 = rs.getString("segundo_apellido");
+                String nombrecompania = rs.getString("nombre_compan");
+                String correo = rs.getString("correo");
                 
+                String telefono = rs.getString("telefono");
                 String direccion = rs.getString("direccion");
-                String telefono = rs.getString("numero_telefono");
-                String correo = rs.getString("correo_electronico");
-//                String fecha = rs.getString("fecha_registro");
-                 String id = rs.getString("id_cliente");
+                String id = rs.getString("id_proveedor");
 
-                editar_cliente editar = new editar_cliente();
-                
-                editar.txtnombre.setText(nombre);
-                editar.txtapellido.setText(apellido);
-                String sexo = rs.getString("genero");
-               
-                if (sexo.equals("Masculino"))
-                {
-                   editar.rbmasculino.setSelected(true);
-                } else if (sexo.equals("Femenino"))
-                {
-                    editar.rbfemenino.setSelected(true);
-                }
-                editar.jtadireccion.setText(direccion);
-                editar.txttelefono.setText(telefono);
+                editar_proveedor editar = new editar_proveedor();
+
+                editar.txt1nom.setText(nombre1);
+                editar.txt2nom.setText(nombre2);
+                editar.txt1ape.setText(apellido1);
+                editar.txt2ape.setText(apellido2);
+                editar.txtcompan.setText(nombrecompania);
                 editar.txtcorreo.setText(correo);
-               
-                 editar.Id_cl.setText(id);
-
-
+                editar.txttel.setText(telefono);
+                editar.txtdire.setText(direccion);
                 
+                
+
+              
+
+                editar.txtid.setText(id);
+
                 editar.setSize(1024, 640);
                 editar.setLocation(0, 0);
 
@@ -389,85 +388,85 @@ public class clientes extends javax.swing.JPanel {
 
     int selectedRow1;
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        selectedRow1 = tableClientes.getSelectedRow();
-        if (selectedRow1 == -1)
-        {
-            JOptionPane.showMessageDialog(null, "Seleccione un cliente para poder visualizarlo");
-            return;
-        }
-
-        try
-        {
-
-            int fila = tableClientes.getSelectedRow();
-            String valorCelda = tableClientes.getValueAt(fila, 1).toString();
-            String valorCelda2 = tableClientes.getValueAt(fila, 2).toString();
-            String valorCelda3 = tableClientes.getValueAt(fila, 4).toString();
-            PreparedStatement ps;
-            ResultSet rs;
-
-            Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
-            ps = conn.prepareStatement("SELECT * FROM Cliente WHERE nombre=? and apellido=? and correo_electronico=?");
-            ps.setString(1, valorCelda);
-            ps.setString(2, valorCelda2);
-            ps.setString(3, valorCelda3);
-            rs = ps.executeQuery();
-
-            while (rs.next())
-            {
-
-                String nombre = rs.getString("nombre");
-                String apellido = rs.getString("apellido");
-                
-                String direccion = rs.getString("direccion");
-                String telefono = rs.getString("numero_telefono");
-                String correo = rs.getString("correo_electronico");
-                String fecha = rs.getString("fecha_registro");
-
-                ver_cliente mostrar = new ver_cliente();
-                
-                mostrar.txtnombre.setText(nombre);
-                mostrar.txtapellido.setText(apellido);
-                String sexo = rs.getString("genero");
-               
-                if (sexo.equals("Masculino"))
-                {
-                   mostrar.rbmasculino.setSelected(true);
-                } else if (sexo.equals("Femenino"))
-                {
-                    mostrar.rbfemenino.setSelected(true);
-                }
-                mostrar.jtadireccion.setText(direccion);
-                mostrar.txttelefono.setText(telefono);
-                mostrar.txtcorreo.setText(correo);
-                mostrar.fecha_registro.setText(fecha);
-
-
-                
-                mostrar.setSize(1024, 640);
-                mostrar.setLocation(0, 0);
-
-                panelprincipal.revalidate();
-                panelprincipal.repaint();
-                panelprincipal.removeAll();
-                panelprincipal.add(mostrar, BorderLayout.CENTER);
-
-                panelprincipal.revalidate();
-                panelprincipal.repaint();
-
-                break; // Salir del bucle después de encontrar el elemento seleccionado
-
-            }
-
-            rs.close();
-            ps.close();
-            conn.close();
-
-        } catch (SQLException e)
-        {
-            e.printStackTrace();
-            // Manejar cualquier excepción que pueda ocurrir durante la consulta a la base de datos
-        }
+//        selectedRow1 = tableClientes.getSelectedRow();
+//        if (selectedRow1 == -1)
+//        {
+//            JOptionPane.showMessageDialog(null, "Seleccione un cliente para poder visualizarlo");
+//            return;
+//        }
+//
+//        try
+//        {
+//
+//            int fila = tableClientes.getSelectedRow();
+//            String valorCelda = tableClientes.getValueAt(fila, 1).toString();
+//            String valorCelda2 = tableClientes.getValueAt(fila, 2).toString();
+//            String valorCelda3 = tableClientes.getValueAt(fila, 4).toString();
+//            PreparedStatement ps;
+//            ResultSet rs;
+//
+//            Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
+//            ps = conn.prepareStatement("SELECT * FROM Cliente WHERE nombre=? and apellido=? and correo_electronico=?");
+//            ps.setString(1, valorCelda);
+//            ps.setString(2, valorCelda2);
+//            ps.setString(3, valorCelda3);
+//            rs = ps.executeQuery();
+//
+//            while (rs.next())
+//            {
+//
+//                String nombre = rs.getString("nombre");
+//                String apellido = rs.getString("apellido");
+//                
+//                String direccion = rs.getString("direccion");
+//                String telefono = rs.getString("numero_telefono");
+//                String correo = rs.getString("correo_electronico");
+//                String fecha = rs.getString("fecha_registro");
+//
+//                ver_cliente mostrar = new ver_cliente();
+//                
+//                mostrar.txtnombre.setText(nombre);
+//                mostrar.txtapellido.setText(apellido);
+//                String sexo = rs.getString("genero");
+//               
+//                if (sexo.equals("Masculino"))
+//                {
+//                   mostrar.rbmasculino.setSelected(true);
+//                } else if (sexo.equals("Femenino"))
+//                {
+//                    mostrar.rbfemenino.setSelected(true);
+//                }
+//                mostrar.jtadireccion.setText(direccion);
+//                mostrar.txttelefono.setText(telefono);
+//                mostrar.txtcorreo.setText(correo);
+//                mostrar.fecha_registro.setText(fecha);
+//
+//
+//                
+//                mostrar.setSize(1024, 640);
+//                mostrar.setLocation(0, 0);
+//
+//                panelprincipal.revalidate();
+//                panelprincipal.repaint();
+//                panelprincipal.removeAll();
+//                panelprincipal.add(mostrar, BorderLayout.CENTER);
+//
+//                panelprincipal.revalidate();
+//                panelprincipal.repaint();
+//
+//                break; // Salir del bucle después de encontrar el elemento seleccionado
+//
+//            }
+//
+//            rs.close();
+//            ps.close();
+//            conn.close();
+//
+//        } catch (SQLException e)
+//        {
+//            e.printStackTrace();
+//            // Manejar cualquier excepción que pueda ocurrir durante la consulta a la base de datos
+//        }
 
     }//GEN-LAST:event_jButton4ActionPerformed
 
@@ -501,7 +500,7 @@ public class clientes extends javax.swing.JPanel {
         {
             Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
 
-            ps = conn.prepareStatement("SELECT COUNT(*) AS TotalFilas FROM Cliente WHERE nombre LIKE ? OR apellido LIKE ?");
+            ps = conn.prepareStatement("SELECT COUNT(*) AS TotalFilas FROM Proveedor WHERE primer_nombre LIKE ? OR primer_apellido LIKE ?");
             ps.setString(1, "%" + terminoBusqueda + "%");
             ps.setString(2, "%" + terminoBusqueda + "%");
             rs = ps.executeQuery();
@@ -528,7 +527,7 @@ public class clientes extends javax.swing.JPanel {
                 offset = 0;
             }
 
-            ps = conn.prepareStatement("SELECT ROW_NUMBER() OVER(ORDER BY nombre) AS NumRegistro, nombre, apellido, genero, correo_electronico FROM Cliente WHERE nombre LIKE ? OR apellido LIKE ? ORDER BY nombre OFFSET ? ROWS FETCH NEXT ? ROWS ONLY");
+            ps = conn.prepareStatement("SELECT ROW_NUMBER() OVER(ORDER BY primer_nombre) AS NumRegistro, primer_nombre, primer_apellido, telefono, nombre_compan FROM Proveedor WHERE primer_nombre LIKE ? OR primer_apellido LIKE ? ORDER BY primer_nombre OFFSET ? ROWS FETCH NEXT ? ROWS ONLY");
             ps.setString(1, "%" + terminoBusqueda + "%");
             ps.setString(2, "%" + terminoBusqueda + "%");
             ps.setInt(3, offset);
@@ -570,7 +569,7 @@ public class clientes extends javax.swing.JPanel {
             Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
             if (conn != null && !conn.isClosed())
             {
-                PreparedStatement ps = conn.prepareStatement("SELECT ROW_NUMBER() OVER(ORDER BY nombre) AS NumRegistro, nombre, apellido, genero, correo_electronico FROM Cliente WHERE nombre LIKE ? OR apellido LIKE ?");
+                PreparedStatement ps = conn.prepareStatement("SELECT ROW_NUMBER() OVER(ORDER BY primer_nombre) AS NumRegistro, primer_nombre, primer_apellido, telefono, nombre_compan FROM Proveedor WHERE primer_nombre LIKE ? OR primer_apellido LIKE ?");
 
                 if (texto != null && !texto.isEmpty())
                 {
@@ -591,10 +590,10 @@ public class clientes extends javax.swing.JPanel {
                     while (rs.next())
                     {
                         int numRegistro = rs.getInt("NumRegistro");
-                        String nombre = rs.getString("nombre");
-                        String Dni = rs.getString("apellido");
-                        String departamento = rs.getString("genero");
-                        String deducciones = rs.getString("correo_electronico");
+                        String nombre = rs.getString("primer_nombre");
+                        String Dni = rs.getString("primer_apellido");
+                        String departamento = rs.getString("telefono");
+                        String deducciones = rs.getString("nombre_compan");
 
                         if (nombre != null && Dni != null && departamento != null)
                         {

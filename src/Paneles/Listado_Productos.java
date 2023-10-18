@@ -27,7 +27,7 @@ import java.awt.event.ActionListener;
  * @author Fernando Amador
  */
 public class Listado_Productos extends javax.swing.JPanel {
-
+  TextPrompt holder;
     int paginaActual = 1; // Página actual
     int filasPorPagina = 18; // Número de filas a mostrar por página
     int totalFilas = 0; // Total de filas en la tabla
@@ -45,6 +45,7 @@ public class Listado_Productos extends javax.swing.JPanel {
         tabla_productos.getTableHeader().setBackground(new Color(255, 0, 0));
         tabla_productos.getTableHeader().setForeground(new Color(255, 0, 0));
         tabla_productos.setRowHeight(25);
+        holder = new TextPrompt("Busque por nombre/categoría del empleado", txtbusqueda);
 
         tabla_productos.setRowSelectionAllowed(true);
         tabla_productos.setColumnSelectionAllowed(false);
@@ -89,7 +90,6 @@ public class Listado_Productos extends javax.swing.JPanel {
 
         jButton1.setBackground(new java.awt.Color(255, 153, 51));
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(0, 0, 0));
         jButton1.setText("Crear Producto");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -99,7 +99,6 @@ public class Listado_Productos extends javax.swing.JPanel {
 
         btnver.setBackground(new java.awt.Color(255, 153, 51));
         btnver.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnver.setForeground(new java.awt.Color(0, 0, 0));
         btnver.setText("Ver");
         btnver.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -115,7 +114,6 @@ public class Listado_Productos extends javax.swing.JPanel {
         jPanel1.setBackground(new java.awt.Color(255, 102, 102));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Listado de productos");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -166,7 +164,6 @@ public class Listado_Productos extends javax.swing.JPanel {
         }
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Buscar:");
 
         txtbusqueda.addActionListener(new java.awt.event.ActionListener() {
@@ -177,7 +174,6 @@ public class Listado_Productos extends javax.swing.JPanel {
 
         btn_buscar.setBackground(new java.awt.Color(255, 153, 51));
         btn_buscar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btn_buscar.setForeground(new java.awt.Color(0, 0, 0));
         btn_buscar.setText("Buscar");
         btn_buscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -189,7 +185,6 @@ public class Listado_Productos extends javax.swing.JPanel {
 
         btn_refrescar.setBackground(new java.awt.Color(255, 153, 51));
         btn_refrescar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btn_refrescar.setForeground(new java.awt.Color(0, 0, 0));
         btn_refrescar.setText("Refrescar");
         btn_refrescar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -198,7 +193,6 @@ public class Listado_Productos extends javax.swing.JPanel {
         });
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Categoria:");
 
         Texto_Contable.setText("0");
@@ -221,7 +215,6 @@ public class Listado_Productos extends javax.swing.JPanel {
 
         btneditar.setBackground(new java.awt.Color(255, 153, 51));
         btneditar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btneditar.setForeground(new java.awt.Color(0, 0, 0));
         btneditar.setText("Editar");
         btneditar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {

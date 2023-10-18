@@ -5,10 +5,12 @@
 package App;
 
 import Paneles.Listado_Empleados;
+
 import Paneles.Listado_Productos;
 
 import Paneles.clientes;
 import Paneles.crear_proveedor;
+import Paneles.listado_proveedores;
 
 import Paneles.ventas;
 import java.awt.BorderLayout;
@@ -165,14 +167,7 @@ public class Menu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void ventasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ventasActionPerformed
-        ventas p2 = new ventas();
-        p2.setSize(1024, 640);
-        p2.setLocation(0, 0);
-
-        panelprincipal.removeAll();
-        panelprincipal.add(p2, BorderLayout.CENTER);
-        panelprincipal.revalidate();
-        panelprincipal.repaint();
+        
     }//GEN-LAST:event_ventasActionPerformed
 
     private void nueva_ventaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nueva_ventaActionPerformed
@@ -198,7 +193,7 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_clientesActionPerformed
 
     private void proveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_proveedorActionPerformed
-        crear_proveedor p2 = new crear_proveedor();
+        listado_proveedores p2 = new listado_proveedores();
         p2.setSize(1024, 640);
         p2.setLocation(0, 0);
 
