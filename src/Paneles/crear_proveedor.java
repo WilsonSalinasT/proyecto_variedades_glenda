@@ -420,12 +420,39 @@ public class crear_proveedor extends javax.swing.JPanel {
         String telefono = txttel.getText().trim();
         String direccion = txtdire.getText().trim();
 
-        if(primerNombre.isEmpty() || segundoNombre.isEmpty() || primerApellido.isEmpty() || segundoApellido.isEmpty() ||
-            nombreComp.isEmpty() || correo.isEmpty() || telefono.isEmpty() || direccion.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Llene los espacios necesarios", "Error", JOptionPane.ERROR_MESSAGE);
+       StringBuilder camposVacios = new StringBuilder("Los siguientes campos están vacíos:");
+
+        if (primerNombre.isEmpty())
+        {
+            camposVacios.append("\n - Primer nombre");
+        }
+        if (primerApellido.isEmpty())
+        {
+            camposVacios.append("\n - Primer apellido");
+        }
+        if (nombreComp.isEmpty())
+        {
+            camposVacios.append("\n - Nombre de la compañía");
+        }
+        if (correo.isEmpty())
+        {
+            camposVacios.append("\n - Email");
+        }
+        if (telefono.isEmpty())
+        {
+            camposVacios.append("\n - Número de teléfono");
+        }
+        if (direccion.isEmpty())
+        {
+            camposVacios.append("\n - Dirección");
         }
 
-        else {
+        if (!camposVacios.toString().equals("Los siguientes campos están vacíos:"))
+        {
+            JOptionPane.showMessageDialog(null, camposVacios.toString(), "Campos Vacíos", JOptionPane.ERROR_MESSAGE);
+        } else {
+
+       
             try {
                 Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
                 Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
@@ -442,11 +469,23 @@ public class crear_proveedor extends javax.swing.JPanel {
 
                 ps.executeUpdate();
                 JOptionPane.showMessageDialog(null, "Registro guardado");
+                
+                listado_proveedores cli = new listado_proveedores();
+
+                cli.setSize(1024, 640);
+                cli.setLocation(0, 0);
+
+                panelprincipal.revalidate();
+                panelprincipal.repaint();
+                panelprincipal.removeAll();
+                panelprincipal.add(cli, BorderLayout.CENTER);
+                panelprincipal.revalidate();
+                panelprincipal.repaint();
 
             } catch (HeadlessException | ClassNotFoundException | SQLException e) {
                 JOptionPane.showMessageDialog(null, e.toString());
+            
             }
-
         }
     }//GEN-LAST:event_btnguardarActionPerformed
 

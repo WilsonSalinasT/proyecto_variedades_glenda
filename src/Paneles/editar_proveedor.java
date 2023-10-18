@@ -15,7 +15,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 
-
 public class editar_proveedor extends javax.swing.JPanel {
 
     /**
@@ -241,6 +240,11 @@ public class editar_proveedor extends javax.swing.JPanel {
                 .addContainerGap(22, Short.MAX_VALUE))
         );
 
+        txtid.setEditable(false);
+        txtid.setBackground(new java.awt.Color(255, 255, 255));
+        txtid.setForeground(new java.awt.Color(255, 255, 255));
+        txtid.setBorder(null);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -299,7 +303,7 @@ public class editar_proveedor extends javax.swing.JPanel {
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnguardar, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(77, Short.MAX_VALUE))
+                .addContainerGap(83, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -322,7 +326,7 @@ public class editar_proveedor extends javax.swing.JPanel {
         // TODO add your handling code here:
         char c = evt.getKeyChar();
         if ((c < 'a' || c > 'z') && (c < 'A' || c > 'Z') && ((int) evt.getKeyChar() <= 160) || txtcompan.getText().length() >= 50)
-        evt.consume();
+            evt.consume();
     }//GEN-LAST:event_txtcompanKeyTyped
 
     private void txt1nomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt1nomActionPerformed
@@ -333,7 +337,7 @@ public class editar_proveedor extends javax.swing.JPanel {
         // Validacion
         char c = evt.getKeyChar();
         if ((c < 'a' || c > 'z') && (c < 'A' || c > 'Z') && ((int) evt.getKeyChar() <= 160) || txt1nom.getText().length() >= 20)
-        evt.consume();
+            evt.consume();
     }//GEN-LAST:event_txt1nomKeyTyped
 
     private void txt1apeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt1apeActionPerformed
@@ -344,7 +348,7 @@ public class editar_proveedor extends javax.swing.JPanel {
         // VALIDAR
         char c = evt.getKeyChar();
         if ((c < 'a' || c > 'z') && (c < 'A' || c > 'Z') && ((int) evt.getKeyChar() <= 160) || txt1ape.getText().length() >= 20)
-        evt.consume();
+            evt.consume();
     }//GEN-LAST:event_txt1apeKeyTyped
 
     private void txtcorreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtcorreoActionPerformed
@@ -363,7 +367,7 @@ public class editar_proveedor extends javax.swing.JPanel {
         //VALIDAR
         char c = evt.getKeyChar();
         if ((c < 'a' || c > 'z') && (c < 'A' || c > 'Z') && ((int) evt.getKeyChar() <= 160) || txt2nom.getText().length() >= 20)
-        evt.consume();        // TODO add your handling code here:
+            evt.consume();        // TODO add your handling code here:
     }//GEN-LAST:event_txt2nomKeyTyped
 
     private void txt2apeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt2apeActionPerformed
@@ -374,7 +378,7 @@ public class editar_proveedor extends javax.swing.JPanel {
         // TODO add your handling code here:
         char c = evt.getKeyChar();
         if ((c < 'a' || c > 'z') && (c < 'A' || c > 'Z') && ((int) evt.getKeyChar() <= 160) || txt2ape.getText().length() >= 20)
-        evt.consume();
+            evt.consume();
     }//GEN-LAST:event_txt2apeKeyTyped
 
     private void txttelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txttelActionPerformed
@@ -425,39 +429,90 @@ public class editar_proveedor extends javax.swing.JPanel {
         String correo = txtcorreo.getText().trim();
         String telefono = txttel.getText().trim();
         String direccion = txtdire.getText().trim();
+       
 
-        if(primerNombre.isEmpty() || segundoNombre.isEmpty() || primerApellido.isEmpty() || segundoApellido.isEmpty() ||
-            nombreComp.isEmpty() || correo.isEmpty() || telefono.isEmpty() || direccion.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Llene los espacios necesarios", "Error", JOptionPane.ERROR_MESSAGE);
+        StringBuilder camposVacios = new StringBuilder("Los siguientes campos están vacíos:");
+
+        if (primerNombre.isEmpty())
+        {
+            camposVacios.append("\n - Primer nombre");
+        }
+        if (primerApellido.isEmpty())
+        {
+            camposVacios.append("\n - Primer apellido");
+        }
+        if (nombreComp.isEmpty())
+        {
+            camposVacios.append("\n - Nombre de la compañía");
+        }
+        if (correo.isEmpty())
+        {
+            camposVacios.append("\n - Email");
+        }
+        if (telefono.isEmpty())
+        {
+            camposVacios.append("\n - Número de teléfono");
+        }
+        if (direccion.isEmpty())
+        {
+            camposVacios.append("\n - Dirección");
         }
 
-        else {
-            try {
-                Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-                Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
+        if (!camposVacios.toString().equals("Los siguientes campos están vacíos:"))
+        {
+            JOptionPane.showMessageDialog(null, camposVacios.toString(), "Campos Vacíos", JOptionPane.ERROR_MESSAGE);
+        } else {
+            
+        try
+        {
+            // Load the SQL Server JDBC driver
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 
-                PreparedStatement ps = conn.prepareStatement("INSERT INTO  proveedor (primer_nombre, segundo_nombre, primer_apellido, segundo_apellido, nombre_compan, correo, telefono, direccion) VALUES (?,?,?,?,?,?,?,?)");
-                ps.setString(1, primerNombre);
-                ps.setString(2, segundoNombre);
-                ps.setString(3, primerApellido);
-                ps.setString(4, segundoApellido);
-                ps.setString(5, nombreComp);
-                ps.setString(6, correo);
-                ps.setString(7, telefono);
-                ps.setString(8, direccion);
+            // Establish a connection to the SQL Server database
+            Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
 
-                ps.executeUpdate();
-                JOptionPane.showMessageDialog(null, "Registro guardado");
+            // Create a prepared statement for updating data in the 'proveedor' table
+            PreparedStatement ps = conn.prepareStatement("UPDATE proveedor SET primer_nombre = ?, segundo_nombre = ?, primer_apellido = ?, segundo_apellido = ?, nombre_compan = ?, correo = ?, telefono = ?, direccion = ? WHERE id_proveedor=?");
 
-            } catch (HeadlessException | ClassNotFoundException | SQLException e) {
-                JOptionPane.showMessageDialog(null, e.toString());
+            int numeracion = Integer.parseInt(txtid.getText());
+            // Set the new values for the columns
+            ps.setString(1, primerNombre);
+            ps.setString(2, segundoNombre);
+            ps.setString(3, primerApellido);
+            ps.setString(4, segundoApellido);
+            ps.setString(5, nombreComp);
+            ps.setString(6, correo);
+            ps.setString(7, telefono);
+            ps.setString(8, direccion);
+             ps.setInt(9, numeracion);
+
+            
+            // Add a condition to specify which record(s) to update (modify 'your_condition_here')
+            // Execute the SQL UPDATE statement
+            int updatedRows = ps.executeUpdate();
+
+            if (updatedRows > 0)
+            {
+                // Rows were updated successfully
+                JOptionPane.showMessageDialog(null, "Registro actualizado");
+            } else
+            {
+                // No rows were updated
+                JOptionPane.showMessageDialog(null, "No se encontraron registros para actualizar");
             }
+
+        } catch (HeadlessException | ClassNotFoundException | SQLException e)
+        {
+            // Handle exceptions by displaying an error message
+            JOptionPane.showMessageDialog(null, e.toString());
+        }
+
 
         }
     }//GEN-LAST:event_btnguardarActionPerformed
 
     private void txtcorreoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtcorreoKeyTyped
-      char c = evt.getKeyChar(); // Obtener el carácter ingresado
+        char c = evt.getKeyChar(); // Obtener el carácter ingresado
 
         if (!Character.isLetterOrDigit(c) && c != '@' && c != '.' && c != '&' && c != '#' && c != '$' && c != '?' && c != '-')
         {
@@ -469,7 +524,7 @@ public class editar_proveedor extends javax.swing.JPanel {
     }//GEN-LAST:event_txtcorreoKeyTyped
 
     private void txtcorreoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtcorreoFocusLost
-            String correo = txtcorreo.getText().trim();
+        String correo = txtcorreo.getText().trim();
 
         if (isValidEmailAddress(correo))
         {
@@ -497,7 +552,7 @@ public class editar_proveedor extends javax.swing.JPanel {
     }//GEN-LAST:event_txtdireKeyTyped
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-      listado_proveedores l2 = new listado_proveedores();
+        listado_proveedores l2 = new listado_proveedores();
         l2.setSize(1024, 640);
         l2.setLocation(0, 0);
 
@@ -507,8 +562,7 @@ public class editar_proveedor extends javax.swing.JPanel {
         panelprincipal.repaint();
     }//GEN-LAST:event_jButton6ActionPerformed
 
-    
-     public boolean isValidEmailAddress(String email) {
+    public boolean isValidEmailAddress(String email) {
         // Define una expresión regular para validar direcciones de correo electrónico.
         // Esta es una implementación básica y puede necesitar ser ajustada.
         String regex = "^[A-Za-z0-9+_.-]+@(.+)$";

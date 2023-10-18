@@ -305,7 +305,7 @@ public class listado_proveedores extends javax.swing.JPanel {
         selectedRow2 = tableClientes.getSelectedRow();
         if (selectedRow2 == -1)
         {
-            JOptionPane.showMessageDialog(null, "Seleccione un cliente para poder editarlo");
+            JOptionPane.showMessageDialog(null, "Seleccione un proveedor para poder editarlo");
             return;
         }
 
@@ -314,16 +314,16 @@ public class listado_proveedores extends javax.swing.JPanel {
 
             int fila = tableClientes.getSelectedRow();
             String valorCelda = tableClientes.getValueAt(fila, 1).toString();
-//            String valorCelda2 = tableClientes.getValueAt(fila, 2).toString();
-//            String valorCelda3 = tableClientes.getValueAt(fila, 3).toString();
+            String valorCelda2 = tableClientes.getValueAt(fila, 2).toString();
+            String valorCelda3 = tableClientes.getValueAt(fila, 4).toString();
             PreparedStatement ps;
             ResultSet rs;
 
             Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
-            ps = conn.prepareStatement("SELECT * FROM Proveedor WHERE primer_nombre=?");
+            ps = conn.prepareStatement("SELECT * FROM Proveedor WHERE primer_nombre=? and primer_apellido=? and nombre_compan=?");
             ps.setString(1, valorCelda);
-//            ps.setString(2, valorCelda2);
-//            ps.setString(3, valorCelda3);
+            ps.setString(2, valorCelda2);
+            ps.setString(3, valorCelda3);
             rs = ps.executeQuery();
 
             while (rs.next())
@@ -351,10 +351,6 @@ public class listado_proveedores extends javax.swing.JPanel {
                 editar.txtcorreo.setText(correo);
                 editar.txttel.setText(telefono);
                 editar.txtdire.setText(direccion);
-                
-                
-
-              
 
                 editar.txtid.setText(id);
 
