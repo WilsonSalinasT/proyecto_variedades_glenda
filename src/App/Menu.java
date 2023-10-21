@@ -5,6 +5,7 @@
 package App;
 
 import Paneles.Crear_Cita;
+import Paneles.Listado_Citas;
 import Paneles.Listado_Empleados;
 
 import Paneles.Listado_Productos;
@@ -166,7 +167,7 @@ public class Menu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void citasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_citasActionPerformed
-        Crear_Cita p2 = new Crear_Cita();
+        Listado_Citas p2 = new Listado_Citas();
         p2.setSize(1024, 640);
         p2.setLocation(0, 0);
 
