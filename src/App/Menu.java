@@ -4,7 +4,6 @@
  */
 package App;
 
-import Paneles.Crear_Cita;
 import Paneles.Listado_Empleados;
 
 import Paneles.Listado_Productos;
@@ -16,11 +15,13 @@ import Paneles.listado_proveedores;
 import Paneles.ventas;
 import java.awt.BorderLayout;
 
+
 public class Menu extends javax.swing.JFrame {
 
     public Menu() {
         initComponents();
 
+        
 //        ImageIcon icon = new ImageIcon(getClass().getResource("/img/Hyper.png"));
 //        jLabel1 = new JLabel(icon);
 //        String filePath = "img/Hyper.png";
@@ -43,7 +44,7 @@ public class Menu extends javax.swing.JFrame {
         nueva_venta = new javax.swing.JButton();
         proveedor = new javax.swing.JButton();
         productos = new javax.swing.JButton();
-        citas = new javax.swing.JButton();
+        ventas = new javax.swing.JButton();
         javax.swing.JLabel jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -107,17 +108,17 @@ public class Menu extends javax.swing.JFrame {
         });
         jPanel2.add(productos, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 320, 250, 40));
 
-        citas.setBackground(new java.awt.Color(255, 153, 102));
-        citas.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        citas.setForeground(new java.awt.Color(204, 255, 255));
-        citas.setText("Cita");
-        citas.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        citas.addActionListener(new java.awt.event.ActionListener() {
+        ventas.setBackground(new java.awt.Color(255, 153, 102));
+        ventas.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        ventas.setForeground(new java.awt.Color(204, 255, 255));
+        ventas.setText("Ventas");
+        ventas.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        ventas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                citasActionPerformed(evt);
+                ventasActionPerformed(evt);
             }
         });
-        jPanel2.add(citas, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 380, 250, 40));
+        jPanel2.add(ventas, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 380, 250, 40));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Hyper.png"))); // NOI18N
         jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 250, 640));
@@ -165,16 +166,9 @@ public class Menu extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void citasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_citasActionPerformed
-        Crear_Cita p2 = new Crear_Cita();
-        p2.setSize(1024, 640);
-        p2.setLocation(0, 0);
-
-        panelprincipal.removeAll();
-        panelprincipal.add(p2, BorderLayout.CENTER);
-        panelprincipal.revalidate();
-        panelprincipal.repaint();
-    }//GEN-LAST:event_citasActionPerformed
+    private void ventasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ventasActionPerformed
+        
+    }//GEN-LAST:event_ventasActionPerformed
 
     private void nueva_ventaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nueva_ventaActionPerformed
         Listado_Empleados p2 = new Listado_Empleados();
@@ -233,20 +227,27 @@ public class Menu extends javax.swing.JFrame {
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+        try
+        {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels())
+            {
+                if ("Nimbus".equals(info.getName()))
+                {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
+        } catch (ClassNotFoundException ex)
+        {
             java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
+        } catch (InstantiationException ex)
+        {
             java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
+        } catch (IllegalAccessException ex)
+        {
             java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (javax.swing.UnsupportedLookAndFeelException ex)
+        {
             java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
@@ -260,7 +261,6 @@ public class Menu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton citas;
     private javax.swing.JButton clientes;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -268,5 +268,6 @@ public class Menu extends javax.swing.JFrame {
     public static final javax.swing.JPanel panelprincipal = new javax.swing.JPanel();
     private javax.swing.JButton productos;
     private javax.swing.JButton proveedor;
+    private javax.swing.JButton ventas;
     // End of variables declaration//GEN-END:variables
 }

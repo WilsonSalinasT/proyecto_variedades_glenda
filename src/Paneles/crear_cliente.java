@@ -58,6 +58,7 @@ public class crear_cliente extends javax.swing.JPanel {
     }
 
     private void actualizarFechaHora() {
+
         SimpleDateFormat sdfFecha = new SimpleDateFormat("dd/MM/yyyy");
         String fechaActual = sdfFecha.format(new Date());
         lbfecha.setText(fechaActual);
@@ -104,10 +105,12 @@ public class crear_cliente extends javax.swing.JPanel {
 
         jLabel2.setBackground(new java.awt.Color(0, 0, 0));
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Crear cliente");
 
         btnatras.setBackground(new java.awt.Color(255, 153, 51));
         btnatras.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnatras.setForeground(new java.awt.Color(0, 0, 0));
         btnatras.setText("VOLVER");
         btnatras.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -145,6 +148,7 @@ public class crear_cliente extends javax.swing.JPanel {
 
         btncrear.setBackground(new java.awt.Color(255, 153, 51));
         btncrear.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btncrear.setForeground(new java.awt.Color(0, 0, 0));
         btncrear.setText("Crear");
         btncrear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -153,7 +157,7 @@ public class crear_cliente extends javax.swing.JPanel {
         });
 
         txtnombre.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtnombre.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Nombre:", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12))); // NOI18N
+        txtnombre.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Nombre:", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12), new java.awt.Color(59, 59, 59))); // NOI18N
         txtnombre.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtnombreKeyTyped(evt);
@@ -161,7 +165,7 @@ public class crear_cliente extends javax.swing.JPanel {
         });
 
         txtapellido.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtapellido.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Apellido:", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12))); // NOI18N
+        txtapellido.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Apellido:", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12), new java.awt.Color(59, 59, 59))); // NOI18N
         txtapellido.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtapellidoKeyTyped(evt);
@@ -169,17 +173,19 @@ public class crear_cliente extends javax.swing.JPanel {
         });
 
         rbmasculino.setFont(new java.awt.Font("Arial Black", 1, 12)); // NOI18N
+        rbmasculino.setForeground(new java.awt.Color(0, 0, 0));
         rbmasculino.setSelected(true);
         rbmasculino.setText("Masculino");
 
         rbfemenino.setFont(new java.awt.Font("Arial Black", 1, 12)); // NOI18N
+        rbfemenino.setForeground(new java.awt.Color(0, 0, 0));
         rbfemenino.setText("Femenino");
 
         jtadireccion.setColumns(20);
         jtadireccion.setLineWrap(true);
         jtadireccion.setRows(5);
         jtadireccion.setWrapStyleWord(true);
-        jtadireccion.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Dirección:", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12))); // NOI18N
+        jtadireccion.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Dirección:", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12), new java.awt.Color(59, 59, 59))); // NOI18N
         jtadireccion.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jtadireccionKeyTyped(evt);
@@ -188,7 +194,7 @@ public class crear_cliente extends javax.swing.JPanel {
         jScrollPane1.setViewportView(jtadireccion);
 
         txttelefono.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txttelefono.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Número de celular:", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12))); // NOI18N
+        txttelefono.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Número de celular:", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12), new java.awt.Color(59, 59, 59))); // NOI18N
         txttelefono.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txttelefonoKeyReleased(evt);
@@ -199,7 +205,7 @@ public class crear_cliente extends javax.swing.JPanel {
         });
 
         txtcorreo.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtcorreo.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Correo electrónico:", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12))); // NOI18N
+        txtcorreo.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Correo electrónico:", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12), new java.awt.Color(59, 59, 59))); // NOI18N
         txtcorreo.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txtcorreoFocusLost(evt);
@@ -299,41 +305,50 @@ public class crear_cliente extends javax.swing.JPanel {
         String direccion = jtadireccion.getText().trim();
         String telefono = txttelefono.getText().trim();
         String correo = txtcorreo.getText().trim();
-        // Obtener la fecha en el formato requerido por SQL Server
-        SimpleDateFormat sdfSQL = new SimpleDateFormat("yyyy-MM-dd");
-        String fechaRegistro = sdfSQL.format(new Date());
+        String fechaRegistro = lbfecha.getText().trim();
 
         StringBuilder camposVacios = new StringBuilder("Los siguientes campos están vacíos:");
 
-        if (nombre.isEmpty()) {
+        if (nombre.isEmpty())
+        {
             camposVacios.append("\n - Nombre");
         }
-        if (apellido.isEmpty()) {
+        if (apellido.isEmpty())
+        {
             camposVacios.append("\n - Apellido");
         }
-        if (direccion.isEmpty()) {
+        if (direccion.isEmpty())
+        {
             camposVacios.append("\n - Dirección");
         }
-        if (telefono.isEmpty()) {
+        if (telefono.isEmpty())
+        {
             camposVacios.append("\n - Teléfono");
         }
-        if (correo.isEmpty()) {
+        if (correo.isEmpty())
+        {
             camposVacios.append("\n - Correo");
         }
 
-        if (!camposVacios.toString().equals("Los siguientes campos están vacíos:")) {
+        if (!camposVacios.toString().equals("Los siguientes campos están vacíos:"))
+        {
             JOptionPane.showMessageDialog(null, camposVacios.toString(), "Campos Vacíos", JOptionPane.ERROR_MESSAGE);
-        } else {
+        } else
+        {
             String sexo;
-            if (rbmasculino.isSelected()) {
+            if (rbmasculino.isSelected())
+            {
                 sexo = "Masculino";
-            } else if (rbfemenino.isSelected()) {
+            } else if (rbfemenino.isSelected())
+            {
                 sexo = "Femenino";
-            } else {
+            } else
+            {
                 sexo = "Masculino"; // Valor predeterminado si no se selecciona un sexo
             }
 
-            try {
+            try
+            {
                 // Resto del código para la inserción en la base de datos
                 Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
                 Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
@@ -362,9 +377,11 @@ public class crear_cliente extends javax.swing.JPanel {
                 panelprincipal.revalidate();
                 panelprincipal.repaint();
 
-            } catch (SQLException e) {
+            } catch (SQLException e)
+            {
                 JOptionPane.showMessageDialog(null, e.toString(), "Error de SQL", JOptionPane.ERROR_MESSAGE);
-            } catch (ClassNotFoundException ex) {
+            } catch (ClassNotFoundException ex)
+            {
                 JOptionPane.showMessageDialog(null, "Error de conexión a la base de datos", "Error de Conexión", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -377,10 +394,12 @@ public class crear_cliente extends javax.swing.JPanel {
     private void txtcorreoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtcorreoFocusLost
         String correo = txtcorreo.getText().trim();
 
-        if (isValidEmailAddress(correo)) {
+        if (isValidEmailAddress(correo))
+        {
             // La dirección de correo electrónico es válida.
             // Puedes realizar acciones adicionales aquí si es necesario.
-        } else {
+        } else
+        {
             // La dirección de correo electrónico no es válida.
             // Muestra un mensaje de error o realiza alguna acción de retroalimentación.
             JOptionPane.showMessageDialog(null, "Correo electrónico no válido", "Error", JOptionPane.ERROR_MESSAGE);
@@ -392,11 +411,14 @@ public class crear_cliente extends javax.swing.JPanel {
     private void txtnombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtnombreKeyTyped
         char c = evt.getKeyChar(); // Obtener el carácter ingresado
 
-        if (txtnombre.getText().isEmpty() && Character.isWhitespace(c)) {
+        if (txtnombre.getText().isEmpty() && Character.isWhitespace(c))
+        {
             evt.consume(); // Consumir el evento si es un espacio en blanco en la primera letra
-        } else if (!Character.isLetter(c) && !Character.isWhitespace(c)) {
+        } else if (!Character.isLetter(c) && !Character.isWhitespace(c))
+        {
             evt.consume(); // Consumir el evento si no es una letra o espacio en blanco
-        } else if (txtnombre.getText().length() >= 50) {
+        } else if (txtnombre.getText().length() >= 50)
+        {
             evt.consume(); // Consumir el evento si se ha alcanzado la longitud máxima
         }
     }//GEN-LAST:event_txtnombreKeyTyped
@@ -404,11 +426,14 @@ public class crear_cliente extends javax.swing.JPanel {
     private void txtapellidoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtapellidoKeyTyped
         char c = evt.getKeyChar(); // Obtener el carácter ingresado
 
-        if (txtapellido.getText().isEmpty() && Character.isWhitespace(c)) {
+        if (txtapellido.getText().isEmpty() && Character.isWhitespace(c))
+        {
             evt.consume(); // Consumir el evento si es un espacio en blanco en la primera letra
-        } else if (!Character.isLetter(c) && !Character.isWhitespace(c)) {
+        } else if (!Character.isLetter(c) && !Character.isWhitespace(c))
+        {
             evt.consume(); // Consumir el evento si no es una letra o espacio en blanco
-        } else if (txtapellido.getText().length() >= 50) {
+        } else if (txtapellido.getText().length() >= 50)
+        {
             evt.consume(); // Consumir el evento si se ha alcanzado la longitud máxima
         }
     }//GEN-LAST:event_txtapellidoKeyTyped
@@ -416,9 +441,11 @@ public class crear_cliente extends javax.swing.JPanel {
     private void jtadireccionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtadireccionKeyTyped
         char c = evt.getKeyChar(); // Obtener el carácter ingresado
 
-        if (jtadireccion.getText().isEmpty() && Character.isWhitespace(c)) {
+        if (jtadireccion.getText().isEmpty() && Character.isWhitespace(c))
+        {
             evt.consume(); // Consumir el evento si es un espacio en blanco en la primera letra
-        } else if (jtadireccion.getText().length() >= 300) {
+        } else if (jtadireccion.getText().length() >= 300)
+        {
             evt.consume(); // Consumir el evento si se ha alcanzado la longitud máxima
         }
     }//GEN-LAST:event_jtadireccionKeyTyped
@@ -428,23 +455,31 @@ public class crear_cliente extends javax.swing.JPanel {
         char c = evt.getKeyChar();
 
 // Verificar si el número de caracteres no excede el formato esperado
-        if (texto.length() < 9) {
-            if (texto.isEmpty()) {
+        if (texto.length() < 9)
+        {
+            if (texto.isEmpty())
+            {
                 // Permitir solo 9, 8 o 3 como primer carácter
-                if (c == '9' || c == '8' || c == '3') {
+                if (c == '9' || c == '8' || c == '3')
+                {
                     txttelefono.setText(String.valueOf(c));
-                } else {
+                } else
+                {
                     evt.consume(); // Ignorar cualquier otro carácter al principio
                 }
-            } else if (Character.isDigit(c)) {
+            } else if (Character.isDigit(c))
+            {
                 // Formato: XXXX-XXXX (4 dígitos seguidos de un guion y otros 4 dígitos)
-                if (texto.length() == 4) {
+                if (texto.length() == 4)
+                {
                     txttelefono.setText(texto + "-");
                 }
-            } else {
+            } else
+            {
                 evt.consume(); // Ignorar el carácter ingresado si no cumple con el formato esperado
             }
-        } else {
+        } else
+        {
             evt.consume(); // Ignorar el carácter ingresado si ya se alcanzó la longitud máxima
         }
     }//GEN-LAST:event_txttelefonoKeyTyped
@@ -452,9 +487,11 @@ public class crear_cliente extends javax.swing.JPanel {
     private void txtcorreoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtcorreoKeyTyped
         char c = evt.getKeyChar(); // Obtener el carácter ingresado
 
-        if (!Character.isLetterOrDigit(c) && c != '@' && c != '.' && c != '&' && c != '#' && c != '$' && c != '?' && c != '-') {
+        if (!Character.isLetterOrDigit(c) && c != '@' && c != '.' && c != '&' && c != '#' && c != '$' && c != '?' && c != '-')
+        {
             evt.consume(); // Consumir el evento si no es una letra, un número, '@' o '.'
-        } else if (txtcorreo.getText().length() >= 30) {
+        } else if (txtcorreo.getText().length() >= 30)
+        {
             evt.consume(); // Consumir el evento si se ha alcanzado la longitud máxima
         }
     }//GEN-LAST:event_txtcorreoKeyTyped
@@ -474,9 +511,11 @@ public class crear_cliente extends javax.swing.JPanel {
         String texto = txttelefono.getText().trim();
         char c = evt.getKeyChar();
 
-        if (texto.startsWith("9") || texto.startsWith("8") || texto.startsWith("3") || c == 9 && c == 8 & c == 3) {
+        if (texto.startsWith("9") || texto.startsWith("8") || texto.startsWith("3") || c == 9 && c == 8 & c == 3)
+        {
             txttelefono.setBackground(Color.green);
-        } else {
+        } else
+        {
             // El texto no cumple con la validación
             evt.consume(); // Bloquea el carácter
             JOptionPane.showMessageDialog(this, "El número de celular debe comenzar con 9, 8 o 3", "Error", JOptionPane.ERROR_MESSAGE);

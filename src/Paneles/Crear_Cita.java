@@ -12,7 +12,6 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.Calendar;
 import java.util.Date;
 import javax.swing.DefaultComboBoxModel;
@@ -32,7 +31,7 @@ public class Crear_Cita extends javax.swing.JPanel {
      */
     public Crear_Cita() {
         initComponents();
-        // holder = new TextPrompt("Busque al cliente por su nombre", txtCliente);
+        holder = new TextPrompt("Busque al cliente por su nombre", txtCliente);
 
         fechaCita.setMinSelectableDate(new Date());
 
@@ -57,40 +56,6 @@ public class Crear_Cita extends javax.swing.JPanel {
         }
 
         cbxHoras.setModel(model);
-
-        try {
-            Connection connection = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
-
-            Statement stmt = connection.createStatement();
-            String sql = "SELECT id_cliente, nombre, apellido FROM Cliente";
-            ResultSet rs = stmt.executeQuery(sql);
-
-            JComboBox<String> comboBox = txtCliente; // Reemplaza "txtCliente" con el nombre de tu JComboBox
-
-// Variable para controlar si se ha agregado el elemento "Seleccione" o no
-            boolean selectAdded = false;
-
-            while (rs.next()) {
-                String nombre = rs.getString("nombre");
-                String apellido = rs.getString("apellido");
-
-                int id_Cliente = rs.getInt("id_cliente");
-                id_cliente.setText(String.valueOf(id_Cliente));
-
-                if (!selectAdded) {
-                    comboBox.addItem("Seleccione");
-                    selectAdded = true; // Marcar que "Seleccione" ya se ha agregado
-                }
-
-                comboBox.addItem(nombre + " " + apellido);
-            }
-
-            connection.close();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
     }
 
     /**
@@ -105,6 +70,8 @@ public class Crear_Cita extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        txtCliente = new javax.swing.JTextField();
+        btnBuscar = new javax.swing.JButton();
         fechaCita = new com.toedter.calendar.JDateChooser();
         jScrollPane2 = new javax.swing.JScrollPane();
         txtMotivo = new javax.swing.JTextArea();
@@ -112,8 +79,6 @@ public class Crear_Cita extends javax.swing.JPanel {
         btnVolver = new javax.swing.JButton();
         id_cliente = new javax.swing.JTextField();
         cbxHoras = new javax.swing.JComboBox<>();
-        txtCliente = new javax.swing.JComboBox<>();
-        crea_cliente = new javax.swing.JLabel();
 
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
@@ -121,6 +86,22 @@ public class Crear_Cita extends javax.swing.JPanel {
 
         jLabel1.setFont(new java.awt.Font("Arial Black", 3, 36)); // NOI18N
         jLabel1.setText("Creación de Cita");
+
+        txtCliente.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Nombre del Cliente", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12))); // NOI18N
+        txtCliente.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtClienteKeyTyped(evt);
+            }
+        });
+
+        btnBuscar.setBackground(new java.awt.Color(255, 153, 51));
+        btnBuscar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
 
         fechaCita.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Fecha de Cita", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12))); // NOI18N
 
@@ -159,46 +140,35 @@ public class Crear_Cita extends javax.swing.JPanel {
 
         cbxHoras.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Hora de la cita", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12))); // NOI18N
 
-        txtCliente.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Nombre del cliente", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12))); // NOI18N
-
-        crea_cliente.setFont(new java.awt.Font("Arial Black", 3, 12)); // NOI18N
-        crea_cliente.setForeground(new java.awt.Color(255, 0, 0));
-        crea_cliente.setText("¿No encontró al cliente? ¿Desea Crear un nuevo cliente?");
-        crea_cliente.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                crea_clienteMouseClicked(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(167, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnCrear)
-                        .addGap(402, 402, 402))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(txtCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 516, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 516, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(103, 103, 103))
-                            .addComponent(crea_cliente)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(fechaCita, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(18, 18, 18)
-                                .addComponent(cbxHoras, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(180, 180, 180))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addComponent(id_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnVolver)
                 .addGap(34, 34, 34))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(210, 210, 210)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 516, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(fechaCita, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(39, 39, 39)
+                        .addComponent(cbxHoras, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 413, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(btnBuscar)))
+                .addGap(204, 204, 204))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnCrear)
+                .addGap(402, 402, 402))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -212,11 +182,11 @@ public class Crear_Cita extends javax.swing.JPanel {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(37, 37, 37)
                         .addComponent(jLabel1)))
-                .addGap(54, 54, 54)
-                .addComponent(txtCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(crea_cliente)
-                .addGap(23, 23, 23)
+                .addGap(48, 48, 48)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(43, 43, 43)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(fechaCita, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbxHoras, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -233,11 +203,13 @@ public class Crear_Cita extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 924, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 553, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 547, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -249,6 +221,46 @@ public class Crear_Cita extends javax.swing.JPanel {
 
     }//GEN-LAST:event_btnVolverActionPerformed
 
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        String nombreBusqueda = txtCliente.getText();
+
+        String query = "SELECT id_cliente, nombre, apellido FROM Cliente WHERE nombre = ?";
+        try (Connection connection = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789"); PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setString(1, nombreBusqueda);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                int id_Cliente = resultSet.getInt("id_cliente");
+                String nombre = resultSet.getString("nombre");
+                String apellido = resultSet.getString("apellido");
+
+                String nombreCompleto = nombre + " " + apellido;
+
+                // Asignar los valores obtenidos a los campos correspondientes
+                id_cliente.setText(String.valueOf(id_Cliente));
+                txtCliente.setText(nombreCompleto);
+                txtCliente.setEditable(false);
+
+            } else {
+                // Manejar el caso en el que no se encuentre un empleado con el nombre ingresado
+                // Puedes mostrar un mensaje de error o realizar alguna acción adicional
+                JOptionPane.showMessageDialog(this, "No se encontró un cliente con ese nombre", "Error de búsqueda", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (SQLException e) {
+            // Manejar las excepciones de la conexión o consulta a la base de datos
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void txtClienteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtClienteKeyTyped
+        char c = evt.getKeyChar();
+
+// Verificar si el carácter es una letra (mayúscula o minúscula)
+        if (!(Character.isLetter(c) || (c == ' ' && txtCliente.getText().length() > 0 && txtCliente.getCaretPosition() > 0))) {
+            evt.consume(); // Consumir el evento (ignorar la entrada del usuario)
+        }
+
+    }//GEN-LAST:event_txtClienteKeyTyped
+
     private void txtMotivoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMotivoKeyTyped
         char c = evt.getKeyChar();
         if (Character.isWhitespace(c) && txtMotivo.getText().isEmpty() || (c < 'a' || c > 'z') && (c < 'A' || c > 'Z') && ((int) evt.getKeyChar() <= 500 && evt.getKeyChar() >= 164) && c != KeyEvent.VK_SPACE || txtMotivo.getText().length() >= 250)
@@ -256,7 +268,7 @@ public class Crear_Cita extends javax.swing.JPanel {
     }//GEN-LAST:event_txtMotivoKeyTyped
 
     private void btnCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActionPerformed
-        String nombre = (String) txtCliente.getSelectedItem();
+        String nombre = txtCliente.getText().trim();
         String motivo = txtMotivo.getText().trim();
         Date fecha = fechaCita.getDate();
         String idC = id_cliente.getText();
@@ -265,7 +277,7 @@ public class Crear_Cita extends javax.swing.JPanel {
 
         StringBuilder camposVacios = new StringBuilder("Los siguientes campos están vacíos:");
 
-        if (nombre.equals("Seleccione")) {
+        if (nombre.isEmpty()) {
             camposVacios.append("\n - Nombre");
         }
         if (fecha == null) {
@@ -273,7 +285,8 @@ public class Crear_Cita extends javax.swing.JPanel {
         }
         String categorias = cbxHoras.getSelectedItem().toString(); // Obtiene el elemento seleccionado en el JComboBox
 
-        if (categorias.equals("Seleccione")) {
+        if (categorias.equals("Seleccione"))
+        {
             camposVacios.append("\n - Hora");
         }
         if (motivo.isEmpty()) {
@@ -284,7 +297,7 @@ public class Crear_Cita extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, camposVacios.toString(), "Campos Vacíos", JOptionPane.ERROR_MESSAGE);
         } else {
 
-            try {
+             try {
                 // Resto del código para la inserción en la base de datos
                 Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
                 Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
@@ -294,14 +307,12 @@ public class Crear_Cita extends javax.swing.JPanel {
                 insertPs.setString(2, hora);
                 insertPs.setObject(3, motivo);
                 insertPs.setObject(4, idC);
+                
 
                 insertPs.executeUpdate();
                 JOptionPane.showMessageDialog(null, "Registro guardado");
 
-                /*
-                TIENE QUE LLEVAR AL LISTADO DE CITAS
-                
-                clientes cli = new clientes();
+                /*clientes cli = new clientes();
 
                 cli.setSize(1024, 640);
                 cli.setLocation(0, 0);
@@ -312,6 +323,7 @@ public class Crear_Cita extends javax.swing.JPanel {
                 panelprincipal.add(cli, BorderLayout.CENTER);
                 panelprincipal.revalidate();
                 panelprincipal.repaint();*/
+
             } catch (SQLException e) {
                 JOptionPane.showMessageDialog(null, e.toString(), "Error de SQL", JOptionPane.ERROR_MESSAGE);
             } catch (ClassNotFoundException ex) {
@@ -320,31 +332,19 @@ public class Crear_Cita extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnCrearActionPerformed
 
-    private void crea_clienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_crea_clienteMouseClicked
-
-        crear_cliente p2 = new crear_cliente();
-        p2.setSize(1024, 640);
-        p2.setLocation(0, 0);
-
-        panelprincipal.removeAll();
-        panelprincipal.add(p2, BorderLayout.CENTER);
-        panelprincipal.revalidate();
-        panelprincipal.repaint();
-    }//GEN-LAST:event_crea_clienteMouseClicked
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnCrear;
     private javax.swing.JButton btnVolver;
     private javax.swing.JComboBox<String> cbxHoras;
-    private javax.swing.JLabel crea_cliente;
     private com.toedter.calendar.JDateChooser fechaCita;
     public javax.swing.JTextField id_cliente;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JComboBox<String> txtCliente;
+    private javax.swing.JTextField txtCliente;
     private javax.swing.JTextArea txtMotivo;
     // End of variables declaration//GEN-END:variables
 }

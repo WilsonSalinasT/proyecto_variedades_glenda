@@ -153,6 +153,9 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="24" style="1"/>
                 </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="0" green="0" red="0" type="rgb"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Crear cliente"/>
               </Properties>
             </Component>
@@ -163,6 +166,9 @@
                 </Property>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="18" style="1"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="0" green="0" red="0" type="rgb"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="VOLVER"/>
               </Properties>
@@ -191,6 +197,9 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="18" style="1"/>
             </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="0" green="0" red="0" type="rgb"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Crear"/>
           </Properties>
           <Events>
@@ -204,6 +213,7 @@
               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                 <TitledBorder justification="2" position="2" title="Nombre:">
                   <Font PropertyName="font" name="Arial Black" size="12" style="2"/>
+                  <Color PropertyName="color" blue="3b" green="3b" red="3b" type="rgb"/>
                 </TitledBorder>
               </Border>
             </Property>
@@ -219,6 +229,7 @@
               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                 <TitledBorder justification="2" position="2" title="Apellido:">
                   <Font PropertyName="font" name="Arial Black" size="12" style="2"/>
+                  <Color PropertyName="color" blue="3b" green="3b" red="3b" type="rgb"/>
                 </TitledBorder>
               </Border>
             </Property>
@@ -232,6 +243,9 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Arial Black" size="12" style="1"/>
             </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="0" green="0" red="0" type="rgb"/>
+            </Property>
             <Property name="selected" type="boolean" value="true"/>
             <Property name="text" type="java.lang.String" value="Masculino"/>
           </Properties>
@@ -240,6 +254,9 @@
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Arial Black" size="12" style="1"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="0" green="0" red="0" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Femenino"/>
           </Properties>
@@ -261,6 +278,7 @@
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                     <TitledBorder justification="2" position="2" title="Direcci&#xf3;n:">
                       <Font PropertyName="font" name="Arial Black" size="12" style="2"/>
+                      <Color PropertyName="color" blue="3b" green="3b" red="3b" type="rgb"/>
                     </TitledBorder>
                   </Border>
                 </Property>
@@ -278,6 +296,7 @@
               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                 <TitledBorder justification="2" position="2" title="N&#xfa;mero de celular:">
                   <Font PropertyName="font" name="Arial Black" size="12" style="2"/>
+                  <Color PropertyName="color" blue="3b" green="3b" red="3b" type="rgb"/>
                 </TitledBorder>
               </Border>
             </Property>
@@ -294,6 +313,7 @@
               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                 <TitledBorder justification="2" position="2" title="Correo electr&#xf3;nico:">
                   <Font PropertyName="font" name="Arial Black" size="12" style="2"/>
+                  <Color PropertyName="color" blue="3b" green="3b" red="3b" type="rgb"/>
                 </TitledBorder>
               </Border>
             </Property>
