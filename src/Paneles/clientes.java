@@ -36,7 +36,7 @@ public class clientes extends javax.swing.JPanel {
     public clientes() {
         initComponents();
         cargarTabla();
-        TextPrompt holder = new TextPrompt("Busque por nombre/apellido", txtbuscar);
+        TextPrompt holder = new TextPrompt("Busque por nombre/apellido/género", txtbuscar);
 
         tableClientes.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 12));
         tableClientes.getTableHeader().setOpaque(false);
@@ -202,10 +202,10 @@ public class clientes extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(114, 114, 114)
+                        .addGap(51, 51, 51)
                         .addComponent(jLabel3)
                         .addGap(18, 18, 18)
-                        .addComponent(txtbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 357, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(29, 29, 29)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(30, 30, 30)
@@ -501,9 +501,10 @@ public class clientes extends javax.swing.JPanel {
         {
             Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
 
-            ps = conn.prepareStatement("SELECT COUNT(*) AS TotalFilas FROM Cliente WHERE nombre LIKE ? OR apellido LIKE ?");
+            ps = conn.prepareStatement("SELECT COUNT(*) AS TotalFilas FROM Cliente WHERE nombre LIKE ? OR apellido LIKE ? OR genero LIKE ?");
             ps.setString(1, "%" + terminoBusqueda + "%");
             ps.setString(2, "%" + terminoBusqueda + "%");
+            ps.setString(3, "%" + terminoBusqueda + "%");
             rs = ps.executeQuery();
 
             int cantidadFilas = 0;
@@ -528,11 +529,12 @@ public class clientes extends javax.swing.JPanel {
                 offset = 0;
             }
 
-            ps = conn.prepareStatement("SELECT ROW_NUMBER() OVER(ORDER BY nombre) AS NumRegistro, nombre, apellido, genero, correo_electronico FROM Cliente WHERE nombre LIKE ? OR apellido LIKE ? ORDER BY nombre OFFSET ? ROWS FETCH NEXT ? ROWS ONLY");
+            ps = conn.prepareStatement("SELECT ROW_NUMBER() OVER(ORDER BY nombre) AS NumRegistro, nombre, apellido, genero, correo_electronico FROM Cliente WHERE nombre LIKE ? OR apellido LIKE ? OR genero LIKE ?  ORDER BY nombre OFFSET ? ROWS FETCH NEXT ? ROWS ONLY");
             ps.setString(1, "%" + terminoBusqueda + "%");
             ps.setString(2, "%" + terminoBusqueda + "%");
-            ps.setInt(3, offset);
-            ps.setInt(4, filasPorPagina);
+            ps.setString(3, "%" + terminoBusqueda + "%");
+            ps.setInt(4, offset);
+            ps.setInt(5, filasPorPagina);
             rs = ps.executeQuery();
             rsmd = rs.getMetaData();
             columnas = rsmd.getColumnCount();
@@ -570,17 +572,19 @@ public class clientes extends javax.swing.JPanel {
             Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
             if (conn != null && !conn.isClosed())
             {
-                PreparedStatement ps = conn.prepareStatement("SELECT ROW_NUMBER() OVER(ORDER BY nombre) AS NumRegistro, nombre, apellido, genero, correo_electronico FROM Cliente WHERE nombre LIKE ? OR apellido LIKE ?");
+                PreparedStatement ps = conn.prepareStatement("SELECT ROW_NUMBER() OVER(ORDER BY nombre) AS NumRegistro, nombre, apellido, genero, correo_electronico FROM Cliente WHERE nombre LIKE ? OR apellido LIKE ? OR genero LIKE ?");
 
                 if (texto != null && !texto.isEmpty())
                 {
                     ps.setString(1, "%" + texto + "%");
                     ps.setString(2, "%" + texto + "%");
+                    ps.setString(3, "%" + texto + "%");
                     terminoBusqueda = texto; // Actualizar el término de búsqueda
                 } else
                 {
                     ps.setString(1, "%");
                     ps.setString(2, "%");
+                    ps.setString(3, "%");
                     terminoBusqueda = ""; // Limpiar el término de búsqueda
                 }
 
