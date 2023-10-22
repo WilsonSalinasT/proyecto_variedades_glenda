@@ -36,7 +36,7 @@ public class listado_proveedores extends javax.swing.JPanel {
     public listado_proveedores() {
         initComponents();
         cargarTabla();
-        TextPrompt holder = new TextPrompt("Busque por nombre/apellido", txtbuscar);
+        TextPrompt holder = new TextPrompt("Busque por empresa/vendedor/número de la empresa", txtbuscar);
 
         tableClientes.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 12));
         tableClientes.getTableHeader().setOpaque(false);
@@ -105,7 +105,7 @@ public class listado_proveedores extends javax.swing.JPanel {
 
             },
             new String [] {
-                "N°", "nombre", "apellido", "teléfono", "Nombre compañía"
+                "N°", "Empresa", "Vendedor", "Número de la empresa", "dirección"
             }
         ));
         tableClientes.setGridColor(new java.awt.Color(255, 51, 51));
@@ -202,13 +202,13 @@ public class listado_proveedores extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(114, 114, 114)
+                        .addGap(43, 43, 43)
                         .addComponent(jLabel3)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(29, 29, 29)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(28, 28, 28)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 30, 30)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton5))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(23, 23, 23)
@@ -496,9 +496,10 @@ public class listado_proveedores extends javax.swing.JPanel {
         {
             Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
 
-            ps = conn.prepareStatement("SELECT COUNT(*) AS TotalFilas FROM Proveedor WHERE primer_nombre LIKE ? OR primer_apellido LIKE ?");
+            ps = conn.prepareStatement("SELECT COUNT(*) AS TotalFilas FROM Proveedor WHERE nombreEmpresa LIKE ? OR nombreProveedor LIKE ? OR telefonoempresa LIKE ? ");
             ps.setString(1, "%" + terminoBusqueda + "%");
             ps.setString(2, "%" + terminoBusqueda + "%");
+            ps.setString(3, "%" + terminoBusqueda + "%");
             rs = ps.executeQuery();
 
             int cantidadFilas = 0;
@@ -523,11 +524,12 @@ public class listado_proveedores extends javax.swing.JPanel {
                 offset = 0;
             }
 
-            ps = conn.prepareStatement("SELECT ROW_NUMBER() OVER(ORDER BY primer_nombre) AS NumRegistro, primer_nombre, primer_apellido, telefono, nombre_compan FROM Proveedor WHERE primer_nombre LIKE ? OR primer_apellido LIKE ? ORDER BY primer_nombre OFFSET ? ROWS FETCH NEXT ? ROWS ONLY");
+            ps = conn.prepareStatement("SELECT ROW_NUMBER() OVER(ORDER BY nombreEmpresa) AS NumRegistro, nombreEmpresa, nombreProveedor, telefonoempresa, direccion FROM Proveedor WHERE nombreEmpresa LIKE ? OR nombreProveedor LIKE ? OR telefonoempresa LIKE ? ORDER BY nombreEmpresa OFFSET ? ROWS FETCH NEXT ? ROWS ONLY");
             ps.setString(1, "%" + terminoBusqueda + "%");
             ps.setString(2, "%" + terminoBusqueda + "%");
-            ps.setInt(3, offset);
-            ps.setInt(4, filasPorPagina);
+             ps.setString(3, "%" + terminoBusqueda + "%");
+            ps.setInt(4, offset);
+            ps.setInt(5, filasPorPagina);
             rs = ps.executeQuery();
             rsmd = rs.getMetaData();
             columnas = rsmd.getColumnCount();
@@ -565,17 +567,19 @@ public class listado_proveedores extends javax.swing.JPanel {
             Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
             if (conn != null && !conn.isClosed())
             {
-                PreparedStatement ps = conn.prepareStatement("SELECT ROW_NUMBER() OVER(ORDER BY primer_nombre) AS NumRegistro, primer_nombre, primer_apellido, telefono, nombre_compan FROM Proveedor WHERE primer_nombre LIKE ? OR primer_apellido LIKE ?");
+                PreparedStatement ps = conn.prepareStatement("SELECT ROW_NUMBER() OVER(ORDER BY nombreEmpresa) AS NumRegistro, nombreEmpresa, nombreProveedor, telefonoempresa, direccion FROM Proveedor WHERE nombreEmpresa LIKE ? OR nombreProveedor LIKE ? OR telefonoempresa LIKE ?");
 
                 if (texto != null && !texto.isEmpty())
                 {
                     ps.setString(1, "%" + texto + "%");
                     ps.setString(2, "%" + texto + "%");
+                    ps.setString(3, "%" + texto + "%");
                     terminoBusqueda = texto; // Actualizar el término de búsqueda
                 } else
                 {
                     ps.setString(1, "%");
                     ps.setString(2, "%");
+                    ps.setString(3, "%");
                     terminoBusqueda = ""; // Limpiar el término de búsqueda
                 }
 
@@ -586,10 +590,10 @@ public class listado_proveedores extends javax.swing.JPanel {
                     while (rs.next())
                     {
                         int numRegistro = rs.getInt("NumRegistro");
-                        String nombre = rs.getString("primer_nombre");
-                        String Dni = rs.getString("primer_apellido");
-                        String departamento = rs.getString("telefono");
-                        String deducciones = rs.getString("nombre_compan");
+                        String nombre = rs.getString("nombreEmpresa");
+                        String Dni = rs.getString("nombreProveedor");
+                        String departamento = rs.getString("telefonoempresa");
+                        String deducciones = rs.getString("direccion");
 
                         if (nombre != null && Dni != null && departamento != null)
                         {
