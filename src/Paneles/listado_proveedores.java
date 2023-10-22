@@ -320,7 +320,7 @@ public class listado_proveedores extends javax.swing.JPanel {
             ResultSet rs;
 
             Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
-            ps = conn.prepareStatement("SELECT * FROM Proveedor WHERE primer_nombre=? and primer_apellido=? and nombre_compan=?");
+            ps = conn.prepareStatement("SELECT * FROM Proveedor WHERE nombreEmpresa=? and nombreProveedor=? and direccion=?");
             ps.setString(1, valorCelda);
             ps.setString(2, valorCelda2);
             ps.setString(3, valorCelda3);
@@ -329,27 +329,24 @@ public class listado_proveedores extends javax.swing.JPanel {
             while (rs.next())
             {
 
-                String nombre1 = rs.getString("primer_nombre");
-                String nombre2 = rs.getString("segundo_nombre");
+                String nombreempresa = rs.getString("nombreEmpresa");
+                String nombrevendedor = rs.getString("nombreProveedor");
 
-                String apellido1 = rs.getString("primer_apellido");
-                String apellido2 = rs.getString("segundo_apellido");
-                String nombrecompania = rs.getString("nombre_compan");
-                String correo = rs.getString("correo");
-                
-                String telefono = rs.getString("telefono");
+                String email = rs.getString("correo");
+                String tempresa = rs.getString("telefonoempresa");
+                String tvendedor = rs.getString("telefonoproveedor");
                 String direccion = rs.getString("direccion");
+                
+              
                 String id = rs.getString("id_proveedor");
 
                 editar_proveedor editar = new editar_proveedor();
 
-                editar.txt1nom.setText(nombre1);
-                editar.txt2nom.setText(nombre2);
-                editar.txt1ape.setText(apellido1);
-                editar.txt2ape.setText(apellido2);
-                editar.txtcompan.setText(nombrecompania);
-                editar.txtcorreo.setText(correo);
-                editar.txttel.setText(telefono);
+                editar.txtempresa.setText(nombreempresa);
+                editar.txtnombrevendedor.setText(nombrevendedor);
+                editar.txtcorreo.setText(email);
+                editar.txtnumeroempresa.setText(tempresa);
+                editar.txtnumerovendedor.setText(tvendedor);
                 editar.txtdire.setText(direccion);
 
                 editar.txtid.setText(id);
