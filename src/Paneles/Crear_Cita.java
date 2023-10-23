@@ -6,6 +6,8 @@ package Paneles;
 
 import static App.Menu.panelprincipal;
 import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -58,31 +60,24 @@ public class Crear_Cita extends javax.swing.JPanel {
 
         cbxHoras.setModel(model);
 
-        try {
+         try {
             Connection connection = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
 
             Statement stmt = connection.createStatement();
             String sql = "SELECT id_cliente, nombre, apellido FROM Cliente";
             ResultSet rs = stmt.executeQuery(sql);
 
-            JComboBox<String> comboBox = txtCliente; // Reemplaza "txtCliente" con el nombre de tu JComboBox
-
-// Variable para controlar si se ha agregado el elemento "Seleccione" o no
-            boolean selectAdded = false;
+            txtCliente.addItem("Seleccione"); // Agrega el elemento "Seleccione" al principio
 
             while (rs.next()) {
                 String nombre = rs.getString("nombre");
                 String apellido = rs.getString("apellido");
+                int idCliente = rs.getInt("id_cliente");
 
-                int id_Cliente = rs.getInt("id_cliente");
-                id_cliente.setText(String.valueOf(id_Cliente));
+                txtCliente.addItem(nombre + " " + apellido);
 
-                if (!selectAdded) {
-                    comboBox.addItem("Seleccione");
-                    selectAdded = true; // Marcar que "Seleccione" ya se ha agregado
-                }
-
-                comboBox.addItem(nombre + " " + apellido);
+                // Almacena el ID del cliente en un mapa con el nombre completo como clave
+                txtCliente.putClientProperty(nombre + " " + apellido, idCliente);
             }
 
             connection.close();
@@ -90,6 +85,17 @@ public class Crear_Cita extends javax.swing.JPanel {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        txtCliente.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String selectedClient = (String) txtCliente.getSelectedItem();
+                int selectedClientId = (int) txtCliente.getClientProperty(selectedClient);
+
+                // Actualiza el campo de texto con el ID del cliente seleccionado
+                id_cliente.setText(Integer.toString(selectedClientId));
+            }
+        });
 
     }
 
@@ -102,25 +108,21 @@ public class Crear_Cita extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
         fechaCita = new com.toedter.calendar.JDateChooser();
         jScrollPane2 = new javax.swing.JScrollPane();
         txtMotivo = new javax.swing.JTextArea();
         btnCrear = new javax.swing.JButton();
-        btnVolver = new javax.swing.JButton();
         id_cliente = new javax.swing.JTextField();
         cbxHoras = new javax.swing.JComboBox<>();
         txtCliente = new javax.swing.JComboBox<>();
         crea_cliente = new javax.swing.JLabel();
-
-        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jPanel2 = new javax.swing.JPanel();
+        btnvolver = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-
-        jLabel1.setFont(new java.awt.Font("Arial Black", 3, 36)); // NOI18N
-        jLabel1.setText("Creación de Cita");
 
         fechaCita.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Fecha de Cita", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12))); // NOI18N
 
@@ -138,6 +140,7 @@ public class Crear_Cita extends javax.swing.JPanel {
 
         btnCrear.setBackground(new java.awt.Color(255, 153, 51));
         btnCrear.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnCrear.setForeground(new java.awt.Color(0, 0, 0));
         btnCrear.setText("CREAR");
         btnCrear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -145,17 +148,8 @@ public class Crear_Cita extends javax.swing.JPanel {
             }
         });
 
-        btnVolver.setBackground(new java.awt.Color(255, 153, 51));
-        btnVolver.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btnVolver.setText("VOLVER");
-        btnVolver.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnVolverActionPerformed(evt);
-            }
-        });
-
-        id_cliente.setEditable(false);
-        id_cliente.setVisible(false);
+        id_cliente.setBackground(new java.awt.Color(255, 51, 255));
+        id_cliente.setForeground(new java.awt.Color(0, 0, 0));
 
         cbxHoras.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Hora de la cita", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12))); // NOI18N
 
@@ -163,6 +157,7 @@ public class Crear_Cita extends javax.swing.JPanel {
 
         crea_cliente.setFont(new java.awt.Font("Arial Black", 3, 12)); // NOI18N
         crea_cliente.setForeground(new java.awt.Color(255, 0, 0));
+        crea_cliente.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         crea_cliente.setText("¿No encontró al cliente? ¿Desea Crear un nuevo cliente?");
         crea_cliente.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -170,84 +165,119 @@ public class Crear_Cita extends javax.swing.JPanel {
             }
         });
 
+        jPanel2.setBackground(new java.awt.Color(255, 102, 102));
+        jPanel2.setBorder(new javax.swing.border.MatteBorder(null));
+
+        btnvolver.setBackground(new java.awt.Color(255, 153, 51));
+        btnvolver.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnvolver.setForeground(new java.awt.Color(0, 0, 0));
+        btnvolver.setText("VOLVER");
+        btnvolver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnvolverActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setFont(new java.awt.Font("Arial Black", 3, 36)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel1.setText("Creación de Cita");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(174, 174, 174)
+                .addComponent(btnvolver, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(25, 25, 25))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnvolver)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(29, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(16, 16, 16))
+        );
+
+        jButton2.setBackground(new java.awt.Color(255, 153, 51));
+        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(0, 0, 0));
+        jButton2.setText("Crear cliente");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(167, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnCrear)
-                        .addGap(402, 402, 402))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(txtCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 516, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 516, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(47, 47, 47)
+                        .addComponent(id_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(145, 145, 145)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(103, 103, 103))
-                            .addComponent(crea_cliente)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(fechaCita, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(fechaCita, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(cbxHoras, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(180, 180, 180))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addComponent(id_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnVolver)
-                .addGap(34, 34, 34))
+                                .addComponent(cbxHoras, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(crea_cliente, javax.swing.GroupLayout.DEFAULT_SIZE, 516, Short.MAX_VALUE)
+                                    .addComponent(txtCliente, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 95, Short.MAX_VALUE)
+                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 516, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(416, 416, 416)
+                        .addComponent(btnCrear, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(17, 17, 17))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnVolver)
-                            .addComponent(id_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(37, 37, 37)
-                        .addComponent(jLabel1)))
-                .addGap(54, 54, 54)
-                .addComponent(txtCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(id_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(crea_cliente)
-                .addGap(23, 23, 23)
+                .addGap(31, 31, 31)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(fechaCita, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbxHoras, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(49, 49, 49)
+                .addGap(45, 45, 45)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 91, Short.MAX_VALUE)
+                .addGap(46, 46, 46)
                 .addComponent(btnCrear)
-                .addGap(30, 30, 30))
+                .addContainerGap(111, Short.MAX_VALUE))
         );
-
-        jScrollPane1.setViewportView(jPanel1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 553, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
-        Listado_Empleados p2 = new Listado_Empleados();
-        p2.setSize(1024, 640);
-        p2.setLocation(0, 0);
-
-
-    }//GEN-LAST:event_btnVolverActionPerformed
 
     private void txtMotivoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMotivoKeyTyped
         char c = evt.getKeyChar();
@@ -332,17 +362,40 @@ public class Crear_Cita extends javax.swing.JPanel {
         panelprincipal.repaint();
     }//GEN-LAST:event_crea_clienteMouseClicked
 
+    private void btnvolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnvolverActionPerformed
+        Listado_Citas l2 = new Listado_Citas();
+        l2.setSize(1024, 640);
+        l2.setLocation(0, 0);
+
+        panelprincipal.removeAll();
+        panelprincipal.add(l2, BorderLayout.CENTER);
+        panelprincipal.revalidate();
+        panelprincipal.repaint();
+    }//GEN-LAST:event_btnvolverActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        crear_cliente p2 = new crear_cliente();
+        p2.setSize(1024, 640);
+        p2.setLocation(0, 0);
+
+        panelprincipal.removeAll();
+        panelprincipal.add(p2, BorderLayout.CENTER);
+        panelprincipal.revalidate();
+        panelprincipal.repaint();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCrear;
-    private javax.swing.JButton btnVolver;
+    private javax.swing.JButton btnvolver;
     private javax.swing.JComboBox<String> cbxHoras;
     private javax.swing.JLabel crea_cliente;
     private com.toedter.calendar.JDateChooser fechaCita;
     public javax.swing.JTextField id_cliente;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JComboBox<String> txtCliente;
     private javax.swing.JTextArea txtMotivo;
