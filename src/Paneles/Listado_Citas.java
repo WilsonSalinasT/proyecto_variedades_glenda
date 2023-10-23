@@ -16,11 +16,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.sql.Time;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
+import com.toedter.calendar.JDateChooser;
 
 /**
  *
@@ -340,15 +344,99 @@ public class Listado_Citas extends javax.swing.JPanel {
     }//GEN-LAST:event_btnSiguienteActionPerformed
 
     private void crearbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearbtnActionPerformed
-        // TODO add your handling code here:
+
+        Crear_Cita p2 = new Crear_Cita();
+        p2.setSize(1024, 640);
+        p2.setLocation(0, 0);
+
+        panelprincipal.removeAll();
+        panelprincipal.add(p2, BorderLayout.CENTER);
+        panelprincipal.revalidate();
+        panelprincipal.repaint();
     }//GEN-LAST:event_crearbtnActionPerformed
 
     private void verbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verbtnActionPerformed
         //
     }//GEN-LAST:event_verbtnActionPerformed
 
+    int selectedRow2;
     private void editarbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarbtnActionPerformed
-        //
+
+            // TODO add your handling code here:
+      selectedRow2 = tblCitas.getSelectedRow();
+        if (selectedRow2 == -1)
+        {
+            JOptionPane.showMessageDialog(null, "Seleccione un cliente para poder editarlo");
+            return;
+        }
+
+        try
+        {
+
+            int fila = tblCitas.getSelectedRow();
+            String valorCelda = tblCitas.getValueAt(fila, 1).toString();
+            String valorCelda2 = tblCitas.getValueAt(fila, 2).toString();
+            String valorCelda3 = tblCitas.getValueAt(fila, 4).toString();
+            PreparedStatement ps;
+            ResultSet rs;
+
+            Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
+            ps = conn.prepareStatement("SELECT * FROM cliente JOIN Cita ON cliente.id_cliente = Cita.id_cliente where nombre =? and apellido=? and fecha_cita=? ");
+            ps.setString(1, valorCelda);
+            ps.setString(2, valorCelda2);
+            ps.setString(3, valorCelda3);
+            rs = ps.executeQuery();
+
+            while (rs.next())
+            {
+
+//                String nombre = rs.getString("nombre");
+//                String apellido = rs.getString("apellido");
+//                
+//                String direccion = rs.getString("direccion");
+//                String telefono = rs.getString("numero_telefono");
+//                String correo = rs.getString("correo_electronico");
+////                String fecha = rs.getString("fecha_registro");
+//                 String id = rs.getString("id_cliente");
+
+               String nombre = rs.getString("nombre");
+               String apellido = rs.getString("apellido");
+                EditarCita editar = new EditarCita();
+                
+//                editar.txtci.setText(nombre);
+                
+                editar.fechaCita.setDate(rs.getDate("fecha_cita"));
+                editar.cbxHoras.setSelectedItem(rs.getString("hora_cita"));
+                 editar.txtMotivo.setText(rs.getString("motivo"));
+                 editar.txtCliente.setSelectedItem(nombre+ " "+ apellido);
+                 editar.id_cliente.setText(rs.getString("id"));
+
+                
+                editar.setSize(1024, 640);
+                editar.setLocation(0, 0);
+
+                panelprincipal.revalidate();
+                panelprincipal.repaint();
+                panelprincipal.removeAll();
+                panelprincipal.add(editar, BorderLayout.CENTER);
+
+                panelprincipal.revalidate();
+                panelprincipal.repaint();
+
+                break; // Salir del bucle después de encontrar el elemento seleccionado
+
+            }
+
+            rs.close();
+            ps.close();
+            conn.close();
+
+        } catch (SQLException e)
+        {
+            e.printStackTrace();
+            // Manejar cualquier excepción que pueda ocurrir durante la consulta a la base de datos
+        }
+
     }//GEN-LAST:event_editarbtnActionPerformed
 
     int paginaActual = 1; // Página actual
@@ -537,4 +625,8 @@ public class Listado_Citas extends javax.swing.JPanel {
     public javax.swing.JTextField txtBuscar;
     private javax.swing.JButton verbtn;
     // End of variables declaration//GEN-END:variables
+
+    private void mostrarVentanaDeEdicion(EditarCita editarCita) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }
