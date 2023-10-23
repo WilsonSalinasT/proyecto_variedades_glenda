@@ -62,11 +62,11 @@ public class listado_proveedores extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         tableProveedor = new javax.swing.JTable();
         txtbuscar = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        btnbuscar = new javax.swing.JButton();
+        btncrear = new javax.swing.JButton();
+        btneditar = new javax.swing.JButton();
+        btnver = new javax.swing.JButton();
+        btnrefrescar = new javax.swing.JButton();
         btnAnterior = new javax.swing.JButton();
         btnSiguiente = new javax.swing.JButton();
         Contable_Registro = new javax.swing.JLabel();
@@ -122,53 +122,53 @@ public class listado_proveedores extends javax.swing.JPanel {
             tableProveedor.getColumnModel().getColumn(4).setResizable(false);
         }
 
-        jButton1.setBackground(new java.awt.Color(255, 153, 51));
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(0, 0, 0));
-        jButton1.setText("Buscar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnbuscar.setBackground(new java.awt.Color(255, 153, 51));
+        btnbuscar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnbuscar.setForeground(new java.awt.Color(0, 0, 0));
+        btnbuscar.setText("Buscar");
+        btnbuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnbuscarActionPerformed(evt);
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(255, 153, 51));
-        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(0, 0, 0));
-        jButton2.setText("Crear");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btncrear.setBackground(new java.awt.Color(255, 153, 51));
+        btncrear.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btncrear.setForeground(new java.awt.Color(0, 0, 0));
+        btncrear.setText("Crear");
+        btncrear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btncrearActionPerformed(evt);
             }
         });
 
-        jButton3.setBackground(new java.awt.Color(255, 153, 51));
-        jButton3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(0, 0, 0));
-        jButton3.setText("Editar");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btneditar.setBackground(new java.awt.Color(255, 153, 51));
+        btneditar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btneditar.setForeground(new java.awt.Color(0, 0, 0));
+        btneditar.setText("Editar");
+        btneditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btneditarActionPerformed(evt);
             }
         });
 
-        jButton4.setBackground(new java.awt.Color(255, 153, 51));
-        jButton4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton4.setForeground(new java.awt.Color(0, 0, 0));
-        jButton4.setText("ver");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        btnver.setBackground(new java.awt.Color(255, 153, 51));
+        btnver.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnver.setForeground(new java.awt.Color(0, 0, 0));
+        btnver.setText("ver");
+        btnver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                btnverActionPerformed(evt);
             }
         });
 
-        jButton5.setBackground(new java.awt.Color(255, 153, 51));
-        jButton5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton5.setForeground(new java.awt.Color(0, 0, 0));
-        jButton5.setText("Refrescar");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        btnrefrescar.setBackground(new java.awt.Color(255, 153, 51));
+        btnrefrescar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnrefrescar.setForeground(new java.awt.Color(0, 0, 0));
+        btnrefrescar.setText("Refrescar");
+        btnrefrescar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                btnrefrescarActionPerformed(evt);
             }
         });
 
@@ -207,9 +207,9 @@ public class listado_proveedores extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(28, 28, 28)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton5))
+                        .addComponent(btnrefrescar))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(23, 23, 23)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -222,9 +222,9 @@ public class listado_proveedores extends javax.swing.JPanel {
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 819, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE)
-                            .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(btncrear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btneditar, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE)
+                            .addComponent(btnver, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(48, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -234,18 +234,18 @@ public class listado_proveedores extends javax.swing.JPanel {
                 .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnrefrescar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton2)
+                        .addComponent(btncrear)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton3)
+                        .addComponent(btneditar)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton4)))
+                        .addComponent(btnver)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnAnterior, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -255,7 +255,7 @@ public class listado_proveedores extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btncrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncrearActionPerformed
         crear_proveedor p2 = new crear_proveedor();
         p2.setSize(1024, 640);
         p2.setLocation(0, 0);
@@ -264,7 +264,7 @@ public class listado_proveedores extends javax.swing.JPanel {
         panelprincipal.add(p2, BorderLayout.CENTER);
         panelprincipal.revalidate();
         panelprincipal.repaint();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btncrearActionPerformed
 
     private void btnAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnteriorActionPerformed
         paginaAnterior();
@@ -274,7 +274,7 @@ public class listado_proveedores extends javax.swing.JPanel {
         siguientePagina();
     }//GEN-LAST:event_btnSiguienteActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbuscarActionPerformed
         String texto = txtbuscar.getText().trim();
 
         //Validacion del texto ingresado
@@ -285,9 +285,9 @@ public class listado_proveedores extends javax.swing.JPanel {
         {
             JOptionPane.showMessageDialog(null, "El texto ingresado es erroneo");
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnbuscarActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void btnrefrescarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnrefrescarActionPerformed
 
         // Restablecer la página actual y el término de búsqueda
         paginaActual = 1;
@@ -298,9 +298,9 @@ public class listado_proveedores extends javax.swing.JPanel {
 
         // Cargar la tabla con los datos actualizados
         cargarTabla();
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_btnrefrescarActionPerformed
     int selectedRow2;
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void btneditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btneditarActionPerformed
         // TODO add your handling code here:
         selectedRow2 = tableProveedor.getSelectedRow();
         if (selectedRow2 == -1)
@@ -377,10 +377,10 @@ public class listado_proveedores extends javax.swing.JPanel {
         }
 
 
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_btneditarActionPerformed
 
     int selectedRow1;
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void btnverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnverActionPerformed
   // TODO add your handling code here:
         selectedRow1 = tableProveedor.getSelectedRow();
         if (selectedRow1 == -1)
@@ -457,7 +457,7 @@ public class listado_proveedores extends javax.swing.JPanel {
         }
 
 
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_btnverActionPerformed
 
     private void siguientePagina() {
         if (paginaActual < totalPaginas)
@@ -617,11 +617,11 @@ public class listado_proveedores extends javax.swing.JPanel {
     private javax.swing.JLabel Contable_Registro;
     private javax.swing.JButton btnAnterior;
     private javax.swing.JButton btnSiguiente;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
+    private javax.swing.JButton btnbuscar;
+    private javax.swing.JButton btncrear;
+    private javax.swing.JButton btneditar;
+    private javax.swing.JButton btnrefrescar;
+    private javax.swing.JButton btnver;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
