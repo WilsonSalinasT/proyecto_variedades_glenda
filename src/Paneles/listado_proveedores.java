@@ -385,7 +385,7 @@ public class listado_proveedores extends javax.swing.JPanel {
         selectedRow1 = tableProveedor.getSelectedRow();
         if (selectedRow1 == -1)
         {
-            JOptionPane.showMessageDialog(null, "Seleccione un proveedor para poder editarlo");
+            JOptionPane.showMessageDialog(null, "Seleccione un proveedor para poder visualizarlo");
             return;
         }
 

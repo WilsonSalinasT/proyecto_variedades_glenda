@@ -20,6 +20,8 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import com.toedter.calendar.JDateChooser;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,15 +31,14 @@ import java.util.List;
  * @author 19fre
  */
 public class EditarCita extends javax.swing.JPanel {
-   
 
     /**
      * Creates new form EditarCita
      */
     public EditarCita() {
         initComponents();
-        
-         fechaCita.setMinSelectableDate(new java.util.Date());
+
+        fechaCita.setMinSelectableDate(new java.util.Date());
 
         Calendar maxDate = Calendar.getInstance();
         maxDate.set(2024, Calendar.DECEMBER, 1);
@@ -49,9 +50,12 @@ public class EditarCita extends javax.swing.JPanel {
         // Agregar "Seleccione" como primer elemento
         model.addElement("Seleccione");
 
-        for (int hora = 8; hora <= 16; hora++) { // Hasta las 4:30 p.m. (16:30)
-            for (int minuto = 0; minuto <= 30; minuto += 30) {
-                if (hora == 8 && minuto < 30) {
+        for (int hora = 8; hora <= 16; hora++)
+        { // Hasta las 4:30 p.m. (16:30)
+            for (int minuto = 0; minuto <= 30; minuto += 30)
+            {
+                if (hora == 8 && minuto < 30)
+                {
                     continue; // Saltar 8:00 a 8:30
                 }
                 String amPm = (hora < 12) ? "a.m." : "p.m.";
@@ -61,31 +65,24 @@ public class EditarCita extends javax.swing.JPanel {
 
         cbxHoras.setModel(model);
 
-        try {
+         try {
             Connection connection = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
 
             Statement stmt = connection.createStatement();
             String sql = "SELECT id_cliente, nombre, apellido FROM Cliente";
             ResultSet rs = stmt.executeQuery(sql);
 
-            JComboBox<String> comboBox = txtCliente; // Reemplaza "txtCliente" con el nombre de tu JComboBox
-
-// Variable para controlar si se ha agregado el elemento "Seleccione" o no
-            boolean selectAdded = false;
+            txtCliente.addItem("Seleccione"); // Agrega el elemento "Seleccione" al principio
 
             while (rs.next()) {
                 String nombre = rs.getString("nombre");
                 String apellido = rs.getString("apellido");
+                int idCliente = rs.getInt("id_cliente");
 
-                int id_Cliente = rs.getInt("id_cliente");
-                id_cliente.setText(String.valueOf(id_Cliente));
+                txtCliente.addItem(nombre + " " + apellido);
 
-                if (!selectAdded) {
-                    comboBox.addItem("Seleccione");
-                    selectAdded = true; // Marcar que "Seleccione" ya se ha agregado
-                }
-
-                comboBox.addItem(nombre + " " + apellido);
+                // Almacena el ID del cliente en un mapa con el nombre completo como clave
+                txtCliente.putClientProperty(nombre + " " + apellido, idCliente);
             }
 
             connection.close();
@@ -94,7 +91,18 @@ public class EditarCita extends javax.swing.JPanel {
             e.printStackTrace();
         }
 
-      
+        txtCliente.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String selectedClient = (String) txtCliente.getSelectedItem();
+                int selectedClientId = (int) txtCliente.getClientProperty(selectedClient);
+
+                // Actualiza el campo de texto con el ID del cliente seleccionado
+                id_cliente.setText(Integer.toString(selectedClientId));
+            }
+        });
+
+
     }
 
     /**
@@ -109,13 +117,13 @@ public class EditarCita extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         jTextField1 = new javax.swing.JTextField();
         btnvolver = new javax.swing.JButton();
-        id_cliente = new javax.swing.JTextField();
         btnGuardar = new javax.swing.JButton();
         txtCliente = new javax.swing.JComboBox<>();
         fechaCita = new com.toedter.calendar.JDateChooser();
         cbxHoras = new javax.swing.JComboBox<>();
         jScrollPane2 = new javax.swing.JScrollPane();
         txtMotivo = new javax.swing.JTextArea();
+        id_cliente = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setPreferredSize(new java.awt.Dimension(1024, 640));
@@ -146,19 +154,12 @@ public class EditarCita extends javax.swing.JPanel {
             }
         });
 
-        id_cliente.setEditable(false);
-        id_cliente.setBackground(new java.awt.Color(255, 102, 102));
-        id_cliente.setBorder(null);
-        id_cliente.setVisible(false);
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(id_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(68, 68, 68)
                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 616, Short.MAX_VALUE)
                 .addComponent(btnvolver, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -169,9 +170,7 @@ public class EditarCita extends javax.swing.JPanel {
             .addComponent(jTextField1)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnvolver)
-                    .addComponent(id_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(btnvolver)
                 .addContainerGap(60, Short.MAX_VALUE))
         );
 
@@ -203,43 +202,50 @@ public class EditarCita extends javax.swing.JPanel {
         });
         jScrollPane2.setViewportView(txtMotivo);
 
+        id_cliente.setEditable(false);
+        id_cliente.setBackground(new java.awt.Color(255, 255, 255));
+        id_cliente.setForeground(new java.awt.Color(255, 255, 255));
+        id_cliente.setBorder(null);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(115, 115, 115)
+                .addComponent(id_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(82, 82, 82)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(446, 446, 446)
-                        .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(cbxHoras, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addGap(253, 253, 253)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(fechaCita, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 516, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 516, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addComponent(fechaCita, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(cbxHoras, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 516, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 516, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(421, 421, 421))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(77, 77, 77)
-                .addComponent(txtCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(48, 48, 48)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(id_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(36, 36, 36)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(cbxHoras, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(fechaCita, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(72, 72, 72)
+                    .addComponent(fechaCita, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbxHoras, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(38, 38, 38)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, Short.MAX_VALUE)
+                .addGap(64, 64, 64)
                 .addComponent(btnGuardar)
-                .addGap(32, 32, 32))
+                .addContainerGap(96, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -248,7 +254,7 @@ public class EditarCita extends javax.swing.JPanel {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void btnvolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnvolverActionPerformed
-       Listado_Citas l2 = new Listado_Citas();
+        Listado_Citas l2 = new Listado_Citas();
         l2.setSize(1024, 640);
         l2.setLocation(0, 0);
 
@@ -259,49 +265,95 @@ public class EditarCita extends javax.swing.JPanel {
     }//GEN-LAST:event_btnvolverActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-     String valorCeldaFecha = fechaCita.getDateFormatString().trim();
-String valorCeldaHora = cbxHoras.getSelectedItem().toString().trim();
-String valorCeldaMotivo = txtMotivo.getText().trim();
-String valorCeldaIdCliente = id_cliente.getText().trim();
+        String nombre = (String) txtCliente.getSelectedItem();
+        String motivo = txtMotivo.getText().trim();
+        java.util.Date fecha = fechaCita.getDate();
+       
 
-if (valorCeldaFecha.isEmpty() || valorCeldaHora.isEmpty() || valorCeldaMotivo.isEmpty() || valorCeldaIdCliente.isEmpty()) {
-    JOptionPane.showMessageDialog(null, "Por favor, complete todos los campos antes de actualizar", "Campos Vacíos", JOptionPane.ERROR_MESSAGE);
-} else {
-    try {
-        Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-        Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
+        String hora = (String) cbxHoras.getSelectedItem();
 
-        PreparedStatement updateStatement = conn.prepareStatement("UPDATE Cita SET fecha_cita=?, hora_cita=?, motivo=?, id_cliente=? WHERE id=?");
-        updateStatement.setString(1, valorCeldaFecha);
-        updateStatement.setString(2, valorCeldaHora);
-        updateStatement.setString(3, valorCeldaMotivo);
-        updateStatement.setString(4, valorCeldaIdCliente);
-        updateStatement.setInt(5, Integer.parseInt(id_cliente.getText())); // Suponiendo que tengas un campo idCita para identificar la cita a actualizar
+        StringBuilder camposVacios = new StringBuilder("Los siguientes campos están vacíos:");
 
-        int rowsUpdated = updateStatement.executeUpdate();
+        if (nombre.equals("Seleccione"))
+        {
+            camposVacios.append("\n - Nombre");
+        }
+        if (fecha == null)
+        {
+            camposVacios.append("\n - Fecha");
+        }
+        String categorias = cbxHoras.getSelectedItem().toString(); // Obtiene el elemento seleccionado en el JComboBox
 
-        if (rowsUpdated > 0) {
-            JOptionPane.showMessageDialog(null, "Cita actualizada con éxito", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-        } else {
-            JOptionPane.showMessageDialog(null, "No se encontró la cita para actualizar", "Advertencia", JOptionPane.WARNING_MESSAGE);
+        if (categorias.equals("Seleccione"))
+        {
+            camposVacios.append("\n - Hora");
+        }
+        if (motivo.isEmpty())
+        {
+            camposVacios.append("\n - Motivo");
         }
 
-        updateStatement.close();
-        conn.close();
-    } catch (SQLException e) {
-        JOptionPane.showMessageDialog(null, e.toString(), "Error de SQL", JOptionPane.ERROR_MESSAGE);
-    } catch (ClassNotFoundException ex) {
-        JOptionPane.showMessageDialog(null, "Error de conexión a la base de datos", "Error de Conexión", JOptionPane.ERROR_MESSAGE);
-    }
-}
+        if (!camposVacios.toString().equals("Los siguientes campos están vacíos:"))
+        {
+            JOptionPane.showMessageDialog(null, camposVacios.toString(), "Campos Vacíos", JOptionPane.ERROR_MESSAGE);
+        } else
+        {
 
+            try
+            {
+                // Resto del código para la actualización en la base de datos
+                Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+                Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
 
+                String updateQuery = "UPDATE Cita SET fecha_cita = ?, hora_cita = ?, motivo = ? WHERE id = ?";
+                PreparedStatement updatePs = conn.prepareStatement(updateQuery);
+                
+                int numeracion = Integer.parseInt(id_cliente.getText());
+                updatePs.setDate(1, new java.sql.Date(fecha.getTime()));
+                updatePs.setString(2, hora);
+                updatePs.setObject(3, motivo);
+                updatePs.setInt(4,numeracion);
+
+               
+                int rowsUpdated = updatePs.executeUpdate();
+
+                if (rowsUpdated > 0)
+                {
+                    JOptionPane.showMessageDialog(null, "Registro actualizado");
+                
+
+//                TIENE QUE LLEVAR AL LISTADO DE CITAS
+                Listado_Citas cli = new Listado_Citas();
+
+                cli.setSize(1024, 640);
+                cli.setLocation(0, 0);
+
+                panelprincipal.revalidate();
+                panelprincipal.repaint();
+                panelprincipal.removeAll();
+                panelprincipal.add(cli, BorderLayout.CENTER);
+                panelprincipal.revalidate();
+                panelprincipal.repaint();
+                
+                } else
+                {
+                    //hola
+                    JOptionPane.showMessageDialog(null, "No se encontró el registro para actualizar", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            } catch (SQLException e)
+            {
+                JOptionPane.showMessageDialog(null, e.toString(), "Error de SQL", JOptionPane.ERROR_MESSAGE);
+            } catch (ClassNotFoundException ex)
+            {
+                JOptionPane.showMessageDialog(null, "Error de conexión a la base de datos", "Error de Conexión", JOptionPane.ERROR_MESSAGE);
+            }
+        }
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void txtMotivoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMotivoKeyTyped
         char c = evt.getKeyChar();
         if (Character.isWhitespace(c) && txtMotivo.getText().isEmpty() || (c < 'a' || c > 'z') && (c < 'A' || c > 'Z') && ((int) evt.getKeyChar() <= 500 && evt.getKeyChar() >= 164) && c != KeyEvent.VK_SPACE || txtMotivo.getText().length() >= 250)
-        evt.consume();
+            evt.consume();
     }//GEN-LAST:event_txtMotivoKeyTyped
 
 

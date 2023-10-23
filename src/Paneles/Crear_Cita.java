@@ -148,8 +148,10 @@ public class Crear_Cita extends javax.swing.JPanel {
             }
         });
 
-        id_cliente.setBackground(new java.awt.Color(255, 51, 255));
-        id_cliente.setForeground(new java.awt.Color(0, 0, 0));
+        id_cliente.setEditable(false);
+        id_cliente.setBackground(new java.awt.Color(255, 255, 255));
+        id_cliente.setForeground(new java.awt.Color(255, 255, 255));
+        id_cliente.setBorder(null);
 
         cbxHoras.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Hora de la cita", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12))); // NOI18N
 
@@ -328,10 +330,10 @@ public class Crear_Cita extends javax.swing.JPanel {
                 insertPs.executeUpdate();
                 JOptionPane.showMessageDialog(null, "Registro guardado");
 
-                /*
-                TIENE QUE LLEVAR AL LISTADO DE CITAS
                 
-                clientes cli = new clientes();
+//                TIENE QUE LLEVAR AL LISTADO DE CITAS
+                
+                Listado_Citas cli = new Listado_Citas();
 
                 cli.setSize(1024, 640);
                 cli.setLocation(0, 0);
@@ -341,7 +343,7 @@ public class Crear_Cita extends javax.swing.JPanel {
                 panelprincipal.removeAll();
                 panelprincipal.add(cli, BorderLayout.CENTER);
                 panelprincipal.revalidate();
-                panelprincipal.repaint();*/
+                panelprincipal.repaint();
             } catch (SQLException e) {
                 JOptionPane.showMessageDialog(null, e.toString(), "Error de SQL", JOptionPane.ERROR_MESSAGE);
             } catch (ClassNotFoundException ex) {

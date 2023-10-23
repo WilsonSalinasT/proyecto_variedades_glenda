@@ -354,19 +354,13 @@ public class Listado_Citas extends javax.swing.JPanel {
         panelprincipal.revalidate();
         panelprincipal.repaint();
     }//GEN-LAST:event_crearbtnActionPerformed
-
+     int selectedRow1;
     private void verbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verbtnActionPerformed
-        //
-    }//GEN-LAST:event_verbtnActionPerformed
-
-    int selectedRow2;
-    private void editarbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarbtnActionPerformed
-
-            // TODO add your handling code here:
-      selectedRow2 = tblCitas.getSelectedRow();
-        if (selectedRow2 == -1)
+             // TODO add your handling code here:
+      selectedRow1 = tblCitas.getSelectedRow();
+        if (selectedRow1 == -1)
         {
-            JOptionPane.showMessageDialog(null, "Seleccione un cliente para poder editarlo");
+            JOptionPane.showMessageDialog(null, "Seleccione una cita para poder visualizarla");
             return;
         }
 
@@ -390,21 +384,83 @@ public class Listado_Citas extends javax.swing.JPanel {
             while (rs.next())
             {
 
-//                String nombre = rs.getString("nombre");
-//                String apellido = rs.getString("apellido");
-//                
-//                String direccion = rs.getString("direccion");
-//                String telefono = rs.getString("numero_telefono");
-//                String correo = rs.getString("correo_electronico");
-////                String fecha = rs.getString("fecha_registro");
-//                 String id = rs.getString("id_cliente");
+
+               String nombre = rs.getString("nombre");
+               String apellido = rs.getString("apellido");
+                ver_cita ver = new ver_cita();
+                
+
+                ver.fechaCita.setText(rs.getString("fecha_cita"));
+                ver.cbxHoras.setText(rs.getString("hora_cita"));
+                 ver.txtMotivo.setText(rs.getString("motivo"));
+                 ver.txtCliente.setText(nombre+ " "+ apellido);
+                 ver.id_cliente.setText(rs.getString("id"));
+
+                
+                ver.setSize(1024, 640);
+                ver.setLocation(0, 0);
+
+                panelprincipal.revalidate();
+                panelprincipal.repaint();
+                panelprincipal.removeAll();
+                panelprincipal.add(ver, BorderLayout.CENTER);
+
+                panelprincipal.revalidate();
+                panelprincipal.repaint();
+
+                break; // Salir del bucle después de encontrar el elemento seleccionado
+
+            }
+
+            rs.close();
+            ps.close();
+            conn.close();
+
+        } catch (SQLException e)
+        {
+            e.printStackTrace();
+            // Manejar cualquier excepción que pueda ocurrir durante la consulta a la base de datos
+        }
+
+    }//GEN-LAST:event_verbtnActionPerformed
+
+    int selectedRow2;
+    private void editarbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarbtnActionPerformed
+
+            // TODO add your handling code here:
+      selectedRow2 = tblCitas.getSelectedRow();
+        if (selectedRow2 == -1)
+        {
+            JOptionPane.showMessageDialog(null, "Seleccione una cita para poder editarla");
+            return;
+        }
+
+        try
+        {
+
+            int fila = tblCitas.getSelectedRow();
+            String valorCelda = tblCitas.getValueAt(fila, 1).toString();
+            String valorCelda2 = tblCitas.getValueAt(fila, 2).toString();
+            String valorCelda3 = tblCitas.getValueAt(fila, 4).toString();
+            PreparedStatement ps;
+            ResultSet rs;
+
+            Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
+            ps = conn.prepareStatement("SELECT * FROM cliente JOIN Cita ON cliente.id_cliente = Cita.id_cliente where nombre =? and apellido=? and fecha_cita=? ");
+            ps.setString(1, valorCelda);
+            ps.setString(2, valorCelda2);
+            ps.setString(3, valorCelda3);
+            rs = ps.executeQuery();
+
+            while (rs.next())
+            {
+
 
                String nombre = rs.getString("nombre");
                String apellido = rs.getString("apellido");
                 EditarCita editar = new EditarCita();
                 
-//                editar.txtci.setText(nombre);
-                
+
                 editar.fechaCita.setDate(rs.getDate("fecha_cita"));
                 editar.cbxHoras.setSelectedItem(rs.getString("hora_cita"));
                  editar.txtMotivo.setText(rs.getString("motivo"));
