@@ -38,14 +38,14 @@ public class listado_proveedores extends javax.swing.JPanel {
         cargarTabla();
         TextPrompt holder = new TextPrompt("Busque por empresa/vendedor/número de la empresa", txtbuscar);
 
-        tableClientes.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 12));
-        tableClientes.getTableHeader().setOpaque(false);
-        tableClientes.getTableHeader().setBackground(new Color(255, 0, 0));
-        tableClientes.getTableHeader().setForeground(new Color(255, 0, 0));
-        tableClientes.setRowHeight(25);
+        tableProveedor.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 12));
+        tableProveedor.getTableHeader().setOpaque(false);
+        tableProveedor.getTableHeader().setBackground(new Color(255, 0, 0));
+        tableProveedor.getTableHeader().setForeground(new Color(255, 0, 0));
+        tableProveedor.setRowHeight(25);
 
-        tableClientes.setRowSelectionAllowed(true);
-        tableClientes.setColumnSelectionAllowed(false);
+        tableProveedor.setRowSelectionAllowed(true);
+        tableProveedor.setColumnSelectionAllowed(false);
     }
 
     /**
@@ -60,7 +60,7 @@ public class listado_proveedores extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tableClientes = new javax.swing.JTable();
+        tableProveedor = new javax.swing.JTable();
         txtbuscar = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
@@ -99,8 +99,8 @@ public class listado_proveedores extends javax.swing.JPanel {
                 .addContainerGap(28, Short.MAX_VALUE))
         );
 
-        tableClientes.setForeground(new java.awt.Color(0, 0, 0));
-        tableClientes.setModel(new javax.swing.table.DefaultTableModel(
+        tableProveedor.setForeground(new java.awt.Color(0, 0, 0));
+        tableProveedor.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -108,18 +108,18 @@ public class listado_proveedores extends javax.swing.JPanel {
                 "N°", "Empresa", "Vendedor", "Número de la empresa", "dirección"
             }
         ));
-        tableClientes.setGridColor(new java.awt.Color(255, 51, 51));
-        tableClientes.setSelectionBackground(new java.awt.Color(255, 102, 102));
-        tableClientes.setSelectionForeground(new java.awt.Color(0, 0, 0));
-        tableClientes.setShowHorizontalLines(true);
-        tableClientes.setShowVerticalLines(true);
-        jScrollPane1.setViewportView(tableClientes);
-        if (tableClientes.getColumnModel().getColumnCount() > 0) {
-            tableClientes.getColumnModel().getColumn(0).setMinWidth(100);
-            tableClientes.getColumnModel().getColumn(0).setPreferredWidth(50);
-            tableClientes.getColumnModel().getColumn(0).setMaxWidth(100);
-            tableClientes.getColumnModel().getColumn(2).setResizable(false);
-            tableClientes.getColumnModel().getColumn(4).setResizable(false);
+        tableProveedor.setGridColor(new java.awt.Color(255, 51, 51));
+        tableProveedor.setSelectionBackground(new java.awt.Color(255, 102, 102));
+        tableProveedor.setSelectionForeground(new java.awt.Color(0, 0, 0));
+        tableProveedor.setShowHorizontalLines(true);
+        tableProveedor.setShowVerticalLines(true);
+        jScrollPane1.setViewportView(tableProveedor);
+        if (tableProveedor.getColumnModel().getColumnCount() > 0) {
+            tableProveedor.getColumnModel().getColumn(0).setMinWidth(100);
+            tableProveedor.getColumnModel().getColumn(0).setPreferredWidth(50);
+            tableProveedor.getColumnModel().getColumn(0).setMaxWidth(100);
+            tableProveedor.getColumnModel().getColumn(2).setResizable(false);
+            tableProveedor.getColumnModel().getColumn(4).setResizable(false);
         }
 
         jButton1.setBackground(new java.awt.Color(255, 153, 51));
@@ -302,7 +302,7 @@ public class listado_proveedores extends javax.swing.JPanel {
     int selectedRow2;
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        selectedRow2 = tableClientes.getSelectedRow();
+        selectedRow2 = tableProveedor.getSelectedRow();
         if (selectedRow2 == -1)
         {
             JOptionPane.showMessageDialog(null, "Seleccione un proveedor para poder editarlo");
@@ -312,10 +312,10 @@ public class listado_proveedores extends javax.swing.JPanel {
         try
         {
 
-            int fila = tableClientes.getSelectedRow();
-            String valorCelda = tableClientes.getValueAt(fila, 1).toString();
-            String valorCelda2 = tableClientes.getValueAt(fila, 2).toString();
-            String valorCelda3 = tableClientes.getValueAt(fila, 4).toString();
+            int fila = tableProveedor.getSelectedRow();
+            String valorCelda = tableProveedor.getValueAt(fila, 1).toString();
+            String valorCelda2 = tableProveedor.getValueAt(fila, 2).toString();
+            String valorCelda3 = tableProveedor.getValueAt(fila, 4).toString();
             PreparedStatement ps;
             ResultSet rs;
 
@@ -382,7 +382,7 @@ public class listado_proveedores extends javax.swing.JPanel {
     int selectedRow1;
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
   // TODO add your handling code here:
-        selectedRow1 = tableClientes.getSelectedRow();
+        selectedRow1 = tableProveedor.getSelectedRow();
         if (selectedRow1 == -1)
         {
             JOptionPane.showMessageDialog(null, "Seleccione un proveedor para poder editarlo");
@@ -392,10 +392,10 @@ public class listado_proveedores extends javax.swing.JPanel {
         try
         {
 
-            int fila = tableClientes.getSelectedRow();
-            String valorCelda = tableClientes.getValueAt(fila, 1).toString();
-            String valorCelda2 = tableClientes.getValueAt(fila, 2).toString();
-            String valorCelda3 = tableClientes.getValueAt(fila, 4).toString();
+            int fila = tableProveedor.getSelectedRow();
+            String valorCelda = tableProveedor.getValueAt(fila, 1).toString();
+            String valorCelda2 = tableProveedor.getValueAt(fila, 2).toString();
+            String valorCelda3 = tableProveedor.getValueAt(fila, 4).toString();
             PreparedStatement ps;
             ResultSet rs;
 
@@ -476,7 +476,7 @@ public class listado_proveedores extends javax.swing.JPanel {
     }
 
     private void cargarTabla() {
-        DefaultTableModel modeloTabla = (DefaultTableModel) tableClientes.getModel();
+        DefaultTableModel modeloTabla = (DefaultTableModel) tableProveedor.getModel();
         modeloTabla.setRowCount(0); // Limpiar los datos existentes en la tabla
 
         PreparedStatement ps;
@@ -551,7 +551,7 @@ public class listado_proveedores extends javax.swing.JPanel {
     }
 
     private void buscarDatos(String texto) {
-        DefaultTableModel modelTabla = (DefaultTableModel) tableClientes.getModel();
+        DefaultTableModel modelTabla = (DefaultTableModel) tableProveedor.getModel();
         modelTabla.setRowCount(0);
         boolean foundData = false;
 
@@ -626,7 +626,7 @@ public class listado_proveedores extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tableClientes;
+    private javax.swing.JTable tableProveedor;
     private javax.swing.JTextField txtbuscar;
     // End of variables declaration//GEN-END:variables
 }
