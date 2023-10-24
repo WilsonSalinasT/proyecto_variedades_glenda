@@ -6,6 +6,7 @@ package Paneles;
 
 import static App.Menu.panelprincipal;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -97,6 +98,9 @@ public class editar_cliente extends javax.swing.JPanel {
         txttelefono.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txttelefono.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Número de celular:", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12))); // NOI18N
         txttelefono.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txttelefonoKeyReleased(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txttelefonoKeyTyped(evt);
             }
@@ -437,6 +441,21 @@ public class editar_cliente extends javax.swing.JPanel {
             evt.consume(); // Consumir el evento si se ha alcanzado la longitud máxima
         }
     }//GEN-LAST:event_txtcorreoKeyTyped
+
+    private void txttelefonoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txttelefonoKeyReleased
+         String texto = txttelefono.getText().trim();
+        char c = evt.getKeyChar();
+
+        if (texto.startsWith("9") || texto.startsWith("8") || texto.startsWith("3") || c == 9 && c == 8 & c == 3) {
+            txttelefono.setBackground(Color.green);
+        } else {
+            // El texto no cumple con la validación
+            evt.consume(); // Bloquea el carácter
+            JOptionPane.showMessageDialog(this, "El número de celular debe comenzar con 9, 8 o 3", "Error", JOptionPane.ERROR_MESSAGE);
+            txttelefono.setBackground(Color.red);
+            txttelefono.setText("");
+        }
+    }//GEN-LAST:event_txttelefonoKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

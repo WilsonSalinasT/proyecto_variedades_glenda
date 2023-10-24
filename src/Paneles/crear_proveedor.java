@@ -5,7 +5,9 @@
 package Paneles;
 
 import static App.Menu.panelprincipal;
+import static Paneles.editar_cliente.txttelefono;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.HeadlessException;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -80,6 +82,9 @@ public class crear_proveedor extends javax.swing.JPanel {
             }
         });
         txtnumeroempresa.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtnumeroempresaKeyReleased(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtnumeroempresaKeyTyped(evt);
             }
@@ -131,6 +136,9 @@ public class crear_proveedor extends javax.swing.JPanel {
             }
         });
         txtnumerovendedor.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtnumerovendedorKeyReleased(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtnumerovendedorKeyTyped(evt);
             }
@@ -560,6 +568,36 @@ public class crear_proveedor extends javax.swing.JPanel {
 //            JOptionPane.showMessageDialog(this, errorMessage, "Error", JOptionPane.ERROR_MESSAGE);
 //        }
     }//GEN-LAST:event_txtcorreoKeyReleased
+
+    private void txtnumeroempresaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtnumeroempresaKeyReleased
+        String texto = txtnumeroempresa.getText().trim();
+        char c = evt.getKeyChar();
+
+        if (texto.startsWith("9") || texto.startsWith("8") || texto.startsWith("3") || texto.startsWith("2") || c == 9 && c == 8 & c == 3 & c == 3) {
+            txtnumeroempresa.setBackground(Color.green);
+        } else {
+            // El texto no cumple con la validación
+            evt.consume(); // Bloquea el carácter
+            JOptionPane.showMessageDialog(this, "El número de celular debe comenzar con 9, 8, 3 o 2", "Error", JOptionPane.ERROR_MESSAGE);
+            txtnumeroempresa.setBackground(Color.red);
+            txtnumeroempresa.setText("");
+        }
+    }//GEN-LAST:event_txtnumeroempresaKeyReleased
+
+    private void txtnumerovendedorKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtnumerovendedorKeyReleased
+         String texto = txtnumerovendedor.getText().trim();
+        char c = evt.getKeyChar();
+
+        if (texto.startsWith("9") || texto.startsWith("8") || texto.startsWith("3") || c == 9 && c == 8 & c == 3) {
+            txtnumerovendedor.setBackground(Color.green);
+        } else {
+            // El texto no cumple con la validación
+            evt.consume(); // Bloquea el carácter
+            JOptionPane.showMessageDialog(this, "El número de celular debe comenzar con 9, 8 o 3", "Error", JOptionPane.ERROR_MESSAGE);
+            txtnumerovendedor.setBackground(Color.red);
+            txtnumerovendedor.setText("");
+        }
+    }//GEN-LAST:event_txtnumerovendedorKeyReleased
 
 //    public boolean isValidEmailAddress(String email) {
 //        // Define una expresión regular para validar direcciones de correo electrónico.
