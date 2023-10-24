@@ -304,20 +304,23 @@ public class Listado_Citas extends javax.swing.JPanel {
     }//GEN-LAST:event_txtBuscarActionPerformed
 
     private void txtBuscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyTyped
-        // validación en el campo de buscar para que acepte solo letra y letras tildades, se utiliza el codigo ASCII para las letras tildades
-        char c = evt.getKeyChar();
-        if ((c < 'a' || c > 'z') && (c < 'A' || c > 'Z') && ((int) evt.getKeyChar() <= 160) || txtBuscar.getText().length() >= 20) {
-            evt.consume();
-        }
+//        // validación en el campo de buscar para que acepte solo letra y letras tildades, se utiliza el codigo ASCII para las letras tildades
+//        char c = evt.getKeyChar();
+//        if ((c < 'a' || c > 'z') && (c < 'A' || c > 'Z') && ((int) evt.getKeyChar() <= 160) || txtBuscar.getText().length() >= 20)
+//        {
+//            evt.consume();
+//        }
     }//GEN-LAST:event_txtBuscarKeyTyped
 
     private void Btn_BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_BuscarActionPerformed
         String texto = txtBuscar.getText().trim();
 
         //Validacion del texto ingresado
-        if (!texto.isEmpty()) {
+        if (!texto.isEmpty())
+        {
             buscarDatos(texto);
-        } else {
+        } else
+        {
             JOptionPane.showMessageDialog(null, "Tiene que ingrese texto");
         }
     }//GEN-LAST:event_Btn_BuscarActionPerformed
@@ -354,10 +357,10 @@ public class Listado_Citas extends javax.swing.JPanel {
         panelprincipal.revalidate();
         panelprincipal.repaint();
     }//GEN-LAST:event_crearbtnActionPerformed
-     int selectedRow1;
+    int selectedRow1;
     private void verbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verbtnActionPerformed
-             // TODO add your handling code here:
-      selectedRow1 = tblCitas.getSelectedRow();
+        // TODO add your handling code here:
+        selectedRow1 = tblCitas.getSelectedRow();
         if (selectedRow1 == -1)
         {
             JOptionPane.showMessageDialog(null, "Seleccione una cita para poder visualizarla");
@@ -384,19 +387,16 @@ public class Listado_Citas extends javax.swing.JPanel {
             while (rs.next())
             {
 
-
-               String nombre = rs.getString("nombre");
-               String apellido = rs.getString("apellido");
+                String nombre = rs.getString("nombre");
+                String apellido = rs.getString("apellido");
                 ver_cita ver = new ver_cita();
-                
 
                 ver.fechaCita.setText(rs.getString("fecha_cita"));
                 ver.cbxHoras.setText(rs.getString("hora_cita"));
-                 ver.txtMotivo.setText(rs.getString("motivo"));
-                 ver.txtCliente.setText(nombre+ " "+ apellido);
-                 ver.id_cliente.setText(rs.getString("id"));
+                ver.txtMotivo.setText(rs.getString("motivo"));
+                ver.txtCliente.setText(nombre + " " + apellido);
+                ver.id_cliente.setText(rs.getString("id"));
 
-                
                 ver.setSize(1024, 640);
                 ver.setLocation(0, 0);
 
@@ -427,8 +427,8 @@ public class Listado_Citas extends javax.swing.JPanel {
     int selectedRow2;
     private void editarbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarbtnActionPerformed
 
-            // TODO add your handling code here:
-      selectedRow2 = tblCitas.getSelectedRow();
+        // TODO add your handling code here:
+        selectedRow2 = tblCitas.getSelectedRow();
         if (selectedRow2 == -1)
         {
             JOptionPane.showMessageDialog(null, "Seleccione una cita para poder editarla");
@@ -455,19 +455,16 @@ public class Listado_Citas extends javax.swing.JPanel {
             while (rs.next())
             {
 
-
-               String nombre = rs.getString("nombre");
-               String apellido = rs.getString("apellido");
+                String nombre = rs.getString("nombre");
+                String apellido = rs.getString("apellido");
                 EditarCita editar = new EditarCita();
-                
 
                 editar.fechaCita.setDate(rs.getDate("fecha_cita"));
                 editar.cbxHoras.setSelectedItem(rs.getString("hora_cita"));
-                 editar.txtMotivo.setText(rs.getString("motivo"));
-                 editar.txtCliente.setSelectedItem(nombre+ " "+ apellido);
-                 editar.id_cliente.setText(rs.getString("id"));
+                editar.txtMotivo.setText(rs.getString("motivo"));
+                editar.txtCliente.setSelectedItem(nombre + " " + apellido);
+                editar.id_cliente.setText(rs.getString("id"));
 
-                
                 editar.setSize(1024, 640);
                 editar.setLocation(0, 0);
 
@@ -512,31 +509,37 @@ public class Listado_Citas extends javax.swing.JPanel {
         int columnas;
         boolean foundData = false;
 
-        try {
+        try
+        {
             Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
 
             // Obtener el total de filas que cumplen con el criterio de búsqueda
             ps = conn.prepareStatement("SELECT COUNT(*) AS TotalFilas "
                     + "FROM Cliente E "
                     + "JOIN Cita V ON E.id_cliente = V.id_cliente "
-                    + "WHERE E.nombre LIKE ? OR E.apellido LIKE ?");
+                    + "WHERE E.nombre LIKE ? OR E.apellido LIKE ? OR V.fecha_cita LIKE ?");
             ps.setString(1, "%" + terminoBusqueda + "%");
             ps.setString(2, "%" + terminoBusqueda + "%");
+            ps.setString(3, "%" + terminoBusqueda + "%");
             rs = ps.executeQuery();
 
-            if (rs.next()) {
+            if (rs.next())
+            {
                 totalFilas = rs.getInt(1);
             }
             totalPaginas = (int) Math.ceil((double) totalFilas / filasPorPagina);
 
-            if (paginaActual < 1) {
+            if (paginaActual < 1)
+            {
                 paginaActual = 1;
-            } else if (paginaActual > totalPaginas) {
+            } else if (paginaActual > totalPaginas)
+            {
                 paginaActual = totalPaginas;
             }
 
             int offset = (paginaActual - 1) * filasPorPagina;
-            if (offset < 0) {
+            if (offset < 0)
+            {
                 offset = 0;
             }
 
@@ -544,20 +547,23 @@ public class Listado_Citas extends javax.swing.JPanel {
             ps = conn.prepareStatement("SELECT ROW_NUMBER() OVER(ORDER BY E.nombre) AS NumRegistro, E.nombre, E.apellido, E.numero_telefono, V.fecha_cita "
                     + "FROM Cliente E "
                     + "JOIN Cita V ON E.id_cliente = V.id_cliente "
-                    + "WHERE E.nombre LIKE ? OR E.apellido LIKE ? "
+                    + "WHERE E.nombre LIKE ? OR E.apellido LIKE ? OR V.fecha_cita LIKE ? "
                     + "ORDER BY E.nombre "
                     + "OFFSET ? ROWS FETCH NEXT ? ROWS ONLY");
             ps.setString(1, "%" + terminoBusqueda + "%");
             ps.setString(2, "%" + terminoBusqueda + "%");
-            ps.setInt(3, offset);
-            ps.setInt(4, filasPorPagina);
+             ps.setString(3, "%" + terminoBusqueda + "%");
+            ps.setInt(4, offset);
+            ps.setInt(5, filasPorPagina);
             rs = ps.executeQuery();
             rsmd = rs.getMetaData();
             columnas = rsmd.getColumnCount();
 
-            while (rs.next()) {
+            while (rs.next())
+            {
                 Object[] fila = new Object[columnas];
-                for (int indice = 0; indice < columnas; indice++) {
+                for (int indice = 0; indice < columnas; indice++)
+                {
                     fila[indice] = rs.getObject(indice + 1);
                 }
                 modeloTabla.addRow(fila);
@@ -566,7 +572,8 @@ public class Listado_Citas extends javax.swing.JPanel {
 
             ajustarTabla(filasPorPagina);
 
-            if (!foundData) {
+            if (!foundData)
+            {
                 JOptionPane.showMessageDialog(null, "No se encontraron datos");
             }
 
@@ -574,7 +581,8 @@ public class Listado_Citas extends javax.swing.JPanel {
             int rowCount = modeloTabla.getRowCount();
             Texto_Contable.setText("Cantidad de filas: " + rowCount + " - Página " + paginaActual + "/" + totalPaginas);
 
-        } catch (SQLException e) {
+        } catch (SQLException e)
+        {
             e.printStackTrace(); // Imprime la pila de excepciones para depuración
             JOptionPane.showMessageDialog(null, e.toString());
         }
@@ -587,14 +595,16 @@ public class Listado_Citas extends javax.swing.JPanel {
     }
 
     private void siguientePagina() {
-        if (paginaActual < totalPaginas) {
+        if (paginaActual < totalPaginas)
+        {
             paginaActual++;
             cargarTablaEmpleados();
         }
     }
 
     private void paginaAnterior() {
-        if (paginaActual > 1) {
+        if (paginaActual > 1)
+        {
             paginaActual--;
             cargarTablaEmpleados();
         }
@@ -605,23 +615,29 @@ public class Listado_Citas extends javax.swing.JPanel {
         modelTabla.setRowCount(0);
         boolean foundData = false;
 
-        try {
+        try
+        {
             Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
-            if (conn != null && !conn.isClosed()) {
+            if (conn != null && !conn.isClosed())
+            {
                 PreparedStatement ps = conn.prepareStatement("SELECT ROW_NUMBER() OVER(ORDER BY E.nombre) AS NumRegistro, E.nombre, E.apellido, E.numero_telefono, V.fecha_cita "
                         + "FROM Cliente E "
                         + "JOIN Cita V ON E.id_cliente = V.id_cliente "
-                        + "WHERE E.nombre LIKE ? OR E.apellido LIKE ? "
+                        + "WHERE E.nombre LIKE ? OR E.apellido LIKE ? OR V.fecha_cita LIKE ? "
                         + "ORDER BY E.nombre "
                         + "OFFSET ? ROWS FETCH NEXT ? ROWS ONLY");
 
-                if (texto != null && !texto.isEmpty()) {
+                if (texto != null && !texto.isEmpty())
+                {
                     ps.setString(1, "%" + texto + "%");
                     ps.setString(2, "%" + texto + "%");
+                     ps.setString(3, "%" + texto + "%");
                     terminoBusqueda = texto; // Actualizar el término de búsqueda
-                } else {
+                } else
+                {
                     ps.setString(1, "%");
                     ps.setString(2, "%");
+                    ps.setString(3, "%");
                     terminoBusqueda = ""; // Limpiar el término de búsqueda
                 }
 
@@ -629,21 +645,25 @@ public class Listado_Citas extends javax.swing.JPanel {
                 int offset = 0; // Cambia el valor del offset según tus requerimientos
                 int fetchNext = 10; // Cambia la cantidad de registros a recuperar según tus requerimientos
 
-                ps.setInt(3, offset);
-                ps.setInt(4, fetchNext);
+                ps.setInt(4, offset);
+                ps.setInt(5, fetchNext);
 
                 ResultSet rs = ps.executeQuery();
 
-                if (rs != null) {
-                    while (rs.next()) {
+                if (rs != null)
+                {
+                    while (rs.next())
+                    {
                         int numRegistro = rs.getInt("NumRegistro");
                         String nombre = rs.getString("nombre");
                         String apellido = rs.getString("apellido");
                         String numeroTelefono = rs.getString("numero_telefono");
                         String fechaCita = rs.getString("fecha_cita");
 
-                        if (nombre != null && apellido != null && numeroTelefono != null) {
-                            modelTabla.addRow(new Object[]{
+                        if (nombre != null && apellido != null && numeroTelefono != null)
+                        {
+                            modelTabla.addRow(new Object[]
+                            {
                                 numRegistro, nombre, apellido, numeroTelefono, fechaCita
                             });
                             foundData = true;
@@ -656,7 +676,8 @@ public class Listado_Citas extends javax.swing.JPanel {
                 ps.close();
                 conn.close();
             }
-        } catch (Exception e) {
+        } catch (Exception e)
+        {
             JOptionPane.showMessageDialog(null, e.toString());
         }
 
