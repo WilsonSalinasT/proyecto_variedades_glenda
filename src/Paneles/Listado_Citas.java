@@ -42,7 +42,7 @@ public class Listado_Citas extends javax.swing.JPanel {
         initComponents();
         cargarTablaEmpleados();
 
-        holder = new TextPrompt("Busque por nombre/apellido del cliente", txtBuscar);
+        holder = new TextPrompt("Busque por nombre/apellido del cliente/fecha de cita", txtBuscar);
 
         tblCitas.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 12));
         tblCitas.getTableHeader().setOpaque(false);
@@ -304,12 +304,15 @@ public class Listado_Citas extends javax.swing.JPanel {
     }//GEN-LAST:event_txtBuscarActionPerformed
 
     private void txtBuscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyTyped
-//        // validación en el campo de buscar para que acepte solo letra y letras tildades, se utiliza el codigo ASCII para las letras tildades
-//        char c = evt.getKeyChar();
-//        if ((c < 'a' || c > 'z') && (c < 'A' || c > 'Z') && ((int) evt.getKeyChar() <= 160) || txtBuscar.getText().length() >= 20)
-//        {
-//            evt.consume();
-//        }
+        char c = evt.getKeyChar(); // Obtener el carácter ingresado
+
+        if (txtBuscar.getText().isEmpty() && Character.isWhitespace(c))
+        {
+            evt.consume(); // Consumir el evento si es un espacio en blanco en la primera letra
+        } else if (txtBuscar.getText().length() >= 100)
+        {
+            evt.consume(); // Consumir el evento si se ha alcanzado la longitud máxima
+        }
     }//GEN-LAST:event_txtBuscarKeyTyped
 
     private void Btn_BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_BuscarActionPerformed
@@ -331,7 +334,7 @@ public class Listado_Citas extends javax.swing.JPanel {
 
         // Limpiar el campo de búsqueda
         txtBuscar.setText("");
-        holder = new TextPrompt("Busque por nombre/apellido del cliente", txtBuscar);
+      
 
         // Cargar la tabla con los datos actualizados
         cargarTablaEmpleados();
@@ -493,7 +496,7 @@ public class Listado_Citas extends javax.swing.JPanel {
     }//GEN-LAST:event_editarbtnActionPerformed
 
     int paginaActual = 1; // Página actual
-    int filasPorPagina = 15; // Número de filas a mostrar por página
+    int filasPorPagina = 20; // Número de filas a mostrar por página
     int totalFilas = 0; // Total de filas en la tabla
     int totalPaginas = 0; // Total de páginas en la tabla
     int numRegistro = 0;
@@ -552,7 +555,7 @@ public class Listado_Citas extends javax.swing.JPanel {
                     + "OFFSET ? ROWS FETCH NEXT ? ROWS ONLY");
             ps.setString(1, "%" + terminoBusqueda + "%");
             ps.setString(2, "%" + terminoBusqueda + "%");
-             ps.setString(3, "%" + terminoBusqueda + "%");
+            ps.setString(3, "%" + terminoBusqueda + "%");
             ps.setInt(4, offset);
             ps.setInt(5, filasPorPagina);
             rs = ps.executeQuery();
@@ -631,7 +634,7 @@ public class Listado_Citas extends javax.swing.JPanel {
                 {
                     ps.setString(1, "%" + texto + "%");
                     ps.setString(2, "%" + texto + "%");
-                     ps.setString(3, "%" + texto + "%");
+                    ps.setString(3, "%" + texto + "%");
                     terminoBusqueda = texto; // Actualizar el término de búsqueda
                 } else
                 {

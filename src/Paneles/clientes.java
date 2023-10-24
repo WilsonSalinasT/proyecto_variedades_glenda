@@ -122,6 +122,12 @@ public class clientes extends javax.swing.JPanel {
             tableClientes.getColumnModel().getColumn(4).setResizable(false);
         }
 
+        txtbuscar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtbuscarKeyTyped(evt);
+            }
+        });
+
         jButton1.setBackground(new java.awt.Color(255, 153, 51));
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButton1.setForeground(new java.awt.Color(0, 0, 0));
@@ -283,7 +289,7 @@ public class clientes extends javax.swing.JPanel {
             buscarDatos(texto);
         } else
         {
-            JOptionPane.showMessageDialog(null, "El texto ingresado es erroneo");
+            JOptionPane.showMessageDialog(null, "Tiene que ingresar texto para hacer la respectiva búsqueda");
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -470,6 +476,16 @@ public class clientes extends javax.swing.JPanel {
         }
 
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void txtbuscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtbuscarKeyTyped
+        char c = evt.getKeyChar(); // Obtener el carácter ingresado
+
+        if (txtbuscar.getText().isEmpty() && Character.isWhitespace(c)) {
+            evt.consume(); // Consumir el evento si es un espacio en blanco en la primera letra
+        } else if (txtbuscar.getText().length() >= 100) {
+            evt.consume(); // Consumir el evento si se ha alcanzado la longitud máxima
+        }
+    }//GEN-LAST:event_txtbuscarKeyTyped
 
     private void siguientePagina() {
         if (paginaActual < totalPaginas)
