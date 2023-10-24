@@ -321,7 +321,7 @@ public class Listado_Citas extends javax.swing.JPanel {
             buscarDatos(texto);
         } else
         {
-            JOptionPane.showMessageDialog(null, "Tiene que ingrese texto");
+            JOptionPane.showMessageDialog(null, "Tiene que ingresar texto para hacer la respectiva búsqueda");
         }
     }//GEN-LAST:event_Btn_BuscarActionPerformed
 
