@@ -357,12 +357,12 @@ public class crear_proveedor extends javax.swing.JPanel {
     private void txtnombrevendedorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtnombrevendedorKeyTyped
         char c = evt.getKeyChar(); // Obtener el carácter ingresado
 
-        if (txtnombrevendedor.getText().isEmpty() && Character.isWhitespace(c))
+        if (txtnombrevendedor.getText().isEmpty() && (Character.isWhitespace(c) || Character.isDigit(c)))
         {
-            evt.consume(); // Consumir el evento si es un espacio en blanco en la primera letra
-        } else if (txtnombrevendedor.getText().length() >= 80)
+            evt.consume(); // Consumir el evento si es un espacio en blanco o un número en la primera letra
+        } else if (txtnombrevendedor.getText().length() >= 80 || Character.isDigit(c))
         {
-            evt.consume(); // Consumir el evento si se ha alcanzado la longitud máxima
+            evt.consume(); // Consumir el evento si se ha alcanzado la longitud máxima o si es un número
         }
     }//GEN-LAST:event_txtnombrevendedorKeyTyped
 
@@ -413,26 +413,26 @@ public class crear_proveedor extends javax.swing.JPanel {
         String telefono = txtnumerovendedor.getText().trim();
         String direccion = txtdire.getText().trim();
 
-        StringBuilder camposVacios = new StringBuilder("Los siguientes campos están vacíos:");
+        StringBuilder camposVacios = new StringBuilder("Los siguientes campos están vacíos o no cumplen con los requisitos:");
 
         if (empresa.isEmpty())
         {
             camposVacios.append("\n - Nombre de la empresa");
         }
+
         if (numeroempresa.isEmpty())
         {
             camposVacios.append("\n - Número o teléfono de la empresa");
-        } else if (numeroempresa.length() == 9)
-        {
-            // El número de empresa tiene exactamente 9 caracteres
-        } else
+        } else if (numeroempresa.length() != 9)
         {
             camposVacios.append("\n - Número de empresa no cumple con los requisitos");
         }
+
         if (direccion.isEmpty())
         {
             camposVacios.append("\n - Dirección");
         }
+
         if (nombrevendedor.isEmpty())
         {
             camposVacios.append("\n - Nombre del vendedor");
@@ -441,10 +441,7 @@ public class crear_proveedor extends javax.swing.JPanel {
         if (telefono.isEmpty())
         {
             camposVacios.append("\n - Teléfono del vendedor");
-        } else if (telefono.length() == 9)
-        {
-            // El número de empresa tiene exactamente 9 caracteres
-        } else
+        } else if (telefono.length() != 9)
         {
             camposVacios.append("\n - Número del vendedor no cumple con los requisitos");
         }
@@ -453,6 +450,7 @@ public class crear_proveedor extends javax.swing.JPanel {
         {
             camposVacios.append("\n - Correo no cumple con los requisitos");
         }
+
         if (!camposVacios.toString().equals("Los siguientes campos están vacíos o no cumplen con los requisitos:"))
         {
             JOptionPane.showMessageDialog(null, camposVacios.toString(), "Campos Vacíos", JOptionPane.ERROR_MESSAGE);

@@ -377,12 +377,12 @@ public class editar_proveedor extends javax.swing.JPanel {
     private void txtnombrevendedorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtnombrevendedorKeyTyped
         char c = evt.getKeyChar(); // Obtener el carácter ingresado
 
-        if (txtnombrevendedor.getText().isEmpty() && Character.isWhitespace(c))
+        if (txtnombrevendedor.getText().isEmpty() && (Character.isWhitespace(c) || Character.isDigit(c)))
         {
-            evt.consume(); // Consumir el evento si es un espacio en blanco en la primera letra
-        } else if (txtnombrevendedor.getText().length() >= 80)
+            evt.consume(); // Consumir el evento si es un espacio en blanco o un número en la primera letra
+        } else if (txtnombrevendedor.getText().length() >= 80 || Character.isDigit(c))
         {
-            evt.consume(); // Consumir el evento si se ha alcanzado la longitud máxima
+            evt.consume(); // Consumir el evento si se ha alcanzado la longitud máxima o si es un número
         }
     }//GEN-LAST:event_txtnombrevendedorKeyTyped
 
@@ -425,82 +425,94 @@ public class editar_proveedor extends javax.swing.JPanel {
     }//GEN-LAST:event_txtnumerovendedorKeyTyped
 
     private void btnguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguardarActionPerformed
-String numeroempresa = txtnumeroempresa.getText().trim();
-    String nombrevendedor = txtnombrevendedor.getText().trim();
-    String empresa = txtempresa.getText().trim();
-    String correo = txtcorreo.getText().trim();
-    String telefono = txtnumerovendedor.getText().trim();
-    String direccion = txtdire.getText().trim();
+        String numeroempresa = txtnumeroempresa.getText().trim();
+        String nombrevendedor = txtnombrevendedor.getText().trim();
+        String empresa = txtempresa.getText().trim();
+        String correo = txtcorreo.getText().trim();
+        String telefono = txtnumerovendedor.getText().trim();
+        String direccion = txtdire.getText().trim();
 
-    StringBuilder camposVacios = new StringBuilder("Los siguientes campos están vacíos o no cumplen con los requisitos:");
+        StringBuilder camposVacios = new StringBuilder("Los siguientes campos están vacíos o no cumplen con los requisitos:");
 
-    if (empresa.isEmpty()) {
-        camposVacios.append("\n - Nombre de la empresa");
-    }
-
-    if (numeroempresa.isEmpty()) {
-        camposVacios.append("\n - Número o teléfono de la empresa");
-    } else if (numeroempresa.length() != 9) {
-        camposVacios.append("\n - Número de empresa no cumple con los requisitos");
-    }
-
-    if (direccion.isEmpty()) {
-        camposVacios.append("\n - Dirección");
-    }
-
-    if (nombrevendedor.isEmpty()) {
-        camposVacios.append("\n - Nombre del vendedor");
-    }
-
-    if (telefono.isEmpty()) {
-        camposVacios.append("\n - Teléfono del vendedor");
-    } else if (telefono.length() != 9) {
-        camposVacios.append("\n - Número del vendedor no cumple con los requisitos");
-    }
-
-    if (!correo.isEmpty() && !correo.matches("^[A-Za-z0-9+_.-]+@(.+)$")) {
-        camposVacios.append("\n - Correo no cumple con los requisitos");
-    }
-
-    if (!camposVacios.toString().equals("Los siguientes campos están vacíos o no cumplen con los requisitos:")) {
-        JOptionPane.showMessageDialog(null, camposVacios.toString(), "Campos Vacíos", JOptionPane.ERROR_MESSAGE);
-    } else {
-        try {
-            // Establece la conexión con la base de datos
-            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
-
-            // Prepara la consulta SQL
-            PreparedStatement ps = conn.prepareStatement("UPDATE proveedor SET nombreEmpresa = ?, nombreProveedor = ?, correo = ?, telefonoempresa = ?, telefonoproveedor = ?, direccion = ? WHERE id_proveedor = ?");
-            int numeracion = Integer.parseInt(txtid.getText());
-            ps.setString(1, empresa);
-            ps.setString(2, nombrevendedor);
-            ps.setString(3, correo);
-            ps.setString(4, numeroempresa);
-            ps.setString(5, telefono);
-            ps.setString(6, direccion);
-            ps.setInt(7, numeracion);
-
-            // Ejecuta la actualización de la base de datos
-            ps.executeUpdate();
-            JOptionPane.showMessageDialog(null, "Registro actualizado");
-
-            // Refresca la vista (si es necesario)
-            listado_proveedores cli = new listado_proveedores();
-            cli.setSize(1024, 640);
-            cli.setLocation(0, 0);
-
-            panelprincipal.revalidate();
-            panelprincipal.repaint();
-            panelprincipal.removeAll();
-            panelprincipal.add(cli, BorderLayout.CENTER);
-            panelprincipal.revalidate();
-            panelprincipal.repaint();
-        } catch (SQLException | ClassNotFoundException e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(null, e.toString());
+        if (empresa.isEmpty())
+        {
+            camposVacios.append("\n - Nombre de la empresa");
         }
-    }
+
+        if (numeroempresa.isEmpty())
+        {
+            camposVacios.append("\n - Número o teléfono de la empresa");
+        } else if (numeroempresa.length() != 9)
+        {
+            camposVacios.append("\n - Número de empresa no cumple con los requisitos");
+        }
+
+        if (direccion.isEmpty())
+        {
+            camposVacios.append("\n - Dirección");
+        }
+
+        if (nombrevendedor.isEmpty())
+        {
+            camposVacios.append("\n - Nombre del vendedor");
+        }
+
+        if (telefono.isEmpty())
+        {
+            camposVacios.append("\n - Teléfono del vendedor");
+        } else if (telefono.length() != 9)
+        {
+            camposVacios.append("\n - Número del vendedor no cumple con los requisitos");
+        }
+
+        if (!correo.isEmpty() && !correo.matches("^[A-Za-z0-9+_.-]+@(.+)$"))
+        {
+            camposVacios.append("\n - Correo no cumple con los requisitos");
+        }
+
+        if (!camposVacios.toString().equals("Los siguientes campos están vacíos o no cumplen con los requisitos:"))
+        {
+            JOptionPane.showMessageDialog(null, camposVacios.toString(), "Campos Vacíos", JOptionPane.ERROR_MESSAGE);
+        } else
+        {
+            try
+            {
+                // Establece la conexión con la base de datos
+                Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+                Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
+
+                // Prepara la consulta SQL
+                PreparedStatement ps = conn.prepareStatement("UPDATE proveedor SET nombreEmpresa = ?, nombreProveedor = ?, correo = ?, telefonoempresa = ?, telefonoproveedor = ?, direccion = ? WHERE id_proveedor = ?");
+                int numeracion = Integer.parseInt(txtid.getText());
+                ps.setString(1, empresa);
+                ps.setString(2, nombrevendedor);
+                ps.setString(3, correo);
+                ps.setString(4, numeroempresa);
+                ps.setString(5, telefono);
+                ps.setString(6, direccion);
+                ps.setInt(7, numeracion);
+
+                // Ejecuta la actualización de la base de datos
+                ps.executeUpdate();
+                JOptionPane.showMessageDialog(null, "Registro actualizado");
+
+                // Refresca la vista (si es necesario)
+                listado_proveedores cli = new listado_proveedores();
+                cli.setSize(1024, 640);
+                cli.setLocation(0, 0);
+
+                panelprincipal.revalidate();
+                panelprincipal.repaint();
+                panelprincipal.removeAll();
+                panelprincipal.add(cli, BorderLayout.CENTER);
+                panelprincipal.revalidate();
+                panelprincipal.repaint();
+            } catch (SQLException | ClassNotFoundException e)
+            {
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(null, e.toString());
+            }
+        }
     }//GEN-LAST:event_btnguardarActionPerformed
 
     private void txtcorreoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtcorreoKeyTyped
