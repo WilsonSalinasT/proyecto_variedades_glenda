@@ -65,43 +65,7 @@ public class EditarCita extends javax.swing.JPanel {
 
         cbxHoras.setModel(model);
 
-         try {
-            Connection connection = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
-
-            Statement stmt = connection.createStatement();
-            String sql = "SELECT id_cliente, nombre, apellido FROM Cliente";
-            ResultSet rs = stmt.executeQuery(sql);
-
-            txtCliente.addItem("Seleccione"); // Agrega el elemento "Seleccione" al principio
-
-            while (rs.next()) {
-                String nombre = rs.getString("nombre");
-                String apellido = rs.getString("apellido");
-                int idCliente = rs.getInt("id_cliente");
-
-                txtCliente.addItem(nombre + " " + apellido);
-
-                // Almacena el ID del cliente en un mapa con el nombre completo como clave
-                txtCliente.putClientProperty(nombre + " " + apellido, idCliente);
-            }
-
-            connection.close();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        txtCliente.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String selectedClient = (String) txtCliente.getSelectedItem();
-                int selectedClientId = (int) txtCliente.getClientProperty(selectedClient);
-
-                // Actualiza el campo de texto con el ID del cliente seleccionado
-                id_cliente.setText(Integer.toString(selectedClientId));
-            }
-        });
-
+        
 
     }
 
@@ -118,12 +82,12 @@ public class EditarCita extends javax.swing.JPanel {
         jTextField1 = new javax.swing.JTextField();
         btnvolver = new javax.swing.JButton();
         btnGuardar = new javax.swing.JButton();
-        txtCliente = new javax.swing.JComboBox<>();
         fechaCita = new com.toedter.calendar.JDateChooser();
         cbxHoras = new javax.swing.JComboBox<>();
         jScrollPane2 = new javax.swing.JScrollPane();
         txtMotivo = new javax.swing.JTextArea();
         id_cliente = new javax.swing.JTextField();
+        txtCliente = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setPreferredSize(new java.awt.Dimension(1024, 640));
@@ -184,8 +148,6 @@ public class EditarCita extends javax.swing.JPanel {
             }
         });
 
-        txtCliente.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Nombre del cliente", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12))); // NOI18N
-
         fechaCita.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Fecha de Cita", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12))); // NOI18N
 
         cbxHoras.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Hora de la cita", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12))); // NOI18N
@@ -207,6 +169,10 @@ public class EditarCita extends javax.swing.JPanel {
         id_cliente.setForeground(new java.awt.Color(255, 255, 255));
         id_cliente.setBorder(null);
 
+        txtCliente.setEditable(false);
+        txtCliente.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtCliente.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true), "Nombre del cliente", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12))); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -221,9 +187,9 @@ public class EditarCita extends javax.swing.JPanel {
                         .addComponent(fechaCita, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(cbxHoras, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(txtCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 516, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 516, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 516, Short.MAX_VALUE)
+                    .addComponent(txtCliente))
+                .addContainerGap(255, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -233,11 +199,11 @@ public class EditarCita extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(77, 77, 77)
+                .addGap(79, 79, 79)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(id_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(36, 36, 36)
+                    .addComponent(id_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(37, 37, 37)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(fechaCita, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbxHoras, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -265,7 +231,7 @@ public class EditarCita extends javax.swing.JPanel {
     }//GEN-LAST:event_btnvolverActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        String nombre = (String) txtCliente.getSelectedItem();
+       
         String motivo = txtMotivo.getText().trim();
         java.util.Date fecha = fechaCita.getDate();
        
@@ -274,10 +240,7 @@ public class EditarCita extends javax.swing.JPanel {
 
         StringBuilder camposVacios = new StringBuilder("Los siguientes campos están vacíos:");
 
-        if (nombre.equals("Seleccione"))
-        {
-            camposVacios.append("\n - Nombre");
-        }
+       
         if (fecha == null)
         {
             camposVacios.append("\n - Fecha");
@@ -366,7 +329,7 @@ public class EditarCita extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField jTextField1;
-    public javax.swing.JComboBox<String> txtCliente;
+    public javax.swing.JTextField txtCliente;
     public javax.swing.JTextArea txtMotivo;
     // End of variables declaration//GEN-END:variables
 

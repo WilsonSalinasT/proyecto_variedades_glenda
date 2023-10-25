@@ -36,10 +36,15 @@ public class Crear_Cita extends javax.swing.JPanel {
         initComponents();
         // holder = new TextPrompt("Busque al cliente por su nombre", txtCliente);
 
+//        fechaCita.setMinSelectableDate(new Date());
+//
+//        Calendar maxDate = Calendar.getInstance();
+//        maxDate.set(2024, Calendar.DECEMBER, 1);
+//        fechaCita.setMaxSelectableDate(maxDate.getTime());
         fechaCita.setMinSelectableDate(new Date());
 
         Calendar maxDate = Calendar.getInstance();
-        maxDate.set(2024, Calendar.DECEMBER, 1);
+        maxDate.add(Calendar.MONTH, 2); // Suma dos meses a la fecha actual
         fechaCita.setMaxSelectableDate(maxDate.getTime());
 
         // Generar ítems para el JComboBox
@@ -48,9 +53,12 @@ public class Crear_Cita extends javax.swing.JPanel {
         // Agregar "Seleccione" como primer elemento
         model.addElement("Seleccione");
 
-        for (int hora = 8; hora <= 16; hora++) { // Hasta las 4:30 p.m. (16:30)
-            for (int minuto = 0; minuto <= 30; minuto += 30) {
-                if (hora == 8 && minuto < 30) {
+        for (int hora = 8; hora <= 16; hora++)
+        { // Hasta las 4:30 p.m. (16:30)
+            for (int minuto = 0; minuto <= 30; minuto += 30)
+            {
+                if (hora == 8 && minuto < 30)
+                {
                     continue; // Saltar 8:00 a 8:30
                 }
                 String amPm = (hora < 12) ? "a.m." : "p.m.";
@@ -60,7 +68,8 @@ public class Crear_Cita extends javax.swing.JPanel {
 
         cbxHoras.setModel(model);
 
-         try {
+        try
+        {
             Connection connection = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
 
             Statement stmt = connection.createStatement();
@@ -69,7 +78,8 @@ public class Crear_Cita extends javax.swing.JPanel {
 
             txtCliente.addItem("Seleccione"); // Agrega el elemento "Seleccione" al principio
 
-            while (rs.next()) {
+            while (rs.next())
+            {
                 String nombre = rs.getString("nombre");
                 String apellido = rs.getString("apellido");
                 int idCliente = rs.getInt("id_cliente");
@@ -82,7 +92,8 @@ public class Crear_Cita extends javax.swing.JPanel {
 
             connection.close();
 
-        } catch (Exception e) {
+        } catch (Exception e)
+        {
             e.printStackTrace();
         }
 
@@ -282,26 +293,33 @@ public class Crear_Cita extends javax.swing.JPanel {
 
         StringBuilder camposVacios = new StringBuilder("Los siguientes campos están vacíos:");
 
-        if (nombre.equals("Seleccione")) {
+        if (nombre.equals("Seleccione"))
+        {
             camposVacios.append("\n - Nombre");
         }
-        if (fecha == null) {
+        if (fecha == null)
+        {
             camposVacios.append("\n - Fecha");
         }
         String categorias = cbxHoras.getSelectedItem().toString(); // Obtiene el elemento seleccionado en el JComboBox
 
-        if (categorias.equals("Seleccione")) {
+        if (categorias.equals("Seleccione"))
+        {
             camposVacios.append("\n - Hora");
         }
-        if (motivo.isEmpty()) {
+        if (motivo.isEmpty())
+        {
             camposVacios.append("\n - Motivo");
         }
 
-        if (!camposVacios.toString().equals("Los siguientes campos están vacíos:")) {
+        if (!camposVacios.toString().equals("Los siguientes campos están vacíos:"))
+        {
             JOptionPane.showMessageDialog(null, camposVacios.toString(), "Campos Vacíos", JOptionPane.ERROR_MESSAGE);
-        } else {
+        } else
+        {
 
-            try {
+            try
+            {
                 // Resto del código para la inserción en la base de datos
                 Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
                 Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
@@ -315,9 +333,7 @@ public class Crear_Cita extends javax.swing.JPanel {
                 insertPs.executeUpdate();
                 JOptionPane.showMessageDialog(null, "Registro guardado");
 
-                
 //                TIENE QUE LLEVAR AL LISTADO DE CITAS
-                
                 Listado_Citas cli = new Listado_Citas();
 
                 cli.setSize(1024, 640);
@@ -329,9 +345,11 @@ public class Crear_Cita extends javax.swing.JPanel {
                 panelprincipal.add(cli, BorderLayout.CENTER);
                 panelprincipal.revalidate();
                 panelprincipal.repaint();
-            } catch (SQLException e) {
+            } catch (SQLException e)
+            {
                 JOptionPane.showMessageDialog(null, e.toString(), "Error de SQL", JOptionPane.ERROR_MESSAGE);
-            } catch (ClassNotFoundException ex) {
+            } catch (ClassNotFoundException ex)
+            {
                 JOptionPane.showMessageDialog(null, "Error de conexión a la base de datos", "Error de Conexión", JOptionPane.ERROR_MESSAGE);
             }
         }

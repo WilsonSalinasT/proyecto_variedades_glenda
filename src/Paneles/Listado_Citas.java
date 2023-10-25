@@ -166,7 +166,7 @@ public class Listado_Citas extends javax.swing.JPanel {
 
             },
             new String [] {
-                "N°", "Nombre Cliente", "Apellido Cliente", "Celular", "Fecha de la cita"
+                "N°", "Nombre del cliente", "Apellido del cliente", "Celular", "Fecha de la cita"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -465,7 +465,8 @@ public class Listado_Citas extends javax.swing.JPanel {
                 editar.fechaCita.setDate(rs.getDate("fecha_cita"));
                 editar.cbxHoras.setSelectedItem(rs.getString("hora_cita"));
                 editar.txtMotivo.setText(rs.getString("motivo"));
-                editar.txtCliente.setSelectedItem(nombre + " " + apellido);
+                editar.txtCliente.setText(nombre + " " + apellido);
+              
                 editar.id_cliente.setText(rs.getString("id"));
 
                 editar.setSize(1024, 640);

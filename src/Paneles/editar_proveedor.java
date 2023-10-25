@@ -472,7 +472,7 @@ public class editar_proveedor extends javax.swing.JPanel {
             camposVacios.append("\n - Número del vendedor no cumple con los requisitos");
         }
 
-        if (!correo.isEmpty() && !correo.matches("^[A-Za-z0-9+_.-]+@(.+)$"))
+        if (!correo.isEmpty() && !correo.matches("^[A-Za-z0-9+_.-]+@.+\\.com$"))
         {
             camposVacios.append("\n - Correo no cumple con los requisitos");
         }

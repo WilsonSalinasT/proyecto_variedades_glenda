@@ -109,6 +109,9 @@ public class editar_cliente extends javax.swing.JPanel {
         txtcorreo.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtcorreo.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Correo electrónico:", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12))); // NOI18N
         txtcorreo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtcorreoKeyReleased(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtcorreoKeyTyped(evt);
             }
@@ -265,9 +268,12 @@ public class editar_cliente extends javax.swing.JPanel {
         {
             camposVacios.append("\n - Teléfono");
         }
-        if (correo.isEmpty())
+         if (correo.isEmpty())
         {
             camposVacios.append("\n - Correo");
+        } else if (!correo.matches("^[A-Za-z0-9+_.-]+@.+\\.com$"))
+        {
+            camposVacios.append("\n - Correo no cumple con los requisitos");
         }
 
         if (!camposVacios.toString().equals("Los siguientes campos están vacíos:"))
@@ -456,6 +462,10 @@ public class editar_cliente extends javax.swing.JPanel {
             txttelefono.setText("");
         }
     }//GEN-LAST:event_txttelefonoKeyReleased
+
+    private void txtcorreoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtcorreoKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtcorreoKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
