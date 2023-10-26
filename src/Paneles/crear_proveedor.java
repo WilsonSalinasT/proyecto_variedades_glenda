@@ -5,7 +5,7 @@
 package Paneles;
 
 import static App.Menu.panelprincipal;
-import static Paneles.editar_cliente.txttelefono;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.HeadlessException;

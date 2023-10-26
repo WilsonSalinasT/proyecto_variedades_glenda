@@ -52,6 +52,7 @@ public class editar_cliente extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         Id_cl = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
+        txttelefono = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -94,17 +95,6 @@ public class editar_cliente extends javax.swing.JPanel {
                 .addComponent(btnatras)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-
-        txttelefono.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txttelefono.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Número de celular:", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12))); // NOI18N
-        txttelefono.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txttelefonoKeyReleased(evt);
-            }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txttelefonoKeyTyped(evt);
-            }
-        });
 
         txtcorreo.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtcorreo.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Correo electrónico:", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12))); // NOI18N
@@ -176,16 +166,33 @@ public class editar_cliente extends javax.swing.JPanel {
         jLabel4.setForeground(new java.awt.Color(59, 59, 59));
         jLabel4.setText("Género:");
 
+        txttelefono.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txttelefono.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Número de celular:", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12))); // NOI18N
+        txttelefono.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txttelefonoKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txttelefonoKeyTyped(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(450, 450, 450))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btncrear, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(402, 402, 402))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(60, 60, 60)
                         .addComponent(Id_cl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -200,19 +207,13 @@ public class editar_cliente extends javax.swing.JPanel {
                             .addComponent(txtnombre, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtcorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txttelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(txtcorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txttelefono, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 369, Short.MAX_VALUE))))
                 .addGap(317, 317, 317))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(450, 450, 450))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btncrear, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(402, 402, 402))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -232,9 +233,9 @@ public class editar_cliente extends javax.swing.JPanel {
                     .addComponent(rbmasculino))
                 .addGap(32, 32, 32)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
+                .addGap(18, 18, 18)
                 .addComponent(txttelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(22, 22, 22)
+                .addGap(30, 30, 30)
                 .addComponent(txtcorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btncrear)
@@ -402,11 +403,44 @@ public class editar_cliente extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jtadireccionKeyTyped
 
+    private void txtcorreoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtcorreoKeyTyped
+        char c = evt.getKeyChar(); // Obtener el carácter ingresado
+
+        if (!Character.isLetterOrDigit(c) && c != '@' && c != '.' && c != '&' && c != '#' && c != '$' && c != '?' && c != '-')
+        {
+            evt.consume(); // Consumir el evento si no es una letra, un número, '@' o '.'
+        } else if (txtcorreo.getText().length() >= 30)
+        {
+            evt.consume(); // Consumir el evento si se ha alcanzado la longitud máxima
+        }
+    }//GEN-LAST:event_txtcorreoKeyTyped
+
+    private void txtcorreoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtcorreoKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtcorreoKeyReleased
+
+    private void txttelefonoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txttelefonoKeyReleased
+        String texto = txttelefono.getText().trim();
+        char c = evt.getKeyChar();
+
+        if (texto.startsWith("9") || texto.startsWith("8") || texto.startsWith("3") || c == 9 && c == 8 & c == 3)
+        {
+            txttelefono.setBackground(Color.green);
+        } else
+        {
+            // El texto no cumple con la validación
+            evt.consume(); // Bloquea el carácter
+            JOptionPane.showMessageDialog(this, "El número de celular debe comenzar con 9, 8 o 3", "Error", JOptionPane.ERROR_MESSAGE);
+            txttelefono.setBackground(Color.red);
+            txttelefono.setText("");
+        }
+    }//GEN-LAST:event_txttelefonoKeyReleased
+
     private void txttelefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txttelefonoKeyTyped
         String texto = txttelefono.getText();
         char c = evt.getKeyChar();
 
-// Verificar si el número de caracteres no excede el formato esperado
+        // Verificar si el número de caracteres no excede el formato esperado
         if (texto.length() < 9)
         {
             if (texto.isEmpty())
@@ -436,37 +470,6 @@ public class editar_cliente extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_txttelefonoKeyTyped
 
-    private void txtcorreoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtcorreoKeyTyped
-        char c = evt.getKeyChar(); // Obtener el carácter ingresado
-
-        if (!Character.isLetterOrDigit(c) && c != '@' && c != '.' && c != '&' && c != '#' && c != '$' && c != '?' && c != '-')
-        {
-            evt.consume(); // Consumir el evento si no es una letra, un número, '@' o '.'
-        } else if (txtcorreo.getText().length() >= 30)
-        {
-            evt.consume(); // Consumir el evento si se ha alcanzado la longitud máxima
-        }
-    }//GEN-LAST:event_txtcorreoKeyTyped
-
-    private void txttelefonoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txttelefonoKeyReleased
-         String texto = txttelefono.getText().trim();
-        char c = evt.getKeyChar();
-
-        if (texto.startsWith("9") || texto.startsWith("8") || texto.startsWith("3") || c == 9 && c == 8 & c == 3) {
-            txttelefono.setBackground(Color.green);
-        } else {
-            // El texto no cumple con la validación
-            evt.consume(); // Bloquea el carácter
-            JOptionPane.showMessageDialog(this, "El número de celular debe comenzar con 9, 8 o 3", "Error", JOptionPane.ERROR_MESSAGE);
-            txttelefono.setBackground(Color.red);
-            txttelefono.setText("");
-        }
-    }//GEN-LAST:event_txttelefonoKeyReleased
-
-    private void txtcorreoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtcorreoKeyReleased
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtcorreoKeyReleased
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JTextField Id_cl;
@@ -482,7 +485,7 @@ public class editar_cliente extends javax.swing.JPanel {
     public static final javax.swing.JTextField txtapellido = new javax.swing.JTextField();
     public static final javax.swing.JTextField txtcorreo = new javax.swing.JTextField();
     public static final javax.swing.JTextField txtnombre = new javax.swing.JTextField();
-    public static final javax.swing.JTextField txttelefono = new javax.swing.JTextField();
+    public javax.swing.JTextField txttelefono;
     // End of variables declaration//GEN-END:variables
 
     private int obtenerIdCliente() {

@@ -544,7 +544,7 @@ public class crear_cliente extends javax.swing.JPanel {
     private javax.swing.JTextField txtapellido;
     private javax.swing.JTextField txtcorreo;
     private javax.swing.JTextField txtnombre;
-    private javax.swing.JTextField txttelefono;
+    public javax.swing.JTextField txttelefono;
     // End of variables declaration//GEN-END:variables
 
     private boolean isValidDateFormat(String fechaHora, String ddMMyyyy) {
