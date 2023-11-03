@@ -9,6 +9,7 @@ import Paneles.Listado_Citas;
 import Paneles.Listado_Empleados;
 
 import Paneles.Listado_Productos;
+import Paneles.Listado_pedido_entregado;
 
 import Paneles.clientes;
 import Paneles.crear_proveedor;

@@ -720,8 +720,7 @@ public class Listado_Empleados extends javax.swing.JPanel {
             paginaActual--;
             cargarTablaEmpleados();
         }
-    }
-
+  }
 //    private void ajustarTabla(int filasDeseadas) {
 //        tblEmpleados.setPreferredScrollableViewportSize(new Dimension(tblEmpleados.getPreferredSize().width, tblEmpleados.getRowHeight() * filasDeseadas));
 //        tblEmpleados.setFillsViewportHeight(true);
@@ -785,6 +784,7 @@ public class Listado_Empleados extends javax.swing.JPanel {
         }
 
         cargarTablaEmpleados(); // Recargar la tabla después de la búsqueda
+        
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton Btn_Buscar;
