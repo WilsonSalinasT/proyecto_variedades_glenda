@@ -4,17 +4,26 @@
  */
 package Paneles;
 
+import static App.Menu.panelprincipal;
+import java.awt.BorderLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
@@ -47,7 +56,6 @@ public class Crear_Pedido extends javax.swing.JPanel {
                 String nombreCompleto = nombre + " " + apellido;
                 txtCliente.addItem(nombreCompleto);
             }
-        
 
             connection.close();
 
@@ -55,44 +63,43 @@ public class Crear_Pedido extends javax.swing.JPanel {
             e.printStackTrace();
         }
 
-       txtCliente.addActionListener(new ActionListener() {
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        if (txtCliente.getSelectedIndex() > 0) {
-            String selectedClient = (String) txtCliente.getSelectedItem();
+        txtCliente.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (txtCliente.getSelectedIndex() > 0) {
+                    String selectedClient = (String) txtCliente.getSelectedItem();
 
-            // Verifica si se seleccionó el elemento "Seleccione"
-            if (!selectedClient.equals("Seleccione")) {
-                // Buscar nuevamente el ID y el teléfono en la base de datos
-                try {
-                    Connection connection = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
+                    // Verifica si se seleccionó el elemento "Seleccione"
+                    if (!selectedClient.equals("Seleccione")) {
+                        // Buscar nuevamente el ID y el teléfono en la base de datos
+                        try {
+                            Connection connection = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
 
-                    Statement stmt = connection.createStatement();
-                    String sql = "SELECT id_cliente, numero_telefono FROM Cliente WHERE CONCAT(nombre, ' ', apellido) = '" + selectedClient + "'";
-                    ResultSet rs = stmt.executeQuery(sql);
+                            Statement stmt = connection.createStatement();
+                            String sql = "SELECT id_cliente, numero_telefono FROM Cliente WHERE CONCAT(nombre, ' ', apellido) = '" + selectedClient + "'";
+                            ResultSet rs = stmt.executeQuery(sql);
 
-                    if (rs.next()) {
-                        int selectedClientId = rs.getInt("id_cliente");
-                        String selectedClientTelefono = rs.getString("numero_telefono");
+                            if (rs.next()) {
+                                int selectedClientId = rs.getInt("id_cliente");
+                                String selectedClientTelefono = rs.getString("numero_telefono");
 
-                        // Actualiza los campos de texto con el ID y el teléfono del cliente seleccionado
-                        id_cliente.setText(Integer.toString(selectedClientId));
-                        txtTel.setText(selectedClientTelefono);
+                                // Actualiza los campos de texto con el ID y el teléfono del cliente seleccionado
+                                id_cliente.setText(Integer.toString(selectedClientId));
+                                txtTel.setText(selectedClientTelefono);
+                            }
+
+                            connection.close();
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                        }
+                    } else {
+                        // Si se selecciona "Seleccione", establece los campos en blanco
+                        id_cliente.setText("");
+                        txtTel.setText("");
                     }
-
-                    connection.close();
-                } catch (Exception ex) {
-                    ex.printStackTrace();
                 }
-            } else {
-                // Si se selecciona "Seleccione", establece los campos en blanco
-                id_cliente.setText("");
-                txtTel.setText("");
             }
-        }
-    }
-});
-
+        });
 
     }
 
@@ -127,22 +134,23 @@ public class Crear_Pedido extends javax.swing.JPanel {
         imagen3 = new javax.swing.JLabel();
         imagenes = new javax.swing.JButton();
         imagen1 = new javax.swing.JLabel();
-        txtCintura = new javax.swing.JTextField();
-        txtCadera = new javax.swing.JTextField();
+        labelPrendas = new javax.swing.JLabel();
         txtLargo = new javax.swing.JTextField();
+        txtCadera = new javax.swing.JTextField();
+        txtCintura = new javax.swing.JTextField();
         txtLManga = new javax.swing.JTextField();
         txtAManga = new javax.swing.JTextField();
-        txtPecho = new javax.swing.JTextField();
         txtCuello = new javax.swing.JTextField();
-        txtHombro = new javax.swing.JTextField();
+        txtPecho = new javax.swing.JTextField();
         txtMuneca = new javax.swing.JTextField();
-        labelPrendas = new javax.swing.JLabel();
+        txtHombro = new javax.swing.JTextField();
+        txtAEspalda = new javax.swing.JTextField();
+        txtLEspalda = new javax.swing.JTextField();
         txtRodilla = new javax.swing.JTextField();
         txtTobillo = new javax.swing.JTextField();
         txtTiro = new javax.swing.JTextField();
         txtMuslo = new javax.swing.JTextField();
-        txtLEspalda = new javax.swing.JTextField();
-        txtAEspalda = new javax.swing.JTextField();
+        ruta = new javax.swing.JLabel();
 
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
@@ -261,10 +269,11 @@ public class Crear_Pedido extends javax.swing.JPanel {
         btnCrear.setBackground(new java.awt.Color(255, 153, 51));
         btnCrear.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnCrear.setText("CREAR");
-
-        imagen2.setText("IMAGEN 2");
-
-        imagen3.setText("IMAGEN 3");
+        btnCrear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCrearActionPerformed(evt);
+            }
+        });
 
         imagenes.setBackground(new java.awt.Color(255, 152, 52));
         imagenes.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
@@ -275,33 +284,111 @@ public class Crear_Pedido extends javax.swing.JPanel {
             }
         });
 
-        imagen1.setText("jLabel1");
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(50, 81, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addComponent(imagen1, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(imagen2, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(31, 31, 31))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addComponent(imagenes)
+                        .addGap(70, 70, 70)))
+                .addComponent(imagen3, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(imagen2, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(imagen3, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(imagen1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(imagenes)
+                .addContainerGap(43, Short.MAX_VALUE))
+        );
 
-        txtCintura.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cintura", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP));
-
-        txtCadera.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cadera", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP));
-        txtCadera.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCaderaActionPerformed(evt);
-            }
-        });
+        labelPrendas.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
 
         txtLargo.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Largo ", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP));
+        txtLargo.setPreferredSize(new java.awt.Dimension(30, 50));
         txtLargo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtLargoActionPerformed(evt);
             }
         });
+        txtLargo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtLargoKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtLargoKeyTyped(evt);
+            }
+        });
+
+        txtCadera.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cadera", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP));
+        txtCadera.setPreferredSize(new java.awt.Dimension(30, 50));
+        txtCadera.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCaderaActionPerformed(evt);
+            }
+        });
+        txtCadera.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCaderaKeyTyped(evt);
+            }
+        });
+
+        txtCintura.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cintura", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP));
+        txtCintura.setPreferredSize(new java.awt.Dimension(30, 50));
+        txtCintura.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCinturaKeyTyped(evt);
+            }
+        });
 
         txtLManga.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Largo de Manga", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP));
+        txtLManga.setPreferredSize(new java.awt.Dimension(25, 45));
+        txtLManga.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtLMangaKeyTyped(evt);
+            }
+        });
 
         txtAManga.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Ancho de Manga", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP));
-
-        txtPecho.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Pecho", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP));
+        txtAManga.setMinimumSize(new java.awt.Dimension(25, 45));
+        txtAManga.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtAMangaKeyTyped(evt);
+            }
+        });
 
         txtCuello.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cuello", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP));
+        txtCuello.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCuelloKeyTyped(evt);
+            }
+        });
 
-        txtHombro.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Hombro", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP));
+        txtPecho.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Pecho", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP));
+        txtPecho.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPechoActionPerformed(evt);
+            }
+        });
+        txtPecho.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtPechoKeyTyped(evt);
+            }
+        });
 
         txtMuneca.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Muñeca", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP));
         txtMuneca.addActionListener(new java.awt.event.ActionListener() {
@@ -309,15 +396,68 @@ public class Crear_Pedido extends javax.swing.JPanel {
                 txtMunecaActionPerformed(evt);
             }
         });
+        txtMuneca.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtMunecaKeyTyped(evt);
+            }
+        });
 
-        labelPrendas.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
-        labelPrendas.setText("Medidas para Camiseta (cm)");
+        txtHombro.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Hombro", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP));
+        txtHombro.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtHombroKeyTyped(evt);
+            }
+        });
+
+        txtAEspalda.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Ancho de Espalda", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP));
+        txtAEspalda.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtAEspaldaKeyTyped(evt);
+            }
+        });
+
+        txtLEspalda.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Largo de Espalda", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP));
+        txtLEspalda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtLEspaldaActionPerformed(evt);
+            }
+        });
+        txtLEspalda.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtLEspaldaKeyTyped(evt);
+            }
+        });
 
         txtRodilla.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Rodilla", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP));
+        txtRodilla.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtRodillaActionPerformed(evt);
+            }
+        });
+        txtRodilla.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtRodillaKeyTyped(evt);
+            }
+        });
 
         txtTobillo.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tobillo", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP));
+        txtTobillo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtTobilloKeyTyped(evt);
+            }
+        });
 
         txtTiro.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tiro", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP));
+        txtTiro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTiroActionPerformed(evt);
+            }
+        });
+        txtTiro.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtTiroKeyTyped(evt);
+            }
+        });
 
         txtMuslo.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Muslo", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP));
         txtMuslo.addActionListener(new java.awt.event.ActionListener() {
@@ -325,110 +465,13 @@ public class Crear_Pedido extends javax.swing.JPanel {
                 txtMusloActionPerformed(evt);
             }
         });
+        txtMuslo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtMusloKeyTyped(evt);
+            }
+        });
 
-        txtLEspalda.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Largo de Espalda", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP));
-
-        txtAEspalda.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Ancho de Espalda", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP));
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(255, 255, 255)
-                .addComponent(labelPrendas, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addGap(50, 50, 50)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(imagen1, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
-                                .addComponent(imagen2, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(imagenes)
-                                .addGap(58, 58, 58)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(imagen3, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addComponent(txtCintura, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(txtCadera))
-                                    .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addComponent(txtLManga)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txtAManga, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txtCuello)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addComponent(txtMuneca, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txtHombro, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addComponent(txtRodilla, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txtTobillo, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtTiro, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
-                                    .addComponent(txtAEspalda))
-                                .addGap(12, 12, 12)))
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtMuslo, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(txtLEspalda, javax.swing.GroupLayout.DEFAULT_SIZE, 204, Short.MAX_VALUE)
-                                .addComponent(txtLargo)
-                                .addComponent(txtPecho)))))
-                .addContainerGap())
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(59, 59, 59)
-                .addComponent(labelPrendas)
-                .addGap(16, 16, 16)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtCintura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtCadera, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtLargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtCuello, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtLManga, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtAManga, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtPecho, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtHombro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtMuneca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtAEspalda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtLEspalda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtRodilla, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtTobillo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtTiro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtMuslo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(51, 51, 51)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(imagen2, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(imagen3, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(imagen1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addComponent(imagenes)
-                .addContainerGap(32, Short.MAX_VALUE))
-        );
+        ruta.setText("jLabel1");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -436,6 +479,9 @@ public class Crear_Pedido extends javax.swing.JPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(149, 149, 149)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(16, 16, 16)
@@ -455,15 +501,56 @@ public class Crear_Pedido extends javax.swing.JPanel {
                                         .addComponent(cbxEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                 .addGap(134, 134, 134)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jScrollPane2)
-                                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 687, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(391, 391, 391)
                         .addComponent(txtprecio, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(476, 476, 476)
-                        .addComponent(btnCrear)))
+                        .addComponent(btnCrear))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(155, 155, 155)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(txtCintura, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtCadera, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtLargo, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtMuneca, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
+                                    .addComponent(txtLManga, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
+                                    .addComponent(txtRodilla, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(txtAManga, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtCuello, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtPecho, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                            .addComponent(txtTobillo, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
+                                            .addComponent(txtHombro, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addComponent(txtAEspalda, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(txtLEspalda, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(0, 0, Short.MAX_VALUE))
+                                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addComponent(txtTiro, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(txtMuslo, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE))))))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(361, 361, 361)
+                        .addComponent(labelPrendas, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(420, 420, 420)
+                        .addComponent(ruta)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -483,18 +570,60 @@ public class Crear_Pedido extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(cbxEstado)
                     .addComponent(cbxPrenda))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(40, 40, 40)
+                .addComponent(labelPrendas, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtCintura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCadera, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtLargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtCuello, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtLManga, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtAManga, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtPecho, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtHombro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtMuneca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtAEspalda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtLEspalda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtRodilla, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTobillo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTiro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtMuslo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(ruta)
+                .addGap(3, 3, 3)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(42, 42, 42)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(62, 62, 62)
                 .addComponent(txtprecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)
                 .addComponent(btnCrear)
-                .addGap(42, 42, 42))
+                .addContainerGap())
         );
 
         id_cliente.setVisible(false);
+        txtLargo.setVisible(false);
+        txtCadera.setVisible(false);
+        txtCintura.setVisible(false);
+        txtLManga.setVisible(false);
+        txtAManga.setVisible(false);
+        txtCuello.setVisible(false);
+        txtPecho.setVisible(false);
+        txtMuneca.setVisible(false);
+        txtHombro.setVisible(false);
+        txtAEspalda.setVisible(false);
+        txtLEspalda.setVisible(false);
+        txtRodilla.setVisible(false);
+        txtTobillo.setVisible(false);
+        txtTiro.setVisible(false);
+        txtMuslo.setVisible(false);
 
         jScrollPane1.setViewportView(jPanel1);
 
@@ -507,7 +636,7 @@ public class Crear_Pedido extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 632, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -525,7 +654,7 @@ public class Crear_Pedido extends javax.swing.JPanel {
 
     private void txtDescripKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDescripKeyTyped
         char c = evt.getKeyChar();
-        if (Character.isWhitespace(c) && txtDescrip.getText().isEmpty() || (c < 'a' || c > 'z') && (c < 'A' || c > 'Z') && ((int) evt.getKeyChar() <= 500 && evt.getKeyChar() >= 164) && c != KeyEvent.VK_SPACE || txtDescrip.getText().length() >= 250)
+        if (Character.isWhitespace(c) && txtDescrip.getText().isEmpty() || (c < 'a' || c > 'z') && (c < 'A' || c > 'Z') && ((int) evt.getKeyChar() <= 500 && evt.getKeyChar() >= 164) && c != KeyEvent.VK_SPACE || txtDescrip.getText().length() >= 300)
             evt.consume();
     }//GEN-LAST:event_txtDescripKeyTyped
 
@@ -548,9 +677,13 @@ public class Crear_Pedido extends javax.swing.JPanel {
     private void txtprecioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtprecioKeyTyped
         char c = evt.getKeyChar();
         String texto = txtprecio.getText();
-        if ((c < '0' || c > '9') && (texto.length() <= 5) || txtprecio.getText().length() >= 6) {
-            evt.consume();
+
+        if (c == '0' && (texto.isEmpty() || texto.equals("0"))) {
+            evt.consume(); // Evita que se inicie con un cero
+        } else if ((c < '0' || c > '9') || texto.length() >= 6) {
+            evt.consume(); // Evita que se ingresen más de 6 caracteres o caracteres que no sean dígitos
         }
+
     }//GEN-LAST:event_txtprecioKeyTyped
 
     private void txtTelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTelActionPerformed
@@ -561,17 +694,117 @@ public class Crear_Pedido extends javax.swing.JPanel {
         String seleccion = cbxPrenda.getSelectedItem().toString();
 
         if (seleccion.equals("Camisa")) {
-            
+            labelPrendas.setText("Medidas para Camisa (cm)");
+
+            txtCintura.setVisible(true);
+            txtCadera.setVisible(true);
+            txtLargo.setVisible(true);
+            txtLManga.setVisible(true);
+            txtAManga.setVisible(true);
+            txtCuello.setVisible(true);
+            txtPecho.setVisible(true);
+            txtMuneca.setVisible(true);
+            txtHombro.setVisible(true);
+            txtAEspalda.setVisible(true);
+            txtLEspalda.setVisible(true);
+
+            txtRodilla.setVisible(false);
+            txtTobillo.setVisible(false);
+            txtTiro.setVisible(false);
+            txtMuslo.setVisible(false);
+
         } else if (seleccion.equals("Camiseta")) {
-            
+            labelPrendas.setText("Medidas para Camiseta (cm)");
+            txtCintura.setVisible(true);
+            txtCadera.setVisible(true);
+            txtLargo.setVisible(true);
+            txtLManga.setVisible(true);
+            txtAManga.setVisible(true);
+            txtCuello.setVisible(true);
+            txtPecho.setVisible(true);
+            txtHombro.setVisible(true);
+            txtAEspalda.setVisible(true);
+            txtLEspalda.setVisible(true);
+
+            txtMuneca.setVisible(false);
+            txtRodilla.setVisible(false);
+            txtTobillo.setVisible(false);
+            txtTiro.setVisible(false);
+            txtMuslo.setVisible(false);
         } else if (seleccion.equals("Pantalón")) {
-            
+            labelPrendas.setText("Medidas para Pantalón (cm)");
+            txtCintura.setVisible(true);
+            txtCadera.setVisible(true);
+            txtLargo.setVisible(true);
+            txtRodilla.setVisible(true);
+            txtTobillo.setVisible(true);
+            txtTiro.setVisible(true);
+            txtMuslo.setVisible(true);
+
+            txtLManga.setVisible(false);
+            txtAManga.setVisible(false);
+            txtCuello.setVisible(false);
+            txtPecho.setVisible(false);
+            txtMuneca.setVisible(false);
+            txtHombro.setVisible(false);
+            txtAEspalda.setVisible(false);
+            txtLEspalda.setVisible(false);
+
         } else if (seleccion.equals("Vestido")) {
-           
+            labelPrendas.setText("Medidas para Vestido (cm)");
+            txtCintura.setVisible(true);
+            txtCadera.setVisible(true);
+            txtLargo.setVisible(true);
+            txtTiro.setVisible(true);
+            txtPecho.setVisible(true);
+            txtAEspalda.setVisible(true);
+            txtLEspalda.setVisible(true);
+            txtLManga.setVisible(true);
+            txtAManga.setVisible(true);
+            txtCuello.setVisible(true);
+
+            txtRodilla.setVisible(false);
+            txtTobillo.setVisible(false);
+            txtTiro.setVisible(false);
+            txtMuslo.setVisible(false);
+
         } else if (seleccion.equals("Falda")) {
-           
+            labelPrendas.setText("Medidas para Falda (cm)");
+            txtCintura.setVisible(true);
+            txtCadera.setVisible(true);
+            txtLargo.setVisible(true);
+
+            txtRodilla.setVisible(false);
+            txtTobillo.setVisible(false);
+            txtTiro.setVisible(false);
+            txtMuslo.setVisible(false);
+            txtAManga.setVisible(false);
+            txtCuello.setVisible(false);
+            txtPecho.setVisible(false);
+            txtMuneca.setVisible(false);
+            txtHombro.setVisible(false);
+            txtAEspalda.setVisible(false);
+            txtLEspalda.setVisible(false);
+            txtLManga.setVisible(false);
         } else {
-           
+
+            labelPrendas.setText("Medidas...");
+
+            txtCintura.setVisible(false);
+            txtCadera.setVisible(false);
+            txtLargo.setVisible(false);
+            txtLManga.setVisible(false);
+            txtAManga.setVisible(false);
+            txtCuello.setVisible(false);
+            txtPecho.setVisible(false);
+            txtMuneca.setVisible(false);
+            txtHombro.setVisible(false);
+            txtAEspalda.setVisible(false);
+            txtLEspalda.setVisible(false);
+            txtRodilla.setVisible(false);
+            txtTobillo.setVisible(false);
+            txtTiro.setVisible(false);
+            txtMuslo.setVisible(false);
         }
 
     }//GEN-LAST:event_cbxPrendaActionPerformed
@@ -583,8 +816,10 @@ public class Crear_Pedido extends javax.swing.JPanel {
     private void txtMusloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMusloActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtMusloActionPerformed
+
     private File[] archivos = new File[3];
     private int contador = 0; // Para llevar el registro de cuántas veces se ha presionado el botón
+
     private void imagenesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_imagenesActionPerformed
         if (contador < 3) {
             JFileChooser fclAbrirArchivo = new JFileChooser();
@@ -621,6 +856,488 @@ public class Crear_Pedido extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCaderaActionPerformed
 
+    private void txtPechoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPechoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPechoActionPerformed
+
+    private void txtRodillaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRodillaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtRodillaActionPerformed
+
+    private void txtTiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTiroActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTiroActionPerformed
+
+    private void txtLEspaldaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtLEspaldaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtLEspaldaActionPerformed
+
+    private void btnCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActionPerformed
+        String nombre = (String) txtCliente.getSelectedItem();
+        String prenda = (String) cbxPrenda.getSelectedItem();
+        String estado = (String) cbxEstado.getSelectedItem();
+        String idC = id_cliente.getText();
+        String imagenM1 = imagen1.getText();
+        String descripcion = txtDescrip.getText();
+        String precio = txtprecio.getText();
+
+        String cadera = txtCadera.getText();
+        String cintura = txtCintura.getText();
+        String largo = txtLargo.getText();
+        String largoManga = txtLManga.getText();
+        String anchoManga = txtAManga.getText();
+        String cuello = txtCuello.getText();
+        String pecho = txtPecho.getText();
+        String muneca = txtMuneca.getText();
+        String hombro = txtHombro.getText();
+        String anchoEsp = txtAEspalda.getText();
+        String largoEsp = txtLEspalda.getText();
+        String rodilla = txtRodilla.getText();
+        String tobillo = txtTobillo.getText();
+        String tiro = txtTiro.getText();
+        String muslo = txtMuslo.getText();
+
+        StringBuilder camposVacios = new StringBuilder("Los siguientes campos están vacíos:");
+
+        if (nombre.equals("Seleccione")) {
+            camposVacios.append("\n - Nombre del cliente");
+        }
+        if (prenda.equals("Seleccione")) {
+            camposVacios.append("\n - Prenda");
+        }
+        if (imagen1.getIcon() == null) {
+            camposVacios.append("\n - Agregue al menos una imagen de muestra");
+        }
+        if (descripcion.isEmpty()) {
+            camposVacios.append("\n - Descripción");
+        }
+        if (precio.isEmpty()) {
+            camposVacios.append("\n - Precio");
+        }
+
+        if (prenda.equals("Camisa")) {
+
+            if (txtCintura.getText().isEmpty()) {
+                camposVacios.append("\n - Cintura");
+            }
+
+            if (txtCadera.getText().isEmpty()) {
+                camposVacios.append("\n - Cadera");
+            }
+
+            if (txtLargo.getText().isEmpty()) {
+                camposVacios.append("\n - Largo");
+            }
+            if (txtLManga.getText().isEmpty()) {
+                camposVacios.append("\n - Largo de Manga");
+            }
+
+            if (txtAManga.getText().isEmpty()) {
+                camposVacios.append("\n - Ancho de Manga");
+            }
+
+            if (txtCuello.getText().isEmpty()) {
+                camposVacios.append("\n - Cuello");
+            }
+
+            if (txtPecho.getText().isEmpty()) {
+                camposVacios.append("\n - Pecho");
+            }
+
+            if (txtMuneca.getText().isEmpty()) {
+                camposVacios.append("\n - Muñeca");
+            }
+
+            if (txtHombro.getText().isEmpty()) {
+                camposVacios.append("\n - Hombro");
+            }
+
+            if (txtAEspalda.getText().isEmpty()) {
+                camposVacios.append("\n - Ancho de Espalda");
+            }
+
+            if (txtLEspalda.getText().isEmpty()) {
+                camposVacios.append("\n - Largo de Espalda");
+            }
+
+        }
+        if (prenda.equals("Camiseta")) {
+            if (txtCintura.getText().isEmpty()) {
+                camposVacios.append("\n - Cintura");
+            }
+
+            if (txtCadera.getText().isEmpty()) {
+                camposVacios.append("\n - Cadera");
+            }
+
+            if (txtLargo.getText().isEmpty()) {
+                camposVacios.append("\n - Largo");
+            }
+            if (txtLManga.getText().isEmpty()) {
+                camposVacios.append("\n - Largo de Manga");
+            }
+
+            if (txtAManga.getText().isEmpty()) {
+                camposVacios.append("\n - Ancho de Manga");
+            }
+
+            if (txtCuello.getText().isEmpty()) {
+                camposVacios.append("\n - Cuello");
+            }
+
+            if (txtPecho.getText().isEmpty()) {
+                camposVacios.append("\n - Pecho");
+            }
+            if (txtHombro.getText().isEmpty()) {
+                camposVacios.append("\n - Hombro");
+            }
+
+            if (txtAEspalda.getText().isEmpty()) {
+                camposVacios.append("\n - Ancho de Espalda");
+            }
+
+            if (txtLEspalda.getText().isEmpty()) {
+                camposVacios.append("\n - Largo de Espalda");
+            }
+
+        }
+        if (prenda.equals("Pantalón")) {
+
+            if (txtCintura.getText().isEmpty()) {
+                camposVacios.append("\n - Cintura");
+            }
+
+            if (txtCadera.getText().isEmpty()) {
+                camposVacios.append("\n - Cadera");
+            }
+
+            if (txtLargo.getText().isEmpty()) {
+                camposVacios.append("\n - Largo");
+            }
+            if (txtRodilla.getText().isEmpty()) {
+                camposVacios.append("\n - Rodilla");
+            }
+            if (txtTobillo.getText().isEmpty()) {
+                camposVacios.append("\n - Tobillo");
+            }
+            if (txtTiro.getText().isEmpty()) {
+                camposVacios.append("\n - Tiro");
+            }
+            if (txtMuslo.getText().isEmpty()) {
+                camposVacios.append("\n - Muslo");
+            }
+        }
+        if (prenda.equals("Vestido")) {
+
+            if (txtCintura.getText().isEmpty()) {
+                camposVacios.append("\n - Cintura");
+            }
+
+            if (txtCadera.getText().isEmpty()) {
+                camposVacios.append("\n - Cadera");
+            }
+
+            if (txtLargo.getText().isEmpty()) {
+                camposVacios.append("\n - Largo");
+            }
+
+            if (txtPecho.getText().isEmpty()) {
+                camposVacios.append("\n - Pecho");
+            }
+
+            if (txtAEspalda.getText().isEmpty()) {
+                camposVacios.append("\n - Ancho de Espalda");
+            }
+
+            if (txtLEspalda.getText().isEmpty()) {
+                camposVacios.append("\n - Largo de Espalda");
+            }
+            if (txtLManga.getText().isEmpty()) {
+                camposVacios.append("\n - Largo de Manga");
+            }
+
+            if (txtAManga.getText().isEmpty()) {
+                camposVacios.append("\n - Ancho de Manga");
+            }
+            if (txtCuello.getText().isEmpty()) {
+                camposVacios.append("\n - Cuello");
+            }
+        }
+        if (prenda.equals("Falda")) {
+            if (txtCintura.getText().isEmpty()) {
+                camposVacios.append("\n - Cintura");
+            }
+
+            if (txtCadera.getText().isEmpty()) {
+                camposVacios.append("\n - Cadera");
+            }
+
+            if (txtLargo.getText().isEmpty()) {
+                camposVacios.append("\n - Largo");
+            }
+        }
+
+        if (!camposVacios.toString().equals("Los siguientes campos están vacíos:")) {
+            JOptionPane.showMessageDialog(null, camposVacios.toString(), "Campos Vacíos", JOptionPane.ERROR_MESSAGE);
+        } else {
+            try {
+                // Rutas de las imágenes
+                String rutaImagen1 = imagen1.getText();
+                String rutaImagen2 = imagen2.getText();
+                String rutaImagen3 = imagen3.getText();
+
+                // Resto del código para la inserción en la base de datos
+                Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+                Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
+
+                PreparedStatement insertPs = conn.prepareStatement("INSERT INTO PedidoSastreria (prenda, estado, descripcion, precio, cadera, cintura, "
+                        + "largo, largoManga"
+                        + ",anchoManga, cuello, pecho, muneca, hombro, anchoEsp, largoEsp, rodilla, tobillo, tiro, muslo,imagen1, imagen2, imagen3,"
+                        + " id_cliente) "
+                        + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+                insertPs.setString(1, prenda);
+                insertPs.setString(2, estado);
+                insertPs.setObject(3, descripcion);
+                insertPs.setObject(4, precio);
+                insertPs.setObject(5, cadera);
+                insertPs.setObject(6, cintura);
+                insertPs.setObject(7, largo);
+                insertPs.setObject(8, largoManga);
+                insertPs.setObject(9, anchoManga);
+                insertPs.setObject(10, cuello);
+                insertPs.setObject(11, pecho);
+                insertPs.setObject(12, muneca);
+                insertPs.setObject(13, hombro);
+                insertPs.setObject(14, anchoEsp);
+                insertPs.setObject(15, largoEsp);
+                insertPs.setObject(16, rodilla);
+                insertPs.setObject(17, tobillo);
+                insertPs.setObject(18, tiro);
+                insertPs.setObject(19, muslo);
+
+                // Verificar si los archivos de imagen existen y agregarlos si es el caso
+                if (new File(rutaImagen1).exists()) {
+                    FileInputStream fis1 = new FileInputStream(new File(rutaImagen1));
+                    insertPs.setBinaryStream(20, fis1, (int) new File(rutaImagen1).length());
+                } else {
+                    insertPs.setBinaryStream(20, null, 0); // Imagen 1 no existe
+                }
+
+                if (new File(rutaImagen2).exists()) {
+                    FileInputStream fis2 = new FileInputStream(new File(rutaImagen2));
+                    insertPs.setBinaryStream(21, fis2, (int) new File(rutaImagen2).length());
+                } else {
+                    insertPs.setBinaryStream(21, null, 0); // Imagen 2 no existe
+                }
+
+                if (new File(rutaImagen3).exists()) {
+                    FileInputStream fis3 = new FileInputStream(new File(rutaImagen3));
+                    insertPs.setBinaryStream(22, fis3, (int) new File(rutaImagen3).length());
+                } else {
+                    insertPs.setBinaryStream(22, null, 0); // Imagen 3 no existe
+                }
+
+                insertPs.setObject(23, idC);
+
+                insertPs.executeUpdate();
+                JOptionPane.showMessageDialog(null, "Registro guardado");
+
+                Listado_Pedidos_Pendientes p = new Listado_Pedidos_Pendientes();
+
+                p.setSize(1024, 640);
+                p.setLocation(0, 0);
+
+                panelprincipal.revalidate();
+                panelprincipal.repaint();
+                panelprincipal.removeAll();
+                panelprincipal.add(p, BorderLayout.CENTER);
+                panelprincipal.revalidate();
+                panelprincipal.repaint();
+
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, e.toString(), "Error de SQL", JOptionPane.ERROR_MESSAGE);
+            } catch (ClassNotFoundException ex) {
+                JOptionPane.showMessageDialog(null, "Error de conexión a la base de datos", "Error de Conexión", JOptionPane.ERROR_MESSAGE);
+            } catch (FileNotFoundException ex) {
+                JOptionPane.showMessageDialog(null, "El archivo de imagen no se puede encontrar.", "Error de Archivo", JOptionPane.ERROR_MESSAGE);
+            }
+
+        }
+
+
+    }//GEN-LAST:event_btnCrearActionPerformed
+
+    private void txtCinturaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCinturaKeyTyped
+        char c = evt.getKeyChar();
+        String texto = txtCintura.getText();
+
+        if (texto.isEmpty() && c == '0') {
+            evt.consume(); // Evita que el campo inicie con "0"
+        } else if ((c < '0' || c > '9') && c != '.' || texto.length() >= 5 || texto.contains(".") && c == '.' || texto.equals("0") && c != '.') {
+            evt.consume();
+        }
+
+    }//GEN-LAST:event_txtCinturaKeyTyped
+
+    private void txtCaderaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCaderaKeyTyped
+        char c = evt.getKeyChar();
+        String texto = txtCadera.getText();
+
+        if (texto.isEmpty() && c == '0') {
+            evt.consume(); // Evita que el campo inicie con "0"
+        } else if ((c < '0' || c > '9') && c != '.' || texto.length() >= 5 || texto.contains(".") && c == '.' || texto.equals("0") && c != '.') {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtCaderaKeyTyped
+
+    private void txtLargoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtLargoKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtLargoKeyReleased
+
+    private void txtLargoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtLargoKeyTyped
+        char c = evt.getKeyChar();
+        String texto = txtLargo.getText();
+
+        if (texto.isEmpty() && c == '0') {
+            evt.consume(); // Evita que el campo inicie con "0"
+        } else if ((c < '0' || c > '9') && c != '.' || texto.length() >= 5 || texto.contains(".") && c == '.' || texto.equals("0") && c != '.') {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtLargoKeyTyped
+
+    private void txtLMangaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtLMangaKeyTyped
+        char c = evt.getKeyChar();
+        String texto = txtLManga.getText();
+
+        if (texto.isEmpty() && c == '0') {
+            evt.consume(); // Evita que el campo inicie con "0"
+        } else if ((c < '0' || c > '9') && c != '.' || texto.length() >= 5 || texto.contains(".") && c == '.' || texto.equals("0") && c != '.') {
+            evt.consume();
+        }
+
+    }//GEN-LAST:event_txtLMangaKeyTyped
+
+    private void txtAMangaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAMangaKeyTyped
+        char c = evt.getKeyChar();
+        String texto = txtAManga.getText();
+
+        if (texto.isEmpty() && c == '0') {
+            evt.consume(); // Evita que el campo inicie con "0"
+        } else if ((c < '0' || c > '9') && c != '.' || texto.length() >= 5 || texto.contains(".") && c == '.' || texto.equals("0") && c != '.') {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtAMangaKeyTyped
+
+    private void txtCuelloKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCuelloKeyTyped
+        char c = evt.getKeyChar();
+        String texto = txtCuello.getText();
+
+        if (texto.isEmpty() && c == '0') {
+            evt.consume(); // Evita que el campo inicie con "0"
+        } else if ((c < '0' || c > '9') && c != '.' || texto.length() >= 5 || texto.contains(".") && c == '.' || texto.equals("0") && c != '.') {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtCuelloKeyTyped
+
+    private void txtPechoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPechoKeyTyped
+        char c = evt.getKeyChar();
+        String texto = txtPecho.getText();
+
+        if (texto.isEmpty() && c == '0') {
+            evt.consume(); // Evita que el campo inicie con "0"
+        } else if ((c < '0' || c > '9') && c != '.' || texto.length() >= 5 || texto.contains(".") && c == '.' || texto.equals("0") && c != '.') {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtPechoKeyTyped
+
+    private void txtMunecaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMunecaKeyTyped
+        char c = evt.getKeyChar();
+        String texto = txtMuneca.getText();
+
+        if (texto.isEmpty() && c == '0') {
+            evt.consume(); // Evita que el campo inicie con "0"
+        } else if ((c < '0' || c > '9') && c != '.' || texto.length() >= 5 || texto.contains(".") && c == '.' || texto.equals("0") && c != '.') {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtMunecaKeyTyped
+
+    private void txtHombroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtHombroKeyTyped
+        char c = evt.getKeyChar();
+        String texto = txtHombro.getText();
+
+        if (texto.isEmpty() && c == '0') {
+            evt.consume(); // Evita que el campo inicie con "0"
+        } else if ((c < '0' || c > '9') && c != '.' || texto.length() >= 5 || texto.contains(".") && c == '.' || texto.equals("0") && c != '.') {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtHombroKeyTyped
+
+    private void txtAEspaldaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAEspaldaKeyTyped
+        char c = evt.getKeyChar();
+        String texto = txtAEspalda.getText();
+
+        if (texto.isEmpty() && c == '0') {
+            evt.consume(); // Evita que el campo inicie con "0"
+        } else if ((c < '0' || c > '9') && c != '.' || texto.length() >= 5 || texto.contains(".") && c == '.' || texto.equals("0") && c != '.') {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtAEspaldaKeyTyped
+
+    private void txtLEspaldaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtLEspaldaKeyTyped
+        char c = evt.getKeyChar();
+        String texto = txtLEspalda.getText();
+
+        if (texto.isEmpty() && c == '0') {
+            evt.consume(); // Evita que el campo inicie con "0"
+        } else if ((c < '0' || c > '9') && c != '.' || texto.length() >= 5 || texto.contains(".") && c == '.' || texto.equals("0") && c != '.') {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtLEspaldaKeyTyped
+
+    private void txtRodillaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRodillaKeyTyped
+        char c = evt.getKeyChar();
+        String texto = txtRodilla.getText();
+
+        if (texto.isEmpty() && c == '0') {
+            evt.consume(); // Evita que el campo inicie con "0"
+        } else if ((c < '0' || c > '9') && c != '.' || texto.length() >= 5 || texto.contains(".") && c == '.' || texto.equals("0") && c != '.') {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtRodillaKeyTyped
+
+    private void txtTobilloKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTobilloKeyTyped
+        char c = evt.getKeyChar();
+        String texto = txtTobillo.getText();
+
+        if (texto.isEmpty() && c == '0') {
+            evt.consume(); // Evita que el campo inicie con "0"
+        } else if ((c < '0' || c > '9') && c != '.' || texto.length() >= 5 || texto.contains(".") && c == '.' || texto.equals("0") && c != '.') {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtTobilloKeyTyped
+
+    private void txtTiroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTiroKeyTyped
+        char c = evt.getKeyChar();
+        String texto = txtTiro.getText();
+
+        if (texto.isEmpty() && c == '0') {
+            evt.consume(); // Evita que el campo inicie con "0"
+        } else if ((c < '0' || c > '9') && c != '.' || texto.length() >= 5 || texto.contains(".") && c == '.' || texto.equals("0") && c != '.') {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtTiroKeyTyped
+
+    private void txtMusloKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMusloKeyTyped
+        char c = evt.getKeyChar();
+        String texto = txtMuslo.getText();
+
+        if (texto.isEmpty() && c == '0') {
+            evt.consume(); // Evita que el campo inicie con "0"
+        } else if ((c < '0' || c > '9') && c != '.' || texto.length() >= 5 || texto.contains(".") && c == '.' || texto.equals("0") && c != '.') {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtMusloKeyTyped
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCrear;
@@ -642,24 +1359,25 @@ public class Crear_Pedido extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel labelPrendas;
-    private javax.swing.JTextField txtAEspalda;
-    private javax.swing.JTextField txtAManga;
-    private javax.swing.JTextField txtCadera;
-    private javax.swing.JTextField txtCintura;
+    private javax.swing.JLabel ruta;
+    public javax.swing.JTextField txtAEspalda;
+    public javax.swing.JTextField txtAManga;
+    public javax.swing.JTextField txtCadera;
+    public javax.swing.JTextField txtCintura;
     private javax.swing.JComboBox<String> txtCliente;
-    private javax.swing.JTextField txtCuello;
+    public javax.swing.JTextField txtCuello;
     private javax.swing.JTextArea txtDescrip;
-    private javax.swing.JTextField txtHombro;
-    private javax.swing.JTextField txtLEspalda;
-    private javax.swing.JTextField txtLManga;
-    private javax.swing.JTextField txtLargo;
-    private javax.swing.JTextField txtMuneca;
-    private javax.swing.JTextField txtMuslo;
-    private javax.swing.JTextField txtPecho;
-    private javax.swing.JTextField txtRodilla;
+    public javax.swing.JTextField txtHombro;
+    public javax.swing.JTextField txtLEspalda;
+    public javax.swing.JTextField txtLManga;
+    public javax.swing.JTextField txtLargo;
+    public javax.swing.JTextField txtMuneca;
+    public javax.swing.JTextField txtMuslo;
+    public javax.swing.JTextField txtPecho;
+    public javax.swing.JTextField txtRodilla;
     private javax.swing.JTextField txtTel;
-    private javax.swing.JTextField txtTiro;
-    private javax.swing.JTextField txtTobillo;
+    public javax.swing.JTextField txtTiro;
+    public javax.swing.JTextField txtTobillo;
     private javax.swing.JTextField txtprecio;
     // End of variables declaration//GEN-END:variables
 }

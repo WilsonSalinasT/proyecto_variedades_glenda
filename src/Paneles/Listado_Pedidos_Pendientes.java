@@ -40,7 +40,7 @@ public class Listado_Pedidos_Pendientes extends javax.swing.JPanel {
      */
     public Listado_Pedidos_Pendientes() {
         initComponents();
-        cargarTablaEmpleados();
+        cargarTabla();
 
         holder = new TextPrompt("Busque por nombre/apellido del cliente/fecha de entrega", txtBuscar);
 
@@ -166,7 +166,7 @@ public class Listado_Pedidos_Pendientes extends javax.swing.JPanel {
 
             },
             new String [] {
-                "N°", "Nombre del cliente", "Apellido del cliente", "Celular", "Fecha de Entrega", "Producto"
+                "N°", "Nombre del cliente", "Apellido del cliente", "Celular", "Producto", "Precio"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -308,11 +308,9 @@ public class Listado_Pedidos_Pendientes extends javax.swing.JPanel {
     private void txtBuscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyTyped
         char c = evt.getKeyChar(); // Obtener el carácter ingresado
 
-        if (txtBuscar.getText().isEmpty() && Character.isWhitespace(c))
-        {
+        if (txtBuscar.getText().isEmpty() && Character.isWhitespace(c)) {
             evt.consume(); // Consumir el evento si es un espacio en blanco en la primera letra
-        } else if (txtBuscar.getText().length() >= 100)
-        {
+        } else if (txtBuscar.getText().length() >= 100) {
             evt.consume(); // Consumir el evento si se ha alcanzado la longitud máxima
         }
     }//GEN-LAST:event_txtBuscarKeyTyped
@@ -321,11 +319,9 @@ public class Listado_Pedidos_Pendientes extends javax.swing.JPanel {
         String texto = txtBuscar.getText().trim();
 
         //Validacion del texto ingresado
-        if (!texto.isEmpty())
-        {
+        if (!texto.isEmpty()) {
             buscarDatos(texto);
-        } else
-        {
+        } else {
             JOptionPane.showMessageDialog(null, "Tiene que ingresar texto para hacer la respectiva búsqueda");
         }
     }//GEN-LAST:event_Btn_BuscarActionPerformed
@@ -336,10 +332,9 @@ public class Listado_Pedidos_Pendientes extends javax.swing.JPanel {
 
         // Limpiar el campo de búsqueda
         txtBuscar.setText("");
-      
 
         // Cargar la tabla con los datos actualizados
-        cargarTablaEmpleados();
+        cargarTabla();
     }//GEN-LAST:event_refrescarbtnActionPerformed
 
     private void btnAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnteriorActionPerformed
@@ -364,7 +359,7 @@ public class Listado_Pedidos_Pendientes extends javax.swing.JPanel {
     }//GEN-LAST:event_crearbtnActionPerformed
     int selectedRow1;
     private void verbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verbtnActionPerformed
-     /*   // TODO add your handling code here:
+        /*   // TODO add your handling code here:
         selectedRow1 = tblCitas.getSelectedRow();
         if (selectedRow1 == -1)
         {
@@ -426,12 +421,12 @@ public class Listado_Pedidos_Pendientes extends javax.swing.JPanel {
             e.printStackTrace();
             // Manejar cualquier excepción que pueda ocurrir durante la consulta a la base de datos
         }
-        */
+         */
     }//GEN-LAST:event_verbtnActionPerformed
 
     int selectedRow2;
     private void editarbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarbtnActionPerformed
-     /*
+        /*
         // TODO add your handling code here:
         selectedRow2 = tblCitas.getSelectedRow();
         if (selectedRow2 == -1)
@@ -495,7 +490,7 @@ public class Listado_Pedidos_Pendientes extends javax.swing.JPanel {
             e.printStackTrace();
             // Manejar cualquier excepción que pueda ocurrir durante la consulta a la base de datos
         }
-        */
+         */
     }//GEN-LAST:event_editarbtnActionPerformed
 
     int paginaActual = 1; // Página actual
@@ -505,7 +500,7 @@ public class Listado_Pedidos_Pendientes extends javax.swing.JPanel {
     int numRegistro = 0;
     String terminoBusqueda = ""; // Término de búsqueda actual
 
-    private void cargarTablaEmpleados() {
+    private void cargarTabla() {
         DefaultTableModel modeloTabla = (DefaultTableModel) tblCitas.getModel();
         modeloTabla.setRowCount(0); // Limpiar los datos existentes en la tabla
 
@@ -515,47 +510,43 @@ public class Listado_Pedidos_Pendientes extends javax.swing.JPanel {
         int columnas;
         boolean foundData = false;
 
-        try
-        {
+        try {
             Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
 
             // Obtener el total de filas que cumplen con el criterio de búsqueda
             ps = conn.prepareStatement("SELECT COUNT(*) AS TotalFilas "
                     + "FROM Cliente E "
-                    + "JOIN Cita V ON E.id_cliente = V.id_cliente "
-                    + "WHERE E.nombre LIKE ? OR E.apellido LIKE ? OR V.fecha_cita LIKE ?");
+                    + "JOIN PedidoSastreria V ON E.id_cliente = V.id_cliente "
+                    + "WHERE E.nombre LIKE ? OR E.apellido LIKE ? ");
             ps.setString(1, "%" + terminoBusqueda + "%");
             ps.setString(2, "%" + terminoBusqueda + "%");
-            ps.setString(3, "%" + terminoBusqueda + "%");
+
             rs = ps.executeQuery();
 
-            if (rs.next())
-            {
+            if (rs.next()) {
                 totalFilas = rs.getInt(1);
             }
             totalPaginas = (int) Math.ceil((double) totalFilas / filasPorPagina);
 
-            if (paginaActual < 1)
-            {
+            if (paginaActual < 1) {
                 paginaActual = 1;
-            } else if (paginaActual > totalPaginas)
-            {
+            } else if (paginaActual > totalPaginas) {
                 paginaActual = totalPaginas;
             }
 
             int offset = (paginaActual - 1) * filasPorPagina;
-            if (offset < 0)
-            {
+            if (offset < 0) {
                 offset = 0;
             }
 
             // Consulta para obtener los datos paginados
-            ps = conn.prepareStatement("SELECT ROW_NUMBER() OVER(ORDER BY E.nombre) AS NumRegistro, E.nombre, E.apellido, E.numero_telefono, V.fecha_cita "
+            ps = conn.prepareStatement("SELECT ROW_NUMBER() OVER(ORDER BY E.nombre) AS NumRegistro, E.nombre, E.apellido, E.numero_telefono"
                     + "FROM Cliente E "
-                    + "JOIN Cita V ON E.id_cliente = V.id_cliente "
-                    + "WHERE E.nombre LIKE ? OR E.apellido LIKE ? OR V.fecha_cita LIKE ? "
+                    + "JOIN PedidoSastreria V ON E.id_cliente = V.id_cliente "
+                    + "WHERE E.nombre LIKE ? OR E.apellido LIKE ? "
                     + "ORDER BY E.nombre "
-                    + "OFFSET ? ROWS FETCH NEXT ? ROWS ONLY");
+                    + "OFFSET ? ROWS FETCH NEXT ? ROWS ONLY"
+            );
             ps.setString(1, "%" + terminoBusqueda + "%");
             ps.setString(2, "%" + terminoBusqueda + "%");
             ps.setString(3, "%" + terminoBusqueda + "%");
@@ -565,11 +556,9 @@ public class Listado_Pedidos_Pendientes extends javax.swing.JPanel {
             rsmd = rs.getMetaData();
             columnas = rsmd.getColumnCount();
 
-            while (rs.next())
-            {
+            while (rs.next()) {
                 Object[] fila = new Object[columnas];
-                for (int indice = 0; indice < columnas; indice++)
-                {
+                for (int indice = 0; indice < columnas; indice++) {
                     fila[indice] = rs.getObject(indice + 1);
                 }
                 modeloTabla.addRow(fila);
@@ -578,8 +567,7 @@ public class Listado_Pedidos_Pendientes extends javax.swing.JPanel {
 
             ajustarTabla(filasPorPagina);
 
-            if (!foundData)
-            {
+            if (!foundData) {
                 JOptionPane.showMessageDialog(null, "No se encontraron datos");
             }
 
@@ -587,8 +575,7 @@ public class Listado_Pedidos_Pendientes extends javax.swing.JPanel {
             int rowCount = modeloTabla.getRowCount();
             Texto_Contable.setText("Cantidad de filas: " + rowCount + " - Página " + paginaActual + "/" + totalPaginas);
 
-        } catch (SQLException e)
-        {
+        } catch (SQLException e) {
             e.printStackTrace(); // Imprime la pila de excepciones para depuración
             JOptionPane.showMessageDialog(null, e.toString());
         }
@@ -601,18 +588,16 @@ public class Listado_Pedidos_Pendientes extends javax.swing.JPanel {
     }
 
     private void siguientePagina() {
-        if (paginaActual < totalPaginas)
-        {
+        if (paginaActual < totalPaginas) {
             paginaActual++;
-            cargarTablaEmpleados();
+            cargarTabla();
         }
     }
 
     private void paginaAnterior() {
-        if (paginaActual > 1)
-        {
+        if (paginaActual > 1) {
             paginaActual--;
-            cargarTablaEmpleados();
+            cargarTabla();
         }
     }
 
@@ -621,11 +606,9 @@ public class Listado_Pedidos_Pendientes extends javax.swing.JPanel {
         modelTabla.setRowCount(0);
         boolean foundData = false;
 
-        try
-        {
+        try {
             Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
-            if (conn != null && !conn.isClosed())
-            {
+            if (conn != null && !conn.isClosed()) {
                 PreparedStatement ps = conn.prepareStatement("SELECT ROW_NUMBER() OVER(ORDER BY E.nombre) AS NumRegistro, E.nombre, E.apellido, E.numero_telefono, V.fecha_cita "
                         + "FROM Cliente E "
                         + "JOIN Cita V ON E.id_cliente = V.id_cliente "
@@ -633,14 +616,12 @@ public class Listado_Pedidos_Pendientes extends javax.swing.JPanel {
                         + "ORDER BY E.nombre "
                         + "OFFSET ? ROWS FETCH NEXT ? ROWS ONLY");
 
-                if (texto != null && !texto.isEmpty())
-                {
+                if (texto != null && !texto.isEmpty()) {
                     ps.setString(1, "%" + texto + "%");
                     ps.setString(2, "%" + texto + "%");
                     ps.setString(3, "%" + texto + "%");
                     terminoBusqueda = texto; // Actualizar el término de búsqueda
-                } else
-                {
+                } else {
                     ps.setString(1, "%");
                     ps.setString(2, "%");
                     ps.setString(3, "%");
@@ -656,20 +637,16 @@ public class Listado_Pedidos_Pendientes extends javax.swing.JPanel {
 
                 ResultSet rs = ps.executeQuery();
 
-                if (rs != null)
-                {
-                    while (rs.next())
-                    {
+                if (rs != null) {
+                    while (rs.next()) {
                         int numRegistro = rs.getInt("NumRegistro");
                         String nombre = rs.getString("nombre");
                         String apellido = rs.getString("apellido");
                         String numeroTelefono = rs.getString("numero_telefono");
                         String fechaCita = rs.getString("fecha_cita");
 
-                        if (nombre != null && apellido != null && numeroTelefono != null)
-                        {
-                            modelTabla.addRow(new Object[]
-                            {
+                        if (nombre != null && apellido != null && numeroTelefono != null) {
+                            modelTabla.addRow(new Object[]{
                                 numRegistro, nombre, apellido, numeroTelefono, fechaCita
                             });
                             foundData = true;
@@ -682,13 +659,12 @@ public class Listado_Pedidos_Pendientes extends javax.swing.JPanel {
                 ps.close();
                 conn.close();
             }
-        } catch (Exception e)
-        {
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.toString());
         }
 
         // Llama a la función de cargarTablaEmpleados() si es necesario recargar la tabla después de la búsqueda
-        cargarTablaEmpleados(); // Recargar la tabla después de la búsqueda
+        cargarTabla(); // Recargar la tabla después de la búsqueda
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton Btn_Buscar;
