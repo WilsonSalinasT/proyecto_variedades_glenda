@@ -5,6 +5,7 @@
 package App;
 
 import Paneles.Crear_Cita;
+import Paneles.Crear_Pedido;
 import Paneles.Listado_Citas;
 import Paneles.Listado_Empleados;
 
@@ -46,6 +47,7 @@ public class Menu extends javax.swing.JFrame {
         proveedor = new javax.swing.JButton();
         productos = new javax.swing.JButton();
         citas = new javax.swing.JButton();
+        citas1 = new javax.swing.JButton();
         javax.swing.JLabel jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -119,7 +121,19 @@ public class Menu extends javax.swing.JFrame {
                 citasActionPerformed(evt);
             }
         });
-        jPanel2.add(citas, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 380, 250, 40));
+        jPanel2.add(citas, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 390, 250, 40));
+
+        citas1.setBackground(new java.awt.Color(255, 153, 102));
+        citas1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        citas1.setForeground(new java.awt.Color(204, 255, 255));
+        citas1.setText("Pedido Sastreria");
+        citas1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        citas1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                citas1ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(citas1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 440, 250, 40));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Hyper.png"))); // NOI18N
         jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 250, 640));
@@ -226,6 +240,18 @@ public class Menu extends javax.swing.JFrame {
 
     }//GEN-LAST:event_productosActionPerformed
 
+    private void citas1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_citas1ActionPerformed
+         
+        Crear_Pedido p2 = new Crear_Pedido();
+        p2.setSize(1024, 640);
+        p2.setLocation(0, 0);
+        
+        panelprincipal.removeAll();
+        panelprincipal.add(p2, BorderLayout.CENTER);
+        panelprincipal.revalidate();
+        panelprincipal.repaint();
+    }//GEN-LAST:event_citas1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -263,6 +289,7 @@ public class Menu extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton citas;
+    private javax.swing.JButton citas1;
     private javax.swing.JButton clientes;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
