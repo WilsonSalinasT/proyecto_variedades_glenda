@@ -150,7 +150,6 @@ public class Crear_Cita extends javax.swing.JPanel {
 
         btnCrear.setBackground(new java.awt.Color(255, 153, 51));
         btnCrear.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btnCrear.setForeground(new java.awt.Color(0, 0, 0));
         btnCrear.setText("CREAR");
         btnCrear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -159,13 +158,17 @@ public class Crear_Cita extends javax.swing.JPanel {
         });
 
         id_cliente.setEditable(false);
-        id_cliente.setBackground(new java.awt.Color(255, 255, 255));
         id_cliente.setForeground(new java.awt.Color(255, 255, 255));
         id_cliente.setBorder(null);
 
         cbxHoras.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Hora de la cita", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12))); // NOI18N
 
         txtCliente.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Nombre del cliente", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12))); // NOI18N
+        txtCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtClienteActionPerformed(evt);
+            }
+        });
 
         crea_cliente.setFont(new java.awt.Font("Arial Black", 3, 12)); // NOI18N
         crea_cliente.setForeground(new java.awt.Color(255, 0, 0));
@@ -182,7 +185,6 @@ public class Crear_Cita extends javax.swing.JPanel {
 
         btnvolver.setBackground(new java.awt.Color(255, 153, 51));
         btnvolver.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btnvolver.setForeground(new java.awt.Color(0, 0, 0));
         btnvolver.setText("VOLVER");
         btnvolver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -191,7 +193,6 @@ public class Crear_Cita extends javax.swing.JPanel {
         });
 
         jLabel1.setFont(new java.awt.Font("Arial Black", 3, 36)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Creación de Cita");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -377,6 +378,10 @@ public class Crear_Cita extends javax.swing.JPanel {
         panelprincipal.revalidate();
         panelprincipal.repaint();
     }//GEN-LAST:event_btnvolverActionPerformed
+
+    private void txtClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtClienteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtClienteActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

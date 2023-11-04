@@ -5,8 +5,14 @@
 package Paneles;
 
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.io.File;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -22,6 +28,71 @@ public class Crear_Pedido extends javax.swing.JPanel {
      */
     public Crear_Pedido() {
         initComponents();
+
+        try {
+            Connection connection = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
+
+            Statement stmt = connection.createStatement();
+            String sql = "SELECT id_cliente, nombre, apellido, numero_telefono FROM Cliente";
+            ResultSet rs = stmt.executeQuery(sql);
+
+            txtCliente.addItem("Seleccione"); // Agrega el elemento "Seleccione" al principio
+
+            while (rs.next()) {
+                String nombre = rs.getString("nombre");
+                String apellido = rs.getString("apellido");
+                int idCliente = rs.getInt("id_cliente");
+                String telefono = rs.getString("numero_telefono");
+
+                String nombreCompleto = nombre + " " + apellido;
+                txtCliente.addItem(nombreCompleto);
+            }
+        
+
+            connection.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+       txtCliente.addActionListener(new ActionListener() {
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (txtCliente.getSelectedIndex() > 0) {
+            String selectedClient = (String) txtCliente.getSelectedItem();
+
+            // Verifica si se seleccionó el elemento "Seleccione"
+            if (!selectedClient.equals("Seleccione")) {
+                // Buscar nuevamente el ID y el teléfono en la base de datos
+                try {
+                    Connection connection = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
+
+                    Statement stmt = connection.createStatement();
+                    String sql = "SELECT id_cliente, numero_telefono FROM Cliente WHERE CONCAT(nombre, ' ', apellido) = '" + selectedClient + "'";
+                    ResultSet rs = stmt.executeQuery(sql);
+
+                    if (rs.next()) {
+                        int selectedClientId = rs.getInt("id_cliente");
+                        String selectedClientTelefono = rs.getString("numero_telefono");
+
+                        // Actualiza los campos de texto con el ID y el teléfono del cliente seleccionado
+                        id_cliente.setText(Integer.toString(selectedClientId));
+                        txtTel.setText(selectedClientTelefono);
+                    }
+
+                    connection.close();
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            } else {
+                // Si se selecciona "Seleccione", establece los campos en blanco
+                id_cliente.setText("");
+                txtTel.setText("");
+            }
+        }
+    }
+});
+
 
     }
 
@@ -47,60 +118,31 @@ public class Crear_Pedido extends javax.swing.JPanel {
         txtprecio = new javax.swing.JTextField();
         crea_cliente = new javax.swing.JLabel();
         txtTel = new javax.swing.JTextField();
-        txtId = new javax.swing.JLabel();
+        id_cliente = new javax.swing.JLabel();
         cbxPrenda = new javax.swing.JComboBox<>();
         cbxEstado = new javax.swing.JComboBox<>();
         btnCrear = new javax.swing.JButton();
-        jLayeredPane2 = new javax.swing.JLayeredPane();
-        panelFalda = new javax.swing.JPanel();
-        jLabel13 = new javax.swing.JLabel();
-        txtCaderaF1 = new javax.swing.JTextField();
-        txtCinturaF1 = new javax.swing.JTextField();
-        txtLargoF1 = new javax.swing.JTextField();
-        panelCamisa = new javax.swing.JPanel();
-        txtCuelloCam1 = new javax.swing.JTextField();
-        txtHombroCam1 = new javax.swing.JTextField();
-        txtMangaCam1 = new javax.swing.JTextField();
-        txtPechoCam1 = new javax.swing.JTextField();
-        txtCinturaCam1 = new javax.swing.JTextField();
-        txtCaderaCam1 = new javax.swing.JTextField();
-        txtMunecaCam1 = new javax.swing.JTextField();
-        txtLargoCam1 = new javax.swing.JTextField();
-        jLabel14 = new javax.swing.JLabel();
-        txtEspaldaCam1 = new javax.swing.JTextField();
-        panelCamiseta = new javax.swing.JPanel();
-        jLabel15 = new javax.swing.JLabel();
-        txtCuelloCamiseta1 = new javax.swing.JTextField();
-        txtHombroCamiseta1 = new javax.swing.JTextField();
-        txtPechoCamiseta1 = new javax.swing.JTextField();
-        txtCinturaCamiseta1 = new javax.swing.JTextField();
-        txtCaderaCamiseta1 = new javax.swing.JTextField();
-        txtLargoCamiseta1 = new javax.swing.JTextField();
-        txtLMangaCamiseta1 = new javax.swing.JTextField();
-        txtAMangaCamiseta1 = new javax.swing.JTextField();
-        panelPantalon = new javax.swing.JPanel();
-        jLabel16 = new javax.swing.JLabel();
-        txtCinturaPan1 = new javax.swing.JTextField();
-        txtCaderaPan1 = new javax.swing.JTextField();
-        txtTiroPan1 = new javax.swing.JTextField();
-        txtMusloPan1 = new javax.swing.JTextField();
-        txtRodillaPan1 = new javax.swing.JTextField();
-        txtTobilloPan1 = new javax.swing.JTextField();
-        txtLargoPan1 = new javax.swing.JTextField();
-        panelVestido = new javax.swing.JPanel();
-        jLabel17 = new javax.swing.JLabel();
-        txtPechoV1 = new javax.swing.JTextField();
-        txtCaderaV1 = new javax.swing.JTextField();
-        txtCinturaV1 = new javax.swing.JTextField();
-        txtTiroV1 = new javax.swing.JTextField();
-        txtMangaV1 = new javax.swing.JTextField();
-        txtAEspaldaV1 = new javax.swing.JTextField();
-        txtLEspaldaV1 = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         imagen2 = new javax.swing.JLabel();
         imagen3 = new javax.swing.JLabel();
         imagenes = new javax.swing.JButton();
         imagen1 = new javax.swing.JLabel();
+        txtCintura = new javax.swing.JTextField();
+        txtCadera = new javax.swing.JTextField();
+        txtLargo = new javax.swing.JTextField();
+        txtLManga = new javax.swing.JTextField();
+        txtAManga = new javax.swing.JTextField();
+        txtPecho = new javax.swing.JTextField();
+        txtCuello = new javax.swing.JTextField();
+        txtHombro = new javax.swing.JTextField();
+        txtMuneca = new javax.swing.JTextField();
+        labelPrendas = new javax.swing.JLabel();
+        txtRodilla = new javax.swing.JTextField();
+        txtTobillo = new javax.swing.JTextField();
+        txtTiro = new javax.swing.JTextField();
+        txtMuslo = new javax.swing.JTextField();
+        txtLEspalda = new javax.swing.JTextField();
+        txtAEspalda = new javax.swing.JTextField();
 
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
@@ -220,422 +262,6 @@ public class Crear_Pedido extends javax.swing.JPanel {
         btnCrear.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnCrear.setText("CREAR");
 
-        jLabel13.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
-        jLabel13.setText("Medidas para Falda (cm)");
-
-        txtCaderaF1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cadera", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP));
-        txtCaderaF1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCaderaF1ActionPerformed(evt);
-            }
-        });
-
-        txtCinturaF1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cintura", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP));
-
-        txtLargoF1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Largo", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP));
-
-        javax.swing.GroupLayout panelFaldaLayout = new javax.swing.GroupLayout(panelFalda);
-        panelFalda.setLayout(panelFaldaLayout);
-        panelFaldaLayout.setHorizontalGroup(
-            panelFaldaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelFaldaLayout.createSequentialGroup()
-                .addContainerGap(72, Short.MAX_VALUE)
-                .addComponent(txtCinturaF1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(5, 5, 5)
-                .addGroup(panelFaldaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(panelFaldaLayout.createSequentialGroup()
-                        .addGap(34, 34, 34)
-                        .addComponent(txtCaderaF1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(44, 44, 44)
-                        .addComponent(txtLargoF1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(94, 94, 94))
-        );
-        panelFaldaLayout.setVerticalGroup(
-            panelFaldaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelFaldaLayout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addComponent(jLabel13)
-                .addGap(30, 30, 30)
-                .addGroup(panelFaldaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtCinturaF1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtCaderaF1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtLargoF1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(68, Short.MAX_VALUE))
-        );
-
-        txtCuelloCam1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cuello", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP));
-
-        txtHombroCam1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Hombro", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP));
-
-        txtMangaCam1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Largo de Manga", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP));
-
-        txtPechoCam1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Pecho", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP));
-
-        txtCinturaCam1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cintura", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP));
-
-        txtCaderaCam1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cadera", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP));
-
-        txtMunecaCam1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Muñeca", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP));
-        txtMunecaCam1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtMunecaCam1ActionPerformed(evt);
-            }
-        });
-
-        txtLargoCam1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Largo de Camisa", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP));
-        txtLargoCam1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtLargoCam1ActionPerformed(evt);
-            }
-        });
-
-        jLabel14.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
-        jLabel14.setText("Medidas para Camisa (cm)");
-
-        txtEspaldaCam1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Espalda", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP));
-
-        javax.swing.GroupLayout panelCamisaLayout = new javax.swing.GroupLayout(panelCamisa);
-        panelCamisa.setLayout(panelCamisaLayout);
-        panelCamisaLayout.setHorizontalGroup(
-            panelCamisaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelCamisaLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(panelCamisaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelCamisaLayout.createSequentialGroup()
-                        .addGroup(panelCamisaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtCuelloCam1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtCinturaCam1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(37, 37, 37)
-                        .addGroup(panelCamisaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtHombroCam1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtCaderaCam1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(30, 30, 30)
-                        .addGroup(panelCamisaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panelCamisaLayout.createSequentialGroup()
-                                .addComponent(txtMangaCam1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
-                                .addComponent(txtPechoCam1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(panelCamisaLayout.createSequentialGroup()
-                                .addComponent(txtMunecaCam1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txtLargoCam1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelCamisaLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(txtEspaldaCam1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(268, 268, 268))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelCamisaLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(209, 209, 209))
-        );
-        panelCamisaLayout.setVerticalGroup(
-            panelCamisaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelCamisaLayout.createSequentialGroup()
-                .addComponent(jLabel14)
-                .addGap(18, 18, 18)
-                .addGroup(panelCamisaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtCuelloCam1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtHombroCam1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtMangaCam1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtPechoCam1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(14, 14, 14)
-                .addGroup(panelCamisaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtCinturaCam1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtCaderaCam1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtMunecaCam1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtLargoCam1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtEspaldaCam1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(10, Short.MAX_VALUE))
-        );
-
-        jLabel15.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
-        jLabel15.setText("Medidas para Camiseta (cm)");
-
-        txtCuelloCamiseta1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cuello", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP));
-
-        txtHombroCamiseta1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Hombro", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP));
-
-        txtPechoCamiseta1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Pecho", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP));
-
-        txtCinturaCamiseta1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cintura", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP));
-
-        txtCaderaCamiseta1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cadera", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP));
-
-        txtLargoCamiseta1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Largo de Camiseta", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP));
-        txtLargoCamiseta1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtLargoCamiseta1ActionPerformed(evt);
-            }
-        });
-
-        txtLMangaCamiseta1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Largo de Manga", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP));
-
-        txtAMangaCamiseta1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Ancho de Manga", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP));
-
-        javax.swing.GroupLayout panelCamisetaLayout = new javax.swing.GroupLayout(panelCamiseta);
-        panelCamiseta.setLayout(panelCamisetaLayout);
-        panelCamisetaLayout.setHorizontalGroup(
-            panelCamisetaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelCamisetaLayout.createSequentialGroup()
-                .addGroup(panelCamisetaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelCamisetaLayout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addGroup(panelCamisetaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(panelCamisetaLayout.createSequentialGroup()
-                                .addComponent(txtCaderaCamiseta1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(27, 27, 27)
-                                .addComponent(txtLargoCamiseta1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(panelCamisetaLayout.createSequentialGroup()
-                                .addComponent(txtCuelloCamiseta1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(27, 27, 27)
-                                .addComponent(txtHombroCamiseta1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(panelCamisetaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panelCamisetaLayout.createSequentialGroup()
-                                .addGap(29, 29, 29)
-                                .addComponent(txtPechoCamiseta1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(panelCamisetaLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txtLMangaCamiseta1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelCamisetaLayout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(21, 21, 21)))
-                .addGap(18, 18, 18)
-                .addGroup(panelCamisetaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtCinturaCamiseta1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtAMangaCamiseta1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(56, Short.MAX_VALUE))
-        );
-        panelCamisetaLayout.setVerticalGroup(
-            panelCamisetaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelCamisetaLayout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addComponent(jLabel15)
-                .addGap(18, 18, 18)
-                .addGroup(panelCamisetaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtCuelloCamiseta1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtHombroCamiseta1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtPechoCamiseta1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtCinturaCamiseta1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(32, 32, 32)
-                .addGroup(panelCamisetaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtCaderaCamiseta1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtLargoCamiseta1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtLMangaCamiseta1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtAMangaCamiseta1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(26, Short.MAX_VALUE))
-        );
-
-        jLabel16.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
-        jLabel16.setText("Medidas para Pantalón (cm)");
-
-        txtCinturaPan1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cintura", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP));
-
-        txtCaderaPan1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cadera", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP));
-
-        txtTiroPan1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tiro", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP));
-
-        txtMusloPan1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Muslo", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP));
-        txtMusloPan1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtMusloPan1ActionPerformed(evt);
-            }
-        });
-
-        txtRodillaPan1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Rodilla", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP));
-
-        txtTobilloPan1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tobillo", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP));
-
-        txtLargoPan1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Largo", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP));
-
-        javax.swing.GroupLayout panelPantalonLayout = new javax.swing.GroupLayout(panelPantalon);
-        panelPantalon.setLayout(panelPantalonLayout);
-        panelPantalonLayout.setHorizontalGroup(
-            panelPantalonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelPantalonLayout.createSequentialGroup()
-                .addGroup(panelPantalonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelPantalonLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(txtCinturaPan1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 30, 30)
-                        .addComponent(txtCaderaPan1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(26, 26, 26)
-                        .addComponent(txtTiroPan1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtMusloPan1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panelPantalonLayout.createSequentialGroup()
-                        .addGap(81, 81, 81)
-                        .addComponent(txtRodillaPan1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(40, 40, 40)
-                        .addComponent(txtTobilloPan1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(58, 58, 58)
-                        .addComponent(txtLargoPan1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(51, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelPantalonLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(209, 209, 209))
-        );
-        panelPantalonLayout.setVerticalGroup(
-            panelPantalonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelPantalonLayout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addComponent(jLabel16)
-                .addGap(18, 18, 18)
-                .addGroup(panelPantalonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtCinturaPan1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtCaderaPan1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtTiroPan1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtMusloPan1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(36, 36, 36)
-                .addGroup(panelPantalonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtRodillaPan1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtTobilloPan1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtLargoPan1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(29, Short.MAX_VALUE))
-        );
-
-        jLabel17.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
-        jLabel17.setText("Medidas para Vestido (cm)");
-
-        txtPechoV1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Pecho", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP));
-
-        txtCaderaV1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cadera", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP));
-
-        txtCinturaV1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cintura", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP));
-
-        txtTiroV1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tiro", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP));
-
-        txtMangaV1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Largo de Manga", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP));
-
-        txtAEspaldaV1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Ancho de Espalda", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP));
-
-        txtLEspaldaV1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Largo de Espalda", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP));
-
-        javax.swing.GroupLayout panelVestidoLayout = new javax.swing.GroupLayout(panelVestido);
-        panelVestido.setLayout(panelVestidoLayout);
-        panelVestidoLayout.setHorizontalGroup(
-            panelVestidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelVestidoLayout.createSequentialGroup()
-                .addGroup(panelVestidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelVestidoLayout.createSequentialGroup()
-                        .addGap(217, 217, 217)
-                        .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panelVestidoLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(panelVestidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(panelVestidoLayout.createSequentialGroup()
-                                .addComponent(txtPechoV1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(28, 28, 28)
-                                .addComponent(txtCaderaV1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(28, 28, 28)
-                                .addComponent(txtCinturaV1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtTiroV1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(panelVestidoLayout.createSequentialGroup()
-                                .addComponent(txtMangaV1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(30, 30, 30)
-                                .addComponent(txtAEspaldaV1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtLEspaldaV1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(87, 87, 87)))))
-                .addContainerGap(25, Short.MAX_VALUE))
-        );
-        panelVestidoLayout.setVerticalGroup(
-            panelVestidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelVestidoLayout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(jLabel17)
-                .addGap(18, 18, 18)
-                .addGroup(panelVestidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtPechoV1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtCaderaV1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtCinturaV1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtTiroV1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(30, 30, 30)
-                .addGroup(panelVestidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtMangaV1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtAEspaldaV1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtLEspaldaV1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(56, Short.MAX_VALUE))
-        );
-
-        jLayeredPane2.setLayer(panelFalda, javax.swing.JLayeredPane.PALETTE_LAYER);
-        jLayeredPane2.setLayer(panelCamisa, javax.swing.JLayeredPane.PALETTE_LAYER);
-        jLayeredPane2.setLayer(panelCamiseta, javax.swing.JLayeredPane.PALETTE_LAYER);
-        jLayeredPane2.setLayer(panelPantalon, javax.swing.JLayeredPane.PALETTE_LAYER);
-        jLayeredPane2.setLayer(panelVestido, javax.swing.JLayeredPane.PALETTE_LAYER);
-
-        javax.swing.GroupLayout jLayeredPane2Layout = new javax.swing.GroupLayout(jLayeredPane2);
-        jLayeredPane2.setLayout(jLayeredPane2Layout);
-        jLayeredPane2Layout.setHorizontalGroup(
-            jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 721, Short.MAX_VALUE)
-            .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jLayeredPane2Layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(panelFalda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
-            .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jLayeredPane2Layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(panelCamisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
-            .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jLayeredPane2Layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(panelCamiseta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
-            .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jLayeredPane2Layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(panelPantalon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
-            .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jLayeredPane2Layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(panelVestido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
-        );
-        jLayeredPane2Layout.setVerticalGroup(
-            jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 255, Short.MAX_VALUE)
-            .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jLayeredPane2Layout.createSequentialGroup()
-                    .addGap(0, 29, Short.MAX_VALUE)
-                    .addComponent(panelFalda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 29, Short.MAX_VALUE)))
-            .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jLayeredPane2Layout.createSequentialGroup()
-                    .addGap(0, 21, Short.MAX_VALUE)
-                    .addComponent(panelCamisa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 21, Short.MAX_VALUE)))
-            .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jLayeredPane2Layout.createSequentialGroup()
-                    .addGap(0, 19, Short.MAX_VALUE)
-                    .addComponent(panelCamiseta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 19, Short.MAX_VALUE)))
-            .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jLayeredPane2Layout.createSequentialGroup()
-                    .addGap(0, 19, Short.MAX_VALUE)
-                    .addComponent(panelPantalon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 19, Short.MAX_VALUE)))
-            .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jLayeredPane2Layout.createSequentialGroup()
-                    .addGap(0, 7, Short.MAX_VALUE)
-                    .addComponent(panelVestido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 8, Short.MAX_VALUE)))
-        );
-
-        panelFalda.setVisible(false);
-        panelCamisa.setVisible(false);
-        panelCamiseta.setVisible(false);
-        panelPantalon.setVisible(false);
-        panelVestido.setVisible(false);
-
         imagen2.setText("IMAGEN 2");
 
         imagen3.setText("IMAGEN 3");
@@ -651,26 +277,149 @@ public class Crear_Pedido extends javax.swing.JPanel {
 
         imagen1.setText("jLabel1");
 
+        txtCintura.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cintura", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP));
+
+        txtCadera.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cadera", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP));
+        txtCadera.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCaderaActionPerformed(evt);
+            }
+        });
+
+        txtLargo.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Largo ", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP));
+        txtLargo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtLargoActionPerformed(evt);
+            }
+        });
+
+        txtLManga.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Largo de Manga", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP));
+
+        txtAManga.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Ancho de Manga", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP));
+
+        txtPecho.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Pecho", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP));
+
+        txtCuello.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cuello", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP));
+
+        txtHombro.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Hombro", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP));
+
+        txtMuneca.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Muñeca", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP));
+        txtMuneca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtMunecaActionPerformed(evt);
+            }
+        });
+
+        labelPrendas.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
+        labelPrendas.setText("Medidas para Camiseta (cm)");
+
+        txtRodilla.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Rodilla", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP));
+
+        txtTobillo.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tobillo", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP));
+
+        txtTiro.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tiro", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP));
+
+        txtMuslo.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Muslo", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP));
+        txtMuslo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtMusloActionPerformed(evt);
+            }
+        });
+
+        txtLEspalda.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Largo de Espalda", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP));
+
+        txtAEspalda.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Ancho de Espalda", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP));
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(50, 50, 50)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(imagenes)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(imagen1, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
-                        .addComponent(imagen2, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(imagen3, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addGap(255, 255, 255)
+                .addComponent(labelPrendas, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addGap(50, 50, 50)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(imagen1, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
+                                .addComponent(imagen2, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(imagenes)
+                                .addGap(58, 58, 58)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(imagen3, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addComponent(txtCintura, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(txtCadera))
+                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addComponent(txtLManga)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtAManga, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtCuello)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addComponent(txtMuneca, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtHombro, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addComponent(txtRodilla, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtTobillo, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtTiro, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
+                                    .addComponent(txtAEspalda))
+                                .addGap(12, 12, 12)))
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtMuslo, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(txtLEspalda, javax.swing.GroupLayout.DEFAULT_SIZE, 204, Short.MAX_VALUE)
+                                .addComponent(txtLargo)
+                                .addComponent(txtPecho)))))
+                .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(13, 13, 13)
+                .addGap(59, 59, 59)
+                .addComponent(labelPrendas)
+                .addGap(16, 16, 16)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtCintura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCadera, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtLargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtCuello, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtLManga, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtAManga, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtPecho, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtHombro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtMuneca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtAEspalda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtLEspalda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtRodilla, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTobillo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTiro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtMuslo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(51, 51, 51)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(imagen2, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -690,34 +439,32 @@ public class Crear_Pedido extends javax.swing.JPanel {
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(16, 16, 16)
-                        .addComponent(txtId)
+                        .addComponent(id_cliente)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                 .addGap(129, 129, 129)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLayeredPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(crea_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 525, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                            .addComponent(txtCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGap(18, 18, 18)
-                                            .addComponent(txtTel, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                            .addComponent(cbxPrenda, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(cbxEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(crea_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 525, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(txtCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(txtTel, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                        .addComponent(cbxPrenda, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(cbxEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                 .addGap(134, 134, 134)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 690, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jScrollPane2)
+                                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(391, 391, 391)
                         .addComponent(txtprecio, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(476, 476, 476)
                         .addComponent(btnCrear)))
-                .addContainerGap(57, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -725,7 +472,7 @@ public class Crear_Pedido extends javax.swing.JPanel {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(36, 36, 36)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtId)
+                    .addComponent(id_cliente)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -737,8 +484,6 @@ public class Crear_Pedido extends javax.swing.JPanel {
                     .addComponent(cbxEstado)
                     .addComponent(cbxPrenda))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLayeredPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -749,7 +494,7 @@ public class Crear_Pedido extends javax.swing.JPanel {
                 .addGap(42, 42, 42))
         );
 
-        txtId.setVisible(false);
+        id_cliente.setVisible(false);
 
         jScrollPane1.setViewportView(jPanel1);
 
@@ -762,7 +507,7 @@ public class Crear_Pedido extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 974, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1141, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -816,93 +561,65 @@ public class Crear_Pedido extends javax.swing.JPanel {
         String seleccion = cbxPrenda.getSelectedItem().toString();
 
         if (seleccion.equals("Camisa")) {
-            panelCamisa.setVisible(true);
-            panelCamiseta.setVisible(false);
-            panelPantalon.setVisible(false);
-            panelVestido.setVisible(false);
-            panelFalda.setVisible(false);
+            
         } else if (seleccion.equals("Camiseta")) {
-            panelCamiseta.setVisible(true);
-            panelCamisa.setVisible(false);
-            panelPantalon.setVisible(false);
-            panelVestido.setVisible(false);
-            panelFalda.setVisible(false);
+            
         } else if (seleccion.equals("Pantalón")) {
-            panelPantalon.setVisible(true);
-            panelCamiseta.setVisible(false);
-            panelCamisa.setVisible(false);
-            panelVestido.setVisible(false);
-            panelFalda.setVisible(false);
+            
         } else if (seleccion.equals("Vestido")) {
-            panelVestido.setVisible(true);
-            panelFalda.setVisible(false);
-            panelPantalon.setVisible(false);
-            panelCamiseta.setVisible(false);
-            panelCamisa.setVisible(false);
+           
         } else if (seleccion.equals("Falda")) {
-            panelFalda.setVisible(true);
-            panelPantalon.setVisible(false);
-            panelCamiseta.setVisible(false);
-            panelCamisa.setVisible(false);
-            panelVestido.setVisible(false);
+           
         } else {
-            panelFalda.setVisible(false);
-            panelPantalon.setVisible(false);
-            panelCamiseta.setVisible(false);
-            panelCamisa.setVisible(false);
-            panelVestido.setVisible(false);
+           
         }
 
     }//GEN-LAST:event_cbxPrendaActionPerformed
 
-    private void txtCaderaF1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCaderaF1ActionPerformed
+    private void txtLargoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtLargoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtCaderaF1ActionPerformed
+    }//GEN-LAST:event_txtLargoActionPerformed
 
-    private void txtMunecaCam1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMunecaCam1ActionPerformed
+    private void txtMusloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMusloActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtMunecaCam1ActionPerformed
-
-    private void txtLargoCam1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtLargoCam1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtLargoCam1ActionPerformed
-
-    private void txtLargoCamiseta1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtLargoCamiseta1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtLargoCamiseta1ActionPerformed
-
-    private void txtMusloPan1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMusloPan1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtMusloPan1ActionPerformed
+    }//GEN-LAST:event_txtMusloActionPerformed
     private File[] archivos = new File[3];
     private int contador = 0; // Para llevar el registro de cuántas veces se ha presionado el botón
     private void imagenesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_imagenesActionPerformed
         if (contador < 3) {
-        JFileChooser fclAbrirArchivo = new JFileChooser();
-        fclAbrirArchivo.setFileFilter(new FileNameExtensionFilter("Archivo de imagen", "jpg", "jpeg", "png"));
+            JFileChooser fclAbrirArchivo = new JFileChooser();
+            fclAbrirArchivo.setFileFilter(new FileNameExtensionFilter("Archivo de imagen", "jpg", "jpeg", "png"));
 
-        int respuesta = fclAbrirArchivo.showOpenDialog(this);
+            int respuesta = fclAbrirArchivo.showOpenDialog(this);
 
-        if (respuesta == JFileChooser.APPROVE_OPTION) {
-            archivos[contador] = fclAbrirArchivo.getSelectedFile();
-            
-            // Cargar la imagen en el label correspondiente (imagen1, imagen2, o imagen3)
-            ImageIcon icono = new ImageIcon(archivos[contador].getAbsolutePath());
-            Image foto = icono.getImage().getScaledInstance(imagen1.getWidth(), imagen1.getHeight(), Image.SCALE_DEFAULT);
-            
-            if (contador == 0) {
-                imagen1.setIcon(new ImageIcon(foto));
-            } else if (contador == 1) {
-                imagen2.setIcon(new ImageIcon(foto));
-            } else if (contador == 2) {
-                imagen3.setIcon(new ImageIcon(foto));
-                imagenes.setEnabled(false); // Desactivar el botón después de cargar la tercera imagen
+            if (respuesta == JFileChooser.APPROVE_OPTION) {
+                archivos[contador] = fclAbrirArchivo.getSelectedFile();
+
+                // Cargar la imagen en el label correspondiente (imagen1, imagen2, o imagen3)
+                ImageIcon icono = new ImageIcon(archivos[contador].getAbsolutePath());
+                Image foto = icono.getImage().getScaledInstance(imagen1.getWidth(), imagen1.getHeight(), Image.SCALE_DEFAULT);
+
+                if (contador == 0) {
+                    imagen1.setIcon(new ImageIcon(foto));
+                } else if (contador == 1) {
+                    imagen2.setIcon(new ImageIcon(foto));
+                } else if (contador == 2) {
+                    imagen3.setIcon(new ImageIcon(foto));
+                    imagenes.setEnabled(false); // Desactivar el botón después de cargar la tercera imagen
+                }
+
+                contador++;
             }
-            
-            contador++;
         }
-    }
     }//GEN-LAST:event_imagenesActionPerformed
+
+    private void txtMunecaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMunecaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtMunecaActionPerformed
+
+    private void txtCaderaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCaderaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCaderaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -911,67 +628,38 @@ public class Crear_Pedido extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> cbxEstado;
     private javax.swing.JComboBox<String> cbxPrenda;
     private javax.swing.JLabel crea_cliente;
+    public javax.swing.JLabel id_cliente;
     private javax.swing.JLabel imagen1;
     private javax.swing.JLabel imagen2;
     private javax.swing.JLabel imagen3;
     private javax.swing.JButton imagenes;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLayeredPane jLayeredPane2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    public static javax.swing.JPanel panelCamisa;
-    public javax.swing.JPanel panelCamiseta;
-    public javax.swing.JPanel panelFalda;
-    public javax.swing.JPanel panelPantalon;
-    public javax.swing.JPanel panelVestido;
-    private javax.swing.JTextField txtAEspaldaV1;
-    private javax.swing.JTextField txtAMangaCamiseta1;
-    private javax.swing.JTextField txtCaderaCam1;
-    private javax.swing.JTextField txtCaderaCamiseta1;
-    private javax.swing.JTextField txtCaderaF1;
-    private javax.swing.JTextField txtCaderaPan1;
-    private javax.swing.JTextField txtCaderaV1;
-    private javax.swing.JTextField txtCinturaCam1;
-    private javax.swing.JTextField txtCinturaCamiseta1;
-    private javax.swing.JTextField txtCinturaF1;
-    private javax.swing.JTextField txtCinturaPan1;
-    private javax.swing.JTextField txtCinturaV1;
+    private javax.swing.JLabel labelPrendas;
+    private javax.swing.JTextField txtAEspalda;
+    private javax.swing.JTextField txtAManga;
+    private javax.swing.JTextField txtCadera;
+    private javax.swing.JTextField txtCintura;
     private javax.swing.JComboBox<String> txtCliente;
-    private javax.swing.JTextField txtCuelloCam1;
-    private javax.swing.JTextField txtCuelloCamiseta1;
+    private javax.swing.JTextField txtCuello;
     private javax.swing.JTextArea txtDescrip;
-    private javax.swing.JTextField txtEspaldaCam1;
-    private javax.swing.JTextField txtHombroCam1;
-    private javax.swing.JTextField txtHombroCamiseta1;
-    public javax.swing.JLabel txtId;
-    private javax.swing.JTextField txtLEspaldaV1;
-    private javax.swing.JTextField txtLMangaCamiseta1;
-    private javax.swing.JTextField txtLargoCam1;
-    private javax.swing.JTextField txtLargoCamiseta1;
-    private javax.swing.JTextField txtLargoF1;
-    private javax.swing.JTextField txtLargoPan1;
-    private javax.swing.JTextField txtMangaCam1;
-    private javax.swing.JTextField txtMangaV1;
-    private javax.swing.JTextField txtMunecaCam1;
-    private javax.swing.JTextField txtMusloPan1;
-    private javax.swing.JTextField txtPechoCam1;
-    private javax.swing.JTextField txtPechoCamiseta1;
-    private javax.swing.JTextField txtPechoV1;
-    private javax.swing.JTextField txtRodillaPan1;
+    private javax.swing.JTextField txtHombro;
+    private javax.swing.JTextField txtLEspalda;
+    private javax.swing.JTextField txtLManga;
+    private javax.swing.JTextField txtLargo;
+    private javax.swing.JTextField txtMuneca;
+    private javax.swing.JTextField txtMuslo;
+    private javax.swing.JTextField txtPecho;
+    private javax.swing.JTextField txtRodilla;
     private javax.swing.JTextField txtTel;
-    private javax.swing.JTextField txtTiroPan1;
-    private javax.swing.JTextField txtTiroV1;
-    private javax.swing.JTextField txtTobilloPan1;
+    private javax.swing.JTextField txtTiro;
+    private javax.swing.JTextField txtTobillo;
     private javax.swing.JTextField txtprecio;
     // End of variables declaration//GEN-END:variables
 }
