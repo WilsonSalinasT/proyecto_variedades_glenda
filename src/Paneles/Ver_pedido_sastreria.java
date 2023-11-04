@@ -99,14 +99,7 @@ public class Ver_pedido_sastreria extends javax.swing.JFrame {
     }                                           
 
     private void btnvolverActionPerformed(java.awt.event.ActionEvent evt) {                                          
-        Listado_Citas l2 = new Listado_Citas();
-        l2.setSize(1024, 640);
-        l2.setLocation(0, 0);
-
-        panelprincipal.removeAll();
-        panelprincipal.add(l2, BorderLayout.CENTER);
-        panelprincipal.revalidate();
-        panelprincipal.repaint();
+        
     }                                         
 
     /**
