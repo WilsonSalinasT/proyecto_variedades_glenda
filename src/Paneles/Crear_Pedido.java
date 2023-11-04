@@ -1133,24 +1133,41 @@ public class Crear_Pedido extends javax.swing.JPanel {
                 insertPs.setObject(18, tiro);
                 insertPs.setObject(19, muslo);
 
-                // Verificar si los archivos de imagen existen y agregarlos si es el caso
-                if (new File(rutaImagen1).exists()) {
-                    FileInputStream fis1 = new FileInputStream(new File(rutaImagen1));
-                    insertPs.setBinaryStream(20, fis1, (int) new File(rutaImagen1).length());
+                // Verificar si el archivo de imagen 1 existe y agregarlo si es el caso
+                if (rutaImagen1 != null && !rutaImagen1.isEmpty() && new File(rutaImagen1).exists()) {
+                    try {
+                        FileInputStream fis1 = new FileInputStream(new File(rutaImagen1));
+                        insertPs.setBinaryStream(20, fis1, (int) new File(rutaImagen1).length());
+                    } catch (FileNotFoundException e) {
+                        // Manejar la excepción si el archivo no se encuentra
+                        insertPs.setBinaryStream(20, null, 0); // Imagen 1 no existe
+                    }
                 } else {
                     insertPs.setBinaryStream(20, null, 0); // Imagen 1 no existe
                 }
 
-                if (new File(rutaImagen2).exists()) {
-                    FileInputStream fis2 = new FileInputStream(new File(rutaImagen2));
-                    insertPs.setBinaryStream(21, fis2, (int) new File(rutaImagen2).length());
+                // Verificar si el archivo de imagen 2 existe y agregarlo si es el caso
+                if (rutaImagen2 != null && !rutaImagen2.isEmpty() && new File(rutaImagen2).exists()) {
+                    try {
+                        FileInputStream fis2 = new FileInputStream(new File(rutaImagen2));
+                        insertPs.setBinaryStream(21, fis2, (int) new File(rutaImagen2).length());
+                    } catch (FileNotFoundException e) {
+                        // Manejar la excepción si el archivo no se encuentra
+                        insertPs.setBinaryStream(21, null, 0); // Imagen 2 no existe
+                    }
                 } else {
                     insertPs.setBinaryStream(21, null, 0); // Imagen 2 no existe
                 }
 
-                if (new File(rutaImagen3).exists()) {
-                    FileInputStream fis3 = new FileInputStream(new File(rutaImagen3));
-                    insertPs.setBinaryStream(22, fis3, (int) new File(rutaImagen3).length());
+// Verificar si el archivo de imagen 3 existe y agregarlo si es el caso
+                if (rutaImagen3 != null && !rutaImagen3.isEmpty() && new File(rutaImagen3).exists()) {
+                    try {
+                        FileInputStream fis3 = new FileInputStream(new File(rutaImagen3));
+                        insertPs.setBinaryStream(22, fis3, (int) new File(rutaImagen3).length());
+                    } catch (FileNotFoundException e) {
+                        // Manejar la excepción si el archivo no se encuentra
+                        insertPs.setBinaryStream(22, null, 0); // Imagen 3 no existe
+                    }
                 } else {
                     insertPs.setBinaryStream(22, null, 0); // Imagen 3 no existe
                 }
@@ -1177,10 +1194,7 @@ public class Crear_Pedido extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(null, e.toString(), "Error de SQL", JOptionPane.ERROR_MESSAGE);
             } catch (ClassNotFoundException ex) {
                 JOptionPane.showMessageDialog(null, "Error de conexión a la base de datos", "Error de Conexión", JOptionPane.ERROR_MESSAGE);
-            } catch (FileNotFoundException ex) {
-                JOptionPane.showMessageDialog(null, "El archivo de imagen no se puede encontrar.", "Error de Archivo", JOptionPane.ERROR_MESSAGE);
             }
-
         }
 
 

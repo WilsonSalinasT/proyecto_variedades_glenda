@@ -166,7 +166,7 @@ public class Listado_Pedidos_Pendientes extends javax.swing.JPanel {
 
             },
             new String [] {
-                "N°", "Nombre del cliente", "Apellido del cliente", "Celular", "Producto", "Precio"
+                "N°", "Nombre del cliente", "Apellido del cliente", "Celular", "Producto", "Fecha de Pedido"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -320,6 +320,7 @@ public class Listado_Pedidos_Pendientes extends javax.swing.JPanel {
 
         //Validacion del texto ingresado
         if (!texto.isEmpty()) {
+
             buscarDatos(texto);
         } else {
             JOptionPane.showMessageDialog(null, "Tiene que ingresar texto para hacer la respectiva búsqueda");
@@ -532,7 +533,7 @@ public class Listado_Pedidos_Pendientes extends javax.swing.JPanel {
             }
 
             // Consulta principal con paginación y JOIN entre las tablas
-            ps = conn.prepareStatement("SELECT ROW_NUMBER() OVER(ORDER BY PS.id_pedido) AS NumRegistro, C.nombre, C.apellido, C.numero_telefono, PS.prenda, PS.precio "
+            ps = conn.prepareStatement("SELECT ROW_NUMBER() OVER(ORDER BY PS.id_pedido) AS NumRegistro, C.nombre, C.apellido, C.numero_telefono, PS.prenda, PS.fechaPedido "
                     + "FROM Cliente C "
                     + "JOIN PedidoSastreria PS ON C.id_cliente = PS.id_cliente "
                     + "ORDER BY PS.id_pedido OFFSET ? ROWS FETCH NEXT ? ROWS ONLY");
@@ -604,31 +605,34 @@ public class Listado_Pedidos_Pendientes extends javax.swing.JPanel {
         try {
             Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
             if (conn != null && !conn.isClosed()) {
-                PreparedStatement ps = conn.prepareStatement("SELECT ROW_NUMBER() OVER(ORDER BY E.nombre) AS NumRegistro, E.nombre, E.apellido, E.numero_telefono, V.fecha_cita "
-                        + "FROM Cliente E "
-                        + "JOIN Cita V ON E.id_cliente = V.id_cliente "
-                        + "WHERE E.nombre LIKE ? OR E.apellido LIKE ? OR V.fecha_cita LIKE ? "
-                        + "ORDER BY E.nombre "
-                        + "OFFSET ? ROWS FETCH NEXT ? ROWS ONLY");
+                PreparedStatement ps;
 
-                if (texto != null && !texto.isEmpty()) {
+                // Modificar la consulta SQL para buscar por nombre o fecha
+                if (!texto.isEmpty()) {
+                    ps = conn.prepareStatement("SELECT ROW_NUMBER() OVER(ORDER BY E.nombre) AS NumRegistro, E.nombre, E.apellido, E.numero_telefono, V.prenda, V.fechaPedido "
+                            + "FROM Cliente E "
+                            + "JOIN PedidoSastreria V ON E.id_cliente = V.id_cliente "
+                            + "WHERE E.nombre LIKE ? OR E.apellido LIKE ? OR V.fechaPedido = ? "
+                            + "ORDER BY E.nombre "
+                            + "OFFSET ? ROWS FETCH NEXT ? ROWS ONLY");
+
                     ps.setString(1, "%" + texto + "%");
                     ps.setString(2, "%" + texto + "%");
-                    ps.setString(3, "%" + texto + "%");
+                    ps.setString(3, texto);
+                    ps.setInt(4, 0); // Configura el valor del offset incluso cuando texto está vacío
+                    ps.setInt(5, 10); // Cambia la cantidad de registros a recuperar según tus requerimientos
                     terminoBusqueda = texto; // Actualizar el término de búsqueda
                 } else {
-                    ps.setString(1, "%");
-                    ps.setString(2, "%");
-                    ps.setString(3, "%");
+                    ps = conn.prepareStatement("SELECT ROW_NUMBER() OVER(ORDER BY E.nombre) AS NumRegistro, E.nombre, E.apellido, E.numero_telefono, V.prenda, V.fechaPedido "
+                            + "FROM Cliente E "
+                            + "JOIN PedidoSastreria V ON E.id_cliente = V.id_cliente "
+                            + "ORDER BY E.nombre "
+                            + "OFFSET ? ROWS FETCH NEXT ? ROWS ONLY");
+
+                    ps.setInt(1, 0); // Configura el valor del offset incluso cuando texto está vacío
+                    ps.setInt(2, 10); // Cambia la cantidad de registros a recuperar según tus requerimientos
                     terminoBusqueda = ""; // Limpiar el término de búsqueda
                 }
-
-                // Define el OFFSET y FETCH NEXT de acuerdo a tus necesidades
-                int offset = 0; // Cambia el valor del offset según tus requerimientos
-                int fetchNext = 10; // Cambia la cantidad de registros a recuperar según tus requerimientos
-
-                ps.setInt(4, offset);
-                ps.setInt(5, fetchNext);
 
                 ResultSet rs = ps.executeQuery();
 
@@ -638,11 +642,12 @@ public class Listado_Pedidos_Pendientes extends javax.swing.JPanel {
                         String nombre = rs.getString("nombre");
                         String apellido = rs.getString("apellido");
                         String numeroTelefono = rs.getString("numero_telefono");
-                        String fechaCita = rs.getString("fecha_cita");
+                        String prenda = rs.getString("prenda");
+                        String fechaPedido = rs.getString("fechaPedido");
 
                         if (nombre != null && apellido != null && numeroTelefono != null) {
                             modelTabla.addRow(new Object[]{
-                                numRegistro, nombre, apellido, numeroTelefono, fechaCita
+                                numRegistro, nombre, apellido, numeroTelefono, prenda, fechaPedido
                             });
                             foundData = true;
                         }
@@ -661,6 +666,8 @@ public class Listado_Pedidos_Pendientes extends javax.swing.JPanel {
         // Llama a la función de cargarTablaEmpleados() si es necesario recargar la tabla después de la búsqueda
         cargarTabla(); // Recargar la tabla después de la búsqueda
     }
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton Btn_Buscar;
     private javax.swing.JLabel Texto_Buscar;
