@@ -44,14 +44,14 @@ public class Listado_Pedidos_Pendientes extends javax.swing.JPanel {
 
         holder = new TextPrompt("Busque por nombre/apellido del cliente/fecha de entrega", txtBuscar);
 
-        tblCitas.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 12));
-        tblCitas.getTableHeader().setOpaque(false);
-        tblCitas.getTableHeader().setBackground(new Color(255, 0, 0));
-        tblCitas.getTableHeader().setForeground(new Color(255, 0, 0));
-        tblCitas.setRowHeight(25);
+        tblPedidos.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 12));
+        tblPedidos.getTableHeader().setOpaque(false);
+        tblPedidos.getTableHeader().setBackground(new Color(255, 0, 0));
+        tblPedidos.getTableHeader().setForeground(new Color(255, 0, 0));
+        tblPedidos.setRowHeight(25);
 
-        tblCitas.setRowSelectionAllowed(true);
-        tblCitas.setColumnSelectionAllowed(false);
+        tblPedidos.setRowSelectionAllowed(true);
+        tblPedidos.setColumnSelectionAllowed(false);
     }
 
     /**
@@ -72,7 +72,7 @@ public class Listado_Pedidos_Pendientes extends javax.swing.JPanel {
         verbtn = new javax.swing.JButton();
         Texto_Buscar = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tblCitas = new javax.swing.JTable();
+        tblPedidos = new javax.swing.JTable();
         txtBuscar = new javax.swing.JTextField();
         Btn_Buscar = new javax.swing.JButton();
         refrescarbtn = new javax.swing.JButton();
@@ -161,7 +161,7 @@ public class Listado_Pedidos_Pendientes extends javax.swing.JPanel {
         Texto_Buscar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         Texto_Buscar.setText("Buscar:");
 
-        tblCitas.setModel(new javax.swing.table.DefaultTableModel(
+        tblPedidos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -177,13 +177,13 @@ public class Listado_Pedidos_Pendientes extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        tblCitas.setGridColor(new java.awt.Color(255, 51, 51));
-        tblCitas.setSelectionBackground(new java.awt.Color(255, 102, 102));
-        tblCitas.setShowHorizontalLines(true);
-        tblCitas.setShowVerticalLines(true);
-        jScrollPane2.setViewportView(tblCitas);
-        if (tblCitas.getColumnModel().getColumnCount() > 0) {
-            tblCitas.getColumnModel().getColumn(0).setPreferredWidth(1);
+        tblPedidos.setGridColor(new java.awt.Color(255, 51, 51));
+        tblPedidos.setSelectionBackground(new java.awt.Color(255, 102, 102));
+        tblPedidos.setShowHorizontalLines(true);
+        tblPedidos.setShowVerticalLines(true);
+        jScrollPane2.setViewportView(tblPedidos);
+        if (tblPedidos.getColumnModel().getColumnCount() > 0) {
+            tblPedidos.getColumnModel().getColumn(0).setPreferredWidth(1);
         }
 
         txtBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -279,7 +279,7 @@ public class Listado_Pedidos_Pendientes extends javax.swing.JPanel {
                             .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(Btn_Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(refrescarbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -501,28 +501,20 @@ public class Listado_Pedidos_Pendientes extends javax.swing.JPanel {
     String terminoBusqueda = ""; // Término de búsqueda actual
 
     private void cargarTabla() {
-        DefaultTableModel modeloTabla = (DefaultTableModel) tblCitas.getModel();
-        modeloTabla.setRowCount(0); // Limpiar los datos existentes en la tabla
+        DefaultTableModel modeloTabla = (DefaultTableModel) tblPedidos.getModel();
+        modeloTabla.setRowCount(0); // Eliminar las filas existentes
 
         PreparedStatement ps;
         ResultSet rs;
         ResultSetMetaData rsmd;
         int columnas;
-        boolean foundData = false;
 
         try {
             Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
 
-            // Obtener el total de filas que cumplen con el criterio de búsqueda
-            ps = conn.prepareStatement("SELECT COUNT(*) AS TotalFilas "
-                    + "FROM Cliente E "
-                    + "JOIN PedidoSastreria V ON E.id_cliente = V.id_cliente "
-                    + "WHERE E.nombre LIKE ? OR E.apellido LIKE ? ");
-            ps.setString(1, "%" + terminoBusqueda + "%");
-            ps.setString(2, "%" + terminoBusqueda + "%");
-
+            // Consulta para contar el número total de filas
+            ps = conn.prepareStatement("SELECT COUNT(*) FROM PedidoSastreria");
             rs = ps.executeQuery();
-
             if (rs.next()) {
                 totalFilas = rs.getInt(1);
             }
@@ -539,20 +531,15 @@ public class Listado_Pedidos_Pendientes extends javax.swing.JPanel {
                 offset = 0;
             }
 
-            // Consulta para obtener los datos paginados
-            ps = conn.prepareStatement("SELECT ROW_NUMBER() OVER(ORDER BY E.nombre) AS NumRegistro, E.nombre, E.apellido, E.numero_telefono"
-                    + "FROM Cliente E "
-                    + "JOIN PedidoSastreria V ON E.id_cliente = V.id_cliente "
-                    + "WHERE E.nombre LIKE ? OR E.apellido LIKE ? "
-                    + "ORDER BY E.nombre "
-                    + "OFFSET ? ROWS FETCH NEXT ? ROWS ONLY"
-            );
-            ps.setString(1, "%" + terminoBusqueda + "%");
-            ps.setString(2, "%" + terminoBusqueda + "%");
-            ps.setString(3, "%" + terminoBusqueda + "%");
-            ps.setInt(4, offset);
-            ps.setInt(5, filasPorPagina);
+            // Consulta principal con paginación y JOIN entre las tablas
+            ps = conn.prepareStatement("SELECT ROW_NUMBER() OVER(ORDER BY PS.id_pedido) AS NumRegistro, C.nombre, C.apellido, C.numero_telefono, PS.prenda, PS.precio "
+                    + "FROM Cliente C "
+                    + "JOIN PedidoSastreria PS ON C.id_cliente = PS.id_cliente "
+                    + "ORDER BY PS.id_pedido OFFSET ? ROWS FETCH NEXT ? ROWS ONLY");
+            ps.setInt(1, offset);
+            ps.setInt(2, filasPorPagina);
             rs = ps.executeQuery();
+
             rsmd = rs.getMetaData();
             columnas = rsmd.getColumnCount();
 
@@ -562,13 +549,23 @@ public class Listado_Pedidos_Pendientes extends javax.swing.JPanel {
                     fila[indice] = rs.getObject(indice + 1);
                 }
                 modeloTabla.addRow(fila);
-                foundData = true;
             }
 
             ajustarTabla(filasPorPagina);
 
-            if (!foundData) {
-                JOptionPane.showMessageDialog(null, "No se encontraron datos");
+            // Eliminar filas vacías del modelo
+            for (int i = modeloTabla.getRowCount() - 1; i >= 0; i--) {
+                boolean isEmptyRow = true;
+                for (int j = 0; j < modeloTabla.getColumnCount(); j++) {
+                    Object value = modeloTabla.getValueAt(i, j);
+                    if (value != null && !value.toString().isEmpty()) {
+                        isEmptyRow = false;
+                        break;
+                    }
+                }
+                if (isEmptyRow) {
+                    modeloTabla.removeRow(i);
+                }
             }
 
             // Obtener el número de filas actualizado
@@ -576,15 +573,13 @@ public class Listado_Pedidos_Pendientes extends javax.swing.JPanel {
             Texto_Contable.setText("Cantidad de filas: " + rowCount + " - Página " + paginaActual + "/" + totalPaginas);
 
         } catch (SQLException e) {
-            e.printStackTrace(); // Imprime la pila de excepciones para depuración
             JOptionPane.showMessageDialog(null, e.toString());
         }
-
     }
 
     private void ajustarTabla(int filasDeseadas) {
-        tblCitas.setPreferredScrollableViewportSize(new Dimension(tblCitas.getPreferredSize().width, tblCitas.getRowHeight() * filasDeseadas));
-        tblCitas.setFillsViewportHeight(true);
+        tblPedidos.setPreferredScrollableViewportSize(new Dimension(tblPedidos.getPreferredSize().width, tblPedidos.getRowHeight() * filasDeseadas));
+        tblPedidos.setFillsViewportHeight(true);
     }
 
     private void siguientePagina() {
@@ -602,7 +597,7 @@ public class Listado_Pedidos_Pendientes extends javax.swing.JPanel {
     }
 
     private void buscarDatos(String texto) {
-        DefaultTableModel modelTabla = (DefaultTableModel) tblCitas.getModel();
+        DefaultTableModel modelTabla = (DefaultTableModel) tblPedidos.getModel();
         modelTabla.setRowCount(0);
         boolean foundData = false;
 
@@ -680,7 +675,7 @@ public class Listado_Pedidos_Pendientes extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JButton refrescarbtn;
-    private javax.swing.JTable tblCitas;
+    private javax.swing.JTable tblPedidos;
     public javax.swing.JTextField txtBuscar;
     private javax.swing.JButton verbtn;
     // End of variables declaration//GEN-END:variables

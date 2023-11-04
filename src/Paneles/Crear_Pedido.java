@@ -1082,9 +1082,10 @@ public class Crear_Pedido extends javax.swing.JPanel {
         } else {
             try {
                 // Rutas de las imágenes
-                String rutaImagen1 = imagen1.getText();
-                String rutaImagen2 = imagen2.getText();
-                String rutaImagen3 = imagen3.getText();
+                String rutaImagen1 = archivos[0].getAbsolutePath();
+                System.out.println("archivos[0]: " + archivos[0]);
+                String rutaImagen2 = archivos[1] != null ? archivos[1].getAbsolutePath() : null;
+                String rutaImagen3 = archivos[2] != null ? archivos[2].getAbsolutePath() : null;
 
                 // Resto del código para la inserción en la base de datos
                 Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
