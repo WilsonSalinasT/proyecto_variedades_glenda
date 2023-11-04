@@ -361,10 +361,10 @@ public class Listado_Pedidos_Pendientes extends javax.swing.JPanel {
     int selectedRow1;
     private void verbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verbtnActionPerformed
         /*   // TODO add your handling code here:
-        selectedRow1 = tblCitas.getSelectedRow();
+        selectedRow1 = tblpedido.getSelectedRow();
         if (selectedRow1 == -1)
         {
-            JOptionPane.showMessageDialog(null, "Seleccione una cita para poder visualizarla");
+            JOptionPane.showMessageDialog(null, "Seleccione una pedido para poder visualizarla");
             return;
         }
 

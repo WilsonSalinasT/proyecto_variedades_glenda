@@ -36,9 +36,9 @@ public class Listado_pedido_entregado extends javax.swing.JPanel {
      */
     public Listado_pedido_entregado() {
         initComponents();
-        cargarTablaPedidosEntregados();
+         cargarTablapedidoentregado();
 
-        holder = new TextPrompt("Busque por nombre/apellido del empleado", txtBuscar);
+        holder = new TextPrompt("Busque por nombre/apellido del empleado/fecha entrega", txtBuscar);
 
         tblpedido.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 12));
         tblpedido.getTableHeader().setOpaque(false);
@@ -166,11 +166,11 @@ public class Listado_pedido_entregado extends javax.swing.JPanel {
 
             },
             new String [] {
-                "N°", "Total", "Fecha Entrega", "Estado Pedido", "Descripcion"
+                "N°", "Nombre del Cliente", "Apellido de Cliente", "Estado Pedido", "Descripcion", "Fecha Entrega"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -239,16 +239,7 @@ public class Listado_pedido_entregado extends javax.swing.JPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(71, 71, 71)
-                        .addComponent(Texto_Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(17, 17, 17)
-                        .addComponent(Btn_Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(refrescarbtn))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(21, 21, 21)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -259,7 +250,16 @@ public class Listado_pedido_entregado extends javax.swing.JPanel {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(btnAnterior, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(btnSiguiente, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(btnSiguiente, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addGap(63, 63, 63)
+                        .addComponent(Texto_Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(27, 27, 27)
+                        .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 414, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(43, 43, 43)
+                        .addComponent(Btn_Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(refrescarbtn)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -331,7 +331,7 @@ public class Listado_pedido_entregado extends javax.swing.JPanel {
         txtBuscar.setText("");
 
         // Cargar la tabla con los datos actualizados
-        cargarTablaPedidosEntregados();
+         cargarTablapedidoentregado();
     }//GEN-LAST:event_refrescarbtnActionPerformed
 
     private void btnAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnteriorActionPerformed
@@ -364,98 +364,116 @@ public class Listado_pedido_entregado extends javax.swing.JPanel {
       
     }//GEN-LAST:event_editarbtnActionPerformed
 
-int filasPorPagina = 20; // Cantidad de filas que se mostrarán en cada página
-int paginaActual = 1; // Página actual
-int totalPaginas = 1; // Total de páginas
-String terminoBusqueda = ""; // Término de búsqueda actual
 
-private void cargarTablaPedidosEntregados() {
-    DefaultTableModel modeloTabla = (DefaultTableModel) tblpedido.getModel();
-    modeloTabla.setRowCount(0); // Limpiar los datos existentes en la tabla
+   int paginaActual = 1; // Página actual
+    int filasPorPagina = 20; // Número de filas a mostrar por página
+    int totalFilas = 0; // Total de filas en la tabla
+    int totalPaginas = 0; // Total de páginas en la tabla
+    int numRegistro = 0;
+    String terminoBusqueda = ""; // Término de búsqueda actual
 
-    PreparedStatement ps;
-    ResultSet rs;
-    ResultSetMetaData rsmd;
-    int columnas;
-    boolean foundData = false;
+    private void cargarTablapedidoentregado() {
+        DefaultTableModel modeloTabla = (DefaultTableModel) tblpedido.getModel();
+        modeloTabla.setRowCount(0); // Eliminar las filas existentes
 
-    try {
-        Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
+        PreparedStatement ps;
+        ResultSet rs;
+        ResultSetMetaData rsmd;
+        int columnas;
 
-        ps = conn.prepareStatement("SELECT COUNT(*) AS TotalFilas FROM PedidoEntregado WHERE ClienteID LIKE ? OR Total LIKE ? OR FechaEntrega LIKE ? OR FechaPedido LIKE ? OR EstadoPedido LIKE ? OR Descripcion LIKE ?");
-        ps.setString(1, "%" + terminoBusqueda + "%");
-        ps.setString(2, "%" + terminoBusqueda + "%");
-        ps.setString(3, "%" + terminoBusqueda + "%");
-        ps.setString(4, "%" + terminoBusqueda + "%");
-        ps.setString(5, "%" + terminoBusqueda + "%");
-        ps.setString(6, "%" + terminoBusqueda + "%");
-        rs = ps.executeQuery();
+        try {
+            Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
 
-        int cantidadFilas = 0;
-        if (rs.next()) {
-            cantidadFilas = rs.getInt("TotalFilas");
-        }
-
-        totalPaginas = (int) Math.ceil((double) cantidadFilas / filasPorPagina);
-
-        if (paginaActual < 1) {
-            paginaActual = 1;
-        } else if (paginaActual > totalPaginas) {
-            paginaActual = totalPaginas;
-        }
-
-        int offset = (paginaActual - 1) * filasPorPagina;
-        if (offset < 0) {
-            offset = 0;
-        }
-
-        ps = conn.prepareStatement("SELECT ROW_NUMBER() OVER(ORDER BY ClienteID) AS NumRegistro, Total, FechaEntrega, EstadoPedido, Descripcion FROM PedidoEntregado WHERE ClienteID LIKE ? OR Total LIKE ? OR FechaEntrega LIKE ? OR FechaPedido LIKE ? OR EstadoPedido LIKE ? OR Descripcion LIKE ? ORDER BY ClienteID OFFSET ? ROWS FETCH NEXT ? ROWS ONLY");
-        ps.setString(1, "%" + terminoBusqueda + "%");
-        ps.setString(2, "%" + terminoBusqueda + "%");
-        ps.setString(3, "%" + terminoBusqueda + "%");
-        ps.setString(4, "%" + terminoBusqueda + "%");
-        ps.setString(5, "%" + terminoBusqueda + "%");
-        ps.setString(6, "%" + terminoBusqueda + "%");
-        ps.setInt(7, offset);
-        ps.setInt(8, filasPorPagina);
-        rs = ps.executeQuery();
-        rsmd = rs.getMetaData();
-        columnas = rsmd.getColumnCount();
-
-        while (rs.next()) {
-            Object[] fila = new Object[columnas];
-            for (int indice = 0; indice < columnas; indice++) {
-                fila[indice] = rs.getObject(indice + 1);
+            // Consulta para contar el número total de filas
+            ps = conn.prepareStatement("SELECT COUNT(*) FROM PedidoEntregado");
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                totalFilas = rs.getInt(1);
             }
-            modeloTabla.addRow(fila);
-            foundData = true;
+            totalPaginas = (int) Math.ceil((double) totalFilas / filasPorPagina);
+
+            if (paginaActual < 1) {
+                paginaActual = 1;
+            } else if (paginaActual > totalPaginas) {
+                paginaActual = totalPaginas;
+            }
+
+            int offset = (paginaActual - 1) * filasPorPagina;
+            if (offset < 0) {
+                offset = 0;
+            }
+
+   // Consulta principal con paginación y JOIN entre las tablas
+ps = conn.prepareStatement("SELECT ROW_NUMBER() OVER(ORDER BY PS.id_pedido) AS NumRegistro, C.nombre AS Nombre, C.apellido AS Apellido, PS.estadoPedido, PS.descripcion,PS.fechaEntrega "
+        + "FROM Cliente C "
+        + "JOIN PedidoEntregado PS ON C.id_cliente = PS.id_cliente "
+        + "ORDER BY PS.id_pedido OFFSET ? ROWS FETCH NEXT ? ROWS ONLY");
+
+ps.setInt(1, offset);
+ps.setInt(2, filasPorPagina);
+rs = ps.executeQuery();
+
+
+
+
+            rsmd = rs.getMetaData();
+            columnas = rsmd.getColumnCount();
+
+            while (rs.next()) {
+                Object[] fila = new Object[columnas];
+                for (int indice = 0; indice < columnas; indice++) {
+                    fila[indice] = rs.getObject(indice + 1);
+                }
+                modeloTabla.addRow(fila);
+            }
+
+            ajustarTabla(filasPorPagina);
+
+            // Eliminar filas vacías del modelo
+            for (int i = modeloTabla.getRowCount() - 1; i >= 0; i--) {
+                boolean isEmptyRow = true;
+                for (int j = 0; j < modeloTabla.getColumnCount(); j++) {
+                    Object value = modeloTabla.getValueAt(i, j);
+                    if (value != null && !value.toString().isEmpty()) {
+                        isEmptyRow = false;
+                        break;
+                    }
+                }
+                if (isEmptyRow) {
+                    modeloTabla.removeRow(i);
+                }
+            }
+
+            // Obtener el número de filas actualizado
+            int rowCount = modeloTabla.getRowCount();
+            Texto_Contable.setText("Cantidad de filas: " + rowCount + " - Página " + paginaActual + "/" + totalPaginas);
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e.toString());
         }
+    }
 
-        if (!foundData) {
-            JOptionPane.showMessageDialog(null, "No se encontraron datos");
+    private void ajustarTabla(int filasDeseadas) {
+        tblpedido.setPreferredScrollableViewportSize(new Dimension(tblpedido.getPreferredSize().width, tblpedido.getRowHeight() * filasDeseadas));
+        tblpedido.setFillsViewportHeight(true);
+    }
+
+    private void siguientePagina() {
+        if (paginaActual < totalPaginas) {
+            paginaActual++;
+            cargarTablapedidoentregado();
         }
-
-        Texto_Contable.setText("Cantidad de filas: " + cantidadFilas + " - Página " + paginaActual + " de " + totalPaginas);
-
-    } catch (SQLException e) {
-        JOptionPane.showMessageDialog(null, e.toString());
-    }
-}
-
-private void siguientePagina() {
-    if (paginaActual < totalPaginas) {
-        paginaActual++;
-        cargarTablaPedidosEntregados();
-    }
-}
-
-private void paginaAnterior() {
-    if (paginaActual > 1) {
-        paginaActual--;
-        cargarTablaPedidosEntregados();
     }
 
-}
+    private void paginaAnterior() {
+        if (paginaActual > 1) {
+            paginaActual--;
+             cargarTablapedidoentregado();
+        }
+    }
+
+
+
 
 
 
@@ -467,16 +485,23 @@ private void buscarDatos(String texto) {
     try {
         Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
         if (conn != null && !conn.isClosed()) {
-            PreparedStatement ps = conn.prepareStatement("SELECT [PedidoID], [ClienteID], [Total], [FechaEntrega], [FechaPedido], [EstadoPedido], [Descripcion] FROM [GlendaDB].[dbo].[PedidoEntregado] WHERE [Total] LIKE ? OR [FechaEntrega] LIKE ?");
-            // Asegúrate de que [Total] y [FechaEntrega] sean las columnas reales de tu tabla
+            PreparedStatement ps = conn.prepareStatement("SELECT ROW_NUMBER() OVER(ORDER BY PS.id_pedido) AS NumRegistro, C.nombre AS Nombre, C.apellido AS Apellido, PS.estadoPedido, PS.descripcion, PS.fechaEntrega "
+                    + "FROM Cliente C "
+                    + "JOIN PedidoEntregado PS ON C.id_cliente = PS.id_cliente "
+                    + "WHERE C.nombre LIKE ? OR C.apellido LIKE ? "
+                    + "ORDER BY PS.id_pedido OFFSET ? ROWS FETCH NEXT ? ROWS ONLY");
 
             if (texto != null && !texto.isEmpty()) {
-                ps.setString(1, "%" + texto + "%");
-                ps.setString(2, "%" + texto + "%");
+                ps.setString(1, "%" + texto + "%"); // Búsqueda por nombre
+                ps.setString(2, "%" + texto + "%"); // Búsqueda por apellido
+                ps.setInt(3, 0); // Offset
+                ps.setInt(4, 10); // FETCH NEXT (por ejemplo, obtiene los primeros 10 registros)
                 terminoBusqueda = texto; // Actualizar el término de búsqueda
             } else {
                 ps.setString(1, "%");
                 ps.setString(2, "%");
+                ps.setInt(3, 0); // Offset
+                ps.setInt(4, 10); // FETCH NEXT (por ejemplo, obtiene los primeros 10 registros)
                 terminoBusqueda = ""; // Limpiar el término de búsqueda
             }
 
@@ -484,20 +509,18 @@ private void buscarDatos(String texto) {
 
             if (rs != null) {
                 while (rs.next()) {
-                    int pedidoID = rs.getInt("PedidoID");
-                    String clienteID = rs.getString("ClienteID");
-                    double total = rs.getDouble("Total");
-                    Date fechaEntrega = rs.getDate("FechaEntrega");
-                    Date fechaPedido = rs.getDate("FechaPedido");
-                    String estadoPedido = rs.getString("EstadoPedido");
-                    String descripcion = rs.getString("Descripcion");
+                    int numRegistro = rs.getInt("NumRegistro");
+                    String nombre = rs.getString("Nombre");
+                    String apellido = rs.getString("Apellido");
+                    String estadoPedido = rs.getString("estadoPedido");
+                    String descripcion = rs.getString("descripcion");
+                    Date fechaEntrega = rs.getDate("fechaEntrega");
 
-                    if (clienteID != null && estadoPedido != null && descripcion != null) {
-                        modelTabla.addRow(new Object[] {
-                            pedidoID, clienteID, total, fechaEntrega, fechaPedido, estadoPedido, descripcion
-                        });
-                        foundData = true;
-                    }
+                    modelTabla.addRow(new Object[] {
+                        numRegistro, nombre, apellido, estadoPedido, descripcion, fechaEntrega
+                    });
+
+                    foundData = true;
                 }
 
                 rs.close();
@@ -510,8 +533,9 @@ private void buscarDatos(String texto) {
         JOptionPane.showMessageDialog(null, e.toString());
     }
 
-    cargarTablaPedidosEntregados(); // Recargar la tabla después de la búsqueda
+    cargarTablapedidoentregado(); // Recargar la tabla después de la búsqueda
 }
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

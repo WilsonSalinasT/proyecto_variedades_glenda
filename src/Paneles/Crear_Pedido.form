@@ -187,11 +187,13 @@
                           <Component id="txtPecho" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="txtHombro" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="txtMuneca" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtAEspalda" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtLEspalda" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="txtHombro" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtAEspalda" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtLEspalda" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -497,9 +499,9 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="103" groupAlignment="3" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="imagen2" alignment="1" min="-2" pref="169" max="-2" attributes="0"/>
-                                  <Component id="imagen3" alignment="3" min="-2" pref="160" max="-2" attributes="0"/>
+                                  <Component id="imagen3" min="-2" pref="160" max="-2" attributes="0"/>
                               </Group>
                               <Component id="imagen1" alignment="1" min="-2" pref="169" max="-2" attributes="0"/>
                           </Group>
