@@ -25,6 +25,7 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 import com.toedter.calendar.JDateChooser;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -364,99 +365,153 @@ public class Listado_Pedidos_Pendientes extends javax.swing.JPanel {
     private void verbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verbtnActionPerformed
                                        
     int selectedRow1 = tblPedidos.getSelectedRow();
-    if (selectedRow1 == -1) {
-        JOptionPane.showMessageDialog(null, "Seleccione un pedido para poder visualizarlo");
-        return;
-    }
+if (selectedRow1 == -1) {
+    JOptionPane.showMessageDialog(null, "Seleccione un pedido para poder visualizarlo");
+    return;
+}
 
-    try {
-        String valorCelda = tblPedidos.getValueAt(selectedRow1, 1).toString();
-        String valorCelda2 = tblPedidos.getValueAt(selectedRow1, 2).toString();
-        String valorCelda3 = tblPedidos.getValueAt(selectedRow1, 3).toString();
-        String valorCelda4 = tblPedidos.getValueAt(selectedRow1, 4).toString();
-        String valorCelda5 = tblPedidos.getValueAt(selectedRow1, 5).toString();
+try {
+    String valorCelda = tblPedidos.getValueAt(selectedRow1, 1).toString();
+    String valorCelda2 = tblPedidos.getValueAt(selectedRow1, 2).toString();
+    String valorCelda3 = tblPedidos.getValueAt(selectedRow1, 3).toString();
+    String valorCelda4 = tblPedidos.getValueAt(selectedRow1, 4).toString();
+    String valorCelda5 = tblPedidos.getValueAt(selectedRow1, 5).toString();
 
-       /* // Recupera los valores de las etiquetas o campos de texto
-        String nombre = (String) cbxClientes.getSelectedItem();
-        String prenda = (String) cbxPrenda.getSelectedItem();
-        String estado = (String) cbxEstado.getSelectedItem();
-        String idC = id_cliente.getText();
-        String imagenM1 = imagen1.getText();
-        String descripcion = txtDescrip.getText();
-        String precio = txtprecio.getText();
-        SimpleDateFormat sdfSQL = new SimpleDateFormat("yyyy-MM-dd");
-        String fechaPedido = sdfSQL.format(new Date());
-        String cadera = txtCadera.getText();
-        String cintura = txtCintura.getText();
-        String largo = txtLargo.getText();
-        String largoManga = txtLManga.getText();
-        String anchoManga = txtAManga.getText();
-        String cuello = txtCuello.getText();
-        String pecho = txtPecho.getText();
-        String muneca = txtMuneca.getText();
-        String hombro = txtHombro.getText();
-        String anchoEsp = txtAEspalda.getText();
-        String largoEsp = txtLEspalda.getText();
-        String rodilla = txtRodilla.getText();
-        String tobillo = txtTobillo.getText();
-        String tiro = txtTiro.getText();
-        String muslo = txtMuslo.getText();*/
+    PreparedStatement ps;
+    ResultSet rs;
 
-        PreparedStatement ps;
-        ResultSet rs;
+    Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
+    ps = conn.prepareStatement("SELECT prenda, estado, descripcion, precio, cadera, cintura, largo, largoManga, anchoManga, cuello, pecho, muneca, hombro, anchoEsp, largoEsp, rodilla, tobillo, tiro, muslo, imagen1, imagen2, imagen3, fechaPedido FROM PedidoSastreria WHERE prenda=? AND estado=? AND descripcion=? AND precio=? AND cadera=?");
+    ps.setString(1, valorCelda);
+    ps.setString(2, valorCelda2);
+    ps.setString(3, valorCelda3);
+    ps.setString(4, valorCelda4);
+    ps.setString(5, valorCelda5);
+    rs = ps.executeQuery();
 
-        Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
-        ps = conn.prepareStatement("SELECT prenda, estado, descripcion, precio, cadera, cintura, largo, largoManga, anchoManga, cuello, pecho, muneca, hombro, anchoEsp, largoEsp, rodilla, tobillo, tiro, muslo, imagen1, imagen2, imagen3, fechaPedido FROM PedidoSastreria WHERE prenda=? AND estado=? AND descripcion=? AND precio=? AND cadera=?");
-        ps.setString(1, valorCelda);
-        ps.setString(2, valorCelda2);
-        ps.setString(3, valorCelda3);
-        ps.setString(4, valorCelda4);
-        ps.setString(5, valorCelda5);
-        rs = ps.executeQuery();
+    if (rs.next()) {
+        String prenda = rs.getString("prenda");
+        String estado = rs.getString("estado");
+        String descripcion = rs.getString("descripcion");
+        String precio = rs.getString("precio");
+        String cadera = rs.getString("cadera");
+        String cintura = rs.getString("cintura");
+        String largo = rs.getString("largo");
+        String largoManga = rs.getString("largoManga");
+        String anchoManga = rs.getString("anchoManga");
+        String cuello = rs.getString("cuello");
+        String pecho = rs.getString("pecho");
+        String muneca = rs.getString("muneca");
+        String hombro = rs.getString("hombro");
+        String anchoEsp = rs.getString("anchoEsp");
+        String largoEsp = rs.getString("largoEsp");
+        String rodilla = rs.getString("rodilla");
+        String tobillo = rs.getString("tobillo");
+        String tiro = rs.getString("tiro");
+        String muslo = rs.getString("muslo");
+        String imagen1 = rs.getString("imagen1");
+        String imagen2 = rs.getString("imagen2");
+        String imagen3 = rs.getString("imagen3");
+        String fechaPedido = rs.getString("fechaPedido");
 
-        if (rs.next()) {
-            // Recupera los datos adicionales de la base de datos
-            String prendaDB = rs.getString("prenda");
-            String estadoDB = rs.getString("estado");
-            String descripcionDB = rs.getString("descripcion");
-            String precioDB = rs.getString("precio");
-            String caderaDB = rs.getString("cadera");
-            String cinturaDB = rs.getString("cintura");
-            String largoDB = rs.getString("largo");
-            String largoMangaDB = rs.getString("largoManga");
-            String anchoMangaDB = rs.getString("anchoManga");
-            String cuelloDB = rs.getString("cuello");
-            String pechoDB = rs.getString("pecho");
-            String munecaDB = rs.getString("muneca");
-            String hombroDB = rs.getString("hombro");
-            String anchoEspDB = rs.getString("anchoEsp");
-            String largoEspDB = rs.getString("largoEsp");
-            String rodillaDB = rs.getString("rodilla");
-            String tobilloDB = rs.getString("tobillo");
-            String tiroDB = rs.getString("tiro");
-            String musloDB = rs.getString("muslo");
-            String imagen1DB = rs.getString("imagen1");
-            String imagen2DB = rs.getString("imagen2");
-            String imagen3DB = rs.getString("imagen3");
-            String fechaPedidoDB = rs.getString("fechaPedido");
+        ver_pedido_sastreria mostrar = new ver_pedido_sastreria();
 
-            // Crea una instancia de la ventana ver_pedido_sastreria
-            ver_pedido_sastreria ventanaVerPedido = new ver_pedido_sastreria();
+        // Configurar los campos en la ventana mostrar
+        mostrar.cbxPrenda.setText(prenda);
+        mostrar.cbxPrenda.setEditable(false);
 
-            // Establece los valores en la ventana ver_pedido_sastreria
-            ventanaVerPedido.setDatos(prendaDB, estadoDB, descripcionDB, precioDB, caderaDB, cinturaDB, largoDB, largoMangaDB, anchoMangaDB, cuelloDB, pechoDB, munecaDB, hombroDB, anchoEspDB, largoEspDB, rodillaDB, tobilloDB, tiroDB, musloDB, imagen1DB, imagen2DB, imagen3DB, fechaPedidoDB);
+        mostrar.cbxEstado.setText(estado);
+        mostrar.cbxEstado.setEditable(false);
 
-            // Muestra la ventana ver_pedido_sastreria
-            ventanaVerPedido.setVisible(true);
+        mostrar.txtCadera.setText(cadera);
+        mostrar.txtCadera.setEditable(false);
+
+        mostrar.txtCintura.setText(cintura);
+        mostrar.txtCintura.setEditable(false);
+
+        mostrar.txtLargo.setText(largo);
+        mostrar.txtLargo.setEditable(false);
+
+        mostrar.txtLManga.setText(largoManga);
+        mostrar.txtLManga.setEditable(false);
+
+        mostrar.txtAManga.setText(anchoManga);
+        mostrar.txtAManga.setEditable(false);
+
+        mostrar.txtCuello.setText(cuello);
+        mostrar.txtCuello.setEditable(false);
+
+        mostrar.txtPecho.setText(pecho);
+        mostrar.txtPecho.setEditable(false);
+
+        mostrar.txtMuneca.setText(muneca);
+        mostrar.txtMuneca.setEditable(false);
+
+        mostrar.txtHombro.setText(hombro);
+        mostrar.txtHombro.setEditable(false);
+
+        mostrar.txtAEspalda.setText(anchoEsp);
+        mostrar.txtAEspalda.setEditable(false);
+
+        mostrar.txtLEspalda.setText(largoEsp);
+        mostrar.txtLEspalda.setEditable(false);
+
+        mostrar.txtRodilla.setText(rodilla);
+        mostrar.txtRodilla.setEditable(false);
+
+        mostrar.txtTobillo.setText(tobillo);
+        mostrar.txtTobillo.setEditable(false);
+
+        mostrar.txtTiro.setText(tiro);
+        mostrar.txtTiro.setEditable(false);
+
+        mostrar.txtMuslo.setText(muslo);
+        mostrar.txtMuslo.setEditable(false);
+
+        // Configurar los campos de imagen
+        try {
+            ImageIcon icon1 = new ImageIcon(imagen1);
+            mostrar.imagen1.setIcon(icon1);
+
+            ImageIcon icon2 = new ImageIcon(imagen2);
+            mostrar.imagen2.setIcon(icon2);
+
+            ImageIcon icon3 = new ImageIcon(imagen3);
+            mostrar.imagen3.setIcon(icon3);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        rs.close();
-        ps.close();
-        conn.close();
-    } catch (SQLException e) {
-        e.printStackTrace(); // Maneja la excepción apropiadamente
+
+        // Configurar el campo de la fecha del pedido
+        mostrar.fechaP.setText(fechaPedido);
+        mostrar.fechaP.setText(fechaPedido);
+
+
+        mostrar.txtDescrip.setText(descripcion);
+        mostrar.txtDescrip.setEditable(false);
+
+        mostrar.txtprecio.setText(precio);
+        mostrar.txtprecio.setEditable(false);
+
+        mostrar.setSize(1024, 640);
+        mostrar.setLocation(0, 0);
+
+        jPanel3.removeAll();
+        jPanel3.add(mostrar, BorderLayout.CENTER);
+        jPanel3.revalidate();
+        jPanel3.repaint();
+    } else {
+        JOptionPane.showMessageDialog(null, "No se encontraron resultados.");
     }
 
+    rs.close();
+    ps.close();
+    conn.close();
 
+} catch (SQLException e) {
+    JOptionPane.showMessageDialog(null, "Error al consultar la base de datos: " + e.getMessage());
+    e.printStackTrace();
+}
 
     }//GEN-LAST:event_verbtnActionPerformed
 
@@ -724,5 +779,15 @@ public class Listado_Pedidos_Pendientes extends javax.swing.JPanel {
 
     private void mostrarVentanaDeEdicion(EditarCita editarCita) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    private static class txtCliente {
+
+        private static void getString(String nombreCompleto) {
+            throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        }
+
+        public txtCliente() {
+        }
     }
 }

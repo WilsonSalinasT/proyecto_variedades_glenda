@@ -430,7 +430,7 @@ public class Listado_Pedidos_Arreglos extends javax.swing.JPanel {
             ver_pedido_sastreria ventanaVerPedido = new ver_pedido_sastreria();
 
             // Establece los valores en la ventana ver_pedido_sastreria
-            ventanaVerPedido.setDatos(prendaDB, estadoDB, descripcionDB, precioDB, caderaDB, cinturaDB, largoDB, largoMangaDB, anchoMangaDB, cuelloDB, pechoDB, munecaDB, hombroDB, anchoEspDB, largoEspDB, rodillaDB, tobilloDB, tiroDB, musloDB, imagen1DB, imagen2DB, imagen3DB, fechaPedidoDB);
+           
 
             // Muestra la ventana ver_pedido_sastreria
             ventanaVerPedido.setVisible(true);

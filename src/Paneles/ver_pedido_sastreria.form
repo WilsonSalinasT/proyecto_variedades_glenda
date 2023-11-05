@@ -70,7 +70,7 @@
                                                       <Component id="cbxEstado" min="-2" pref="344" max="-2" attributes="0"/>
                                                   </Group>
                                                   <Group type="102" attributes="0">
-                                                      <Component id="txCliente2" min="-2" pref="344" max="-2" attributes="0"/>
+                                                      <Component id="txtCliente" min="-2" pref="344" max="-2" attributes="0"/>
                                                       <EmptySpace min="-2" pref="69" max="-2" attributes="0"/>
                                                       <Component id="txtTel" min="-2" pref="344" max="-2" attributes="0"/>
                                                   </Group>
@@ -152,7 +152,7 @@
                               <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="txtTel" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txCliente2" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtCliente" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="124" max="-2" attributes="0"/>
                           </Group>
@@ -653,7 +653,7 @@
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
               </AuxValues>
             </Component>
-            <Component class="javax.swing.JTextField" name="txCliente2">
+            <Component class="javax.swing.JTextField" name="txtCliente">
               <Properties>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
@@ -664,7 +664,7 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txCliente2ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtClienteActionPerformed"/>
               </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>

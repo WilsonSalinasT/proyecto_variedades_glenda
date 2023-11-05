@@ -41,11 +41,11 @@ public class ver_pedido_sastreria extends javax.swing.JPanel {
       
      
     public ver_pedido_sastreria() {
-         ver_pedido_sastreria ver_pedido_sastreria = new ver_pedido_sastreria();
+         ver_pedido_sastreria mostrar = new ver_pedido_sastreria();
         
     }
     
-    public void setDatos(String prenda, String estado, String descripcion, String precio, String cadera, String cintura, String largo, String largoManga, String anchoManga, String cuello, String pecho, String muneca, String hombro, String anchoEsp, String largoEsp, String rodilla, String tobillo, String tiro, String muslo, String imagen1, String imagen2, String imagen3, String fechaPedido) {
+   /* public void setDatos(String prenda, String estado, String descripcion, String precio, String cadera, String cintura, String largo, String largoManga, String anchoManga, String cuello, String pecho, String muneca, String hombro, String anchoEsp, String largoEsp, String rodilla, String tobillo, String tiro, String muslo, String imagen1, String imagen2, String imagen3, String fechaPedido) {
        
         // Asigna los datos a otros componentes
     }
@@ -88,7 +88,7 @@ public class ver_pedido_sastreria extends javax.swing.JPanel {
         fechaP = new javax.swing.JLabel();
         txtTel = new javax.swing.JTextField();
         cbxEstado = new javax.swing.JTextField();
-        txCliente2 = new javax.swing.JTextField();
+        txtCliente = new javax.swing.JTextField();
         cbxPrenda = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         btnvolver1 = new javax.swing.JButton();
@@ -325,10 +325,10 @@ public class ver_pedido_sastreria extends javax.swing.JPanel {
             }
         });
 
-        txCliente2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Nombre del cliente", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
-        txCliente2.addActionListener(new java.awt.event.ActionListener() {
+        txtCliente.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Nombre del cliente", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
+        txtCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txCliente2ActionPerformed(evt);
+                txtClienteActionPerformed(evt);
             }
         });
 
@@ -360,7 +360,7 @@ public class ver_pedido_sastreria extends javax.swing.JPanel {
                                                 .addGap(69, 69, 69)
                                                 .addComponent(cbxEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE))
                                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addComponent(txCliente2, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(txtCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addGap(69, 69, 69)
                                                 .addComponent(txtTel, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -418,7 +418,7 @@ public class ver_pedido_sastreria extends javax.swing.JPanel {
                         .addGap(58, 58, 58)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtTel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txCliente2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(124, 124, 124))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(0, 182, Short.MAX_VALUE)
@@ -697,9 +697,9 @@ public class ver_pedido_sastreria extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_cbxEstadoActionPerformed
 
-    private void txCliente2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txCliente2ActionPerformed
+    private void txtClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtClienteActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txCliente2ActionPerformed
+    }//GEN-LAST:event_txtClienteActionPerformed
 
     private void cbxPrendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxPrendaActionPerformed
         // TODO add your handling code here:
@@ -725,11 +725,11 @@ public class ver_pedido_sastreria extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel labelPrendas;
-    public javax.swing.JTextField txCliente2;
     public javax.swing.JTextField txtAEspalda;
     public javax.swing.JTextField txtAManga;
     public javax.swing.JTextField txtCadera;
     public javax.swing.JTextField txtCintura;
+    public javax.swing.JTextField txtCliente;
     public javax.swing.JTextField txtCuello;
     public javax.swing.JTextArea txtDescrip;
     public javax.swing.JTextField txtHombro;

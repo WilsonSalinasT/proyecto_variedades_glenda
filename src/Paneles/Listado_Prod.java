@@ -408,35 +408,7 @@ public class Listado_Prod extends javax.swing.JPanel {
 
     int selectedRow1;
     private void btnverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnverActionPerformed
-//        // Obtener la fila seleccionada
-//        int filaSeleccionada = tabla_productos.getSelectedRow();
-//
-//        // Verificar si se ha seleccionado una fila
-//        if (filaSeleccionada >= 0)
-//        {
-//            // Obtener los valores de las celdas en la fila seleccionada
-//            Object idProducto = tabla_productos.getValueAt(filaSeleccionada, 0); // Supongamos que la columna 0 contiene el ID del producto
-//            Object nombreProducto = tabla_productos.getValueAt(filaSeleccionada, 1); // Supongamos que la columna 1 contiene el nombre del producto
-//            Object precioProducto = tabla_productos.getValueAt(filaSeleccionada, 2); // Supongamos que la columna 2 contiene el precio del producto
-//
-//            // Luego puedes usar estos valores como desees, por ejemplo, para pasarlos a la ventana verProducto
-//            verProducto p2 = new verProducto();
-//            p2.setSize(1024, 640);
-//            p2.setLocation(0, 0);
-//
-//            // Puedes pasar los datos recuperados a la ventana verProducto
-//            p2.mostrarDatos(idProducto, nombreProducto, precioProducto);
-//
-//            // Remover el contenido actual del panel principal
-//            panelprincipal.removeAll();
-//
-//            // Agregar la ventana verProducto al panel principal
-//            panelprincipal.add(p2, BorderLayout.CENTER);
-//
-//            // Revalidar y repintar el panel principal para mostrar la nueva ventana
-//            panelprincipal.revalidate();
-//            panelprincipal.repaint();
-//        }
+//       
 
         selectedRow1 = tabla_productos.getSelectedRow();
         if (selectedRow1 == -1)
@@ -480,17 +452,11 @@ public class Listado_Prod extends javax.swing.JPanel {
                 mostrar.AreaDescripcion.setText(descripcion);
                 mostrar.AreaDescripcion.setEditable(false); // Establece el área de texto como no editable
 
-//        mostrar.txtExistencia.setText(existencias);
-//        mostrar.txtExistencia.setEditable(false); // Establece el campo de texto como no editable
-//        mostrar.txtPrecio.setText(precio);
-//        mostrar.txtPrecio.setEditable(false); // Establece el campo de texto como no editable
+      
                 mostrar.txtCategoria.setText(categoria);
                 mostrar.txtCategoria.setEditable(false); // Establece el campo de texto como no editable
 
-//        mostrar.txtProveedor.setText(proveedor);
-//        mostrar.txtProveedor.setEditable(false); // Establece el campo de texto como no editable
-//        mostrar.txtFechaAdquision.setText(fecha);
-//        mostrar.txtFechaAdquision.setEditable(false); // Establece el campo de texto como no editable
+
                 mostrar.txtId.setText(Id);
                 mostrar.txtId.setEditable(false); // Establece el campo de texto como no editable
 
