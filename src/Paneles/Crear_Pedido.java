@@ -658,14 +658,14 @@ public class Crear_Pedido extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnvolver1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnvolver1ActionPerformed
-        /*  Listado_Citas l2 = new Listado_Citas();
+        Listado_Pedidos_Pendientes l2 = new Listado_Pedidos_Pendientes();
         l2.setSize(1024, 640);
         l2.setLocation(0, 0);
 
         panelprincipal.removeAll();
         panelprincipal.add(l2, BorderLayout.CENTER);
         panelprincipal.revalidate();
-        panelprincipal.repaint();*/
+        panelprincipal.repaint();
     }//GEN-LAST:event_btnvolver1ActionPerformed
 
     private void txtDescripKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDescripKeyTyped
