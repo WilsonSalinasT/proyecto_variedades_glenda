@@ -38,10 +38,15 @@ public class EditarCita extends javax.swing.JPanel {
     public EditarCita() {
         initComponents();
 
+//        fechaCita.setMinSelectableDate(new java.util.Date());
+//
+//        Calendar maxDate = Calendar.getInstance();
+//        maxDate.set(2024, Calendar.DECEMBER, 1);
+//        fechaCita.setMaxSelectableDate(maxDate.getTime());
         fechaCita.setMinSelectableDate(new java.util.Date());
 
         Calendar maxDate = Calendar.getInstance();
-        maxDate.set(2024, Calendar.DECEMBER, 1);
+        maxDate.add(Calendar.MONTH, 2); // Suma dos meses a la fecha actual
         fechaCita.setMaxSelectableDate(maxDate.getTime());
 
         // Generar ítems para el JComboBox
@@ -64,8 +69,6 @@ public class EditarCita extends javax.swing.JPanel {
         }
 
         cbxHoras.setModel(model);
-
-        
 
     }
 
@@ -231,16 +234,14 @@ public class EditarCita extends javax.swing.JPanel {
     }//GEN-LAST:event_btnvolverActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-       
+
         String motivo = txtMotivo.getText().trim();
         java.util.Date fecha = fechaCita.getDate();
-       
 
         String hora = (String) cbxHoras.getSelectedItem();
 
         StringBuilder camposVacios = new StringBuilder("Los siguientes campos están vacíos:");
 
-       
         if (fecha == null)
         {
             camposVacios.append("\n - Fecha");
@@ -270,34 +271,32 @@ public class EditarCita extends javax.swing.JPanel {
 
                 String updateQuery = "UPDATE Cita SET fecha_cita = ?, hora_cita = ?, motivo = ? WHERE id = ?";
                 PreparedStatement updatePs = conn.prepareStatement(updateQuery);
-                
+
                 int numeracion = Integer.parseInt(id_cliente.getText());
                 updatePs.setDate(1, new java.sql.Date(fecha.getTime()));
                 updatePs.setString(2, hora);
                 updatePs.setObject(3, motivo);
-                updatePs.setInt(4,numeracion);
+                updatePs.setInt(4, numeracion);
 
-               
                 int rowsUpdated = updatePs.executeUpdate();
 
                 if (rowsUpdated > 0)
                 {
                     JOptionPane.showMessageDialog(null, "Registro actualizado");
-                
 
 //                TIENE QUE LLEVAR AL LISTADO DE CITAS
-                Listado_Citas cli = new Listado_Citas();
+                    Listado_Citas cli = new Listado_Citas();
 
-                cli.setSize(1024, 640);
-                cli.setLocation(0, 0);
+                    cli.setSize(1024, 640);
+                    cli.setLocation(0, 0);
 
-                panelprincipal.revalidate();
-                panelprincipal.repaint();
-                panelprincipal.removeAll();
-                panelprincipal.add(cli, BorderLayout.CENTER);
-                panelprincipal.revalidate();
-                panelprincipal.repaint();
-                
+                    panelprincipal.revalidate();
+                    panelprincipal.repaint();
+                    panelprincipal.removeAll();
+                    panelprincipal.add(cli, BorderLayout.CENTER);
+                    panelprincipal.revalidate();
+                    panelprincipal.repaint();
+
                 } else
                 {
                     //hola

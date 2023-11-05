@@ -18,7 +18,7 @@ public class verProducto extends javax.swing.JPanel {
      */
     public verProducto() {
         initComponents();
-        Producto verProducto = new Producto();
+     
     }
 
     /**

@@ -168,6 +168,11 @@ public class editar_cliente extends javax.swing.JPanel {
 
         txttelefono.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txttelefono.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Número de celular:", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12))); // NOI18N
+        txttelefono.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txttelefonoActionPerformed(evt);
+            }
+        });
         txttelefono.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txttelefonoKeyReleased(evt);
@@ -269,7 +274,7 @@ public class editar_cliente extends javax.swing.JPanel {
         {
             camposVacios.append("\n - Teléfono");
         }
-         if (correo.isEmpty())
+        if (correo.isEmpty())
         {
             camposVacios.append("\n - Correo");
         } else if (!correo.matches("^[A-Za-z0-9+_.-]+@.+\\.com$"))
@@ -437,38 +442,44 @@ public class editar_cliente extends javax.swing.JPanel {
     }//GEN-LAST:event_txttelefonoKeyReleased
 
     private void txttelefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txttelefonoKeyTyped
-        String texto = txttelefono.getText();
+        // Obtener el carácter que se está ingresando
         char c = evt.getKeyChar();
 
-        // Verificar si el número de caracteres no excede el formato esperado
-        if (texto.length() < 9)
+        // Validar que el carácter sea un número
+        if (!Character.isDigit(c))
         {
-            if (texto.isEmpty())
-            {
-                // Permitir solo 9, 8 o 3 como primer carácter
-                if (c == '9' || c == '8' || c == '3')
-                {
-                    txttelefono.setText(String.valueOf(c));
-                } else
-                {
-                    evt.consume(); // Ignorar cualquier otro carácter al principio
-                }
-            } else if (Character.isDigit(c))
-            {
-                // Formato: XXXX-XXXX (4 dígitos seguidos de un guion y otros 4 dígitos)
-                if (texto.length() == 4)
-                {
-                    txttelefono.setText(texto + "-");
-                }
-            } else
-            {
-                evt.consume(); // Ignorar el carácter ingresado si no cumple con el formato esperado
-            }
-        } else
+            // Si no es un número, cancelar el evento
+            evt.consume();
+            return;
+        }
+
+        // Obtener el texto actual del campo de texto
+        String texto = txttelefono.getText();
+
+        // Validar que el primer carácter sea 9, 8, o 3
+        if (texto.length() == 0 && (c != '9' && c != '8' && c != '3'))
         {
-            evt.consume(); // Ignorar el carácter ingresado si ya se alcanzó la longitud máxima
+            // Si no es 9, 8, o 3, cancelar el evento
+            evt.consume();
+            return;
+        }
+
+        // Insertar un guion después del cuarto número
+        if (texto.length() == 4)
+        {
+            txttelefono.setText(texto + "-");
+        }
+
+        // No permitir más de 9 caracteres
+        if (texto.length() == 9)
+        {
+            evt.consume();
         }
     }//GEN-LAST:event_txttelefonoKeyTyped
+
+    private void txttelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txttelefonoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txttelefonoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

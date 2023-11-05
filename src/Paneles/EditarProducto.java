@@ -28,7 +28,7 @@ public class EditarProducto extends javax.swing.JPanel {
      */
     public EditarProducto() {
         initComponents();
-        Producto EditarProducto = new Producto();
+       
     }
 
     /**
