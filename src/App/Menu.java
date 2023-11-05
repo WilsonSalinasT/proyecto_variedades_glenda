@@ -12,6 +12,7 @@ import Paneles.Listado_Pedidos_Arreglos;
 import Paneles.Listado_Pedidos_Pendientes;
 
 import Paneles.Listado_Productos;
+import Paneles.Listado_Sublimacion;
 import Paneles.Listado_pedido_entregado;
 
 import Paneles.clientes;
@@ -53,6 +54,7 @@ public class Menu extends javax.swing.JFrame {
         pedidoSastreria = new javax.swing.JButton();
         pedidoSastreria1 = new javax.swing.JButton();
         nueva_venta1 = new javax.swing.JButton();
+        pedidoSublimacion = new javax.swing.JButton();
         javax.swing.JLabel jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -164,8 +166,20 @@ public class Menu extends javax.swing.JFrame {
         });
         jPanel2.add(nueva_venta1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 250, 40));
 
+        pedidoSublimacion.setBackground(new java.awt.Color(255, 153, 102));
+        pedidoSublimacion.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        pedidoSublimacion.setForeground(new java.awt.Color(204, 255, 255));
+        pedidoSublimacion.setText("Pedido Sublimación");
+        pedidoSublimacion.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        pedidoSublimacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pedidoSublimacionActionPerformed(evt);
+            }
+        });
+        jPanel2.add(pedidoSublimacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 560, 250, 40));
+
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Hyper.png"))); // NOI18N
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 250, 640));
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         panelprincipal.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -306,6 +320,18 @@ public class Menu extends javax.swing.JFrame {
         panelprincipal.repaint();
     }//GEN-LAST:event_nueva_venta1ActionPerformed
 
+    private void pedidoSublimacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pedidoSublimacionActionPerformed
+        // TODO add your handling code here:
+        Listado_Sublimacion p2 = new Listado_Sublimacion();
+        p2.setSize(1024, 640);
+        p2.setLocation(0, 0);
+        
+        panelprincipal.removeAll();
+        panelprincipal.add(p2, BorderLayout.CENTER);
+        panelprincipal.revalidate();
+        panelprincipal.repaint();
+    }//GEN-LAST:event_pedidoSublimacionActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -351,6 +377,7 @@ public class Menu extends javax.swing.JFrame {
     public static final javax.swing.JPanel panelprincipal = new javax.swing.JPanel();
     private javax.swing.JButton pedidoSastreria;
     private javax.swing.JButton pedidoSastreria1;
+    private javax.swing.JButton pedidoSublimacion;
     private javax.swing.JButton productos;
     private javax.swing.JButton proveedor;
     // End of variables declaration//GEN-END:variables
