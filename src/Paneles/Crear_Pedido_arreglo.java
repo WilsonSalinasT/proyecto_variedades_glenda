@@ -300,7 +300,7 @@ public class Crear_Pedido_arreglo extends javax.swing.JPanel {
 
         labelPrendas.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
 
-        txtDescripcionArre.setBorder(javax.swing.BorderFactory.createTitledBorder("Descripcion"));
+        txtDescripcionArre.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Descripcion", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial Black", 3, 12))); // NOI18N
 
         txtprecio.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Precio", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12))); // NOI18N
         txtprecio.addActionListener(new java.awt.event.ActionListener() {
@@ -559,7 +559,7 @@ public class Crear_Pedido_arreglo extends javax.swing.JPanel {
                 insertPs.executeUpdate();
                 JOptionPane.showMessageDialog(null, "Registro guardado");
 
-                Listado_Pedidos_Pendientes p = new Listado_Pedidos_Pendientes();
+                Listado_Pedidos_Arreglos p = new Listado_Pedidos_Arreglos();
 
                 p.setSize(1024, 640);
                 p.setLocation(0, 0);
@@ -607,7 +607,7 @@ public class Crear_Pedido_arreglo extends javax.swing.JPanel {
     }//GEN-LAST:event_txtClienteActionPerformed
 
     private void btnvolver1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnvolver1ActionPerformed
-      Listado_Pedidos_Pendientes l2 = new Listado_Pedidos_Pendientes();
+      Listado_Pedidos_Arreglos l2 = new Listado_Pedidos_Arreglos();
         l2.setSize(1024, 640);
         l2.setLocation(0, 0);
 

@@ -30,7 +30,7 @@ import com.toedter.calendar.JDateChooser;
  *
  * @author Admin
  */
-public class Listado_Pedidos_Pendientes extends javax.swing.JPanel {
+public class Listado_Pedidos_Arreglos extends javax.swing.JPanel {
 
     int selectedRow;
     TextPrompt holder;
@@ -38,21 +38,21 @@ public class Listado_Pedidos_Pendientes extends javax.swing.JPanel {
     /**
      * Creates new form Listado_Empleados
      */
-    public Listado_Pedidos_Pendientes() {
+    public Listado_Pedidos_Arreglos() {
         initComponents();
      
         cargarTabla();
 
         holder = new TextPrompt("Busque por nombre/apellido del cliente/fecha de entrega", txtBuscar);
 
-        tblPedidos.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 12));
-        tblPedidos.getTableHeader().setOpaque(false);
-        tblPedidos.getTableHeader().setBackground(new Color(255, 0, 0));
-        tblPedidos.getTableHeader().setForeground(new Color(255, 0, 0));
-        tblPedidos.setRowHeight(25);
+        tblPedidosA.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 12));
+        tblPedidosA.getTableHeader().setOpaque(false);
+        tblPedidosA.getTableHeader().setBackground(new Color(255, 0, 0));
+        tblPedidosA.getTableHeader().setForeground(new Color(255, 0, 0));
+        tblPedidosA.setRowHeight(25);
 
-        tblPedidos.setRowSelectionAllowed(true);
-        tblPedidos.setColumnSelectionAllowed(false);
+        tblPedidosA.setRowSelectionAllowed(true);
+        tblPedidosA.setColumnSelectionAllowed(false);
     }
 
     /**
@@ -68,12 +68,12 @@ public class Listado_Pedidos_Pendientes extends javax.swing.JPanel {
         jPanel4 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        crearbtn = new javax.swing.JButton();
         editarbtn = new javax.swing.JButton();
         verbtn = new javax.swing.JButton();
+        crearbtn1 = new javax.swing.JButton();
         Texto_Buscar = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tblPedidos = new javax.swing.JTable();
+        tblPedidosA = new javax.swing.JTable();
         txtBuscar = new javax.swing.JTextField();
         Btn_Buscar = new javax.swing.JButton();
         refrescarbtn = new javax.swing.JButton();
@@ -87,7 +87,7 @@ public class Listado_Pedidos_Pendientes extends javax.swing.JPanel {
 
         jLabel2.setBackground(new java.awt.Color(0, 0, 0));
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel2.setText("Listado de Pedidos Pendientes");
+        jLabel2.setText("Listado de Pedidos Pendientes de Arreglos");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -108,15 +108,6 @@ public class Listado_Pedidos_Pendientes extends javax.swing.JPanel {
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
-        crearbtn.setBackground(new java.awt.Color(255, 153, 51));
-        crearbtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        crearbtn.setText("CREAR");
-        crearbtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                crearbtnActionPerformed(evt);
-            }
-        });
-
         editarbtn.setBackground(new java.awt.Color(255, 153, 51));
         editarbtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         editarbtn.setText("EDITAR");
@@ -135,34 +126,44 @@ public class Listado_Pedidos_Pendientes extends javax.swing.JPanel {
             }
         });
 
+        crearbtn1.setBackground(new java.awt.Color(255, 153, 51));
+        crearbtn1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        crearbtn1.setText("CREAR ");
+        crearbtn1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                crearbtn1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(crearbtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(editarbtn, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)
-                    .addComponent(verbtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(crearbtn1, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(editarbtn, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)
+                        .addComponent(verbtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap(49, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(99, 99, 99)
-                .addComponent(crearbtn)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(105, 105, 105)
+                .addComponent(crearbtn1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(editarbtn)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(verbtn)
-                .addContainerGap(64, Short.MAX_VALUE))
+                .addContainerGap(76, Short.MAX_VALUE))
         );
 
         Texto_Buscar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         Texto_Buscar.setText("Buscar:");
 
-        tblPedidos.setModel(new javax.swing.table.DefaultTableModel(
+        tblPedidosA.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -178,13 +179,13 @@ public class Listado_Pedidos_Pendientes extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        tblPedidos.setGridColor(new java.awt.Color(255, 51, 51));
-        tblPedidos.setSelectionBackground(new java.awt.Color(255, 102, 102));
-        tblPedidos.setShowHorizontalLines(true);
-        tblPedidos.setShowVerticalLines(true);
-        jScrollPane2.setViewportView(tblPedidos);
-        if (tblPedidos.getColumnModel().getColumnCount() > 0) {
-            tblPedidos.getColumnModel().getColumn(0).setPreferredWidth(1);
+        tblPedidosA.setGridColor(new java.awt.Color(255, 51, 51));
+        tblPedidosA.setSelectionBackground(new java.awt.Color(255, 102, 102));
+        tblPedidosA.setShowHorizontalLines(true);
+        tblPedidosA.setShowVerticalLines(true);
+        jScrollPane2.setViewportView(tblPedidosA);
+        if (tblPedidosA.getColumnModel().getColumnCount() > 0) {
+            tblPedidosA.getColumnModel().getColumn(0).setPreferredWidth(1);
         }
 
         txtBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -347,34 +348,22 @@ public class Listado_Pedidos_Pendientes extends javax.swing.JPanel {
     private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
         siguientePagina();
     }//GEN-LAST:event_btnSiguienteActionPerformed
-
-    private void crearbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearbtnActionPerformed
-
-        Crear_Pedido p2 = new Crear_Pedido();
-        p2.setSize(1024, 640);
-        p2.setLocation(0, 0);
-
-        panelprincipal.removeAll();
-        panelprincipal.add(p2, BorderLayout.CENTER);
-        panelprincipal.revalidate();
-        panelprincipal.repaint();
-    }//GEN-LAST:event_crearbtnActionPerformed
     int selectedRow1;
     
     private void verbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verbtnActionPerformed
                                        
-    int selectedRow1 = tblPedidos.getSelectedRow();
+    int selectedRow1 = tblPedidosA.getSelectedRow();
     if (selectedRow1 == -1) {
         JOptionPane.showMessageDialog(null, "Seleccione un pedido para poder visualizarlo");
         return;
     }
 
     try {
-        String valorCelda = tblPedidos.getValueAt(selectedRow1, 1).toString();
-        String valorCelda2 = tblPedidos.getValueAt(selectedRow1, 2).toString();
-        String valorCelda3 = tblPedidos.getValueAt(selectedRow1, 3).toString();
-        String valorCelda4 = tblPedidos.getValueAt(selectedRow1, 4).toString();
-        String valorCelda5 = tblPedidos.getValueAt(selectedRow1, 5).toString();
+        String valorCelda = tblPedidosA.getValueAt(selectedRow1, 1).toString();
+        String valorCelda2 = tblPedidosA.getValueAt(selectedRow1, 2).toString();
+        String valorCelda3 = tblPedidosA.getValueAt(selectedRow1, 3).toString();
+        String valorCelda4 = tblPedidosA.getValueAt(selectedRow1, 4).toString();
+        String valorCelda5 = tblPedidosA.getValueAt(selectedRow1, 5).toString();
 
        /* // Recupera los valores de las etiquetas o campos de texto
         String nombre = (String) cbxClientes.getSelectedItem();
@@ -529,6 +518,19 @@ public class Listado_Pedidos_Pendientes extends javax.swing.JPanel {
          */
     }//GEN-LAST:event_editarbtnActionPerformed
 
+    private void crearbtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearbtn1ActionPerformed
+        // TODO add your handling code here:
+        
+        Crear_Pedido_arreglo p2 = new Crear_Pedido_arreglo();
+        p2.setSize(1024, 640);
+        p2.setLocation(0, 0);
+
+        panelprincipal.removeAll();
+        panelprincipal.add(p2, BorderLayout.CENTER);
+        panelprincipal.revalidate();
+        panelprincipal.repaint();
+    }//GEN-LAST:event_crearbtn1ActionPerformed
+
     int paginaActual = 1; // Página actual
     int filasPorPagina = 20; // Número de filas a mostrar por página
     int totalFilas = 0; // Total de filas en la tabla
@@ -537,7 +539,7 @@ public class Listado_Pedidos_Pendientes extends javax.swing.JPanel {
     String terminoBusqueda = ""; // Término de búsqueda actual
 
     private void cargarTabla() {
-        DefaultTableModel modeloTabla = (DefaultTableModel) tblPedidos.getModel();
+        DefaultTableModel modeloTabla = (DefaultTableModel) tblPedidosA.getModel();
         modeloTabla.setRowCount(0); // Eliminar las filas existentes
 
         PreparedStatement ps;
@@ -549,7 +551,7 @@ public class Listado_Pedidos_Pendientes extends javax.swing.JPanel {
             Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
 
             // Consulta para contar el número total de filas
-            ps = conn.prepareStatement("SELECT COUNT(*) FROM PedidoSastreria");
+            ps = conn.prepareStatement("SELECT COUNT(*) FROM PedidoArreglo");
             rs = ps.executeQuery();
             if (rs.next()) {
                 totalFilas = rs.getInt(1);
@@ -568,9 +570,9 @@ public class Listado_Pedidos_Pendientes extends javax.swing.JPanel {
             }
 
             // Consulta principal con paginación y JOIN entre las tablas
-            ps = conn.prepareStatement("SELECT ROW_NUMBER() OVER(ORDER BY PS.id_pedido) AS NumRegistro, C.nombre, C.apellido, C.numero_telefono, PS.prenda, PS.fechaPedido "
+            ps = conn.prepareStatement("SELECT ROW_NUMBER() OVER(ORDER BY PS.id_pedido) AS NumRegistro, C.nombre, C.apellido, C.numero_telefono, PS.arreglo, PS.fechaPedido "
                     + "FROM Cliente C "
-                    + "JOIN PedidoSastreria PS ON C.id_cliente = PS.id_cliente "
+                    + "JOIN PedidoArreglo PS ON C.id_cliente = PS.id_cliente "
                     + "ORDER BY PS.id_pedido OFFSET ? ROWS FETCH NEXT ? ROWS ONLY");
             ps.setInt(1, offset);
             ps.setInt(2, filasPorPagina);
@@ -614,8 +616,8 @@ public class Listado_Pedidos_Pendientes extends javax.swing.JPanel {
     }
 
     private void ajustarTabla(int filasDeseadas) {
-        tblPedidos.setPreferredScrollableViewportSize(new Dimension(tblPedidos.getPreferredSize().width, tblPedidos.getRowHeight() * filasDeseadas));
-        tblPedidos.setFillsViewportHeight(true);
+        tblPedidosA.setPreferredScrollableViewportSize(new Dimension(tblPedidosA.getPreferredSize().width, tblPedidosA.getRowHeight() * filasDeseadas));
+        tblPedidosA.setFillsViewportHeight(true);
     }
 
     private void siguientePagina() {
@@ -633,7 +635,7 @@ public class Listado_Pedidos_Pendientes extends javax.swing.JPanel {
     }
 
     private void buscarDatos(String texto) {
-        DefaultTableModel modelTabla = (DefaultTableModel) tblPedidos.getModel();
+        DefaultTableModel modelTabla = (DefaultTableModel) tblPedidosA.getModel();
         modelTabla.setRowCount(0);
         boolean foundData = false;
 
@@ -644,9 +646,9 @@ public class Listado_Pedidos_Pendientes extends javax.swing.JPanel {
 
                 // Modificar la consulta SQL para buscar por nombre o fecha
                 if (!texto.isEmpty()) {
-                    ps = conn.prepareStatement("SELECT ROW_NUMBER() OVER(ORDER BY E.nombre) AS NumRegistro, E.nombre, E.apellido, E.numero_telefono, V.prenda, V.fechaPedido "
+                    ps = conn.prepareStatement("SELECT ROW_NUMBER() OVER(ORDER BY E.nombre) AS NumRegistro, E.nombre, E.apellido, E.numero_telefono, V.arreglo, V.fechaPedido "
                             + "FROM Cliente E "
-                            + "JOIN PedidoSastreria V ON E.id_cliente = V.id_cliente "
+                            + "JOIN PedidoArreglo V ON E.id_cliente = V.id_cliente "
                             + "WHERE E.nombre LIKE ? OR E.apellido LIKE ? OR V.fechaPedido LIKE ? "
                             + "ORDER BY E.nombre "
                             + "OFFSET ? ROWS FETCH NEXT ? ROWS ONLY");
@@ -658,9 +660,9 @@ public class Listado_Pedidos_Pendientes extends javax.swing.JPanel {
                     ps.setInt(5, 10); // Cambia la cantidad de registros a recuperar según tus requerimientos
                     terminoBusqueda = texto; // Actualizar el término de búsqueda
                 } else {
-                    ps = conn.prepareStatement("SELECT ROW_NUMBER() OVER(ORDER BY E.nombre) AS NumRegistro, E.nombre, E.apellido, E.numero_telefono, V.prenda, V.fechaPedido "
+                    ps = conn.prepareStatement("SELECT ROW_NUMBER() OVER(ORDER BY E.nombre) AS NumRegistro, E.nombre, E.apellido, E.numero_telefono, V.arreglo, V.fechaPedido "
                             + "FROM Cliente E "
-                            + "JOIN PedidoSastreria V ON E.id_cliente = V.id_cliente "
+                            + "JOIN PedidoArreglo V ON E.id_cliente = V.id_cliente "
                             + "ORDER BY E.nombre "
                             + "OFFSET ? ROWS FETCH NEXT ? ROWS ONLY");
 
@@ -677,12 +679,12 @@ public class Listado_Pedidos_Pendientes extends javax.swing.JPanel {
                         String nombre = rs.getString("nombre");
                         String apellido = rs.getString("apellido");
                         String numeroTelefono = rs.getString("numero_telefono");
-                        String prenda = rs.getString("prenda");
+                        String arreglo = rs.getString("arreglo");
                         String fechaPedido = rs.getString("fechaPedido");
 
                         if (nombre != null && apellido != null && numeroTelefono != null) {
                             modelTabla.addRow(new Object[]{
-                                numRegistro, nombre, apellido, numeroTelefono, prenda, fechaPedido
+                                numRegistro, nombre, apellido, numeroTelefono, arreglo, fechaPedido
                             });
                             foundData = true;
                         }
@@ -709,7 +711,7 @@ public class Listado_Pedidos_Pendientes extends javax.swing.JPanel {
     private javax.swing.JLabel Texto_Contable;
     private javax.swing.JButton btnAnterior;
     private javax.swing.JButton btnSiguiente;
-    private javax.swing.JButton crearbtn;
+    private javax.swing.JButton crearbtn1;
     private javax.swing.JButton editarbtn;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
@@ -717,7 +719,7 @@ public class Listado_Pedidos_Pendientes extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JButton refrescarbtn;
-    private javax.swing.JTable tblPedidos;
+    private javax.swing.JTable tblPedidosA;
     public javax.swing.JTextField txtBuscar;
     private javax.swing.JButton verbtn;
     // End of variables declaration//GEN-END:variables
