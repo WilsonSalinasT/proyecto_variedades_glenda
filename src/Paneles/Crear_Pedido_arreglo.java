@@ -239,7 +239,7 @@ public class Crear_Pedido_arreglo extends javax.swing.JPanel {
             }
         });
 
-        cbxarreglo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "Camisa", "Camiseta", "Pantalón", "Vestido", "Falda" }));
+        cbxarreglo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "Arreglo de Rosas", "Arreglo Rosas naturales", "Arreglo de girasoles", "Arreglo de rosas con chocolates", " " }));
         cbxarreglo.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Arreglo", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12))); // NOI18N
         cbxarreglo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -393,7 +393,6 @@ public class Crear_Pedido_arreglo extends javax.swing.JPanel {
 
         id_cliente.setVisible(false);
         fechaP.setVisible(false);
-        txtDescripcionArre.getAccessibleContext().setAccessibleName("Descripcion");
 
         jScrollPane1.setViewportView(jPanel1);
 
@@ -645,8 +644,8 @@ public class Crear_Pedido_arreglo extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> cbxEstado;
     private javax.swing.JComboBox<String> cbxarreglo;
     private javax.swing.JLabel crea_cliente;
-    private javax.swing.JLabel fechaP;
-    private javax.swing.JLabel id_cliente;
+    public javax.swing.JLabel fechaP;
+    public javax.swing.JLabel id_cliente;
     private javax.swing.JLabel imagen1;
     private javax.swing.JLabel imagen2;
     private javax.swing.JLabel imagen3;
