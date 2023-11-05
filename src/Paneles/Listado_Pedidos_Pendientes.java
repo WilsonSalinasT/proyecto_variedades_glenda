@@ -71,6 +71,7 @@ public class Listado_Pedidos_Pendientes extends javax.swing.JPanel {
         crearbtn = new javax.swing.JButton();
         editarbtn = new javax.swing.JButton();
         verbtn = new javax.swing.JButton();
+        crearbtn1 = new javax.swing.JButton();
         Texto_Buscar = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblPedidos = new javax.swing.JTable();
@@ -135,17 +136,30 @@ public class Listado_Pedidos_Pendientes extends javax.swing.JPanel {
             }
         });
 
+        crearbtn1.setBackground(new java.awt.Color(255, 153, 51));
+        crearbtn1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        crearbtn1.setText("CREAR ARREGLO");
+        crearbtn1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                crearbtn1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(crearbtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(editarbtn, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)
-                    .addComponent(verbtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(crearbtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(editarbtn, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)
+                            .addComponent(verbtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(crearbtn1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -156,7 +170,9 @@ public class Listado_Pedidos_Pendientes extends javax.swing.JPanel {
                 .addComponent(editarbtn)
                 .addGap(18, 18, 18)
                 .addComponent(verbtn)
-                .addContainerGap(42, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addComponent(crearbtn1)
+                .addContainerGap())
         );
 
         Texto_Buscar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -529,6 +545,19 @@ public class Listado_Pedidos_Pendientes extends javax.swing.JPanel {
          */
     }//GEN-LAST:event_editarbtnActionPerformed
 
+    private void crearbtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearbtn1ActionPerformed
+        // TODO add your handling code here:
+        
+        Crear_Pedido_arreglo p2 = new Crear_Pedido_arreglo();
+        p2.setSize(1024, 640);
+        p2.setLocation(0, 0);
+
+        panelprincipal.removeAll();
+        panelprincipal.add(p2, BorderLayout.CENTER);
+        panelprincipal.revalidate();
+        panelprincipal.repaint();
+    }//GEN-LAST:event_crearbtn1ActionPerformed
+
     int paginaActual = 1; // Página actual
     int filasPorPagina = 20; // Número de filas a mostrar por página
     int totalFilas = 0; // Total de filas en la tabla
@@ -710,6 +739,7 @@ public class Listado_Pedidos_Pendientes extends javax.swing.JPanel {
     private javax.swing.JButton btnAnterior;
     private javax.swing.JButton btnSiguiente;
     private javax.swing.JButton crearbtn;
+    private javax.swing.JButton crearbtn1;
     private javax.swing.JButton editarbtn;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
