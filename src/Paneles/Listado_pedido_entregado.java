@@ -16,6 +16,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -485,10 +486,10 @@ private void buscarDatos(String texto) {
     try {
         Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
         if (conn != null && !conn.isClosed()) {
-            PreparedStatement ps = conn.prepareStatement("SELECT ROW_NUMBER() OVER(ORDER BY PS.id_pedido) AS NumRegistro, C.nombre AS Nombre, C.apellido AS Apellido, PS.estadoPedido, PS.descripcion, PS.fechaEntrega "
+            PreparedStatement ps = conn.prepareStatement("SELECT ROW_NUMBER() OVER(ORDER BY PS.id_cliente) AS NumRegistro, C.nombre AS Nombre, C.apellido AS Apellido, PS.id_pedido, PS.estadoPedido, PS.descripcion, PS.precio, PS.fechaEntrega, PS.tipoCategoria, PS.id_cliente "
                     + "FROM Cliente C "
                     + "JOIN PedidoEntregado PS ON C.id_cliente = PS.id_cliente "
-                    + "WHERE C.nombre LIKE ? OR C.apellido LIKE ? "
+                    + "WHERE C.nombre LIKE ? OR C.apellido LIKE ?"
                     + "ORDER BY PS.id_pedido OFFSET ? ROWS FETCH NEXT ? ROWS ONLY");
 
             if (texto != null && !texto.isEmpty()) {
@@ -512,12 +513,16 @@ private void buscarDatos(String texto) {
                     int numRegistro = rs.getInt("NumRegistro");
                     String nombre = rs.getString("Nombre");
                     String apellido = rs.getString("Apellido");
+                    int idPedido = rs.getInt("id_pedido");
                     String estadoPedido = rs.getString("estadoPedido");
                     String descripcion = rs.getString("descripcion");
+                    double precio = rs.getDouble("precio");
                     Date fechaEntrega = rs.getDate("fechaEntrega");
+                    String tipoCategoria = rs.getString("tipoCategoria");
+                    int idCliente = rs.getInt("id_cliente");
 
                     modelTabla.addRow(new Object[] {
-                        numRegistro, nombre, apellido, estadoPedido, descripcion, fechaEntrega
+                        numRegistro, nombre, apellido, idPedido, estadoPedido, descripcion, precio, fechaEntrega, tipoCategoria, idCliente
                     });
 
                     foundData = true;
@@ -535,6 +540,8 @@ private void buscarDatos(String texto) {
 
     cargarTablapedidoentregado(); // Recargar la tabla después de la búsqueda
 }
+
+
 
 
 

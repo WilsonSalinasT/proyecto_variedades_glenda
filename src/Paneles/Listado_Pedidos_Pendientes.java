@@ -40,6 +40,7 @@ public class Listado_Pedidos_Pendientes extends javax.swing.JPanel {
      */
     public Listado_Pedidos_Pendientes() {
         initComponents();
+     
         cargarTabla();
 
         holder = new TextPrompt("Busque por nombre/apellido del cliente/fecha de entrega", txtBuscar);
@@ -359,70 +360,104 @@ public class Listado_Pedidos_Pendientes extends javax.swing.JPanel {
         panelprincipal.repaint();
     }//GEN-LAST:event_crearbtnActionPerformed
     int selectedRow1;
+    
     private void verbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verbtnActionPerformed
-        /*   // TODO add your handling code here:
-        selectedRow1 = tblpedido.getSelectedRow();
-        if (selectedRow1 == -1)
-        {
-            JOptionPane.showMessageDialog(null, "Seleccione una pedido para poder visualizarla");
-            return;
+                                       
+    int selectedRow1 = tblPedidos.getSelectedRow();
+    if (selectedRow1 == -1) {
+        JOptionPane.showMessageDialog(null, "Seleccione un pedido para poder visualizarlo");
+        return;
+    }
+
+    try {
+        String valorCelda = tblPedidos.getValueAt(selectedRow1, 1).toString();
+        String valorCelda2 = tblPedidos.getValueAt(selectedRow1, 2).toString();
+        String valorCelda3 = tblPedidos.getValueAt(selectedRow1, 3).toString();
+        String valorCelda4 = tblPedidos.getValueAt(selectedRow1, 4).toString();
+        String valorCelda5 = tblPedidos.getValueAt(selectedRow1, 5).toString();
+
+       /* // Recupera los valores de las etiquetas o campos de texto
+        String nombre = (String) cbxClientes.getSelectedItem();
+        String prenda = (String) cbxPrenda.getSelectedItem();
+        String estado = (String) cbxEstado.getSelectedItem();
+        String idC = id_cliente.getText();
+        String imagenM1 = imagen1.getText();
+        String descripcion = txtDescrip.getText();
+        String precio = txtprecio.getText();
+        SimpleDateFormat sdfSQL = new SimpleDateFormat("yyyy-MM-dd");
+        String fechaPedido = sdfSQL.format(new Date());
+        String cadera = txtCadera.getText();
+        String cintura = txtCintura.getText();
+        String largo = txtLargo.getText();
+        String largoManga = txtLManga.getText();
+        String anchoManga = txtAManga.getText();
+        String cuello = txtCuello.getText();
+        String pecho = txtPecho.getText();
+        String muneca = txtMuneca.getText();
+        String hombro = txtHombro.getText();
+        String anchoEsp = txtAEspalda.getText();
+        String largoEsp = txtLEspalda.getText();
+        String rodilla = txtRodilla.getText();
+        String tobillo = txtTobillo.getText();
+        String tiro = txtTiro.getText();
+        String muslo = txtMuslo.getText();*/
+
+        PreparedStatement ps;
+        ResultSet rs;
+
+        Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
+        ps = conn.prepareStatement("SELECT prenda, estado, descripcion, precio, cadera, cintura, largo, largoManga, anchoManga, cuello, pecho, muneca, hombro, anchoEsp, largoEsp, rodilla, tobillo, tiro, muslo, imagen1, imagen2, imagen3, fechaPedido FROM PedidoSastreria WHERE prenda=? AND estado=? AND descripcion=? AND precio=? AND cadera=?");
+        ps.setString(1, valorCelda);
+        ps.setString(2, valorCelda2);
+        ps.setString(3, valorCelda3);
+        ps.setString(4, valorCelda4);
+        ps.setString(5, valorCelda5);
+        rs = ps.executeQuery();
+
+        if (rs.next()) {
+            // Recupera los datos adicionales de la base de datos
+            String prendaDB = rs.getString("prenda");
+            String estadoDB = rs.getString("estado");
+            String descripcionDB = rs.getString("descripcion");
+            String precioDB = rs.getString("precio");
+            String caderaDB = rs.getString("cadera");
+            String cinturaDB = rs.getString("cintura");
+            String largoDB = rs.getString("largo");
+            String largoMangaDB = rs.getString("largoManga");
+            String anchoMangaDB = rs.getString("anchoManga");
+            String cuelloDB = rs.getString("cuello");
+            String pechoDB = rs.getString("pecho");
+            String munecaDB = rs.getString("muneca");
+            String hombroDB = rs.getString("hombro");
+            String anchoEspDB = rs.getString("anchoEsp");
+            String largoEspDB = rs.getString("largoEsp");
+            String rodillaDB = rs.getString("rodilla");
+            String tobilloDB = rs.getString("tobillo");
+            String tiroDB = rs.getString("tiro");
+            String musloDB = rs.getString("muslo");
+            String imagen1DB = rs.getString("imagen1");
+            String imagen2DB = rs.getString("imagen2");
+            String imagen3DB = rs.getString("imagen3");
+            String fechaPedidoDB = rs.getString("fechaPedido");
+
+            // Crea una instancia de la ventana ver_pedido_sastreria
+            ver_pedido_sastreria ventanaVerPedido = new ver_pedido_sastreria();
+
+            // Establece los valores en la ventana ver_pedido_sastreria
+            ventanaVerPedido.setDatos(prendaDB, estadoDB, descripcionDB, precioDB, caderaDB, cinturaDB, largoDB, largoMangaDB, anchoMangaDB, cuelloDB, pechoDB, munecaDB, hombroDB, anchoEspDB, largoEspDB, rodillaDB, tobilloDB, tiroDB, musloDB, imagen1DB, imagen2DB, imagen3DB, fechaPedidoDB);
+
+            // Muestra la ventana ver_pedido_sastreria
+            ventanaVerPedido.setVisible(true);
         }
+        rs.close();
+        ps.close();
+        conn.close();
+    } catch (SQLException e) {
+        e.printStackTrace(); // Maneja la excepción apropiadamente
+    }
 
-        try
-        {
 
-            int fila = tblCitas.getSelectedRow();
-            String valorCelda = tblCitas.getValueAt(fila, 1).toString();
-            String valorCelda2 = tblCitas.getValueAt(fila, 2).toString();
-            String valorCelda3 = tblCitas.getValueAt(fila, 4).toString();
-            PreparedStatement ps;
-            ResultSet rs;
 
-            Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
-            ps = conn.prepareStatement("SELECT * FROM cliente JOIN Cita ON cliente.id_cliente = Cita.id_cliente where nombre =? and apellido=? and fecha_cita=? ");
-            ps.setString(1, valorCelda);
-            ps.setString(2, valorCelda2);
-            ps.setString(3, valorCelda3);
-            rs = ps.executeQuery();
-
-            while (rs.next())
-            {
-
-                String nombre = rs.getString("nombre");
-                String apellido = rs.getString("apellido");
-                ver_cita ver = new ver_cita();
-
-                ver.fechaCita.setText(rs.getString("fecha_cita"));
-                ver.cbxHoras.setText(rs.getString("hora_cita"));
-                ver.txtMotivo.setText(rs.getString("motivo"));
-                ver.txtCliente.setText(nombre + " " + apellido);
-                ver.id_cliente.setText(rs.getString("id"));
-
-                ver.setSize(1024, 640);
-                ver.setLocation(0, 0);
-
-                panelprincipal.revalidate();
-                panelprincipal.repaint();
-                panelprincipal.removeAll();
-                panelprincipal.add(ver, BorderLayout.CENTER);
-
-                panelprincipal.revalidate();
-                panelprincipal.repaint();
-
-                break; // Salir del bucle después de encontrar el elemento seleccionado
-
-            }
-
-            rs.close();
-            ps.close();
-            conn.close();
-
-        } catch (SQLException e)
-        {
-            e.printStackTrace();
-            // Manejar cualquier excepción que pueda ocurrir durante la consulta a la base de datos
-        }
-         */
     }//GEN-LAST:event_verbtnActionPerformed
 
     int selectedRow2;
