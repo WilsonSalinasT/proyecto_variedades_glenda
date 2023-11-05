@@ -36,7 +36,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  * @author Admin
  */
 public class ver_pedido_sastreria extends javax.swing.JPanel {
-    
+ 
 
       
      
@@ -708,13 +708,13 @@ public class ver_pedido_sastreria extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnvolver1;
-    private javax.swing.JTextField cbxEstado;
-    private javax.swing.JTextField cbxPrenda;
+    public javax.swing.JTextField cbxEstado;
+    public javax.swing.JTextField cbxPrenda;
     public javax.swing.JLabel fechaP;
     public javax.swing.JLabel id_cliente;
-    private javax.swing.JLabel imagen1;
-    private javax.swing.JLabel imagen2;
-    private javax.swing.JLabel imagen3;
+    public javax.swing.JLabel imagen1;
+    public javax.swing.JLabel imagen2;
+    public javax.swing.JLabel imagen3;
     private javax.swing.JButton imagenes;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -725,13 +725,13 @@ public class ver_pedido_sastreria extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel labelPrendas;
-    private javax.swing.JTextField txCliente2;
+    public javax.swing.JTextField txCliente2;
     public javax.swing.JTextField txtAEspalda;
     public javax.swing.JTextField txtAManga;
     public javax.swing.JTextField txtCadera;
     public javax.swing.JTextField txtCintura;
     public javax.swing.JTextField txtCuello;
-    private javax.swing.JTextArea txtDescrip;
+    public javax.swing.JTextArea txtDescrip;
     public javax.swing.JTextField txtHombro;
     public javax.swing.JTextField txtLEspalda;
     public javax.swing.JTextField txtLManga;
@@ -740,13 +740,17 @@ public class ver_pedido_sastreria extends javax.swing.JPanel {
     public javax.swing.JTextField txtMuslo;
     public javax.swing.JTextField txtPecho;
     public javax.swing.JTextField txtRodilla;
-    private javax.swing.JTextField txtTel;
+    public javax.swing.JTextField txtTel;
     public javax.swing.JTextField txtTiro;
     public javax.swing.JTextField txtTobillo;
-    private javax.swing.JTextField txtprecio;
+    public javax.swing.JTextField txtprecio;
     // End of variables declaration//GEN-END:variables
 
     private void cargarTabla() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    void setDatos(ResultSet rs) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

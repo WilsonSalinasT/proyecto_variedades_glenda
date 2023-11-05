@@ -317,7 +317,7 @@ public class Listado_pedido_entregado extends javax.swing.JPanel {
         //Validacion del texto ingresado
         if (!texto.isEmpty())
         {
-            buscarDatos(texto);
+           buscarDatos(texto);
         } else
         {
             JOptionPane.showMessageDialog(null, "El texto ingresado es erroneo");
@@ -366,7 +366,7 @@ public class Listado_pedido_entregado extends javax.swing.JPanel {
     }//GEN-LAST:event_editarbtnActionPerformed
 
 
-   int paginaActual = 1; // Página actual
+    int paginaActual = 1; // Página actual
     int filasPorPagina = 20; // Número de filas a mostrar por página
     int totalFilas = 0; // Total de filas en la tabla
     int totalPaginas = 0; // Total de páginas en la tabla
@@ -475,10 +475,7 @@ rs = ps.executeQuery();
 
 
 
-
-
-
-private void buscarDatos(String texto) {
+         private void buscarDatos(String texto) {
     DefaultTableModel modelTabla = (DefaultTableModel) tblpedido.getModel();
     modelTabla.setRowCount(0);
     boolean foundData = false;
@@ -486,46 +483,69 @@ private void buscarDatos(String texto) {
     try {
         Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
         if (conn != null && !conn.isClosed()) {
-            PreparedStatement ps = conn.prepareStatement("SELECT ROW_NUMBER() OVER(ORDER BY PS.id_cliente) AS NumRegistro, C.nombre AS Nombre, C.apellido AS Apellido, PS.id_pedido, PS.estadoPedido, PS.descripcion, PS.precio, PS.fechaEntrega, PS.tipoCategoria, PS.id_cliente "
-                    + "FROM Cliente C "
-                    + "JOIN PedidoEntregado PS ON C.id_cliente = PS.id_cliente "
-                    + "WHERE C.nombre LIKE ? OR C.apellido LIKE ?"
-                    + "ORDER BY PS.id_pedido OFFSET ? ROWS FETCH NEXT ? ROWS ONLY");
+            PreparedStatement ps;
+            ResultSet rs;
 
-            if (texto != null && !texto.isEmpty()) {
-                ps.setString(1, "%" + texto + "%"); // Búsqueda por nombre
-                ps.setString(2, "%" + texto + "%"); // Búsqueda por apellido
-                ps.setInt(3, 0); // Offset
-                ps.setInt(4, 10); // FETCH NEXT (por ejemplo, obtiene los primeros 10 registros)
-                terminoBusqueda = texto; // Actualizar el término de búsqueda
+            if (!texto.isEmpty()) {
+                // Consulta para contar el número total de filas que cumplen con los criterios de búsqueda
+                ps = conn.prepareStatement("SELECT COUNT(*) " +
+                        "FROM Cliente E " +
+                        "JOIN PedidoEntregado V ON E.id_cliente = V.id_cliente " +
+                        "WHERE E.nombre LIKE ? OR E.apellido LIKE ? OR V.fechaEntrega LIKE ?");
+
+                ps.setString(1, "%" + texto + "%");
+                ps.setString(2, "%" + texto + "%");
+                ps.setString(3, "%" + texto + "%");
+
+                rs = ps.executeQuery();
+                if (rs.next()) {
+                    totalFilas = rs.getInt(1);
+                    totalPaginas = (int) Math.ceil((double) totalFilas / filasPorPagina);
+                }
+                ps.close();
+
+                // Consulta principal con paginación y criterios de búsqueda
+                ps = conn.prepareStatement("SELECT ROW_NUMBER() OVER(ORDER BY E.nombre) AS NumRegistro, E.nombre, E.apellido, V.estadoPedido, V.descripcion, V.fechaEntrega " +
+                        "FROM Cliente E " +
+                        "JOIN PedidoEntregado V ON E.id_cliente = V.id_cliente " +
+                        "WHERE E.nombre LIKE ? OR E.apellido LIKE ? OR V.fechaEntrega LIKE ? " +
+                        "ORDER BY E.nombre " +
+                        "OFFSET ? ROWS FETCH NEXT ? ROWS ONLY");
+
+                ps.setString(1, "%" + texto + "%");
+                ps.setString(2, "%" + texto + "%");
+                ps.setString(3, "%" + texto + "%");
+                ps.setInt(4, (paginaActual - 1) * filasPorPagina);
+                ps.setInt(5, filasPorPagina);
             } else {
-                ps.setString(1, "%");
-                ps.setString(2, "%");
-                ps.setInt(3, 0); // Offset
-                ps.setInt(4, 10); // FETCH NEXT (por ejemplo, obtiene los primeros 10 registros)
-                terminoBusqueda = ""; // Limpiar el término de búsqueda
+                // Consulta sin criterios de búsqueda
+                ps = conn.prepareStatement("SELECT ROW_NUMBER() OVER(ORDER BY E.nombre) AS NumRegistro, E.nombre, E.apellido, V.estadoPedido, V.descripcion, V.fechaEntrega " +
+                        "FROM Cliente E " +
+                        "JOIN PedidoEntregado V ON E.id_cliente = V.id_cliente " +
+                        "ORDER BY E.nombre " +
+                        "OFFSET ? ROWS FETCH NEXT ? ROWS ONLY");
+
+                ps.setInt(1, (paginaActual - 1) * filasPorPagina);
+                ps.setInt(2, filasPorPagina);
             }
 
-            ResultSet rs = ps.executeQuery();
+            rs = ps.executeQuery();
 
             if (rs != null) {
                 while (rs.next()) {
                     int numRegistro = rs.getInt("NumRegistro");
-                    String nombre = rs.getString("Nombre");
-                    String apellido = rs.getString("Apellido");
-                    int idPedido = rs.getInt("id_pedido");
+                    String nombre = rs.getString("nombre");
+                    String apellido = rs.getString("apellido");
                     String estadoPedido = rs.getString("estadoPedido");
                     String descripcion = rs.getString("descripcion");
-                    double precio = rs.getDouble("precio");
-                    Date fechaEntrega = rs.getDate("fechaEntrega");
-                    String tipoCategoria = rs.getString("tipoCategoria");
-                    int idCliente = rs.getInt("id_cliente");
+                    String fechaEntrega = rs.getString("fechaEntrega");
 
-                    modelTabla.addRow(new Object[] {
-                        numRegistro, nombre, apellido, idPedido, estadoPedido, descripcion, precio, fechaEntrega, tipoCategoria, idCliente
-                    });
-
-                    foundData = true;
+                    if (nombre != null && apellido != null && estadoPedido != null) {
+                        modelTabla.addRow(new Object[]{
+                            numRegistro, nombre, apellido, estadoPedido, descripcion, fechaEntrega
+                        });
+                        foundData = true;
+                    }
                 }
 
                 rs.close();
@@ -538,12 +558,9 @@ private void buscarDatos(String texto) {
         JOptionPane.showMessageDialog(null, e.toString());
     }
 
-    cargarTablapedidoentregado(); // Recargar la tabla después de la búsqueda
+    // Actualiza la etiqueta de paginación
+    Texto_Contable.setText("Cantidad de filas: " + totalFilas + " - Página " + paginaActual + "/" + totalPaginas);
 }
-
-
-
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton Btn_Buscar;
@@ -563,4 +580,9 @@ private void buscarDatos(String texto) {
     public javax.swing.JTextField txtBuscar;
     private javax.swing.JButton verbtn;
     // End of variables declaration//GEN-END:variables
-}
+
+    private void buscarDatosPorNombre(String nombreBuscado) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    }
