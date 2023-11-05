@@ -14,14 +14,19 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import javax.swing.JOptionPane;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 /**
  *
  * @author Fernando Amador
  */
 public class Crear_Pedido_Sublimacion extends javax.swing.JPanel {
+
+    private double[] materialPrices = {0, 180, 120, 100, 130, 80};
 
     /**
      * Creates new form Crear_Pedido_Sublimacion
@@ -39,6 +44,21 @@ public class Crear_Pedido_Sublimacion extends javax.swing.JPanel {
 
         // Mostrar la fecha en el JLabel
         //fechaP.setText(fechaFormateada);
+        //--------------------------------------------------
+        // Crea un objeto Calendar para manipular la fecha actual
+        Calendar currentCalendar = Calendar.getInstance();
+        currentCalendar.setTime(fechaActual);
+
+        // Restringe las fechas anteriores a la fecha actual
+        jDateChooser1.setMinSelectableDate(fechaActual);
+
+        // Crea un objeto Calendar para la fecha actual más tres meses
+        Calendar maxDateCalendar = Calendar.getInstance();
+        maxDateCalendar.setTime(fechaActual);
+        maxDateCalendar.add(Calendar.MONTH, 3);
+
+        // Restringe las fechas dentro de tres meses a partir de la fecha actual
+        jDateChooser1.setMaxSelectableDate(maxDateCalendar.getTime());
 
         try {
             Connection connection = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
@@ -100,6 +120,23 @@ public class Crear_Pedido_Sublimacion extends javax.swing.JPanel {
                         txtTel.setText("");
                     }
                 }
+            }
+        });
+
+        txtcantidad.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                actualizarTotal();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                actualizarTotal();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                actualizarTotal();
             }
         });
     }
@@ -241,12 +278,16 @@ public class Crear_Pedido_Sublimacion extends javax.swing.JPanel {
         cbxEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pendiente", "Entregado" }));
         cbxEstado.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Estado del pedido", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12))); // NOI18N
 
-        txtcantidad.setEditable(false);
         txtcantidad.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtcantidad.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cantidad", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12))); // NOI18N
         txtcantidad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtcantidadActionPerformed(evt);
+            }
+        });
+        txtcantidad.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtcantidadKeyTyped(evt);
             }
         });
 
@@ -378,18 +419,36 @@ public class Crear_Pedido_Sublimacion extends javax.swing.JPanel {
     private void txtdescripcionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtdescripcionKeyTyped
         char c = evt.getKeyChar(); // Obtener el carácter ingresado
 
-        if (txtdescripcion.getText().isEmpty() && Character.isWhitespace(c))
-        {
+        if (txtdescripcion.getText().isEmpty() && Character.isWhitespace(c)) {
             evt.consume(); // Consumir el evento si es un espacio en blanco en la primera letra
-        } else if (txtdescripcion.getText().length() >= 300)
-        {
+        } else if (txtdescripcion.getText().length() >= 300) {
             evt.consume(); // Consumir el evento si se ha alcanzado la longitud máxima
         }
     }//GEN-LAST:event_txtdescripcionKeyTyped
 
     private void cbnproductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbnproductoActionPerformed
-        // TODO add your handling code here:
+
+        int selectedIndex = cbnproducto.getSelectedIndex();
+        if (selectedIndex >= 0 && selectedIndex < materialPrices.length) {
+            double selectedPrice = materialPrices[selectedIndex];
+            txtPrecio.setText(String.valueOf(selectedPrice));
+        }
+
     }//GEN-LAST:event_cbnproductoActionPerformed
+
+    private void actualizarTotal() {
+        try {
+            int selectedIndex = cbnproducto.getSelectedIndex();
+            if (selectedIndex >= 0 && selectedIndex < materialPrices.length) {
+                double selectedPrice = materialPrices[selectedIndex];
+                double cantidad = Double.parseDouble(txtcantidad.getText());
+                double total = selectedPrice * cantidad;
+                txtPrecio.setText(String.valueOf(total));
+            }
+        } catch (NumberFormatException e) {
+            txtPrecio.setText("Ingrese una cantidad válida");
+        }
+    }
 
     private void btnCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActionPerformed
         /*String nombre = txtnombre.getText().trim();
@@ -482,6 +541,19 @@ public class Crear_Pedido_Sublimacion extends javax.swing.JPanel {
     private void txtPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPrecioActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPrecioActionPerformed
+
+    private void txtcantidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtcantidadKeyTyped
+
+        char c = evt.getKeyChar();
+        String texto = txtcantidad.getText();
+
+        if (c == '0' && (texto.isEmpty() || texto.equals("0"))) {
+            evt.consume(); // Evita que se inicie con un cero
+        } else if ((c < '0' || c > '9') || texto.length() >= 3 || (texto.isEmpty() && c == ' ')) {
+            evt.consume(); // Evita que se ingresen más de 3 caracteres, caracteres que no sean dígitos o un espacio en blanco al inicio
+        }
+
+    }//GEN-LAST:event_txtcantidadKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
