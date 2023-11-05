@@ -39,7 +39,7 @@ public class Listado_pedido_entregado extends javax.swing.JPanel {
         initComponents();
          cargarTablapedidoentregado();
 
-        holder = new TextPrompt("Busque por nombre/apellido del empleado/fecha entrega", txtBuscar);
+        holder = new TextPrompt("Busque por nombre / fecha de entrega", txtBuscar);
 
         tblpedido.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 12));
         tblpedido.getTableHeader().setOpaque(false);
@@ -404,17 +404,23 @@ public class Listado_pedido_entregado extends javax.swing.JPanel {
                 offset = 0;
             }
 
-   // Consulta principal con paginación y JOIN entre las tablas
-ps = conn.prepareStatement("SELECT ROW_NUMBER() OVER(ORDER BY PS.id_pedido) AS NumRegistro, C.nombre AS Nombre, C.apellido AS Apellido, PS.estadoPedido, PS.descripcion,PS.fechaEntrega "
+ps = conn.prepareStatement("SELECT ROW_NUMBER() OVER (ORDER BY P.id_pedido) AS NumRegistro, C.nombre AS Nombre, C.apellido AS Apellido, P.estadoPedido, P.descripcion, P.fechaEntrega "
         + "FROM Cliente C "
-        + "JOIN PedidoEntregado PS ON C.id_cliente = PS.id_cliente "
-        + "ORDER BY PS.id_pedido OFFSET ? ROWS FETCH NEXT ? ROWS ONLY");
+        + "JOIN ("
+        + "    SELECT id_cliente, id_pedido, estadoPedido, descripcion, fechaEntrega FROM PedidoEntregado "
+        + "    UNION ALL "
+        + "    SELECT id_cliente, id_pedido, estado, descripcion, fechaPedido FROM PedidoArreglo "
+        + "    UNION ALL "
+        + "    SELECT id_cliente, id_pedido, estado, descripcion, fechaPedido FROM PedidoSastreria "
+        + "    UNION ALL "
+        + "    SELECT id_cliente, id_pedido, estado, descripcion, fechaPedido FROM PedidoSublimacion "
+        + ") AS P ON C.id_cliente = P.id_cliente "
+        + "WHERE P.estadoPedido = 'Entregado' "
+        + "ORDER BY NumRegistro OFFSET ? ROWS FETCH NEXT ? ROWS ONLY");
 
 ps.setInt(1, offset);
 ps.setInt(2, filasPorPagina);
 rs = ps.executeQuery();
-
-
 
 
             rsmd = rs.getMetaData();
@@ -475,7 +481,7 @@ rs = ps.executeQuery();
 
 
 
-         private void buscarDatos(String texto) {
+             private void buscarDatos(String texto) {
     DefaultTableModel modelTabla = (DefaultTableModel) tblpedido.getModel();
     modelTabla.setRowCount(0);
     boolean foundData = false;
@@ -561,7 +567,6 @@ rs = ps.executeQuery();
     // Actualiza la etiqueta de paginación
     Texto_Contable.setText("Cantidad de filas: " + totalFilas + " - Página " + paginaActual + "/" + totalPaginas);
 }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton Btn_Buscar;
     private javax.swing.JLabel Texto_Buscar;
