@@ -466,8 +466,9 @@ public class Crear_Pedido_Sublimacion extends javax.swing.JPanel {
         String estado = (String) cbxEstado.getSelectedItem();
         String precio = txtPrecio.getText().trim();
         String cantidad = txtcantidad.getText().trim();
+        Date fechaSeleccionada = jDateChooser1.getDate();
         SimpleDateFormat sdfSQL = new SimpleDateFormat("yyyy-MM-dd");
-        String fechaPedido = sdfSQL.format(new Date());
+        String fechaPedido = sdfSQL.format(fechaSeleccionada);
         String imagenM1 = imagen.getText();
         String idC = id_cliente.getText();
 

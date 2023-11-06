@@ -389,12 +389,12 @@ public class Listado_Sublimacion extends javax.swing.JPanel {
 
     private void crearbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearbtnActionPerformed
 
-        Crear_Pedido_Sublimacion p5 = new Crear_Pedido_Sublimacion();
-        p5.setSize(1024, 640);
-        p5.setLocation(0, 0);
+        Crear_Pedido_Sublimacion p8 = new Crear_Pedido_Sublimacion();
+        p8.setSize(1024, 640);
+        p8.setLocation(0, 0);
 
         panelprincipal.removeAll();
-        panelprincipal.add(p5, BorderLayout.CENTER);
+        panelprincipal.add(p8, BorderLayout.CENTER);
         panelprincipal.revalidate();
         panelprincipal.repaint();
     }//GEN-LAST:event_crearbtnActionPerformed
@@ -404,7 +404,7 @@ public class Listado_Sublimacion extends javax.swing.JPanel {
 // TODO add your handling code here:
         selectedRow1 = tblsublimacion.getSelectedRow();
         if (selectedRow1 == -1) {
-            JOptionPane.showMessageDialog(null, "Seleccione un pedido para poder visualizarla");
+            JOptionPane.showMessageDialog(null, "Seleccione un cliente para poder visualizar el pedido");
             return;
         }
 
