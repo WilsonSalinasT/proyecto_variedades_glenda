@@ -491,7 +491,7 @@ public class crear_envio extends javax.swing.JPanel {
 
         id_pedidosat.setEditable(false);
         id_pedidosat.setBackground(new java.awt.Color(255, 255, 255));
-        id_pedidosat.setForeground(new java.awt.Color(255, 51, 51));
+        id_pedidosat.setForeground(new java.awt.Color(255, 255, 255));
         id_pedidosat.setText("0000");
         id_pedidosat.setBorder(null);
 

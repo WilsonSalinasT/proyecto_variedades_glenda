@@ -32,6 +32,7 @@ import java.io.IOException;
 import java.sql.Blob;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.table.TableColumn;
 
 /**
  *
@@ -59,6 +60,14 @@ public class Listado_Sublimacion extends javax.swing.JPanel {
 
         tblsublimacion.setRowSelectionAllowed(true);
         tblsublimacion.setColumnSelectionAllowed(false);
+        
+         int columnIndexToHide = 6;
+        TableColumn column = tblsublimacion.getColumnModel().getColumn(columnIndexToHide);
+        
+        column.setMinWidth(0);
+        column.setMaxWidth(0);
+        column.setPreferredWidth(0);
+        column.setResizable(false);
     }
 
     /**
@@ -173,10 +182,9 @@ public class Listado_Sublimacion extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(crearbtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(editarbtn, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)
-                        .addComponent(verbtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(crearbtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(editarbtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)
+                    .addComponent(verbtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(28, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -201,11 +209,11 @@ public class Listado_Sublimacion extends javax.swing.JPanel {
 
             },
             new String [] {
-                "N°", "Nombre del cliente", "Apellido del cliente", "Celular", "Diseño", "Fecha de pedido"
+                "N°", "Nombre del cliente", "Apellido del cliente", "Celular", "Diseño", "Fecha de pedido", "id_comnuna"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, true, false
+                false, false, false, false, true, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -513,7 +521,7 @@ public class Listado_Sublimacion extends javax.swing.JPanel {
                     JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]);
 
             if (choice == 0) {
-                Number id_sublimacion = (Number) tblsublimacion.getValueAt(selectedRow, 0); // Obtén el ID del registro seleccionado
+                Number id_sublimacion = (Number) tblsublimacion.getValueAt(selectedRow, 6); // Obtén el ID del registro seleccionado
 
                 try {
                     Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
@@ -583,7 +591,7 @@ public class Listado_Sublimacion extends javax.swing.JPanel {
             }
 
             // Consulta para obtener los datos paginados
-            ps = conn.prepareStatement("SELECT ROW_NUMBER() OVER(ORDER BY E.nombre) AS NumRegistro, E.nombre, E.apellido, E.numero_telefono, V.material,V.fechaPedido "
+            ps = conn.prepareStatement("SELECT ROW_NUMBER() OVER(ORDER BY E.nombre) AS NumRegistro, E.nombre, E.apellido, E.numero_telefono, V.material,V.fechaPedido,V.id_sublimacion "
                     + "FROM Cliente E "
                     + "JOIN PedidoSublimacion V ON E.id_cliente = V.id_cliente "
                     + "WHERE E.nombre LIKE ? OR E.apellido LIKE ? OR V.fechaPedido LIKE ? "
