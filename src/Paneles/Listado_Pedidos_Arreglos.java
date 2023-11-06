@@ -419,6 +419,10 @@ public class Listado_Pedidos_Arreglos extends javax.swing.JPanel {
             while (rs.next())
             {
 
+                
+                String nombre = rs.getString("nombre");
+                String apellido = rs.getString("apellido");
+                String tel = rs.getString("numero_telefono");
                 String arregloA = rs.getString("arreglo");
                 String estadoA = rs.getString("estado");
                 String descripcionA = rs.getString("descripcion");
@@ -427,6 +431,8 @@ public class Listado_Pedidos_Arreglos extends javax.swing.JPanel {
 
                 ver_pedido_arreglo ver = new ver_pedido_arreglo();
 
+                ver.txtCliente.setText(nombre + " " + apellido);
+                ver.txtTel.setText(tel);
                 ver.txtArreglo.setText(arregloA);
                 ver.txtestado.setText(estadoA);
                 ver.txtDescripcionA.setText(descripcionA);

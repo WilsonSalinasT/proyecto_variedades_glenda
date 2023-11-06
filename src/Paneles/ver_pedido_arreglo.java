@@ -49,9 +49,11 @@ public class ver_pedido_arreglo extends javax.swing.JPanel {
         txtprecio = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         txtDescripcionA = new javax.swing.JTextArea();
-        txtcliente = new javax.swing.JTextField();
+        txtCliente = new javax.swing.JTextField();
         txtArreglo = new javax.swing.JTextField();
         txtestado = new javax.swing.JTextField();
+
+        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -69,7 +71,7 @@ public class ver_pedido_arreglo extends javax.swing.JPanel {
         });
 
         jLabel2.setFont(new java.awt.Font("Arial Black", 3, 36)); // NOI18N
-        jLabel2.setText("Ver Pedido de Arreglo");
+        jLabel2.setText("Ver pedido de arreglo");
 
         jLabel3.setFont(new java.awt.Font("Segoe Script", 1, 14)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -152,6 +154,7 @@ public class ver_pedido_arreglo extends javax.swing.JPanel {
 
         labelPrendas.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
 
+        txtprecio.setEditable(false);
         txtprecio.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Precio", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12))); // NOI18N
         txtprecio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -164,6 +167,7 @@ public class ver_pedido_arreglo extends javax.swing.JPanel {
             }
         });
 
+        txtDescripcionA.setEditable(false);
         txtDescripcionA.setColumns(20);
         txtDescripcionA.setLineWrap(true);
         txtDescripcionA.setRows(5);
@@ -171,9 +175,11 @@ public class ver_pedido_arreglo extends javax.swing.JPanel {
         txtDescripcionA.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Descripción", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12))); // NOI18N
         jScrollPane2.setViewportView(txtDescripcionA);
 
-        txtcliente.setBackground(new java.awt.Color(242, 242, 242));
-        txtcliente.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Nombre del Cliente", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 3, 12))); // NOI18N
+        txtCliente.setEditable(false);
+        txtCliente.setBackground(new java.awt.Color(242, 242, 242));
+        txtCliente.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Nombre del Cliente", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 3, 12))); // NOI18N
 
+        txtArreglo.setEditable(false);
         txtArreglo.setBackground(new java.awt.Color(242, 242, 242));
         txtArreglo.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Arreglo", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 3, 12))); // NOI18N
 
@@ -204,7 +210,7 @@ public class ver_pedido_arreglo extends javax.swing.JPanel {
                                         .addGap(18, 18, 18)
                                         .addComponent(txtestado, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(txtcliente, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(txtCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
                                         .addComponent(txtTel, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
@@ -232,7 +238,7 @@ public class ver_pedido_arreglo extends javax.swing.JPanel {
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtcliente, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtTel, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(44, 44, 44)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -262,9 +268,7 @@ public class ver_pedido_arreglo extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1018, Short.MAX_VALUE))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1024, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -317,9 +321,9 @@ public class ver_pedido_arreglo extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel labelPrendas;
     public javax.swing.JTextField txtArreglo;
+    public javax.swing.JTextField txtCliente;
     public javax.swing.JTextArea txtDescripcionA;
     public javax.swing.JTextField txtTel;
-    public javax.swing.JTextField txtcliente;
     public javax.swing.JTextField txtestado;
     public javax.swing.JTextField txtprecio;
     // End of variables declaration//GEN-END:variables
