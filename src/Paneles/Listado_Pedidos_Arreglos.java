@@ -443,15 +443,32 @@ public class Listado_Pedidos_Arreglos extends javax.swing.JPanel {
                 byte[] imagenA2 = rs.getBytes("imagen2");
                 byte[] imagenA3 = rs.getBytes("imagen3");
                 
-                //Crear un objeto ImageIcon a partir de los bytes de la imagen
+                // Comprobar si los arreglos de bytes de imagen no son nulos
+                if (imagenA1 != null) {
+                // Crear un objeto ImageIcon a partir de los bytes de la imagen
                 ImageIcon imagenIcono = new ImageIcon(imagenA1);
+                // Establecer el ImageIcon en el JLabel
+                 ver.imagen1.setIcon(imagenIcono);
+                } else {
+                // Si el arreglo de bytes de imagen es nulo, puedes mostrar un mensaje o establecer un valor predeterminado.
+                ver.imagen1.setIcon(null); // O establecer un icono predeterminado
+                }
+
+                if (imagenA2 != null) {
                 ImageIcon imagenIcon2 = new ImageIcon(imagenA2);
-                ImageIcon imagenIcon3 = new ImageIcon(imagenA3);
-         
-                //Establecer el ImageIcon en el JLabel
-                ver.imagen1.setIcon(imagenIcono);
                 ver.imagen2.setIcon(imagenIcon2);
+                } else {
+                ver.imagen2.setIcon(null);
+                }
+
+                if (imagenA3 != null) {
+                ImageIcon imagenIcon3 = new ImageIcon(imagenA3);
                 ver.imagen3.setIcon(imagenIcon3);
+                } else {
+                ver.imagen3.setIcon(null);
+                }
+                
+               
                 ver.fechaP.setText(fechapedido);
 
                 ver.setSize(1024, 640);
