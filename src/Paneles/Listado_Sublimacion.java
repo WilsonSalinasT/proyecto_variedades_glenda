@@ -50,7 +50,7 @@ public class Listado_Sublimacion extends javax.swing.JPanel {
         initComponents();
         cargarTablaEmpleados();
 
-        holder = new TextPrompt("Busque por nombre/apellido del cliente/fecha de cita", txtBuscar);
+        holder = new TextPrompt("Busque por nombre/apellido del cliente/fecha de pedido", txtBuscar);
 
         tblsublimacion.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 12));
         tblsublimacion.getTableHeader().setOpaque(false);
@@ -411,16 +411,16 @@ public class Listado_Sublimacion extends javax.swing.JPanel {
         try {
 
             int fila = tblsublimacion.getSelectedRow();
-            String valorCelda = tblsublimacion.getValueAt(fila, 1).toString();
-            String valorCelda2 = tblsublimacion.getValueAt(fila, 2).toString();
+            int valorEntero = Integer.parseInt(tblsublimacion.getValueAt(fila, 6).toString());
+
 //            String valorCelda3 = tblsublimacion.getValueAt(fila, 4).toString();
             PreparedStatement ps;
             ResultSet rs;
 
             Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
-            ps = conn.prepareStatement("SELECT * FROM cliente JOIN PedidoSublimacion ON cliente.id_cliente = PedidoSublimacion.id_cliente where nombre =? and apellido=? ");
-            ps.setString(1, valorCelda);
-            ps.setString(2, valorCelda2);
+            ps = conn.prepareStatement("SELECT * FROM cliente JOIN PedidoSublimacion ON cliente.id_cliente = PedidoSublimacion.id_cliente where id_sublimacion=? ");
+            ps.setInt(1, valorEntero);
+           
 //            ps.setString(3, valorCelda3);
             rs = ps.executeQuery();
 
@@ -441,7 +441,8 @@ public class Listado_Sublimacion extends javax.swing.JPanel {
                 mostrar.txtcantidad.setText(rs.getString("cantidad"));
                 mostrar.txtTelefono.setText(rs.getString("numero_telefono"));
                 mostrar.txtestado.setText(rs.getString("estado"));
-//                ver.id_cliente.setText(rs.getString("id"));
+                mostrar.txtfecha.setText(rs.getString("fechaPedido"));
+                mostrar.id_sublimacion.setText(rs.getString("id_sublimacion"));
 
                 Blob fotos = rs.getBlob("imagen1");
 

@@ -269,7 +269,7 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_proveedorActionPerformed
 
     private void productosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_productosActionPerformed
-        // jTabbedPane1.setSelectedIndex(11);
+      
 
         Listado_Productos p2 = new Listado_Productos();
         p2.setSize(1024, 640);

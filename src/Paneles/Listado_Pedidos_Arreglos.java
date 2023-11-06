@@ -587,10 +587,10 @@ public class Listado_Pedidos_Arreglos extends javax.swing.JPanel {
             }
 
             // Consulta principal con paginación y JOIN entre las tablas
-            ps = conn.prepareStatement("SELECT ROW_NUMBER() OVER(ORDER BY PS.id_pedido) AS NumRegistro, C.nombre, C.apellido, C.numero_telefono, PS.arreglo, PS.fechaPedido,PS.id_sublimacion "
+            ps = conn.prepareStatement("SELECT ROW_NUMBER() OVER(ORDER BY PS.id_arreglo) AS NumRegistro, C.nombre, C.apellido, C.numero_telefono, PS.arreglo, PS.fechaPedido,PS.id_arreglo "
                     + "FROM Cliente C "
                     + "JOIN PedidoArreglo PS ON C.id_cliente = PS.id_cliente "
-                    + "ORDER BY PS.id_pedido OFFSET ? ROWS FETCH NEXT ? ROWS ONLY");
+                    + "ORDER BY PS.id_arreglo OFFSET ? ROWS FETCH NEXT ? ROWS ONLY");
             ps.setInt(1, offset);
             ps.setInt(2, filasPorPagina);
             rs = ps.executeQuery();
