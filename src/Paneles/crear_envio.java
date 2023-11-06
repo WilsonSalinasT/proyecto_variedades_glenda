@@ -209,7 +209,7 @@ public class crear_envio extends javax.swing.JPanel {
                     if (selectedProduct.equals("Seleccione"))
                     {
                         // Si "Seleccione" está seleccionado, establece el valor de id_pedido en 0
-                        id_pedidosat.setText("0");
+                        id_pedidosat.setText("");
                     } else
                     {
                         try
@@ -221,9 +221,9 @@ public class crear_envio extends javax.swing.JPanel {
 
                             if (rs.next())
                             {
-                                int idPedido = rs.getInt("id_sastreria");
-                                // Muestra el id_pedido en un JTextField
-                                id_pedidosat.setText(Integer.toString(idPedido));
+                                int idPedido = rs.getInt("id_sastreria"); // Obtiene el valor entero de la columna "id_sastreria"
+                                String idPedidoStr = String.valueOf(idPedido); // Convierte el valor entero a una cadena
+                                id_pedidosat.setText(idPedidoStr);
                             }
 
                             connection.close();
@@ -246,7 +246,7 @@ public class crear_envio extends javax.swing.JPanel {
                     if (selectedProduct.equals("Seleccione"))
                     {
                         // Si "Seleccione" está seleccionado, establece el valor de id_pedido en 0
-                        id_arreglo.setText("0");
+                        id_arreglo.setText("");
                     } else
                     {
                         try
@@ -258,9 +258,9 @@ public class crear_envio extends javax.swing.JPanel {
 
                             if (rs.next())
                             {
-                                int idPedido = rs.getInt("id_arreglo");
-                                // Muestra el id_pedido en un JTextField
-                                id_arreglo.setText(Integer.toString(idPedido));
+                                int idPedido = rs.getInt("id_arreglo"); // Obtiene el valor entero de la columna "id_arreglo"
+                                String idPedidoStr = String.valueOf(idPedido); // Convierte el valor entero a una cadena
+                                id_arreglo.setText(idPedidoStr);
                             }
 
                             connection.close();
@@ -283,7 +283,7 @@ public class crear_envio extends javax.swing.JPanel {
                     if (selectedProduct.equals("Seleccione"))
                     {
                         // Si "Seleccione" está seleccionado, establece el valor de id_pedido en 0
-                        id_sublimacion.setText("0");
+                        id_sublimacion.setText("");
                     } else
                     {
                         try
@@ -295,9 +295,9 @@ public class crear_envio extends javax.swing.JPanel {
 
                             if (rs.next())
                             {
-                                int idPedido = rs.getInt("id_sublimacion");
-                                // Muestra el id_pedido en un JTextField
-                                id_sublimacion.setText(Integer.toString(idPedido));
+                                int idPedido = rs.getInt("id_sublimacion"); // Obtiene el valor entero de la columna "id_sublimacion"
+                                String idPedidoStr = String.valueOf(idPedido); // Convierte el valor entero a una cadena
+                                id_sublimacion.setText(idPedidoStr);
                             }
 
                             connection.close();
@@ -461,6 +461,9 @@ public class crear_envio extends javax.swing.JPanel {
         txtdireccion.setBorder(javax.swing.BorderFactory.createTitledBorder("Direccion:"));
         jScrollPane1.setViewportView(txtdireccion);
 
+        btnCrear.setBackground(new java.awt.Color(255, 153, 51));
+        btnCrear.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnCrear.setForeground(new java.awt.Color(0, 0, 0));
         btnCrear.setText("Crear");
         btnCrear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -469,6 +472,8 @@ public class crear_envio extends javax.swing.JPanel {
         });
 
         id_cliente.setEditable(false);
+        id_cliente.setBackground(new java.awt.Color(255, 255, 255));
+        id_cliente.setForeground(new java.awt.Color(255, 255, 255));
         id_cliente.setText("000000000");
         id_cliente.setBorder(null);
 
@@ -484,11 +489,23 @@ public class crear_envio extends javax.swing.JPanel {
 
         sublimacion.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Sublimación", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12))); // NOI18N
 
+        id_pedidosat.setEditable(false);
+        id_pedidosat.setBackground(new java.awt.Color(255, 255, 255));
+        id_pedidosat.setForeground(new java.awt.Color(255, 51, 51));
         id_pedidosat.setText("0000");
+        id_pedidosat.setBorder(null);
 
+        id_arreglo.setEditable(false);
+        id_arreglo.setBackground(new java.awt.Color(255, 255, 255));
+        id_arreglo.setForeground(new java.awt.Color(255, 255, 255));
         id_arreglo.setText("0000");
+        id_arreglo.setBorder(null);
 
+        id_sublimacion.setEditable(false);
+        id_sublimacion.setBackground(new java.awt.Color(255, 255, 255));
+        id_sublimacion.setForeground(new java.awt.Color(255, 255, 255));
         id_sublimacion.setText("0000");
+        id_sublimacion.setBorder(null);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -550,7 +567,7 @@ public class crear_envio extends javax.swing.JPanel {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(26, 26, 26)
                                 .addComponent(id_pedidosat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 53, Short.MAX_VALUE))
+                                .addGap(18, 50, Short.MAX_VALUE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(18, 18, 18)
                                 .addComponent(productListComboBox)
@@ -629,12 +646,12 @@ public class crear_envio extends javax.swing.JPanel {
                 Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
                 Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
 
-                PreparedStatement insertPs = conn.prepareStatement("INSERT INTO Envios (fechaenvio, id_cliente,id_sastreria,id_arreglo,id_sublimacion) VALUES (?,?,?,?,?)");
+                PreparedStatement insertPs = conn.prepareStatement("INSERT INTO Envios (fechaenvio, id_cliente, id_sastreria, id_arreglo, id_sublimacion) VALUES (?, ?, ?, ?, ?)");
                 insertPs.setDate(1, new java.sql.Date(fecha.getTime()));
                 insertPs.setObject(2, idC);
-                insertPs.setObject(3, idSa);
-                insertPs.setObject(4, idA);
-                insertPs.setObject(5, idS);
+                insertPs.setObject(3, idSa); // Puede ser null si id_sastreria es nulo
+                insertPs.setObject(4, idA); // Puede ser null si id_arreglo es nulo
+                insertPs.setObject(5, idS); // Puede ser null si id_sublimacion es nulo
 
                 insertPs.executeUpdate();
                 JOptionPane.showMessageDialog(null, "Registro guardado");
