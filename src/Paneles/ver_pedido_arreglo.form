@@ -16,7 +16,10 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jScrollPane1" alignment="0" pref="1024" max="32767" attributes="0"/>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jScrollPane1" pref="1018" max="32767" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -98,8 +101,8 @@
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="txtcliente" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
-                                  <Component id="txtTel" alignment="3" max="32767" attributes="0"/>
+                                  <Component id="txtcliente" alignment="3" min="-2" pref="52" max="-2" attributes="0"/>
+                                  <Component id="txtTel" alignment="3" min="-2" pref="52" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">

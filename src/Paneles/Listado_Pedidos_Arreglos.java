@@ -363,19 +363,25 @@ public class Listado_Pedidos_Arreglos extends javax.swing.JPanel {
             int fila = tblPedidosA.getSelectedRow();
             String valorCelda = tblPedidosA.getValueAt(fila, 1).toString();
             String valorCelda2 = tblPedidosA.getValueAt(fila, 2).toString();
-            String valorCelda3 = tblPedidosA.getValueAt(fila, 4).toString();
+            String valorCelda3 = tblPedidosA.getValueAt(fila, 3).toString();
+            String valorCelda4 = tblPedidosA.getValueAt(fila, 4).toString();
             PreparedStatement ps;
             ResultSet rs;
 
             Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
-            ps = conn.prepareStatement("SELECT * FROM Cliente JOIN PedidoArreglo ON Cliente.id_cliente = PedidoArreglo.id_cliente WHERE nombre=? and apellido=? and arreglo=?");
+            ps = conn.prepareStatement("SELECT * FROM Cliente JOIN PedidoArreglo ON Cliente.id_cliente = PedidoArreglo.id_cliente WHERE nombre=? and apellido=? and numero_telefono=? and arreglo=?");
             ps.setString(1, valorCelda);
             ps.setString(2, valorCelda2);
             ps.setString(3, valorCelda3);
+            ps.setString(4, valorCelda4);
             rs = ps.executeQuery();
 
             while (rs.next()) {
-
+               
+                String nombre = rs.getString("nombre");
+                String apellido = rs.getString("apellido");
+                String telf = rs.getString("numero_telefono");
+                
                 String arregloA = rs.getString("arreglo");
                 String estadoA = rs.getString("estado");
                 String descripcionA = rs.getString("descripcion");
@@ -383,7 +389,9 @@ public class Listado_Pedidos_Arreglos extends javax.swing.JPanel {
                 String fechapedido = rs.getString("fechaPedido");
 
                 ver_pedido_arreglo ver = new ver_pedido_arreglo();
-
+                
+                ver.txtcliente.setText(nombre + " " + apellido);
+                ver.txtTel.setText(telf);
                 ver.txtArreglo.setText(arregloA);
                 ver.txtestado.setText(estadoA);
                 ver.txtDescripcionA.setText(descripcionA);
