@@ -44,14 +44,14 @@ public class Listado_Sublimacion extends javax.swing.JPanel {
 
         holder = new TextPrompt("Busque por nombre/apellido del cliente/fecha de cita", txtBuscar);
 
-        tblCitas.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 12));
-        tblCitas.getTableHeader().setOpaque(false);
-        tblCitas.getTableHeader().setBackground(new Color(255, 0, 0));
-        tblCitas.getTableHeader().setForeground(new Color(255, 0, 0));
-        tblCitas.setRowHeight(25);
+        tblsublimacion.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 12));
+        tblsublimacion.getTableHeader().setOpaque(false);
+        tblsublimacion.getTableHeader().setBackground(new Color(255, 0, 0));
+        tblsublimacion.getTableHeader().setForeground(new Color(255, 0, 0));
+        tblsublimacion.setRowHeight(25);
 
-        tblCitas.setRowSelectionAllowed(true);
-        tblCitas.setColumnSelectionAllowed(false);
+        tblsublimacion.setRowSelectionAllowed(true);
+        tblsublimacion.setColumnSelectionAllowed(false);
     }
 
     /**
@@ -72,7 +72,7 @@ public class Listado_Sublimacion extends javax.swing.JPanel {
         verbtn = new javax.swing.JButton();
         Texto_Buscar = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tblCitas = new javax.swing.JTable();
+        tblsublimacion = new javax.swing.JTable();
         txtBuscar = new javax.swing.JTextField();
         Btn_Buscar = new javax.swing.JButton();
         refrescarbtn = new javax.swing.JButton();
@@ -161,27 +161,27 @@ public class Listado_Sublimacion extends javax.swing.JPanel {
         Texto_Buscar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         Texto_Buscar.setText("Buscar:");
 
-        tblCitas.setModel(new javax.swing.table.DefaultTableModel(
+        tblsublimacion.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "N°", "Nombre del cliente", "Apellido del cliente", "Celular", "Fecha de la cita"
+                "N°", "Nombre del cliente", "Apellido del cliente", "Celular", "Diseño", "Fecha de pedido"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, true, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        tblCitas.setGridColor(new java.awt.Color(255, 51, 51));
-        tblCitas.setSelectionBackground(new java.awt.Color(255, 102, 102));
-        tblCitas.setShowHorizontalLines(true);
-        tblCitas.setShowVerticalLines(true);
-        jScrollPane2.setViewportView(tblCitas);
+        tblsublimacion.setGridColor(new java.awt.Color(255, 51, 51));
+        tblsublimacion.setSelectionBackground(new java.awt.Color(255, 102, 102));
+        tblsublimacion.setShowHorizontalLines(true);
+        tblsublimacion.setShowVerticalLines(true);
+        jScrollPane2.setViewportView(tblsublimacion);
 
         txtBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -363,7 +363,69 @@ public class Listado_Sublimacion extends javax.swing.JPanel {
     
     int selectedRow1;
     private void verbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verbtnActionPerformed
-        // TODO add your handling code here:
+// TODO add your handling code here:
+        selectedRow1 = tblsublimacion.getSelectedRow();
+        if (selectedRow1 == -1)
+        {
+            JOptionPane.showMessageDialog(null, "Seleccione un pedido para poder visualizarla");
+            return;
+        }
+
+        try
+        {
+
+            int fila = tblsublimacion.getSelectedRow();
+            String valorCelda = tblsublimacion.getValueAt(fila, 1).toString();
+            String valorCelda2 = tblsublimacion.getValueAt(fila, 2).toString();
+//            String valorCelda3 = tblsublimacion.getValueAt(fila, 4).toString();
+            PreparedStatement ps;
+            ResultSet rs;
+
+            Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
+            ps = conn.prepareStatement("SELECT * FROM cliente JOIN PedidoSublimacion ON cliente.id_cliente = PedidoSublimacion.id_cliente where nombre =? and apellido=? ");
+            ps.setString(1, valorCelda);
+            ps.setString(2, valorCelda2);
+//            ps.setString(3, valorCelda3);
+            rs = ps.executeQuery();
+
+            while (rs.next())
+            {
+
+                String nombre = rs.getString("nombre");
+                String apellido = rs.getString("apellido");
+                ver_pedido_sublimacion mostrar = new ver_pedido_sublimacion();
+
+//                ver.fechaCita.setText(rs.getString("fecha_cita"));
+//                ver.cbxHoras.setText(rs.getString("hora_cita"));
+//                ver.txtMotivo.setText(rs.getString("motivo"));
+                mostrar.txtCliente.setText(nombre + " " + apellido);
+//                ver.id_cliente.setText(rs.getString("id"));
+
+                mostrar.setSize(1024, 640);
+                mostrar.setLocation(0, 0);
+
+                panelprincipal.revalidate();
+                panelprincipal.repaint();
+                panelprincipal.removeAll();
+                panelprincipal.add(mostrar, BorderLayout.CENTER);
+
+                panelprincipal.revalidate();
+                panelprincipal.repaint();
+
+                break; // Salir del bucle después de encontrar el elemento seleccionado
+
+            }
+
+            rs.close();
+            ps.close();
+            conn.close();
+
+        } catch (SQLException e)
+        {
+            e.printStackTrace();
+            // Manejar cualquier excepción que pueda ocurrir durante la consulta a la base de datos
+        }
+      
         
     }//GEN-LAST:event_verbtnActionPerformed
 
@@ -380,7 +442,7 @@ public class Listado_Sublimacion extends javax.swing.JPanel {
     String terminoBusqueda = ""; // Término de búsqueda actual
 
     private void cargarTablaEmpleados() {
-        /*DefaultTableModel modeloTabla = (DefaultTableModel) tblCitas.getModel();
+        DefaultTableModel modeloTabla = (DefaultTableModel) tblsublimacion.getModel();
         modeloTabla.setRowCount(0); // Limpiar los datos existentes en la tabla
 
         PreparedStatement ps;
@@ -396,8 +458,8 @@ public class Listado_Sublimacion extends javax.swing.JPanel {
             // Obtener el total de filas que cumplen con el criterio de búsqueda
             ps = conn.prepareStatement("SELECT COUNT(*) AS TotalFilas "
                     + "FROM Cliente E "
-                    + "JOIN Cita V ON E.id_cliente = V.id_cliente "
-                    + "WHERE E.nombre LIKE ? OR E.apellido LIKE ? OR V.fecha_cita LIKE ?");
+                    + "JOIN PedidoSublimacion V ON E.id_cliente = V.id_cliente "
+                    + "WHERE E.nombre LIKE ? OR E.apellido LIKE ? OR V.fechaPedido LIKE ?");
             ps.setString(1, "%" + terminoBusqueda + "%");
             ps.setString(2, "%" + terminoBusqueda + "%");
             ps.setString(3, "%" + terminoBusqueda + "%");
@@ -424,10 +486,10 @@ public class Listado_Sublimacion extends javax.swing.JPanel {
             }
 
             // Consulta para obtener los datos paginados
-            ps = conn.prepareStatement("SELECT ROW_NUMBER() OVER(ORDER BY E.nombre) AS NumRegistro, E.nombre, E.apellido, E.numero_telefono, V.fecha_cita "
+            ps = conn.prepareStatement("SELECT ROW_NUMBER() OVER(ORDER BY E.nombre) AS NumRegistro, E.nombre, E.apellido, E.numero_telefono, V.material,V.fechaPedido "
                     + "FROM Cliente E "
-                    + "JOIN Cita V ON E.id_cliente = V.id_cliente "
-                    + "WHERE E.nombre LIKE ? OR E.apellido LIKE ? OR V.fecha_cita LIKE ? "
+                    + "JOIN PedidoSublimacion V ON E.id_cliente = V.id_cliente "
+                    + "WHERE E.nombre LIKE ? OR E.apellido LIKE ? OR V.fechaPedido LIKE ? "
                     + "ORDER BY E.nombre "
                     + "OFFSET ? ROWS FETCH NEXT ? ROWS ONLY");
             ps.setString(1, "%" + terminoBusqueda + "%");
@@ -465,13 +527,15 @@ public class Listado_Sublimacion extends javax.swing.JPanel {
         {
             e.printStackTrace(); // Imprime la pila de excepciones para depuración
             JOptionPane.showMessageDialog(null, e.toString());
-        }*/
+        }
 
     }
+    
+    
 
     private void ajustarTabla(int filasDeseadas) {
-        tblCitas.setPreferredScrollableViewportSize(new Dimension(tblCitas.getPreferredSize().width, tblCitas.getRowHeight() * filasDeseadas));
-        tblCitas.setFillsViewportHeight(true);
+        tblsublimacion.setPreferredScrollableViewportSize(new Dimension(tblsublimacion.getPreferredSize().width, tblsublimacion.getRowHeight() * filasDeseadas));
+        tblsublimacion.setFillsViewportHeight(true);
     }
 
     private void siguientePagina() {
@@ -491,7 +555,7 @@ public class Listado_Sublimacion extends javax.swing.JPanel {
     }
 
     private void buscarDatos(String texto) {
-        DefaultTableModel modelTabla = (DefaultTableModel) tblCitas.getModel();
+        DefaultTableModel modelTabla = (DefaultTableModel) tblsublimacion.getModel();
         modelTabla.setRowCount(0);
         boolean foundData = false;
 
@@ -500,10 +564,10 @@ public class Listado_Sublimacion extends javax.swing.JPanel {
             Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
             if (conn != null && !conn.isClosed())
             {
-                PreparedStatement ps = conn.prepareStatement("SELECT ROW_NUMBER() OVER(ORDER BY E.nombre) AS NumRegistro, E.nombre, E.apellido, E.numero_telefono, V.fecha_cita "
+                PreparedStatement ps = conn.prepareStatement("SELECT ROW_NUMBER() OVER(ORDER BY E.nombre) AS NumRegistro, E.nombre, E.apellido, E.numero_telefono, V.material, V.fechaPedido "
                         + "FROM Cliente E "
-                        + "JOIN Cita V ON E.id_cliente = V.id_cliente "
-                        + "WHERE E.nombre LIKE ? OR E.apellido LIKE ? OR V.fecha_cita LIKE ? "
+                        + "JOIN PedidoSublimacion V ON E.id_cliente = V.id_cliente "
+                        + "WHERE E.nombre LIKE ? OR E.apellido LIKE ? OR V.fechaPedido LIKE ? "
                         + "ORDER BY E.nombre "
                         + "OFFSET ? ROWS FETCH NEXT ? ROWS ONLY");
 
@@ -538,13 +602,14 @@ public class Listado_Sublimacion extends javax.swing.JPanel {
                         String nombre = rs.getString("nombre");
                         String apellido = rs.getString("apellido");
                         String numeroTelefono = rs.getString("numero_telefono");
-                        String fechaCita = rs.getString("fecha_cita");
+                        String material = rs.getString("material");
+                        String fechaCi = rs.getString("fechaPedido");
 
                         if (nombre != null && apellido != null && numeroTelefono != null)
                         {
                             modelTabla.addRow(new Object[]
                             {
-                                numRegistro, nombre, apellido, numeroTelefono, fechaCita
+                                numRegistro, nombre, apellido, numeroTelefono, material, fechaCi
                             });
                             foundData = true;
                         }
@@ -578,7 +643,7 @@ public class Listado_Sublimacion extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JButton refrescarbtn;
-    private javax.swing.JTable tblCitas;
+    private javax.swing.JTable tblsublimacion;
     public javax.swing.JTextField txtBuscar;
     private javax.swing.JButton verbtn;
     // End of variables declaration//GEN-END:variables

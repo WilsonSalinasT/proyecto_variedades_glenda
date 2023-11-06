@@ -36,10 +36,6 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  * @author Admin
  */
 public class ver_pedido_sastreria extends javax.swing.JPanel {
- 
-
-      
-     
     public ver_pedido_sastreria() {
          ver_pedido_sastreria mostrar = new ver_pedido_sastreria();
         

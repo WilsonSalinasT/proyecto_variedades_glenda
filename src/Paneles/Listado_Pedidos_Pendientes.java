@@ -269,14 +269,13 @@ public class Listado_Pedidos_Pendientes extends javax.swing.JPanel {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(12, 12, 12)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(29, 29, 29)
+                        .addGap(35, 35, 35)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(Texto_Buscar)
                             .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -284,7 +283,7 @@ public class Listado_Pedidos_Pendientes extends javax.swing.JPanel {
                             .addComponent(refrescarbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(496, 496, 496)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(Texto_Contable, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnAnterior, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -623,10 +622,10 @@ try {
             }
 
             // Consulta principal con paginación y JOIN entre las tablas
-            ps = conn.prepareStatement("SELECT ROW_NUMBER() OVER(ORDER BY PS.id_pedido) AS NumRegistro, C.nombre, C.apellido, C.numero_telefono, PS.prenda, PS.fechaPedido "
+            ps = conn.prepareStatement("SELECT ROW_NUMBER() OVER(ORDER BY PS.id_sastreria) AS NumRegistro, C.nombre, C.apellido, C.numero_telefono, PS.prenda, PS.fechaPedido "
                     + "FROM Cliente C "
                     + "JOIN PedidoSastreria PS ON C.id_cliente = PS.id_cliente "
-                    + "ORDER BY PS.id_pedido OFFSET ? ROWS FETCH NEXT ? ROWS ONLY");
+                    + "ORDER BY PS.id_sastreria OFFSET ? ROWS FETCH NEXT ? ROWS ONLY");
             ps.setInt(1, offset);
             ps.setInt(2, filasPorPagina);
             rs = ps.executeQuery();

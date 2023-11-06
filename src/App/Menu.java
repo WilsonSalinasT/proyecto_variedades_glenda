@@ -273,6 +273,7 @@ public class Menu extends javax.swing.JFrame {
 
         Listado_Productos p2 = new Listado_Productos();
         p2.setSize(1024, 640);
+        
         p2.setLocation(0, 0);
 
         panelprincipal.removeAll();
