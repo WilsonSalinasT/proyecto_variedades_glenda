@@ -25,6 +25,9 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 import com.toedter.calendar.JDateChooser;
+import java.io.File;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 
 /**
  *
@@ -349,98 +352,87 @@ public class Listado_Pedidos_Arreglos extends javax.swing.JPanel {
     
     private void verbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verbtnActionPerformed
                                        
-    int selectedRow1 = tblPedidosA.getSelectedRow();
-    if (selectedRow1 == -1) {
-        JOptionPane.showMessageDialog(null, "Seleccione un pedido para poder visualizarlo");
-        return;
-    }
-
-    try {
-        String valorCelda = tblPedidosA.getValueAt(selectedRow1, 1).toString();
-        String valorCelda2 = tblPedidosA.getValueAt(selectedRow1, 2).toString();
-        String valorCelda3 = tblPedidosA.getValueAt(selectedRow1, 3).toString();
-        String valorCelda4 = tblPedidosA.getValueAt(selectedRow1, 4).toString();
-        String valorCelda5 = tblPedidosA.getValueAt(selectedRow1, 5).toString();
-
-       /* // Recupera los valores de las etiquetas o campos de texto
-        String nombre = (String) cbxClientes.getSelectedItem();
-        String prenda = (String) cbxPrenda.getSelectedItem();
-        String estado = (String) cbxEstado.getSelectedItem();
-        String idC = id_cliente.getText();
-        String imagenM1 = imagen1.getText();
-        String descripcion = txtDescrip.getText();
-        String precio = txtprecio.getText();
-        SimpleDateFormat sdfSQL = new SimpleDateFormat("yyyy-MM-dd");
-        String fechaPedido = sdfSQL.format(new Date());
-        String cadera = txtCadera.getText();
-        String cintura = txtCintura.getText();
-        String largo = txtLargo.getText();
-        String largoManga = txtLManga.getText();
-        String anchoManga = txtAManga.getText();
-        String cuello = txtCuello.getText();
-        String pecho = txtPecho.getText();
-        String muneca = txtMuneca.getText();
-        String hombro = txtHombro.getText();
-        String anchoEsp = txtAEspalda.getText();
-        String largoEsp = txtLEspalda.getText();
-        String rodilla = txtRodilla.getText();
-        String tobillo = txtTobillo.getText();
-        String tiro = txtTiro.getText();
-        String muslo = txtMuslo.getText();*/
-
-        PreparedStatement ps;
-        ResultSet rs;
-
-        Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
-        ps = conn.prepareStatement("SELECT prenda, estado, descripcion, precio, cadera, cintura, largo, largoManga, anchoManga, cuello, pecho, muneca, hombro, anchoEsp, largoEsp, rodilla, tobillo, tiro, muslo, imagen1, imagen2, imagen3, fechaPedido FROM PedidoSastreria WHERE prenda=? AND estado=? AND descripcion=? AND precio=? AND cadera=?");
-        ps.setString(1, valorCelda);
-        ps.setString(2, valorCelda2);
-        ps.setString(3, valorCelda3);
-        ps.setString(4, valorCelda4);
-        ps.setString(5, valorCelda5);
-        rs = ps.executeQuery();
-
-        if (rs.next()) {
-            // Recupera los datos adicionales de la base de datos
-            String prendaDB = rs.getString("prenda");
-            String estadoDB = rs.getString("estado");
-            String descripcionDB = rs.getString("descripcion");
-            String precioDB = rs.getString("precio");
-            String caderaDB = rs.getString("cadera");
-            String cinturaDB = rs.getString("cintura");
-            String largoDB = rs.getString("largo");
-            String largoMangaDB = rs.getString("largoManga");
-            String anchoMangaDB = rs.getString("anchoManga");
-            String cuelloDB = rs.getString("cuello");
-            String pechoDB = rs.getString("pecho");
-            String munecaDB = rs.getString("muneca");
-            String hombroDB = rs.getString("hombro");
-            String anchoEspDB = rs.getString("anchoEsp");
-            String largoEspDB = rs.getString("largoEsp");
-            String rodillaDB = rs.getString("rodilla");
-            String tobilloDB = rs.getString("tobillo");
-            String tiroDB = rs.getString("tiro");
-            String musloDB = rs.getString("muslo");
-            String imagen1DB = rs.getString("imagen1");
-            String imagen2DB = rs.getString("imagen2");
-            String imagen3DB = rs.getString("imagen3");
-            String fechaPedidoDB = rs.getString("fechaPedido");
-
-            // Crea una instancia de la ventana ver_pedido_sastreria
-            ver_pedido_sastreria ventanaVerPedido = new ver_pedido_sastreria();
-
-            // Establece los valores en la ventana ver_pedido_sastreria
-           
-
-            // Muestra la ventana ver_pedido_sastreria
-            ventanaVerPedido.setVisible(true);
+    selectedRow1 = tblPedidosA.getSelectedRow();
+        if (selectedRow1 == -1)
+        {
+            JOptionPane.showMessageDialog(null, "Seleccione un pedido para poder visualizarlo");
+            return;
         }
-        rs.close();
-        ps.close();
-        conn.close();
-    } catch (SQLException e) {
-        e.printStackTrace(); // Maneja la excepción apropiadamente
-    }
+
+        try
+        {
+
+            int fila = tblPedidosA.getSelectedRow();
+            String valorCelda = tblPedidosA.getValueAt(fila, 1).toString();
+            String valorCelda2 = tblPedidosA.getValueAt(fila, 2).toString();
+            String valorCelda3 = tblPedidosA.getValueAt(fila, 4).toString();
+            PreparedStatement ps;
+            ResultSet rs;
+
+            Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
+            ps = conn.prepareStatement("SELECT * FROM Cliente JOIN PedidoArreglo ON Cliente.id_cliente = PedidoArreglo.id_cliente WHERE nombre=? and apellido=? and arreglo=?" );
+            ps.setString(1, valorCelda);
+            ps.setString(2, valorCelda2);
+            ps.setString(3, valorCelda3);
+            rs = ps.executeQuery();
+
+            while (rs.next())
+            {
+
+                String arregloA = rs.getString("arreglo");
+                String estadoA = rs.getString("estado");
+                String descripcionA = rs.getString("descripcion");
+                String precioA = rs.getString("precio");
+                String fechapedido = rs.getString("fechaPedido");
+
+                ver_pedido_arreglo ver = new ver_pedido_arreglo();
+
+                ver.txtArreglo.setText(arregloA);
+                ver.txtestado.setText(estadoA);
+                ver.txtDescripcionA.setText(descripcionA);
+                ver.txtprecio.setText(precioA);
+                
+                //Recuperar la imagen de la base de datos
+                byte[] imagenA1 = rs.getBytes("imagen1");
+                byte[] imagenA2 = rs.getBytes("imagen2");
+                byte[] imagenA3 = rs.getBytes("imagen3");
+                
+                //Crear un objeto ImageIcon a partir de los bytes de la imagen
+                ImageIcon imagenIcono = new ImageIcon(imagenA1);
+                ImageIcon imagenIcon2 = new ImageIcon(imagenA2);
+                ImageIcon imagenIcon3 = new ImageIcon(imagenA3);
+         
+                //Establecer el ImageIcon en el JLabel
+                ver.imagen1.setIcon(imagenIcono);
+                ver.imagen2.setIcon(imagenIcon2);
+                ver.imagen3.setIcon(imagenIcon3);
+                ver.fechaP.setText(fechapedido);
+
+                ver.setSize(1024, 640);
+                ver.setLocation(0, 0);
+
+                panelprincipal.revalidate();
+                panelprincipal.repaint();
+                panelprincipal.removeAll();
+                panelprincipal.add(ver, BorderLayout.CENTER);
+
+                panelprincipal.revalidate();
+                panelprincipal.repaint();
+
+                break; // Salir del bucle después de encontrar el elemento seleccionado
+
+            }
+
+            rs.close();
+            ps.close();
+            conn.close();
+
+        } catch (SQLException e)
+        {
+            e.printStackTrace();
+            // Manejar cualquier excepción que pueda ocurrir durante la consulta a la base de datos
+        }
+
 
 
 
@@ -724,4 +716,5 @@ public class Listado_Pedidos_Arreglos extends javax.swing.JPanel {
     private void mostrarVentanaDeEdicion(EditarCita editarCita) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+
 }
