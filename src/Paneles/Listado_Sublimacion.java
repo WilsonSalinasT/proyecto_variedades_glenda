@@ -209,7 +209,7 @@ public class Listado_Sublimacion extends javax.swing.JPanel {
 
             },
             new String [] {
-                "N°", "Nombre del cliente", "Apellido del cliente", "Celular", "Diseño", "Fecha de pedido", "id_comnuna"
+                "N°", "Nombre del cliente", "Apellido del cliente", "Estado", "Diseño", "Fecha de pedido", "id_comnuna"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -592,10 +592,10 @@ public class Listado_Sublimacion extends javax.swing.JPanel {
             }
 
             // Consulta para obtener los datos paginados
-            ps = conn.prepareStatement("SELECT ROW_NUMBER() OVER(ORDER BY E.nombre) AS NumRegistro, E.nombre, E.apellido, E.numero_telefono, V.material,V.fechaPedido,V.id_sublimacion "
+            ps = conn.prepareStatement("SELECT ROW_NUMBER() OVER(ORDER BY E.nombre) AS NumRegistro, E.nombre, E.apellido, V.estado, V.material,V.fechaPedido,V.id_sublimacion "
                     + "FROM Cliente E "
                     + "JOIN PedidoSublimacion V ON E.id_cliente = V.id_cliente "
-                    + "WHERE E.nombre LIKE ? OR E.apellido LIKE ? OR V.fechaPedido LIKE ? "
+                    + "WHERE (E.nombre LIKE ? OR E.apellido LIKE ? OR V.fechaPedido LIKE ?) and V.estado = 'pendiente' "
                     + "ORDER BY E.nombre "
                     + "OFFSET ? ROWS FETCH NEXT ? ROWS ONLY");
             ps.setString(1, "%" + terminoBusqueda + "%");
@@ -660,7 +660,7 @@ public class Listado_Sublimacion extends javax.swing.JPanel {
         try {
             Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
             if (conn != null && !conn.isClosed()) {
-                PreparedStatement ps = conn.prepareStatement("SELECT ROW_NUMBER() OVER(ORDER BY E.nombre) AS NumRegistro, E.nombre, E.apellido, E.numero_telefono, V.material, V.fechaPedido "
+                PreparedStatement ps = conn.prepareStatement("SELECT ROW_NUMBER() OVER(ORDER BY E.nombre) AS NumRegistro, E.nombre, E.apellido, V.estado, V.material, V.fechaPedido "
                         + "FROM Cliente E "
                         + "JOIN PedidoSublimacion V ON E.id_cliente = V.id_cliente "
                         + "WHERE E.nombre LIKE ? OR E.apellido LIKE ? OR V.fechaPedido LIKE ? "
@@ -693,7 +693,7 @@ public class Listado_Sublimacion extends javax.swing.JPanel {
                         int numRegistro = rs.getInt("NumRegistro");
                         String nombre = rs.getString("nombre");
                         String apellido = rs.getString("apellido");
-                        String numeroTelefono = rs.getString("numero_telefono");
+                        String numeroTelefono = rs.getString("estado");
                         String material = rs.getString("material");
                         String fechaCi = rs.getString("fechaPedido");
 
