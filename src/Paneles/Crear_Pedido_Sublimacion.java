@@ -476,7 +476,7 @@ public class Crear_Pedido_Sublimacion extends javax.swing.JPanel {
         if (nombre.equals("Seleccione")) {
             camposVacios.append("\n - Nombre del cliente");
         }
-        
+
         if (descripcion.isEmpty()) {
             camposVacios.append("\n - Descripcion");
         }
@@ -494,7 +494,7 @@ public class Crear_Pedido_Sublimacion extends javax.swing.JPanel {
             camposVacios.append("\n - Agregue una imagen de muestra");
         }
 
-        if (fechaPedido == null) {
+        if (jDateChooser1.getDate() == null) {
             camposVacios.append("\n - Fecha de Entrega");
         }
 
@@ -510,30 +510,31 @@ public class Crear_Pedido_Sublimacion extends javax.swing.JPanel {
                 Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
                 Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
 
-                PreparedStatement insertPs = conn.prepareStatement("INSERT INTO PedidoSublimacion (material, estado, descripcion, precio,"
+                PreparedStatement insertPs = conn.prepareStatement("INSERT INTO PedidoSublimacion (material, cantidad, estado, descripcion, precio,"
                         + "imagen1,fechaPedido,id_cliente) "
-                        + "VALUES (?,?,?,?,?,?,?)");
+                        + "VALUES (?,?,?,?,?,?,?,?)");
                 insertPs.setString(1, material);
-                insertPs.setString(2, estado);
-                insertPs.setObject(3, descripcion);
-                insertPs.setObject(4, precio);
+                insertPs.setString(2, cantidad);
+                insertPs.setString(3, estado);
+                insertPs.setObject(4, descripcion);
+                insertPs.setObject(5, precio);
 
                 // Verificar si el archivo de imagen 1 existe y agregarlo si es el caso
                 if (rutaImagen1 != null && !rutaImagen1.isEmpty() && new File(rutaImagen1).exists()) {
                     try {
                         FileInputStream fis1 = new FileInputStream(new File(rutaImagen1));
-                        insertPs.setBinaryStream(5, fis1, (int) new File(rutaImagen1).length());
+                        insertPs.setBinaryStream(6, fis1, (int) new File(rutaImagen1).length());
                     } catch (FileNotFoundException e) {
                         // Manejar la excepción si el archivo no se encuentra
-                        insertPs.setBinaryStream(5, null, 0); // Imagen 1 no existe
+                        insertPs.setBinaryStream(6, null, 0); // Imagen 1 no existe
                     }
                 } else {
                     insertPs.setBinaryStream(5, null, 0); // Imagen 1 no existe
                 }
 
-                insertPs.setString(6, fechaPedido);
+                insertPs.setString(7, fechaPedido);
                 // insertPs.setDate(24, new java.sql.Date(fecha.getTime()));
-                insertPs.setObject(7, idC);
+                insertPs.setObject(8, idC);
 
                 insertPs.executeUpdate();
                 JOptionPane.showMessageDialog(null, "Registro guardado");
