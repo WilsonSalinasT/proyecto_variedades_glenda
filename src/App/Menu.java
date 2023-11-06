@@ -236,7 +236,7 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_citasActionPerformed
 
     private void nueva_ventaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nueva_ventaActionPerformed
-        Listado_pedido_entregado p2 = new Listado_pedido_entregado();
+        Listado_Empleados p2 = new Listado_Empleados();
         p2.setSize(1024, 640);
         p2.setLocation(0, 0);
 

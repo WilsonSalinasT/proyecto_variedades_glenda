@@ -411,7 +411,7 @@ ps = conn.prepareStatement("SELECT ROW_NUMBER() OVER (ORDER BY P.id_pedido) AS N
         + "    UNION ALL "
         + "    SELECT id_cliente, id_pedido, estado, descripcion, fechaPedido FROM PedidoArreglo "
         + "    UNION ALL "
-        + "    SELECT id_cliente, id_pedido, estado, descripcion, fechaPedido FROM PedidoSastreria "
+        + "    SELECT id_cliente, id_sastreria, estado, descripcion, fechaPedido FROM PedidoSastreria "
         + "    UNION ALL "
         + "    SELECT id_cliente, id_pedido, estado, descripcion, fechaPedido FROM PedidoSublimacion "
         + ") AS P ON C.id_cliente = P.id_cliente "

@@ -25,6 +25,12 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 import com.toedter.calendar.JDateChooser;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.sql.Blob;
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
 /**
@@ -41,7 +47,7 @@ public class Listado_Pedidos_Pendientes extends javax.swing.JPanel {
      */
     public Listado_Pedidos_Pendientes() {
         initComponents();
-     
+
         cargarTabla();
 
         holder = new TextPrompt("Busque por nombre/apellido del cliente/fecha de entrega", txtBuscar);
@@ -68,6 +74,7 @@ public class Listado_Pedidos_Pendientes extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         crearbtn = new javax.swing.JButton();
         editarbtn = new javax.swing.JButton();
@@ -88,7 +95,16 @@ public class Listado_Pedidos_Pendientes extends javax.swing.JPanel {
 
         jLabel2.setBackground(new java.awt.Color(0, 0, 0));
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel2.setText("Listado de Pedidos de Satrería");
+        jLabel2.setText("Listado de Pedidos Pendientes");
+
+        jButton1.setBackground(new java.awt.Color(255, 153, 51));
+        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jButton1.setText("Listado de pedidos entregados");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -97,13 +113,20 @@ public class Listado_Pedidos_Pendientes extends javax.swing.JPanel {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addComponent(jLabel2)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(26, 26, 26))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(49, 49, 49)
-                .addComponent(jLabel2)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(59, 59, 59)
+                        .addComponent(jLabel2))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(34, 34, 34)
+                        .addComponent(jButton1)))
                 .addContainerGap(51, Short.MAX_VALUE))
         );
 
@@ -360,157 +383,167 @@ public class Listado_Pedidos_Pendientes extends javax.swing.JPanel {
         panelprincipal.repaint();
     }//GEN-LAST:event_crearbtnActionPerformed
     int selectedRow1;
-    
+
     private void verbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verbtnActionPerformed
-                                       
-    int selectedRow1 = tblPedidos.getSelectedRow();
-if (selectedRow1 == -1) {
-    JOptionPane.showMessageDialog(null, "Seleccione un pedido para poder visualizarlo");
-    return;
-}
 
-try {
-    String valorCelda = tblPedidos.getValueAt(selectedRow1, 1).toString();
-    String valorCelda2 = tblPedidos.getValueAt(selectedRow1, 2).toString();
-    String valorCelda3 = tblPedidos.getValueAt(selectedRow1, 3).toString();
-    String valorCelda4 = tblPedidos.getValueAt(selectedRow1, 4).toString();
-    String valorCelda5 = tblPedidos.getValueAt(selectedRow1, 5).toString();
-
-    PreparedStatement ps;
-    ResultSet rs;
-
-    Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
-    ps = conn.prepareStatement("SELECT prenda, estado, descripcion, precio, cadera, cintura, largo, largoManga, anchoManga, cuello, pecho, muneca, hombro, anchoEsp, largoEsp, rodilla, tobillo, tiro, muslo, imagen1, imagen2, imagen3, fechaPedido FROM PedidoSastreria WHERE prenda=? AND estado=? AND descripcion=? AND precio=? AND cadera=?");
-    ps.setString(1, valorCelda);
-    ps.setString(2, valorCelda2);
-    ps.setString(3, valorCelda3);
-    ps.setString(4, valorCelda4);
-    ps.setString(5, valorCelda5);
-    rs = ps.executeQuery();
-
-    if (rs.next()) {
-        String prenda = rs.getString("prenda");
-        String estado = rs.getString("estado");
-        String descripcion = rs.getString("descripcion");
-        String precio = rs.getString("precio");
-        String cadera = rs.getString("cadera");
-        String cintura = rs.getString("cintura");
-        String largo = rs.getString("largo");
-        String largoManga = rs.getString("largoManga");
-        String anchoManga = rs.getString("anchoManga");
-        String cuello = rs.getString("cuello");
-        String pecho = rs.getString("pecho");
-        String muneca = rs.getString("muneca");
-        String hombro = rs.getString("hombro");
-        String anchoEsp = rs.getString("anchoEsp");
-        String largoEsp = rs.getString("largoEsp");
-        String rodilla = rs.getString("rodilla");
-        String tobillo = rs.getString("tobillo");
-        String tiro = rs.getString("tiro");
-        String muslo = rs.getString("muslo");
-        String imagen1 = rs.getString("imagen1");
-        String imagen2 = rs.getString("imagen2");
-        String imagen3 = rs.getString("imagen3");
-        String fechaPedido = rs.getString("fechaPedido");
-
-        ver_pedido_sastreria mostrar = new ver_pedido_sastreria();
-
-        // Configurar los campos en la ventana mostrar
-        mostrar.cbxPrenda.setText(prenda);
-        mostrar.cbxPrenda.setEditable(false);
-
-        mostrar.cbxEstado.setText(estado);
-        mostrar.cbxEstado.setEditable(false);
-
-        mostrar.txtCadera.setText(cadera);
-        mostrar.txtCadera.setEditable(false);
-
-        mostrar.txtCintura.setText(cintura);
-        mostrar.txtCintura.setEditable(false);
-
-        mostrar.txtLargo.setText(largo);
-        mostrar.txtLargo.setEditable(false);
-
-        mostrar.txtLManga.setText(largoManga);
-        mostrar.txtLManga.setEditable(false);
-
-        mostrar.txtAManga.setText(anchoManga);
-        mostrar.txtAManga.setEditable(false);
-
-        mostrar.txtCuello.setText(cuello);
-        mostrar.txtCuello.setEditable(false);
-
-        mostrar.txtPecho.setText(pecho);
-        mostrar.txtPecho.setEditable(false);
-
-        mostrar.txtMuneca.setText(muneca);
-        mostrar.txtMuneca.setEditable(false);
-
-        mostrar.txtHombro.setText(hombro);
-        mostrar.txtHombro.setEditable(false);
-
-        mostrar.txtAEspalda.setText(anchoEsp);
-        mostrar.txtAEspalda.setEditable(false);
-
-        mostrar.txtLEspalda.setText(largoEsp);
-        mostrar.txtLEspalda.setEditable(false);
-
-        mostrar.txtRodilla.setText(rodilla);
-        mostrar.txtRodilla.setEditable(false);
-
-        mostrar.txtTobillo.setText(tobillo);
-        mostrar.txtTobillo.setEditable(false);
-
-        mostrar.txtTiro.setText(tiro);
-        mostrar.txtTiro.setEditable(false);
-
-        mostrar.txtMuslo.setText(muslo);
-        mostrar.txtMuslo.setEditable(false);
-
-        // Configurar los campos de imagen
-        try {
-            ImageIcon icon1 = new ImageIcon(imagen1);
-            mostrar.imagen1.setIcon(icon1);
-
-            ImageIcon icon2 = new ImageIcon(imagen2);
-            mostrar.imagen2.setIcon(icon2);
-
-            ImageIcon icon3 = new ImageIcon(imagen3);
-            mostrar.imagen3.setIcon(icon3);
-        } catch (Exception e) {
-            e.printStackTrace();
+        selectedRow1 = tblPedidos.getSelectedRow();
+        if (selectedRow1 == -1)
+        {
+            JOptionPane.showMessageDialog(null, "Seleccione un pedido para poder visualizarla");
+            return;
         }
 
-        // Configurar el campo de la fecha del pedido
-        mostrar.fechaP.setText(fechaPedido);
-        mostrar.fechaP.setText(fechaPedido);
+        try
+        {
+
+            int fila = tblPedidos.getSelectedRow();
+            String valorCelda = tblPedidos.getValueAt(fila, 1).toString();
+            String valorCelda2 = tblPedidos.getValueAt(fila, 2).toString();
+//            String valorCelda3 = tblsublimacion.getValueAt(fila, 4).toString();
+            PreparedStatement ps;
+            ResultSet rs;
+
+            Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
+            ps = conn.prepareStatement("SELECT * FROM cliente JOIN PedidoSastreria ON cliente.id_cliente = PedidoSastreria.id_cliente where nombre =? and apellido=?  ");
+            ps.setString(1, valorCelda);
+            ps.setString(2, valorCelda2);
+//            ps.setString(3, valorCelda3);
+            rs = ps.executeQuery();
+
+            while (rs.next())
+            {
+
+                String nombre = rs.getString("nombre");
+                String apellido = rs.getString("apellido");
+             //   String telefono = rs.getString("numero_telefono");
+                
+                ver_sastreria mostrar = new ver_sastreria();
+
+//                ver.fechaCita.setText(rs.getString("fecha_cita"));
+//                ver.cbxHoras.setText(rs.getString("hora_cita"));
+//                ver.txtMotivo.setText(rs.getString("motivo"));
+                mostrar.txtCliente1.setText(nombre + " " + apellido);
+                mostrar.txtTel.setText(rs.getString("numero_telefono"));
+                mostrar.cbxPrenda1.setText(rs.getString("Prenda"));
+                mostrar.cbxEstado.setText(rs.getString("estado"));
+                mostrar.txtCintura.setText(rs.getString("cintura"));
+                mostrar.txtCadera.setText(rs.getString("cadera"));
+                mostrar.txtLargo.setText(rs.getString("largo"));
+                mostrar.txtLManga.setText(rs.getString("largoManga"));
+                mostrar.txtAManga.setText(rs.getString("anchoManga"));
+                mostrar.txtCuello.setText(rs.getString("cuello"));
+                mostrar.txtPecho.setText(rs.getString("pecho"));
+                mostrar.txtMuneca.setText(rs.getString("cintura"));
+                mostrar.txtHombro.setText(rs.getString("hombro"));
+                mostrar.txtAEspalda.setText(rs.getString("anchoEsp"));
+                mostrar.txtLEspalda.setText(rs.getString("largoEsp"));
+                mostrar.txtRodilla.setText(rs.getString("rodilla"));
+                mostrar.txtTobillo.setText(rs.getString("tobillo"));
+                mostrar.txtTiro.setText(rs.getString("tiro"));
+                mostrar.txtMuslo.setText(rs.getString("muslo"));
+                mostrar.txtDescrip.setText(rs.getString("descripcion"));
+                mostrar.txtprecio.setText(rs.getString("precio"));
+             
 
 
-        mostrar.txtDescrip.setText(descripcion);
-        mostrar.txtDescrip.setEditable(false);
+                  Blob fotos = rs.getBlob("imagen1");
+                    
+                       if (fotos != null)
+                       {
+                           byte[] recuperar = fotos.getBytes(1, (int) fotos.length());
+                       BufferedImage img = ImageIO.read(new ByteArrayInputStream(recuperar));
+                    //Define las dimensiones deseadas para la imagen
+                       int anchoDeseado = 200; // Reemplaza esto con el ancho que desees
+                       int altoDeseado = 150;  // Reemplaza esto con el alto que desees
 
-        mostrar.txtprecio.setText(precio);
-        mostrar.txtprecio.setEditable(false);
+                    //Escala la imagen a las dimensiones deseadas
+                        Image imagen = img.getScaledInstance(anchoDeseado, altoDeseado, Image.SCALE_SMOOTH);
 
-        mostrar.setSize(1024, 640);
-        mostrar.setLocation(0, 0);
+                  //// Establece la imagen escalada en el componente mostrar.txtimagen
+                       mostrar.imagen1.setIcon(new ImageIcon(imagen));
+                        
+                       } else
+                       {
+                            ImageIcon imagenIcon;
+                           // Cargar una imagen predeterminada si no se encuentra la imagen en la base de datos
+                            imagenIcon = new ImageIcon(getClass().getResource("/img/agregar.png"));
+                           mostrar.imagen1.setIcon(imagenIcon);
+                        }
 
-        jPanel3.removeAll();
-        jPanel3.add(mostrar, BorderLayout.CENTER);
-        jPanel3.revalidate();
-        jPanel3.repaint();
-    } else {
-        JOptionPane.showMessageDialog(null, "No se encontraron resultados.");
-    }
+                       Blob fotos1 = rs.getBlob("imagen2");
+                    
+                       if (fotos != null)
+                       {
+                           byte[] recuperar = fotos.getBytes(1, (int) fotos.length());
+                       BufferedImage img = ImageIO.read(new ByteArrayInputStream(recuperar));
+                    //Define las dimensiones deseadas para la imagen
+                       int anchoDeseado = 200; // Reemplaza esto con el ancho que desees
+                       int altoDeseado = 150;  // Reemplaza esto con el alto que desees
 
-    rs.close();
-    ps.close();
-    conn.close();
+                    //Escala la imagen a las dimensiones deseadas
+                        Image imagen = img.getScaledInstance(anchoDeseado, altoDeseado, Image.SCALE_SMOOTH);
 
-} catch (SQLException e) {
-    JOptionPane.showMessageDialog(null, "Error al consultar la base de datos: " + e.getMessage());
-    e.printStackTrace();
-}
+                  //// Establece la imagen escalada en el componente mostrar.txtimagen
+                       mostrar.imagen2.setIcon(new ImageIcon(imagen));
+                        
+                       } else
+                       {
+                            ImageIcon imagenIcon;
+                           // Cargar una imagen predeterminada si no se encuentra la imagen en la base de datos
+                            imagenIcon = new ImageIcon(getClass().getResource("/img/agregar.png"));
+                           mostrar.imagen2.setIcon(imagenIcon);
+                        }
+                       Blob fotos2 = rs.getBlob("imagen3");
+                    
+                       if (fotos != null)
+                       {
+                           byte[] recuperar = fotos.getBytes(1, (int) fotos.length());
+                       BufferedImage img = ImageIO.read(new ByteArrayInputStream(recuperar));
+                    //Define las dimensiones deseadas para la imagen
+                       int anchoDeseado = 200; // Reemplaza esto con el ancho que desees
+                       int altoDeseado = 150;  // Reemplaza esto con el alto que desees
+
+                    //Escala la imagen a las dimensiones deseadas
+                        Image imagen = img.getScaledInstance(anchoDeseado, altoDeseado, Image.SCALE_SMOOTH);
+
+                  //// Establece la imagen escalada en el componente mostrar.txtimagen
+                       mostrar.imagen3.setIcon(new ImageIcon(imagen));
+                        
+                       } else
+                       {
+                            ImageIcon imagenIcon;
+                           // Cargar una imagen predeterminada si no se encuentra la imagen en la base de datos
+                            imagenIcon = new ImageIcon(getClass().getResource("/img/descarga.png"));
+                           mostrar.imagen3.setIcon(imagenIcon);
+                        }
+                        
+
+                mostrar.setSize(1024, 640);
+                mostrar.setLocation(0, 0);
+
+                panelprincipal.revalidate();
+                panelprincipal.repaint();
+                panelprincipal.removeAll();
+                panelprincipal.add(mostrar, BorderLayout.CENTER);
+
+                panelprincipal.revalidate();
+                panelprincipal.repaint();
+
+                break; // Salir del bucle después de encontrar el elemento seleccionado
+
+            }
+
+            rs.close();
+            ps.close();
+            conn.close();
+
+        } catch (SQLException e)
+        {
+            e.printStackTrace();
+            // Manejar cualquier excepción que pueda ocurrir durante la consulta a la base de datos
+        } catch (IOException ex) {
+            Logger.getLogger(Listado_Pedidos_Pendientes.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }//GEN-LAST:event_verbtnActionPerformed
 
@@ -582,6 +615,17 @@ try {
         }
          */
     }//GEN-LAST:event_editarbtnActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        Listado_pedido_entregado p2 = new Listado_pedido_entregado();
+        p2.setSize(1024, 640);
+        p2.setLocation(0, 0);
+
+        panelprincipal.removeAll();
+        panelprincipal.add(p2, BorderLayout.CENTER);
+        panelprincipal.revalidate();
+        panelprincipal.repaint();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     int paginaActual = 1; // Página actual
     int filasPorPagina = 20; // Número de filas a mostrar por página
@@ -765,6 +809,7 @@ try {
     private javax.swing.JButton btnSiguiente;
     private javax.swing.JButton crearbtn;
     private javax.swing.JButton editarbtn;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;

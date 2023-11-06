@@ -73,6 +73,7 @@ public class Listado_Sublimacion extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         crearbtn = new javax.swing.JButton();
         editarbtn = new javax.swing.JButton();
@@ -95,6 +96,15 @@ public class Listado_Sublimacion extends javax.swing.JPanel {
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel2.setText("Listado de pedidos pendientes de sublimación");
 
+        jButton2.setBackground(new java.awt.Color(255, 153, 51));
+        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jButton2.setText("Listado de pedidos entregados");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -102,13 +112,17 @@ public class Listado_Sublimacion extends javax.swing.JPanel {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addComponent(jLabel2)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton2)
+                .addGap(26, 26, 26))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(25, 25, 25)
-                .addComponent(jLabel2)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jButton2))
                 .addContainerGap(28, Short.MAX_VALUE))
         );
 
@@ -276,7 +290,7 @@ public class Listado_Sublimacion extends javax.swing.JPanel {
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 187, Short.MAX_VALUE))
+                        .addGap(0, 184, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(122, 122, 122)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -357,12 +371,12 @@ public class Listado_Sublimacion extends javax.swing.JPanel {
 
     private void crearbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearbtnActionPerformed
 
-        Crear_Pedido_Sublimacion p8 = new Crear_Pedido_Sublimacion();
-        p8.setSize(1024, 640);
-        p8.setLocation(0, 0);
+        Crear_Pedido_Sublimacion p5 = new Crear_Pedido_Sublimacion();
+        p5.setSize(1024, 640);
+        p5.setLocation(0, 0);
 
         panelprincipal.removeAll();
-        panelprincipal.add(p8, BorderLayout.CENTER);
+        panelprincipal.add(p5, BorderLayout.CENTER);
         panelprincipal.revalidate();
         panelprincipal.repaint();
     }//GEN-LAST:event_crearbtnActionPerformed
@@ -406,14 +420,12 @@ public class Listado_Sublimacion extends javax.swing.JPanel {
 //                ver.txtMotivo.setText(rs.getString("motivo"));
                 mostrar.txtCliente.setText(nombre + " " + apellido);
                 mostrar.txtdiseño.setText(rs.getString("material"));
-                mostrar.txtcantidad.setText(rs.getString("cantidad"));
+                mostrar.txtdiseño.setText(rs.getString("cantidad"));
                 mostrar.txtdescripcion.setText(rs.getString("descripcion"));
                 mostrar.txtPrecio.setText(rs.getString("precio"));
-               
+                mostrar.txtcantidad.setText(rs.getString("cantidad"));
                  mostrar.txtTelefono.setText(rs.getString("numero_telefono"));
                  mostrar.txtestado.setText(rs.getString("estado"));
-                  mostrar.txtfecha.setText(rs.getString("fechaPedido"));
-                 
 //                ver.id_cliente.setText(rs.getString("id"));
 
                   Blob fotos = rs.getBlob("imagen1");
@@ -482,6 +494,17 @@ public class Listado_Sublimacion extends javax.swing.JPanel {
     private void editarbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarbtnActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_editarbtnActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        Listado_pedido_entregado p2 = new Listado_pedido_entregado();
+        p2.setSize(1024, 640);
+        p2.setLocation(0, 0);
+
+        panelprincipal.removeAll();
+        panelprincipal.add(p2, BorderLayout.CENTER);
+        panelprincipal.revalidate();
+        panelprincipal.repaint();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     int paginaActual = 1; // Página actual
     int filasPorPagina = 20; // Número de filas a mostrar por página
@@ -684,6 +707,7 @@ public class Listado_Sublimacion extends javax.swing.JPanel {
     private javax.swing.JButton btnSiguiente;
     private javax.swing.JButton crearbtn;
     private javax.swing.JButton editarbtn;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
