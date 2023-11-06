@@ -660,7 +660,7 @@ public class Listado_Sublimacion extends javax.swing.JPanel {
         try {
             Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
             if (conn != null && !conn.isClosed()) {
-                PreparedStatement ps = conn.prepareStatement("SELECT ROW_NUMBER() OVER(ORDER BY E.nombre) AS NumRegistro, E.nombre, E.apellido, V.estado, V.material, V.fechaPedido "
+                PreparedStatement ps = conn.prepareStatement("SELECT ROW_NUMBER() OVER(ORDER BY E.nombre) AS NumRegistro, E.nombre, E.apellido, V.estado, V.material, V.fechaPedido ,V.id_sublimacion "
                         + "FROM Cliente E "
                         + "JOIN PedidoSublimacion V ON E.id_cliente = V.id_cliente "
                         + "WHERE E.nombre LIKE ? OR E.apellido LIKE ? OR V.fechaPedido LIKE ? "
@@ -696,10 +696,11 @@ public class Listado_Sublimacion extends javax.swing.JPanel {
                         String numeroTelefono = rs.getString("estado");
                         String material = rs.getString("material");
                         String fechaCi = rs.getString("fechaPedido");
+                        String id = rs.getString("id_sublimacion");
 
                         if (nombre != null && apellido != null && numeroTelefono != null) {
                             modelTabla.addRow(new Object[]{
-                                numRegistro, nombre, apellido, numeroTelefono, material, fechaCi
+                                numRegistro, nombre, apellido, numeroTelefono, material, fechaCi, id
                             });
                             foundData = true;
                         }

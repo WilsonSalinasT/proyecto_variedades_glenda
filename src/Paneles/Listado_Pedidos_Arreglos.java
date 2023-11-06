@@ -180,15 +180,13 @@ public class Listado_Pedidos_Arreglos extends javax.swing.JPanel {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(crearbtn1, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)
-                            .addComponent(editarbtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)
-                            .addComponent(verbtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE))
-                .addContainerGap())
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(crearbtn1, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)
+                        .addComponent(editarbtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)
+                        .addComponent(verbtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -200,8 +198,8 @@ public class Listado_Pedidos_Arreglos extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addComponent(verbtn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
-                .addGap(49, 49, 49))
+                .addComponent(jButton2)
+                .addContainerGap(53, Short.MAX_VALUE))
         );
 
         Texto_Buscar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -720,7 +718,7 @@ public class Listado_Pedidos_Arreglos extends javax.swing.JPanel {
 
                 // Modificar la consulta SQL para buscar por nombre o fecha
                 if (!texto.isEmpty()) {
-                    ps = conn.prepareStatement("SELECT ROW_NUMBER() OVER(ORDER BY E.nombre) AS NumRegistro, E.nombre, E.apellido, E.numero_telefono, V.arreglo, V.fechaPedido "
+                    ps = conn.prepareStatement("SELECT ROW_NUMBER() OVER(ORDER BY E.nombre) AS NumRegistro, E.nombre, E.apellido, E.numero_telefono, V.arreglo, V.fechaPedido, V.id_arreglo "
                             + "FROM Cliente E "
                             + "JOIN PedidoArreglo V ON E.id_cliente = V.id_cliente "
                             + "WHERE E.nombre LIKE ? OR E.apellido LIKE ? OR V.fechaPedido LIKE ? "
@@ -734,7 +732,7 @@ public class Listado_Pedidos_Arreglos extends javax.swing.JPanel {
                     ps.setInt(5, 10); // Cambia la cantidad de registros a recuperar según tus requerimientos
                     terminoBusqueda = texto; // Actualizar el término de búsqueda
                 } else {
-                    ps = conn.prepareStatement("SELECT ROW_NUMBER() OVER(ORDER BY E.nombre) AS NumRegistro, E.nombre, E.apellido, E.numero_telefono, V.arreglo, V.fechaPedido "
+                    ps = conn.prepareStatement("SELECT ROW_NUMBER() OVER(ORDER BY E.nombre) AS NumRegistro, E.nombre, E.apellido, E.numero_telefono, V.arreglo, V.fechaPedido , V.id_arreglo "
                             + "FROM Cliente E "
                             + "JOIN PedidoArreglo V ON E.id_cliente = V.id_cliente "
                             + "ORDER BY E.nombre "
@@ -755,10 +753,11 @@ public class Listado_Pedidos_Arreglos extends javax.swing.JPanel {
                         String numeroTelefono = rs.getString("numero_telefono");
                         String arreglo = rs.getString("arreglo");
                         String fechaPedido = rs.getString("fechaPedido");
+                        String id = rs.getString("id_arreglo");
 
                         if (nombre != null && apellido != null && numeroTelefono != null) {
                             modelTabla.addRow(new Object[]{
-                                numRegistro, nombre, apellido, numeroTelefono, arreglo, fechaPedido
+                                numRegistro, nombre, apellido, numeroTelefono, arreglo, fechaPedido, id
                             });
                             foundData = true;
                         }
