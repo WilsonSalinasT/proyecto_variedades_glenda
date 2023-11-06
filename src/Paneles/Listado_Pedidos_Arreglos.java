@@ -43,7 +43,7 @@ public class Listado_Pedidos_Arreglos extends javax.swing.JPanel {
      */
     public Listado_Pedidos_Arreglos() {
         initComponents();
-     
+
         cargarTabla();
 
         holder = new TextPrompt("Busque por nombre/apellido del cliente/fecha de entrega", txtBuscar);
@@ -349,18 +349,16 @@ public class Listado_Pedidos_Arreglos extends javax.swing.JPanel {
         siguientePagina();
     }//GEN-LAST:event_btnSiguienteActionPerformed
     int selectedRow1;
-    
+
     private void verbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verbtnActionPerformed
-                                       
-    selectedRow1 = tblPedidosA.getSelectedRow();
-        if (selectedRow1 == -1)
-        {
+
+        selectedRow1 = tblPedidosA.getSelectedRow();
+        if (selectedRow1 == -1) {
             JOptionPane.showMessageDialog(null, "Seleccione un pedido para poder visualizarlo");
             return;
         }
 
-        try
-        {
+        try {
 
             int fila = tblPedidosA.getSelectedRow();
             String valorCelda = tblPedidosA.getValueAt(fila, 1).toString();
@@ -370,14 +368,13 @@ public class Listado_Pedidos_Arreglos extends javax.swing.JPanel {
             ResultSet rs;
 
             Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
-            ps = conn.prepareStatement("SELECT * FROM Cliente JOIN PedidoArreglo ON Cliente.id_cliente = PedidoArreglo.id_cliente WHERE nombre=? and apellido=? and arreglo=?" );
+            ps = conn.prepareStatement("SELECT * FROM Cliente JOIN PedidoArreglo ON Cliente.id_cliente = PedidoArreglo.id_cliente WHERE nombre=? and apellido=? and arreglo=?");
             ps.setString(1, valorCelda);
             ps.setString(2, valorCelda2);
             ps.setString(3, valorCelda3);
             rs = ps.executeQuery();
 
-            while (rs.next())
-            {
+            while (rs.next()) {
 
                 String arregloA = rs.getString("arreglo");
                 String estadoA = rs.getString("estado");
@@ -391,21 +388,37 @@ public class Listado_Pedidos_Arreglos extends javax.swing.JPanel {
                 ver.txtestado.setText(estadoA);
                 ver.txtDescripcionA.setText(descripcionA);
                 ver.txtprecio.setText(precioA);
-                
-                //Recuperar la imagen de la base de datos
+
+                // Recuperar la imagen de la base de datos
                 byte[] imagenA1 = rs.getBytes("imagen1");
                 byte[] imagenA2 = rs.getBytes("imagen2");
                 byte[] imagenA3 = rs.getBytes("imagen3");
-                
-                //Crear un objeto ImageIcon a partir de los bytes de la imagen
-                ImageIcon imagenIcono = new ImageIcon(imagenA1);
-                ImageIcon imagenIcon2 = new ImageIcon(imagenA2);
-                ImageIcon imagenIcon3 = new ImageIcon(imagenA3);
-         
-                //Establecer el ImageIcon en el JLabel
-                ver.imagen1.setIcon(imagenIcono);
-                ver.imagen2.setIcon(imagenIcon2);
-                ver.imagen3.setIcon(imagenIcon3);
+
+// Comprobar si los arreglos de bytes de imagen no son nulos
+                if (imagenA1 != null) {
+                    // Crear un objeto ImageIcon a partir de los bytes de la imagen
+                    ImageIcon imagenIcono = new ImageIcon(imagenA1);
+                    // Establecer el ImageIcon en el JLabel
+                    ver.imagen1.setIcon(imagenIcono);
+                } else {
+                    // Si el arreglo de bytes de imagen es nulo, puedes mostrar un mensaje o establecer un valor predeterminado.
+                    ver.imagen1.setIcon(null); // O establecer un icono predeterminado
+                }
+
+                if (imagenA2 != null) {
+                    ImageIcon imagenIcon2 = new ImageIcon(imagenA2);
+                    ver.imagen2.setIcon(imagenIcon2);
+                } else {
+                    ver.imagen2.setIcon(null);
+                }
+
+                if (imagenA3 != null) {
+                    ImageIcon imagenIcon3 = new ImageIcon(imagenA3);
+                    ver.imagen3.setIcon(imagenIcon3);
+                } else {
+                    ver.imagen3.setIcon(null);
+                }
+
                 ver.fechaP.setText(fechapedido);
 
                 ver.setSize(1024, 640);
@@ -427,14 +440,10 @@ public class Listado_Pedidos_Arreglos extends javax.swing.JPanel {
             ps.close();
             conn.close();
 
-        } catch (SQLException e)
-        {
+        } catch (SQLException e) {
             e.printStackTrace();
             // Manejar cualquier excepción que pueda ocurrir durante la consulta a la base de datos
         }
-
-
-
 
     }//GEN-LAST:event_verbtnActionPerformed
 
@@ -509,7 +518,7 @@ public class Listado_Pedidos_Arreglos extends javax.swing.JPanel {
 
     private void crearbtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearbtn1ActionPerformed
         // TODO add your handling code here:
-        
+
         Crear_Pedido_arreglo p2 = new Crear_Pedido_arreglo();
         p2.setSize(1024, 640);
         p2.setLocation(0, 0);
@@ -559,10 +568,10 @@ public class Listado_Pedidos_Arreglos extends javax.swing.JPanel {
             }
 
             // Consulta principal con paginación y JOIN entre las tablas
-            ps = conn.prepareStatement("SELECT ROW_NUMBER() OVER(ORDER BY PS.id_pedido) AS NumRegistro, C.nombre, C.apellido, C.numero_telefono, PS.arreglo, PS.fechaPedido "
+            ps = conn.prepareStatement("SELECT ROW_NUMBER() OVER(ORDER BY PS.id_arreglo) AS NumRegistro, C.nombre, C.apellido, C.numero_telefono, PS.arreglo, PS.fechaPedido "
                     + "FROM Cliente C "
                     + "JOIN PedidoArreglo PS ON C.id_cliente = PS.id_cliente "
-                    + "ORDER BY PS.id_pedido OFFSET ? ROWS FETCH NEXT ? ROWS ONLY");
+                    + "ORDER BY PS.id_arreglo OFFSET ? ROWS FETCH NEXT ? ROWS ONLY");
             ps.setInt(1, offset);
             ps.setInt(2, filasPorPagina);
             rs = ps.executeQuery();
