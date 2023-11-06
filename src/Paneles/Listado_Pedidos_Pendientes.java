@@ -423,27 +423,48 @@ public class Listado_Pedidos_Pendientes extends javax.swing.JPanel {
 //                ver.cbxHoras.setText(rs.getString("hora_cita"));
 //                ver.txtMotivo.setText(rs.getString("motivo"));
                 mostrar.txtCliente1.setText(nombre + " " + apellido);
+                mostrar.txtCliente1.setEditable(false);
                 mostrar.txtTel.setText(rs.getString("numero_telefono"));
+                mostrar.txtTel.setEditable(false);
                 mostrar.cbxPrenda1.setText(rs.getString("Prenda"));
+                mostrar.cbxPrenda1.setEnabled(false);
                 mostrar.cbxEstado.setText(rs.getString("estado"));
+                mostrar.cbxEstado.setEnabled(false);
                 mostrar.txtCintura.setText(rs.getString("cintura"));
+                mostrar.txtCintura.setEditable(false);
                 mostrar.txtCadera.setText(rs.getString("cadera"));
+                mostrar.txtCadera.setEditable(false);
                 mostrar.txtLargo.setText(rs.getString("largo"));
+                mostrar.txtLargo.setEditable(false);
                 mostrar.txtLManga.setText(rs.getString("largoManga"));
+                mostrar.txtLManga.setEditable(false);
                 mostrar.txtAManga.setText(rs.getString("anchoManga"));
+                mostrar.txtAManga.setEditable(false);
                 mostrar.txtCuello.setText(rs.getString("cuello"));
+                mostrar.txtCuello.setEditable(false);
                 mostrar.txtPecho.setText(rs.getString("pecho"));
+                mostrar.txtPecho.setEditable(false);
                 mostrar.txtMuneca.setText(rs.getString("cintura"));
+                mostrar.txtMuneca.setEditable(false);
                 mostrar.txtHombro.setText(rs.getString("hombro"));
+                mostrar.txtHombro.setEditable(false);
                 mostrar.txtAEspalda.setText(rs.getString("anchoEsp"));
+                mostrar.txtAEspalda.setEditable(false);
                 mostrar.txtLEspalda.setText(rs.getString("largoEsp"));
+                mostrar.txtLEspalda.setEditable(false);
                 mostrar.txtRodilla.setText(rs.getString("rodilla"));
+                mostrar.txtRodilla.setEditable(false);
                 mostrar.txtTobillo.setText(rs.getString("tobillo"));
+                mostrar.txtTobillo.setEditable(false);
                 mostrar.txtTiro.setText(rs.getString("tiro"));
+                mostrar.txtTiro.setEditable(false);
                 mostrar.txtMuslo.setText(rs.getString("muslo"));
+                mostrar.txtMuslo.setEditable(false);
                 mostrar.txtDescrip.setText(rs.getString("descripcion"));
+                mostrar.txtDescrip.setEditable(false);
                 mostrar.txtprecio.setText(rs.getString("precio"));
-             
+                mostrar.txtprecio.setEditable(false);
+
 
 
                   Blob fotos = rs.getBlob("imagen1");
@@ -472,9 +493,9 @@ public class Listado_Pedidos_Pendientes extends javax.swing.JPanel {
 
                        Blob fotos1 = rs.getBlob("imagen2");
                     
-                       if (fotos != null)
+                       if (fotos1 != null)
                        {
-                           byte[] recuperar = fotos.getBytes(1, (int) fotos.length());
+                           byte[] recuperar = fotos1.getBytes(1, (int) fotos1.length());
                        BufferedImage img = ImageIO.read(new ByteArrayInputStream(recuperar));
                     //Define las dimensiones deseadas para la imagen
                        int anchoDeseado = 200; // Reemplaza esto con el ancho que desees
@@ -495,9 +516,9 @@ public class Listado_Pedidos_Pendientes extends javax.swing.JPanel {
                         }
                        Blob fotos2 = rs.getBlob("imagen3");
                     
-                       if (fotos != null)
+                       if (fotos2 != null)
                        {
-                           byte[] recuperar = fotos.getBytes(1, (int) fotos.length());
+                           byte[] recuperar = fotos2.getBytes(1, (int) fotos2.length());
                        BufferedImage img = ImageIO.read(new ByteArrayInputStream(recuperar));
                     //Define las dimensiones deseadas para la imagen
                        int anchoDeseado = 200; // Reemplaza esto con el ancho que desees
@@ -517,6 +538,7 @@ public class Listado_Pedidos_Pendientes extends javax.swing.JPanel {
                            mostrar.imagen3.setIcon(imagenIcon);
                         }
                         
+
 
                 mostrar.setSize(1024, 640);
                 mostrar.setLocation(0, 0);

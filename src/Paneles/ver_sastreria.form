@@ -22,7 +22,7 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <Component id="jPanel4" min="-2" max="-2" attributes="0"/>
+              <Component id="jPanel4" min="-2" pref="599" max="-2" attributes="0"/>
               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -48,9 +48,10 @@
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
+              <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="32767" attributes="0"/>
-                  <Component id="jScrollPane3" min="-2" pref="599" max="-2" attributes="0"/>
+                  <Component id="jScrollPane3" min="-2" pref="596" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="651" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -230,7 +231,7 @@
                               <Component id="txtTiro" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="txtMuslo" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" max="-2" attributes="0"/>
                           <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
                           <EmptySpace pref="102" max="32767" attributes="0"/>
                           <Component id="jScrollPane2" min="-2" max="-2" attributes="0"/>
@@ -373,6 +374,7 @@
                 </Container>
                 <Component class="javax.swing.JTextField" name="txtprecio">
                   <Properties>
+                    <Property name="horizontalAlignment" type="int" value="0"/>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                         <TitledBorder justification="2" position="2" title="Precio">
@@ -538,6 +540,7 @@
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtAManga">
                   <Properties>
+                    <Property name="horizontalAlignment" type="int" value="0"/>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                         <TitledBorder justification="2" position="2" title="Ancho de Manga"/>
@@ -557,6 +560,7 @@
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtCuello">
                   <Properties>
+                    <Property name="horizontalAlignment" type="int" value="0"/>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                         <TitledBorder justification="2" position="2" title="Cuello"/>
@@ -573,6 +577,7 @@
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtPecho">
                   <Properties>
+                    <Property name="horizontalAlignment" type="int" value="0"/>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                         <TitledBorder justification="2" position="2" title="Pecho"/>
@@ -590,6 +595,7 @@
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtMuneca">
                   <Properties>
+                    <Property name="horizontalAlignment" type="int" value="0"/>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                         <TitledBorder justification="2" position="2" title="Mu&#xf1;eca"/>
@@ -607,6 +613,7 @@
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtHombro">
                   <Properties>
+                    <Property name="horizontalAlignment" type="int" value="0"/>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                         <TitledBorder justification="2" position="2" title="Hombro"/>
@@ -623,6 +630,7 @@
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtAEspalda">
                   <Properties>
+                    <Property name="horizontalAlignment" type="int" value="0"/>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                         <TitledBorder justification="2" position="2" title="Ancho de Espalda"/>
@@ -639,6 +647,7 @@
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtLEspalda">
                   <Properties>
+                    <Property name="horizontalAlignment" type="int" value="0"/>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                         <TitledBorder justification="2" position="2" title="Largo de Espalda"/>
@@ -656,6 +665,7 @@
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtRodilla">
                   <Properties>
+                    <Property name="horizontalAlignment" type="int" value="0"/>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                         <TitledBorder justification="2" position="2" title="Rodilla"/>
@@ -673,6 +683,7 @@
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtTobillo">
                   <Properties>
+                    <Property name="horizontalAlignment" type="int" value="0"/>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                         <TitledBorder justification="2" position="2" title="Tobillo"/>
@@ -689,6 +700,7 @@
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtTiro">
                   <Properties>
+                    <Property name="horizontalAlignment" type="int" value="0"/>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                         <TitledBorder justification="2" position="2" title="Tiro"/>
@@ -706,6 +718,7 @@
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtMuslo">
                   <Properties>
+                    <Property name="horizontalAlignment" type="int" value="0"/>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                         <TitledBorder justification="2" position="2" title="Muslo"/>

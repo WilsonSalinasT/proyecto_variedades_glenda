@@ -166,6 +166,7 @@ public class ver_sastreria extends javax.swing.JPanel {
         });
         jScrollPane2.setViewportView(txtDescrip);
 
+        txtprecio.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtprecio.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Precio", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12))); // NOI18N
         txtprecio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -254,6 +255,7 @@ public class ver_sastreria extends javax.swing.JPanel {
             }
         });
 
+        txtAManga.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtAManga.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Ancho de Manga", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP));
         txtAManga.setMinimumSize(new java.awt.Dimension(25, 45));
         txtAManga.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -262,6 +264,7 @@ public class ver_sastreria extends javax.swing.JPanel {
             }
         });
 
+        txtCuello.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtCuello.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cuello", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP));
         txtCuello.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -269,6 +272,7 @@ public class ver_sastreria extends javax.swing.JPanel {
             }
         });
 
+        txtPecho.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtPecho.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Pecho", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP));
         txtPecho.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -281,6 +285,7 @@ public class ver_sastreria extends javax.swing.JPanel {
             }
         });
 
+        txtMuneca.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtMuneca.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Muñeca", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP));
         txtMuneca.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -293,6 +298,7 @@ public class ver_sastreria extends javax.swing.JPanel {
             }
         });
 
+        txtHombro.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtHombro.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Hombro", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP));
         txtHombro.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -300,6 +306,7 @@ public class ver_sastreria extends javax.swing.JPanel {
             }
         });
 
+        txtAEspalda.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtAEspalda.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Ancho de Espalda", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP));
         txtAEspalda.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -307,6 +314,7 @@ public class ver_sastreria extends javax.swing.JPanel {
             }
         });
 
+        txtLEspalda.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtLEspalda.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Largo de Espalda", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP));
         txtLEspalda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -319,6 +327,7 @@ public class ver_sastreria extends javax.swing.JPanel {
             }
         });
 
+        txtRodilla.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtRodilla.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Rodilla", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP));
         txtRodilla.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -331,6 +340,7 @@ public class ver_sastreria extends javax.swing.JPanel {
             }
         });
 
+        txtTobillo.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtTobillo.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tobillo", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP));
         txtTobillo.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -338,6 +348,7 @@ public class ver_sastreria extends javax.swing.JPanel {
             }
         });
 
+        txtTiro.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtTiro.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tiro", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP));
         txtTiro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -350,6 +361,7 @@ public class ver_sastreria extends javax.swing.JPanel {
             }
         });
 
+        txtMuslo.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtMuslo.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Muslo", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP));
         txtMuslo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -495,7 +507,7 @@ public class ver_sastreria extends javax.swing.JPanel {
                     .addComponent(txtTobillo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtTiro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtMuslo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(38, 38, 38)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 102, Short.MAX_VALUE)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -535,9 +547,10 @@ public class ver_sastreria extends javax.swing.JPanel {
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 599, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 596, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(651, 651, 651))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -549,7 +562,7 @@ public class ver_sastreria extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 599, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
