@@ -25,6 +25,13 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 import com.toedter.calendar.JDateChooser;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.sql.Blob;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -334,7 +341,6 @@ public class Listado_Sublimacion extends javax.swing.JPanel {
 
         // Limpiar el campo de búsqueda
         txtBuscar.setText("");
-      
 
         // Cargar la tabla con los datos actualizados
         cargarTablaEmpleados();
@@ -360,7 +366,7 @@ public class Listado_Sublimacion extends javax.swing.JPanel {
         panelprincipal.revalidate();
         panelprincipal.repaint();
     }//GEN-LAST:event_crearbtnActionPerformed
-    
+
     int selectedRow1;
     private void verbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verbtnActionPerformed
 // TODO add your handling code here:
@@ -399,7 +405,45 @@ public class Listado_Sublimacion extends javax.swing.JPanel {
 //                ver.cbxHoras.setText(rs.getString("hora_cita"));
 //                ver.txtMotivo.setText(rs.getString("motivo"));
                 mostrar.txtCliente.setText(nombre + " " + apellido);
+                mostrar.txtdiseño.setText(rs.getString("material"));
+                mostrar.txtdiseño.setText(rs.getString("cantidad"));
+                mostrar.txtdescripcion.setText(rs.getString("descripcion"));
+                mostrar.txtPrecio.setText(rs.getString("precio"));
+                mostrar.txtcantidad.setText(rs.getString("cantidad"));
+                 mostrar.txtTelefono.setText(rs.getString("numero_telefono"));
+                 mostrar.txtestado.setText(rs.getString("estado"));
 //                ver.id_cliente.setText(rs.getString("id"));
+
+                  Blob fotos = rs.getBlob("imagen1");
+                       
+
+                         if (fotos != null)
+                        {
+                             byte[] recuperar = fotos.getBytes(1, (int) fotos.length());
+                        BufferedImage img = ImageIO.read(new ByteArrayInputStream(recuperar));
+
+// Define las dimensiones deseadas para la imagen
+                        int anchoDeseado = 200; // Reemplaza esto con el ancho que desees
+                        int altoDeseado = 150;  // Reemplaza esto con el alto que desees
+
+// Escala la imagen a las dimensiones deseadas
+                        Image imagen = img.getScaledInstance(anchoDeseado, altoDeseado, Image.SCALE_SMOOTH);
+
+// Establece la imagen escalada en el componente mostrar.txtimagen
+                        mostrar.lblimagen.setIcon(new ImageIcon(imagen));
+
+                       
+                          
+                        
+                        } else
+                        {
+                             ImageIcon imagenIcon;
+                            // Cargar una imagen predeterminada si no se encuentra la imagen en la base de datos
+                             imagenIcon = new ImageIcon(getClass().getResource("/img/agregar.png"));
+                            mostrar.lblimagen.setIcon(imagenIcon);
+                        }
+
+                       
 
                 mostrar.setSize(1024, 640);
                 mostrar.setLocation(0, 0);
@@ -424,14 +468,17 @@ public class Listado_Sublimacion extends javax.swing.JPanel {
         {
             e.printStackTrace();
             // Manejar cualquier excepción que pueda ocurrir durante la consulta a la base de datos
+        } catch (IOException ex)
+        {
+            Logger.getLogger(Listado_Sublimacion.class.getName()).log(Level.SEVERE, null, ex);
         }
-      
-        
+
+
     }//GEN-LAST:event_verbtnActionPerformed
 
     int selectedRow2;
     private void editarbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarbtnActionPerformed
-    // TODO add your handling code here:
+        // TODO add your handling code here:
     }//GEN-LAST:event_editarbtnActionPerformed
 
     int paginaActual = 1; // Página actual
@@ -530,8 +577,6 @@ public class Listado_Sublimacion extends javax.swing.JPanel {
         }
 
     }
-    
-    
 
     private void ajustarTabla(int filasDeseadas) {
         tblsublimacion.setPreferredScrollableViewportSize(new Dimension(tblsublimacion.getPreferredSize().width, tblsublimacion.getRowHeight() * filasDeseadas));
