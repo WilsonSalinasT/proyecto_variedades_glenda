@@ -245,7 +245,6 @@ public class ver_sastreria extends javax.swing.JPanel {
             }
         });
 
-        txtLManga.setForeground(new java.awt.Color(0, 0, 0));
         txtLManga.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtLManga.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Largo de Manga", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP));
         txtLManga.setPreferredSize(new java.awt.Dimension(25, 45));
@@ -374,15 +373,18 @@ public class ver_sastreria extends javax.swing.JPanel {
             }
         });
 
+        txtTel.setEditable(false);
         txtTel.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtTel.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), "Telefono", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12))); // NOI18N
 
         txtCliente1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtCliente1.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), "Nombre del cliente", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12))); // NOI18N
 
+        cbxEstado.setEditable(false);
         cbxEstado.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         cbxEstado.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), "Estado del Pedido", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12))); // NOI18N
 
+        cbxPrenda1.setEditable(false);
         cbxPrenda1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         cbxPrenda1.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), "Prenda", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12))); // NOI18N
 
@@ -533,6 +535,9 @@ public class ver_sastreria extends javax.swing.JPanel {
         txtTiro.setVisible(true);
         txtMuslo.setVisible(true);
         fechaP.setVisible(false);
+        txtTel.setEnabled(false);
+        cbxEstado.setEnabled(true);
+        cbxPrenda1.setEnabled(true);
 
         jScrollPane3.setViewportView(jPanel1);
 

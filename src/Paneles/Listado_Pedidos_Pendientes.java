@@ -489,7 +489,7 @@ public class Listado_Pedidos_Pendientes extends javax.swing.JPanel {
 
 
 
-                  Blob fotos = rs.getBlob("imagen1");
+                 /* Blob fotos = rs.getBlob("imagen1");
                     
                        if (fotos != null)
                        {
@@ -560,7 +560,38 @@ public class Listado_Pedidos_Pendientes extends javax.swing.JPanel {
                            mostrar.imagen3.setIcon(imagenIcon);
                         }
                         
+*/
+                 
+                 //Recuperar la imagen de la base de datos
+                byte[] imagenA1 = rs.getBytes("imagen1");
+                byte[] imagenA2 = rs.getBytes("imagen2");
+                byte[] imagenA3 = rs.getBytes("imagen3");
+                
+                // Comprobar si los arreglos de bytes de imagen no son nulos
+                if (imagenA1 != null) {
+                // Crear un objeto ImageIcon a partir de los bytes de la imagen
+                ImageIcon imagenIcono = new ImageIcon(imagenA1);
+                // Establecer el ImageIcon en el JLabel
+                 mostrar.imagen1.setIcon(imagenIcono);
+                } else {
+                // Si el arreglo de bytes de imagen es nulo, puedes mostrar un mensaje o establecer un valor predeterminado.
+                mostrar.imagen1.setIcon(null); // O establecer un icono predeterminado
+                }
 
+                if (imagenA2 != null) {
+                ImageIcon imagenIcon2 = new ImageIcon(imagenA2);
+                mostrar.imagen2.setIcon(imagenIcon2);
+                } else {
+                mostrar.imagen2.setIcon(null);
+                }
+
+                if (imagenA3 != null) {
+                ImageIcon imagenIcon3 = new ImageIcon(imagenA3);
+                mostrar.imagen3.setIcon(imagenIcon3);
+                } else {
+                mostrar.imagen3.setIcon(null);
+                }
+                
 
                 mostrar.setSize(1024, 640);
                 mostrar.setLocation(0, 0);
@@ -585,8 +616,6 @@ public class Listado_Pedidos_Pendientes extends javax.swing.JPanel {
         {
             e.printStackTrace();
             // Manejar cualquier excepción que pueda ocurrir durante la consulta a la base de datos
-        } catch (IOException ex) {
-            Logger.getLogger(Listado_Pedidos_Pendientes.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }//GEN-LAST:event_verbtnActionPerformed
