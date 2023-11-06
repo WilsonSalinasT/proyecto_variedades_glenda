@@ -32,6 +32,7 @@ import java.io.IOException;
 import java.sql.Blob;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.table.TableColumn;
 
 /**
  *
@@ -60,6 +61,14 @@ public class Listado_Pedidos_Pendientes extends javax.swing.JPanel {
 
         tblPedidos.setRowSelectionAllowed(true);
         tblPedidos.setColumnSelectionAllowed(false);
+        
+        int columnIndexToHide = 6;
+        TableColumn column = tblPedidos.getColumnModel().getColumn(columnIndexToHide);
+
+        column.setMinWidth(0);
+        column.setMaxWidth(0);
+        column.setPreferredWidth(0);
+        column.setResizable(false);
     }
 
     /**
@@ -79,6 +88,7 @@ public class Listado_Pedidos_Pendientes extends javax.swing.JPanel {
         crearbtn = new javax.swing.JButton();
         editarbtn = new javax.swing.JButton();
         verbtn = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
         Texto_Buscar = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblPedidos = new javax.swing.JTable();
@@ -159,28 +169,41 @@ public class Listado_Pedidos_Pendientes extends javax.swing.JPanel {
             }
         });
 
+        jButton2.setBackground(new java.awt.Color(255, 153, 51));
+        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButton2.setText("ELIMINAR");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(crearbtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(editarbtn, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)
-                    .addComponent(verbtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(crearbtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(editarbtn, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)
+                        .addComponent(verbtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap(49, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(99, 99, 99)
+                .addGap(62, 62, 62)
                 .addComponent(crearbtn)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(editarbtn)
                 .addGap(18, 18, 18)
                 .addComponent(verbtn)
-                .addContainerGap(64, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton2)
+                .addContainerGap(69, Short.MAX_VALUE))
         );
 
         Texto_Buscar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -191,11 +214,11 @@ public class Listado_Pedidos_Pendientes extends javax.swing.JPanel {
 
             },
             new String [] {
-                "N°", "Nombre del cliente", "Apellido del cliente", "Celular", "Producto", "Fecha de Pedido"
+                "N°", "Nombre del cliente", "Apellido del cliente", "Celular", "Producto", "Fecha de Pedido", "id_sastreria"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false, false, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -649,6 +672,38 @@ public class Listado_Pedidos_Pendientes extends javax.swing.JPanel {
         panelprincipal.repaint();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        int selectedRow = tblPedidos.getSelectedRow();
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(null, "Por favor, selecciona un registro para eliminar.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+        } else {
+            Object[] options = {"Sí, eliminar", "No, cancelar"};
+            int choice = JOptionPane.showOptionDialog(null, "¿Estás seguro de que deseas eliminar este registro?", "Confirmación",
+                JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]);
+
+            if (choice == 0) {
+                Number id_sublimacion = (Number) tblPedidos.getValueAt(selectedRow, 6); // Obtén el ID del registro seleccionado
+
+                try {
+                    Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
+
+                    String sql = "DELETE FROM PedidoSastreria WHERE id_sastreria = ?";
+                    PreparedStatement pstmt = conn.prepareStatement(sql);
+                    pstmt.setInt(1, id_sublimacion.intValue()); // Utiliza el ID del registro seleccionado
+                    pstmt.executeUpdate();
+                    JOptionPane.showMessageDialog(null, "Registro eliminado con éxito");
+
+                    // Lógica para actualizar la tabla después de la eliminación
+                    cargarTabla();
+
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                    JOptionPane.showMessageDialog(null, "Error al eliminar el registro: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     int paginaActual = 1; // Página actual
     int filasPorPagina = 20; // Número de filas a mostrar por página
     int totalFilas = 0; // Total de filas en la tabla
@@ -688,7 +743,7 @@ public class Listado_Pedidos_Pendientes extends javax.swing.JPanel {
             }
 
             // Consulta principal con paginación y JOIN entre las tablas
-            ps = conn.prepareStatement("SELECT ROW_NUMBER() OVER(ORDER BY PS.id_sastreria) AS NumRegistro, C.nombre, C.apellido, C.numero_telefono, PS.prenda, PS.fechaPedido "
+            ps = conn.prepareStatement("SELECT ROW_NUMBER() OVER(ORDER BY PS.id_sastreria) AS NumRegistro, C.nombre, C.apellido, C.numero_telefono, PS.prenda, PS.fechaPedido ,PS.id_sastreria "
                     + "FROM Cliente C "
                     + "JOIN PedidoSastreria PS ON C.id_cliente = PS.id_cliente "
                     + "ORDER BY PS.id_sastreria OFFSET ? ROWS FETCH NEXT ? ROWS ONLY");
@@ -764,7 +819,7 @@ public class Listado_Pedidos_Pendientes extends javax.swing.JPanel {
 
                 // Modificar la consulta SQL para buscar por nombre o fecha
                 if (!texto.isEmpty()) {
-                    ps = conn.prepareStatement("SELECT ROW_NUMBER() OVER(ORDER BY E.nombre) AS NumRegistro, E.nombre, E.apellido, E.numero_telefono, V.prenda, V.fechaPedido "
+                    ps = conn.prepareStatement("SELECT ROW_NUMBER() OVER(ORDER BY E.nombre) AS NumRegistro, E.nombre, E.apellido, E.numero_telefono, V.prenda, V.fechaPedido ,V.id_sastreria "
                             + "FROM Cliente E "
                             + "JOIN PedidoSastreria V ON E.id_cliente = V.id_cliente "
                             + "WHERE E.nombre LIKE ? OR E.apellido LIKE ? OR V.fechaPedido LIKE ? "
@@ -778,7 +833,7 @@ public class Listado_Pedidos_Pendientes extends javax.swing.JPanel {
                     ps.setInt(5, 10); // Cambia la cantidad de registros a recuperar según tus requerimientos
                     terminoBusqueda = texto; // Actualizar el término de búsqueda
                 } else {
-                    ps = conn.prepareStatement("SELECT ROW_NUMBER() OVER(ORDER BY E.nombre) AS NumRegistro, E.nombre, E.apellido, E.numero_telefono, V.prenda, V.fechaPedido "
+                    ps = conn.prepareStatement("SELECT ROW_NUMBER() OVER(ORDER BY E.nombre) AS NumRegistro, E.nombre, E.apellido, E.numero_telefono, V.prenda, V.fechaPedido , V.id_sastreria "
                             + "FROM Cliente E "
                             + "JOIN PedidoSastreria V ON E.id_cliente = V.id_cliente "
                             + "ORDER BY E.nombre "
@@ -799,10 +854,11 @@ public class Listado_Pedidos_Pendientes extends javax.swing.JPanel {
                         String numeroTelefono = rs.getString("numero_telefono");
                         String prenda = rs.getString("prenda");
                         String fechaPedido = rs.getString("fechaPedido");
+                        int idSastreria = Integer.parseInt(rs.getString("id_sastreria"));
 
                         if (nombre != null && apellido != null && numeroTelefono != null) {
                             modelTabla.addRow(new Object[]{
-                                numRegistro, nombre, apellido, numeroTelefono, prenda, fechaPedido
+                                numRegistro, nombre, apellido, numeroTelefono, prenda, fechaPedido, idSastreria
                             });
                             foundData = true;
                         }
@@ -832,6 +888,7 @@ public class Listado_Pedidos_Pendientes extends javax.swing.JPanel {
     private javax.swing.JButton crearbtn;
     private javax.swing.JButton editarbtn;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;

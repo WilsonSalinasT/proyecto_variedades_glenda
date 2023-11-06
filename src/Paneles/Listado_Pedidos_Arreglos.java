@@ -753,11 +753,11 @@ public class Listado_Pedidos_Arreglos extends javax.swing.JPanel {
                         String numeroTelefono = rs.getString("numero_telefono");
                         String arreglo = rs.getString("arreglo");
                         String fechaPedido = rs.getString("fechaPedido");
-                        String id = rs.getString("id_arreglo");
+                       int idArreglo= Integer.parseInt(rs.getString("id_arreglo"));
 
                         if (nombre != null && apellido != null && numeroTelefono != null) {
                             modelTabla.addRow(new Object[]{
-                                numRegistro, nombre, apellido, numeroTelefono, arreglo, fechaPedido, id
+                                numRegistro, nombre, apellido, numeroTelefono, arreglo, fechaPedido, idArreglo
                             });
                             foundData = true;
                         }
