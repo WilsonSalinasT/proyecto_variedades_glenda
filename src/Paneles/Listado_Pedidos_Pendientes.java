@@ -419,16 +419,15 @@ public class Listado_Pedidos_Pendientes extends javax.swing.JPanel {
         {
 
             int fila = tblPedidos.getSelectedRow();
-            String valorCelda = tblPedidos.getValueAt(fila, 1).toString();
-            String valorCelda2 = tblPedidos.getValueAt(fila, 2).toString();
+             int valorEntero = Integer.parseInt(tblPedidos.getValueAt(fila, 6).toString());
 //            String valorCelda3 = tblsublimacion.getValueAt(fila, 4).toString();
             PreparedStatement ps;
             ResultSet rs;
 
             Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
-            ps = conn.prepareStatement("SELECT * FROM cliente JOIN PedidoSastreria ON cliente.id_cliente = PedidoSastreria.id_cliente where nombre =? and apellido=?  ");
-            ps.setString(1, valorCelda);
-            ps.setString(2, valorCelda2);
+            ps = conn.prepareStatement("SELECT * FROM cliente JOIN PedidoSastreria ON cliente.id_cliente = PedidoSastreria.id_cliente where id_sastreria =?  ");
+            ps.setInt(1, valorEntero);
+            
 //            ps.setString(3, valorCelda3);
             rs = ps.executeQuery();
 
@@ -439,19 +438,21 @@ public class Listado_Pedidos_Pendientes extends javax.swing.JPanel {
                 String apellido = rs.getString("apellido");
              //   String telefono = rs.getString("numero_telefono");
                 
-                ver_sastreria mostrar = new ver_sastreria();
+                ver_sast mostrar = new ver_sast();
 
+               
 //                ver.fechaCita.setText(rs.getString("fecha_cita"));
 //                ver.cbxHoras.setText(rs.getString("hora_cita"));
 //                ver.txtMotivo.setText(rs.getString("motivo"));
-                mostrar.txtCliente1.setText(nombre + " " + apellido);
-                mostrar.txtCliente1.setEditable(false);
+                mostrar.txtCliente.setText(nombre + " " + apellido);
+                mostrar.txtCliente.setEditable(false);
                 mostrar.txtTel.setText(rs.getString("numero_telefono"));
                 mostrar.txtTel.setEditable(false);
-                mostrar.cbxPrenda1.setText(rs.getString("Prenda"));
-                mostrar.cbxPrenda1.setEnabled(false);
-                mostrar.cbxEstado.setText(rs.getString("estado"));
-                mostrar.cbxEstado.setEnabled(false);
+                mostrar.cbxPrenda.setSelectedItem(rs.getString("Prenda"));
+              
+                mostrar.cbxPrenda.setEnabled(false);
+//                mostrar.cbxEstado.setText(rs.getString("estado"));
+//                mostrar.cbxEstado.setEnabled(false);
                 mostrar.txtCintura.setText(rs.getString("cintura"));
                 mostrar.txtCintura.setEditable(false);
                 mostrar.txtCadera.setText(rs.getString("cadera"));

@@ -430,9 +430,6 @@ public class Listado_Sublimacion extends javax.swing.JPanel {
                 String apellido = rs.getString("apellido");
                 ver_pedido_sublimacion mostrar = new ver_pedido_sublimacion();
 
-//                ver.fechaCita.setText(rs.getString("fecha_cita"));
-//                ver.cbxHoras.setText(rs.getString("hora_cita"));
-//                ver.txtMotivo.setText(rs.getString("motivo"));
                 mostrar.txtCliente.setText(nombre + " " + apellido);
                 mostrar.txtdiseño.setText(rs.getString("material"));
                 mostrar.txtcantidad.setText(rs.getString("cantidad"));
