@@ -435,7 +435,7 @@ public class Listado_Sublimacion extends javax.swing.JPanel {
 //                ver.txtMotivo.setText(rs.getString("motivo"));
                 mostrar.txtCliente.setText(nombre + " " + apellido);
                 mostrar.txtdiseño.setText(rs.getString("material"));
-                mostrar.txtdiseño.setText(rs.getString("cantidad"));
+                mostrar.txtcantidad.setText(rs.getString("cantidad"));
                 mostrar.txtdescripcion.setText(rs.getString("descripcion"));
                 mostrar.txtPrecio.setText(rs.getString("precio"));
                 mostrar.txtcantidad.setText(rs.getString("cantidad"));

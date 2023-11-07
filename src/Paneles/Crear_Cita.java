@@ -304,6 +304,7 @@ public class Crear_Cita extends javax.swing.JPanel {
         }
         String categorias = cbxHoras.getSelectedItem().toString(); // Obtiene el elemento seleccionado en el JComboBox
 
+        
         if (categorias.equals("Seleccione"))
         {
             camposVacios.append("\n - Hora");
