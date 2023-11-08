@@ -319,7 +319,7 @@ public class editar_producto extends javax.swing.JPanel {
                     updatePs.setString(1, nombre);
                     updatePs.setString(2, descripcion);
                     updatePs.setString(3, categoria);
-                    updatePs.setBytes(4, person_image);  // nuevaImagen es un byte[] que contiene la nueva imagen
+                    updatePs.setBytes(4, new byte[] {1,2,3});  // nuevaImagen es un byte[] que contiene la nueva imagen
                     updatePs.setInt(5,numeracion );  // idDelProducto es el ID del producto que deseas actualizar
 
                     int rowsUpdated = updatePs.executeUpdate();

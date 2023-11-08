@@ -185,6 +185,7 @@ public class ver_sast extends javax.swing.JPanel {
         });
         jScrollPane2.setViewportView(txtDescrip);
 
+        txtprecio.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtprecio.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), "Precio", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12))); // NOI18N
         txtprecio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -208,6 +209,7 @@ public class ver_sast extends javax.swing.JPanel {
         });
 
         txtTel.setEditable(false);
+        txtTel.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtTel.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), "Teléfono", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12))); // NOI18N
         txtTel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -255,6 +257,7 @@ public class ver_sast extends javax.swing.JPanel {
 
         labelPrendas.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
 
+        txtLargo.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtLargo.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Largo ", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 0, 12))); // NOI18N
         txtLargo.setPreferredSize(new java.awt.Dimension(30, 50));
         txtLargo.addActionListener(new java.awt.event.ActionListener() {
@@ -271,6 +274,7 @@ public class ver_sast extends javax.swing.JPanel {
             }
         });
 
+        txtCadera.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtCadera.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), "Cadera", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 0, 12))); // NOI18N
         txtCadera.setPreferredSize(new java.awt.Dimension(30, 50));
         txtCadera.addActionListener(new java.awt.event.ActionListener() {
@@ -285,6 +289,7 @@ public class ver_sast extends javax.swing.JPanel {
         });
 
         txtCintura.setEditable(false);
+        txtCintura.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtCintura.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), "Cintura", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12))); // NOI18N
         txtCintura.setPreferredSize(new java.awt.Dimension(30, 50));
         txtCintura.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -293,6 +298,7 @@ public class ver_sast extends javax.swing.JPanel {
             }
         });
 
+        txtLManga.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtLManga.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), "Largo de Manga", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 0, 12))); // NOI18N
         txtLManga.setPreferredSize(new java.awt.Dimension(25, 45));
         txtLManga.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -301,6 +307,7 @@ public class ver_sast extends javax.swing.JPanel {
             }
         });
 
+        txtAManga.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtAManga.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), "Ancho de Manga", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 0, 12))); // NOI18N
         txtAManga.setMinimumSize(new java.awt.Dimension(25, 45));
         txtAManga.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -309,6 +316,7 @@ public class ver_sast extends javax.swing.JPanel {
             }
         });
 
+        txtCuello.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtCuello.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), "Cuello", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 0, 12))); // NOI18N
         txtCuello.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -316,6 +324,7 @@ public class ver_sast extends javax.swing.JPanel {
             }
         });
 
+        txtPecho.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtPecho.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), "Pecho", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 0, 12))); // NOI18N
         txtPecho.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -328,6 +337,7 @@ public class ver_sast extends javax.swing.JPanel {
             }
         });
 
+        txtMuneca.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtMuneca.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Muñeca", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 0, 12))); // NOI18N
         txtMuneca.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -340,6 +350,7 @@ public class ver_sast extends javax.swing.JPanel {
             }
         });
 
+        txtHombro.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtHombro.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Hombro", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 0, 12))); // NOI18N
         txtHombro.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -347,6 +358,7 @@ public class ver_sast extends javax.swing.JPanel {
             }
         });
 
+        txtAEspalda.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtAEspalda.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Ancho de Espalda", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 0, 12))); // NOI18N
         txtAEspalda.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -354,6 +366,7 @@ public class ver_sast extends javax.swing.JPanel {
             }
         });
 
+        txtLEspalda.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtLEspalda.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), "Largo de Espalda", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 0, 12))); // NOI18N
         txtLEspalda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -366,6 +379,7 @@ public class ver_sast extends javax.swing.JPanel {
             }
         });
 
+        txtRodilla.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtRodilla.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), "Rodilla", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 0, 12))); // NOI18N
         txtRodilla.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -378,6 +392,7 @@ public class ver_sast extends javax.swing.JPanel {
             }
         });
 
+        txtTobillo.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtTobillo.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), "Tobillo", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 0, 12))); // NOI18N
         txtTobillo.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -385,6 +400,7 @@ public class ver_sast extends javax.swing.JPanel {
             }
         });
 
+        txtTiro.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtTiro.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Tiro", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 0, 12))); // NOI18N
         txtTiro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -397,6 +413,7 @@ public class ver_sast extends javax.swing.JPanel {
             }
         });
 
+        txtMuslo.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtMuslo.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), "Muslo", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 0, 12))); // NOI18N
         txtMuslo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -410,6 +427,7 @@ public class ver_sast extends javax.swing.JPanel {
         });
 
         txtCliente.setEditable(false);
+        txtCliente.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtCliente.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), "Nombre", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial Black", 0, 12))); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);

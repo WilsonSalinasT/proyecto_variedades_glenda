@@ -454,8 +454,8 @@ public class Listado_Pedidos_Pendientes extends javax.swing.JPanel {
                 mostrar.cbxPrenda.setSelectedItem(rs.getString("Prenda"));
 
                 mostrar.cbxPrenda.setEnabled(false);
-               mostrar.cbxEstado.setSelectedItem(rs.getString("estado"));
-               mostrar.cbxEstado.setEnabled(false);
+                mostrar.cbxEstado.setSelectedItem(rs.getString("estado"));
+                mostrar.cbxEstado.setEnabled(false);
                 mostrar.txtCintura.setText(rs.getString("cintura"));
                 mostrar.txtCintura.setEditable(false);
                 mostrar.txtCadera.setText(rs.getString("cadera"));
@@ -572,8 +572,11 @@ public class Listado_Pedidos_Pendientes extends javax.swing.JPanel {
                 if (imagenA1 != null)
                 {
                     // Crear un objeto ImageIcon a partir de los bytes de la imagen
-                    ImageIcon imagenIcono = new ImageIcon(imagenA1);
-                    // Establecer el ImageIcon en el JLabel
+                    ImageIcon imagenIcono = new ImageIcon(imagenA1); // Reemplaza "ruta_de_tu_imagen.png" con la ruta de tu imagen
+                    Image imagen = imagenIcono.getImage();
+                    Image imagenEscalada = imagen.getScaledInstance(191, 169, Image.SCALE_DEFAULT);
+
+                    imagenIcono = new ImageIcon(imagenEscalada);
                     mostrar.imagen1.setIcon(imagenIcono);
                 } else
                 {
@@ -583,8 +586,12 @@ public class Listado_Pedidos_Pendientes extends javax.swing.JPanel {
 
                 if (imagenA2 != null)
                 {
-                    ImageIcon imagenIcon2 = new ImageIcon(imagenA2);
-                    mostrar.imagen2.setIcon(imagenIcon2);
+                    ImageIcon imagenIcono = new ImageIcon(imagenA2); // Reemplaza "ruta_de_tu_imagen.png" con la ruta de tu imagen
+                    Image imagen = imagenIcono.getImage();
+                    Image imagenEscalada = imagen.getScaledInstance(191, 169, Image.SCALE_DEFAULT);
+
+                    imagenIcono = new ImageIcon(imagenEscalada);
+                    mostrar.imagen2.setIcon(imagenIcono);
                 } else
                 {
                     mostrar.imagen2.setIcon(null);
@@ -592,8 +599,12 @@ public class Listado_Pedidos_Pendientes extends javax.swing.JPanel {
 
                 if (imagenA3 != null)
                 {
-                    ImageIcon imagenIcon3 = new ImageIcon(imagenA3);
-                    mostrar.imagen3.setIcon(imagenIcon3);
+                    ImageIcon imagenIcono = new ImageIcon(imagenA3); // Reemplaza "ruta_de_tu_imagen.png" con la ruta de tu imagen
+                    Image imagen = imagenIcono.getImage();
+                    Image imagenEscalada = imagen.getScaledInstance(191, 169, Image.SCALE_DEFAULT);
+
+                    imagenIcono = new ImageIcon(imagenEscalada);
+                    mostrar.imagen3.setIcon(imagenIcono);
                 } else
                 {
                     mostrar.imagen3.setIcon(null);
