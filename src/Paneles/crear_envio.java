@@ -215,7 +215,7 @@ public class crear_envio extends javax.swing.JPanel {
                         try
                         {
                             Connection connection = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
-                            PreparedStatement preparedStatement = connection.prepareStatement("SELECT id_sastreria,prenda,precio,fechaPedido FROM PedidoSastreria WHERE CONCAT('Prenda:',prenda, ' ','Precio:', precio, ' ','Fecha de pedido:', fechaPedido) = ?");
+                            PreparedStatement preparedStatement = connection.prepareStatement("SELECT id_sastreria,prenda,precio,fechaPedido FROM PedidoSastreria WHERE CONCAT('Prenda:',prenda, ' ','Precio:', precio, ' ','Fecha de pedido:', fechaPedido) = ? and estado = 'pendiente'");
                             preparedStatement.setString(1, selectedProduct);
                             ResultSet rs = preparedStatement.executeQuery();
 
@@ -252,7 +252,7 @@ public class crear_envio extends javax.swing.JPanel {
                         try
                         {
                             Connection connection = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
-                            PreparedStatement preparedStatement = connection.prepareStatement("SELECT id_arreglo,arreglo,precio,fechaPedido FROM PedidoArreglo WHERE CONCAT('Arreglo:',arreglo, ' ','Precio:', precio, ' ','Fecha de pedido:', fechaPedido) = ?");
+                            PreparedStatement preparedStatement = connection.prepareStatement("SELECT id_arreglo,arreglo,precio,fechaPedido FROM PedidoArreglo WHERE CONCAT('Arreglo:',arreglo, ' ','Precio:', precio, ' ','Fecha de pedido:', fechaPedido) = ? and estado = 'pendiente'");
                             preparedStatement.setString(1, selectedProduct);
                             ResultSet rs = preparedStatement.executeQuery();
 
