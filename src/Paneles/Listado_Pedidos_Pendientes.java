@@ -105,7 +105,7 @@ public class Listado_Pedidos_Pendientes extends javax.swing.JPanel {
 
         jLabel2.setBackground(new java.awt.Color(0, 0, 0));
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel2.setText("Listado de Pedidos Pendientes");
+        jLabel2.setText("Listado de pedidos pendientes de sastrería");
 
         jButton1.setBackground(new java.awt.Color(255, 153, 51));
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
