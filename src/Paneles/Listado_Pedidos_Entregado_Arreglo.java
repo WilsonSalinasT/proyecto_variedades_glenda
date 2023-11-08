@@ -718,7 +718,7 @@ public class Listado_Pedidos_Entregado_Arreglo extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    int paginaActual = 1; // Página actual
+    int paginaActual = 0; // Página actual
     int filasPorPagina = 20; // Número de filas a mostrar por página
     int totalFilas = 0; // Total de filas en la tabla
     int totalPaginas = 0; // Total de páginas en la tabla
