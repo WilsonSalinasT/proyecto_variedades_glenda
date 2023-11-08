@@ -282,7 +282,9 @@ public class ver_sast extends javax.swing.JPanel {
             }
         });
 
-        txtCintura.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cintura", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP));
+        txtCintura.setEditable(false);
+        txtCintura.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtCintura.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), "Cintura", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12))); // NOI18N
         txtCintura.setPreferredSize(new java.awt.Dimension(30, 50));
         txtCintura.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -405,6 +407,8 @@ public class ver_sast extends javax.swing.JPanel {
                 txtMusloKeyTyped(evt);
             }
         });
+
+        txtCliente.setEditable(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
