@@ -256,6 +256,7 @@ public class Crear_Pedido_arreglo extends javax.swing.JPanel {
 
         cbxEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pendiente", "Entregado" }));
         cbxEstado.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Estado del pedido", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12))); // NOI18N
+        cbxEstado.setEnabled(false);
 
         btnCrear.setBackground(new java.awt.Color(255, 153, 51));
         btnCrear.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -333,6 +334,11 @@ public class Crear_Pedido_arreglo extends javax.swing.JPanel {
         txtDescripcionArre.setRows(5);
         txtDescripcionArre.setWrapStyleWord(true);
         txtDescripcionArre.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Descripción", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12))); // NOI18N
+        txtDescripcionArre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtDescripcionArreKeyTyped(evt);
+            }
+        });
         jScrollPane1.setViewportView(txtDescripcionArre);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -658,11 +664,24 @@ public class Crear_Pedido_arreglo extends javax.swing.JPanel {
         if (c == '0' && (texto.isEmpty() || texto.equals("0")))
         {
             evt.consume(); // Evita que se inicie con un cero
-        } else if ((c < '0' || c > '9') || texto.length() >= 6)
+        } else if ((c < '0' || c > '9') || texto.length() >= 5)
         {
             evt.consume(); // Evita que se ingresen más de 6 caracteres o caracteres que no sean dígitos
         }
     }//GEN-LAST:event_txtprecioKeyTyped
+
+    private void txtDescripcionArreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDescripcionArreKeyTyped
+        // TODO add your handling code here:
+         char c = evt.getKeyChar(); // Obtener el carácter ingresado
+
+        if (txtDescripcionArre.getText().isEmpty() && Character.isWhitespace(c))
+        {
+            evt.consume(); // Consumir el evento si es un espacio en blanco en la primera letra
+        } else if (txtDescripcionArre.getText().length() >= 300)
+        {
+            evt.consume(); // Consumir el evento si se ha alcanzado la longitud máxima
+        }
+    }//GEN-LAST:event_txtDescripcionArreKeyTyped
 
     private File[] archivos = new File[3];
     private int contador = 0; // Para llevar el registro de cuántas veces se ha presionado el botón

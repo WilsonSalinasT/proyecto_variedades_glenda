@@ -35,8 +35,10 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
+import javax.xml.bind.DatatypeConverter;
 //import javafx.event.ActionEvent;
 
 /**
@@ -452,10 +454,8 @@ public class Listado_Prod extends javax.swing.JPanel {
                 mostrar.AreaDescripcion.setText(descripcion);
                 mostrar.AreaDescripcion.setEditable(false); // Establece el área de texto como no editable
 
-      
                 mostrar.txtCategoria.setText(categoria);
                 mostrar.txtCategoria.setEditable(false); // Establece el campo de texto como no editable
-
 
                 mostrar.txtId.setText(Id);
                 mostrar.txtId.setEditable(false); // Establece el campo de texto como no editable
@@ -526,36 +526,58 @@ public class Listado_Prod extends javax.swing.JPanel {
                         mostrar.jComboBox1.setSelectedItem(rs.getString("categoria"));
 
                         Blob fotos = rs.getBlob("foto");
-                       
 
-                         if (fotos != null)
+                        if (fotos != null)
                         {
-                             byte[] recuperar = fotos.getBytes(1, (int) fotos.length());
-                        BufferedImage img = ImageIO.read(new ByteArrayInputStream(recuperar));
+                            byte[] recuperar = fotos.getBytes(1, (int) fotos.length());
+                            BufferedImage img = ImageIO.read(new ByteArrayInputStream(recuperar));
 
 // Define las dimensiones deseadas para la imagen
-                        int anchoDeseado = 200; // Reemplaza esto con el ancho que desees
-                        int altoDeseado = 150;  // Reemplaza esto con el alto que desees
+                            int anchoDeseado = 200; // Reemplaza esto con el ancho que desees
+                            int altoDeseado = 150;  // Reemplaza esto con el alto que desees
 
 // Escala la imagen a las dimensiones deseadas
-                        Image imagen = img.getScaledInstance(anchoDeseado, altoDeseado, Image.SCALE_SMOOTH);
+                            Image imagen = img.getScaledInstance(anchoDeseado, altoDeseado, Image.SCALE_SMOOTH);
 
 // Establece la imagen escalada en el componente mostrar.txtimagen
-                        mostrar.txtimagen.setIcon(new ImageIcon(imagen));
+                            mostrar.txtimagen.setIcon(new ImageIcon(imagen));
 
-                        mostrar.txtbytes.setText(tabla_productos.getModel().getValueAt(tabla_productos.getSelectedRow(), 3).toString());
-                          
-                        
+                            mostrar.txtbytes.setText(tabla_productos.getModel().getValueAt(tabla_productos.getSelectedRow(), 3).toString());
+
                         } else
                         {
-                             ImageIcon imagenIcon;
+                            ImageIcon imagenIcon;
                             // Cargar una imagen predeterminada si no se encuentra la imagen en la base de datos
-                             imagenIcon = new ImageIcon(getClass().getResource("/img/agregar.png"));
+                            imagenIcon = new ImageIcon(getClass().getResource("/img/agregar.png"));
                             mostrar.txtimagen.setIcon(imagenIcon);
                         }
 
-                       
-                         mostrar.txtruta.setText(rs.getString("imagen"));
+//                        byte[] byteArray = rs.getBytes("foto");
+//
+//                        StringBuilder hexStringBuilder = new StringBuilder();
+//                        for (byte b : byteArray)
+//                        {
+//                            hexStringBuilder.append(String.format("%02X", b));
+//                        }
+//
+//                        String hexString = hexStringBuilder.toString();
+//                        
+//                        mostrar.txtbytes = new JTextField(hexString);
+//                        byte[] byteArray = rs.getBytes("foto");
+//
+//                // Crea un ImageIcon a partir de los bytes
+//                ImageIcon imagenIcono = new ImageIcon(byteArray);
+//
+//                // Crea un JLabel con el ImageIcon y muestra la imagen en una ventana
+//                mostrar.txtimagen = new JLabel(imagenIcono);
+                        byte[] data = rs.getBytes("foto");
+                        String hexString = "0x" + bytesToHexString(data);
+
+                        mostrar.txtbytes.setText(hexString);
+                        mostrar.bytes.setText(hexString);
+                        mostrar.txtbytes.setText(hexString);
+                        mostrar.txtruta.setText(rs.getString("imagen"));
+
 //                        ImageIcon imagenIcon;
 //                        byte[] bytesImagen = rs.getBytes("foto");
 //                        if (bytesImagen != null)
@@ -609,6 +631,15 @@ public class Listado_Prod extends javax.swing.JPanel {
         }
 
     }//GEN-LAST:event_btneditarActionPerformed
+
+    public static String bytesToHexString(byte[] bytes) {
+        StringBuilder sb = new StringBuilder();
+        for (byte b : bytes)
+        {
+            sb.append(String.format("%02X", b));
+        }
+        return sb.toString();
+    }
 
     private static ImageIcon loadImageFromDatabase(Connection connection, String query, int imageId) {
         try
