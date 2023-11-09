@@ -376,7 +376,7 @@ public class Listado_Pedidos_Entregado_Sublimacion extends javax.swing.JPanel {
             ps = conn.prepareStatement("SELECT COUNT(*) AS TotalFilas "
                     + "FROM Cliente E "
                     + "JOIN PedidoSublimacion V ON E.id_cliente = V.id_cliente "
-                    + "WHERE E.nombre LIKE ? OR E.apellido LIKE ? OR V.material LIKE ?");
+                    + "WHERE (E.nombre LIKE ? OR E.apellido LIKE ? OR V.material LIKE ?) and estado = 'entregado' ");
             ps.setString(1, "%" + terminoBusqueda + "%");
             ps.setString(2, "%" + terminoBusqueda + "%");
             ps.setString(3, "%" + terminoBusqueda + "%");
