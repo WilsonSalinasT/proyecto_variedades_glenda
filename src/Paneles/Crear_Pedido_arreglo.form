@@ -312,13 +312,12 @@
                 <Component class="javax.swing.JComboBox" name="cbxarreglo">
                   <Properties>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                      <StringArray count="6">
+                      <StringArray count="5">
                         <StringItem index="0" value="Seleccione"/>
                         <StringItem index="1" value="Arreglo de Rosas"/>
                         <StringItem index="2" value="Arreglo Rosas naturales"/>
                         <StringItem index="3" value="Arreglo de girasoles"/>
                         <StringItem index="4" value="Arreglo de rosas con chocolates"/>
-                        <StringItem index="5" value=" "/>
                       </StringArray>
                     </Property>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">

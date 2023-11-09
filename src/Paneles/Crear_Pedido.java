@@ -710,7 +710,7 @@ public class Crear_Pedido extends javax.swing.JPanel {
 
         if (c == '0' && (texto.isEmpty() || texto.equals("0"))) {
             evt.consume(); // Evita que se inicie con un cero
-        } else if ((c < '0' || c > '9') || texto.length() >= 6) {
+        } else if ((c < '0' || c > '9') || texto.length() >= 5) {
             evt.consume(); // Evita que se ingresen más de 6 caracteres o caracteres que no sean dígitos
         }
 
