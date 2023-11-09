@@ -25,6 +25,7 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 import com.toedter.calendar.JDateChooser;
+import java.awt.Image;
 import java.io.File;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -450,8 +451,16 @@ public class Listado_Pedidos_Arreglos extends javax.swing.JPanel {
                 {
                     // Crear un objeto ImageIcon a partir de los bytes de la imagen
                     ImageIcon imagenIcono = new ImageIcon(imagenA1);
+                    
+                    // Ajustar el tamaño de la imagen
+                    Image imagenT = imagenIcono.getImage().getScaledInstance(180, 200, Image.SCALE_SMOOTH);
+                    ImageIcon imagenT1 = new ImageIcon(imagenT);
+
+                    // Establecer el ImageIcon escalado en el JLabel
+                    ver.imagen1.setIcon(imagenT1);
+
                     // Establecer el ImageIcon en el JLabel
-                    ver.imagen1.setIcon(imagenIcono);
+                    
                 } else
                 {
                     // Si el arreglo de bytes de imagen es nulo, puedes mostrar un mensaje o establecer un valor predeterminado.
@@ -461,7 +470,12 @@ public class Listado_Pedidos_Arreglos extends javax.swing.JPanel {
                 if (imagenA2 != null)
                 {
                     ImageIcon imagenIcon2 = new ImageIcon(imagenA2);
-                    ver.imagen2.setIcon(imagenIcon2);
+                    // Ajustar el tamaño de la imagen
+                    Image imagenT = imagenIcon2.getImage().getScaledInstance(180, 200, Image.SCALE_SMOOTH);
+                    ImageIcon imagenT2 = new ImageIcon(imagenT);
+
+                    // Establecer el ImageIcon escalado en el JLabel
+                    ver.imagen2.setIcon(imagenT2);
                 } else
                 {
                     ver.imagen2.setIcon(null);
@@ -470,7 +484,12 @@ public class Listado_Pedidos_Arreglos extends javax.swing.JPanel {
                 if (imagenA3 != null)
                 {
                     ImageIcon imagenIcon3 = new ImageIcon(imagenA3);
-                    ver.imagen3.setIcon(imagenIcon3);
+                    // Ajustar el tamaño de la imagen
+                    Image imagenT = imagenIcon3.getImage().getScaledInstance(180, 200, Image.SCALE_SMOOTH);
+                    ImageIcon imagenT3 = new ImageIcon(imagenT);
+
+                    // Establecer el ImageIcon escalado en el JLabel
+                    ver.imagen3.setIcon(imagenT3);
                 } else
                 {
                     ver.imagen3.setIcon(null);
