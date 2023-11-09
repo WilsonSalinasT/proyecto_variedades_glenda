@@ -112,7 +112,8 @@ public class ver_pedido_arreglo extends javax.swing.JPanel {
         );
 
         txtTel.setEditable(false);
-        txtTel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Teléfono", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12))); // NOI18N
+        txtTel.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtTel.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), "Teléfono", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12))); // NOI18N
         txtTel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtTelActionPerformed(evt);
@@ -122,10 +123,13 @@ public class ver_pedido_arreglo extends javax.swing.JPanel {
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 102, 102), 2, true));
 
+        imagen2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         imagen2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 102, 102), 2, true));
 
+        imagen3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         imagen3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 102, 102), 2, true));
 
+        imagen1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         imagen1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 102, 102), 2, true));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -155,7 +159,8 @@ public class ver_pedido_arreglo extends javax.swing.JPanel {
         labelPrendas.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
 
         txtprecio.setEditable(false);
-        txtprecio.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Precio", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12))); // NOI18N
+        txtprecio.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtprecio.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), "Precio", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12))); // NOI18N
         txtprecio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtprecioActionPerformed(evt);
@@ -172,19 +177,22 @@ public class ver_pedido_arreglo extends javax.swing.JPanel {
         txtDescripcionA.setLineWrap(true);
         txtDescripcionA.setRows(5);
         txtDescripcionA.setWrapStyleWord(true);
-        txtDescripcionA.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Descripción", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12))); // NOI18N
+        txtDescripcionA.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), "Descripción", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12))); // NOI18N
         jScrollPane2.setViewportView(txtDescripcionA);
 
         txtCliente.setEditable(false);
-        txtCliente.setBackground(new java.awt.Color(242, 242, 242));
-        txtCliente.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Nombre del Cliente", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 3, 12))); // NOI18N
+        txtCliente.setBackground(new java.awt.Color(255, 255, 255));
+        txtCliente.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtCliente.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), "Nombre del Cliente", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 3, 12))); // NOI18N
 
         txtArreglo.setEditable(false);
-        txtArreglo.setBackground(new java.awt.Color(242, 242, 242));
-        txtArreglo.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Arreglo", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 3, 12))); // NOI18N
+        txtArreglo.setBackground(new java.awt.Color(255, 255, 255));
+        txtArreglo.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtArreglo.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), "Arreglo", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 3, 12))); // NOI18N
 
         txtestado.setEditable(false);
-        txtestado.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Estado del Pedido", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12))); // NOI18N
+        txtestado.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtestado.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), "Estado del Pedido", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12))); // NOI18N
         txtestado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtestadoActionPerformed(evt);

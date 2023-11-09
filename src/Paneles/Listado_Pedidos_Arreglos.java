@@ -453,7 +453,7 @@ public class Listado_Pedidos_Arreglos extends javax.swing.JPanel {
                     ImageIcon imagenIcono = new ImageIcon(imagenA1);
                     
                     // Ajustar el tamaño de la imagen
-                    Image imagenT = imagenIcono.getImage().getScaledInstance(180, 200, Image.SCALE_SMOOTH);
+                    Image imagenT = imagenIcono.getImage().getScaledInstance(170, 169, Image.SCALE_SMOOTH);
                     ImageIcon imagenT1 = new ImageIcon(imagenT);
 
                     // Establecer el ImageIcon escalado en el JLabel
@@ -471,7 +471,7 @@ public class Listado_Pedidos_Arreglos extends javax.swing.JPanel {
                 {
                     ImageIcon imagenIcon2 = new ImageIcon(imagenA2);
                     // Ajustar el tamaño de la imagen
-                    Image imagenT = imagenIcon2.getImage().getScaledInstance(180, 200, Image.SCALE_SMOOTH);
+                    Image imagenT = imagenIcon2.getImage().getScaledInstance(170, 169, Image.SCALE_SMOOTH);
                     ImageIcon imagenT2 = new ImageIcon(imagenT);
 
                     // Establecer el ImageIcon escalado en el JLabel
@@ -485,7 +485,7 @@ public class Listado_Pedidos_Arreglos extends javax.swing.JPanel {
                 {
                     ImageIcon imagenIcon3 = new ImageIcon(imagenA3);
                     // Ajustar el tamaño de la imagen
-                    Image imagenT = imagenIcon3.getImage().getScaledInstance(180, 200, Image.SCALE_SMOOTH);
+                    Image imagenT = imagenIcon3.getImage().getScaledInstance(170, 169, Image.SCALE_SMOOTH);
                     ImageIcon imagenT3 = new ImageIcon(imagenT);
 
                     // Establecer el ImageIcon escalado en el JLabel
