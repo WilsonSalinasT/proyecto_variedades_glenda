@@ -389,12 +389,12 @@ public class Listado_Sublimacion extends javax.swing.JPanel {
 
     private void crearbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearbtnActionPerformed
 
-        Crear_Pedido_Sublimacion p8 = new Crear_Pedido_Sublimacion();
-        p8.setSize(1024, 640);
-        p8.setLocation(0, 0);
+        Crear_Pedido_Sublimacion p7 = new Crear_Pedido_Sublimacion();
+        p7.setSize(1024, 640);
+        p7.setLocation(0, 0);
 
         panelprincipal.removeAll();
-        panelprincipal.add(p8, BorderLayout.CENTER);
+        panelprincipal.add(p7, BorderLayout.CENTER);
         panelprincipal.revalidate();
         panelprincipal.repaint();
     }//GEN-LAST:event_crearbtnActionPerformed
