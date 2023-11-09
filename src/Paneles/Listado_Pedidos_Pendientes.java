@@ -449,8 +449,8 @@ public class Listado_Pedidos_Pendientes extends javax.swing.JPanel {
 //                ver.txtMotivo.setText(rs.getString("motivo"));
                 mostrar.txtCliente.setText(nombre + " " + apellido);
                 mostrar.txtCliente.setEditable(false);
-                mostrar.cbxEstado.setText(rs.getString("numero_telefono"));
-                mostrar.cbxEstado.setEditable(false);
+                mostrar.txtTel.setText(rs.getString("numero_telefono"));
+                mostrar.txtTel.setEditable(false);
                 mostrar.cbxPrenda.setSelectedItem(rs.getString("Prenda"));
 
                 mostrar.cbxPrenda.setEnabled(false);

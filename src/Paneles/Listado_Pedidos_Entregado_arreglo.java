@@ -53,17 +53,17 @@ public class Listado_Pedidos_Entregado_arreglo extends javax.swing.JPanel {
 
         holder = new TextPrompt("Busque por nombre/apellido del cliente/precio", txtBuscar);
 
-        tblPedidos.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 12));
-        tblPedidos.getTableHeader().setOpaque(false);
-        tblPedidos.getTableHeader().setBackground(new Color(255, 0, 0));
-        tblPedidos.getTableHeader().setForeground(new Color(255, 0, 0));
-        tblPedidos.setRowHeight(25);
+        tblPedidosA.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 12));
+        tblPedidosA.getTableHeader().setOpaque(false);
+        tblPedidosA.getTableHeader().setBackground(new Color(255, 0, 0));
+        tblPedidosA.getTableHeader().setForeground(new Color(255, 0, 0));
+        tblPedidosA.setRowHeight(25);
 
-        tblPedidos.setRowSelectionAllowed(true);
-        tblPedidos.setColumnSelectionAllowed(false);
+        tblPedidosA.setRowSelectionAllowed(true);
+        tblPedidosA.setColumnSelectionAllowed(false);
 
         int columnIndexToHide = 6;
-        TableColumn column = tblPedidos.getColumnModel().getColumn(columnIndexToHide);
+        TableColumn column = tblPedidosA.getColumnModel().getColumn(columnIndexToHide);
 
         column.setMinWidth(0);
         column.setMaxWidth(0);
@@ -87,7 +87,7 @@ public class Listado_Pedidos_Entregado_arreglo extends javax.swing.JPanel {
         jPanel3 = new javax.swing.JPanel();
         Texto_Buscar = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tblPedidos = new javax.swing.JTable();
+        tblPedidosA = new javax.swing.JTable();
         txtBuscar = new javax.swing.JTextField();
         Btn_Buscar = new javax.swing.JButton();
         refrescarbtn = new javax.swing.JButton();
@@ -149,7 +149,7 @@ public class Listado_Pedidos_Entregado_arreglo extends javax.swing.JPanel {
         Texto_Buscar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         Texto_Buscar.setText("Buscar:");
 
-        tblPedidos.setModel(new javax.swing.table.DefaultTableModel(
+        tblPedidosA.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -165,13 +165,13 @@ public class Listado_Pedidos_Entregado_arreglo extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        tblPedidos.setGridColor(new java.awt.Color(255, 51, 51));
-        tblPedidos.setSelectionBackground(new java.awt.Color(255, 102, 102));
-        tblPedidos.setShowHorizontalLines(true);
-        tblPedidos.setShowVerticalLines(true);
-        jScrollPane2.setViewportView(tblPedidos);
-        if (tblPedidos.getColumnModel().getColumnCount() > 0) {
-            tblPedidos.getColumnModel().getColumn(0).setPreferredWidth(1);
+        tblPedidosA.setGridColor(new java.awt.Color(255, 51, 51));
+        tblPedidosA.setSelectionBackground(new java.awt.Color(255, 102, 102));
+        tblPedidosA.setShowHorizontalLines(true);
+        tblPedidosA.setShowVerticalLines(true);
+        jScrollPane2.setViewportView(tblPedidosA);
+        if (tblPedidosA.getColumnModel().getColumnCount() > 0) {
+            tblPedidosA.getColumnModel().getColumn(0).setPreferredWidth(1);
         }
 
         txtBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -359,7 +359,7 @@ public class Listado_Pedidos_Entregado_arreglo extends javax.swing.JPanel {
     String terminoBusqueda = ""; // Término de búsqueda actual
 
     private void cargarTablaEmpleados() {
-        DefaultTableModel modeloTabla = (DefaultTableModel) tblPedidos.getModel();
+        DefaultTableModel modeloTabla = (DefaultTableModel) tblPedidosA.getModel();
         modeloTabla.setRowCount(0); // Limpiar los datos existentes en la tabla
 
         PreparedStatement ps;
@@ -449,8 +449,8 @@ public class Listado_Pedidos_Entregado_arreglo extends javax.swing.JPanel {
     }
 
     private void ajustarTabla(int filasDeseadas) {
-        tblPedidos.setPreferredScrollableViewportSize(new Dimension(tblPedidos.getPreferredSize().width, tblPedidos.getRowHeight() * filasDeseadas));
-        tblPedidos.setFillsViewportHeight(true);
+        tblPedidosA.setPreferredScrollableViewportSize(new Dimension(tblPedidosA.getPreferredSize().width, tblPedidosA.getRowHeight() * filasDeseadas));
+        tblPedidosA.setFillsViewportHeight(true);
     }
 
     private void siguientePagina() {
@@ -470,7 +470,7 @@ public class Listado_Pedidos_Entregado_arreglo extends javax.swing.JPanel {
     }
 
     private void buscarDatos(String texto) {
-        DefaultTableModel modelTabla = (DefaultTableModel) tblPedidos.getModel();
+        DefaultTableModel modelTabla = (DefaultTableModel) tblPedidosA.getModel();
         modelTabla.setRowCount(0);
         boolean foundData = false;
 
@@ -630,7 +630,7 @@ public class Listado_Pedidos_Entregado_arreglo extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JButton refrescarbtn;
-    private javax.swing.JTable tblPedidos;
+    private javax.swing.JTable tblPedidosA;
     public javax.swing.JTextField txtBuscar;
     // End of variables declaration//GEN-END:variables
 

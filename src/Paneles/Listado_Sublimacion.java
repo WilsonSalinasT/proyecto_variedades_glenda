@@ -52,17 +52,17 @@ public class Listado_Sublimacion extends javax.swing.JPanel {
 
         holder = new TextPrompt("Busque por nombre/apellido del cliente/fecha de pedido", txtBuscar);
 
-        tblsublimacion.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 12));
-        tblsublimacion.getTableHeader().setOpaque(false);
-        tblsublimacion.getTableHeader().setBackground(new Color(255, 0, 0));
-        tblsublimacion.getTableHeader().setForeground(new Color(255, 0, 0));
-        tblsublimacion.setRowHeight(25);
+        tblsublimacionB.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 12));
+        tblsublimacionB.getTableHeader().setOpaque(false);
+        tblsublimacionB.getTableHeader().setBackground(new Color(255, 0, 0));
+        tblsublimacionB.getTableHeader().setForeground(new Color(255, 0, 0));
+        tblsublimacionB.setRowHeight(25);
 
-        tblsublimacion.setRowSelectionAllowed(true);
-        tblsublimacion.setColumnSelectionAllowed(false);
+        tblsublimacionB.setRowSelectionAllowed(true);
+        tblsublimacionB.setColumnSelectionAllowed(false);
         
          int columnIndexToHide = 6;
-        TableColumn column = tblsublimacion.getColumnModel().getColumn(columnIndexToHide);
+        TableColumn column = tblsublimacionB.getColumnModel().getColumn(columnIndexToHide);
         
         column.setMinWidth(0);
         column.setMaxWidth(0);
@@ -90,7 +90,7 @@ public class Listado_Sublimacion extends javax.swing.JPanel {
         jButton1 = new javax.swing.JButton();
         Texto_Buscar = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tblsublimacion = new javax.swing.JTable();
+        tblsublimacionB = new javax.swing.JTable();
         txtBuscar = new javax.swing.JTextField();
         Btn_Buscar = new javax.swing.JButton();
         refrescarbtn = new javax.swing.JButton();
@@ -204,7 +204,7 @@ public class Listado_Sublimacion extends javax.swing.JPanel {
         Texto_Buscar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         Texto_Buscar.setText("Buscar:");
 
-        tblsublimacion.setModel(new javax.swing.table.DefaultTableModel(
+        tblsublimacionB.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -220,11 +220,11 @@ public class Listado_Sublimacion extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        tblsublimacion.setGridColor(new java.awt.Color(255, 51, 51));
-        tblsublimacion.setSelectionBackground(new java.awt.Color(255, 102, 102));
-        tblsublimacion.setShowHorizontalLines(true);
-        tblsublimacion.setShowVerticalLines(true);
-        jScrollPane2.setViewportView(tblsublimacion);
+        tblsublimacionB.setGridColor(new java.awt.Color(255, 51, 51));
+        tblsublimacionB.setSelectionBackground(new java.awt.Color(255, 102, 102));
+        tblsublimacionB.setShowHorizontalLines(true);
+        tblsublimacionB.setShowVerticalLines(true);
+        jScrollPane2.setViewportView(tblsublimacionB);
 
         txtBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -402,7 +402,7 @@ public class Listado_Sublimacion extends javax.swing.JPanel {
     int selectedRow1;
     private void verbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verbtnActionPerformed
 // TODO add your handling code here:
-        selectedRow1 = tblsublimacion.getSelectedRow();
+        selectedRow1 = tblsublimacionB.getSelectedRow();
         if (selectedRow1 == -1) {
             JOptionPane.showMessageDialog(null, "Seleccione un cliente para poder visualizar el pedido");
             return;
@@ -410,8 +410,8 @@ public class Listado_Sublimacion extends javax.swing.JPanel {
 
         try {
 
-            int fila = tblsublimacion.getSelectedRow();
-            int valorEntero = Integer.parseInt(tblsublimacion.getValueAt(fila, 6).toString());
+            int fila = tblsublimacionB.getSelectedRow();
+            int valorEntero = Integer.parseInt(tblsublimacionB.getValueAt(fila, 6).toString());
 
 //            String valorCelda3 = tblsublimacion.getValueAt(fila, 4).toString();
             PreparedStatement ps;
@@ -510,7 +510,7 @@ public class Listado_Sublimacion extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        int selectedRow = tblsublimacion.getSelectedRow();
+        int selectedRow = tblsublimacionB.getSelectedRow();
         if (selectedRow == -1) {
             JOptionPane.showMessageDialog(null, "Por favor, selecciona un registro para eliminar.", "Advertencia", JOptionPane.WARNING_MESSAGE);
         } else {
@@ -519,7 +519,7 @@ public class Listado_Sublimacion extends javax.swing.JPanel {
                     JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]);
 
             if (choice == 0) {
-                Number id_sublimacion = (Number) tblsublimacion.getValueAt(selectedRow, 6); // Obtén el ID del registro seleccionado
+                Number id_sublimacion = (Number) tblsublimacionB.getValueAt(selectedRow, 6); // Obtén el ID del registro seleccionado
 
                 try {
                     Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
@@ -550,7 +550,7 @@ public class Listado_Sublimacion extends javax.swing.JPanel {
     String terminoBusqueda = ""; // Término de búsqueda actual
 
     private void cargarTablaEmpleados() {
-        DefaultTableModel modeloTabla = (DefaultTableModel) tblsublimacion.getModel();
+        DefaultTableModel modeloTabla = (DefaultTableModel) tblsublimacionB.getModel();
         modeloTabla.setRowCount(0); // Limpiar los datos existentes en la tabla
 
         PreparedStatement ps;
@@ -631,8 +631,8 @@ public class Listado_Sublimacion extends javax.swing.JPanel {
     }
 
     private void ajustarTabla(int filasDeseadas) {
-        tblsublimacion.setPreferredScrollableViewportSize(new Dimension(tblsublimacion.getPreferredSize().width, tblsublimacion.getRowHeight() * filasDeseadas));
-        tblsublimacion.setFillsViewportHeight(true);
+        tblsublimacionB.setPreferredScrollableViewportSize(new Dimension(tblsublimacionB.getPreferredSize().width, tblsublimacionB.getRowHeight() * filasDeseadas));
+        tblsublimacionB.setFillsViewportHeight(true);
     }
 
     private void siguientePagina() {
@@ -650,7 +650,7 @@ public class Listado_Sublimacion extends javax.swing.JPanel {
     }
 
     private void buscarDatos(String texto) {
-        DefaultTableModel modelTabla = (DefaultTableModel) tblsublimacion.getModel();
+        DefaultTableModel modelTabla = (DefaultTableModel) tblsublimacionB.getModel();
         modelTabla.setRowCount(0);
         boolean foundData = false;
 
@@ -734,7 +734,7 @@ public class Listado_Sublimacion extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JButton refrescarbtn;
-    private javax.swing.JTable tblsublimacion;
+    private javax.swing.JTable tblsublimacionB;
     public javax.swing.JTextField txtBuscar;
     private javax.swing.JButton verbtn;
     // End of variables declaration//GEN-END:variables
