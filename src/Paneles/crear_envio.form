@@ -16,7 +16,7 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
+          <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -41,46 +41,50 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Component id="jPanel2" alignment="1" max="32767" attributes="0"/>
               <Group type="102" alignment="1" attributes="0">
-                  <Group type="103" groupAlignment="1" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
-                          <Component id="id_cliente" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace pref="77" max="32767" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="id_sublimacion" alignment="1" min="-2" max="-2" attributes="0"/>
-                              <Group type="102" alignment="1" attributes="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                          <Component id="fechaentrega" alignment="0" pref="451" max="32767" attributes="0"/>
-                                          <Component id="txtCliente" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="productListComboBox" alignment="0" max="32767" attributes="0"/>
-                                      </Group>
-                                      <Component id="arreglo" alignment="0" min="-2" pref="451" max="-2" attributes="0"/>
-                                      <Component id="id_arreglo" alignment="0" min="-2" pref="43" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="sublimacion" min="-2" pref="406" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="txtcelular" pref="406" max="32767" attributes="0"/>
-                                          <Component id="jScrollPane1" max="32767" attributes="0"/>
-                                      </Group>
-                                  </Group>
+                  <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Group type="102" alignment="1" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="id_pedidosat" alignment="1" min="-2" pref="45" max="-2" attributes="0"/>
+                                  <Component id="id_cliente" alignment="1" min="-2" max="-2" attributes="0"/>
                               </Group>
+                              <EmptySpace min="-2" pref="436" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Component id="id_arreglo" min="-2" pref="43" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="487" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="32" pref="32" max="-2" attributes="0"/>
+                              <Component id="sublimacion" max="32767" attributes="0"/>
+                              <EmptySpace min="-2" pref="68" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace min="-2" pref="158" max="-2" attributes="0"/>
-                          <Component id="id_pedidosat" min="-2" pref="45" max="-2" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="arreglo" max="32767" attributes="0"/>
+                              <Component id="fechaentrega" alignment="1" pref="432" max="32767" attributes="0"/>
+                              <Component id="txtCliente" alignment="1" max="32767" attributes="0"/>
+                              <Component id="productListComboBox" alignment="0" max="32767" attributes="0"/>
+                          </Group>
                           <EmptySpace max="32767" attributes="0"/>
-                          <Component id="btnCrear" min="-2" pref="202" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="325" max="-2" attributes="0"/>
                       </Group>
                   </Group>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Component id="jScrollPane2" min="-2" pref="406" max="-2" attributes="0"/>
+                      <Component id="jScrollPane1" min="-2" pref="406" max="-2" attributes="0"/>
+                      <Component id="txtcelular" min="-2" pref="406" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="id_sublimacion" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="68" max="-2" attributes="0"/>
+              </Group>
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace min="-2" pref="418" max="-2" attributes="0"/>
+                  <Component id="btnCrear" min="-2" pref="202" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -91,35 +95,40 @@
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="id_cliente" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="txtcelular" max="32767" attributes="0"/>
-                      <Component id="txtCliente" min="-2" pref="52" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="txtCliente" alignment="3" min="-2" pref="52" max="-2" attributes="0"/>
+                      <Component id="txtcelular" alignment="3" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="25" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Group type="102" attributes="0">
                           <Component id="fechaentrega" min="-2" pref="65" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="productListComboBox" min="-2" pref="54" max="-2" attributes="0"/>
+                          <Component id="productListComboBox" max="32767" attributes="0"/>
                       </Group>
-                      <Component id="jScrollPane1" max="32767" attributes="0"/>
+                      <Component id="jScrollPane1" pref="137" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="1" attributes="0">
-                      <Component id="arreglo" min="-2" pref="56" max="-2" attributes="0"/>
-                      <Component id="sublimacion" min="-2" pref="63" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="id_sublimacion" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="btnCrear" min="-2" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="id_pedidosat" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="id_arreglo" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="-2" pref="73" max="-2" attributes="0"/>
+                          <Component id="id_sublimacion" min="-2" max="-2" attributes="0"/>
                       </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="arreglo" min="-2" pref="56" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="sublimacion" min="-2" pref="63" max="-2" attributes="0"/>
+                      </Group>
+                      <Component id="jScrollPane2" min="-2" pref="137" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="146" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="id_pedidosat" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="id_arreglo" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Component id="btnCrear" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="155" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -140,21 +149,21 @@
                       <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="btnatras" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="168" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-                      <Component id="btnatras" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="28" max="32767" attributes="0"/>
-                  </Group>
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="38" max="32767" attributes="0"/>
                       <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                      <Component id="btnatras" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -230,6 +239,9 @@
               </Border>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtcelularActionPerformed"/>
+          </Events>
         </Component>
         <Container class="javax.swing.JScrollPane" name="jScrollPane1">
           <AuxValues>
@@ -247,7 +259,7 @@
                 <Property name="wrapStyleWord" type="boolean" value="true"/>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                    <TitledBorder justification="2" position="2" title="Direccion">
+                    <TitledBorder justification="2" position="2" title="Direcci&#xf3;n">
                       <Font PropertyName="font" name="Arial Black" size="12" style="2"/>
                     </TitledBorder>
                   </Border>
@@ -399,6 +411,33 @@
             </Property>
           </Properties>
         </Component>
+        <Container class="javax.swing.JScrollPane" name="jScrollPane2">
+          <AuxValues>
+            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+          </AuxValues>
+
+          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+          <SubComponents>
+            <Component class="javax.swing.JTextArea" name="txtreferencia">
+              <Properties>
+                <Property name="columns" type="int" value="20"/>
+                <Property name="lineWrap" type="boolean" value="true"/>
+                <Property name="rows" type="int" value="5"/>
+                <Property name="wrapStyleWord" type="boolean" value="true"/>
+                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                  <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+                    <TitledBorder justification="2" position="2" title="Otra referencia de domicilio">
+                      <Font PropertyName="font" name="Arial Black" size="12" style="2"/>
+                    </TitledBorder>
+                  </Border>
+                </Property>
+              </Properties>
+              <Events>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtreferenciaKeyTyped"/>
+              </Events>
+            </Component>
+          </SubComponents>
+        </Container>
       </SubComponents>
     </Container>
   </SubComponents>
