@@ -715,6 +715,8 @@ public class Listado_Sublimacion extends javax.swing.JPanel {
 
         // Llama a la función de cargarTablaEmpleados() si es necesario recargar la tabla después de la búsqueda
         cargarTablaEmpleados(); // Recargar la tabla después de la búsqueda
+
+
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton Btn_Buscar;

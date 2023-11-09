@@ -83,11 +83,8 @@ public class Listado_Pedidos_Entregado_Sastreria extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
-        crearbtn = new javax.swing.JButton();
-        editarbtn = new javax.swing.JButton();
-        verbtn = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
         Texto_Buscar = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblPedidos = new javax.swing.JTable();
@@ -106,86 +103,47 @@ public class Listado_Pedidos_Entregado_Sastreria extends javax.swing.JPanel {
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel2.setText("Listado de pedidos entregados de sastrería");
 
+        jButton1.setBackground(new java.awt.Color(255, 153, 51));
+        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jButton1.setText("Volver");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(14, 14, 14)
+                .addContainerGap()
                 .addComponent(jLabel2)
-                .addContainerGap(541, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(56, 56, 56))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(59, 59, 59)
-                .addComponent(jLabel2)
-                .addContainerGap(51, Short.MAX_VALUE))
+                .addGap(42, 42, 42)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jLabel2))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
-
-        crearbtn.setBackground(new java.awt.Color(255, 153, 51));
-        crearbtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        crearbtn.setText("CREAR");
-        crearbtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                crearbtnActionPerformed(evt);
-            }
-        });
-
-        editarbtn.setBackground(new java.awt.Color(255, 153, 51));
-        editarbtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        editarbtn.setText("EDITAR");
-        editarbtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editarbtnActionPerformed(evt);
-            }
-        });
-
-        verbtn.setBackground(new java.awt.Color(255, 153, 51));
-        verbtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        verbtn.setText("VER");
-        verbtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                verbtnActionPerformed(evt);
-            }
-        });
-
-        jButton2.setBackground(new java.awt.Color(255, 153, 51));
-        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton2.setText("ELIMINAR");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)
-                    .addComponent(crearbtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(editarbtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)
-                    .addComponent(verbtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(49, Short.MAX_VALUE))
+            .addGap(0, 163, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(62, 62, 62)
-                .addComponent(crearbtn)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(editarbtn)
-                .addGap(18, 18, 18)
-                .addComponent(verbtn)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton2)
-                .addContainerGap(69, Short.MAX_VALUE))
+            .addGap(0, 275, Short.MAX_VALUE)
         );
 
         Texto_Buscar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -379,10 +337,10 @@ public class Listado_Pedidos_Entregado_Sastreria extends javax.swing.JPanel {
     private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
         siguientePagina();
     }//GEN-LAST:event_btnSiguienteActionPerformed
+    int selectedRow1;
 
-    private void crearbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearbtnActionPerformed
-
-        Crear_Pedido p2 = new Crear_Pedido();
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+       Listado_Pedidos_Pendientes p2 = new Listado_Pedidos_Pendientes();
         p2.setSize(1024, 640);
         p2.setLocation(0, 0);
 
@@ -390,334 +348,9 @@ public class Listado_Pedidos_Entregado_Sastreria extends javax.swing.JPanel {
         panelprincipal.add(p2, BorderLayout.CENTER);
         panelprincipal.revalidate();
         panelprincipal.repaint();
-    }//GEN-LAST:event_crearbtnActionPerformed
-    int selectedRow1;
-
-    private void verbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verbtnActionPerformed
-
-        selectedRow1 = tblPedidos.getSelectedRow();
-        if (selectedRow1 == -1)
-        {
-            JOptionPane.showMessageDialog(null, "Seleccione un pedido para poder visualizarla");
-            return;
-        }
-
-        try
-        {
-
-            int fila = tblPedidos.getSelectedRow();
-            int valorEntero = Integer.parseInt(tblPedidos.getValueAt(fila, 6).toString());
-//            String valorCelda3 = tblsublimacion.getValueAt(fila, 4).toString();
-            PreparedStatement ps;
-            ResultSet rs;
-
-            Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
-            ps = conn.prepareStatement("SELECT * FROM cliente JOIN PedidoSastreria ON cliente.id_cliente = PedidoSastreria.id_cliente where id_sastreria =?  ");
-            ps.setInt(1, valorEntero);
-
-//            ps.setString(3, valorCelda3);
-            rs = ps.executeQuery();
-
-            while (rs.next())
-            {
-
-                String nombre = rs.getString("nombre");
-                String apellido = rs.getString("apellido");
-                //   String telefono = rs.getString("numero_telefono");
-
-                ver_sast mostrar = new ver_sast();
-
-//                ver.fechaCita.setText(rs.getString("fecha_cita"));
-//                ver.cbxHoras.setText(rs.getString("hora_cita"));
-//                ver.txtMotivo.setText(rs.getString("motivo"));
-                mostrar.txtCliente.setText(nombre + " " + apellido);
-                mostrar.txtCliente.setEditable(false);
-                mostrar.txtTel.setText(rs.getString("numero_telefono"));
-                mostrar.txtTel.setEditable(false);
-                mostrar.cbxPrenda.setSelectedItem(rs.getString("Prenda"));
-
-                mostrar.cbxPrenda.setEnabled(false);
-               mostrar.cbxEstado.setSelectedItem(rs.getString("estado"));
-               mostrar.cbxEstado.setEnabled(false);
-                mostrar.txtCintura.setText(rs.getString("cintura"));
-                mostrar.txtCintura.setEditable(false);
-                mostrar.txtCadera.setText(rs.getString("cadera"));
-                mostrar.txtCadera.setEditable(false);
-                mostrar.txtLargo.setText(rs.getString("largo"));
-                mostrar.txtLargo.setEditable(false);
-                mostrar.txtLManga.setText(rs.getString("largoManga"));
-                mostrar.txtLManga.setEditable(false);
-                mostrar.txtAManga.setText(rs.getString("anchoManga"));
-                mostrar.txtAManga.setEditable(false);
-                mostrar.txtCuello.setText(rs.getString("cuello"));
-                mostrar.txtCuello.setEditable(false);
-                mostrar.txtPecho.setText(rs.getString("pecho"));
-                mostrar.txtPecho.setEditable(false);
-                mostrar.txtMuneca.setText(rs.getString("cintura"));
-                mostrar.txtMuneca.setEditable(false);
-                mostrar.txtHombro.setText(rs.getString("hombro"));
-                mostrar.txtHombro.setEditable(false);
-                mostrar.txtAEspalda.setText(rs.getString("anchoEsp"));
-                mostrar.txtAEspalda.setEditable(false);
-                mostrar.txtLEspalda.setText(rs.getString("largoEsp"));
-                mostrar.txtLEspalda.setEditable(false);
-                mostrar.txtRodilla.setText(rs.getString("rodilla"));
-                mostrar.txtRodilla.setEditable(false);
-                mostrar.txtTobillo.setText(rs.getString("tobillo"));
-                mostrar.txtTobillo.setEditable(false);
-                mostrar.txtTiro.setText(rs.getString("tiro"));
-                mostrar.txtTiro.setEditable(false);
-                mostrar.txtMuslo.setText(rs.getString("muslo"));
-                mostrar.txtMuslo.setEditable(false);
-                mostrar.txtDescrip.setText(rs.getString("descripcion"));
-                mostrar.txtDescrip.setEditable(false);
-                mostrar.txtprecio.setText(rs.getString("precio"));
-                mostrar.txtprecio.setEditable(false);
-
-                /* Blob fotos = rs.getBlob("imagen1");
-                    
-                       if (fotos != null)
-                       {
-                           byte[] recuperar = fotos.getBytes(1, (int) fotos.length());
-                       BufferedImage img = ImageIO.read(new ByteArrayInputStream(recuperar));
-                    //Define las dimensiones deseadas para la imagen
-                       int anchoDeseado = 200; // Reemplaza esto con el ancho que desees
-                       int altoDeseado = 150;  // Reemplaza esto con el alto que desees
-
-                    //Escala la imagen a las dimensiones deseadas
-                        Image imagen = img.getScaledInstance(anchoDeseado, altoDeseado, Image.SCALE_SMOOTH);
-
-                  //// Establece la imagen escalada en el componente mostrar.txtimagen
-                       mostrar.imagen1.setIcon(new ImageIcon(imagen));
-                        
-                       } else
-                       {
-                            ImageIcon imagenIcon;
-                           // Cargar una imagen predeterminada si no se encuentra la imagen en la base de datos
-                            imagenIcon = new ImageIcon(getClass().getResource("/img/agregar.png"));
-                           mostrar.imagen1.setIcon(imagenIcon);
-                        }
-
-                       Blob fotos1 = rs.getBlob("imagen2");
-                    
-                       if (fotos1 != null)
-                       {
-                           byte[] recuperar = fotos1.getBytes(1, (int) fotos1.length());
-                       BufferedImage img = ImageIO.read(new ByteArrayInputStream(recuperar));
-                    //Define las dimensiones deseadas para la imagen
-                       int anchoDeseado = 200; // Reemplaza esto con el ancho que desees
-                       int altoDeseado = 150;  // Reemplaza esto con el alto que desees
-
-                    //Escala la imagen a las dimensiones deseadas
-                        Image imagen = img.getScaledInstance(anchoDeseado, altoDeseado, Image.SCALE_SMOOTH);
-
-                  //// Establece la imagen escalada en el componente mostrar.txtimagen
-                       mostrar.imagen2.setIcon(new ImageIcon(imagen));
-                        
-                       } else
-                       {
-                            ImageIcon imagenIcon;
-                           // Cargar una imagen predeterminada si no se encuentra la imagen en la base de datos
-                            imagenIcon = new ImageIcon(getClass().getResource("/img/agregar.png"));
-                           mostrar.imagen2.setIcon(imagenIcon);
-                        }
-                       Blob fotos2 = rs.getBlob("imagen3");
-                    
-                       if (fotos2 != null)
-                       {
-                           byte[] recuperar = fotos2.getBytes(1, (int) fotos2.length());
-                       BufferedImage img = ImageIO.read(new ByteArrayInputStream(recuperar));
-                    //Define las dimensiones deseadas para la imagen
-                       int anchoDeseado = 200; // Reemplaza esto con el ancho que desees
-                       int altoDeseado = 150;  // Reemplaza esto con el alto que desees
-
-                    //Escala la imagen a las dimensiones deseadas
-                        Image imagen = img.getScaledInstance(anchoDeseado, altoDeseado, Image.SCALE_SMOOTH);
-
-                  //// Establece la imagen escalada en el componente mostrar.txtimagen
-                       mostrar.imagen3.setIcon(new ImageIcon(imagen));
-                        
-                       } else
-                       {
-                            ImageIcon imagenIcon;
-                           // Cargar una imagen predeterminada si no se encuentra la imagen en la base de datos
-                            imagenIcon = new ImageIcon(getClass().getResource("/img/descarga.png"));
-                           mostrar.imagen3.setIcon(imagenIcon);
-                        }
-                        
-                 */
-                //Recuperar la imagen de la base de datos
-                byte[] imagenA1 = rs.getBytes("imagen1");
-                byte[] imagenA2 = rs.getBytes("imagen2");
-                byte[] imagenA3 = rs.getBytes("imagen3");
-
-                // Comprobar si los arreglos de bytes de imagen no son nulos
-                if (imagenA1 != null)
-                {
-                    // Crear un objeto ImageIcon a partir de los bytes de la imagen
-                    ImageIcon imagenIcono = new ImageIcon(imagenA1);
-                    // Establecer el ImageIcon en el JLabel
-                    mostrar.imagen1.setIcon(imagenIcono);
-                } else
-                {
-                    // Si el arreglo de bytes de imagen es nulo, puedes mostrar un mensaje o establecer un valor predeterminado.
-                    mostrar.imagen1.setIcon(null); // O establecer un icono predeterminado
-                }
-
-                if (imagenA2 != null)
-                {
-                    ImageIcon imagenIcon2 = new ImageIcon(imagenA2);
-                    mostrar.imagen2.setIcon(imagenIcon2);
-                } else
-                {
-                    mostrar.imagen2.setIcon(null);
-                }
-
-                if (imagenA3 != null)
-                {
-                    ImageIcon imagenIcon3 = new ImageIcon(imagenA3);
-                    mostrar.imagen3.setIcon(imagenIcon3);
-                } else
-                {
-                    mostrar.imagen3.setIcon(null);
-                }
-
-                mostrar.setSize(1024, 640);
-                mostrar.setLocation(0, 0);
-
-                panelprincipal.revalidate();
-                panelprincipal.repaint();
-                panelprincipal.removeAll();
-                panelprincipal.add(mostrar, BorderLayout.CENTER);
-
-                panelprincipal.revalidate();
-                panelprincipal.repaint();
-
-                break; // Salir del bucle después de encontrar el elemento seleccionado
-
-            }
-
-            rs.close();
-            ps.close();
-            conn.close();
-
-        } catch (SQLException e)
-        {
-            e.printStackTrace();
-            // Manejar cualquier excepción que pueda ocurrir durante la consulta a la base de datos
-        }
-
-    }//GEN-LAST:event_verbtnActionPerformed
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     int selectedRow2;
-    private void editarbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarbtnActionPerformed
-        /*
-        // TODO add your handling code here:
-        selectedRow2 = tblCitas.getSelectedRow();
-        if (selectedRow2 == -1)
-        {
-            JOptionPane.showMessageDialog(null, "Seleccione una cita para poder editarla");
-            return;
-        }
-
-        try
-        {
-
-            int fila = tblCitas.getSelectedRow();
-            String valorCelda = tblCitas.getValueAt(fila, 1).toString();
-            String valorCelda2 = tblCitas.getValueAt(fila, 2).toString();
-            String valorCelda3 = tblCitas.getValueAt(fila, 4).toString();
-            PreparedStatement ps;
-            ResultSet rs;
-
-            Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
-            ps = conn.prepareStatement("SELECT * FROM cliente JOIN Cita ON cliente.id_cliente = Cita.id_cliente where nombre =? and apellido=? and fecha_cita=? ");
-            ps.setString(1, valorCelda);
-            ps.setString(2, valorCelda2);
-            ps.setString(3, valorCelda3);
-            rs = ps.executeQuery();
-
-            while (rs.next())
-            {
-
-                String nombre = rs.getString("nombre");
-                String apellido = rs.getString("apellido");
-                EditarCita editar = new EditarCita();
-
-                editar.fechaCita.setDate(rs.getDate("fecha_cita"));
-                editar.cbxHoras.setSelectedItem(rs.getString("hora_cita"));
-                editar.txtMotivo.setText(rs.getString("motivo"));
-                editar.txtCliente.setText(nombre + " " + apellido);
-              
-                editar.id_cliente.setText(rs.getString("id"));
-
-                editar.setSize(1024, 640);
-                editar.setLocation(0, 0);
-
-                panelprincipal.revalidate();
-                panelprincipal.repaint();
-                panelprincipal.removeAll();
-                panelprincipal.add(editar, BorderLayout.CENTER);
-
-                panelprincipal.revalidate();
-                panelprincipal.repaint();
-
-                break; // Salir del bucle después de encontrar el elemento seleccionado
-
-            }
-
-            rs.close();
-            ps.close();
-            conn.close();
-
-        } catch (SQLException e)
-        {
-            e.printStackTrace();
-            // Manejar cualquier excepción que pueda ocurrir durante la consulta a la base de datos
-        }
-         */
-    }//GEN-LAST:event_editarbtnActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        int selectedRow = tblPedidos.getSelectedRow();
-        if (selectedRow == -1)
-        {
-            JOptionPane.showMessageDialog(null, "Por favor, selecciona un registro para eliminar.", "Advertencia", JOptionPane.WARNING_MESSAGE);
-        } else
-        {
-            Object[] options =
-            {
-                "Sí, eliminar", "No, cancelar"
-            };
-            int choice = JOptionPane.showOptionDialog(null, "¿Estás seguro de que deseas eliminar este registro?", "Confirmación",
-                    JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]);
-
-            if (choice == 0)
-            {
-                Number id_sublimacion = (Number) tblPedidos.getValueAt(selectedRow, 6); // Obtén el ID del registro seleccionado
-
-                try
-                {
-                    Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
-
-                    String sql = "DELETE FROM PedidoSastreria WHERE id_sastreria = ?";
-                    PreparedStatement pstmt = conn.prepareStatement(sql);
-                    pstmt.setInt(1, id_sublimacion.intValue()); // Utiliza el ID del registro seleccionado
-                    pstmt.executeUpdate();
-                    JOptionPane.showMessageDialog(null, "Registro eliminado con éxito");
-
-                    // Lógica para actualizar la tabla después de la eliminación
-                    cargarTablaEmpleados();
-
-                } catch (SQLException ex)
-                {
-                    ex.printStackTrace();
-                    JOptionPane.showMessageDialog(null, "Error al eliminar el registro: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-                }
-            }
-        }
-    }//GEN-LAST:event_jButton2ActionPerformed
-
     int paginaActual = 1; // Página actual
     int filasPorPagina = 20; // Número de filas a mostrar por página
     int totalFilas = 0; // Total de filas en la tabla
@@ -990,9 +623,7 @@ public class Listado_Pedidos_Entregado_Sastreria extends javax.swing.JPanel {
     private javax.swing.JLabel Texto_Contable;
     private javax.swing.JButton btnAnterior;
     private javax.swing.JButton btnSiguiente;
-    private javax.swing.JButton crearbtn;
-    private javax.swing.JButton editarbtn;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
@@ -1001,7 +632,6 @@ public class Listado_Pedidos_Entregado_Sastreria extends javax.swing.JPanel {
     private javax.swing.JButton refrescarbtn;
     private javax.swing.JTable tblPedidos;
     public javax.swing.JTextField txtBuscar;
-    private javax.swing.JButton verbtn;
     // End of variables declaration//GEN-END:variables
 
     private void mostrarVentanaDeEdicion(EditarCita editarCita) {

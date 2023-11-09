@@ -608,7 +608,7 @@ public class Listado_Pedidos_Arreglos extends javax.swing.JPanel {
     }//GEN-LAST:event_crearbtn1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        Listado_Pedidos_Entregado_Arreglo p2 = new Listado_Pedidos_Entregado_Arreglo();
+        Listado_Pedidos_Entregado_arreglo p2 = new Listado_Pedidos_Entregado_arreglo();
         p2.setSize(1024, 640);
         p2.setLocation(0, 0);
 
