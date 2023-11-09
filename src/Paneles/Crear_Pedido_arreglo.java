@@ -354,19 +354,18 @@ public class Crear_Pedido_arreglo extends javax.swing.JPanel {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(id_cliente)
                                 .addGap(129, 129, 129)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(txtCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(txtTel, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                        .addComponent(cbxarreglo, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(cbxEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(crea_cliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(149, 149, 149)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                            .addComponent(txtCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGap(18, 18, 18)
+                                            .addComponent(txtTel, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                            .addComponent(cbxarreglo, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(cbxEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(crea_cliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(197, 197, 197)
@@ -374,11 +373,11 @@ public class Crear_Pedido_arreglo extends javax.swing.JPanel {
                         .addGap(68, 68, 68)
                         .addComponent(labelPrendas, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(352, 352, 352)
-                        .addComponent(txtprecio, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(479, 479, 479)
-                        .addComponent(btnCrear)))
+                        .addComponent(btnCrear))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(371, 371, 371)
+                        .addComponent(txtprecio, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -409,13 +408,13 @@ public class Crear_Pedido_arreglo extends javax.swing.JPanel {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(60, 60, 60)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(69, 69, 69)
-                        .addComponent(txtprecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(41, 41, 41)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(44, 44, 44)
+                        .addComponent(txtprecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(36, 36, 36)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(56, 56, 56)
                 .addComponent(btnCrear)
-                .addGap(56, 56, 56))
+                .addGap(104, 104, 104))
         );
 
         id_cliente.setVisible(false);
@@ -431,7 +430,7 @@ public class Crear_Pedido_arreglo extends javax.swing.JPanel {
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 640, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 725, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -643,7 +642,7 @@ public class Crear_Pedido_arreglo extends javax.swing.JPanel {
     }//GEN-LAST:event_txtClienteActionPerformed
 
     private void btnvolver1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnvolver1ActionPerformed
-      Listado_Pedidos_Arreglos l2 = new Listado_Pedidos_Arreglos();
+        Listado_Pedidos_Arreglos l2 = new Listado_Pedidos_Arreglos();
         l2.setSize(1024, 640);
         l2.setLocation(0, 0);
 
@@ -664,23 +663,17 @@ public class Crear_Pedido_arreglo extends javax.swing.JPanel {
         if (c == '0' && (texto.isEmpty() || texto.equals("0")))
         {
             evt.consume(); // Evita que se inicie con un cero
-        } else if ((c < '0' || c > '9') || texto.length() >= 5)
+        } else if (!Character.isDigit(c) || texto.length() >= 5)
         {
-            evt.consume(); // Evita que se ingresen más de 6 caracteres o caracteres que no sean dígitos
+            evt.consume(); // Evita que se ingresen más de 5 cifras o caracteres que no sean dígitos
         }
+
     }//GEN-LAST:event_txtprecioKeyTyped
 
     private void txtDescripcionArreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDescripcionArreKeyTyped
-        // TODO add your handling code here:
-         char c = evt.getKeyChar(); // Obtener el carácter ingresado
-
-        if (txtDescripcionArre.getText().isEmpty() && Character.isWhitespace(c))
-        {
-            evt.consume(); // Consumir el evento si es un espacio en blanco en la primera letra
-        } else if (txtDescripcionArre.getText().length() >= 300)
-        {
-            evt.consume(); // Consumir el evento si se ha alcanzado la longitud máxima
-        }
+      char c = evt.getKeyChar();
+        if (Character.isWhitespace(c) && txtDescripcionArre.getText().isEmpty() || (c < 'a' || c > 'z') && (c < 'A' || c > 'Z') && ((int) evt.getKeyChar() <= 500 && evt.getKeyChar() >= 164) && c != KeyEvent.VK_SPACE || txtDescripcionArre.getText().length() >= 300)
+            evt.consume();
     }//GEN-LAST:event_txtDescripcionArreKeyTyped
 
     private File[] archivos = new File[3];
