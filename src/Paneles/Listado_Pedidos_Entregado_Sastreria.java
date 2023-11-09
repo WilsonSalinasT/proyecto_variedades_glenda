@@ -246,8 +246,7 @@ public class Listado_Pedidos_Entregado_Sastreria extends javax.swing.JPanel {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(btnAnterior, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(btnSiguiente, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(8, 8, 8)))))
+                                .addComponent(btnSiguiente, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -376,7 +375,7 @@ public class Listado_Pedidos_Entregado_Sastreria extends javax.swing.JPanel {
             ps = conn.prepareStatement("SELECT COUNT(*) AS TotalFilas "
                     + "FROM Cliente E "
                     + "JOIN PedidoSastreria V ON E.id_cliente = V.id_cliente "
-                    + "WHERE E.nombre LIKE ? OR E.apellido LIKE ? OR V.fechaPedido LIKE ?");
+                    + "WHERE (E.nombre LIKE ? OR E.apellido LIKE ? OR V.fechaPedido LIKE ?) and V.estado = 'entregado' ");
             ps.setString(1, "%" + terminoBusqueda + "%");
             ps.setString(2, "%" + terminoBusqueda + "%");
             ps.setString(3, "%" + terminoBusqueda + "%");

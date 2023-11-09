@@ -63,7 +63,7 @@
                   <Component id="Texto_Contable" min="-2" pref="349" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
                   <Component id="btnAnterior" min="-2" pref="35" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="btnSiguiente" min="-2" pref="38" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="190" max="-2" attributes="0"/>
               </Group>

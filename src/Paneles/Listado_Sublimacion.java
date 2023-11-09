@@ -448,8 +448,8 @@ public class Listado_Sublimacion extends javax.swing.JPanel {
                     BufferedImage img = ImageIO.read(new ByteArrayInputStream(recuperar));
 
 // Define las dimensiones deseadas para la imagen
-                    int anchoDeseado = 200; // Reemplaza esto con el ancho que desees
-                    int altoDeseado = 150;  // Reemplaza esto con el alto que desees
+                    int anchoDeseado = 230; // Reemplaza esto con el ancho que desees
+                    int altoDeseado = 220;  // Reemplaza esto con el alto que desees
 
 // Escala la imagen a las dimensiones deseadas
                     Image imagen = img.getScaledInstance(anchoDeseado, altoDeseado, Image.SCALE_SMOOTH);
