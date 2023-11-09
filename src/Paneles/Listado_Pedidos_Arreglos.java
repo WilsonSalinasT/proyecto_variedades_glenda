@@ -683,7 +683,7 @@ public class Listado_Pedidos_Arreglos extends javax.swing.JPanel {
             ps = conn.prepareStatement("SELECT COUNT(*) AS TotalFilas "
                     + "FROM Cliente E "
                     + "JOIN PedidoArreglo V ON E.id_cliente = V.id_cliente "
-                    + "WHERE E.nombre LIKE ? OR E.apellido LIKE ? OR V.fechaPedido LIKE ?");
+                    + "WHERE (E.nombre LIKE ? OR E.apellido LIKE ? OR V.fechaPedido LIKE ?) and V.estado = 'pendiente' ");
             ps.setString(1, "%" + terminoBusqueda + "%");
             ps.setString(2, "%" + terminoBusqueda + "%");
             ps.setString(3, "%" + terminoBusqueda + "%");
