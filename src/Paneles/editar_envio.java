@@ -41,11 +41,11 @@ public class editar_envio extends javax.swing.JPanel {
         productListComboBox.setPreferredSize(new Dimension(438, 54));
         arreglo.setPreferredSize(new Dimension(438, 54));
         sublimacion.setPreferredSize(new Dimension(438, 54));
-        fechaentrega.setMinSelectableDate(new Date());
+        fechaenvio.setMinSelectableDate(new Date());
 
         Calendar maxDate = Calendar.getInstance();
         maxDate.add(Calendar.MONTH, 2); // Suma dos meses a la fecha actual
-        fechaentrega.setMaxSelectableDate(maxDate.getTime());
+        fechaenvio.setMaxSelectableDate(maxDate.getTime());
 
         configurarComboBoxClientes();
 
@@ -100,7 +100,7 @@ public class editar_envio extends javax.swing.JPanel {
             }
         });
 
-         id_pedidosat.getDocument().addDocumentListener(new DocumentListener() {
+        id_pedidosat.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
                 actualizarComboBoxSastreria();
@@ -186,6 +186,7 @@ public class editar_envio extends javax.swing.JPanel {
                     txtCliente.addItem(nombreCompleto);
                     nombresCompletos.add(nombreCompleto); // Agrega el nombre completo al conjunto
                     txtcelular.setText(telefono);
+                    txtdireccion.setText(rs.getString("direccion"));
                 }
             }
 
@@ -206,7 +207,7 @@ public class editar_envio extends javax.swing.JPanel {
 
             // Realiza una consulta en la base de datos para buscar el nombre correspondiente al número ingresado
             // Reemplaza este bloque con tu consulta real en la base de datos
-            String sql = "SELECT nombre, apellido, numero_telefono FROM Cliente WHERE id_cliente = ?";
+            String sql = "SELECT nombre, apellido, numero_telefono,direccion FROM Cliente WHERE id_cliente = ?";
 
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, numeroIngresado);
@@ -218,9 +219,11 @@ public class editar_envio extends javax.swing.JPanel {
                 String nombre = rs.getString("nombre");
                 String apellido = rs.getString("apellido");
                 String telefono = rs.getString("numero_telefono");
+                String direccion = rs.getString("direccion");
                 String nombreCompleto = nombre + " " + apellido;
                 nuevoModelo.addElement(nombreCompleto);
                 txtcelular.setText(telefono);
+                txtdireccion.setText(direccion);
             }
 
             txtCliente.setModel(nuevoModelo);
@@ -318,7 +321,7 @@ public class editar_envio extends javax.swing.JPanel {
 
         arreglo.setModel(model);
     }
-    
+
     public void actualizarComboBoxSastreria() {
         String numeroIngresado = id_pedidosat.getText();
         DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>();
@@ -367,7 +370,7 @@ public class editar_envio extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         btnatras = new javax.swing.JButton();
         txtCliente = new javax.swing.JComboBox<>();
-        fechaentrega = new com.toedter.calendar.JDateChooser();
+        fechaenvio = new com.toedter.calendar.JDateChooser();
         txtcelular = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtdireccion = new javax.swing.JTextArea();
@@ -389,7 +392,7 @@ public class editar_envio extends javax.swing.JPanel {
 
         jLabel2.setBackground(new java.awt.Color(0, 0, 0));
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel2.setText("Crear envio");
+        jLabel2.setText("Editar envio");
 
         btnatras.setBackground(new java.awt.Color(255, 153, 51));
         btnatras.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -426,7 +429,7 @@ public class editar_envio extends javax.swing.JPanel {
         txtCliente.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(null, "Nombre del cliente:", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12)))); // NOI18N
         txtCliente.setEnabled(false);
 
-        fechaentrega.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Fecha de Entrega", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12))); // NOI18N
+        fechaenvio.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Fecha de Entrega", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12))); // NOI18N
 
         txtcelular.setEditable(false);
         txtcelular.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Teléfono", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 1, 12))); // NOI18N
@@ -537,7 +540,7 @@ public class editar_envio extends javax.swing.JPanel {
                         .addGap(30, 30, 30)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(arreglo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(fechaentrega, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 432, Short.MAX_VALUE)
+                            .addComponent(fechaenvio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 432, Short.MAX_VALUE)
                             .addComponent(txtCliente, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(productListComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
@@ -568,7 +571,7 @@ public class editar_envio extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(fechaentrega, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(fechaenvio, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(productListComboBox))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE))
@@ -620,8 +623,10 @@ public class editar_envio extends javax.swing.JPanel {
 
         String nombre = (String) txtCliente.getSelectedItem();
 
-        Date fecha = fechaentrega.getDate();
+//        Date fecha = fechaenvio.getDate();
+        java.util.Date fecha = fechaenvio.getDate();
         String idC = id_cliente.getText();
+        String idEnvio = id_envio.getText();
         String idSa = id_pedidosat.getText();
         String idA = id_arreglo.getText();
         String idS = id_sublimacion.getText();
@@ -629,29 +634,12 @@ public class editar_envio extends javax.swing.JPanel {
 
         StringBuilder camposVacios = new StringBuilder("Los siguientes campos están vacíos:");
 
-        if (nombre.equals("Seleccione"))
-        {
-            camposVacios.append("\n - Nombre");
-        }
         if (fecha == null)
         {
             camposVacios.append("\n - Fecha");
         }
-        String categoria1 = (String) productListComboBox.getSelectedItem();
-        String categoria2 = (String) arreglo.getSelectedItem();
-        String categoria3 = (String) sublimacion.getSelectedItem();
 
-        if (categoria1.equals("Seleccione") && categoria2.equals("Seleccione") && categoria3.equals("Seleccione"))
-        {
-            // Ningún JComboBox tiene una selección válida
-            camposVacios.append("\n - Debe seleccionar al menos una categoría como sastreria,arreglos,sublimacion .");
-        } else
-        {
-            // Al menos uno de los JComboBox tiene una selección válida
-            // Puedes realizar alguna acción adicional aquí
-        }
         // Obtiene el elemento seleccionado en el JComboBox
-
         if (!camposVacios.toString().equals("Los siguientes campos están vacíos:"))
         {
             JOptionPane.showMessageDialog(null, camposVacios.toString(), "Campos Vacíos", JOptionPane.ERROR_MESSAGE);
@@ -664,29 +652,27 @@ public class editar_envio extends javax.swing.JPanel {
                 Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
                 Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
 
-                PreparedStatement insertPs = conn.prepareStatement("INSERT INTO Envios (fechaenvio, id_cliente, id_sastreria, id_arreglo, id_sublimacion, referencia) VALUES (?, ?, ?, ?, ?, ?)");
-                insertPs.setDate(1, new java.sql.Date(fecha.getTime()));
-                insertPs.setObject(2, idC);
-                insertPs.setObject(3, idSa); // Puede ser null si id_sastreria es nulo
-                insertPs.setObject(4, idA); // Puede ser null si id_arreglo es nulo
-                insertPs.setObject(5, idS); // Puede ser null si id_sublimacion es nulo
-                insertPs.setObject(6, referencia);
+                PreparedStatement updatePs = conn.prepareStatement("UPDATE Envios SET referencia = ? , fechaenvio = ? WHERE id_envio = ?");
 
-                insertPs.executeUpdate();
-                JOptionPane.showMessageDialog(null, "Registro guardado");
+                updatePs.setObject(1, referencia);
+                updatePs.setDate(2,  new java.sql.Date(fecha.getTime()));
+                updatePs.setObject(3, idEnvio);
+
+                updatePs.executeUpdate();
+                JOptionPane.showMessageDialog(null, "Registro actualizado");
 
 //                TIENE QUE LLEVAR AL LISTADO DE CITAS
-//                Listado_Citas cli = new Listado_Citas();
-//
-//                cli.setSize(1024, 640);
-//                cli.setLocation(0, 0);
-//
-//                panelprincipal.revalidate();
-//                panelprincipal.repaint();
-//                panelprincipal.removeAll();
-//                panelprincipal.add(cli, BorderLayout.CENTER);
-//                panelprincipal.revalidate();
-//                panelprincipal.repaint();
+                Listado_de_envios cli = new Listado_de_envios();
+
+                cli.setSize(1024, 640);
+                cli.setLocation(0, 0);
+
+                panelprincipal.revalidate();
+                panelprincipal.repaint();
+                panelprincipal.removeAll();
+                panelprincipal.add(cli, BorderLayout.CENTER);
+                panelprincipal.revalidate();
+                panelprincipal.repaint();
             } catch (SQLException e)
             {
                 JOptionPane.showMessageDialog(null, e.toString(), "Error de SQL", JOptionPane.ERROR_MESSAGE);
@@ -726,7 +712,7 @@ public class editar_envio extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> arreglo;
     private javax.swing.JButton btnCrear;
     private javax.swing.JButton btnatras;
-    private com.toedter.calendar.JDateChooser fechaentrega;
+    public com.toedter.calendar.JDateChooser fechaenvio;
     public javax.swing.JTextField id_arreglo;
     public javax.swing.JTextField id_cliente;
     public javax.swing.JTextField id_envio;

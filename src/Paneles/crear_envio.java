@@ -725,17 +725,17 @@ public class crear_envio extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(null, "Registro guardado");
 
 //                TIENE QUE LLEVAR AL LISTADO DE CITAS
-//                Listado_Citas cli = new Listado_Citas();
-//
-//                cli.setSize(1024, 640);
-//                cli.setLocation(0, 0);
-//
-//                panelprincipal.revalidate();
-//                panelprincipal.repaint();
-//                panelprincipal.removeAll();
-//                panelprincipal.add(cli, BorderLayout.CENTER);
-//                panelprincipal.revalidate();
-//                panelprincipal.repaint();
+                Listado_de_envios cli = new Listado_de_envios();
+
+                cli.setSize(1024, 640);
+                cli.setLocation(0, 0);
+
+                panelprincipal.revalidate();
+                panelprincipal.repaint();
+                panelprincipal.removeAll();
+                panelprincipal.add(cli, BorderLayout.CENTER);
+                panelprincipal.revalidate();
+                panelprincipal.repaint();
             } catch (SQLException e)
             {
                 JOptionPane.showMessageDialog(null, e.toString(), "Error de SQL", JOptionPane.ERROR_MESSAGE);

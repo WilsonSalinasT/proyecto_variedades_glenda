@@ -527,13 +527,13 @@ public class Listado_de_envios extends javax.swing.JPanel {
             while (rs.next())
             {
 
-                String id_envio = rs.getString("id_cliente");
+                String id_envio = rs.getString("id_envio");
                 String id_cliente = rs.getString("id_cliente");
                 String id_sastreria = rs.getString("id_sastreria");
                 String id_arreglo = rs.getString("id_arreglo");
                 String id_sublimacion = rs.getString("id_sublimacion");
                 String referencia = rs.getString("referencia");
-                
+                 
 
                 editar_envio editar = new editar_envio();
 
@@ -542,14 +542,9 @@ public class Listado_de_envios extends javax.swing.JPanel {
                 editar.id_pedidosat.setText(id_sastreria);
                 editar.id_arreglo.setText(id_arreglo);
                 editar.id_sublimacion.setText(id_sublimacion);
-                 editar.txtreferencia.setText(referencia);
+                editar.txtreferencia.setText(referencia);
+                editar.fechaenvio.setDate(rs.getDate("fechaenvio"));
 
-//                editar.fechaCita.setDate(rs.getDate("fecha_cita"));
-//                editar.cbxHoras.setSelectedItem(rs.getString("hora_cita"));
-//                editar.txtMotivo.setText(rs.getString("motivo"));
-//                editar.txtCliente.setText(nombre + " " + apellido);
-//              
-//                editar.id_cliente.setText(rs.getString("id"));
                 editar.setSize(1024, 640);
                 editar.setLocation(0, 0);
 
