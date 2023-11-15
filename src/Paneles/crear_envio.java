@@ -384,31 +384,31 @@ public class crear_envio extends javax.swing.JPanel {
 //        });
     }
 
-    public void actualizarComboBoxPorNumero(int numero) {
-        DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>();
-        try
-        {
-            Connection connection = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
-            PreparedStatement preparedStatement = connection.prepareStatement("SELECT material,precio,fechaPedido FROM PedidoSublimacion WHERE id_sublimacion = ? and estado = 'pendiente'");
-            preparedStatement.setInt(1, numero);
-            ResultSet rs = preparedStatement.executeQuery();
-
-            while (rs.next())
-            {
-                String material = rs.getString("material");
-                String precio = rs.getString("precio");
-                String fechaPedido = rs.getString("fechaPedido");
-                model.addElement("Material: " + material + " Precio: " + precio + " Fecha de pedido: " + fechaPedido);
-            }
-
-            connection.close();
-        } catch (SQLException ex)
-        {
-            ex.printStackTrace();
-        }
-
-        sublimacion.setModel(model);
-    }
+//    public void actualizarComboBoxPorNumero(int numero) {
+//        DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>();
+//        try
+//        {
+//            Connection connection = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
+//            PreparedStatement preparedStatement = connection.prepareStatement("SELECT material,precio,fechaPedido FROM PedidoSublimacion WHERE id_sublimacion = ? and estado = 'pendiente'");
+//            preparedStatement.setInt(1, numero);
+//            ResultSet rs = preparedStatement.executeQuery();
+//
+//            while (rs.next())
+//            {
+//                String material = rs.getString("material");
+//                String precio = rs.getString("precio");
+//                String fechaPedido = rs.getString("fechaPedido");
+//                model.addElement("Material: " + material + " Precio: " + precio + " Fecha de pedido: " + fechaPedido);
+//            }
+//
+//            connection.close();
+//        } catch (SQLException ex)
+//        {
+//            ex.printStackTrace();
+//        }
+//
+//        sublimacion.setModel(model);
+//    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -440,6 +440,7 @@ public class crear_envio extends javax.swing.JPanel {
         txtreferencia = new javax.swing.JTextArea();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setPreferredSize(new java.awt.Dimension(1024, 640));
 
         jPanel2.setBackground(new java.awt.Color(255, 102, 102));
 
@@ -465,18 +466,18 @@ public class crear_envio extends javax.swing.JPanel {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnatras)
-                .addGap(127, 127, 127))
+                .addGap(102, 102, 102))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(38, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addGap(17, 17, 17))
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(16, 16, 16)
+                .addGap(20, 20, 20)
                 .addComponent(btnatras)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
 
         txtCliente.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(null, "Nombre del cliente:", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12)))); // NOI18N
@@ -620,8 +621,8 @@ public class crear_envio extends javax.swing.JPanel {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(fechaentrega, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(productListComboBox))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE))
+                        .addComponent(productListComboBox, javax.swing.GroupLayout.DEFAULT_SIZE, 54, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1))
                 .addGap(26, 26, 26)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -649,21 +650,19 @@ public class crear_envio extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnatrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnatrasActionPerformed
-//        listado_de_pedidos p2 = new listado_de_pedidos();
-//        p2.setSize(1024, 640);
-//        p2.setLocation(0, 0);
-//
-//        jPanel1.removeAll();
-//        jPanel1.add(p2, BorderLayout.CENTER);
-//        jPanel1.revalidate();
-//        jPanel1.repaint();
+        Listado_de_envios p2 = new Listado_de_envios();
+        p2.setSize(1024, 640);
+        p2.setLocation(0, 0);
+
+        jPanel1.removeAll();
+        jPanel1.add(p2, BorderLayout.CENTER);
+        jPanel1.revalidate();
+        jPanel1.repaint();
     }//GEN-LAST:event_btnatrasActionPerformed
 
     private void btnCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActionPerformed

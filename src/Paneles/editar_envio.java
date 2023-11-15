@@ -48,7 +48,7 @@ public class editar_envio extends javax.swing.JPanel {
         fechaentrega.setMaxSelectableDate(maxDate.getTime());
 
         configurarComboBoxClientes();
-        
+
         ((JTextComponent) id_cliente).getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
@@ -65,8 +65,7 @@ public class editar_envio extends javax.swing.JPanel {
                 // No relevante para JTextField
             }
         });
-        
-        
+
         id_sublimacion.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
@@ -84,6 +83,39 @@ public class editar_envio extends javax.swing.JPanel {
             }
         });
 
+        id_arreglo.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                actualizarComboBoxArreglo();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                actualizarComboBoxArreglo();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                actualizarComboBoxArreglo();
+            }
+        });
+
+         id_pedidosat.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                actualizarComboBoxSastreria();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                actualizarComboBoxSastreria();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                actualizarComboBoxSastreria();
+            }
+        });
     }
 
     public void actualizarComboBoxPorNumero() {
@@ -119,9 +151,10 @@ public class editar_envio extends javax.swing.JPanel {
         sublimacion.setModel(model);
 
     }
-    
+
     public void configurarComboBoxClientes() {
-        try {
+        try
+        {
             Connection connection = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
 
             Statement stmt = connection.createStatement();
@@ -140,14 +173,16 @@ public class editar_envio extends javax.swing.JPanel {
 
             Set<String> nombresCompletos = new HashSet<>(); // Utiliza un conjunto para almacenar nombres y apellidos únicos
 
-            while (rs.next()) {
+            while (rs.next())
+            {
                 String nombre = rs.getString("nombre");
                 String apellido = rs.getString("apellido");
                 String nombreCompleto = nombre + " " + apellido;
                 String telefono = rs.getString("numero_telefono");
 
                 // Verifica si el nombre completo ya está en el conjunto
-                if (!nombresCompletos.contains(nombreCompleto)) {
+                if (!nombresCompletos.contains(nombreCompleto))
+                {
                     txtCliente.addItem(nombreCompleto);
                     nombresCompletos.add(nombreCompleto); // Agrega el nombre completo al conjunto
                     txtcelular.setText(telefono);
@@ -156,21 +191,21 @@ public class editar_envio extends javax.swing.JPanel {
 
             connection.close();
 
-        } catch (Exception e) {
+        } catch (Exception e)
+        {
             e.printStackTrace();
         }
     }
-    
-      public void actualizarComboBoxPorNumero(String numeroIngresado) {
+
+    public void actualizarComboBoxPorNumero(String numeroIngresado) {
         DefaultComboBoxModel<String> nuevoModelo = new DefaultComboBoxModel<>();
 
-        try {
+        try
+        {
             Connection connection = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
 
             // Realiza una consulta en la base de datos para buscar el nombre correspondiente al número ingresado
-
             // Reemplaza este bloque con tu consulta real en la base de datos
-
             String sql = "SELECT nombre, apellido, numero_telefono FROM Cliente WHERE id_cliente = ?";
 
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -178,20 +213,22 @@ public class editar_envio extends javax.swing.JPanel {
 
             ResultSet rs = preparedStatement.executeQuery();
 
-            while (rs.next()) {
+            while (rs.next())
+            {
                 String nombre = rs.getString("nombre");
                 String apellido = rs.getString("apellido");
-                  String telefono = rs.getString("numero_telefono");
+                String telefono = rs.getString("numero_telefono");
                 String nombreCompleto = nombre + " " + apellido;
                 nuevoModelo.addElement(nombreCompleto);
-                 txtcelular.setText(telefono);
+                txtcelular.setText(telefono);
             }
 
             txtCliente.setModel(nuevoModelo);
 
             connection.close();
 
-        } catch (Exception e) {
+        } catch (Exception e)
+        {
             e.printStackTrace();
         }
     }
@@ -222,84 +259,99 @@ public class editar_envio extends javax.swing.JPanel {
         sublimacion.setModel(model);
     }
 
-//    public void actualizarComboBoxPorCliente() {
-//        String clienteSeleccionado = (String) txtCliente.getSelectedItem();
-//        if (!clienteSeleccionado.equals("Seleccione"))
-//        {
-//            DefaultComboBoxModel<String> productListModel = new DefaultComboBoxModel<>();
-//            DefaultComboBoxModel<String> arregloModel = new DefaultComboBoxModel<>();
-//            DefaultComboBoxModel<String> sublimacionModel = new DefaultComboBoxModel<>();
-//
-//            try
-//            {
-//                Connection connection = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
-//
-//                Statement stmt = connection.createStatement();
-//
-//                String sqlq = "SELECT C.nombre, C.apellido, C.numero_telefono, C.direccion, C.id_cliente, "
-//                        + "PS.prenda, PS.fechaPedido, PS.precio, PSB.precio as preciosubl, "
-//                        + "PSB.material, PSB.fechaPedido as fechasublimacion, "
-//                        + "PA.arreglo, PA.precio AS precioarreglo, PA.fechaPedido as fechaprenda "
-//                        + "FROM Cliente C "
-//                        + "LEFT JOIN PedidoSastreria PS ON C.id_cliente = PS.id_cliente "
-//                        + "LEFT JOIN PedidoSublimacion PSB ON C.id_cliente = PSB.id_cliente "
-//                        + "LEFT JOIN PedidoArreglo PA ON C.id_cliente = PA.id_cliente "
-//                        + "WHERE CONCAT(C.nombre, ' ', C.apellido) = ?";
-//
-//                PreparedStatement preparedStatement = connection.prepareStatement(sqlq);
-//                preparedStatement.setString(1, clienteSeleccionado);
-//
-//                ResultSet rs = preparedStatement.executeQuery();
-//
-//                if (rs.next())
-//                {
-//                    int selectedClientId = rs.getInt("id_cliente");
-//                    String selectedClientTelefono = rs.getString("numero_telefono");
-//                    String selectedClientDireccion = rs.getString("direccion");
-//
-//                    id_cliente.setText(Integer.toString(selectedClientId));
-//                    txtcelular.setText(selectedClientTelefono);
-//                    txtdireccion.setText(selectedClientDireccion);
-//
-//                    do
-//                    {
-//                        String selectedPrenda = rs.getString("prenda");
-//                        String selectedPrecioStr = rs.getString("precio");
-//                        String selectedFecha = rs.getString("fechaPedido");
-//                        productListModel.addElement("Prenda:" + selectedPrenda + " Precio:" + selectedPrecioStr + " Fecha de pedido:" + selectedFecha);
-//
-//                        String selectedPrendaArreglo = rs.getString("arreglo");
-//                        String selectedPrecioArreglo = rs.getString("precioarreglo");
-//                        String selectedFechaArreglo = rs.getString("fechaprenda");
-//                        arregloModel.addElement("Arreglo:" + selectedPrendaArreglo + " Precio:" + selectedPrecioArreglo + " Fecha de pedido:" + selectedFechaArreglo);
-//
-//                        String selectedMaterialSubli = rs.getString("material");
-//                        String selectedPrecioSubli = rs.getString("preciosubl");
-//                        String selectedFechaSubli = rs.getString("fechasublimacion");
-//                        sublimacionModel.addElement("Material:" + selectedMaterialSubli + " Precio:" + selectedPrecioSubli + " Fecha de pedido:" + selectedFechaSubli);
-//                    } while (rs.next());
-//
-//                    productListComboBox.setModel(productListModel);
-//                    arreglo.setModel(arregloModel);
-//                    sublimacion.setModel(sublimacionModel);
-//                } else
-//                {
-//                    // Si no se encontraron productos, establece los campos en blanco y limpia los JComboBox
-//                    id_cliente.setText("");
-//                    txtcelular.setText("");
-//                    txtdireccion.setText("");
-//                    productListComboBox.removeAllItems();
-//                    arreglo.removeAllItems();
-//                    sublimacion.removeAllItems();
-//                }
-//
-//                connection.close();
-//            } catch (Exception ex)
-//            {
-//                ex.printStackTrace();
-//            }
-//        }
-//    }
+    public void actualizarComboBoxArreglo() {
+        String numeroIngresado = id_arreglo.getText();
+        DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>();
+
+        if (!numeroIngresado.isEmpty())
+        {
+            try
+            {
+                int numero = Integer.parseInt(numeroIngresado);
+
+                Connection connection = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
+                PreparedStatement preparedStatement = connection.prepareStatement("SELECT id_arreglo,arreglo,precio,fechaPedido FROM PedidoArreglo WHERE id_arreglo = ? and estado = 'pendiente'");
+                preparedStatement.setInt(1, numero);
+                ResultSet rs = preparedStatement.executeQuery();
+
+                while (rs.next())
+                {
+                    String material = rs.getString("arreglo");
+                    String precio = rs.getString("precio");
+                    String fechaPedido = rs.getString("fechaPedido");
+                    model.addElement("Arreglo: " + material + " Precio: " + precio + " Fecha de pedido: " + fechaPedido);
+                }
+
+                connection.close();
+            } catch (NumberFormatException | SQLException ex)
+            {
+                ex.printStackTrace();
+            }
+        }
+
+        arreglo.setModel(model);
+
+    }
+
+    public void actualizarComboBoxArreglo(int numero) {
+        DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>();
+        try
+        {
+            Connection connection = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT id_arreglo,arreglo,precio,fechaPedido FROM PedidoArreglo WHERE CONCAT('Arreglo:',arreglo, ' ','Precio:', precio, ' ','Fecha de pedido:', fechaPedido) = ? and estado = 'pendiente'");
+            preparedStatement.setInt(1, numero);
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while (rs.next())
+            {
+                String material = rs.getString("Arreglo");
+                String precio = rs.getString("precio");
+                String fechaPedido = rs.getString("fechaPedido");
+                model.addElement("Material: " + material + " Precio: " + precio + " Fecha de pedido: " + fechaPedido);
+            }
+
+            connection.close();
+        } catch (SQLException ex)
+        {
+            ex.printStackTrace();
+        }
+
+        arreglo.setModel(model);
+    }
+    
+    public void actualizarComboBoxSastreria() {
+        String numeroIngresado = id_pedidosat.getText();
+        DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>();
+
+        if (!numeroIngresado.isEmpty())
+        {
+            try
+            {
+                int numero = Integer.parseInt(numeroIngresado);
+
+                Connection connection = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
+                PreparedStatement preparedStatement = connection.prepareStatement("SELECT id_sastreria,prenda,precio,fechaPedido FROM PedidoSastreria WHERE id_sastreria=? and estado = 'pendiente'");
+                preparedStatement.setInt(1, numero);
+                ResultSet rs = preparedStatement.executeQuery();
+
+                while (rs.next())
+                {
+                    String material = rs.getString("prenda");
+                    String precio = rs.getString("precio");
+                    String fechaPedido = rs.getString("fechaPedido");
+                    model.addElement("Arreglo: " + material + " Precio: " + precio + " Fecha de pedido: " + fechaPedido);
+                }
+
+                connection.close();
+            } catch (NumberFormatException | SQLException ex)
+            {
+                ex.printStackTrace();
+            }
+        }
+
+        productListComboBox.setModel(model);
+
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -329,6 +381,7 @@ public class editar_envio extends javax.swing.JPanel {
         id_sublimacion = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         txtreferencia = new javax.swing.JTextArea();
+        id_envio = new javax.swing.JTextField();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -402,7 +455,7 @@ public class editar_envio extends javax.swing.JPanel {
         });
 
         id_cliente.setBackground(new java.awt.Color(255, 255, 255));
-        id_cliente.setForeground(new java.awt.Color(255, 255, 255));
+        id_cliente.setForeground(new java.awt.Color(51, 255, 0));
         id_cliente.setText("000000000");
         id_cliente.setBorder(null);
 
@@ -428,20 +481,18 @@ public class editar_envio extends javax.swing.JPanel {
         sublimacion.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Sublimación", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12))); // NOI18N
         sublimacion.setEnabled(false);
 
-        id_pedidosat.setEditable(false);
         id_pedidosat.setBackground(new java.awt.Color(255, 255, 255));
-        id_pedidosat.setForeground(new java.awt.Color(255, 255, 255));
+        id_pedidosat.setForeground(new java.awt.Color(153, 153, 0));
         id_pedidosat.setText("0000");
         id_pedidosat.setBorder(null);
 
-        id_arreglo.setEditable(false);
         id_arreglo.setBackground(new java.awt.Color(255, 255, 255));
-        id_arreglo.setForeground(new java.awt.Color(255, 255, 255));
+        id_arreglo.setForeground(new java.awt.Color(255, 102, 0));
         id_arreglo.setText("0000");
         id_arreglo.setBorder(null);
 
         id_sublimacion.setBackground(new java.awt.Color(255, 255, 255));
-        id_sublimacion.setForeground(new java.awt.Color(255, 255, 255));
+        id_sublimacion.setForeground(new java.awt.Color(102, 255, 102));
         id_sublimacion.setText("0000");
         id_sublimacion.setBorder(null);
 
@@ -457,6 +508,8 @@ public class editar_envio extends javax.swing.JPanel {
         });
         jScrollPane2.setViewportView(txtreferencia);
 
+        id_envio.setEditable(false);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -470,7 +523,9 @@ public class editar_envio extends javax.swing.JPanel {
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(id_pedidosat, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(id_cliente, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(436, 436, 436))
+                            .addGap(69, 69, 69)
+                            .addComponent(id_envio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(297, 297, 297))
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                             .addComponent(id_arreglo, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(487, 487, 487))
@@ -503,8 +558,10 @@ public class editar_envio extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(id_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(id_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(id_envio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(27, 27, 27)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtcelular))
@@ -670,10 +727,11 @@ public class editar_envio extends javax.swing.JPanel {
     private javax.swing.JButton btnCrear;
     private javax.swing.JButton btnatras;
     private com.toedter.calendar.JDateChooser fechaentrega;
-    private javax.swing.JTextField id_arreglo;
+    public javax.swing.JTextField id_arreglo;
     public javax.swing.JTextField id_cliente;
-    private javax.swing.JTextField id_pedidosat;
-    private javax.swing.JTextField id_sublimacion;
+    public javax.swing.JTextField id_envio;
+    public javax.swing.JTextField id_pedidosat;
+    public javax.swing.JTextField id_sublimacion;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -684,6 +742,6 @@ public class editar_envio extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> txtCliente;
     private javax.swing.JTextField txtcelular;
     private javax.swing.JTextArea txtdireccion;
-    private javax.swing.JTextArea txtreferencia;
+    public javax.swing.JTextArea txtreferencia;
     // End of variables declaration//GEN-END:variables
 }

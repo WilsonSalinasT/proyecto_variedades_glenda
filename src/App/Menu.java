@@ -13,6 +13,7 @@ import Paneles.Listado_Prod;
 
 import Paneles.Listado_Productos;
 import Paneles.Listado_Sublimacion;
+import Paneles.Listado_de_envios;
 import Paneles.Listado_pedido_entregado;
 
 import Paneles.clientes;
@@ -324,7 +325,7 @@ public class Menu extends javax.swing.JFrame {
 
     private void nueva_venta1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nueva_venta1ActionPerformed
         // TODO add your handling code here:
-        editar_envio p2 = new editar_envio();
+        Listado_de_envios p2 = new Listado_de_envios();
         p2.setSize(1024, 640);
         p2.setLocation(0, 0);
 
