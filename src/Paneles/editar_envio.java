@@ -22,17 +22,20 @@ import java.util.Set;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.text.JTextComponent;
 
 /**
  *
  * @author novastar
  */
-public class crear_envio extends javax.swing.JPanel {
+public class editar_envio extends javax.swing.JPanel {
 
     /**
      * Creates new form crear_envio
      */
-    public crear_envio() {
+    public editar_envio() {
         initComponents();
 
         productListComboBox.setPreferredSize(new Dimension(438, 54));
@@ -44,344 +47,153 @@ public class crear_envio extends javax.swing.JPanel {
         maxDate.add(Calendar.MONTH, 2); // Suma dos meses a la fecha actual
         fechaentrega.setMaxSelectableDate(maxDate.getTime());
 
-        try
+        configurarComboBoxClientes();
+        
+        ((JTextComponent) id_cliente).getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                actualizarComboBoxPorNumero(id_cliente.getText());
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                actualizarComboBoxPorNumero(id_cliente.getText());
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                // No relevante para JTextField
+            }
+        });
+        
+        
+        id_sublimacion.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                actualizarComboBoxPorNumero();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                actualizarComboBoxPorNumero();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                actualizarComboBoxPorNumero();
+            }
+        });
+
+    }
+
+    public void actualizarComboBoxPorNumero() {
+        String numeroIngresado = id_sublimacion.getText();
+        DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>();
+
+        if (!numeroIngresado.isEmpty())
         {
+            try
+            {
+                int numero = Integer.parseInt(numeroIngresado);
+
+                Connection connection = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
+                PreparedStatement preparedStatement = connection.prepareStatement("SELECT material,precio,fechaPedido FROM PedidoSublimacion WHERE id_sublimacion = ? and estado = 'pendiente'");
+                preparedStatement.setInt(1, numero);
+                ResultSet rs = preparedStatement.executeQuery();
+
+                while (rs.next())
+                {
+                    String material = rs.getString("material");
+                    String precio = rs.getString("precio");
+                    String fechaPedido = rs.getString("fechaPedido");
+                    model.addElement("Material: " + material + " Precio: " + precio + " Fecha de pedido: " + fechaPedido);
+                }
+
+                connection.close();
+            } catch (NumberFormatException | SQLException ex)
+            {
+                ex.printStackTrace();
+            }
+        }
+
+        sublimacion.setModel(model);
+
+    }
+    
+    public void configurarComboBoxClientes() {
+        try {
             Connection connection = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
 
             Statement stmt = connection.createStatement();
-            String sql = "SELECT C.nombre, C.apellido, C.numero_telefono,C.direccion,\n"
-                    + "       PS.prenda, PS.fechaPedido, PS.precio, \n"
-                    + "       PSB.material, PSB.fechaPedido as fechasublimacion,PSB.precio as preciosubl, \n"
-                    + "       PA.arreglo, PA.precio AS precioarreglo, PA.fechaPedido as fechaprenda\n"
-                    + "FROM Cliente C\n"
-                    + "LEFT JOIN PedidoSastreria PS ON C.id_cliente = PS.id_cliente\n"
-                    + "LEFT JOIN PedidoSublimacion PSB ON C.id_cliente = PSB.id_cliente\n"
+            String sql = "SELECT C.nombre, C.apellido, C.numero_telefono, C.direccion, "
+                    + "PS.prenda, PS.fechaPedido, PS.precio, "
+                    + "PSB.material, PSB.fechaPedido as fechasublimacion, PSB.precio as preciosubl, "
+                    + "PA.arreglo, PA.precio AS precioarreglo, PA.fechaPedido as fechaprenda "
+                    + "FROM Cliente C "
+                    + "LEFT JOIN PedidoSastreria PS ON C.id_cliente = PS.id_cliente "
+                    + "LEFT JOIN PedidoSublimacion PSB ON C.id_cliente = PSB.id_cliente "
                     + "LEFT JOIN PedidoArreglo PA ON C.id_cliente = PA.id_cliente;";
+
             ResultSet rs = stmt.executeQuery(sql);
 
             txtCliente.addItem("Seleccione"); // Agrega el elemento "Seleccione" al principio
 
             Set<String> nombresCompletos = new HashSet<>(); // Utiliza un conjunto para almacenar nombres y apellidos únicos
 
-            while (rs.next())
-            {
+            while (rs.next()) {
                 String nombre = rs.getString("nombre");
                 String apellido = rs.getString("apellido");
                 String nombreCompleto = nombre + " " + apellido;
+                String telefono = rs.getString("numero_telefono");
 
                 // Verifica si el nombre completo ya está en el conjunto
-                if (!nombresCompletos.contains(nombreCompleto))
-                {
+                if (!nombresCompletos.contains(nombreCompleto)) {
                     txtCliente.addItem(nombreCompleto);
                     nombresCompletos.add(nombreCompleto); // Agrega el nombre completo al conjunto
+                    txtcelular.setText(telefono);
                 }
             }
 
             connection.close();
 
-        } catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+    
+      public void actualizarComboBoxPorNumero(String numeroIngresado) {
+        DefaultComboBoxModel<String> nuevoModelo = new DefaultComboBoxModel<>();
 
-        txtCliente.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (txtCliente.getSelectedIndex() > 0)
-                {
-                    String selectedClient = (String) txtCliente.getSelectedItem();
+        try {
+            Connection connection = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
 
-                    // Verifica si se seleccionó el elemento "Seleccione"
-                    if (!selectedClient.equals("Seleccione"))
-                    {
-                        // Buscar nuevamente el ID y el teléfono en la base de datos
-                        try
-                        {
-                            Connection connection = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
+            // Realiza una consulta en la base de datos para buscar el nombre correspondiente al número ingresado
 
-                            Statement stmt = connection.createStatement();
+            // Reemplaza este bloque con tu consulta real en la base de datos
 
-                            String sqlq = "SELECT C.nombre, C.apellido, C.numero_telefono,C.direccion,C.id_cliente,\n"
-                                    + "       PS.prenda, PS.fechaPedido, PS.precio,PSB.precio as preciosubl, \n"
-                                    + "       PSB.material, PSB.fechaPedido as fechasublimacion, \n"
-                                    + "       PA.arreglo, PA.precio AS precioarreglo, PA.fechaPedido as fechaprenda\n"
-                                    + "FROM Cliente C\n"
-                                    + "LEFT JOIN PedidoSastreria PS ON C.id_cliente = PS.id_cliente\n"
-                                    + "LEFT JOIN PedidoSublimacion PSB ON C.id_cliente = PSB.id_cliente\n"
-                                    + "LEFT JOIN PedidoArreglo PA ON C.id_cliente = PA.id_cliente WHERE CONCAT(C.nombre, ' ', C.apellido) = '" + selectedClient + "'";
-                            ResultSet rs = stmt.executeQuery(sqlq);
+            String sql = "SELECT nombre, apellido, numero_telefono FROM Cliente WHERE id_cliente = ?";
 
-                            if (rs.next())
-                            {
-                                int selectedClientId = rs.getInt("id_cliente");
-                                String selectedClientTelefono = rs.getString("numero_telefono");
-                                String selectedClientDireccion = rs.getString("direccion");
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, numeroIngresado);
 
-                                // Actualiza los campos de texto con el ID y el teléfono del cliente seleccionado
-                                id_cliente.setText(Integer.toString(selectedClientId));
-                                txtcelular.setText(selectedClientTelefono);
-                                txtdireccion.setText(selectedClientDireccion);
+            ResultSet rs = preparedStatement.executeQuery();
 
-                                // Limpia los elementos existentes en los JComboBox
-                                productListComboBox.removeAllItems();
-                                arreglo.removeAllItems();
-                                sublimacion.removeAllItems();
-
-                                Set<String> productoInfoSet = new HashSet<>(); // Utiliza un HashSet para evitar duplicados en productListComboBox
-                                Set<String> arregloInfoSet = new HashSet<>();  // Utiliza otro HashSet para evitar duplicados en el JComboBox "arreglo"
-                                Set<String> sublimacionInfoSet = new HashSet<>();  // Utiliza otro HashSet para evitar duplicados en el JComboBox "sublimacion"
-
-                                do
-                                {
-                                    String selectedPrecioStr = rs.getString("precio");
-                                    String selectedPrenda = rs.getString("prenda");
-                                    String selectedFecha = rs.getString("fechaPedido");
-//                                    String productoInfo = "Prenda: " + selectedPrenda + " | Precio:" + selectedPrecioStr + " lps | " + "Fecha de pedido: " + selectedFecha;
-//                                    productoInfoSet.add(productoInfo);
-                                    String productoInfo = "Prenda:" + selectedPrenda + " Precio:" + selectedPrecioStr + " Fecha de pedido:" + selectedFecha;
-                                    productoInfoSet.add(productoInfo);
-
-                                    String selectedPrecioArreglo = rs.getString("precioarreglo");  // Nombre de la columna corregido
-                                    String selectedPrendaArreglo = rs.getString("arreglo");  // Nombre de la columna corregido
-                                    String selectedFechaArreglo = rs.getString("fechaprenda");  // Nombre de la columna corregido
-                                    String productoInfoArreglo = "Arreglo:" + selectedPrendaArreglo + " Precio:" + selectedPrecioArreglo + " Fecha de pedido:" + selectedFechaArreglo;
-                                    arregloInfoSet.add(productoInfoArreglo);
-
-                                    String selectedMaterialSubli = rs.getString("material");
-                                    String selectedPrecioSubli = rs.getString("preciosubl");
-                                    String selectedFechaSubli = rs.getString("fechasublimacion");
-                                    String productoInfoSubli = "Material:" + selectedMaterialSubli + " Precio:" + selectedPrecioSubli + " Fecha de pedido:" + selectedFechaSubli;
-                                    sublimacionInfoSet.add(productoInfoSubli);
-                                } while (rs.next());
-
-                                productListComboBox.addItem("Seleccione");
-                                arreglo.addItem("Seleccione");
-                                sublimacion.addItem("Seleccione");
-
-                                // Agrega elementos únicos desde el HashSet a productListComboBox
-                                for (String producto : productoInfoSet)
-                                {
-                                    productListComboBox.addItem(producto);
-
-                                }
-
-                                // Agrega elementos únicos desde el HashSet a arreglo
-                                for (String producto : arregloInfoSet)
-                                {
-                                    arreglo.addItem(producto);
-                                }
-
-                                // Agrega elementos únicos desde el HashSet a sublimacion
-                                for (String producto : sublimacionInfoSet)
-                                {
-                                    sublimacion.addItem(producto);
-                                }
-                            } else
-                            {
-                                // Si no se encontraron productos, establece los campos en blanco y limpia los JComboBox
-                                id_cliente.setText("");
-                                txtcelular.setText("");
-                                txtdireccion.setText("");
-                                productListComboBox.removeAllItems();
-                                arreglo.removeAllItems();
-                                sublimacion.removeAllItems();
-                            }
-
-                            connection.close();
-                        } catch (Exception ex)
-                        {
-                            ex.printStackTrace();
-                        }
-                    } else
-                    {
-                        // Si se selecciona "Seleccione", establece los campos en blanco
-                        id_cliente.setText("");
-                        txtcelular.setText("");
-                        txtdireccion.setText("");
-                    }
-                }
-
+            while (rs.next()) {
+                String nombre = rs.getString("nombre");
+                String apellido = rs.getString("apellido");
+                  String telefono = rs.getString("numero_telefono");
+                String nombreCompleto = nombre + " " + apellido;
+                nuevoModelo.addElement(nombreCompleto);
+                 txtcelular.setText(telefono);
             }
-        });
 
-        productListComboBox.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String selectedProduct = (String) productListComboBox.getSelectedItem();
+            txtCliente.setModel(nuevoModelo);
 
-                if (selectedProduct != null)
-                {
-                    if (selectedProduct.equals("Seleccione"))
-                    {
-                        // Si "Seleccione" está seleccionado, establece el valor de id_pedido en 0
-                        id_pedidosat.setText("");
-                    } else
-                    {
-                        try
-                        {
-                            Connection connection = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
-                            PreparedStatement preparedStatement = connection.prepareStatement("SELECT id_sastreria,prenda,precio,fechaPedido FROM PedidoSastreria WHERE CONCAT('Prenda:',prenda, ' ','Precio:', precio, ' ','Fecha de pedido:', fechaPedido) = ? and estado = 'pendiente'");
-                            preparedStatement.setString(1, selectedProduct);
-                            ResultSet rs = preparedStatement.executeQuery();
+            connection.close();
 
-                            if (rs.next())
-                            {
-                                int idPedido = rs.getInt("id_sastreria"); // Obtiene el valor entero de la columna "id_sastreria"
-                                String idPedidoStr = String.valueOf(idPedido); // Convierte el valor entero a una cadena
-                                id_pedidosat.setText(idPedidoStr);
-                            }
-
-                            connection.close();
-                        } catch (SQLException ex)
-                        {
-                            ex.printStackTrace();
-                        }
-                    }
-                }
-            }
-        });
-
-        arreglo.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String selectedProduct = (String) arreglo.getSelectedItem();
-
-                if (selectedProduct != null)
-                {
-                    if (selectedProduct.equals("Seleccione"))
-                    {
-                        // Si "Seleccione" está seleccionado, establece el valor de id_pedido en 0
-                        id_arreglo.setText("");
-                    } else
-                    {
-                        try
-                        {
-                            Connection connection = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
-                            PreparedStatement preparedStatement = connection.prepareStatement("SELECT id_arreglo,arreglo,precio,fechaPedido FROM PedidoArreglo WHERE CONCAT('Arreglo:',arreglo, ' ','Precio:', precio, ' ','Fecha de pedido:', fechaPedido) = ? and estado = 'pendiente'");
-                            preparedStatement.setString(1, selectedProduct);
-                            ResultSet rs = preparedStatement.executeQuery();
-
-                            if (rs.next())
-                            {
-                                int idPedido = rs.getInt("id_arreglo"); // Obtiene el valor entero de la columna "id_arreglo"
-                                String idPedidoStr = String.valueOf(idPedido); // Convierte el valor entero a una cadena
-                                id_arreglo.setText(idPedidoStr);
-                            }
-
-                            connection.close();
-                        } catch (SQLException ex)
-                        {
-                            ex.printStackTrace();
-                        }
-                    }
-                }
-            }
-        });
-
-        sublimacion.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String selectedProduct = (String) sublimacion.getSelectedItem();
-
-                if (selectedProduct != null)
-                {
-                    if (selectedProduct.equals("Seleccione"))
-                    {
-                        // Si "Seleccione" está seleccionado, establece el valor de id_pedido en 0
-                        id_sublimacion.setText("");
-                    } else
-                    {
-                        try
-                        {
-                            Connection connection = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
-                            PreparedStatement preparedStatement = connection.prepareStatement("SELECT id_sublimacion,material,precio,fechaPedido,estado FROM PedidoSublimacion WHERE CONCAT('Material:',material, ' ','Precio:', precio, ' ','Fecha de pedido:', fechaPedido) = ? and estado = 'pendiente' ");
-                            preparedStatement.setString(1, selectedProduct);
-                            ResultSet rs = preparedStatement.executeQuery();
-
-                            if (rs.next())
-                            {
-                                int idPedido = rs.getInt("id_sublimacion"); // Obtiene el valor entero de la columna "id_sublimacion"
-                                String idPedidoStr = String.valueOf(idPedido); // Convierte el valor entero a una cadena
-                                id_sublimacion.setText(idPedidoStr);
-                            }
-
-                            connection.close();
-                        } catch (SQLException ex)
-                        {
-                            ex.printStackTrace();
-                        }
-                    }
-
-                }
-            }
-        });
-//        try
-//        {
-//            Connection connection = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
-//            Statement stmt = connection.createStatement();
-//            String sql = "SELECT prenda, precio, id_pedido FROM PedidoSastreria";
-//            ResultSet rs = stmt.executeQuery(sql);
-//            DefaultListModel<String> model = new DefaultListModel<>();
-//            model.addElement("Seleccione"); // Agrega el elemento "Seleccione" al principio
-//
-//            while (rs.next())
-//            {
-//                String prenda = rs.getString("prenda");
-//                String precio = rs.getString("precio");
-//                int idPedido = rs.getInt("id_pedido");
-//                String nombreCompleto = prenda + " " + precio;
-//                model.addElement(nombreCompleto);
-//            }
-//
-//            connection.close();
-//
-//        } catch (Exception e)
-//        {
-//            e.printStackTrace();
-//        }
-//
-//        txtpedidos.setSelectedIndex(0);
-//
-//        txtpedidos.addListSelectionListener(e ->
-//        {
-//            if (!e.getValueIsAdjusting())
-//            {
-//                String selectedClient = txtpedidos.getSelectedValue();
-//                if (selectedClient != null && !selectedClient.equals("Seleccione"))
-//                {
-//                    try
-//                    {
-//                        Connection connection = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
-//                        Statement stmt = connection.createStatement();
-//                        String sql = "SELECT prenda, precio, id_pedido FROM PedidoSastreria WHERE CONCAT(prenda, ' ', precio) = '" + selectedClient + "'";
-//                        ResultSet rs = stmt.executeQuery(sql);
-//
-//                        if (rs.next())
-//                        {
-//                            int selectedClientId = rs.getInt("id_pedido");
-//                            String selectedClientTelefono = rs.getString("prenda");
-//                            String selectedClientDireccion = rs.getString("precio");
-//
-//                            // Actualiza los campos de texto con el ID y el teléfono del cliente seleccionado
-//                            id_cliente.setText(Integer.toString(selectedClientId));
-//                            txtcelular.setText(selectedClientTelefono);
-//                            txtdireccion.setText(selectedClientDireccion);
-//                        }
-//
-//                        connection.close();
-//                    } catch (Exception ex)
-//                    {
-//                        ex.printStackTrace();
-//                    }
-//                } else
-//                {
-//                    // Si se selecciona "Seleccione", establece los campos en blanco
-//                    id_cliente.setText("");
-//                    txtcelular.setText("");
-//                    txtdireccion.setText("");
-//                }
-//            }
-//        });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void actualizarComboBoxPorNumero(int numero) {
@@ -409,6 +221,85 @@ public class crear_envio extends javax.swing.JPanel {
 
         sublimacion.setModel(model);
     }
+
+//    public void actualizarComboBoxPorCliente() {
+//        String clienteSeleccionado = (String) txtCliente.getSelectedItem();
+//        if (!clienteSeleccionado.equals("Seleccione"))
+//        {
+//            DefaultComboBoxModel<String> productListModel = new DefaultComboBoxModel<>();
+//            DefaultComboBoxModel<String> arregloModel = new DefaultComboBoxModel<>();
+//            DefaultComboBoxModel<String> sublimacionModel = new DefaultComboBoxModel<>();
+//
+//            try
+//            {
+//                Connection connection = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
+//
+//                Statement stmt = connection.createStatement();
+//
+//                String sqlq = "SELECT C.nombre, C.apellido, C.numero_telefono, C.direccion, C.id_cliente, "
+//                        + "PS.prenda, PS.fechaPedido, PS.precio, PSB.precio as preciosubl, "
+//                        + "PSB.material, PSB.fechaPedido as fechasublimacion, "
+//                        + "PA.arreglo, PA.precio AS precioarreglo, PA.fechaPedido as fechaprenda "
+//                        + "FROM Cliente C "
+//                        + "LEFT JOIN PedidoSastreria PS ON C.id_cliente = PS.id_cliente "
+//                        + "LEFT JOIN PedidoSublimacion PSB ON C.id_cliente = PSB.id_cliente "
+//                        + "LEFT JOIN PedidoArreglo PA ON C.id_cliente = PA.id_cliente "
+//                        + "WHERE CONCAT(C.nombre, ' ', C.apellido) = ?";
+//
+//                PreparedStatement preparedStatement = connection.prepareStatement(sqlq);
+//                preparedStatement.setString(1, clienteSeleccionado);
+//
+//                ResultSet rs = preparedStatement.executeQuery();
+//
+//                if (rs.next())
+//                {
+//                    int selectedClientId = rs.getInt("id_cliente");
+//                    String selectedClientTelefono = rs.getString("numero_telefono");
+//                    String selectedClientDireccion = rs.getString("direccion");
+//
+//                    id_cliente.setText(Integer.toString(selectedClientId));
+//                    txtcelular.setText(selectedClientTelefono);
+//                    txtdireccion.setText(selectedClientDireccion);
+//
+//                    do
+//                    {
+//                        String selectedPrenda = rs.getString("prenda");
+//                        String selectedPrecioStr = rs.getString("precio");
+//                        String selectedFecha = rs.getString("fechaPedido");
+//                        productListModel.addElement("Prenda:" + selectedPrenda + " Precio:" + selectedPrecioStr + " Fecha de pedido:" + selectedFecha);
+//
+//                        String selectedPrendaArreglo = rs.getString("arreglo");
+//                        String selectedPrecioArreglo = rs.getString("precioarreglo");
+//                        String selectedFechaArreglo = rs.getString("fechaprenda");
+//                        arregloModel.addElement("Arreglo:" + selectedPrendaArreglo + " Precio:" + selectedPrecioArreglo + " Fecha de pedido:" + selectedFechaArreglo);
+//
+//                        String selectedMaterialSubli = rs.getString("material");
+//                        String selectedPrecioSubli = rs.getString("preciosubl");
+//                        String selectedFechaSubli = rs.getString("fechasublimacion");
+//                        sublimacionModel.addElement("Material:" + selectedMaterialSubli + " Precio:" + selectedPrecioSubli + " Fecha de pedido:" + selectedFechaSubli);
+//                    } while (rs.next());
+//
+//                    productListComboBox.setModel(productListModel);
+//                    arreglo.setModel(arregloModel);
+//                    sublimacion.setModel(sublimacionModel);
+//                } else
+//                {
+//                    // Si no se encontraron productos, establece los campos en blanco y limpia los JComboBox
+//                    id_cliente.setText("");
+//                    txtcelular.setText("");
+//                    txtdireccion.setText("");
+//                    productListComboBox.removeAllItems();
+//                    arreglo.removeAllItems();
+//                    sublimacion.removeAllItems();
+//                }
+//
+//                connection.close();
+//            } catch (Exception ex)
+//            {
+//                ex.printStackTrace();
+//            }
+//        }
+//    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -480,6 +371,7 @@ public class crear_envio extends javax.swing.JPanel {
         );
 
         txtCliente.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(null, "Nombre del cliente:", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12)))); // NOI18N
+        txtCliente.setEnabled(false);
 
         fechaentrega.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Fecha de Entrega", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12))); // NOI18N
 
@@ -502,14 +394,13 @@ public class crear_envio extends javax.swing.JPanel {
         btnCrear.setBackground(new java.awt.Color(255, 153, 51));
         btnCrear.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnCrear.setForeground(new java.awt.Color(0, 0, 0));
-        btnCrear.setText("Crear");
+        btnCrear.setText("Editar");
         btnCrear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCrearActionPerformed(evt);
             }
         });
 
-        id_cliente.setEditable(false);
         id_cliente.setBackground(new java.awt.Color(255, 255, 255));
         id_cliente.setForeground(new java.awt.Color(255, 255, 255));
         id_cliente.setText("000000000");
@@ -517,6 +408,7 @@ public class crear_envio extends javax.swing.JPanel {
 
         productListComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione" }));
         productListComboBox.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Sastrería", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12))); // NOI18N
+        productListComboBox.setEnabled(false);
         productListComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 productListComboBoxActionPerformed(evt);
@@ -525,6 +417,7 @@ public class crear_envio extends javax.swing.JPanel {
 
         arreglo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione" }));
         arreglo.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Arreglos", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12))); // NOI18N
+        arreglo.setEnabled(false);
         arreglo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 arregloActionPerformed(evt);
@@ -533,6 +426,7 @@ public class crear_envio extends javax.swing.JPanel {
 
         sublimacion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione" }));
         sublimacion.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Sublimación", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12))); // NOI18N
+        sublimacion.setEnabled(false);
 
         id_pedidosat.setEditable(false);
         id_pedidosat.setBackground(new java.awt.Color(255, 255, 255));
@@ -546,7 +440,6 @@ public class crear_envio extends javax.swing.JPanel {
         id_arreglo.setText("0000");
         id_arreglo.setBorder(null);
 
-        id_sublimacion.setEditable(false);
         id_sublimacion.setBackground(new java.awt.Color(255, 255, 255));
         id_sublimacion.setForeground(new java.awt.Color(255, 255, 255));
         id_sublimacion.setText("0000");

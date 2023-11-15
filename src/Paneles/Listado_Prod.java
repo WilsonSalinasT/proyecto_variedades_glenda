@@ -843,6 +843,38 @@ public class Listado_Prod extends javax.swing.JPanel {
 
     private void buscarDatos(String texto) {
         DefaultTableModel modelTabla = (DefaultTableModel) tabla_productos.getModel();
+        
+         DefaultTableCellRenderer imageRenderer = new DefaultTableCellRenderer() {
+            @Override
+            public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+                // Verifica si el valor es un ImageIcon
+                if (value instanceof ImageIcon)
+                {
+                    // Crea un JLabel para mostrar la imagen
+                    JLabel label = new JLabel((ImageIcon) value);
+                    label.setHorizontalAlignment(JLabel.CENTER);
+
+                    // Configura el tamaño de la imagen
+                    ImageIcon originalIcon = (ImageIcon) value;
+                    Image image = originalIcon.getImage();
+                    Image scaledImage = image.getScaledInstance(250, 220, Image.SCALE_SMOOTH);
+                    label.setIcon(new ImageIcon(scaledImage));
+
+                    return label;
+                }
+                return super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+            }
+        };
+
+// Asigna el TableCellRenderer personalizado a la columna de imágenes
+        tabla_productos.getColumnModel().getColumn(3).setCellRenderer(imageRenderer);
+
+        int maxWidth = calcularAnchoMaximoDeImagenes(); // Debes implementar esta función
+        tabla_productos.getColumnModel().getColumn(3).setPreferredWidth(maxWidth);
+
+      // Eliminar las filas existentes
+        
+        
         modelTabla.setRowCount(0); // Limpia el modelo de la tabla antes de agregar nuevos datos
         boolean foundData = false;
 
@@ -852,12 +884,12 @@ public class Listado_Prod extends javax.swing.JPanel {
         String sqlQuery;
         if ("Todas".equals(categoriaSeleccionada))
         {
-            sqlQuery = "SELECT ROW_NUMBER() OVER(ORDER BY cod_producto) AS NumRegistro, nombre, descripcion, categoria"
-                    + " FROM Producto WHERE nombre LIKE ? OR descripcion LIKE ?";
+            sqlQuery = "SELECT ROW_NUMBER() OVER(ORDER BY cod_producto) AS NumRegistro, nombre, categoria, foto "
+                    + " FROM Productos WHERE nombre LIKE ? OR descripcion LIKE ?";
         } else
         {
-            sqlQuery = "SELECT ROW_NUMBER() OVER(ORDER BY cod_producto) AS NumRegistro, nombre, descripcion, categoria"
-                    + " FROM Producto WHERE categoria = ? AND (nombre LIKE ? OR descripcion LIKE ?)";
+            sqlQuery = "SELECT ROW_NUMBER() OVER(ORDER BY cod_producto) AS NumRegistro, nombre, categoria, foto "
+                    + " FROM Productos WHERE categoria = ? AND (nombre LIKE ? OR descripcion LIKE ?)";
         }
 
         try (Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789"); PreparedStatement ps = conn.prepareStatement(sqlQuery))
@@ -881,8 +913,8 @@ public class Listado_Prod extends javax.swing.JPanel {
                 {
                     int numRegistro = rs.getInt("NumRegistro");
                     String nombre = rs.getString("nombre");
-                    String descripcion = rs.getString("descripcion");
-                    String categoria = rs.getString("categoria");
+                    String descripcion = rs.getString("categoria");
+                    String categoria = rs.getString("foto");
 
                     if (nombre != null && descripcion != null && categoria != null)
                     {

@@ -4,11 +4,12 @@
  */
 package App;
 
-
+import Paneles.GalleryProduct;
 import Paneles.Listado_Citas;
 import Paneles.Listado_Empleados;
 import Paneles.Listado_Pedidos_Arreglos;
 import Paneles.Listado_Pedidos_Pendientes;
+import Paneles.Listado_Prod;
 
 import Paneles.Listado_Productos;
 import Paneles.Listado_Sublimacion;
@@ -17,6 +18,7 @@ import Paneles.Listado_pedido_entregado;
 import Paneles.clientes;
 import Paneles.crear_envio;
 import Paneles.crear_proveedor;
+import Paneles.editar_envio;
 import Paneles.listado_proveedores;
 
 import Paneles.ventas;
@@ -54,6 +56,7 @@ public class Menu extends javax.swing.JFrame {
         pedidoSastreria1 = new javax.swing.JButton();
         nueva_venta1 = new javax.swing.JButton();
         pedidoSublimacion = new javax.swing.JButton();
+        pedidoSublimacion1 = new javax.swing.JButton();
         javax.swing.JLabel jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -77,7 +80,7 @@ public class Menu extends javax.swing.JFrame {
                 clientesActionPerformed(evt);
             }
         });
-        jPanel2.add(clientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 200, 260, 40));
+        jPanel2.add(clientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 160, 260, 40));
 
         nueva_venta.setBackground(new java.awt.Color(255, 153, 102));
         nueva_venta.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -89,7 +92,7 @@ public class Menu extends javax.swing.JFrame {
                 nueva_ventaActionPerformed(evt);
             }
         });
-        jPanel2.add(nueva_venta, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 250, 40));
+        jPanel2.add(nueva_venta, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 250, 40));
 
         proveedor.setBackground(new java.awt.Color(255, 153, 102));
         proveedor.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -101,7 +104,7 @@ public class Menu extends javax.swing.JFrame {
                 proveedorActionPerformed(evt);
             }
         });
-        jPanel2.add(proveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 260, 250, 40));
+        jPanel2.add(proveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 210, 250, 40));
 
         productos.setBackground(new java.awt.Color(255, 153, 102));
         productos.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -115,7 +118,7 @@ public class Menu extends javax.swing.JFrame {
                 productosActionPerformed(evt);
             }
         });
-        jPanel2.add(productos, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 320, 250, 40));
+        jPanel2.add(productos, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 260, 250, 40));
 
         citas.setBackground(new java.awt.Color(255, 153, 102));
         citas.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -127,7 +130,7 @@ public class Menu extends javax.swing.JFrame {
                 citasActionPerformed(evt);
             }
         });
-        jPanel2.add(citas, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 390, 250, 40));
+        jPanel2.add(citas, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 310, 250, 40));
 
         pedidoSastreria.setBackground(new java.awt.Color(255, 153, 102));
         pedidoSastreria.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -139,7 +142,7 @@ public class Menu extends javax.swing.JFrame {
                 pedidoSastreriaActionPerformed(evt);
             }
         });
-        jPanel2.add(pedidoSastreria, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 440, 250, 40));
+        jPanel2.add(pedidoSastreria, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 360, 250, 40));
 
         pedidoSastreria1.setBackground(new java.awt.Color(255, 153, 102));
         pedidoSastreria1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -151,7 +154,7 @@ public class Menu extends javax.swing.JFrame {
                 pedidoSastreria1ActionPerformed(evt);
             }
         });
-        jPanel2.add(pedidoSastreria1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 500, 250, 40));
+        jPanel2.add(pedidoSastreria1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 410, 250, 40));
 
         nueva_venta1.setBackground(new java.awt.Color(255, 153, 102));
         nueva_venta1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -175,7 +178,19 @@ public class Menu extends javax.swing.JFrame {
                 pedidoSublimacionActionPerformed(evt);
             }
         });
-        jPanel2.add(pedidoSublimacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 560, 250, 40));
+        jPanel2.add(pedidoSublimacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 460, 250, 40));
+
+        pedidoSublimacion1.setBackground(new java.awt.Color(255, 153, 102));
+        pedidoSublimacion1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        pedidoSublimacion1.setForeground(new java.awt.Color(204, 255, 255));
+        pedidoSublimacion1.setText("Galeria");
+        pedidoSublimacion1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        pedidoSublimacion1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pedidoSublimacion1ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(pedidoSublimacion1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 520, 250, 40));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Hyper.png"))); // NOI18N
         jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -268,11 +283,10 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_proveedorActionPerformed
 
     private void productosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_productosActionPerformed
-      
 
-        Listado_Productos p2 = new Listado_Productos();
+        Listado_Prod p2 = new Listado_Prod();
         p2.setSize(1024, 640);
-        
+
         p2.setLocation(0, 0);
 
         panelprincipal.removeAll();
@@ -284,11 +298,11 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_productosActionPerformed
 
     private void pedidoSastreriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pedidoSastreriaActionPerformed
-         
+
         Listado_Pedidos_Pendientes p2 = new Listado_Pedidos_Pendientes();
         p2.setSize(1024, 640);
         p2.setLocation(0, 0);
-        
+
         panelprincipal.removeAll();
         panelprincipal.add(p2, BorderLayout.CENTER);
         panelprincipal.revalidate();
@@ -297,11 +311,11 @@ public class Menu extends javax.swing.JFrame {
 
     private void pedidoSastreria1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pedidoSastreria1ActionPerformed
         // TODO add your handling code here:
-             
+
         Listado_Pedidos_Arreglos p2 = new Listado_Pedidos_Arreglos();
         p2.setSize(1024, 640);
         p2.setLocation(0, 0);
-        
+
         panelprincipal.removeAll();
         panelprincipal.add(p2, BorderLayout.CENTER);
         panelprincipal.revalidate();
@@ -310,10 +324,10 @@ public class Menu extends javax.swing.JFrame {
 
     private void nueva_venta1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nueva_venta1ActionPerformed
         // TODO add your handling code here:
-         crear_envio p2 = new crear_envio();
+        editar_envio p2 = new editar_envio();
         p2.setSize(1024, 640);
         p2.setLocation(0, 0);
-        
+
         panelprincipal.removeAll();
         panelprincipal.add(p2, BorderLayout.CENTER);
         panelprincipal.revalidate();
@@ -325,12 +339,24 @@ public class Menu extends javax.swing.JFrame {
         Listado_Sublimacion p2 = new Listado_Sublimacion();
         p2.setSize(1024, 640);
         p2.setLocation(0, 0);
-        
+
         panelprincipal.removeAll();
         panelprincipal.add(p2, BorderLayout.CENTER);
         panelprincipal.revalidate();
         panelprincipal.repaint();
     }//GEN-LAST:event_pedidoSublimacionActionPerformed
+
+    private void pedidoSublimacion1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pedidoSublimacion1ActionPerformed
+        // TODO add your handling code here:
+        GalleryProduct p2 = new GalleryProduct();
+        p2.setSize(1024, 640);
+        p2.setLocation(0, 0);
+
+        panelprincipal.removeAll();
+        panelprincipal.add(p2, BorderLayout.CENTER);
+        panelprincipal.revalidate();
+        panelprincipal.repaint();
+    }//GEN-LAST:event_pedidoSublimacion1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -341,20 +367,27 @@ public class Menu extends javax.swing.JFrame {
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+        try
+        {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels())
+            {
+                if ("Nimbus".equals(info.getName()))
+                {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
+        } catch (ClassNotFoundException ex)
+        {
             java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
+        } catch (InstantiationException ex)
+        {
             java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
+        } catch (IllegalAccessException ex)
+        {
             java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (javax.swing.UnsupportedLookAndFeelException ex)
+        {
             java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
@@ -378,6 +411,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JButton pedidoSastreria;
     private javax.swing.JButton pedidoSastreria1;
     private javax.swing.JButton pedidoSublimacion;
+    private javax.swing.JButton pedidoSublimacion1;
     private javax.swing.JButton productos;
     private javax.swing.JButton proveedor;
     // End of variables declaration//GEN-END:variables

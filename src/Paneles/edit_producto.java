@@ -290,8 +290,8 @@ public class edit_producto extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
                             .addComponent(jLabel6))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtruta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtbytes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
@@ -353,7 +353,6 @@ public class edit_producto extends javax.swing.JPanel {
             try
             {
 
-                
                 FileInputStream archivofoto;
                 File nombFile = new File(txtruta.getText());
                 archivofoto = new FileInputStream(nombFile);
@@ -363,15 +362,16 @@ public class edit_producto extends javax.swing.JPanel {
                 Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
                 Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
 
-                PreparedStatement insertPs = conn.prepareStatement("UPDATE Productos SET nombre=?, descripcion=?,categoria=?,foto =? WHERE cod_producto=?");
+                PreparedStatement insertPs = conn.prepareStatement("UPDATE Productos SET nombre=?, descripcion=?,categoria=?,imagen=?,foto =? WHERE cod_producto=?");
                 insertPs.setString(1, nombre);
                 insertPs.setString(2, descripcion);
                 insertPs.setString(3, categoria);
-//                insertPs.setString(4, imagen);
-                archivofoto = new FileInputStream(txtbytes.getText());
-                insertPs.setBinaryStream(4, archivofoto);
 
-                insertPs.setString(5, id);
+                insertPs.setString(4, imagen);
+                archivofoto = new FileInputStream(txtruta.getText());
+                insertPs.setBinaryStream(5, archivofoto);
+
+                insertPs.setString(6, id);
 
                 insertPs.executeUpdate();
                 JOptionPane.showMessageDialog(null, "Producto actualizado con éxito");

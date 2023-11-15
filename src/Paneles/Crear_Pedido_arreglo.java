@@ -464,6 +464,7 @@ public class Crear_Pedido_arreglo extends javax.swing.JPanel {
                 if (contador == 0)
                 {
                     imagen1.setIcon(new ImageIcon(foto));
+//                     textField1.setText(archivos[contador].getAbsolutePath());
                 } else if (contador == 1)
                 {
                     imagen2.setIcon(new ImageIcon(foto));
@@ -478,6 +479,7 @@ public class Crear_Pedido_arreglo extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_imagenesActionPerformed
 
+       
     private void btnCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActionPerformed
         String nombre = (String) txtCliente.getSelectedItem();
         String arreglo = (String) cbxarreglo.getSelectedItem();
