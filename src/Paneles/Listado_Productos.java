@@ -305,7 +305,7 @@ public class Listado_Productos extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        CrearProducto p1 = new CrearProducto();
+        crear_producto p1 = new crear_producto();
         p1.setSize(1024, 640);
         p1.setLocation(0, 0);
 

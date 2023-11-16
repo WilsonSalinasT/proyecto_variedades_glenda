@@ -4,7 +4,8 @@
  */
 package Paneles;
 
-import com.sun.xml.internal.ws.message.ByteArrayAttachment;
+
+
 import java.awt.Color;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
