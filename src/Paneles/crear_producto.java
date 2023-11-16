@@ -398,12 +398,17 @@ public class crear_producto extends javax.swing.JPanel {
     }//GEN-LAST:event_txtdescripcionKeyTyped
 
     private void txtnombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtnombreKeyTyped
-        char c = evt.getKeyChar();
+      char c = evt.getKeyChar(); // Obtener el carácter ingresado
 
-        // Verificar si el carácter es una letra (mayúscula o minúscula)
-        if (!(Character.isLetter(c)))
+        if (txtnombre.getText().isEmpty() && Character.isWhitespace(c))
         {
-            evt.consume(); // Consumir el evento (ignorar la entrada del usuario)
+            evt.consume(); // Consumir el evento si es un espacio en blanco en la primera letra
+        } else if (!Character.isLetter(c) && !Character.isWhitespace(c))
+        {
+            evt.consume(); // Consumir el evento si no es una letra o espacio en blanco
+        } else if (txtnombre.getText().length() >= 50)
+        {
+            evt.consume(); // Consumir el evento si se ha alcanzado la longitud máxima
         }
     }//GEN-LAST:event_txtnombreKeyTyped
 
