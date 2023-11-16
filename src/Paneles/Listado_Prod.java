@@ -573,7 +573,7 @@ public class Listado_Prod extends javax.swing.JPanel {
                         String hexString = "0x" + bytesToHexString(data);
 
                         mostrar.txtbytes.setText(hexString);
-                        mostrar.bytes.setText(hexString);
+//                        mostrar.bytes.setText(hexString);
                         mostrar.txtbytes.setText(hexString);
                         mostrar.txtruta.setText(rs.getString("imagen"));
 

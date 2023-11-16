@@ -294,7 +294,7 @@ public class crear_producto extends javax.swing.JPanel {
             try
             {
                 FileInputStream archivofoto;
-                
+
                 // Resto del código para la inserción en la base de datos
                 Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
                 Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
@@ -318,17 +318,33 @@ public class crear_producto extends javax.swing.JPanel {
                     JOptionPane.showMessageDialog(null, "El producto con nombre '" + existingName + "' ya existe. Por favor, elige otro nombre.");
                 } else
                 {
-                    // Si el nombre es único, procede con la inserción
-                    PreparedStatement insertPs = conn.prepareStatement("INSERT INTO Productos (nombre,descripcion,categoria,imagen,foto) VALUES (?,?,?,?,?)");
+                    PreparedStatement insertPs = conn.prepareStatement("INSERT INTO Productos (nombre, descripcion, categoria, imagen, foto) VALUES (?, ?, ?, ?, ?)");
+
                     insertPs.setString(1, nombre);
                     insertPs.setString(2, descripcion);
                     insertPs.setString(3, categoria);
-                    insertPs.setString(4, imagen);
-                    archivofoto = new FileInputStream(txtruta.getText());
-                    insertPs.setBinaryStream(5, archivofoto);
-                    
-                    
 
+                    if (imagen != null && !imagen.isEmpty())
+                    {
+                        insertPs.setString(4, imagen);
+                    } else
+                    {
+                        // Asignar la ruta de la imagen por defecto
+                        insertPs.setString(4, "C:\\imagenes\\logo.jpg");
+                    }
+
+                    if (txtruta.getText() != null && !txtruta.getText().isEmpty())
+                    {
+                        archivofoto = new FileInputStream(txtruta.getText());
+                        insertPs.setBinaryStream(5, archivofoto);
+                    } else
+                    {
+                        // Asignar la imagen por defecto como un flujo de bytes
+                        InputStream imagenPorDefecto = new FileInputStream("C:\\imagenes\\logo.jpg");
+                        insertPs.setBinaryStream(5, imagenPorDefecto);
+                    }
+
+// Ahora puedes ejecutar la consulta
                     insertPs.executeUpdate();
                     JOptionPane.showMessageDialog(null, "Registro guardado");
 
@@ -392,16 +408,17 @@ public class crear_producto extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-     FileNameExtensionFilter filtro = new FileNameExtensionFilter("Formatos de archivos JPEG(*.JPG;*.JPG)", "jpg","jpeg");
+        FileNameExtensionFilter filtro = new FileNameExtensionFilter("Formatos de archivos JPEG(*.JPG;*.JPG)", "jpg", "jpeg");
         JFileChooser archivo = new JFileChooser();
         archivo.addChoosableFileFilter(filtro);
         archivo.setDialogTitle("Abrir Archivo");
         File ruta = new File("C:\\");
         archivo.setCurrentDirectory(ruta);
         int ventana = archivo.showOpenDialog(null);
-        
-        if (ventana == JFileChooser.APPROVE_OPTION){
-        
+
+        if (ventana == JFileChooser.APPROVE_OPTION)
+        {
+
             File file = archivo.getSelectedFile();
             txtruta.setText(String.valueOf(file));
             Image foto = getToolkit().getImage(txtruta.getText());
@@ -413,7 +430,7 @@ public class crear_producto extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void txtimagenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtimagenMouseClicked
-       
+
     }//GEN-LAST:event_txtimagenMouseClicked
 
 
