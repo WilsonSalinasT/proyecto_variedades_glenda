@@ -4,6 +4,7 @@
  */
 package App;
 
+import static App.IngresodeCompra.tablecompras;
 import Paneles.IngresarCompra;
 import Paneles.TextPrompt;
 import java.awt.BorderLayout;
@@ -22,7 +23,7 @@ import java.sql.Statement;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
-import static App.IngresodeCompra.tablecompras;
+import javax.swing.table.TableColumn;
 
 /**
  *
@@ -57,6 +58,14 @@ public class ProductoParaCompra extends javax.swing.JFrame {
 
         tblProductosParafactura.setRowSelectionAllowed(true);
         tblProductosParafactura.setColumnSelectionAllowed(false);
+        
+        int columnIndexToHide = 4;
+        TableColumn column = tblProductosParafactura.getColumnModel().getColumn(columnIndexToHide);
+
+        column.setMinWidth(0);
+        column.setMaxWidth(0);
+        column.setPreferredWidth(0);
+        column.setResizable(false);
 
 //        tblProductosParafactura.getTableHeader().setReorderingAllowed(false);
 //        Controlador.ProductosFactura.ProductoParaCompra("");
