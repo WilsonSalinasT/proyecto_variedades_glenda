@@ -5,6 +5,7 @@
 package App;
 
 import Paneles.GalleryProduct;
+import Paneles.IngresarCompra;
 import Paneles.Listado_Citas;
 import Paneles.Listado_Empleados;
 import Paneles.Listado_Pedidos_Arreglos;
@@ -58,6 +59,7 @@ public class Menu extends javax.swing.JFrame {
         nueva_venta1 = new javax.swing.JButton();
         pedidoSublimacion = new javax.swing.JButton();
         pedidoSublimacion1 = new javax.swing.JButton();
+        pedidoSublimacion2 = new javax.swing.JButton();
         javax.swing.JLabel jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -192,6 +194,18 @@ public class Menu extends javax.swing.JFrame {
             }
         });
         jPanel2.add(pedidoSublimacion1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 520, 250, 40));
+
+        pedidoSublimacion2.setBackground(new java.awt.Color(255, 153, 102));
+        pedidoSublimacion2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        pedidoSublimacion2.setForeground(new java.awt.Color(204, 255, 255));
+        pedidoSublimacion2.setText("Compras");
+        pedidoSublimacion2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        pedidoSublimacion2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pedidoSublimacion2ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(pedidoSublimacion2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 580, 250, 30));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Hyper.png"))); // NOI18N
         jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -359,6 +373,13 @@ public class Menu extends javax.swing.JFrame {
         panelprincipal.repaint();
     }//GEN-LAST:event_pedidoSublimacion1ActionPerformed
 
+    private void pedidoSublimacion2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pedidoSublimacion2ActionPerformed
+        IngresodeCompra ver = new IngresodeCompra();
+        ver.setVisible(true);
+        ver.setLocationRelativeTo(null);
+
+    }//GEN-LAST:event_pedidoSublimacion2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -413,6 +434,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JButton pedidoSastreria1;
     private javax.swing.JButton pedidoSublimacion;
     private javax.swing.JButton pedidoSublimacion1;
+    private javax.swing.JButton pedidoSublimacion2;
     private javax.swing.JButton productos;
     private javax.swing.JButton proveedor;
     // End of variables declaration//GEN-END:variables
