@@ -22,6 +22,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -31,6 +32,9 @@ import java.util.Date;
  */
 public class IngresodeCompra extends javax.swing.JFrame {
 
+    DefaultTableModel modelo;
+
+    
     /**
      * Creates new form IngresodeCompra
      */
@@ -46,9 +50,9 @@ public class IngresodeCompra extends javax.swing.JFrame {
         tablecompras.setRowSelectionAllowed(true);
         tablecompras.setColumnSelectionAllowed(false);
 
+      
 //     sumarColumna();
-        Tsum.setText(Integer.toString((int) getsumarColumna()));
-
+//        Tsum.setText(Integer.toString((int) getsumarColumna()));
         try
         {
             Connection connection = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
@@ -91,18 +95,33 @@ public class IngresodeCompra extends javax.swing.JFrame {
 
     }
 
-    public double getsumarColumna() {
-
-        double suma = 0;
-        int rowscount = tablecompras.getRowCount();
-
-        for (int i = 0; i < rowscount; i++)
-        {
-            suma = suma + Integer.parseInt(tablecompras.getValueAt(i, 2).toString());
-        }
-        return suma;
-
-    }
+//    public double getsumarColumna() {
+//
+//        double suma = 0;
+//        int rowscount = tablecompras.getRowCount();
+//
+//        for (int i = 0; i < rowscount; i++)
+//        {
+//            suma = suma + Integer.parseInt(tablecompras.getValueAt(i, 2).toString());
+//        }
+//        return suma;
+//
+//    }
+//    private void calcularTotal() {
+//        int rowCount = tablecompras.getRowCount();
+//        double total = 0.0;
+//
+//        for (int i = 0; i < rowCount; i++)
+//        {
+//            // Obtener el valor en la columna "Total"
+//            double valorTotal = (double) tablecompras.getValueAt(i, 3);
+//            total += valorTotal;
+//        }
+//
+//        // Formatear el total como string y mostrarlo en el JTextField
+//        DecimalFormat df = new DecimalFormat("#.##");
+//        Tsum.setText(df.format(total));
+//    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -138,6 +157,7 @@ public class IngresodeCompra extends javax.swing.JFrame {
         jSeparator3 = new javax.swing.JSeparator();
         Tsum = new javax.swing.JTextField();
         jButton5 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -327,6 +347,11 @@ public class IngresodeCompra extends javax.swing.JFrame {
         jSeparator3.setForeground(new java.awt.Color(255, 51, 51));
         jSeparator3.setOpaque(true);
 
+        Tsum.setEditable(false);
+        Tsum.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
+        Tsum.setForeground(new java.awt.Color(0, 0, 0));
+        Tsum.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 153, 102), 1, true));
+
         jButton5.setText("Ver");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -334,25 +359,32 @@ public class IngresodeCompra extends javax.swing.JFrame {
             }
         });
 
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel2.setText("Total:");
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jSeparator3)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addGap(0, 26, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 543, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(15, 15, 15))
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(201, 201, 201)
-                .addComponent(Tsum, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addGap(133, 133, 133)
                 .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addGap(30, 30, 30))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Tsum, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(0, 26, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 543, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(15, 15, 15))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -365,7 +397,9 @@ public class IngresodeCompra extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 326, Short.MAX_VALUE)
                 .addGap(7, 7, 7)
-                .addComponent(Tsum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Tsum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2)))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -425,7 +459,9 @@ public class IngresodeCompra extends javax.swing.JFrame {
 
             // Restar el total de la fila eliminada del totalFactura
             totalFactura -= totalP;
-
+                 
+            calcular();
+            
             // Actualizar el total de la factura en el componente adecuado (lblTotalFactura)
             //lblTotalFactura.setText(String.valueOf(totalFactura));
         } else
@@ -433,8 +469,23 @@ public class IngresodeCompra extends javax.swing.JFrame {
             // No se seleccionó ninguna fila, mostrar un mensaje de advertencia o error
             JOptionPane.showMessageDialog(null, "No se ha seleccionado ninguna fila", "Error al eliminar fila", JOptionPane.WARNING_MESSAGE);
         }
+        
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
+     public void calcular(){
+
+        float suma = 0;
+        for(int i = 0; i < tablecompras.getRowCount(); i++){
+        
+            float renglon;
+            renglon = Float.parseFloat(tablecompras.getValueAt(i, 3).toString());
+            
+            suma = suma + renglon;
+        }
+        Tsum.setText(String.valueOf(suma));
+
+}
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         ProductoParaCompra prod = new ProductoParaCompra();
         prod.setVisible(true);
@@ -466,6 +517,7 @@ public class IngresodeCompra extends javax.swing.JFrame {
         facturaText.append("Proveedor: ").append(proveedor).append("\n");
         facturaText.append("Fecha: ").append(fechaFormateada).append("\n");
 
+        facturaText.append("*********************************************************************\n");
 // Agregar títulos estáticos y datos de la tabla
         facturaText.append("\n"); // Agregar una línea en blanco antes de la tabla
         facturaText.append(String.format("%-20s %-10s %-20s %-10s\n", "Producto", "Cantidad", "Precio unitario", "Total"));
@@ -483,7 +535,8 @@ public class IngresodeCompra extends javax.swing.JFrame {
 // Establecer el texto en el JTextArea una vez con toda la información
         ver.txtbill.setText(facturaText.toString());
         ver.txtbill.setText(ver.txtbill.getText() + "*********************************************************************\n");
-        ver.txtbill.setText(ver.txtbill.getText() + "Total: " + totalFactura + "\n");
+        ver.txtbill.setText(ver.txtbill.getText() + "Total: " + Tsum.getText() + "\n");
+        facturaText.append("*********************************************************************\n");
 
         ver.setVisible(true);
 
@@ -643,7 +696,7 @@ public class IngresodeCompra extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField Tsum;
+    public static javax.swing.JTextField Tsum;
     public javax.swing.JTextField id_proveedor;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -651,6 +704,7 @@ public class IngresodeCompra extends javax.swing.JFrame {
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;

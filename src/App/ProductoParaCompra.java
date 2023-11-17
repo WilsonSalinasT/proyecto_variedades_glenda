@@ -5,6 +5,7 @@
 package App;
 
 import static App.IngresodeCompra.tablecompras;
+import static App.IngresodeCompra.Tsum;
 import Paneles.IngresarCompra;
 import Paneles.TextPrompt;
 import java.awt.BorderLayout;
@@ -20,10 +21,14 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DecimalFormat;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
+
+
+
 
 /**
  *
@@ -58,7 +63,7 @@ public class ProductoParaCompra extends javax.swing.JFrame {
 
         tblProductosParafactura.setRowSelectionAllowed(true);
         tblProductosParafactura.setColumnSelectionAllowed(false);
-        
+
         int columnIndexToHide = 4;
         TableColumn column = tblProductosParafactura.getColumnModel().getColumn(columnIndexToHide);
 
@@ -420,7 +425,7 @@ public class ProductoParaCompra extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bntAgregarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntAgregarProductoActionPerformed
-     
+
         int fila = tblProductosParafactura.getSelectedRow();
 
         try
@@ -450,7 +455,6 @@ public class ProductoParaCompra extends javax.swing.JFrame {
                 return; // Salir del método si no se ingresó una cantidad
             }
 
-        
             DefaultTableModel modelo = (DefaultTableModel) tblProductosParafactura.getModel();
             nombreProd = tblProductosParafactura.getValueAt(fila, 1).toString();
             precU = tblProductosParafactura.getValueAt(fila, 3).toString();
@@ -459,7 +463,9 @@ public class ProductoParaCompra extends javax.swing.JFrame {
             //Se realizan los cálculos para el total en la factura
             tot = (Double.parseDouble(precU) * Integer.parseInt(cantid));
 
-            totalP = String.valueOf(tot);
+            DecimalFormat df = new DecimalFormat("#0.00");
+            totalP = df.format(tot);
+//            totalP = String.valueOf(tot);
 
             //Enviar los campos seleccionados de la tabla de productos a la tabla de factura de compras
             modelo = (DefaultTableModel) tablecompras.getModel();
@@ -499,6 +505,7 @@ public class ProductoParaCompra extends javax.swing.JFrame {
                 };
                 modelo.addRow(filaElemento);
             }
+            calcular();
 
             //calculo para que se sumen los totales de la factura a uno solo y se envíe a la tabla de facturas
             calcula = Double.parseDouble(precU) * Integer.parseInt(cantidad.getText());
@@ -509,9 +516,12 @@ public class ProductoParaCompra extends javax.swing.JFrame {
             cantidad.setText("");
             JOptionPane.showMessageDialog(null, "Se agrego el producto!");
 
+            
+            
+           
+           
 //            ver.setSize(1024, 640);
 //            ver.setLocation(0, 0);
-
 //            jPanel1.removeAll();
 //            jPanel1.add(ver, BorderLayout.CENTER);
 //            jPanel1.revalidate();
@@ -522,6 +532,21 @@ public class ProductoParaCompra extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_bntAgregarProductoActionPerformed
 
+    public void calcular(){
+
+        float suma = 0;
+        for(int i = 0; i < tablecompras.getRowCount(); i++){
+        
+            float renglon;
+            renglon = Float.parseFloat(tablecompras.getValueAt(i, 3).toString());
+            
+            suma = suma + renglon;
+        }
+        Tsum.setText(String.valueOf(suma));
+
+}
+   
+    
     private void cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarActionPerformed
         // TODO add your handling code here:
         this.dispose();

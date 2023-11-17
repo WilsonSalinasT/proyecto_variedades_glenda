@@ -41,14 +41,15 @@ public class factura extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 204));
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         txtbill.setEditable(false);
-        txtbill.setBackground(new java.awt.Color(255, 255, 153));
+        txtbill.setBackground(new java.awt.Color(255, 255, 255));
         txtbill.setColumns(20);
         txtbill.setFont(new java.awt.Font("Monospaced", 2, 14)); // NOI18N
         txtbill.setForeground(new java.awt.Color(51, 51, 51));
         txtbill.setRows(5);
+        txtbill.setBorder(null);
         jScrollPane1.setViewportView(txtbill);
 
         jButton1.setText("Imprimir");
