@@ -377,6 +377,7 @@ public class Menu extends javax.swing.JFrame {
         IngresodeCompra ver = new IngresodeCompra();
         ver.setVisible(true);
         ver.setLocationRelativeTo(null);
+        
 
     }//GEN-LAST:event_pedidoSublimacion2ActionPerformed
 

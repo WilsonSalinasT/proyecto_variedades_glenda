@@ -4,12 +4,27 @@
  */
 package App;
 
+import static App.Menu.panelprincipal;
 import java.awt.Color;
 import java.awt.Font;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import static App.ProductoParaCompra.totalFactura;
+import Paneles.clientes;
+import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.Connection;
+
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 
 /**
  *
@@ -32,7 +47,62 @@ public class IngresodeCompra extends javax.swing.JFrame {
         tablecompras.setRowSelectionAllowed(true);
         tablecompras.setColumnSelectionAllowed(false);
 
-      
+//     sumarColumna();
+        Tsum.setText(Integer.toString((int) getsumarColumna()));
+
+        try
+        {
+            Connection connection = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
+
+            Statement stmt = connection.createStatement();
+            String sql = "SELECT id_proveedor, nombreEmpresa FROM Proveedor";
+            ResultSet rs = stmt.executeQuery(sql);
+
+            txtProveedor.addItem("Seleccione"); // Agrega el elemento "Seleccione" al principio
+
+            while (rs.next())
+            {
+                String nombreProveedor = rs.getString("nombreEmpresa");
+
+                int idProveedor = rs.getInt("id_proveedor");
+
+                txtProveedor.addItem(nombreProveedor);
+
+                // Almacena el ID del cliente en un mapa con el nombre completo como clave
+                txtProveedor.putClientProperty(nombreProveedor, idProveedor);
+            }
+
+            connection.close();
+
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
+        txtProveedor.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String selectedClient = (String) txtProveedor.getSelectedItem();
+                int selectedClientId = (int) txtProveedor.getClientProperty(selectedClient);
+
+                // Actualiza el campo de texto con el ID del cliente seleccionado
+                id_proveedor.setText(Integer.toString(selectedClientId));
+            }
+        });
+
+    }
+
+    public double getsumarColumna() {
+
+        double suma = 0;
+        int rowscount = tablecompras.getRowCount();
+
+        for (int i = 0; i < rowscount; i++)
+        {
+            suma = suma + Integer.parseInt(tablecompras.getValueAt(i, 2).toString());
+        }
+        return suma;
+
     }
 
     /**
@@ -53,19 +123,21 @@ public class IngresodeCompra extends javax.swing.JFrame {
         jSeparator4 = new javax.swing.JSeparator();
         jButton2 = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        txtfecha = new com.toedter.calendar.JDateChooser();
         jLabel5 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        txtProveedor = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
         tipoCompra = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
-        jFormattedTextField1 = new javax.swing.JFormattedTextField();
+        numFactura = new javax.swing.JFormattedTextField();
         jSeparator5 = new javax.swing.JSeparator();
+        id_proveedor = new javax.swing.JTextField();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablecompras = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jSeparator3 = new javax.swing.JSeparator();
+        Tsum = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -99,6 +171,11 @@ public class IngresodeCompra extends javax.swing.JFrame {
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 102, 102), 3, true), "Datos", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 14), new java.awt.Color(0, 0, 0))); // NOI18N
 
         jButton4.setText("Cancelar");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Guardar");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -122,8 +199,6 @@ public class IngresodeCompra extends javax.swing.JFrame {
 
         jLabel5.setText("Proveedor:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         jLabel4.setText("Tipo de Compra:");
 
         tipoCompra.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Credito", "Contado", "Normal", "Donación" }));
@@ -135,16 +210,18 @@ public class IngresodeCompra extends javax.swing.JFrame {
 
         jLabel3.setText("No. de Factura");
 
-        jFormattedTextField1.setText("   -   -  -   ");
-        jFormattedTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+        numFactura.setText("   -   -  -   ");
+        numFactura.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                jFormattedTextField1KeyTyped(evt);
+                numFacturaKeyTyped(evt);
             }
         });
 
         jSeparator5.setBackground(new java.awt.Color(255, 51, 51));
         jSeparator5.setForeground(new java.awt.Color(255, 51, 51));
         jSeparator5.setOpaque(true);
+
+        id_proveedor.setEditable(false);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -168,15 +245,15 @@ public class IngresodeCompra extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addGap(18, 18, 18)
-                                .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(numFactura, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel5)
                                     .addComponent(jLabel6))
                                 .addGap(37, 37, 37)
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                    .addComponent(txtfecha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(txtProveedor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                         .addGap(0, 2, Short.MAX_VALUE)))
                 .addGap(38, 38, 38))
             .addComponent(jSeparator4)
@@ -185,14 +262,20 @@ public class IngresodeCompra extends javax.swing.JFrame {
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(44, 44, 44))
             .addComponent(jSeparator5)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(id_proveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addGap(31, 31, 31)
+                .addContainerGap()
+                .addComponent(id_proveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(numFactura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
@@ -200,11 +283,11 @@ public class IngresodeCompra extends javax.swing.JFrame {
                 .addGap(32, 32, 32)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(40, 40, 40)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6)
-                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtfecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(31, 31, 31)
                 .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -258,6 +341,10 @@ public class IngresodeCompra extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 543, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(15, 15, 15))))
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(201, 201, 201)
+                .addComponent(Tsum, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -267,7 +354,8 @@ public class IngresodeCompra extends javax.swing.JFrame {
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 326, Short.MAX_VALUE)
-                .addGap(29, 29, 29))
+                .addGap(7, 7, 7)
+                .addComponent(Tsum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -311,28 +399,30 @@ public class IngresodeCompra extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         //codigo para eliminar filas de las tablas 
         //Obtener el índice de la fila seleccionada
-            // Obtener el índice de la fila seleccionada
-    int filaSeleccionada = tablecompras.getSelectedRow();
+        // Obtener el índice de la fila seleccionada
+        int filaSeleccionada = tablecompras.getSelectedRow();
 
-    if (filaSeleccionada >= 0) {
-        // Obtener el modelo de la tabla
-        DefaultTableModel modelo = (DefaultTableModel) tablecompras.getModel();
-        
-        // Obtener el total de la fila seleccionada
-        double totalP = Double.parseDouble(modelo.getValueAt(filaSeleccionada, 3).toString());
-        
-        // Eliminar la fila seleccionada del modelo de la tabla
-        modelo.removeRow(filaSeleccionada);
-        
-        // Restar el total de la fila eliminada del totalFactura
-        totalFactura -= totalP;
-        
-        // Actualizar el total de la factura en el componente adecuado (lblTotalFactura)
-        //lblTotalFactura.setText(String.valueOf(totalFactura));
-    } else {
-        // No se seleccionó ninguna fila, mostrar un mensaje de advertencia o error
-        JOptionPane.showMessageDialog(null, "No se ha seleccionado ninguna fila", "Error al eliminar fila", JOptionPane.WARNING_MESSAGE);
-    }
+        if (filaSeleccionada >= 0)
+        {
+            // Obtener el modelo de la tabla
+            DefaultTableModel modelo = (DefaultTableModel) tablecompras.getModel();
+
+            // Obtener el total de la fila seleccionada
+            double totalP = Double.parseDouble(modelo.getValueAt(filaSeleccionada, 3).toString());
+
+            // Eliminar la fila seleccionada del modelo de la tabla
+            modelo.removeRow(filaSeleccionada);
+
+            // Restar el total de la fila eliminada del totalFactura
+            totalFactura -= totalP;
+
+            // Actualizar el total de la factura en el componente adecuado (lblTotalFactura)
+            //lblTotalFactura.setText(String.valueOf(totalFactura));
+        } else
+        {
+            // No se seleccionó ninguna fila, mostrar un mensaje de advertencia o error
+            JOptionPane.showMessageDialog(null, "No se ha seleccionado ninguna fila", "Error al eliminar fila", JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -341,7 +431,7 @@ public class IngresodeCompra extends javax.swing.JFrame {
         prod.setLocationRelativeTo(null);
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jFormattedTextField1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jFormattedTextField1KeyTyped
+    private void numFacturaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_numFacturaKeyTyped
         // TODO add your handling code here:
         char validar = evt.getKeyChar();
         if (Character.isLetter(validar))
@@ -349,15 +439,103 @@ public class IngresodeCompra extends javax.swing.JFrame {
             getToolkit().beep();
             evt.consume();
         }
-    }//GEN-LAST:event_jFormattedTextField1KeyTyped
+    }//GEN-LAST:event_numFacturaKeyTyped
 
     private void tipoCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tipoCompraActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tipoCompraActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
+        String nunfactura = numFactura.getText().trim();
+        String id = id_proveedor.getText().trim();
+        String tipo = (String) tipoCompra.getSelectedItem();
+//        String proveedor = (String) txtProveedor.getSelectedItem();
+        Date fecha = (Date) txtfecha.getDate();
+
+        // Obtener la fecha en el formato requerido por SQL Server
+//        StringBuilder camposVacios = new StringBuilder("Los siguientes campos están vacíos:");
+//
+//        if (nombre.isEmpty())
+//        {
+//            camposVacios.append("\n - Nombre");
+//        }
+//        if (apellido.isEmpty())
+//        {
+//            camposVacios.append("\n - Apellido");
+//        }
+//        if (direccion.isEmpty())
+//        {
+//            camposVacios.append("\n - Dirección");
+//        }
+//        if (telefono.isEmpty())
+//        {
+//            camposVacios.append("\n - Teléfono");
+//        }
+//        if (correo.isEmpty())
+//        {
+//            camposVacios.append("\n - Correo");
+//        } else if (!correo.matches("^[A-Za-z0-9+_.-]+@.+\\.com$"))
+//        {
+//            camposVacios.append("\n - Correo no cumple con los requisitos");
+//        }
+//        if (!camposVacios.toString().equals("Los siguientes campos están vacíos:"))
+//        {
+//            JOptionPane.showMessageDialog(null, camposVacios.toString(), "Campos Vacíos", JOptionPane.ERROR_MESSAGE);
+//        } else
+//        {
+//            String sexo;
+//            if (rbmasculino.isSelected())
+//            {
+//                sexo = "Masculino";
+//            } else if (rbfemenino.isSelected())
+//            {
+//                sexo = "Femenino";
+//            } else
+//            {
+//                sexo = "Masculino"; // Valor predeterminado si no se selecciona un sexo
+//            }
+        try
+        {
+            // Resto del código para la inserción en la base de datos
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
+
+            PreparedStatement insertPs = conn.prepareStatement("INSERT INTO Compras (numfactura, tipoCategoria, fecha, total, id_proveedor) VALUES (?,?,?,?,?)");
+            insertPs.setString(1, nunfactura);
+            insertPs.setString(2, tipo);
+            insertPs.setDate(3, new java.sql.Date(fecha.getTime()));
+            insertPs.setObject(4, totalFactura);
+            insertPs.setString(5, id);
+          
+
+            insertPs.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Registro guardado");
+
+//                clientes cli = new clientes();
+//
+//                cli.setSize(1024, 640);
+//                cli.setLocation(0, 0);
+//
+//                panelprincipal.revalidate();
+//                panelprincipal.repaint();
+//                panelprincipal.removeAll();
+//                panelprincipal.add(cli, BorderLayout.CENTER);
+//                panelprincipal.revalidate();
+//                panelprincipal.repaint();
+        } catch (SQLException e)
+        {
+            JOptionPane.showMessageDialog(null, e.toString(), "Error de SQL", JOptionPane.ERROR_MESSAGE);
+        } catch (ClassNotFoundException ex)
+        {
+            JOptionPane.showMessageDialog(null, "Error de conexión a la base de datos", "Error de Conexión", JOptionPane.ERROR_MESSAGE);
+        }
+
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -402,13 +580,12 @@ public class IngresodeCompra extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField Tsum;
+    public javax.swing.JTextField id_proveedor;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
-    private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -422,7 +599,10 @@ public class IngresodeCompra extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
+    public javax.swing.JFormattedTextField numFactura;
     public static javax.swing.JTable tablecompras;
-    private javax.swing.JComboBox<String> tipoCompra;
+    public javax.swing.JComboBox<String> tipoCompra;
+    public javax.swing.JComboBox<String> txtProveedor;
+    public com.toedter.calendar.JDateChooser txtfecha;
     // End of variables declaration//GEN-END:variables
 }
