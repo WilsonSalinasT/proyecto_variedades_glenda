@@ -16,7 +16,7 @@ import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
-
+import static App.factura.txtbill;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -24,7 +24,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
 
 /**
  *
@@ -138,8 +137,9 @@ public class IngresodeCompra extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jSeparator3 = new javax.swing.JSeparator();
         Tsum = new javax.swing.JTextField();
+        jButton5 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -327,6 +327,13 @@ public class IngresodeCompra extends javax.swing.JFrame {
         jSeparator3.setForeground(new java.awt.Color(255, 51, 51));
         jSeparator3.setOpaque(true);
 
+        jButton5.setText("Ver");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -334,22 +341,25 @@ public class IngresodeCompra extends javax.swing.JFrame {
             .addComponent(jSeparator3)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addGap(0, 26, Short.MAX_VALUE)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addGap(30, 30, 30))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 543, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(15, 15, 15))))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 543, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(15, 15, 15))
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(201, 201, 201)
                 .addComponent(Tsum, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addGap(133, 133, 133)
+                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(30, 30, 30))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -431,6 +441,55 @@ public class IngresodeCompra extends javax.swing.JFrame {
         prod.setLocationRelativeTo(null);
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    public void bill() {
+
+        String num = numFactura.getText();
+        String tipo = (String) tipoCompra.getSelectedItem();
+        String proveedor = (String) txtProveedor.getSelectedItem();
+        Date fecha = txtfecha.getDate();
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+        String fechaFormateada = formato.format(fecha);
+
+        factura ver = new factura();
+        DefaultTableModel model = new DefaultTableModel();
+        model = (DefaultTableModel) tablecompras.getModel();
+
+        StringBuilder facturaText = new StringBuilder();
+
+// Agregar los mensajes a la cadena
+        facturaText.append("*********************************************************************\n");
+        facturaText.append("                   Factura de compra                   \n");
+        facturaText.append("*********************************************************************\n");
+
+        facturaText.append("No. de Factura: ").append(num).append("\n");
+        facturaText.append("Tipo de compra: ").append(tipo).append("\n");
+        facturaText.append("Proveedor: ").append(proveedor).append("\n");
+        facturaText.append("Fecha: ").append(fechaFormateada).append("\n");
+
+// Agregar títulos estáticos y datos de la tabla
+        facturaText.append("\n"); // Agregar una línea en blanco antes de la tabla
+        facturaText.append(String.format("%-20s %-10s %-20s %-10s\n", "Producto", "Cantidad", "Precio unitario", "Total"));
+
+        for (int i = 0; i < model.getRowCount(); i++)
+        {
+            String name = (String) model.getValueAt(i, 0);
+            String cantidad = (String) model.getValueAt(i, 1);
+            String preciounitario = (String) model.getValueAt(i, 2);
+            String total = (String) model.getValueAt(i, 3);
+
+            facturaText.append(String.format("%-20s %-10s %-20s %-10s\n", name, cantidad, preciounitario, total));
+        }
+
+// Establecer el texto en el JTextArea una vez con toda la información
+        ver.txtbill.setText(facturaText.toString());
+        ver.txtbill.setText(ver.txtbill.getText() + "*********************************************************************\n");
+        ver.txtbill.setText(ver.txtbill.getText() + "Total: " + totalFactura + "\n");
+
+        ver.setVisible(true);
+
+    }
+
+
     private void numFacturaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_numFacturaKeyTyped
         // TODO add your handling code here:
         char validar = evt.getKeyChar();
@@ -506,7 +565,6 @@ public class IngresodeCompra extends javax.swing.JFrame {
             insertPs.setDate(3, new java.sql.Date(fecha.getTime()));
             insertPs.setObject(4, totalFactura);
             insertPs.setString(5, id);
-          
 
             insertPs.executeUpdate();
             JOptionPane.showMessageDialog(null, "Registro guardado");
@@ -536,6 +594,11 @@ public class IngresodeCompra extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+        bill();
+    }//GEN-LAST:event_jButton5ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -586,6 +649,7 @@ public class IngresodeCompra extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

@@ -420,8 +420,7 @@ public class ProductoParaCompra extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bntAgregarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntAgregarProductoActionPerformed
-        // TODO add your handling code here:
-        //variable para seleccionar el producto de la lista de productos
+     
         int fila = tblProductosParafactura.getSelectedRow();
 
         try
