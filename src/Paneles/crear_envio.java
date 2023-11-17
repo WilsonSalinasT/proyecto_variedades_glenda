@@ -101,14 +101,13 @@ public class crear_envio extends javax.swing.JPanel {
 
                             Statement stmt = connection.createStatement();
 
-                            String sqlq = "SELECT C.nombre, C.apellido, C.numero_telefono,C.direccion,C.id_cliente,\n"
-                                    + "       PS.prenda, PS.fechaPedido, PS.precio,PSB.precio as preciosubl, \n"
-                                    + "       PSB.material, PSB.fechaPedido as fechasublimacion, \n"
-                                    + "       PA.arreglo, PA.precio AS precioarreglo, PA.fechaPedido as fechaprenda\n"
+                            String sqlq = "SELECT C.nombre, C.apellido, C.numero_telefono, C.direccion, C.id_cliente, PS.prenda, PS.fechaPedido, PS.estado, PS.precio, PSB.material, PSB.fechaPedido as fechasublimacion, PSB.precio as preciosubl,\n"
+                                    + "     PA.arreglo, PA.precio AS precioarreglo, PA.fechaPedido as fechaprenda\n"
                                     + "FROM Cliente C\n"
-                                    + "LEFT JOIN PedidoSastreria PS ON C.id_cliente = PS.id_cliente\n"
-                                    + "LEFT JOIN PedidoSublimacion PSB ON C.id_cliente = PSB.id_cliente\n"
-                                    + "LEFT JOIN PedidoArreglo PA ON C.id_cliente = PA.id_cliente WHERE CONCAT(C.nombre, ' ', C.apellido) = '" + selectedClient + "'";
+                                    + "LEFT JOIN PedidoSastreria PS ON C.id_cliente = PS.id_cliente AND PS.estado = 'Pendiente'\n"
+                                    + "LEFT JOIN PedidoSublimacion PSB ON C.id_cliente = PSB.id_cliente AND PSB.estado = 'Pendiente'\n"
+                                    + "LEFT JOIN PedidoArreglo PA ON C.id_cliente = PA.id_cliente AND PA.estado = 'Pendiente'\n"
+                                    + "WHERE CONCAT(C.nombre, ' ', C.apellido) = '" + selectedClient + "'";
                             ResultSet rs = stmt.executeQuery(sqlq);
 
                             if (rs.next())
@@ -220,7 +219,7 @@ public class crear_envio extends javax.swing.JPanel {
                         try
                         {
                             Connection connection = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
-                            PreparedStatement preparedStatement = connection.prepareStatement("SELECT id_sastreria,prenda,precio,fechaPedido FROM PedidoSastreria WHERE CONCAT('Prenda:',prenda, ' ','Precio:', precio, ' ','Fecha de pedido:', fechaPedido) = ? and estado = 'Pendiente'");
+                            PreparedStatement preparedStatement = connection.prepareStatement("SELECT id_sastreria,prenda,precio,fechaPedido,estado FROM PedidoSastreria WHERE CONCAT('Prenda:',prenda, ' ','Precio:', precio, ' ','Fecha de pedido:', fechaPedido) = ? and estado = 'Pendiente'");
                             preparedStatement.setString(1, selectedProduct);
                             ResultSet rs = preparedStatement.executeQuery();
 
@@ -257,7 +256,7 @@ public class crear_envio extends javax.swing.JPanel {
                         try
                         {
                             Connection connection = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
-                            PreparedStatement preparedStatement = connection.prepareStatement("SELECT id_arreglo,arreglo,precio,fechaPedido FROM PedidoArreglo WHERE CONCAT('Arreglo:',arreglo, ' ','Precio:', precio, ' ','Fecha de pedido:', fechaPedido) = ? and estado = 'pendiente'");
+                            PreparedStatement preparedStatement = connection.prepareStatement("SELECT id_arreglo,arreglo,precio,fechaPedido FROM PedidoArreglo WHERE CONCAT('Arreglo:',arreglo, ' ','Precio:', precio, ' ','Fecha de pedido:', fechaPedido) = ? and estado = 'Pendiente'");
                             preparedStatement.setString(1, selectedProduct);
                             ResultSet rs = preparedStatement.executeQuery();
 
@@ -409,7 +408,6 @@ public class crear_envio extends javax.swing.JPanel {
 //
 //        sublimacion.setModel(model);
 //    }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

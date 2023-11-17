@@ -42,6 +42,7 @@ public class ProductoParaCompra extends javax.swing.JFrame {
     int filasPorPagina = 18; // Número de filas a mostrar por página
     int totalFilas = 0; // Total de filas en la tabla
     int totalPaginas = 0; // Total de páginas en la tabla
+     String terminoBusqueda = "";
 
     /**
      * Creates new form ProductoParaCompra
@@ -186,37 +187,81 @@ public class ProductoParaCompra extends javax.swing.JFrame {
         tblProductosParafactura.setFillsViewportHeight(true);
     }
 
-    public void filtrarDatosProductos(String valor) {
-//        String[] titulos = {"<html>Num.</html>","<html>Nombre del Producto</html>","<html>Tipo de inventario</html>",
-//            "<html>Precio</html>"};
-//        String[] registrosP = new String[4];
-//        
-//        DefaultTableModel modelo = new DefaultTableModel(null, titulos);
-//        String SQL = "select * from productos WHERE "
-//                + "nombreProducto like '%"+valor+"%' or tipoInventario like '%"+valor+"%'";
-//        
-//        
-////        
-//        try {
-//           Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
-//            ps = conn.prepareStatement("SELECT * FROM cliente JOIN Cita ON cliente.id_cliente = Cita.id_cliente where nombre =? and apellido=? and fecha_cita=? ");
+    
+//    private void buscarDatos(String texto) {
+//        DefaultTableModel modelTabla = (DefaultTableModel) tablecompras.getModel();
+//        modelTabla.setRowCount(0);
+//        boolean foundData = false;
 //
-//            while(rs.next()){
-//                registrosP[0]=rs.getString("id");
-//                registrosP[1]=rs.getString("nombreProducto");
-//                registrosP[2]=rs.getString("tipoInventario");
-//                registrosP[3]=rs.getString("precio");
-//                
-//                modelo.addRow(registrosP);
-//                
+//        try
+//        {
+//            Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
+//            if (conn != null && !conn.isClosed())
+//            {
+//                PreparedStatement ps = conn.prepareStatement("SELECT ROW_NUMBER() OVER(ORDER BY E.nombre) AS NumRegistro, E.nombre, E.apellido, E.numero_telefono, V.fecha_cita "
+//                        + "FROM Cliente E "
+//                        + "JOIN Cita V ON E.id_cliente = V.id_cliente "
+//                        + "WHERE E.nombre LIKE ? OR E.apellido LIKE ? OR V.fecha_cita LIKE ? "
+//                        + "ORDER BY E.nombre "
+//                        + "OFFSET ? ROWS FETCH NEXT ? ROWS ONLY");
+//
+//                if (texto != null && !texto.isEmpty())
+//                {
+//                    ps.setString(1, "%" + texto + "%");
+//                    ps.setString(2, "%" + texto + "%");
+//                    ps.setString(3, "%" + texto + "%");
+//                    terminoBusqueda = texto; // Actualizar el término de búsqueda
+//                } else
+//                {
+//                    ps.setString(1, "%");
+//                    ps.setString(2, "%");
+//                    ps.setString(3, "%");
+//                    terminoBusqueda = ""; // Limpiar el término de búsqueda
+//                }
+//
+//                // Define el OFFSET y FETCH NEXT de acuerdo a tus necesidades
+//                int offset = 0; // Cambia el valor del offset según tus requerimientos
+//                int fetchNext = 10; // Cambia la cantidad de registros a recuperar según tus requerimientos
+//
+//                ps.setInt(4, offset);
+//                ps.setInt(5, fetchNext);
+//
+//                ResultSet rs = ps.executeQuery();
+//
+//                if (rs != null)
+//                {
+//                    while (rs.next())
+//                    {
+//                        int numRegistro = rs.getInt("NumRegistro");
+//                        String nombre = rs.getString("nombre");
+//                        String apellido = rs.getString("apellido");
+//                        String numeroTelefono = rs.getString("numero_telefono");
+//                        String fechaCita = rs.getString("fecha_cita");
+//
+//                        if (nombre != null && apellido != null && numeroTelefono != null)
+//                        {
+//                            modelTabla.addRow(new Object[]
+//                            {
+//                                numRegistro, nombre, apellido, numeroTelefono, fechaCita
+//                            });
+//                            foundData = true;
+//                        }
+//                    }
+//
+//                    rs.close();
+//                }
+//
+//                ps.close();
+//                conn.close();
 //            }
-//            
-//            ProductoParaCompra.tblProductosParafactura.setModel(modelo);
-//            
-//        } catch (Exception e) {
-//            JOptionPane.showMessageDialog(null,"Error"+e);
+//        } catch (Exception e)
+//        {
+//            JOptionPane.showMessageDialog(null, e.toString());
 //        }
-    }
+//
+//        // Llama a la función de cargarTablaEmpleados() si es necesario recargar la tabla después de la búsqueda
+//        cargarTablaProductos(); // Recargar la tabla después de la búsqueda
+//    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -559,7 +604,7 @@ public class ProductoParaCompra extends javax.swing.JFrame {
 
     private void CuadroBuscarProductoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_CuadroBuscarProductoKeyReleased
         // TODO add your handling code here:
-        filtrarDatosProductos(CuadroBuscarProducto.getText());
+//        filtrarDatosProductos(CuadroBuscarProducto.getText());
     }//GEN-LAST:event_CuadroBuscarProductoKeyReleased
 
     private void CuadroBuscarProductoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_CuadroBuscarProductoFocusGained
