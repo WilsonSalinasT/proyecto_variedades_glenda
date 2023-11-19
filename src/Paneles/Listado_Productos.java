@@ -583,7 +583,7 @@ try {
             Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
 
             // Consulta para contar el número total de filas
-            ps = conn.prepareStatement("SELECT COUNT(*) FROM Producto");
+            ps = conn.prepareStatement("SELECT COUNT(*) FROM Productos");
             rs = ps.executeQuery();
             if (rs.next())
             {
@@ -607,7 +607,7 @@ try {
 
             // Consulta principal con paginación
             ps = conn.prepareStatement("SELECT ROW_NUMBER() OVER(ORDER BY cod_producto) AS NumRegistro, nombre, descripcion, categoria "
-                    + "FROM Producto ORDER BY cod_producto OFFSET ? ROWS FETCH NEXT ? ROWS ONLY");
+                    + "FROM Productos ORDER BY cod_producto OFFSET ? ROWS FETCH NEXT ? ROWS ONLY");
             ps.setInt(1, offset);
             ps.setInt(2, filasPorPagina);
             rs = ps.executeQuery();
@@ -669,11 +669,11 @@ try {
         if ("Todas".equals(categoriaSeleccionada))
         {
             sqlQuery = "SELECT ROW_NUMBER() OVER(ORDER BY cod_producto) AS NumRegistro, nombre, descripcion, categoria"
-                    + " FROM Producto WHERE nombre LIKE ? OR descripcion LIKE ?";
+                    + " FROM Productos WHERE nombre LIKE ? OR descripcion LIKE ?";
         } else
         {
             sqlQuery = "SELECT ROW_NUMBER() OVER(ORDER BY cod_producto) AS NumRegistro, nombre, descripcion, categoria"
-                    + " FROM Producto WHERE categoria = ? AND (nombre LIKE ? OR descripcion LIKE ?)";
+                    + " FROM Productos WHERE categoria = ? AND (nombre LIKE ? OR descripcion LIKE ?)";
         }
 
         try (Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789"); PreparedStatement ps = conn.prepareStatement(sqlQuery))

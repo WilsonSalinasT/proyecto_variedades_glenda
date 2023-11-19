@@ -299,7 +299,7 @@ public class Menu extends javax.swing.JFrame {
 
     private void productosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_productosActionPerformed
 
-        Listado_Prod p2 = new Listado_Prod();
+        Listado_Productos p2 = new Listado_Productos();
         p2.setSize(1024, 640);
 
         p2.setLocation(0, 0);
