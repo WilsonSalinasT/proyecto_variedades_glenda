@@ -748,7 +748,7 @@ public class ProductoParaCompra extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void btnbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbuscarActionPerformed
-         String texto = btnbuscar.getText().trim();
+    String texto = CuadroBuscarProducto.getText().trim();
 
         //Validacion del texto ingresado
         if (!texto.isEmpty())
@@ -756,7 +756,7 @@ public class ProductoParaCompra extends javax.swing.JFrame {
             buscarDatos(texto);
         } else
         {
-            JOptionPane.showMessageDialog(null, "El texto ingresado es erroneo");
+            JOptionPane.showMessageDialog(null, "Tiene que ingresar texto para hacer la respectiva búsqueda");
         }
     }//GEN-LAST:event_btnbuscarActionPerformed
 
@@ -886,7 +886,7 @@ public class ProductoParaCompra extends javax.swing.JFrame {
         }
     }
 
- private void buscarDatos(String texto) {
+private void buscarDatos(String texto) {
     DefaultTableModel modelTabla = (DefaultTableModel) tblProductosParafactura.getModel();
     modelTabla.setRowCount(0);
     boolean foundData = false;
@@ -894,41 +894,36 @@ public class ProductoParaCompra extends javax.swing.JFrame {
     try {
         Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
         if (conn != null && !conn.isClosed()) {
-            String query = "SELECT ROW_NUMBER() OVER(ORDER BY nombre) AS NumRegistro, nombre, categoria, precio, cod_producto "
-                    + "FROM Productos "
-                    + "WHERE nombre LIKE ? "
-                    + "ORDER BY nombre OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
-
-            PreparedStatement ps = conn.prepareStatement(query);
+            PreparedStatement ps = conn.prepareStatement("SELECT ROW_NUMBER() OVER(ORDER BY cod_producto) AS NumRegistro, cod_producto, nombre, descripcion, categoria, precio, imagen, foto " +
+                    "FROM Productos " +
+                    "WHERE nombre LIKE ? OR categoria LIKE ?");
 
             if (texto != null && !texto.isEmpty()) {
                 ps.setString(1, "%" + texto + "%");
+                ps.setString(2, "%" + texto + "%");
                 terminoBusqueda = texto; // Actualizar el término de búsqueda
             } else {
                 ps.setString(1, "%");
+                ps.setString(2, "%");
                 terminoBusqueda = ""; // Limpiar el término de búsqueda
             }
-
-            // Define el OFFSET y FETCH NEXT de acuerdo a tus necesidades
-            int offset = 0; // Cambia el valor del offset según tus requerimientos
-            int fetchNext = 10; // Cambia la cantidad de registros a recuperar según tus requerimientos
-
-            ps.setInt(2, offset);
-            ps.setInt(3, fetchNext);
 
             ResultSet rs = ps.executeQuery();
 
             if (rs != null) {
                 while (rs.next()) {
                     int numRegistro = rs.getInt("NumRegistro");
+                    int codProducto = rs.getInt("cod_producto");
                     String nombre = rs.getString("nombre");
+                    String descripcion = rs.getString("descripcion");
                     String categoria = rs.getString("categoria");
                     String precio = rs.getString("precio");
-                    int codproducto = rs.getInt("cod_producto");
+                    String imagen = rs.getString("imagen");
+                    String foto = rs.getString("foto");
 
-                    if (nombre != null && categoria != null && precio != null) {
+                    if (nombre != null && categoria != null) {
                         modelTabla.addRow(new Object[]{
-                                numRegistro, nombre, categoria, precio, codproducto
+                                numRegistro, codProducto, nombre, descripcion, categoria, precio, imagen, foto
                         });
                         foundData = true;
                     }
@@ -946,6 +941,7 @@ public class ProductoParaCompra extends javax.swing.JFrame {
 
     cargarTablaProductos(); // Recargar la tabla después de la búsqueda
 }
+
 
     
     /**
