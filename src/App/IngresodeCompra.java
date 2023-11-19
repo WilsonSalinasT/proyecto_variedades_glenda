@@ -622,17 +622,6 @@ public class IngresodeCompra extends javax.swing.JFrame {
             insertPs.executeUpdate();
             JOptionPane.showMessageDialog(null, "Registro guardado");
 
-//                clientes cli = new clientes();
-//
-//                cli.setSize(1024, 640);
-//                cli.setLocation(0, 0);
-//
-//                panelprincipal.revalidate();
-//                panelprincipal.repaint();
-//                panelprincipal.removeAll();
-//                panelprincipal.add(cli, BorderLayout.CENTER);
-//                panelprincipal.revalidate();
-//                panelprincipal.repaint();
         } catch (SQLException e)
         {
             JOptionPane.showMessageDialog(null, e.toString(), "Error de SQL", JOptionPane.ERROR_MESSAGE);

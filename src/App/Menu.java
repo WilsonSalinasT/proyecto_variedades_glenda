@@ -363,14 +363,7 @@ public class Menu extends javax.swing.JFrame {
 
     private void pedidoSublimacion1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pedidoSublimacion1ActionPerformed
         // TODO add your handling code here:
-        GalleryProduct p2 = new GalleryProduct();
-        p2.setSize(1024, 640);
-        p2.setLocation(0, 0);
-
-        panelprincipal.removeAll();
-        panelprincipal.add(p2, BorderLayout.CENTER);
-        panelprincipal.revalidate();
-        panelprincipal.repaint();
+       
     }//GEN-LAST:event_pedidoSublimacion1ActionPerformed
 
     private void pedidoSublimacion2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pedidoSublimacion2ActionPerformed
