@@ -26,6 +26,11 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
+import javax.swing.text.JTextComponent;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+
 
 
 
@@ -36,13 +41,14 @@ import javax.swing.table.TableColumn;
  */
 public class ProductoParaCompra extends javax.swing.JFrame {
 
+     TextPrompt holder;
+     
+    
     //Variables para calcular el total de la factura
     static double totalFactura, suma;
-    int paginaActual = 1; // Página actual
-    int filasPorPagina = 18; // Número de filas a mostrar por página
-    int totalFilas = 0; // Total de filas en la tabla
-    int totalPaginas = 0; // Total de páginas en la tabla
-     String terminoBusqueda = "";
+    private boolean foundData;
+    
+ 
 
     /**
      * Creates new form ProductoParaCompra
@@ -50,7 +56,7 @@ public class ProductoParaCompra extends javax.swing.JFrame {
     public ProductoParaCompra() {
         initComponents();
         this.setLocationRelativeTo(null);
-
+        holder = new TextPrompt("Busque por nombre del producto y tipo de categoría", CuadroBuscarProducto);
         cargarTablaProductos();
         //Inicializando la variable para calcular el total de la factura
         totalFactura = 0;
@@ -92,6 +98,7 @@ public class ProductoParaCompra extends javax.swing.JFrame {
 //            suma = suma + renglon;
 //        }
 //    }
+    /*
     private void cargarTablaProductos() {
 
         DefaultTableModel modeloTabla = (DefaultTableModel) tblProductosParafactura.getModel();
@@ -186,7 +193,7 @@ public class ProductoParaCompra extends javax.swing.JFrame {
         tblProductosParafactura.setPreferredScrollableViewportSize(new Dimension(tblProductosParafactura.getPreferredSize().width, tblProductosParafactura.getRowHeight() * filasDeseadas));
         tblProductosParafactura.setFillsViewportHeight(true);
     }
-
+*/
     
 //    private void buscarDatos(String texto) {
 //        DefaultTableModel modelTabla = (DefaultTableModel) tablecompras.getModel();
@@ -279,8 +286,11 @@ public class ProductoParaCompra extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnbuscar = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        Texto_Contable = new javax.swing.JLabel();
+        btnAnterior = new javax.swing.JButton();
+        btnSiguiente = new javax.swing.JButton();
 
         jList1.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -295,7 +305,8 @@ public class ProductoParaCompra extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        cancelar.setBackground(new java.awt.Color(253, 253, 253));
+        cancelar.setBackground(new java.awt.Color(255, 153, 51));
+        cancelar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         cancelar.setText("Cancelar");
         cancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -363,7 +374,8 @@ public class ProductoParaCompra extends javax.swing.JFrame {
         });
         jScrollPane3.setViewportView(tblProductosParafactura);
 
-        bntAgregarProducto.setBackground(new java.awt.Color(253, 253, 253));
+        bntAgregarProducto.setBackground(new java.awt.Color(255, 153, 51));
+        bntAgregarProducto.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         bntAgregarProducto.setText("Agregar Producto");
         bntAgregarProducto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -396,41 +408,78 @@ public class ProductoParaCompra extends javax.swing.JFrame {
                 .addContainerGap(22, Short.MAX_VALUE))
         );
 
-        jButton1.setText("Buscar");
+        btnbuscar.setBackground(new java.awt.Color(255, 153, 51));
+        btnbuscar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnbuscar.setText("Buscar");
+        btnbuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnbuscarActionPerformed(evt);
+            }
+        });
 
+        jButton2.setBackground(new java.awt.Color(255, 153, 51));
+        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButton2.setText("Refrescar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        Texto_Contable.setText("0");
+
+        btnAnterior.setBackground(new java.awt.Color(255, 102, 102));
+        btnAnterior.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/previous.png"))); // NOI18N
+        btnAnterior.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAnteriorActionPerformed(evt);
+            }
+        });
+
+        btnSiguiente.setBackground(new java.awt.Color(255, 102, 102));
+        btnSiguiente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/next.png"))); // NOI18N
+        btnSiguiente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSiguienteActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(177, 177, 177)
+                .addComponent(CuadroBuscarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnbuscar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton2)
+                .addContainerGap(169, Short.MAX_VALUE))
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(29, 29, 29)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(15, 15, 15)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 757, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(209, 209, 209)
-                                .addComponent(CuadroBuscarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButton1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton2))))
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 818, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(225, 225, 225)
+                        .addComponent(Texto_Contable, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(50, 50, 50)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(bntAgregarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(cancelar))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(20, 20, 20)
                                 .addComponent(jLabel3)
-                                .addGap(18, 18, 18)
-                                .addComponent(cantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(22, Short.MAX_VALUE))
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(26, 26, 26)
+                                .addComponent(cantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnAnterior, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnSiguiente, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(58, 58, 58))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -439,19 +488,28 @@ public class ProductoParaCompra extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(CuadroBuscarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1)
+                    .addComponent(btnbuscar)
                     .addComponent(jButton2))
-                .addGap(14, 14, 14)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(7, 7, 7)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
+                .addGap(34, 34, 34)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(13, 13, 13)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(cantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel3)
+                                    .addComponent(Texto_Contable, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnSiguiente, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(btnAnterior, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bntAgregarProducto)
                     .addComponent(cancelar))
-                .addContainerGap(56, Short.MAX_VALUE))
+                .addContainerGap(42, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -610,27 +668,27 @@ public class ProductoParaCompra extends javax.swing.JFrame {
     private void CuadroBuscarProductoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_CuadroBuscarProductoFocusGained
         // TODO add your handling code here:
         //placeholder para notificar como realizar la busqueda
-        JTextField textField = (JTextField) evt.getSource();
-        String placeholder = "Buscar por nombre de producto y tipo de inventario";
+        //JTextField textField = (JTextField) evt.getSource();
+       // String placeholder = "Buscar por nombre de producto y tipo de inventario";
 
-        if (textField.getText().equals(placeholder))
-        {
-            textField.setText("");
-            textField.setForeground(Color.BLACK); // Establece el color de fuente adecuado
-        }
+        //if (textField.getText().equals(placeholder))
+       // {
+       //     textField.setText("");
+       //     textField.setForeground(Color.BLACK); // Establece el color de fuente adecuado
+     //   }
     }//GEN-LAST:event_CuadroBuscarProductoFocusGained
 
     private void CuadroBuscarProductoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_CuadroBuscarProductoFocusLost
         // TODO add your handling code here:
         //placeholder para notificar como realizar la busqueda
-        JTextField textField = (JTextField) evt.getSource();
-        String placeholder = "Buscar por nombre de producto y tipo de inventario";
+      //  JTextField textField = (JTextField) evt.getSource();
+      //  String placeholder = "Buscar por nombre de producto y tipo de categoria";
 
-        if (textField.getText().isEmpty())
-        {
-            textField.setText(placeholder);
-            textField.setForeground(Color.GRAY); // Establece el color de fuente del placeholder
-        }
+      //  if (textField.getText().isEmpty())
+      //  {
+      //      textField.setText(placeholder);
+       //     textField.setForeground(Color.GRAY); // Establece el color de fuente del placeholder
+       // }
     }//GEN-LAST:event_CuadroBuscarProductoFocusLost
 
     private void CuadroBuscarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CuadroBuscarProductoActionPerformed
@@ -676,6 +734,220 @@ public class ProductoParaCompra extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cantidadActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+      paginaActual = 1;
+        terminoBusqueda = "";
+
+        // Limpiar el campo de búsqueda
+       CuadroBuscarProducto.setText("");
+
+        // Cargar la tabla con los datos actualizados
+        cargarTablaProductos();
+
+       
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void btnbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbuscarActionPerformed
+         String texto = btnbuscar.getText().trim();
+
+        //Validacion del texto ingresado
+        if (!texto.isEmpty())
+        {
+            buscarDatos(texto);
+        } else
+        {
+            JOptionPane.showMessageDialog(null, "El texto ingresado es erroneo");
+        }
+    }//GEN-LAST:event_btnbuscarActionPerformed
+
+    private void btnAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnteriorActionPerformed
+        // TODO add your handling code here:
+        paginaAnterior();
+    }//GEN-LAST:event_btnAnteriorActionPerformed
+
+    private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
+        siguientePagina();
+    }//GEN-LAST:event_btnSiguienteActionPerformed
+
+    
+  int selectedRow2;
+    int paginaActual = 1; // Página actual
+    int filasPorPagina = 20; // Número de filas a mostrar por página
+    int totalFilas = 0; // Total de filas en la tabla
+    int totalPaginas = 0; // Total de páginas en la tabla
+    int numRegistro = 0;
+    String terminoBusqueda = ""; // Término de búsqueda actual
+
+    private void cargarTablaProductos() {
+        DefaultTableModel modeloTabla = (DefaultTableModel) tblProductosParafactura.getModel();
+        modeloTabla.setRowCount(0); // Limpiar los datos existentes en la tabla
+
+        PreparedStatement ps;
+        ResultSet rs;
+        ResultSetMetaData rsmd;
+        int columnas;
+        boolean foundData = false;
+
+       try {
+    Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
+
+    // Obtener el total de filas que cumplen con el criterio de búsqueda
+    ps = conn.prepareStatement("SELECT COUNT(*) AS TotalFilas "
+            + "FROM Productos "
+            + "WHERE nombre LIKE ? OR categoria LIKE ?");
+    ps.setString(1, "%" + terminoBusqueda + "%");
+    ps.setString(2, "%" + terminoBusqueda + "%");
+
+    rs = ps.executeQuery();
+
+            if (rs.next())
+            {
+                totalFilas = rs.getInt(1);
+            }
+            totalPaginas = (int) Math.ceil((double) totalFilas / filasPorPagina);
+
+            if (paginaActual < 1)
+            {
+                paginaActual = 1;
+            } else if (paginaActual > totalPaginas)
+            {
+                paginaActual = totalPaginas;
+            }
+
+            int offset = (paginaActual - 1) * filasPorPagina;
+            if (offset < 0)
+            {
+                offset = 0;
+            }
+
+            // Consulta para obtener los datos paginados
+            ps = conn.prepareStatement("SELECT ROW_NUMBER() OVER(ORDER BY nombre) AS NumRegistro, nombre, categoria, precio, cod_producto "
+        + "FROM Productos "
+        + "WHERE nombre LIKE ? OR categoria LIKE ? "
+        + "ORDER BY nombre "
+        + "OFFSET ? ROWS FETCH NEXT ? ROWS ONLY");
+         ps.setString(1, "%" + terminoBusqueda + "%");
+         ps.setString(2, "%" + terminoBusqueda + "%");
+         ps.setInt(3, offset);
+         ps.setInt(4, filasPorPagina);
+         rs = ps.executeQuery();
+         rsmd = rs.getMetaData();
+         columnas = rsmd.getColumnCount();
+
+
+            while (rs.next())
+            {
+                Object[] fila = new Object[columnas];
+                for (int indice = 0; indice < columnas; indice++)
+                {
+                    fila[indice] = rs.getObject(indice + 1);
+                }
+                modeloTabla.addRow(fila);
+                foundData = true;
+            }
+
+            ajustarTabla(filasPorPagina);
+
+            if (!foundData)
+            {
+                JOptionPane.showMessageDialog(null, "No se encontraron datos");
+            }
+
+            // Obtener el número de filas actualizado
+            int rowCount = modeloTabla.getRowCount();
+            Texto_Contable.setText("Cantidad de filas: " + rowCount + " - Página " + paginaActual + "/" + totalPaginas);
+
+        } catch (SQLException e)
+        {
+            e.printStackTrace(); // Imprime la pila de excepciones para depuración
+            JOptionPane.showMessageDialog(null, e.toString());
+        }
+
+    }
+
+    private void ajustarTabla(int filasDeseadas) {
+       tblProductosParafactura.setPreferredScrollableViewportSize(new Dimension(tblProductosParafactura.getPreferredSize().width,tblProductosParafactura.getRowHeight() * filasDeseadas));
+       tblProductosParafactura.setFillsViewportHeight(true);
+    }
+
+    private void siguientePagina() {
+        if (paginaActual < totalPaginas)
+        {
+            paginaActual++;
+            cargarTablaProductos();
+        }
+    }
+
+    private void paginaAnterior() {
+        if (paginaActual > 1)
+        {
+            paginaActual--;
+           cargarTablaProductos();
+        }
+    }
+
+ private void buscarDatos(String texto) {
+    DefaultTableModel modelTabla = (DefaultTableModel) tblProductosParafactura.getModel();
+    modelTabla.setRowCount(0);
+    boolean foundData = false;
+
+    try {
+        Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
+        if (conn != null && !conn.isClosed()) {
+            String query = "SELECT ROW_NUMBER() OVER(ORDER BY nombre) AS NumRegistro, nombre, categoria, precio, cod_producto "
+                    + "FROM Productos "
+                    + "WHERE nombre LIKE ? "
+                    + "ORDER BY nombre OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
+
+            PreparedStatement ps = conn.prepareStatement(query);
+
+            if (texto != null && !texto.isEmpty()) {
+                ps.setString(1, "%" + texto + "%");
+                terminoBusqueda = texto; // Actualizar el término de búsqueda
+            } else {
+                ps.setString(1, "%");
+                terminoBusqueda = ""; // Limpiar el término de búsqueda
+            }
+
+            // Define el OFFSET y FETCH NEXT de acuerdo a tus necesidades
+            int offset = 0; // Cambia el valor del offset según tus requerimientos
+            int fetchNext = 10; // Cambia la cantidad de registros a recuperar según tus requerimientos
+
+            ps.setInt(2, offset);
+            ps.setInt(3, fetchNext);
+
+            ResultSet rs = ps.executeQuery();
+
+            if (rs != null) {
+                while (rs.next()) {
+                    int numRegistro = rs.getInt("NumRegistro");
+                    String nombre = rs.getString("nombre");
+                    String categoria = rs.getString("categoria");
+                    String precio = rs.getString("precio");
+                    int codproducto = rs.getInt("cod_producto");
+
+                    if (nombre != null && categoria != null && precio != null) {
+                        modelTabla.addRow(new Object[]{
+                                numRegistro, nombre, categoria, precio, codproducto
+                        });
+                        foundData = true;
+                    }
+                }
+
+                rs.close();
+            }
+
+            ps.close();
+            conn.close();
+        }
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(null, e.toString());
+    }
+
+    cargarTablaProductos(); // Recargar la tabla después de la búsqueda
+}
+
+    
     /**
      * @param args the command line arguments
      */
@@ -721,10 +993,13 @@ public class ProductoParaCompra extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField CuadroBuscarProducto;
+    private javax.swing.JLabel Texto_Contable;
     public static javax.swing.JButton bntAgregarProducto;
+    private javax.swing.JButton btnAnterior;
+    private javax.swing.JButton btnSiguiente;
+    private javax.swing.JButton btnbuscar;
     private javax.swing.JButton cancelar;
     private javax.swing.JTextField cantidad;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
@@ -735,4 +1010,8 @@ public class ProductoParaCompra extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     public static javax.swing.JTable tblProductosParafactura;
     // End of variables declaration//GEN-END:variables
+
+    
+    
+   
 }

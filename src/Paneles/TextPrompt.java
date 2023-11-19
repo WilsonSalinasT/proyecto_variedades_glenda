@@ -33,6 +33,10 @@ public class TextPrompt extends JLabel implements FocusListener, DocumentListene
 	 */
 	private static final long serialVersionUID = 1L;
 
+    public TextPrompt(String busque_por_nombre_del_producto_y_tipo_de_, JButton txtbuscar) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
 	public enum Show {
 		ALWAYS, FOCUS_GAINED, FOCUS_LOST;
 	}
