@@ -211,7 +211,7 @@ public class Listado_Pedidos_Pendientes extends javax.swing.JPanel {
 
             },
             new String [] {
-                "N°", "Nombre del cliente", "Apellido del cliente", "Estado", "Producto", "Fecha de Pedido", "id_sastreria"
+                "N°", "Nombre del cliente", "Apellido del cliente", "Estado", "Producto", "Fecha de Entrega", "id_sastreria"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -354,11 +354,9 @@ public class Listado_Pedidos_Pendientes extends javax.swing.JPanel {
     private void txtBuscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyTyped
         char c = evt.getKeyChar(); // Obtener el carácter ingresado
 
-        if (txtBuscar.getText().isEmpty() && Character.isWhitespace(c))
-        {
+        if (txtBuscar.getText().isEmpty() && Character.isWhitespace(c)) {
             evt.consume(); // Consumir el evento si es un espacio en blanco en la primera letra
-        } else if (txtBuscar.getText().length() >= 100)
-        {
+        } else if (txtBuscar.getText().length() >= 100) {
             evt.consume(); // Consumir el evento si se ha alcanzado la longitud máxima
         }
     }//GEN-LAST:event_txtBuscarKeyTyped
@@ -367,11 +365,9 @@ public class Listado_Pedidos_Pendientes extends javax.swing.JPanel {
         String texto = txtBuscar.getText().trim();
 
         //Validacion del texto ingresado
-        if (!texto.isEmpty())
-        {
+        if (!texto.isEmpty()) {
             buscarDatos(texto);
-        } else
-        {
+        } else {
             JOptionPane.showMessageDialog(null, "Tiene que ingresar texto para hacer la respectiva búsqueda");
         }
     }//GEN-LAST:event_Btn_BuscarActionPerformed
@@ -412,14 +408,12 @@ public class Listado_Pedidos_Pendientes extends javax.swing.JPanel {
     private void verbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verbtnActionPerformed
 
         selectedRow1 = tblPedidos.getSelectedRow();
-        if (selectedRow1 == -1)
-        {
+        if (selectedRow1 == -1) {
             JOptionPane.showMessageDialog(null, "Seleccione un pedido para poder visualizarla");
             return;
         }
 
-        try
-        {
+        try {
 
             int fila = tblPedidos.getSelectedRow();
             int valorEntero = Integer.parseInt(tblPedidos.getValueAt(fila, 6).toString());
@@ -434,8 +428,7 @@ public class Listado_Pedidos_Pendientes extends javax.swing.JPanel {
 //            ps.setString(3, valorCelda3);
             rs = ps.executeQuery();
 
-            while (rs.next())
-            {
+            while (rs.next()) {
 
                 String nombre = rs.getString("nombre");
                 String apellido = rs.getString("apellido");
@@ -490,86 +483,17 @@ public class Listado_Pedidos_Pendientes extends javax.swing.JPanel {
                 mostrar.txtprecio.setText(rs.getString("precio"));
                 mostrar.txtprecio.setEditable(false);
 
-                /* Blob fotos = rs.getBlob("imagen1");
-                    
-                       if (fotos != null)
-                       {
-                           byte[] recuperar = fotos.getBytes(1, (int) fotos.length());
-                       BufferedImage img = ImageIO.read(new ByteArrayInputStream(recuperar));
-                    //Define las dimensiones deseadas para la imagen
-                       int anchoDeseado = 200; // Reemplaza esto con el ancho que desees
-                       int altoDeseado = 150;  // Reemplaza esto con el alto que desees
+                String fechaEntrega = rs.getDate("fechaEntrega").toString();
+                mostrar.txtFechaEntrega.setText(fechaEntrega);
+                mostrar.txtFechaEntrega.setEditable(false);
 
-                    //Escala la imagen a las dimensiones deseadas
-                        Image imagen = img.getScaledInstance(anchoDeseado, altoDeseado, Image.SCALE_SMOOTH);
-
-                  //// Establece la imagen escalada en el componente mostrar.txtimagen
-                       mostrar.imagen1.setIcon(new ImageIcon(imagen));
-                        
-                       } else
-                       {
-                            ImageIcon imagenIcon;
-                           // Cargar una imagen predeterminada si no se encuentra la imagen en la base de datos
-                            imagenIcon = new ImageIcon(getClass().getResource("/img/agregar.png"));
-                           mostrar.imagen1.setIcon(imagenIcon);
-                        }
-
-                       Blob fotos1 = rs.getBlob("imagen2");
-                    
-                       if (fotos1 != null)
-                       {
-                           byte[] recuperar = fotos1.getBytes(1, (int) fotos1.length());
-                       BufferedImage img = ImageIO.read(new ByteArrayInputStream(recuperar));
-                    //Define las dimensiones deseadas para la imagen
-                       int anchoDeseado = 200; // Reemplaza esto con el ancho que desees
-                       int altoDeseado = 150;  // Reemplaza esto con el alto que desees
-
-                    //Escala la imagen a las dimensiones deseadas
-                        Image imagen = img.getScaledInstance(anchoDeseado, altoDeseado, Image.SCALE_SMOOTH);
-
-                  //// Establece la imagen escalada en el componente mostrar.txtimagen
-                       mostrar.imagen2.setIcon(new ImageIcon(imagen));
-                        
-                       } else
-                       {
-                            ImageIcon imagenIcon;
-                           // Cargar una imagen predeterminada si no se encuentra la imagen en la base de datos
-                            imagenIcon = new ImageIcon(getClass().getResource("/img/agregar.png"));
-                           mostrar.imagen2.setIcon(imagenIcon);
-                        }
-                       Blob fotos2 = rs.getBlob("imagen3");
-                    
-                       if (fotos2 != null)
-                       {
-                           byte[] recuperar = fotos2.getBytes(1, (int) fotos2.length());
-                       BufferedImage img = ImageIO.read(new ByteArrayInputStream(recuperar));
-                    //Define las dimensiones deseadas para la imagen
-                       int anchoDeseado = 200; // Reemplaza esto con el ancho que desees
-                       int altoDeseado = 150;  // Reemplaza esto con el alto que desees
-
-                    //Escala la imagen a las dimensiones deseadas
-                        Image imagen = img.getScaledInstance(anchoDeseado, altoDeseado, Image.SCALE_SMOOTH);
-
-                  //// Establece la imagen escalada en el componente mostrar.txtimagen
-                       mostrar.imagen3.setIcon(new ImageIcon(imagen));
-                        
-                       } else
-                       {
-                            ImageIcon imagenIcon;
-                           // Cargar una imagen predeterminada si no se encuentra la imagen en la base de datos
-                            imagenIcon = new ImageIcon(getClass().getResource("/img/descarga.png"));
-                           mostrar.imagen3.setIcon(imagenIcon);
-                        }
-                        
-                 */
                 //Recuperar la imagen de la base de datos
                 byte[] imagenA1 = rs.getBytes("imagen1");
                 byte[] imagenA2 = rs.getBytes("imagen2");
                 byte[] imagenA3 = rs.getBytes("imagen3");
 
                 // Comprobar si los arreglos de bytes de imagen no son nulos
-                if (imagenA1 != null)
-                {
+                if (imagenA1 != null) {
                     // Crear un objeto ImageIcon a partir de los bytes de la imagen
                     ImageIcon imagenIcono = new ImageIcon(imagenA1); // Reemplaza "ruta_de_tu_imagen.png" con la ruta de tu imagen
                     Image imagen = imagenIcono.getImage();
@@ -577,35 +501,30 @@ public class Listado_Pedidos_Pendientes extends javax.swing.JPanel {
 
                     imagenIcono = new ImageIcon(imagenEscalada);
                     mostrar.imagen1.setIcon(imagenIcono);
-                } else
-                {
+                } else {
                     // Si el arreglo de bytes de imagen es nulo, puedes mostrar un mensaje o establecer un valor predeterminado.
                     mostrar.imagen1.setIcon(null); // O establecer un icono predeterminado
                 }
 
-                if (imagenA2 != null)
-                {
+                if (imagenA2 != null) {
                     ImageIcon imagenIcono = new ImageIcon(imagenA2); // Reemplaza "ruta_de_tu_imagen.png" con la ruta de tu imagen
                     Image imagen = imagenIcono.getImage();
                     Image imagenEscalada = imagen.getScaledInstance(191, 169, Image.SCALE_DEFAULT);
 
                     imagenIcono = new ImageIcon(imagenEscalada);
                     mostrar.imagen2.setIcon(imagenIcono);
-                } else
-                {
+                } else {
                     mostrar.imagen2.setIcon(null);
                 }
 
-                if (imagenA3 != null)
-                {
+                if (imagenA3 != null) {
                     ImageIcon imagenIcono = new ImageIcon(imagenA3); // Reemplaza "ruta_de_tu_imagen.png" con la ruta de tu imagen
                     Image imagen = imagenIcono.getImage();
                     Image imagenEscalada = imagen.getScaledInstance(191, 169, Image.SCALE_DEFAULT);
 
                     imagenIcono = new ImageIcon(imagenEscalada);
                     mostrar.imagen3.setIcon(imagenIcono);
-                } else
-                {
+                } else {
                     mostrar.imagen3.setIcon(null);
                 }
 
@@ -628,8 +547,7 @@ public class Listado_Pedidos_Pendientes extends javax.swing.JPanel {
             ps.close();
             conn.close();
 
-        } catch (SQLException e)
-        {
+        } catch (SQLException e) {
             e.printStackTrace();
             // Manejar cualquier excepción que pueda ocurrir durante la consulta a la base de datos
         }
@@ -638,45 +556,125 @@ public class Listado_Pedidos_Pendientes extends javax.swing.JPanel {
 
     int selectedRow2;
     private void editarbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarbtnActionPerformed
-        /*
         // TODO add your handling code here:
-        selectedRow2 = tblCitas.getSelectedRow();
-        if (selectedRow2 == -1)
-        {
-            JOptionPane.showMessageDialog(null, "Seleccione una cita para poder editarla");
+        selectedRow2 = tblPedidos.getSelectedRow();
+        if (selectedRow2 == -1) {
+            JOptionPane.showMessageDialog(null, "Seleccione un pedido para poder editarlo");
             return;
         }
 
-        try
-        {
+        try {
 
-            int fila = tblCitas.getSelectedRow();
-            String valorCelda = tblCitas.getValueAt(fila, 1).toString();
-            String valorCelda2 = tblCitas.getValueAt(fila, 2).toString();
-            String valorCelda3 = tblCitas.getValueAt(fila, 4).toString();
+            int fila = tblPedidos.getSelectedRow();
+            int valorEntero = Integer.parseInt(tblPedidos.getValueAt(fila, 6).toString());
+//            String valorCelda3 = tblsublimacion.getValueAt(fila, 4).toString();
             PreparedStatement ps;
             ResultSet rs;
 
             Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
-            ps = conn.prepareStatement("SELECT * FROM cliente JOIN Cita ON cliente.id_cliente = Cita.id_cliente where nombre =? and apellido=? and fecha_cita=? ");
-            ps.setString(1, valorCelda);
-            ps.setString(2, valorCelda2);
-            ps.setString(3, valorCelda3);
+            ps = conn.prepareStatement("SELECT * FROM cliente JOIN PedidoSastreria ON cliente.id_cliente = PedidoSastreria.id_cliente where id_sastreria =?  ");
+            ps.setInt(1, valorEntero);
+
+//            ps.setString(3, valorCelda3);
             rs = ps.executeQuery();
 
-            while (rs.next())
-            {
+            while (rs.next()) {
+
+                String id_Pedido = rs.getString("id_sastreria");
 
                 String nombre = rs.getString("nombre");
                 String apellido = rs.getString("apellido");
-                EditarCita editar = new EditarCita();
+                String telefono = rs.getString("numero_telefono");
+                String prenda = rs.getString("prenda");
+                String estado = rs.getString("estado");
 
-                editar.fechaCita.setDate(rs.getDate("fecha_cita"));
-                editar.cbxHoras.setSelectedItem(rs.getString("hora_cita"));
-                editar.txtMotivo.setText(rs.getString("motivo"));
-                editar.txtCliente.setText(nombre + " " + apellido);
-              
-                editar.id_cliente.setText(rs.getString("id"));
+                String cintura = rs.getString("cintura");
+                String cadera = rs.getString("cadera");
+                String largo = rs.getString("largo");
+                String largoManga = rs.getString("largoManga");
+                String anchoManga = rs.getString("anchoManga");
+                String cuello = rs.getString("cuello");
+                String pecho = rs.getString("pecho");
+                String muneca = rs.getString("muneca");
+                String hombro = rs.getString("hombro");
+                String anchoEsp = rs.getString("anchoEsp");
+                String largoEsp = rs.getString("largoEsp");
+                String rodilla = rs.getString("rodilla");
+                String tobillo = rs.getString("tobillo");
+                String tiro = rs.getString("tiro");
+                String muslo = rs.getString("muslo");
+                String descripcion = rs.getString("descripcion");
+                String precio = rs.getString("precio");
+
+                Date fechaEntrega = rs.getDate("fechaEntrega");
+
+                editar_pedidoSas editar = new editar_pedidoSas();
+
+                editar.idPedido.setText(id_Pedido);
+
+                editar.txtCliente.setSelectedItem(nombre + " " + apellido);
+                editar.txtTel.setText(telefono);
+                editar.cbxPrenda.setSelectedItem(prenda);
+                editar.cbxEstado.setSelectedItem(estado);
+
+                editar.txtCintura.setText(cintura);
+                editar.txtCadera.setText(cadera);
+                editar.txtLargo.setText(largo);
+                editar.txtLManga.setText(largoManga);
+                editar.txtAManga.setText(anchoManga);
+                editar.txtCuello.setText(cuello);
+                editar.txtPecho.setText(pecho);
+                editar.txtMuneca.setText(muneca);
+                editar.txtHombro.setText(hombro);
+                editar.txtAEspalda.setText(anchoEsp);
+                editar.txtLEspalda.setText(largoEsp);
+                editar.txtRodilla.setText(rodilla);
+                editar.txtTobillo.setText(tobillo);
+                editar.txtTiro.setText(tiro);
+                editar.txtMuslo.setText(muslo);
+
+                // Recuperar la imagen de la base de datos
+                byte[] bytesImagen = rs.getBytes("imagen1");
+                byte[] bytesImagen2 = rs.getBytes("imagen2");
+                byte[] bytesImagen3 = rs.getBytes("imagen3");
+
+                // Verificar si la segunda imagen es nula
+                boolean segundaImagenNula = (bytesImagen2 == null);
+
+                // Verificar si la tercera imagen es nula
+                boolean terceraImagenNula = (bytesImagen3 == null);
+
+                // Crear objetos ImageIcon solo si las imágenes no son nulas
+                ImageIcon imagenIcono1 = (bytesImagen != null) ? new ImageIcon(bytesImagen) : null;
+                ImageIcon imagenIcono2 = (bytesImagen2 != null) ? new ImageIcon(bytesImagen2) : null;
+                ImageIcon imagenIcono3 = (bytesImagen3 != null) ? new ImageIcon(bytesImagen3) : null;
+
+                // Escalar las imágenes al tamaño del JLabel
+                if (imagenIcono1 != null) {
+                    imagenIcono1 = escalarImagen(imagenIcono1, editar.imagen1.getWidth(), editar.imagen1.getHeight());
+                    editar.imagen1.setIcon(imagenIcono1);
+                }
+
+                if (imagenIcono2 != null) {
+                    imagenIcono2 = escalarImagen(imagenIcono2, editar.imagen2.getWidth(), editar.imagen2.getHeight());
+                    editar.imagen2.setIcon(imagenIcono2);
+                }
+
+                if (imagenIcono3 != null) {
+                    imagenIcono3 = escalarImagen(imagenIcono3, editar.imagen3.getWidth(), editar.imagen3.getHeight());
+                    editar.imagen3.setIcon(imagenIcono3);
+                }
+
+                // Deshabilitar el botón de imágenes si todas las imágenes están llenas
+                if (!segundaImagenNula && !terceraImagenNula) {
+                    editar.imagenes.setEnabled(false);
+                }
+
+                editar.txtDescrip.setText(descripcion);
+                editar.txtprecio.setText(precio);
+                //editar.fechaP.setText(fechapedido);
+                editar.fechaEntrega.setDate(fechaEntrega);
+                editar.id_cliente.setText(rs.getString("id_cliente"));
 
                 editar.setSize(1024, 640);
                 editar.setLocation(0, 0);
@@ -697,12 +695,11 @@ public class Listado_Pedidos_Pendientes extends javax.swing.JPanel {
             ps.close();
             conn.close();
 
-        } catch (SQLException e)
-        {
+        } catch (SQLException e) {
             e.printStackTrace();
             // Manejar cualquier excepción que pueda ocurrir durante la consulta a la base de datos
         }
-         */
+
     }//GEN-LAST:event_editarbtnActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -718,24 +715,20 @@ public class Listado_Pedidos_Pendientes extends javax.swing.JPanel {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         int selectedRow = tblPedidos.getSelectedRow();
-        if (selectedRow == -1)
-        {
+        if (selectedRow == -1) {
             JOptionPane.showMessageDialog(null, "Por favor, selecciona un registro para eliminar.", "Advertencia", JOptionPane.WARNING_MESSAGE);
-        } else
-        {
-            Object[] options =
-            {
-                "Sí, eliminar", "No, cancelar"
-            };
+        } else {
+            Object[] options
+                    = {
+                        "Sí, eliminar", "No, cancelar"
+                    };
             int choice = JOptionPane.showOptionDialog(null, "¿Estás seguro de que deseas eliminar este registro?", "Confirmación",
                     JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]);
 
-            if (choice == 0)
-            {
+            if (choice == 0) {
                 Number id_sublimacion = (Number) tblPedidos.getValueAt(selectedRow, 6); // Obtén el ID del registro seleccionado
 
-                try
-                {
+                try {
                     Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
 
                     String sql = "DELETE FROM PedidoSastreria WHERE id_sastreria = ?";
@@ -747,8 +740,7 @@ public class Listado_Pedidos_Pendientes extends javax.swing.JPanel {
                     // Lógica para actualizar la tabla después de la eliminación
                     cargarTablaEmpleados();
 
-                } catch (SQLException ex)
-                {
+                } catch (SQLException ex) {
                     ex.printStackTrace();
                     JOptionPane.showMessageDialog(null, "Error al eliminar el registro: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                 }
@@ -773,45 +765,40 @@ public class Listado_Pedidos_Pendientes extends javax.swing.JPanel {
         int columnas;
         boolean foundData = false;
 
-        try
-        {
+        try {
             Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
 
             // Obtener el total de filas que cumplen con el criterio de búsqueda
             ps = conn.prepareStatement("SELECT COUNT(*) AS TotalFilas "
                     + "FROM Cliente E "
                     + "JOIN PedidoSastreria V ON E.id_cliente = V.id_cliente "
-                    + "WHERE (E.nombre LIKE ? OR E.apellido LIKE ? OR V.fechaPedido LIKE ?) and V.estado = 'pendiente' ");
+                    + "WHERE (E.nombre LIKE ? OR E.apellido LIKE ? OR V.fechaEntrega LIKE ?) and V.estado = 'pendiente' ");
             ps.setString(1, "%" + terminoBusqueda + "%");
             ps.setString(2, "%" + terminoBusqueda + "%");
             ps.setString(3, "%" + terminoBusqueda + "%");
             rs = ps.executeQuery();
 
-            if (rs.next())
-            {
+            if (rs.next()) {
                 totalFilas = rs.getInt(1);
             }
             totalPaginas = (int) Math.ceil((double) totalFilas / filasPorPagina);
 
-            if (paginaActual < 1)
-            {
+            if (paginaActual < 1) {
                 paginaActual = 1;
-            } else if (paginaActual > totalPaginas)
-            {
+            } else if (paginaActual > totalPaginas) {
                 paginaActual = totalPaginas;
             }
 
             int offset = (paginaActual - 1) * filasPorPagina;
-            if (offset < 0)
-            {
+            if (offset < 0) {
                 offset = 0;
             }
 
             // Consulta para obtener los datos paginados
-            ps = conn.prepareStatement("SELECT ROW_NUMBER() OVER(ORDER BY E.nombre) AS NumRegistro, E.nombre, E.apellido, V.estado, V.prenda, V.fechaPedido ,V.id_sastreria "
+            ps = conn.prepareStatement("SELECT ROW_NUMBER() OVER(ORDER BY E.nombre) AS NumRegistro, E.nombre, E.apellido, V.estado, V.prenda, V.fechaEntrega ,V.id_sastreria "
                     + "FROM Cliente E "
                     + "JOIN PedidoSastreria V ON E.id_cliente = V.id_cliente "
-                    + "WHERE (E.nombre LIKE ? OR E.apellido LIKE ? OR V.fechaPedido LIKE ?) and V.estado = 'pendiente' "
+                    + "WHERE (E.nombre LIKE ? OR E.apellido LIKE ? OR V.fechaEntrega LIKE ?) and V.estado = 'pendiente' "
                     + "ORDER BY E.nombre "
                     + "OFFSET ? ROWS FETCH NEXT ? ROWS ONLY");
             ps.setString(1, "%" + terminoBusqueda + "%");
@@ -823,11 +810,9 @@ public class Listado_Pedidos_Pendientes extends javax.swing.JPanel {
             rsmd = rs.getMetaData();
             columnas = rsmd.getColumnCount();
 
-            while (rs.next())
-            {
+            while (rs.next()) {
                 Object[] fila = new Object[columnas];
-                for (int indice = 0; indice < columnas; indice++)
-                {
+                for (int indice = 0; indice < columnas; indice++) {
                     fila[indice] = rs.getObject(indice + 1);
                 }
                 modeloTabla.addRow(fila);
@@ -836,8 +821,7 @@ public class Listado_Pedidos_Pendientes extends javax.swing.JPanel {
 
             ajustarTabla(filasPorPagina);
 
-            if (!foundData)
-            {
+            if (!foundData) {
                 JOptionPane.showMessageDialog(null, "No se encontraron datos");
             }
 
@@ -845,8 +829,7 @@ public class Listado_Pedidos_Pendientes extends javax.swing.JPanel {
             int rowCount = modeloTabla.getRowCount();
             Texto_Contable.setText("Cantidad de filas: " + rowCount + " - Página " + paginaActual + "/" + totalPaginas);
 
-        } catch (SQLException e)
-        {
+        } catch (SQLException e) {
             e.printStackTrace(); // Imprime la pila de excepciones para depuración
             JOptionPane.showMessageDialog(null, e.toString());
         }
@@ -859,16 +842,14 @@ public class Listado_Pedidos_Pendientes extends javax.swing.JPanel {
     }
 
     private void siguientePagina() {
-        if (paginaActual < totalPaginas)
-        {
+        if (paginaActual < totalPaginas) {
             paginaActual++;
             cargarTablaEmpleados();
         }
     }
 
     private void paginaAnterior() {
-        if (paginaActual > 1)
-        {
+        if (paginaActual > 1) {
             paginaActual--;
             cargarTablaEmpleados();
         }
@@ -879,26 +860,22 @@ public class Listado_Pedidos_Pendientes extends javax.swing.JPanel {
         modelTabla.setRowCount(0);
         boolean foundData = false;
 
-        try
-        {
+        try {
             Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
-            if (conn != null && !conn.isClosed())
-            {
-                PreparedStatement ps = conn.prepareStatement("SELECT ROW_NUMBER() OVER(ORDER BY E.nombre) AS NumRegistro, E.nombre, E.apellido, V.estado, V.prenda, V.fechaPedido ,V.id_sastreria "
+            if (conn != null && !conn.isClosed()) {
+                PreparedStatement ps = conn.prepareStatement("SELECT ROW_NUMBER() OVER(ORDER BY E.nombre) AS NumRegistro, E.nombre, E.apellido, V.estado, V.prenda, V.fechaEntrega ,V.id_sastreria "
                         + "FROM Cliente E "
                         + "JOIN PedidoSastreria V ON E.id_cliente = V.id_cliente "
-                        + "WHERE (E.nombre LIKE ? OR E.apellido LIKE ? OR V.fechaPedido LIKE ?) and V.estado = 'pendiente' "
+                        + "WHERE (E.nombre LIKE ? OR E.apellido LIKE ? OR V.fechaEntrega LIKE ?) and V.estado = 'pendiente' "
                         + "ORDER BY E.nombre "
                         + "OFFSET ? ROWS FETCH NEXT ? ROWS ONLY");
 
-                if (texto != null && !texto.isEmpty())
-                {
+                if (texto != null && !texto.isEmpty()) {
                     ps.setString(1, "%" + texto + "%");
                     ps.setString(2, "%" + texto + "%");
                     ps.setString(3, "%" + texto + "%");
                     terminoBusqueda = texto; // Actualizar el término de búsqueda
-                } else
-                {
+                } else {
                     ps.setString(1, "%");
                     ps.setString(2, "%");
                     ps.setString(3, "%");
@@ -914,23 +891,19 @@ public class Listado_Pedidos_Pendientes extends javax.swing.JPanel {
 
                 ResultSet rs = ps.executeQuery();
 
-                if (rs != null)
-                {
-                    while (rs.next())
-                    {
+                if (rs != null) {
+                    while (rs.next()) {
                         int numRegistro = rs.getInt("NumRegistro");
                         String nombre = rs.getString("nombre");
                         String apellido = rs.getString("apellido");
                         String numeroTelefono = rs.getString("estado");
                         String prenda = rs.getString("prenda");
-                        String fechaPedido = rs.getString("fechaPedido");
+                        String fechaEntrega = rs.getString("fechaEntrega");
                         int idSastreria = Integer.parseInt(rs.getString("id_sastreria"));
 
-                        if (nombre != null && apellido != null && numeroTelefono != null)
-                        {
-                            modelTabla.addRow(new Object[]
-                            {
-                                numRegistro, nombre, apellido, numeroTelefono, prenda, fechaPedido, idSastreria
+                        if (nombre != null && apellido != null && numeroTelefono != null) {
+                            modelTabla.addRow(new Object[]{
+                                numRegistro, nombre, apellido, numeroTelefono, prenda, fechaEntrega, idSastreria
                             });
                             foundData = true;
                         }
@@ -942,8 +915,7 @@ public class Listado_Pedidos_Pendientes extends javax.swing.JPanel {
                 ps.close();
                 conn.close();
             }
-        } catch (Exception e)
-        {
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.toString());
         }
 
@@ -1055,5 +1027,12 @@ public class Listado_Pedidos_Pendientes extends javax.swing.JPanel {
 
         public txtCliente() {
         }
+    }
+    
+     // Método para escalar una imagen al tamaño deseado
+    private ImageIcon escalarImagen(ImageIcon icono, int ancho, int alto) {
+        Image imagen = icono.getImage();
+        Image imagenEscalada = imagen.getScaledInstance(191, 169, java.awt.Image.SCALE_SMOOTH);
+        return new ImageIcon(imagenEscalada);
     }
 }

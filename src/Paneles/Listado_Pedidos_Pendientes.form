@@ -289,7 +289,7 @@
                     <Column editable="false" title="Apellido del cliente" type="java.lang.Object"/>
                     <Column editable="false" title="Estado" type="java.lang.Object"/>
                     <Column editable="false" title="Producto" type="java.lang.Object"/>
-                    <Column editable="false" title="Fecha de Pedido" type="java.lang.Object"/>
+                    <Column editable="false" title="Fecha de Entrega" type="java.lang.Object"/>
                     <Column editable="true" title="id_sastreria" type="java.lang.Object"/>
                   </Table>
                 </Property>
