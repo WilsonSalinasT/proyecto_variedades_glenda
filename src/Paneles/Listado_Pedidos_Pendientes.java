@@ -822,7 +822,7 @@ public class Listado_Pedidos_Pendientes extends javax.swing.JPanel {
             }
 
             // Consulta para obtener los datos paginados
-            ps = conn.prepareStatement("SELECT ROW_NUMBER() OVER(ORDER BY E.nombre) AS NumRegistro, E.nombre, E.apellido, V.estado, V.prenda, V.fechaEntrega ,V.id_sastreria "
+            ps = conn.prepareStatement("SELECT ROW_NUMBER() OVER(ORDER BY E.nombre) AS NumRegistro, E.nombre, E.apellido, V.estado, V.prenda, V.fechaPedido ,V.id_sastreria "
                     + "FROM Cliente E "
                     + "JOIN PedidoSastreria V ON E.id_cliente = V.id_cliente "
                     + "WHERE (E.nombre LIKE ? OR E.apellido LIKE ? OR V.fechaEntrega LIKE ?) and V.estado = 'pendiente' "
