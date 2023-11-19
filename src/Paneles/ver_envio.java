@@ -356,7 +356,7 @@ public class ver_envio extends javax.swing.JPanel {
     public javax.swing.JTextField txtPreciosastereia;
     public javax.swing.JTextField txtPrenda;
     public javax.swing.JTextField txtarreglo;
-    private javax.swing.JTextField txtcelular;
+    public javax.swing.JTextField txtcelular;
     public javax.swing.JTextArea txtdireccion;
     public javax.swing.JTextField txtfechaEntrega;
     public javax.swing.JTextField txtfechaarreglo;

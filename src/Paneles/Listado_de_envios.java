@@ -391,20 +391,20 @@ public class Listado_de_envios extends javax.swing.JPanel {
             Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
             ps = conn.prepareStatement("SELECT\n"
                     + "    E.id_envio,\n"
-                    + "    E.fechaenvio,\n"
-                    + "    PA.arreglo,PA.precio as precioarreglo,PA.fechaPedido as fechaArreglo,PS.material,PS.precio as precioarreglo,\n"
-                    + "	PS.fechaPedido as fechaArreglo,\n"
-                    + "	SA.prenda,SA.precio as precioarreglo,SA.fechaPedido as fechaArreglo,C.nombre AS nombreCliente,C.apellido AS apellidoCliente,C.numero_telefono,C.direccion\n"
+                    + "    E.fechaenvio,E.referencia,\n"
+                    + "    PA.arreglo,PA.precio as precioarreglo,PA.fechaPedido as fechaArreglo,PS.material,PS.precio as precisublimacion,\n"
+                    + "	PS.fechaPedido as fechasublimacion,\n"
+                    + "	SA.prenda,SA.precio as preciosastreria,SA.fechaPedido as fechaSatreria,C.nombre AS nombreCliente,C.apellido AS apellidoCliente,C.numero_telefono,C.direccion\n"
                     + "FROM\n"
                     + "    Envios E\n"
-                    + "JOIN\n"
+                    + "LEFT JOIN\n"
                     + "    PedidoArreglo PA ON E.id_arreglo = PA.id_arreglo\n"
-                    + " JOIN\n"
+                    + " LEFT JOIN\n"
                     + "    PedidoSublimacion PS ON E.id_sublimacion = PS.id_sublimacion\n"
-                    + "JOIN\n"
+                    + "LEFT JOIN\n"
                     + "    PedidoSastreria SA ON E.id_sastreria = SA.id_sastreria\n"
                     + "LEFT JOIN\n"
-                    + "    Cliente C ON E.id_cliente = C.id_cliente WHERE id_envio=?");
+                    + "    Cliente C ON E.id_cliente = C.id_cliente WHERE E.id_envio=?");
             ps.setInt(1, valorEntero);
 
             rs = ps.executeQuery();
@@ -414,25 +414,52 @@ public class Listado_de_envios extends javax.swing.JPanel {
 
                 String nombre = rs.getString("nombreCliente");
                 String apellido = rs.getString("apellidoCliente");
-//                String tel = rs.getString("numero_telefono");
-//                String arregloA = rs.getString("arreglo");
-//                String estadoA = rs.getString("estado");
-//                String descripcionA = rs.getString("descripcion");
-//                String precioA = rs.getString("precio");
-//                String fechapedido = rs.getString("fechaPedido");
+                String tel = rs.getString("numero_telefono");
+                String direccion = rs.getString("direccion");
+                String fechaenvio = rs.getString("fechaenvio");
+                String prenda = rs.getString("prenda");
+                String precioPS = rs.getString("preciosastreria");
+                String fechaPS = rs.getString("fechaSatreria");
 
+                String arreglo = rs.getString("arreglo");
+                String precioArreglo = rs.getString("precioarreglo");
+                String fechaArreglo = rs.getString("fechaArreglo");
+
+         
+                String material = rs.getString("material");
+                String preciosublimacion = rs.getString("precisublimacion");
+                String fechasublimacion = rs.getString("fechasublimacion");
+                
+                String referencia = rs.getString("referencia");
+
+           
                 ver_envio ver = new ver_envio();
 
                 ver.txtCliente.setText(nombre + " " + apellido);
-//                ver.txtTel.setText(tel);
+                ver.txtcelular.setText(tel);
+                ver.txtdireccion.setText(direccion);
+                ver.txtfechaEntrega.setText(fechaenvio);
+                
+                ver.txtPrenda.setText(prenda);
+                ver.txtPreciosastereia.setText(precioPS);
+                ver.txtfechapedidosast.setText(fechaPS);
+                
+                ver.txtarreglo.setText(arreglo);
+                ver.txtprecioarreglo.setText(precioArreglo);
+                ver.txtfechaarreglo.setText(fechaArreglo);
+                
+                  ver.txtmaterial.setText(material);
+                ver.txtpreciosublimacion.setText(preciosublimacion);
+                ver.txtfechasublimacion.setText(fechasublimacion);
+                ver.txtreferencia.setText(referencia);
+                
+                
+
 //                ver.txtArreglo.setText(arregloA);
 //                ver.txtestado.setText(estadoA);
 //                ver.txtDescripcionA.setText(descripcionA);
 //                ver.txtprecio.setText(precioA);
 //                ver.id.setText(rs.getString("id_arreglo"));
-
-             
-
                 ver.setSize(1024, 640);
                 ver.setLocation(0, 0);
 
