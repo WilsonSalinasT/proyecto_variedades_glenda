@@ -384,12 +384,27 @@ public class Listado_de_envios extends javax.swing.JPanel {
         {
 
             int fila = tblEnvios.getSelectedRow();
-            int valorEntero = Integer.parseInt(tblEnvios.getValueAt(fila, 6).toString());
+            int valorEntero = Integer.parseInt(tblEnvios.getValueAt(fila, 5).toString());
             PreparedStatement ps;
             ResultSet rs;
 
             Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
-            ps = conn.prepareStatement("SELECT * FROM Cliente JOIN PedidoArreglo ON Cliente.id_cliente = PedidoArreglo.id_cliente WHERE id_arreglo=?");
+            ps = conn.prepareStatement("SELECT\n"
+                    + "    E.id_envio,\n"
+                    + "    E.fechaenvio,\n"
+                    + "    PA.arreglo,PA.precio as precioarreglo,PA.fechaPedido as fechaArreglo,PS.material,PS.precio as precioarreglo,\n"
+                    + "	PS.fechaPedido as fechaArreglo,\n"
+                    + "	SA.prenda,SA.precio as precioarreglo,SA.fechaPedido as fechaArreglo,C.nombre AS nombreCliente,C.apellido AS apellidoCliente,C.numero_telefono,C.direccion\n"
+                    + "FROM\n"
+                    + "    Envios E\n"
+                    + "JOIN\n"
+                    + "    PedidoArreglo PA ON E.id_arreglo = PA.id_arreglo\n"
+                    + " JOIN\n"
+                    + "    PedidoSublimacion PS ON E.id_sublimacion = PS.id_sublimacion\n"
+                    + "JOIN\n"
+                    + "    PedidoSastreria SA ON E.id_sastreria = SA.id_sastreria\n"
+                    + "LEFT JOIN\n"
+                    + "    Cliente C ON E.id_cliente = C.id_cliente WHERE id_envio=?");
             ps.setInt(1, valorEntero);
 
             rs = ps.executeQuery();
@@ -397,79 +412,26 @@ public class Listado_de_envios extends javax.swing.JPanel {
             while (rs.next())
             {
 
-                String nombre = rs.getString("nombre");
-                String apellido = rs.getString("apellido");
-                String tel = rs.getString("numero_telefono");
-                String arregloA = rs.getString("arreglo");
-                String estadoA = rs.getString("estado");
-                String descripcionA = rs.getString("descripcion");
-                String precioA = rs.getString("precio");
-                String fechapedido = rs.getString("fechaPedido");
+                String nombre = rs.getString("nombreCliente");
+                String apellido = rs.getString("apellidoCliente");
+//                String tel = rs.getString("numero_telefono");
+//                String arregloA = rs.getString("arreglo");
+//                String estadoA = rs.getString("estado");
+//                String descripcionA = rs.getString("descripcion");
+//                String precioA = rs.getString("precio");
+//                String fechapedido = rs.getString("fechaPedido");
 
-                ver_pedido_arreglo ver = new ver_pedido_arreglo();
+                ver_envio ver = new ver_envio();
 
                 ver.txtCliente.setText(nombre + " " + apellido);
-                ver.txtTel.setText(tel);
-                ver.txtArreglo.setText(arregloA);
-                ver.txtestado.setText(estadoA);
-                ver.txtDescripcionA.setText(descripcionA);
-                ver.txtprecio.setText(precioA);
-                ver.id.setText(rs.getString("id_arreglo"));
+//                ver.txtTel.setText(tel);
+//                ver.txtArreglo.setText(arregloA);
+//                ver.txtestado.setText(estadoA);
+//                ver.txtDescripcionA.setText(descripcionA);
+//                ver.txtprecio.setText(precioA);
+//                ver.id.setText(rs.getString("id_arreglo"));
 
-                //Recuperar la imagen de la base de datos
-                byte[] imagenA1 = rs.getBytes("imagen1");
-                byte[] imagenA2 = rs.getBytes("imagen2");
-                byte[] imagenA3 = rs.getBytes("imagen3");
-
-                // Comprobar si los arreglos de bytes de imagen no son nulos
-                if (imagenA1 != null)
-                {
-                    // Crear un objeto ImageIcon a partir de los bytes de la imagen
-                    ImageIcon imagenIcono = new ImageIcon(imagenA1);
-
-                    // Ajustar el tamaño de la imagen
-                    Image imagenT = imagenIcono.getImage().getScaledInstance(170, 169, Image.SCALE_SMOOTH);
-                    ImageIcon imagenT1 = new ImageIcon(imagenT);
-
-                    // Establecer el ImageIcon escalado en el JLabel
-                    ver.imagen1.setIcon(imagenT1);
-
-                    // Establecer el ImageIcon en el JLabel
-                } else
-                {
-                    // Si el arreglo de bytes de imagen es nulo, puedes mostrar un mensaje o establecer un valor predeterminado.
-                    ver.imagen1.setIcon(null); // O establecer un icono predeterminado
-                }
-
-                if (imagenA2 != null)
-                {
-                    ImageIcon imagenIcon2 = new ImageIcon(imagenA2);
-                    // Ajustar el tamaño de la imagen
-                    Image imagenT = imagenIcon2.getImage().getScaledInstance(170, 169, Image.SCALE_SMOOTH);
-                    ImageIcon imagenT2 = new ImageIcon(imagenT);
-
-                    // Establecer el ImageIcon escalado en el JLabel
-                    ver.imagen2.setIcon(imagenT2);
-                } else
-                {
-                    ver.imagen2.setIcon(null);
-                }
-
-                if (imagenA3 != null)
-                {
-                    ImageIcon imagenIcon3 = new ImageIcon(imagenA3);
-                    // Ajustar el tamaño de la imagen
-                    Image imagenT = imagenIcon3.getImage().getScaledInstance(170, 169, Image.SCALE_SMOOTH);
-                    ImageIcon imagenT3 = new ImageIcon(imagenT);
-
-                    // Establecer el ImageIcon escalado en el JLabel
-                    ver.imagen3.setIcon(imagenT3);
-                } else
-                {
-                    ver.imagen3.setIcon(null);
-                }
-
-                ver.fechaP.setText(fechapedido);
+             
 
                 ver.setSize(1024, 640);
                 ver.setLocation(0, 0);
@@ -533,7 +495,6 @@ public class Listado_de_envios extends javax.swing.JPanel {
                 String id_arreglo = rs.getString("id_arreglo");
                 String id_sublimacion = rs.getString("id_sublimacion");
                 String referencia = rs.getString("referencia");
-                 
 
                 editar_envio editar = new editar_envio();
 
