@@ -198,6 +198,11 @@ public class crear_producto extends javax.swing.JPanel {
         txtruta.setBorder(null);
 
         txtPrecio.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Precio", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12), new java.awt.Color(0, 0, 0))); // NOI18N
+        txtPrecio.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtPrecioKeyTyped(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -447,6 +452,17 @@ public class crear_producto extends javax.swing.JPanel {
     private void txtimagenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtimagenMouseClicked
 
     }//GEN-LAST:event_txtimagenMouseClicked
+
+    private void txtPrecioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrecioKeyTyped
+        char c = evt.getKeyChar();
+        String texto = txtPrecio.getText();
+
+        if (c == '0' && (texto.isEmpty() || texto.equals("0"))) {
+            evt.consume(); // Evita que se inicie con un cero
+        } else if ((c < '0' || c > '9') || texto.length() >= 5) {
+            evt.consume(); // Evita que se ingresen más de 6 caracteres o caracteres que no sean dígitos
+        }
+    }//GEN-LAST:event_txtPrecioKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

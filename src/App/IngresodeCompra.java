@@ -24,6 +24,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -40,6 +41,13 @@ public class IngresodeCompra extends javax.swing.JFrame {
      */
     public IngresodeCompra() {
         initComponents();
+        
+        txtfecha.setMinSelectableDate(new Date());
+
+         Calendar maxDate = Calendar.getInstance();
+         maxDate.add(Calendar.MONTH, 2); // Suma dos meses a la fecha actual
+         txtfecha.setMaxSelectableDate(maxDate.getTime());
+
 
         tablecompras.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 12));
         tablecompras.getTableHeader().setOpaque(false);
@@ -95,33 +103,7 @@ public class IngresodeCompra extends javax.swing.JFrame {
 
     }
 
-//    public double getsumarColumna() {
-//
-//        double suma = 0;
-//        int rowscount = tablecompras.getRowCount();
-//
-//        for (int i = 0; i < rowscount; i++)
-//        {
-//            suma = suma + Integer.parseInt(tablecompras.getValueAt(i, 2).toString());
-//        }
-//        return suma;
-//
-//    }
-//    private void calcularTotal() {
-//        int rowCount = tablecompras.getRowCount();
-//        double total = 0.0;
-//
-//        for (int i = 0; i < rowCount; i++)
-//        {
-//            // Obtener el valor en la columna "Total"
-//            double valorTotal = (double) tablecompras.getValueAt(i, 3);
-//            total += valorTotal;
-//        }
-//
-//        // Formatear el total como string y mostrarlo en el JTextField
-//        DecimalFormat df = new DecimalFormat("#.##");
-//        Tsum.setText(df.format(total));
-//    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -504,55 +486,64 @@ public class IngresodeCompra extends javax.swing.JFrame {
         prod.setLocationRelativeTo(null);
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    public void bill() {
+   public void bill() {
+    // Obtener valores de los campos
+    String num = numFactura.getText();
+    String tipo = (String) tipoCompra.getSelectedItem();
+    String proveedor = (String) txtProveedor.getSelectedItem();
+    Date fecha = txtfecha.getDate();
 
-        String num = numFactura.getText();
-        String tipo = (String) tipoCompra.getSelectedItem();
-        String proveedor = (String) txtProveedor.getSelectedItem();
-        Date fecha = txtfecha.getDate();
-        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-        String fechaFormateada = formato.format(fecha);
-
-        factura ver = new factura();
-        DefaultTableModel model = new DefaultTableModel();
-        model = (DefaultTableModel) tablecompras.getModel();
-
-        StringBuilder facturaText = new StringBuilder();
-
-// Agregar los mensajes a la cadena
-        facturaText.append("*********************************************************************\n");
-        facturaText.append("                    Factura de compra                   \n");
-        facturaText.append("*********************************************************************\n");
-
-        facturaText.append("No. de Factura: ").append(num).append("\n");
-        facturaText.append("Tipo de compra: ").append(tipo).append("\n");
-        facturaText.append("Proveedor: ").append(proveedor).append("\n");
-        facturaText.append("Fecha: ").append(fechaFormateada).append("\n");
-
-        facturaText.append("*********************************************************************\n");
-// Agregar títulos estáticos y datos de la tabla
-        facturaText.append("\n"); // Agregar una línea en blanco antes de la tabla
-        facturaText.append(String.format("%-20s %-10s %-20s %-10s\n", "Producto", "Cantidad", "Precio unitario", "Total"));
-
-        for (int i = 0; i < model.getRowCount(); i++)
-        {
-            String name = (String) model.getValueAt(i, 0);
-            String cantidad = (String) model.getValueAt(i, 1);
-            String preciounitario = (String) model.getValueAt(i, 2);
-            String total = (String) model.getValueAt(i, 3);
-
-            facturaText.append(String.format("%-20s %-10s %-20s %-10s\n", name, cantidad, preciounitario, total));
-        }
-
-// Establecer el texto en el JTextArea una vez con toda la información
-        ver.txtbill.setText(facturaText.toString());
-        ver.txtbill.setText(ver.txtbill.getText() + "*********************************************************************\n");
-        ver.txtbill.setText(ver.txtbill.getText() + "Total: " + Tsum.getText() + "\n");
-        facturaText.append("*********************************************************************\n");
-
-        ver.setVisible(true);
-
+    // Verificar si algún campo obligatorio está vacío
+    if (num.isEmpty() || tipo == null || proveedor == null || fecha == null) {
+        JOptionPane.showMessageDialog(null, "Por favor, complete todos los campos obligatorios.", "Error", JOptionPane.ERROR_MESSAGE);
+        return; // Salir del método si falta algún campo obligatorio
     }
+
+    factura ver = new factura();
+    DefaultTableModel model = (DefaultTableModel) tablecompras.getModel();
+
+    // Verificar si hay al menos una fila en la tabla
+    if (model.getRowCount() == 0) {
+        JOptionPane.showMessageDialog(null, "Por favor, agregue al menos un producto a la factura.", "Error", JOptionPane.ERROR_MESSAGE);
+        return; // Salir del método si la tabla está vacía
+    }
+
+    StringBuilder facturaText = new StringBuilder();
+
+    // Resto del código para generar la factura
+    SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+    String fechaFormateada = formato.format(fecha);
+
+    facturaText.append("*********************************************************************\n");
+    facturaText.append("                    Factura de compra                   \n");
+    facturaText.append("*********************************************************************\n");
+
+    facturaText.append("No. de Factura: ").append(num).append("\n");
+    facturaText.append("Tipo de compra: ").append(tipo).append("\n");
+    facturaText.append("Proveedor: ").append(proveedor).append("\n");
+    facturaText.append("Fecha: ").append(fechaFormateada).append("\n");
+
+    facturaText.append("*********************************************************************\n");
+    facturaText.append("\n");
+    facturaText.append(String.format("%-20s %-10s %-20s %-10s\n", "Producto", "Cantidad", "Precio unitario", "Total"));
+
+    for (int i = 0; i < model.getRowCount(); i++) {
+        String name = (String) model.getValueAt(i, 0);
+        String cantidad = (String) model.getValueAt(i, 1);
+        String preciounitario = (String) model.getValueAt(i, 2);
+        String total = (String) model.getValueAt(i, 3);
+
+        facturaText.append(String.format("%-20s %-10s %-20s %-10s\n", name, cantidad, preciounitario, total));
+    }
+
+    ver.txtbill.setText(facturaText.toString());
+    ver.txtbill.setText(ver.txtbill.getText() + "*********************************************************************\n");
+    ver.txtbill.setText(ver.txtbill.getText() + "Total: " + Tsum.getText() + "\n");
+    facturaText.append("*********************************************************************\n");
+
+    ver.setVisible(true);
+}
+
 
 
     private void numFacturaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_numFacturaKeyTyped
