@@ -32,6 +32,7 @@ import java.io.IOException;
 import java.sql.Blob;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.table.TableColumn;
 
 /**
@@ -487,45 +488,65 @@ public class Listado_Pedidos_Pendientes extends javax.swing.JPanel {
                 mostrar.txtFechaEntrega.setText(fechaEntrega);
                 mostrar.txtFechaEntrega.setEditable(false);
 
-                //Recuperar la imagen de la base de datos
+                // Recuperar la imagen de la base de datos
                 byte[] imagenA1 = rs.getBytes("imagen1");
                 byte[] imagenA2 = rs.getBytes("imagen2");
                 byte[] imagenA3 = rs.getBytes("imagen3");
 
-                // Comprobar si los arreglos de bytes de imagen no son nulos
+// Mostrar u ocultar el label de imagen1 según la disponibilidad de la imagen
                 if (imagenA1 != null) {
-                    // Crear un objeto ImageIcon a partir de los bytes de la imagen
-                    ImageIcon imagenIcono = new ImageIcon(imagenA1); // Reemplaza "ruta_de_tu_imagen.png" con la ruta de tu imagen
+                    ImageIcon imagenIcono = new ImageIcon(imagenA1);
                     Image imagen = imagenIcono.getImage();
                     Image imagenEscalada = imagen.getScaledInstance(191, 169, Image.SCALE_DEFAULT);
 
                     imagenIcono = new ImageIcon(imagenEscalada);
                     mostrar.imagen1.setIcon(imagenIcono);
+
+                    // Centrar la imagen en el label si es necesario
+                    mostrar.imagen1.setHorizontalAlignment(JLabel.CENTER);
+                    mostrar.imagen1.setVerticalAlignment(JLabel.CENTER);
+
+                    // Hacer visible el label de imagen1
+                    mostrar.imagen1.setVisible(true);
                 } else {
                     // Si el arreglo de bytes de imagen es nulo, puedes mostrar un mensaje o establecer un valor predeterminado.
                     mostrar.imagen1.setIcon(null); // O establecer un icono predeterminado
+                    // Ocultar el label de imagen1
+                    mostrar.imagen1.setVisible(false);
                 }
 
+// Mostrar u ocultar el label de imagen2 según la disponibilidad de la imagen
                 if (imagenA2 != null) {
-                    ImageIcon imagenIcono = new ImageIcon(imagenA2); // Reemplaza "ruta_de_tu_imagen.png" con la ruta de tu imagen
+                    ImageIcon imagenIcono = new ImageIcon(imagenA2);
                     Image imagen = imagenIcono.getImage();
                     Image imagenEscalada = imagen.getScaledInstance(191, 169, Image.SCALE_DEFAULT);
 
                     imagenIcono = new ImageIcon(imagenEscalada);
                     mostrar.imagen2.setIcon(imagenIcono);
+
+                    // Hacer visible el label de imagen2
+                    mostrar.imagen2.setVisible(true);
                 } else {
+                    // Ocultar el label de imagen2
                     mostrar.imagen2.setIcon(null);
+                    mostrar.imagen2.setVisible(false);
                 }
 
+// Mostrar u ocultar el label de imagen3 según la disponibilidad de la imagen
                 if (imagenA3 != null) {
-                    ImageIcon imagenIcono = new ImageIcon(imagenA3); // Reemplaza "ruta_de_tu_imagen.png" con la ruta de tu imagen
+                    ImageIcon imagenIcono = new ImageIcon(imagenA3);
                     Image imagen = imagenIcono.getImage();
                     Image imagenEscalada = imagen.getScaledInstance(191, 169, Image.SCALE_DEFAULT);
 
                     imagenIcono = new ImageIcon(imagenEscalada);
                     mostrar.imagen3.setIcon(imagenIcono);
+
+                    // Hacer visible el label de imagen3
+                    mostrar.imagen3.setVisible(true);
                 } else {
+                    // Ocultar el label de imagen3
                     mostrar.imagen3.setIcon(null);
+                    mostrar.imagen3.setVisible(false);
                 }
 
                 mostrar.setSize(1024, 640);
@@ -638,35 +659,41 @@ public class Listado_Pedidos_Pendientes extends javax.swing.JPanel {
                 byte[] bytesImagen2 = rs.getBytes("imagen2");
                 byte[] bytesImagen3 = rs.getBytes("imagen3");
 
-                // Verificar si la segunda imagen es nula
-                boolean segundaImagenNula = (bytesImagen2 == null);
-
-                // Verificar si la tercera imagen es nula
-                boolean terceraImagenNula = (bytesImagen3 == null);
-
                 // Crear objetos ImageIcon solo si las imágenes no son nulas
                 ImageIcon imagenIcono1 = (bytesImagen != null) ? new ImageIcon(bytesImagen) : null;
                 ImageIcon imagenIcono2 = (bytesImagen2 != null) ? new ImageIcon(bytesImagen2) : null;
                 ImageIcon imagenIcono3 = (bytesImagen3 != null) ? new ImageIcon(bytesImagen3) : null;
 
-                // Escalar las imágenes al tamaño del JLabel
+                // Escalar las imágenes al tamaño del JLabel y ajustar visibilidad
                 if (imagenIcono1 != null) {
                     imagenIcono1 = escalarImagen(imagenIcono1, editar.imagen1.getWidth(), editar.imagen1.getHeight());
                     editar.imagen1.setIcon(imagenIcono1);
+                    editar.imagen1.setVisible(true);
+                } else {
+                    editar.imagen1.setIcon(null);
+                    editar.imagen1.setVisible(false);
                 }
 
                 if (imagenIcono2 != null) {
                     imagenIcono2 = escalarImagen(imagenIcono2, editar.imagen2.getWidth(), editar.imagen2.getHeight());
                     editar.imagen2.setIcon(imagenIcono2);
+                    editar.imagen2.setVisible(true);
+                } else {
+                    editar.imagen2.setIcon(null);
+                    editar.imagen2.setVisible(false);
                 }
 
                 if (imagenIcono3 != null) {
                     imagenIcono3 = escalarImagen(imagenIcono3, editar.imagen3.getWidth(), editar.imagen3.getHeight());
                     editar.imagen3.setIcon(imagenIcono3);
+                    editar.imagen3.setVisible(true);
+                } else {
+                    editar.imagen3.setIcon(null);
+                    editar.imagen3.setVisible(false);
                 }
 
-                // Deshabilitar el botón de imágenes si todas las imágenes están llenas
-                if (!segundaImagenNula && !terceraImagenNula) {
+// Deshabilitar el botón de imágenes si todas las imágenes están llenas
+                if (imagenIcono2 != null && imagenIcono3 != null) {
                     editar.imagenes.setEnabled(false);
                 }
 
@@ -1028,8 +1055,8 @@ public class Listado_Pedidos_Pendientes extends javax.swing.JPanel {
         public txtCliente() {
         }
     }
-    
-     // Método para escalar una imagen al tamaño deseado
+
+    // Método para escalar una imagen al tamaño deseado
     private ImageIcon escalarImagen(ImageIcon icono, int ancho, int alto) {
         Image imagen = icono.getImage();
         Image imagenEscalada = imagen.getScaledInstance(191, 169, java.awt.Image.SCALE_SMOOTH);
