@@ -60,10 +60,10 @@ public class Listado_Sublimacion extends javax.swing.JPanel {
 
         tblsublimacionB.setRowSelectionAllowed(true);
         tblsublimacionB.setColumnSelectionAllowed(false);
-        
-         int columnIndexToHide = 6;
+
+        int columnIndexToHide = 6;
         TableColumn column = tblsublimacionB.getColumnModel().getColumn(columnIndexToHide);
-        
+
         column.setMinWidth(0);
         column.setMaxWidth(0);
         column.setPreferredWidth(0);
@@ -224,6 +224,11 @@ public class Listado_Sublimacion extends javax.swing.JPanel {
         tblsublimacionB.setSelectionBackground(new java.awt.Color(255, 102, 102));
         tblsublimacionB.setShowHorizontalLines(true);
         tblsublimacionB.setShowVerticalLines(true);
+        tblsublimacionB.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblsublimacionBMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tblsublimacionB);
 
         txtBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -389,12 +394,12 @@ public class Listado_Sublimacion extends javax.swing.JPanel {
 
     private void crearbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearbtnActionPerformed
 
-        Crear_Pedido_Sublimacion p8 = new Crear_Pedido_Sublimacion();
-        p8.setSize(1024, 640);
-        p8.setLocation(0, 0);
+        Crear_Pedido_Sublimacion p1 = new Crear_Pedido_Sublimacion();
+        p1.setSize(1024, 640);
+        p1.setLocation(0, 0);
 
         panelprincipal.removeAll();
-        panelprincipal.add(p8, BorderLayout.CENTER);
+        panelprincipal.add(p1, BorderLayout.CENTER);
         panelprincipal.revalidate();
         panelprincipal.repaint();
     }//GEN-LAST:event_crearbtnActionPerformed
@@ -420,7 +425,7 @@ public class Listado_Sublimacion extends javax.swing.JPanel {
             Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
             ps = conn.prepareStatement("SELECT * FROM cliente JOIN PedidoSublimacion ON cliente.id_cliente = PedidoSublimacion.id_cliente where id_sublimacion=? ");
             ps.setInt(1, valorEntero);
-           
+
 //            ps.setString(3, valorCelda3);
             rs = ps.executeQuery();
 
@@ -495,7 +500,95 @@ public class Listado_Sublimacion extends javax.swing.JPanel {
 
     int selectedRow2;
     private void editarbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarbtnActionPerformed
-        // TODO add your handling code here:
+
+        selectedRow2 = tblsublimacionB.getSelectedRow();
+        if (selectedRow2 == -1) {
+            JOptionPane.showMessageDialog(null, "Seleccione un pedido para poder editarlo");
+            return;
+        }
+
+        try {
+
+            int fila = tblsublimacionB.getSelectedRow();
+            int valorEntero = Integer.parseInt(tblsublimacionB.getValueAt(fila, 6).toString());
+//            String valorCelda3 = tblsublimacion.getValueAt(fila, 4).toString();
+            PreparedStatement ps;
+            ResultSet rs;
+
+            Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
+            ps = conn.prepareStatement("SELECT * FROM cliente JOIN PedidoSublimacion ON cliente.id_cliente = PedidoSublimacion.id_cliente where id_sublimacion =?  ");
+            ps.setInt(1, valorEntero);
+
+//            ps.setString(3, valorCelda3);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+
+                String id_subli = rs.getString("id_sublimacion");
+
+                String nombre = rs.getString("nombre");
+                String apellido = rs.getString("apellido");
+                String telefono = rs.getString("numero_telefono");
+                String material = rs.getString("material");
+                String estado = rs.getString("estado");
+                String precio = rs.getString("precio");
+                String cantidad = rs.getString("cantidad");
+                String descripcion = rs.getString("descripcion");
+
+                Date fechaEntrega = rs.getDate("fechaPedido");
+
+                Editar_Pedido_Sublimacion editar2 = new Editar_Pedido_Sublimacion();
+
+                editar2.id_cliente.setText(id_subli);
+
+                editar2.txtCliente.setSelectedItem(nombre + " " + apellido);
+                editar2.txtTel.setText(telefono);
+                editar2.cbnProducto.setSelectedItem(material);
+                editar2.cbxestado.setSelectedItem(estado);
+
+                // Recuperar la imagen de la base de datos
+                byte[] bytesImagen = rs.getBytes("imagen1");
+
+                // Crear objetos ImageIcon solo si las imágenes no son nulas
+                ImageIcon imagenIcono1 = (bytesImagen != null) ? new ImageIcon(bytesImagen) : null;
+
+                // Escalar las imágenes al tamaño del JLabel
+                if (imagenIcono1 != null) {
+                    imagenIcono1 = escalarImagen(imagenIcono1, editar2.Imagen.getWidth(), editar2.Imagen.getHeight());
+                    editar2.Imagen.setIcon(imagenIcono1);
+                }
+
+                editar2.txtdescripcion.setText(descripcion);
+                editar2.txtPrecio.setText(precio);
+                editar2.txtcantidad.setText(cantidad);
+                //edit.fechaP.setText(fechapedido);
+                editar2.jDateChooser.setDate(fechaEntrega);
+                editar2.id_cliente.setText(rs.getString("id_cliente"));
+
+                editar2.setSize(1024, 640);
+                editar2.setLocation(0, 0);
+
+                panelprincipal.revalidate();
+                panelprincipal.repaint();
+                panelprincipal.removeAll();
+                panelprincipal.add(editar2, BorderLayout.CENTER);
+
+                panelprincipal.revalidate();
+                panelprincipal.repaint();
+
+                break; // Salir del bucle después de encontrar el elemento seleccionado
+
+            }
+
+            rs.close();
+            ps.close();
+            conn.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Manejar cualquier excepción que pueda ocurrir durante la consulta a la base de datos
+        }
+
     }//GEN-LAST:event_editarbtnActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -541,6 +634,10 @@ public class Listado_Sublimacion extends javax.swing.JPanel {
         }
 
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void tblsublimacionBMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblsublimacionBMouseClicked
+        
+    }//GEN-LAST:event_tblsublimacionBMouseClicked
 
     int paginaActual = 1; // Página actual
     int filasPorPagina = 20; // Número de filas a mostrar por página
@@ -716,7 +813,6 @@ public class Listado_Sublimacion extends javax.swing.JPanel {
         // Llama a la función de cargarTablaEmpleados() si es necesario recargar la tabla después de la búsqueda
         cargarTablaEmpleados(); // Recargar la tabla después de la búsqueda
 
-
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton Btn_Buscar;
@@ -742,4 +838,15 @@ public class Listado_Sublimacion extends javax.swing.JPanel {
     private void mostrarVentanaDeEdicion(EditarCita editarCita) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+
+    private ImageIcon escalarImagen(ImageIcon icono, int ancho, int alto) {
+        Image imagen = icono.getImage();
+        Image imagenEscalada = imagen.getScaledInstance(191, 169, java.awt.Image.SCALE_SMOOTH);
+        return new ImageIcon(imagenEscalada);
+    }
+
+    private void cambiarImagen(Object identificador) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
 }
