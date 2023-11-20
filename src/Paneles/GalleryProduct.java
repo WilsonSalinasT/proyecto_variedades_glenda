@@ -4,6 +4,10 @@
  */
 package Paneles;
 
+import static App.Menu.panelprincipal;
+import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.DefaultListModel;
 import javax.swing.SwingUtilities;
 
@@ -13,23 +17,56 @@ import javax.swing.SwingUtilities;
  */
 public class GalleryProduct extends javax.swing.JPanel {
 
-     private int currentPage = 1;
+    private int currentPage = 1;
     private int itemsPerPage = 5;
+
     /**
      * Creates new form GalleryProduct
      */
     public GalleryProduct() {
         initComponents();
-        
-        
         Operations opera = new Operations();
-        opera.ListProductsInJlist(galleryproduct, this);
-        
-        
-    }
-   
+        opera.ListProductsInJlist(galleryproduct, null);
 
-    
+        categoria.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Obtener el índice seleccionado
+                int selectedIndex = categoria.getSelectedIndex();
+
+                // Abrir la clase correspondiente
+                switch (selectedIndex)
+                {
+                    case 0:
+
+                        Operations opera = new Operations();
+                        opera.ListProductsInJlist(galleryproduct, null);
+
+                        break;
+                    case 1:
+
+                        OperationsSastreria operationsSastreria = new OperationsSastreria();
+                        operationsSastreria.ListProductsInJlist(galleryproduct, null);
+
+                        break;
+                    case 2:
+                        OperationsArreglos operaArreglo = new OperationsArreglos();
+                        operaArreglo.ListProductsInJlist(galleryproduct, null);
+                        break;
+                    case 3:
+                         OperationsSublimacion operationsSublimacion = new OperationsSublimacion();
+                        operationsSublimacion.ListProductsInJlist(galleryproduct, null);
+
+                        break;
+                    default:
+                        // Manejar otros casos si es necesario
+                        break;
+                }
+            }
+        });
+
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -42,6 +79,7 @@ public class GalleryProduct extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        categoria = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         galleryproduct = new javax.swing.JList<>();
 
@@ -51,22 +89,35 @@ public class GalleryProduct extends javax.swing.JPanel {
 
         jLabel1.setFont(new java.awt.Font("Arial Black", 2, 48)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Galeria de Productos de sastreria");
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Galeria de Productos");
+
+        categoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Sastrería", "Arreglos", "Sublimación" }));
+        categoria.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 5, true));
+        categoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                categoriaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(55, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 939, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29))
+                .addContainerGap(52, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 649, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(63, 63, 63)
+                .addComponent(categoria, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(69, 69, 69))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(0, 23, Short.MAX_VALUE)
-                .addComponent(jLabel1))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(categoria, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27))
         );
 
         galleryproduct.setBackground(new java.awt.Color(255, 255, 255));
@@ -100,10 +151,13 @@ public class GalleryProduct extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-  
+    private void categoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_categoriaActionPerformed
+
+    }//GEN-LAST:event_categoriaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> categoria;
     private javax.swing.JList<String> galleryproduct;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
