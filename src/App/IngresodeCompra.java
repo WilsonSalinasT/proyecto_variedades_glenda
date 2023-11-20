@@ -119,7 +119,7 @@ public class IngresodeCompra extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jButton4 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btnguardar = new javax.swing.JButton();
         jSeparator4 = new javax.swing.JSeparator();
         jButton2 = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
@@ -181,12 +181,12 @@ public class IngresodeCompra extends javax.swing.JFrame {
             }
         });
 
-        jButton3.setBackground(new java.awt.Color(255, 153, 51));
-        jButton3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton3.setText("Guardar");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btnguardar.setBackground(new java.awt.Color(255, 153, 51));
+        btnguardar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnguardar.setText("Guardar");
+        btnguardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btnguardarActionPerformed(evt);
             }
         });
 
@@ -209,7 +209,7 @@ public class IngresodeCompra extends javax.swing.JFrame {
 
         jLabel4.setText("Tipo de Compra:");
 
-        tipoCompra.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Credito", "Contado", "Normal", "Donación" }));
+        tipoCompra.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Credito", "Contado" }));
         tipoCompra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tipoCompraActionPerformed(evt);
@@ -218,7 +218,11 @@ public class IngresodeCompra extends javax.swing.JFrame {
 
         jLabel3.setText("No. de Factura");
 
-        numFactura.setText("   -   -  -   ");
+        numFactura.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                numFacturaActionPerformed(evt);
+            }
+        });
         numFactura.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 numFacturaKeyTyped(evt);
@@ -231,7 +235,13 @@ public class IngresodeCompra extends javax.swing.JFrame {
 
         id_proveedor.setEditable(false);
         id_proveedor.setBackground(new java.awt.Color(255, 255, 255));
+        id_proveedor.setForeground(new java.awt.Color(255, 255, 255));
         id_proveedor.setBorder(null);
+        id_proveedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                id_proveedorActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -239,7 +249,7 @@ public class IngresodeCompra extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addGap(49, 49, 49)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnguardar, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(46, 46, 46))
@@ -307,7 +317,7 @@ public class IngresodeCompra extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton4)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnguardar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(15, Short.MAX_VALUE))
         );
 
@@ -493,12 +503,7 @@ public class IngresodeCompra extends javax.swing.JFrame {
     String proveedor = (String) txtProveedor.getSelectedItem();
     Date fecha = txtfecha.getDate();
 
-    // Verificar si algún campo obligatorio está vacío
-    if (num.isEmpty() || tipo == null || proveedor == null || fecha == null) {
-        JOptionPane.showMessageDialog(null, "Por favor, complete todos los campos obligatorios.", "Error", JOptionPane.ERROR_MESSAGE);
-        return; // Salir del método si falta algún campo obligatorio
-    }
-
+ 
     factura ver = new factura();
     DefaultTableModel model = (DefaultTableModel) tablecompras.getModel();
 
@@ -560,80 +565,58 @@ public class IngresodeCompra extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_tipoCompraActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void btnguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguardarActionPerformed
         String nunfactura = numFactura.getText().trim();
-        String id = id_proveedor.getText().trim();
-        String tipo = (String) tipoCompra.getSelectedItem();
-//        String proveedor = (String) txtProveedor.getSelectedItem();
-        Date fecha = (Date) txtfecha.getDate();
+String id = id_proveedor.getText().trim();
+String tipo = (String) tipoCompra.getSelectedItem();
+Date fecha = (Date) txtfecha.getDate();
 
-        // Obtener la fecha en el formato requerido por SQL Server
-//        StringBuilder camposVacios = new StringBuilder("Los siguientes campos están vacíos:");
-//
-//        if (nombre.isEmpty())
-//        {
-//            camposVacios.append("\n - Nombre");
-//        }
-//        if (apellido.isEmpty())
-//        {
-//            camposVacios.append("\n - Apellido");
-//        }
-//        if (direccion.isEmpty())
-//        {
-//            camposVacios.append("\n - Dirección");
-//        }
-//        if (telefono.isEmpty())
-//        {
-//            camposVacios.append("\n - Teléfono");
-//        }
-//        if (correo.isEmpty())
-//        {
-//            camposVacios.append("\n - Correo");
-//        } else if (!correo.matches("^[A-Za-z0-9+_.-]+@.+\\.com$"))
-//        {
-//            camposVacios.append("\n - Correo no cumple con los requisitos");
-//        }
-//        if (!camposVacios.toString().equals("Los siguientes campos están vacíos:"))
-//        {
-//            JOptionPane.showMessageDialog(null, camposVacios.toString(), "Campos Vacíos", JOptionPane.ERROR_MESSAGE);
-//        } else
-//        {
-//            String sexo;
-//            if (rbmasculino.isSelected())
-//            {
-//                sexo = "Masculino";
-//            } else if (rbfemenino.isSelected())
-//            {
-//                sexo = "Femenino";
-//            } else
-//            {
-//                sexo = "Masculino"; // Valor predeterminado si no se selecciona un sexo
-//            }
-        try
-        {
-            // Resto del código para la inserción en la base de datos
-            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
+// Validar que los campos obligatorios estén llenos
+if (nunfactura.isEmpty() || id.isEmpty() || tipo == null || fecha == null) {
+    StringBuilder camposVacios = new StringBuilder("Por favor, complete los siguientes campos obligatorios:\n");
 
-            PreparedStatement insertPs = conn.prepareStatement("INSERT INTO Compras (numfactura, tipoCategoria, fecha, total, id_proveedor) VALUES (?,?,?,?,?)");
-            insertPs.setString(1, nunfactura);
-            insertPs.setString(2, tipo);
-            insertPs.setDate(3, new java.sql.Date(fecha.getTime()));
-            insertPs.setObject(4, totalFactura);
-            insertPs.setString(5, id);
+    if (nunfactura.isEmpty()) {
+        camposVacios.append("- Número de factura \n");
+    }
+    if (id.isEmpty()) {
+        camposVacios.append("-  proveedor\n");
+    }
+    if (tipo == null) {
+        camposVacios.append("- Tipo de compra\n");
+    }
+    if (fecha == null) {
+        camposVacios.append("- Fecha\n");
+    }
 
-            insertPs.executeUpdate();
-            JOptionPane.showMessageDialog(null, "Registro guardado");
+    JOptionPane.showMessageDialog(null, camposVacios.toString(), "Error", JOptionPane.ERROR_MESSAGE);
+    return; // Salir del método si falta algún campo obligatorio
+}
 
-        } catch (SQLException e)
-        {
-            JOptionPane.showMessageDialog(null, e.toString(), "Error de SQL", JOptionPane.ERROR_MESSAGE);
-        } catch (ClassNotFoundException ex)
-        {
-            JOptionPane.showMessageDialog(null, "Error de conexión a la base de datos", "Error de Conexión", JOptionPane.ERROR_MESSAGE);
-        }
+try {
+    // Resto del código para la inserción en la base de datos
+    Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+    Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
 
-    }//GEN-LAST:event_jButton3ActionPerformed
+    PreparedStatement insertPs = conn.prepareStatement("INSERT INTO Compras (numfactura, tipoCategoria, fecha, total, id_proveedor) VALUES (?,?,?,?,?)");
+    insertPs.setString(1, nunfactura);
+    insertPs.setString(2, tipo);
+    insertPs.setDate(3, new java.sql.Date(fecha.getTime()));
+    // Asegúrate de tener la variable totalFactura definida y con un valor asignado
+     insertPs.setObject(4, totalFactura);
+    
+    insertPs.setString(5, id);
+
+    insertPs.executeUpdate();
+    JOptionPane.showMessageDialog(null, "Registro guardado");
+
+} catch (SQLException e) {
+    JOptionPane.showMessageDialog(null, e.toString(), "Error de SQL", JOptionPane.ERROR_MESSAGE);
+} catch (ClassNotFoundException ex) {
+    JOptionPane.showMessageDialog(null, "Error de conexión a la base de datos", "Error de Conexión", JOptionPane.ERROR_MESSAGE);
+}
+
+
+    }//GEN-LAST:event_btnguardarActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
@@ -644,6 +627,14 @@ public class IngresodeCompra extends javax.swing.JFrame {
         // TODO add your handling code here:
         bill();
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void id_proveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_id_proveedorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_id_proveedorActionPerformed
+
+    private void numFacturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numFacturaActionPerformed
+        
+    }//GEN-LAST:event_numFacturaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -689,10 +680,10 @@ public class IngresodeCompra extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JTextField Tsum;
+    private javax.swing.JButton btnguardar;
     public javax.swing.JTextField id_proveedor;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
