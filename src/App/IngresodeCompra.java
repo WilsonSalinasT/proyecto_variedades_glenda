@@ -209,7 +209,7 @@ public class IngresodeCompra extends javax.swing.JFrame {
 
         jLabel4.setText("Tipo de Compra:");
 
-        tipoCompra.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Credito", "Contado" }));
+        tipoCompra.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar", "Credito", "Contado" }));
         tipoCompra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tipoCompraActionPerformed(evt);
@@ -218,6 +218,7 @@ public class IngresodeCompra extends javax.swing.JFrame {
 
         jLabel3.setText("No. de Factura");
 
+        numFactura.setText("- - -");
         numFactura.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 numFacturaActionPerformed(evt);
@@ -566,34 +567,46 @@ public class IngresodeCompra extends javax.swing.JFrame {
     }//GEN-LAST:event_tipoCompraActionPerformed
 
     private void btnguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguardarActionPerformed
-        String nunfactura = numFactura.getText().trim();
+  String nunfactura = numFactura.getText().trim();
 String id = id_proveedor.getText().trim();
 String tipo = (String) tipoCompra.getSelectedItem();
 Date fecha = (Date) txtfecha.getDate();
 
-// Validar que los campos obligatorios estén llenos
-if (nunfactura.isEmpty() || id.isEmpty() || tipo == null || fecha == null) {
-    StringBuilder camposVacios = new StringBuilder("Por favor, complete los siguientes campos obligatorios:\n");
+StringBuilder camposVacios = new StringBuilder("Por favor, complete los siguientes campos obligatorios:\n");
 
-    if (nunfactura.isEmpty()) {
-        camposVacios.append("- Número de factura \n");
-    }
-    if (id.isEmpty()) {
-        camposVacios.append("-  proveedor\n");
-    }
-    if (tipo == null) {
-        camposVacios.append("- Tipo de compra\n");
-    }
-    if (fecha == null) {
-        camposVacios.append("- Fecha\n");
-    }
 
+String numeroFacturaSinSeparadores = nunfactura.replaceAll("[\\s-]+", "");
+
+// Eliminar los separadores y verificar la longitud de los dígitos significativos
+String digitosSignificativos = numeroFacturaSinSeparadores.replaceAll("\\D", "");
+
+if (digitosSignificativos.length() < 3) {
+    camposVacios.append("- Número de factura\n");
+}
+
+// Verifica si tipo es nulo, está vacío o es igual al valor predeterminado "Seleccionar"
+if (tipoCompra.getSelectedItem() == null || tipoCompra.getSelectedItem().toString().trim().isEmpty() ||
+    tipoCompra.getSelectedItem().toString().trim().equals("Seleccionar")) {
+    camposVacios.append("- Tipo de compra\n");
+}
+
+
+if (id.isEmpty()) {
+    camposVacios.append("- Proveedor\n");
+}
+
+if (fecha == null) {
+    camposVacios.append("- Fecha\n");
+}
+
+// Mostrar mensajes de error solo si hay campos vacíos
+if (camposVacios.length() > "Por favor, complete los siguientes campos obligatorios:\n".length()) {
     JOptionPane.showMessageDialog(null, camposVacios.toString(), "Error", JOptionPane.ERROR_MESSAGE);
     return; // Salir del método si falta algún campo obligatorio
 }
 
+// Resto del código para la inserción en la base de datos
 try {
-    // Resto del código para la inserción en la base de datos
     Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
     Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
 
@@ -602,15 +615,16 @@ try {
     insertPs.setString(2, tipo);
     insertPs.setDate(3, new java.sql.Date(fecha.getTime()));
     // Asegúrate de tener la variable totalFactura definida y con un valor asignado
-     insertPs.setObject(4, totalFactura);
-    
+    insertPs.setObject(4, totalFactura);
     insertPs.setString(5, id);
 
     insertPs.executeUpdate();
+
     JOptionPane.showMessageDialog(null, "Registro guardado");
 
 } catch (SQLException e) {
-    JOptionPane.showMessageDialog(null, e.toString(), "Error de SQL", JOptionPane.ERROR_MESSAGE);
+    e.printStackTrace();
+    JOptionPane.showMessageDialog(null, e.getMessage(), "Error de SQL", JOptionPane.ERROR_MESSAGE);
 } catch (ClassNotFoundException ex) {
     JOptionPane.showMessageDialog(null, "Error de conexión a la base de datos", "Error de Conexión", JOptionPane.ERROR_MESSAGE);
 }
