@@ -376,7 +376,7 @@ public class Listado_de_envios extends javax.swing.JPanel {
         selectedRow1 = tblEnvios.getSelectedRow();
         if (selectedRow1 == -1)
         {
-            JOptionPane.showMessageDialog(null, "Seleccione un pedido para poder visualizarlo");
+            JOptionPane.showMessageDialog(null, "Seleccione un envio para poder visualizarlo");
             return;
         }
 
@@ -491,7 +491,7 @@ public class Listado_de_envios extends javax.swing.JPanel {
         selectedRow2 = tblEnvios.getSelectedRow();
         if (selectedRow2 == -1)
         {
-            JOptionPane.showMessageDialog(null, "Seleccione una cita para poder editarla");
+            JOptionPane.showMessageDialog(null, "Seleccione un envio para poder editarlo");
             return;
         }
 
