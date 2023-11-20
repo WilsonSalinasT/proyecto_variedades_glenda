@@ -425,35 +425,31 @@ public class Listado_de_envios extends javax.swing.JPanel {
                 String precioArreglo = rs.getString("precioarreglo");
                 String fechaArreglo = rs.getString("fechaArreglo");
 
-         
                 String material = rs.getString("material");
                 String preciosublimacion = rs.getString("precisublimacion");
                 String fechasublimacion = rs.getString("fechasublimacion");
-                
+
                 String referencia = rs.getString("referencia");
 
-           
                 ver_envio ver = new ver_envio();
 
                 ver.txtCliente.setText(nombre + " " + apellido);
                 ver.txtcelular.setText(tel);
                 ver.txtdireccion.setText(direccion);
                 ver.txtfechaEntrega.setText(fechaenvio);
-                
+
                 ver.txtPrenda.setText(prenda);
                 ver.txtPreciosastereia.setText(precioPS);
                 ver.txtfechapedidosast.setText(fechaPS);
-                
+
                 ver.txtarreglo.setText(arreglo);
                 ver.txtprecioarreglo.setText(precioArreglo);
                 ver.txtfechaarreglo.setText(fechaArreglo);
-                
-                  ver.txtmaterial.setText(material);
+
+                ver.txtmaterial.setText(material);
                 ver.txtpreciosublimacion.setText(preciosublimacion);
                 ver.txtfechasublimacion.setText(fechasublimacion);
                 ver.txtreferencia.setText(referencia);
-                
-                
 
 //                ver.txtArreglo.setText(arregloA);
 //                ver.txtestado.setText(estadoA);
@@ -720,12 +716,21 @@ public class Listado_de_envios extends javax.swing.JPanel {
             Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
             if (conn != null && !conn.isClosed())
             {
-                PreparedStatement ps = conn.prepareStatement("SELECT ROW_NUMBER() OVER(ORDER BY E.nombre) AS NumRegistro, E.nombre, E.apellido, V.estado, V.arreglo, V.fechaPedido, V.id_arreglo "
-                        + "FROM Cliente E "
-                        + "JOIN PedidoArreglo V ON E.id_cliente = V.id_cliente "
-                        + "WHERE (E.nombre LIKE ? OR E.apellido LIKE ? OR V.fechaPedido LIKE ?) and V.estado = 'pendiente' "
-                        + "ORDER BY E.nombre "
-                        + "OFFSET ? ROWS FETCH NEXT ? ROWS ONLY");
+                PreparedStatement ps = conn.prepareStatement(
+                        "SELECT ROW_NUMBER() OVER(ORDER BY C.nombre) AS NumRegistro,  C.nombre, C.apellido, "
+                        + "ISNULL(NULLIF(CONCAT(NULLIF(PA.arreglo, ''), "
+                        + "CASE WHEN PA.arreglo IS NOT NULL AND (PS.material IS NOT NULL OR SA.prenda IS NOT NULL) THEN ', ' ELSE '' END, "
+                        + "NULLIF(PS.material, ''), "
+                        + "CASE WHEN PS.material IS NOT NULL AND SA.prenda IS NOT NULL THEN ', ' ELSE '' END, "
+                        + "NULLIF(SA.prenda, '')), ''), 'Ninguno') AS detalle_pedido, "
+                        + "E.fechaenvio, E.id_envio "
+                        + "FROM Envios E "
+                        + "LEFT JOIN PedidoArreglo PA ON E.id_arreglo = PA.id_arreglo "
+                        + "LEFT JOIN PedidoSublimacion PS ON E.id_sublimacion = PS.id_sublimacion "
+                        + "LEFT JOIN PedidoSastreria SA ON E.id_sastreria = SA.id_sastreria "
+                        + "LEFT JOIN Cliente C ON E.id_cliente = C.id_cliente "
+                        + "WHERE C.nombre LIKE ? OR C.apellido LIKE ? OR E.fechaenvio LIKE ? "
+                        + "ORDER BY C.nombre OFFSET ? ROWS FETCH NEXT ? ROWS ONLY");
 
                 if (texto != null && !texto.isEmpty())
                 {
@@ -741,7 +746,7 @@ public class Listado_de_envios extends javax.swing.JPanel {
                     terminoBusqueda = ""; // Limpiar el término de búsqueda
                 }
 
-                // Define el OFFSET y FETCH NEXT de acuerdo a tus necesidades
+// Define el OFFSET y FETCH NEXT de acuerdo a tus necesidades
                 int offset = 0; // Cambia el valor del offset según tus requerimientos
                 int fetchNext = 10; // Cambia la cantidad de registros a recuperar según tus requerimientos
 
@@ -757,19 +762,15 @@ public class Listado_de_envios extends javax.swing.JPanel {
                         int numRegistro = rs.getInt("NumRegistro");
                         String nombre = rs.getString("nombre");
                         String apellido = rs.getString("apellido");
-                        String numeroTelefono = rs.getString("estado");
-                        String arreglo = rs.getString("arreglo");
-                        String fechaPedido = rs.getString("fechaPedido");
-                        int idArreglo = Integer.parseInt(rs.getString("id_arreglo"));
+                        String detalle_pedido = rs.getString("detalle_pedido");
+                        String fechaPedido = rs.getString("fechaenvio");
+                        int idArreglo = rs.getInt("id_envio");
 
-                        if (nombre != null && apellido != null && numeroTelefono != null)
+                        modelTabla.addRow(new Object[]
                         {
-                            modelTabla.addRow(new Object[]
-                            {
-                                numRegistro, nombre, apellido, numeroTelefono, arreglo, fechaPedido, idArreglo
-                            });
-                            foundData = true;
-                        }
+                            numRegistro, nombre, apellido, detalle_pedido, fechaPedido, idArreglo
+                        });
+                        foundData = true;
                     }
 
                     rs.close();
