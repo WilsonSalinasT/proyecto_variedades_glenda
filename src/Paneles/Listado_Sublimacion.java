@@ -209,7 +209,7 @@ public class Listado_Sublimacion extends javax.swing.JPanel {
 
             },
             new String [] {
-                "N°", "Nombre del cliente", "Apellido del cliente", "Estado", "Diseño", "Fecha de pedido", "id_comnuna"
+                "N°", "Nombre del cliente", "Apellido del cliente", "Estado", "Producto", "Fecha de pedido", "id_comnuna"
             }
         ) {
             boolean[] canEdit = new boolean [] {

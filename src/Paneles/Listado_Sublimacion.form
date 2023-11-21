@@ -284,7 +284,7 @@
                     <Column editable="false" title="Nombre del cliente" type="java.lang.Object"/>
                     <Column editable="false" title="Apellido del cliente" type="java.lang.Object"/>
                     <Column editable="false" title="Estado" type="java.lang.Object"/>
-                    <Column editable="true" title="Dise&#xf1;o" type="java.lang.Object"/>
+                    <Column editable="true" title="Producto" type="java.lang.Object"/>
                     <Column editable="false" title="Fecha de pedido" type="java.lang.Object"/>
                     <Column editable="false" title="id_comnuna" type="java.lang.Object"/>
                   </Table>
