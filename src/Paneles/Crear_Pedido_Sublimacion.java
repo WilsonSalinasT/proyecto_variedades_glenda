@@ -555,8 +555,7 @@ public class Crear_Pedido_Sublimacion extends javax.swing.JPanel {
                 panelprincipal.repaint();
                 panelprincipal.removeAll();
                 panelprincipal.add(sub, BorderLayout.CENTER);
-                panelprincipal.revalidate();
-                panelprincipal.repaint();
+                
 
             } catch (SQLException e) {
                 JOptionPane.showMessageDialog(null, e.toString(), "Error de SQL", JOptionPane.ERROR_MESSAGE);

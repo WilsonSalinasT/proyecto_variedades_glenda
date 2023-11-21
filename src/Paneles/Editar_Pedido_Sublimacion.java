@@ -246,6 +246,8 @@ public class Editar_Pedido_Sublimacion extends javax.swing.JPanel {
                 .addComponent(idSubli))
         );
 
+        idSubli.setVisible(false);
+
         txtCliente.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Nombre del cliente:", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 3, 12))); // NOI18N
         txtCliente.setEnabled(false);
 
@@ -523,6 +525,7 @@ public class Editar_Pedido_Sublimacion extends javax.swing.JPanel {
         String fechaPedido = fechaSeleccionada != null ? sdfSQL.format(fechaSeleccionada) : null;
         String imagenM1 = Imagen.getText();
         String idC = id_cliente.getText();
+        String idS = idSubli.getText();
 
         StringBuilder camposVacios = new StringBuilder("Los siguientes campos están vacíos:");
 
@@ -583,7 +586,7 @@ public class Editar_Pedido_Sublimacion extends javax.swing.JPanel {
                 Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
 
                 PreparedStatement updatePs = conn.prepareStatement("UPDATE PedidoSublimacion SET material=?, cantidad=?, estado=?, descripcion=?, precio=?,"
-                        + "imagen1=?, fechaPedido=? WHERE id_cliente=?");
+                        + "imagen1=?, fechaPedido=?, id_cliente=? WHERE id_sublimacion=?");
 
                 updatePs.setString(1, material);
                 updatePs.setString(2, cantidad);
@@ -614,6 +617,7 @@ public class Editar_Pedido_Sublimacion extends javax.swing.JPanel {
 
                 updatePs.setString(7, fechaPedido);
                 updatePs.setObject(8, idC);
+                updatePs.setObject(9, idS);
 
                 updatePs.executeUpdate();
 

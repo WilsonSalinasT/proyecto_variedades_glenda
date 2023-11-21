@@ -539,7 +539,7 @@ public class Listado_Sublimacion extends javax.swing.JPanel {
 
                 Editar_Pedido_Sublimacion editar1 = new Editar_Pedido_Sublimacion();
 
-                editar1.id_cliente.setText(id_subli);
+                editar1.idSubli.setText(id_subli);
                 editar1.txtCliente.setSelectedItem(nombre + " " + apellido);
                 editar1.txtTel.setText(telefono);
                 editar1.cbnProducto.setSelectedItem(material);
