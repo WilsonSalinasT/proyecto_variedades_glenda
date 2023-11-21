@@ -178,6 +178,9 @@ public class crear_producto extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(txtdescripcion);
 
+        jButton3.setBackground(new java.awt.Color(255, 153, 51));
+        jButton3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButton3.setForeground(new java.awt.Color(0, 0, 0));
         jButton3.setText("Imagen");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -195,6 +198,7 @@ public class crear_producto extends javax.swing.JPanel {
 
         txtruta.setEditable(false);
         txtruta.setBackground(new java.awt.Color(255, 255, 255));
+        txtruta.setForeground(new java.awt.Color(255, 255, 255));
         txtruta.setBorder(null);
 
         txtPrecio.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Precio", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12), new java.awt.Color(0, 0, 0))); // NOI18N

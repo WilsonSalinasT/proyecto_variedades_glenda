@@ -308,7 +308,6 @@ public class Menu extends javax.swing.JFrame {
         panelprincipal.add(p2, BorderLayout.CENTER);
         panelprincipal.revalidate();
         panelprincipal.repaint();
-
     }//GEN-LAST:event_productosActionPerformed
 
     private void pedidoSastreriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pedidoSastreriaActionPerformed
