@@ -394,12 +394,12 @@ public class Listado_Sublimacion extends javax.swing.JPanel {
 
     private void crearbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearbtnActionPerformed
 
-        Crear_Pedido_Sublimacion p1 = new Crear_Pedido_Sublimacion();
-        p1.setSize(1024, 640);
-        p1.setLocation(0, 0);
+        Crear_Pedido_Sublimacion p6 = new Crear_Pedido_Sublimacion();
+        p6.setSize(1024, 640);
+        p6.setLocation(0, 0);
 
         panelprincipal.removeAll();
-        panelprincipal.add(p1, BorderLayout.CENTER);
+        panelprincipal.add(p6, BorderLayout.CENTER);
         panelprincipal.revalidate();
         panelprincipal.repaint();
     }//GEN-LAST:event_crearbtnActionPerformed
@@ -537,14 +537,13 @@ public class Listado_Sublimacion extends javax.swing.JPanel {
 
                 Date fechaEntrega = rs.getDate("fechaPedido");
 
-                Editar_Pedido_Sublimacion editar2 = new Editar_Pedido_Sublimacion();
+                Editar_Pedido_Sublimacion editar1 = new Editar_Pedido_Sublimacion();
 
-                editar2.id_cliente.setText(id_subli);
-
-                editar2.txtCliente.setSelectedItem(nombre + " " + apellido);
-                editar2.txtTel.setText(telefono);
-                editar2.cbnProducto.setSelectedItem(material);
-                editar2.cbxestado.setSelectedItem(estado);
+                editar1.id_cliente.setText(id_subli);
+                editar1.txtCliente.setSelectedItem(nombre + " " + apellido);
+                editar1.txtTel.setText(telefono);
+                editar1.cbnProducto.setSelectedItem(material);
+                editar1.cbxestado.setSelectedItem(estado);
 
                 // Recuperar la imagen de la base de datos
                 byte[] bytesImagen = rs.getBytes("imagen1");
@@ -554,24 +553,23 @@ public class Listado_Sublimacion extends javax.swing.JPanel {
 
                 // Escalar las imágenes al tamaño del JLabel
                 if (imagenIcono1 != null) {
-                    imagenIcono1 = escalarImagen(imagenIcono1, editar2.Imagen.getWidth(), editar2.Imagen.getHeight());
-                    editar2.Imagen.setIcon(imagenIcono1);
+                    imagenIcono1 = escalarImagen(imagenIcono1, editar1.Imagen.getWidth(), editar1.Imagen.getHeight());
+                    editar1.Imagen.setIcon(imagenIcono1);
                 }
 
-                editar2.txtdescripcion.setText(descripcion);
-                editar2.txtPrecio.setText(precio);
-                editar2.txtcantidad.setText(cantidad);
-                //edit.fechaP.setText(fechapedido);
-                editar2.jDateChooser.setDate(fechaEntrega);
-                editar2.id_cliente.setText(rs.getString("id_cliente"));
-
-                editar2.setSize(1024, 640);
-                editar2.setLocation(0, 0);
+                editar1.txtdescripcion.setText(descripcion);
+                editar1.txtPrecio.setText(precio);
+                editar1.txtcantidad.setText(cantidad);
+                //editfechaP.setText(fechapedido);
+                editar1.jDateChooser.setDate(fechaEntrega);
+                editar1.id_cliente.setText(rs.getString("id_cliente"));
+                editar1.setSize(1024, 640);
+                editar1.setLocation(0, 0);
 
                 panelprincipal.revalidate();
                 panelprincipal.repaint();
                 panelprincipal.removeAll();
-                panelprincipal.add(editar2, BorderLayout.CENTER);
+                panelprincipal.add(editar1, BorderLayout.CENTER);
 
                 panelprincipal.revalidate();
                 panelprincipal.repaint();
@@ -839,7 +837,8 @@ public class Listado_Sublimacion extends javax.swing.JPanel {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-    private ImageIcon escalarImagen(ImageIcon icono, int ancho, int alto) {
+    // Método para escalar una imagen al tamaño deseado
+    public ImageIcon escalarImagen(ImageIcon icono, int ancho, int alto) {
         Image imagen = icono.getImage();
         Image imagenEscalada = imagen.getScaledInstance(191, 169, java.awt.Image.SCALE_SMOOTH);
         return new ImageIcon(imagenEscalada);

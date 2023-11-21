@@ -7,6 +7,7 @@ package Paneles;
 import static App.Menu.panelprincipal;
 import static Paneles.Editar_Pedido_Sublimacion.Imagen;
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -433,7 +434,7 @@ public class Crear_Pedido_Sublimacion extends javax.swing.JPanel {
 
         if (txtdescripcion.getText().isEmpty() && Character.isWhitespace(c)) {
             evt.consume(); // Consumir el evento si es un espacio en blanco en la primera letra
-        } else if (txtdescripcion.getText().length() >= 300) {
+        } else if (txtdescripcion.getText().length() >= 150) {
             evt.consume(); // Consumir el evento si se ha alcanzado la longitud máxima
         }
     }//GEN-LAST:event_txtdescripcionKeyTyped
@@ -458,7 +459,8 @@ public class Crear_Pedido_Sublimacion extends javax.swing.JPanel {
                 txtPrecio.setText(String.valueOf(total));
             }
         } catch (NumberFormatException e) {
-            txtPrecio.setText("Ingrese una cantidad válida");
+            txtPrecio.setText("0.0");
+            //txtcantidad.setText("Ingrese una cantidad válida");
         }
     }
 
@@ -534,7 +536,7 @@ public class Crear_Pedido_Sublimacion extends javax.swing.JPanel {
                         insertPs.setBinaryStream(6, null, 0); // Imagen 1 no existe
                     }
                 } else {
-                    insertPs.setBinaryStream(5, null, 0); // Imagen 1 no existe
+                    insertPs.setBinaryStream(6, null, 0); // Imagen 1 no existe
                 }
 
                 insertPs.setString(7, fechaPedido);
@@ -586,37 +588,43 @@ public class Crear_Pedido_Sublimacion extends javax.swing.JPanel {
     }//GEN-LAST:event_txtcantidadKeyTyped
 
     private File[] archivos = new File[1];
-    private boolean imagenCargada = false; // Para verificar si se ha cargado una imagen
+    private int contador = 0;// Para verificar si se ha cargado una imagen
 
     private void imagenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imagenMouseClicked
 
-        if (!imagenCargada) {
+        if (contador < 1) {
             JFileChooser fclAbrirArchivo = new JFileChooser();
             fclAbrirArchivo.setFileFilter(new FileNameExtensionFilter("Archivo de imagen", "jpg", "jpeg", "png"));
 
             int respuesta = fclAbrirArchivo.showOpenDialog(this);
 
             if (respuesta == JFileChooser.APPROVE_OPTION) {
-                archivos[0] = fclAbrirArchivo.getSelectedFile();
+                archivos[contador] = fclAbrirArchivo.getSelectedFile();
 
-                // Cargar la imagen en el label correspondiente (imagen1)
-                ImageIcon icono = new ImageIcon(archivos[0].getAbsolutePath());
-                Image foto = icono.getImage().getScaledInstance(Imagen.getWidth(), Imagen.getHeight(), Image.SCALE_DEFAULT);
+                // Cargar la imagen en el label correspondiente (imagen1, imagen2, o imagen3)
+                ImageIcon icono = new ImageIcon(archivos[contador].getAbsolutePath());
+                Image foto = icono.getImage().getScaledInstance(imagen.getWidth(), imagen.getHeight(), Image.SCALE_DEFAULT);
 
-                Imagen.setIcon(new ImageIcon(foto));
-                //Imagen.setEnabled(false); // Desactivar el botón después de cargar la primera imagen
+                if (contador == 0) {
+                    imagen.setIcon(new ImageIcon(foto));
+                    //JOptionPane.showMessageDialog(this, "Ya se ha cargado una imagen. No se puede agregar otra.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+                    //imagenes.setEnabled(false); // Desactivar el botón después de cargar la tercera imagen
+                }
 
-                imagenCargada = true;
+                contador++;
             }
         } else {
             // Verificar si el evento de clic proviene del área de la imagen
-            if (evt.getSource() == Imagen) {
+            if (evt.getSource() == imagen) {
                 JOptionPane.showMessageDialog(this, "Ya se ha cargado una imagen. No se puede agregar otra.", "Advertencia", JOptionPane.WARNING_MESSAGE);
             }
         }
 
     }//GEN-LAST:event_imagenMouseClicked
 
+    private boolean tieneDimensionesValidas(Component componente) {
+        return componente.getWidth() > 0 && componente.getHeight() > 0;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCrear;

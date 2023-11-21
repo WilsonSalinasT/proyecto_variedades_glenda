@@ -173,6 +173,7 @@ public class Editar_Pedido_Sublimacion extends javax.swing.JPanel {
         jScrollPane2 = new javax.swing.JScrollPane();
         btnEditar = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
+        btnCambiarImagen = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         jLabel10.setFont(new java.awt.Font("Segoe Print", 1, 14)); // NOI18N
@@ -329,31 +330,51 @@ public class Editar_Pedido_Sublimacion extends javax.swing.JPanel {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Arial Black", 2, 14)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 51, 51));
-        jLabel1.setText("Tocar la imagen si desea cambiarla");
+        btnCambiarImagen.setBackground(new java.awt.Color(255, 153, 51));
+        btnCambiarImagen.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
+        btnCambiarImagen.setText("Cambiar imagen");
+        btnCambiarImagen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCambiarImagenActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/admiracion.png"))); // NOI18N
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel1MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Imagen, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addComponent(Imagen, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
                         .addComponent(jLabel1)
-                        .addGap(10, 10, 10)))
-                .addContainerGap(23, Short.MAX_VALUE))
+                        .addGap(74, 74, 74)
+                        .addComponent(btnCambiarImagen)))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(30, 30, 30)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel1))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addComponent(btnCambiarImagen)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(Imagen, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -408,13 +429,10 @@ public class Editar_Pedido_Sublimacion extends javax.swing.JPanel {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
                         .addComponent(txtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(441, 441, 441)
-                                .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(52, 52, 52)
-                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(52, 52, 52)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(26, 26, 26)
+                        .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(30, 30, 30))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(49, 49, 49)
@@ -464,7 +482,7 @@ public class Editar_Pedido_Sublimacion extends javax.swing.JPanel {
 
         if (txtdescripcion.getText().isEmpty() && Character.isWhitespace(c)) {
             evt.consume(); // Consumir el evento si es un espacio en blanco en la primera letra
-        } else if (txtdescripcion.getText().length() >= 300) {
+        } else if (txtdescripcion.getText().length() >= 150) {
             evt.consume(); // Consumir el evento si se ha alcanzado la longitud máxima
         }
     }//GEN-LAST:event_txtdescripcionKeyTyped
@@ -489,7 +507,7 @@ public class Editar_Pedido_Sublimacion extends javax.swing.JPanel {
                 txtPrecio.setText(String.valueOf(total));
             }
         } catch (NumberFormatException e) {
-            txtPrecio.setText("Ingrese una cantidad válida");
+            txtPrecio.setText("0.0");
         }
     }
 
@@ -645,64 +663,45 @@ public class Editar_Pedido_Sublimacion extends javax.swing.JPanel {
 
     }//GEN-LAST:event_txtcantidadKeyTyped
 
-    private void ImagenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ImagenMouseClicked
+    private File[] archivos = new File[1];
+    private int contador = 0; // Para llevar el registro de cuántas veces se ha presionado el botón
 
+    private void ImagenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ImagenMouseClicked
 
     }//GEN-LAST:event_ImagenMouseClicked
 
     private void ImagenMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ImagenMousePressed
 
-        imagenCargada = false;
-
-        if (!seleccionandoImagen) {
-            seleccionandoImagen = true;
-
-            int opcion = JOptionPane.showConfirmDialog(this, "¿Desea cambiar la imagen?", "Cambio de Imagen", JOptionPane.YES_NO_OPTION);
-
-            try {
-                if (opcion == JOptionPane.YES_OPTION) {
-                    cambiarImagen();
-                }
-            } finally {
-                seleccionandoImagen = false;
-            }
-        }
-
     }//GEN-LAST:event_ImagenMousePressed
 
-    private File[] archivos = new File[1];
-    private boolean imagenCargada; // Para verificar si se ha cargado una imagen
-    private boolean seleccionandoImagen; // Para controlar si se está seleccionando una nueva imagen
+    private void btnCambiarImagenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCambiarImagenActionPerformed
+        if (contador < 1) {
+            JFileChooser fclAbrirArchivo = new JFileChooser();
+            fclAbrirArchivo.setFileFilter(new FileNameExtensionFilter("Archivo de imagen", "jpg", "jpeg", "png"));
 
-    private void cambiarImagen() {
-        if (!seleccionandoImagen) {
-            seleccionandoImagen = true;
+            int respuesta = fclAbrirArchivo.showOpenDialog(this);
 
-            try {
-                // Restablecer la imagen actual antes de cargar una nueva
-                Imagen.setIcon(null);
+            if (respuesta == JFileChooser.APPROVE_OPTION) {
+                archivos[contador] = fclAbrirArchivo.getSelectedFile();
 
-                JFileChooser fclAbrirArchivo = new JFileChooser();
-                fclAbrirArchivo.setFileFilter(new FileNameExtensionFilter("Archivo de imagen", "jpg", "jpeg", "png"));
+                // Cargar la imagen en el label correspondiente (imagen1, imagen2, o imagen3)
+                ImageIcon icono = new ImageIcon(archivos[contador].getAbsolutePath());
+                Image foto = icono.getImage().getScaledInstance(Imagen.getWidth(), Imagen.getHeight(), Image.SCALE_DEFAULT);
 
-                int respuesta = fclAbrirArchivo.showOpenDialog(this);
-
-                if (respuesta == JFileChooser.APPROVE_OPTION) {
-                    archivos[0] = fclAbrirArchivo.getSelectedFile();
-
-                    // Cargar la imagen en el label correspondiente (Imagen)
-                    ImageIcon icono = new ImageIcon(archivos[0].getAbsolutePath());
-                    Image foto = icono.getImage().getScaledInstance(Imagen.getWidth(), Imagen.getHeight(), Image.SCALE_DEFAULT);
-
+                if (contador == 0) {
                     Imagen.setIcon(new ImageIcon(foto));
-
-                    imagenCargada = true;
+                    //JOptionPane.showMessageDialog(this, "Ya se ha cargado una imagen. No se puede agregar otra.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+                    btnCambiarImagen.setEnabled(false); // Desactivar el botón después de cargar la tercera imagen
                 }
-            } finally {
-                seleccionandoImagen = false;
+
+                contador++;
             }
         }
-    }
+    }//GEN-LAST:event_btnCambiarImagenActionPerformed
+
+    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+        JOptionPane.showMessageDialog(this, "¡Importante! Solo se permite cambiar la imagen una vez. Si necesitas modificarla de nuevo, por favor, sal y vuelve a entrar. ¡Gracias!.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+    }//GEN-LAST:event_jLabel1MouseClicked
 
     // Método para obtener la imagen existente en la base de datos
     private byte[] obtenerImagenExistente(int posicion) throws SQLException, ClassNotFoundException {
@@ -776,6 +775,7 @@ public class Editar_Pedido_Sublimacion extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static final javax.swing.JLabel Imagen = new javax.swing.JLabel();
+    private javax.swing.JButton btnCambiarImagen;
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnVolve;
     public static final javax.swing.JComboBox<String> cbnProducto = new javax.swing.JComboBox<>();
