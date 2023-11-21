@@ -46,7 +46,7 @@ public class Listado_Pedidos_Arreglos extends javax.swing.JPanel {
     public Listado_Pedidos_Arreglos() {
         initComponents();
 
-       cargarTablaEmpleados();
+        cargarTablaEmpleados();
 
         holder = new TextPrompt("Busque por nombre/apellido del cliente/fecha de entrega", txtBuscar);
 
@@ -407,14 +407,14 @@ public class Listado_Pedidos_Arreglos extends javax.swing.JPanel {
         {
 
             int fila = tblPedidosA.getSelectedRow();
-           int valorEntero = Integer.parseInt(tblPedidosA.getValueAt(fila, 6).toString());
+            int valorEntero = Integer.parseInt(tblPedidosA.getValueAt(fila, 6).toString());
             PreparedStatement ps;
             ResultSet rs;
 
             Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
             ps = conn.prepareStatement("SELECT * FROM Cliente JOIN PedidoArreglo ON Cliente.id_cliente = PedidoArreglo.id_cliente WHERE id_arreglo=?");
             ps.setInt(1, valorEntero);
-           
+
             rs = ps.executeQuery();
 
             while (rs.next())
@@ -438,6 +438,154 @@ public class Listado_Pedidos_Arreglos extends javax.swing.JPanel {
                 ver.txtDescripcionA.setText(descripcionA);
                 ver.txtprecio.setText(precioA);
                 ver.id.setText(rs.getString("id_arreglo"));
+                // Recuperar la imagen de la base de datos
+                byte[] imagenA1 = rs.getBytes("imagen1");
+                byte[] imagenA2 = rs.getBytes("imagen2");
+                byte[] imagenA3 = rs.getBytes("imagen3");
+
+// Mostrar u ocultar el label de imagen1 según la disponibilidad de la imagen
+                if (imagenA1 != null)
+                {
+                    ImageIcon imagenIcono = new ImageIcon(imagenA1);
+                    Image imagen = imagenIcono.getImage();
+                    Image imagenEscalada = imagen.getScaledInstance(191, 169, Image.SCALE_DEFAULT);
+
+                    imagenIcono = new ImageIcon(imagenEscalada);
+                    ver.imagen1.setIcon(imagenIcono);
+
+                    // Centrar la imagen en el label si es necesario
+                    ver.imagen1.setHorizontalAlignment(JLabel.CENTER);
+                    ver.imagen1.setVerticalAlignment(JLabel.CENTER);
+
+                    // Hacer visible el label de imagen1
+                    ver.imagen1.setVisible(true);
+                } else
+                {
+                    // Si el arreglo de bytes de imagen es nulo, puedes mostrar un mensaje o establecer un valor predeterminado.
+                    ver.imagen1.setIcon(null); // O establecer un icono predeterminado
+                    // Ocultar el label de imagen1
+                    ver.imagen1.setVisible(false);
+                }
+
+// Mostrar u ocultar el label de imagen2 según la disponibilidad de la imagen
+                if (imagenA2 != null)
+                {
+                    ImageIcon imagenIcono = new ImageIcon(imagenA2);
+                    Image imagen = imagenIcono.getImage();
+                    Image imagenEscalada = imagen.getScaledInstance(191, 169, Image.SCALE_DEFAULT);
+
+                    imagenIcono = new ImageIcon(imagenEscalada);
+                    ver.imagen2.setIcon(imagenIcono);
+
+                    // Hacer visible el label de imagen2
+                    ver.imagen2.setVisible(true);
+                } else
+                {
+                    // Ocultar el label de imagen2
+                    ver.imagen2.setIcon(null);
+                    ver.imagen2.setVisible(false);
+                }
+
+// Mostrar u ocultar el label de imagen3 según la disponibilidad de la imagen
+                if (imagenA3 != null)
+                {
+                    ImageIcon imagenIcono = new ImageIcon(imagenA3);
+                    Image imagen = imagenIcono.getImage();
+                    Image imagenEscalada = imagen.getScaledInstance(191, 169, Image.SCALE_DEFAULT);
+
+                    imagenIcono = new ImageIcon(imagenEscalada);
+                    ver.imagen3.setIcon(imagenIcono);
+
+                    // Hacer visible el label de imagen3
+                    ver.imagen3.setVisible(true);
+                } else
+                {
+                    // Ocultar el label de imagen3
+                    ver.imagen3.setIcon(null);
+                    ver.imagen3.setVisible(false);
+                }
+
+                ver.fechaP.setText(fechapedido);
+
+                ver.setSize(1024, 640);
+                ver.setLocation(0, 0);
+
+                panelprincipal.revalidate();
+                panelprincipal.repaint();
+                panelprincipal.removeAll();
+                panelprincipal.add(ver, BorderLayout.CENTER);
+
+                panelprincipal.revalidate();
+                panelprincipal.repaint();
+
+                break; // Salir del bucle después de encontrar el elemento seleccionado
+
+            }
+
+            rs.close();
+            ps.close();
+            conn.close();
+
+        } catch (SQLException e)
+        {
+            e.printStackTrace();
+            // Manejar cualquier excepción que pueda ocurrir durante la consulta a la base de datos
+        }
+
+
+    }//GEN-LAST:event_verbtnActionPerformed
+    /*editar_Pedido_arreglo p2 = new editar_Pedido_arreglo();
+        p2.setSize(1024, 640);
+        p2.setLocation(0, 0);
+
+        panelprincipal.removeAll();
+        panelprincipal.add(p2, BorderLayout.CENTER);
+        panelprincipal.revalidate();
+        panelprincipal.repaint();*/
+    int selectedRow2;
+    private void editarbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarbtnActionPerformed
+        selectedRow1 = tblPedidosA.getSelectedRow();
+        if (selectedRow1 == -1)
+        {
+            JOptionPane.showMessageDialog(null, "Seleccione un pedido para poder editar");
+            return;
+        }
+
+        try
+        {
+
+            int fila = tblPedidosA.getSelectedRow();
+            int valorEntero = Integer.parseInt(tblPedidosA.getValueAt(fila, 6).toString());
+            PreparedStatement ps;
+            ResultSet rs;
+
+            Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
+            ps = conn.prepareStatement("SELECT * FROM Cliente JOIN PedidoArreglo ON Cliente.id_cliente = PedidoArreglo.id_cliente WHERE id_arreglo=?");
+            ps.setInt(1, valorEntero);
+
+            rs = ps.executeQuery();
+
+            while (rs.next())
+            {
+                String idArreglo = rs.getString("id_arreglo");
+                String nombre = rs.getString("nombre");
+                String apellido = rs.getString("apellido");
+                String tel = rs.getString("numero_telefono");
+                String arregloA = rs.getString("arreglo");
+                String estadoA = rs.getString("estado");
+                String descripcionA = rs.getString("descripcion");
+                String precioA = rs.getString("precio");
+                String fechapedido = rs.getString("fechaPedido");
+
+                editar_Pedido_arreglo ver = new editar_Pedido_arreglo();
+                ver.lbl_id_arregl.setText(idArreglo);
+                ver.txtCliente.setSelectedItem(nombre + " " + apellido);
+                ver.txtTel.setText(tel);
+                ver.cbxarreglo.setSelectedItem(arregloA);
+                ver.cbxEstado.setSelectedItem(estadoA);
+                ver.txtDescripcionArre.setText(descripcionA);
+                ver.txtprecio.setText(precioA);
+                ver.id_client.setText(rs.getString("id_arreglo"));
 
                 //Recuperar la imagen de la base de datos
                 byte[] imagenA1 = rs.getBytes("imagen1");
@@ -449,7 +597,7 @@ public class Listado_Pedidos_Arreglos extends javax.swing.JPanel {
                 {
                     // Crear un objeto ImageIcon a partir de los bytes de la imagen
                     ImageIcon imagenIcono = new ImageIcon(imagenA1);
-                    
+
                     // Ajustar el tamaño de la imagen
                     Image imagenT = imagenIcono.getImage().getScaledInstance(170, 169, Image.SCALE_SMOOTH);
                     ImageIcon imagenT1 = new ImageIcon(imagenT);
@@ -458,7 +606,6 @@ public class Listado_Pedidos_Arreglos extends javax.swing.JPanel {
                     ver.imagen1.setIcon(imagenT1);
 
                     // Establecer el ImageIcon en el JLabel
-                    
                 } else
                 {
                     // Si el arreglo de bytes de imagen es nulo, puedes mostrar un mensaje o establecer un valor predeterminado.
@@ -520,76 +667,6 @@ public class Listado_Pedidos_Arreglos extends javax.swing.JPanel {
             // Manejar cualquier excepción que pueda ocurrir durante la consulta a la base de datos
         }
 
-
-    }//GEN-LAST:event_verbtnActionPerformed
-
-    int selectedRow2;
-    private void editarbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarbtnActionPerformed
-        /*
-        // TODO add your handling code here:
-        selectedRow2 = tblCitas.getSelectedRow();
-        if (selectedRow2 == -1)
-        {
-            JOptionPane.showMessageDialog(null, "Seleccione una cita para poder editarla");
-            return;
-        }
-
-        try
-        {
-
-            int fila = tblCitas.getSelectedRow();
-            String valorCelda = tblCitas.getValueAt(fila, 1).toString();
-            String valorCelda2 = tblCitas.getValueAt(fila, 2).toString();
-            String valorCelda3 = tblCitas.getValueAt(fila, 4).toString();
-            PreparedStatement ps;
-            ResultSet rs;
-
-            Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
-            ps = conn.prepareStatement("SELECT * FROM cliente JOIN Cita ON cliente.id_cliente = Cita.id_cliente where nombre =? and apellido=? and fecha_cita=? ");
-            ps.setString(1, valorCelda);
-            ps.setString(2, valorCelda2);
-            ps.setString(3, valorCelda3);
-            rs = ps.executeQuery();
-
-            while (rs.next())
-            {
-
-                String nombre = rs.getString("nombre");
-                String apellido = rs.getString("apellido");
-                EditarCita editar = new EditarCita();
-
-                editar.fechaCita.setDate(rs.getDate("fecha_cita"));
-                editar.cbxHoras.setSelectedItem(rs.getString("hora_cita"));
-                editar.txtMotivo.setText(rs.getString("motivo"));
-                editar.txtCliente.setText(nombre + " " + apellido);
-              
-                editar.id_cliente.setText(rs.getString("id"));
-
-                editar.setSize(1024, 640);
-                editar.setLocation(0, 0);
-
-                panelprincipal.revalidate();
-                panelprincipal.repaint();
-                panelprincipal.removeAll();
-                panelprincipal.add(editar, BorderLayout.CENTER);
-
-                panelprincipal.revalidate();
-                panelprincipal.repaint();
-
-                break; // Salir del bucle después de encontrar el elemento seleccionado
-
-            }
-
-            rs.close();
-            ps.close();
-            conn.close();
-
-        } catch (SQLException e)
-        {
-            e.printStackTrace();
-            // Manejar cualquier excepción que pueda ocurrir durante la consulta a la base de datos
-        }
-         */
     }//GEN-LAST:event_editarbtnActionPerformed
 
     private void crearbtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearbtn1ActionPerformed
@@ -851,7 +928,6 @@ public class Listado_Pedidos_Arreglos extends javax.swing.JPanel {
         cargarTablaEmpleados(); // Recargar la tabla después de la búsqueda
     }
 
-  
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton Btn_Buscar;
