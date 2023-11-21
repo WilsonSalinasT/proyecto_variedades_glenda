@@ -167,6 +167,7 @@ public class Crear_Pedido_Sublimacion extends javax.swing.JPanel {
         btnVolve = new javax.swing.JButton();
         jLabel59 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         btnCrear = new javax.swing.JButton();
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
@@ -201,20 +202,31 @@ public class Crear_Pedido_Sublimacion extends javax.swing.JPanel {
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel11.setText("Trojes, El Paraíso");
 
+        jLabel3.setFont(new java.awt.Font("Segoe Script", 1, 14)); // NOI18N
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText("9801-4550 / 3308-9197");
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel59, javax.swing.GroupLayout.PREFERRED_SIZE, 941, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 933, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(635, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnVolve)
                 .addGap(604, 604, 604))
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(595, 595, 595))
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addComponent(jLabel59, javax.swing.GroupLayout.PREFERRED_SIZE, 941, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(33, 33, 33)
+                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 933, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(614, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -223,7 +235,9 @@ public class Crear_Pedido_Sublimacion extends javax.swing.JPanel {
                 .addComponent(btnVolve)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel59, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38)
+                .addGap(8, 8, 8)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel11)
                 .addContainerGap())
         );
@@ -545,6 +559,8 @@ public class Crear_Pedido_Sublimacion extends javax.swing.JPanel {
 
                 insertPs.executeUpdate();
                 JOptionPane.showMessageDialog(null, "Registro guardado");
+                
+                limpiarCampos(); // Limpia los campos después de guardar
 
                 Listado_Sublimacion sub = new Listado_Sublimacion();
 
@@ -555,7 +571,6 @@ public class Crear_Pedido_Sublimacion extends javax.swing.JPanel {
                 panelprincipal.repaint();
                 panelprincipal.removeAll();
                 panelprincipal.add(sub, BorderLayout.CENTER);
-                
 
             } catch (SQLException e) {
                 JOptionPane.showMessageDialog(null, e.toString(), "Error de SQL", JOptionPane.ERROR_MESSAGE);
@@ -564,6 +579,19 @@ public class Crear_Pedido_Sublimacion extends javax.swing.JPanel {
             }
         }
     }//GEN-LAST:event_btnCrearActionPerformed
+
+    private void limpiarCampos() {
+        txtCliente.setSelectedIndex(0);
+        cbnproducto.setSelectedIndex(0);
+        txtdescripcion.setText("");
+        cbxEstado.setSelectedIndex(0);
+        txtPrecio.setText("");
+        txtcantidad.setText("");
+        jDateChooser1.setDate(null);
+        imagen.setIcon(null);
+        id_cliente.setText("");
+    }
+
 
     private void txtcantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtcantidadActionPerformed
         // TODO add your handling code here:
@@ -635,6 +663,7 @@ public class Crear_Pedido_Sublimacion extends javax.swing.JPanel {
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel59;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

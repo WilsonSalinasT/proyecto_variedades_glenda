@@ -495,6 +495,7 @@ public class Editar_Pedido_Sublimacion extends javax.swing.JPanel {
         if (selectedIndex >= 0 && selectedIndex < materialPrices.length) {
             double selectedPrice = materialPrices[selectedIndex];
             txtPrecio.setText(String.valueOf(selectedPrice));
+            actualizarTotal(); // Llama a actualizarTotal() después de cambiar el material
         }
 
     }//GEN-LAST:event_cbnProductoActionPerformed
