@@ -56,6 +56,15 @@ public class IngresodeCompra extends javax.swing.JFrame {
 
         tablecompras.setRowSelectionAllowed(true);
         tablecompras.setColumnSelectionAllowed(false);
+        
+        
+        int columnIndexToHide = 4;
+        TableColumn column = tablecompras.getColumnModel().getColumn(columnIndexToHide);
+
+        column.setMinWidth(0);
+        column.setMaxWidth(0);
+        column.setPreferredWidth(0);
+        column.setResizable(false);
 
 //     sumarColumna();
 //        Tsum.setText(Integer.toString((int) getsumarColumna()));
@@ -367,7 +376,7 @@ public class IngresodeCompra extends javax.swing.JFrame {
 
         jButton5.setBackground(new java.awt.Color(255, 153, 51));
         jButton5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton5.setText("Ver");
+        jButton5.setText("Ver factura");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
@@ -576,7 +585,7 @@ public class IngresodeCompra extends javax.swing.JFrame {
         String fechaFormateada = formato.format(fecha);
 
         facturaText.append("*********************************************************************\n");
-        facturaText.append("                    Factura de compra                   \n");
+        facturaText.append("                           Factura de compra                   \n");
         facturaText.append("*********************************************************************\n");
 
         facturaText.append("No. de Factura: ").append(num).append("\n");

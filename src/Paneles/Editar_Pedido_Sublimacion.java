@@ -262,6 +262,7 @@ public class Editar_Pedido_Sublimacion extends javax.swing.JPanel {
 
         cbnProducto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "Camisa", "Taza", "Plato", "Gorra", "Llavero" }));
         cbnProducto.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Material:", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12))); // NOI18N
+        cbnProducto.setEnabled(false);
         cbnProducto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbnProductoActionPerformed(evt);
