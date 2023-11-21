@@ -608,38 +608,37 @@ public class IngresodeCompra extends javax.swing.JFrame {
 
 
     private void numFacturaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_numFacturaKeyTyped
-        // Obtiene el texto actual del campo de número de factura
-        String numeroFactura = numFactura.getText().trim();
+                                       
+    // Obtiene el texto actual del campo de número de factura
+    String numeroFactura = numFactura.getText().trim();
 
-        // Permite solo dígitos y el carácter '-'
-        char c = evt.getKeyChar();
-        if (!Character.isDigit(c) && c != '-')
-        {
-            evt.consume(); // Ignora la tecla si no es un dígito ni '-'
-            return;
-        }
+    // Permite solo dígitos
+    char c = evt.getKeyChar();
+    if (!Character.isDigit(c)) {
+        evt.consume(); // Ignora la tecla si no es un dígito
+        return;
+    }
 
-        // Verifica la longitud del número de factura después de la nueva pulsación de tecla
-        if ((numeroFactura + evt.getKeyChar()).length() > 14)
-        {
-            evt.consume(); // Ignora la tecla si supera los 14 caracteres
-            return;
-        }
+    // Verifica la longitud del número de factura después de la nueva pulsación de tecla
+    if ((numeroFactura + evt.getKeyChar()).length() > 8) {
+        evt.consume(); // Ignora la tecla si supera los 8 caracteres
+        return;
+    }
 
-        // Actualiza el número de factura en el campo
-        numFactura.setText(numeroFactura);
+    // Actualiza el número de factura en el campo
+    numFactura.setText(numeroFactura);
 
-        // Realiza la validación del formato usando la expresión regular
-        if (!numeroFactura.matches("\\d{1,3}-\\d{1,3}-\\d{1,3}-\\d{1,3}"))
-        {
-            // Muestra un mensaje de error o toma alguna acción
-            // Puedes también deshabilitar el botón de guardar, por ejemplo
-            // btnGuardar.setEnabled(false);
-        } else
-        {
-            // Puedes habilitar el botón de guardar si es necesario
-            // btnGuardar.setEnabled(true);
-        }
+    // Realiza la validación del formato usando la expresión regular
+    if (!numeroFactura.matches("\\d{8}")) {
+        // Muestra un mensaje de error o toma alguna acción
+        // Puedes también deshabilitar el botón de guardar, por ejemplo
+        // btnGuardar.setEnabled(false);
+    } else {
+        // Puedes habilitar el botón de guardar si es necesario
+        // btnGuardar.setEnabled(true);
+    }
+
+
     }//GEN-LAST:event_numFacturaKeyTyped
 
     private void tipoCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tipoCompraActionPerformed
@@ -649,105 +648,105 @@ public class IngresodeCompra extends javax.swing.JFrame {
     private void btnguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguardarActionPerformed
 
         String nunfactura = numFactura.getText().trim();
-        String id = id_proveedor.getText().trim();
-        String tipo = (String) tipoCompra.getSelectedItem();
-        Date fecha = (Date) txtfecha.getDate();
-        String agregarProducto = btnAgregarproducto.getText().trim(); // Nuevo campo
+String id = id_proveedor.getText().trim();
+String tipo = (String) tipoCompra.getSelectedItem();
+Date fecha = (Date) txtfecha.getDate();
+String agregarProducto = btnAgregarproducto.getText().trim(); // Nuevo campo
 
-        StringBuilder camposVacios = new StringBuilder("Por favor, complete los siguientes campos obligatorios:\n");
+StringBuilder camposVacios = new StringBuilder("Por favor, complete los siguientes campos obligatorios:\n");
 
-        String numeroFacturaSinSeparadores = nunfactura.replaceAll("[\\s-]+", "");
-        String digitosSignificativos = numeroFacturaSinSeparadores.replaceAll("\\D", "");
+String numeroFacturaSinSeparadores = nunfactura.replaceAll("[\\s-]+", "");
+String digitosSignificativos = numeroFacturaSinSeparadores.replaceAll("\\D", "");
 
-        if (digitosSignificativos.length() < 3)
-        {
-            camposVacios.append("- Número de factura\n");
-        }
+if (digitosSignificativos.length() < 3) {
+    camposVacios.append("- Número de factura\n");
+}
 
-        if (tipoCompra.getSelectedItem() == null || tipoCompra.getSelectedItem().toString().trim().isEmpty()
-                || tipoCompra.getSelectedItem().toString().trim().equalsIgnoreCase("Seleccione"))
-        {
-            camposVacios.append("- Tipo de compra\n");
-        }
+if (tipoCompra.getSelectedItem() == null || tipoCompra.getSelectedItem().toString().trim().isEmpty()
+        || tipoCompra.getSelectedItem().toString().trim().equalsIgnoreCase("Seleccione")) {
+    camposVacios.append("- Tipo de compra\n");
+}
 
-        if (id.isEmpty())
-        {
-            camposVacios.append("- Proveedor\n");
-        }
-        if (fecha == null)
-        {
-            camposVacios.append("- Fecha\n");
-        }
+if (id.isEmpty()) {
+    camposVacios.append("- Proveedor\n");
+}
+if (fecha == null) {
+    camposVacios.append("- Fecha\n");
+}
 
-        boolean agregarProductoPresionado = true;
-        if (!agregarProductoPresionado)
-        {
-            camposVacios.append("- Agregar Producto\n");
-        }
+boolean agregarProductoPresionado = true;
+if (!agregarProductoPresionado) {
+    camposVacios.append("- Agregar Producto\n");
+}
 
 // Verificar si hay al menos una fila en la tabla
-        if (tablecompras.getRowCount() == 0)
-        {
-            camposVacios.append("- Por favor, agregue al menos un producto a la factura.\n");
-        }
+if (tablecompras.getRowCount() == 0) {
+    camposVacios.append("- Por favor, agregue al menos un producto a la factura.\n");
+}
 
 // Mostrar mensajes de error solo si hay campos vacíos
-        if (camposVacios.length() > "Por favor, complete los siguientes campos obligatorios:\n".length())
-        {
-            JOptionPane.showMessageDialog(null, camposVacios.toString(), "Error", JOptionPane.ERROR_MESSAGE);
-            return; // Salir del método si falta algún campo obligatorio
-        }
+if (camposVacios.length() > "Por favor, complete los siguientes campos obligatorios:\n".length()) {
+    JOptionPane.showMessageDialog(null, camposVacios.toString(), "Error", JOptionPane.ERROR_MESSAGE);
+    return; // Salir del método si falta algún campo obligatorio
+}
 
 // Resto del código para la inserción en la base de datos
-        try
-        {
-            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
+try {
+    Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+    Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
 
-            // Inserción en la tabla Compras
-            PreparedStatement insertCompras = conn.prepareStatement("INSERT INTO Compras (numfactura, tipoCategoria, fecha, total, id_proveedor) VALUES (?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
-            insertCompras.setString(1, nunfactura);
-            insertCompras.setString(2, tipo);
-            insertCompras.setDate(3, new java.sql.Date(fecha.getTime()));
-            // Asegúrate de tener la variable totalFactura definida y con un valor asignado
-            insertCompras.setObject(4, totalFactura);
-            insertCompras.setString(5, id);
+    // Verificar si el número de factura ya existe en la base de datos
+    PreparedStatement checkNumFactura = conn.prepareStatement("SELECT COUNT(*) FROM Compras WHERE numfactura = ?");
+    checkNumFactura.setString(1, nunfactura);
+    ResultSet rsCheckNumFactura = checkNumFactura.executeQuery();
+    rsCheckNumFactura.next();
+    int count = rsCheckNumFactura.getInt(1);
 
-            int filasAfectadasCompras = insertCompras.executeUpdate();
+    if (count > 0) {
+        // Si ya existe un registro con el mismo número de factura, mostrar un mensaje de error
+        JOptionPane.showMessageDialog(null, "Error: El número de factura ya existe en la base de datos.", "Error", JOptionPane.ERROR_MESSAGE);
+        return; // Salir del método si el número de factura ya existe
+    }
 
-            // Obtener el ID generado para la compra
-            
-            ResultSet rsCompras = insertCompras.getGeneratedKeys();
-            if (rsCompras.next())
-            {
-                int idCompraGenerado = rsCompras.getInt(1);
-            
-            
-            // Inserción en la tabla DetallesCompras con valores directos
-            for (int i=0;i<tablecompras.getRowCount();i++)
-            {
-                PreparedStatement insertDetallesCompras = conn.prepareStatement("INSERT INTO DetallesCompras (id_compra, cantidad, precio_unitario, total, cod_producto) VALUES (?,?,?,?,?)");
-                insertDetallesCompras.setInt(1, idCompraGenerado );
-                insertDetallesCompras.setString(2, tablecompras.getValueAt(i, 1).toString()); // Ejemplo de valor directo para cod_producto
-                insertDetallesCompras.setString(3, tablecompras.getValueAt(i, 2).toString()); // Ejemplo de valor directo para cantidad
-                insertDetallesCompras.setString(4, tablecompras.getValueAt(i, 3).toString()); // Ejemplo de valor directo para precio_unitario
-                insertDetallesCompras.setString(5,tablecompras.getValueAt(i, 4).toString()); // Ejemplo de valor directo para total
+    // Continuar con la inserción en la tabla Compras si el número de factura es único
+    // ...
 
-                insertDetallesCompras.executeUpdate();
-            }
+    // Resto del código para la inserción en la base de datos
+    PreparedStatement insertCompras = conn.prepareStatement("INSERT INTO Compras (numfactura, tipoCategoria, fecha, total, id_proveedor) VALUES (?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
+    insertCompras.setString(1, nunfactura);
+    insertCompras.setString(2, tipo);
+    insertCompras.setDate(3, new java.sql.Date(fecha.getTime()));
+    // Asegúrate de tener la variable totalFactura definida y con un valor asignado
+    insertCompras.setObject(4, totalFactura);
+    insertCompras.setString(5, id);
 
-            JOptionPane.showMessageDialog(null, "Registro guardado");
+    int filasAfectadasCompras = insertCompras.executeUpdate();
 
-            }
-        } catch (SQLException e)
-        {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(null, e.getMessage(), "Error de SQL", JOptionPane.ERROR_MESSAGE);
-        } catch (ClassNotFoundException ex)
-        {
-            JOptionPane.showMessageDialog(null, "Error de conexión a la base de datos", "Error de Conexión", JOptionPane.ERROR_MESSAGE);
+    // Obtener el ID generado para la compra
+    ResultSet rsCompras = insertCompras.getGeneratedKeys();
+    if (rsCompras.next()) {
+        int idCompraGenerado = rsCompras.getInt(1);
+
+        // Inserción en la tabla DetallesCompras con valores directos
+        for (int i = 0; i < tablecompras.getRowCount(); i++) {
+            PreparedStatement insertDetallesCompras = conn.prepareStatement("INSERT INTO DetallesCompras (id_compra, cantidad, precio_unitario, total, cod_producto) VALUES (?,?,?,?,?)");
+            insertDetallesCompras.setInt(1, idCompraGenerado);
+            insertDetallesCompras.setString(2, tablecompras.getValueAt(i, 1).toString()); // Ejemplo de valor directo para cod_producto
+            insertDetallesCompras.setString(3, tablecompras.getValueAt(i, 2).toString()); // Ejemplo de valor directo para cantidad
+            insertDetallesCompras.setString(4, tablecompras.getValueAt(i, 3).toString()); // Ejemplo de valor directo para precio_unitario
+            insertDetallesCompras.setString(5, tablecompras.getValueAt(i, 4).toString()); // Ejemplo de valor directo para total
+
+            insertDetallesCompras.executeUpdate();
         }
-        
+
+        JOptionPane.showMessageDialog(null, "Registro guardado");
+    }
+} catch (SQLException e) {
+    e.printStackTrace();
+    JOptionPane.showMessageDialog(null, e.getMessage(), "Error de SQL", JOptionPane.ERROR_MESSAGE);
+} catch (ClassNotFoundException ex) {
+    JOptionPane.showMessageDialog(null, "Error de conexión a la base de datos", "Error de Conexión", JOptionPane.ERROR_MESSAGE);
+}
 
     }//GEN-LAST:event_btnguardarActionPerformed
 
