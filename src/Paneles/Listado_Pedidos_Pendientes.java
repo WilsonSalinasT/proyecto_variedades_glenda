@@ -489,62 +489,39 @@ public class Listado_Pedidos_Pendientes extends javax.swing.JPanel {
                 mostrar.txtFechaEntrega.setEditable(false);
 
                 // Recuperar la imagen de la base de datos
-                byte[] imagenA1 = rs.getBytes("imagen1");
-                byte[] imagenA2 = rs.getBytes("imagen2");
-                byte[] imagenA3 = rs.getBytes("imagen3");
+                byte[] bytesImagen = rs.getBytes("imagen1");
+                byte[] bytesImagen2 = rs.getBytes("imagen2");
+                byte[] bytesImagen3 = rs.getBytes("imagen3");
 
-// Mostrar u ocultar el label de imagen1 según la disponibilidad de la imagen
-                if (imagenA1 != null) {
-                    ImageIcon imagenIcono = new ImageIcon(imagenA1);
-                    Image imagen = imagenIcono.getImage();
-                    Image imagenEscalada = imagen.getScaledInstance(191, 169, Image.SCALE_DEFAULT);
+                // Crear objetos ImageIcon solo si las imágenes no son nulas
+                ImageIcon imagenIcono1 = (bytesImagen != null) ? new ImageIcon(bytesImagen) : null;
+                ImageIcon imagenIcono2 = (bytesImagen2 != null) ? new ImageIcon(bytesImagen2) : null;
+                ImageIcon imagenIcono3 = (bytesImagen3 != null) ? new ImageIcon(bytesImagen3) : null;
 
-                    imagenIcono = new ImageIcon(imagenEscalada);
-                    mostrar.imagen1.setIcon(imagenIcono);
-
-                    // Centrar la imagen en el label si es necesario
-                    mostrar.imagen1.setHorizontalAlignment(JLabel.CENTER);
-                    mostrar.imagen1.setVerticalAlignment(JLabel.CENTER);
-
-                    // Hacer visible el label de imagen1
+                // Escalar las imágenes al tamaño del JLabel y ajustar visibilidad
+                if (imagenIcono1 != null) {
+                    imagenIcono1 = escalarImagen(imagenIcono1, mostrar.imagen1.getWidth(), mostrar.imagen1.getHeight());
+                    mostrar.imagen1.setIcon(imagenIcono1);
                     mostrar.imagen1.setVisible(true);
                 } else {
-                    // Si el arreglo de bytes de imagen es nulo, puedes mostrar un mensaje o establecer un valor predeterminado.
-                    mostrar.imagen1.setIcon(null); // O establecer un icono predeterminado
-                    // Ocultar el label de imagen1
+                    mostrar.imagen1.setIcon(null);
                     mostrar.imagen1.setVisible(false);
                 }
 
-// Mostrar u ocultar el label de imagen2 según la disponibilidad de la imagen
-                if (imagenA2 != null) {
-                    ImageIcon imagenIcono = new ImageIcon(imagenA2);
-                    Image imagen = imagenIcono.getImage();
-                    Image imagenEscalada = imagen.getScaledInstance(191, 169, Image.SCALE_DEFAULT);
-
-                    imagenIcono = new ImageIcon(imagenEscalada);
-                    mostrar.imagen2.setIcon(imagenIcono);
-
-                    // Hacer visible el label de imagen2
+                if (imagenIcono2 != null) {
+                    imagenIcono2 = escalarImagen(imagenIcono2, mostrar.imagen2.getWidth(), mostrar.imagen2.getHeight());
+                    mostrar.imagen2.setIcon(imagenIcono2);
                     mostrar.imagen2.setVisible(true);
                 } else {
-                    // Ocultar el label de imagen2
                     mostrar.imagen2.setIcon(null);
                     mostrar.imagen2.setVisible(false);
                 }
 
-// Mostrar u ocultar el label de imagen3 según la disponibilidad de la imagen
-                if (imagenA3 != null) {
-                    ImageIcon imagenIcono = new ImageIcon(imagenA3);
-                    Image imagen = imagenIcono.getImage();
-                    Image imagenEscalada = imagen.getScaledInstance(191, 169, Image.SCALE_DEFAULT);
-
-                    imagenIcono = new ImageIcon(imagenEscalada);
-                    mostrar.imagen3.setIcon(imagenIcono);
-
-                    // Hacer visible el label de imagen3
+                if (imagenIcono3 != null) {
+                    imagenIcono3 = escalarImagen(imagenIcono3, mostrar.imagen3.getWidth(), mostrar.imagen3.getHeight());
+                    mostrar.imagen3.setIcon(imagenIcono3);
                     mostrar.imagen3.setVisible(true);
                 } else {
-                    // Ocultar el label de imagen3
                     mostrar.imagen3.setIcon(null);
                     mostrar.imagen3.setVisible(false);
                 }
