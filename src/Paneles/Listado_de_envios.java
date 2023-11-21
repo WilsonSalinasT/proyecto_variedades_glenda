@@ -181,7 +181,7 @@ public class Listado_de_envios extends javax.swing.JPanel {
 
             },
             new String [] {
-                "N°", "Nombre del cliente", "Apellido del cliente", "Producto", "Fecha de entrega", "id_envio"
+                "N°", "Nombre", "Apellido", "Producto", "Fecha de entrega", "id_envio"
             }
         ) {
             boolean[] canEdit = new boolean [] {

@@ -36,22 +36,17 @@ public class IngresodeCompra extends javax.swing.JFrame {
 
     DefaultTableModel modelo;
 
-    
     /**
      * Creates new form IngresodeCompra
      */
     public IngresodeCompra() {
         initComponents();
-        
-        
-    
-        
+
         txtfecha.setMinSelectableDate(new Date());
 
-         Calendar maxDate = Calendar.getInstance();
-         maxDate.add(Calendar.MONTH, 2); // Suma dos meses a la fecha actual
-         txtfecha.setMaxSelectableDate(maxDate.getTime());
-
+        Calendar maxDate = Calendar.getInstance();
+        maxDate.add(Calendar.MONTH, 2); // Suma dos meses a la fecha actual
+        txtfecha.setMaxSelectableDate(maxDate.getTime());
 
         tablecompras.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 12));
         tablecompras.getTableHeader().setOpaque(false);
@@ -62,7 +57,6 @@ public class IngresodeCompra extends javax.swing.JFrame {
         tablecompras.setRowSelectionAllowed(true);
         tablecompras.setColumnSelectionAllowed(false);
 
-      
 //     sumarColumna();
 //        Tsum.setText(Integer.toString((int) getsumarColumna()));
         try
@@ -106,8 +100,6 @@ public class IngresodeCompra extends javax.swing.JFrame {
         });
 
     }
-
-
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -481,9 +473,9 @@ public class IngresodeCompra extends javax.swing.JFrame {
 
             // Restar el total de la fila eliminada del totalFactura
             totalFactura -= totalP;
-                 
+
             calcular();
-            
+
             // Actualizar el total de la factura en el componente adecuado (lblTotalFactura)
             //lblTotalFactura.setText(String.valueOf(totalFactura));
         } else
@@ -491,154 +483,163 @@ public class IngresodeCompra extends javax.swing.JFrame {
             // No se seleccionó ninguna fila, mostrar un mensaje de advertencia o error
             JOptionPane.showMessageDialog(null, "No se ha seleccionado ninguna fila", "Error al eliminar fila", JOptionPane.WARNING_MESSAGE);
         }
-        
-        
+
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
-     public void calcular(){
+    public void calcular() {
 
         float suma = 0;
-        for(int i = 0; i < tablecompras.getRowCount(); i++){
-        
+        for (int i = 0; i < tablecompras.getRowCount(); i++)
+        {
+
             float renglon;
             renglon = Float.parseFloat(tablecompras.getValueAt(i, 3).toString());
-            
+
             suma = suma + renglon;
         }
         Tsum.setText(String.valueOf(suma));
 
-}
+    }
     private void btnAgregarproductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarproductoActionPerformed
         ProductoParaCompra prod = new ProductoParaCompra();
         prod.setVisible(true);
         prod.setLocationRelativeTo(null);
     }//GEN-LAST:event_btnAgregarproductoActionPerformed
 
-   public void bill() {
-    // Obtener valores de los campos
-  // Obtener valores de los campos
-String num = numFactura.getText();
-String tipo = (String) tipoCompra.getSelectedItem();
-String proveedor = (String) txtProveedor.getSelectedItem();
-Date fecha = txtfecha.getDate();
-String agregarProducto = btnAgregarproducto.getText().trim(); // Nuevo campo
+    public void bill() {
+        // Obtener valores de los campos
+        // Obtener valores de los campos
+        String num = numFactura.getText();
+        String tipo = (String) tipoCompra.getSelectedItem();
+        String proveedor = (String) txtProveedor.getSelectedItem();
+        Date fecha = txtfecha.getDate();
+        String agregarProducto = btnAgregarproducto.getText().trim(); // Nuevo campo
 
-StringBuilder camposVacios = new StringBuilder("Por favor, complete los siguientes campos obligatorios:\n");
+        StringBuilder camposVacios = new StringBuilder("Por favor, complete los siguientes campos obligatorios:\n");
 
-String numeroFacturaSinSeparadores = num.replaceAll("[\\s-]+", "");
-String digitosSignificativos = numeroFacturaSinSeparadores.replaceAll("\\D", "");
+        String numeroFacturaSinSeparadores = num.replaceAll("[\\s-]+", "");
+        String digitosSignificativos = numeroFacturaSinSeparadores.replaceAll("\\D", "");
 
-if (digitosSignificativos.length() < 3) {
-    camposVacios.append("- Número de factura\n");
-}
+        if (digitosSignificativos.length() < 3)
+        {
+            camposVacios.append("- Número de factura\n");
+        }
 
-if (tipoCompra.getSelectedItem() == null || tipoCompra.getSelectedItem().toString().trim().isEmpty() ||
-    tipoCompra.getSelectedItem().toString().trim().equalsIgnoreCase("Seleccione")) {
-    camposVacios.append("- Tipo de compra\n");
-}
+        if (tipoCompra.getSelectedItem() == null || tipoCompra.getSelectedItem().toString().trim().isEmpty()
+                || tipoCompra.getSelectedItem().toString().trim().equalsIgnoreCase("Seleccione"))
+        {
+            camposVacios.append("- Tipo de compra\n");
+        }
 
-
-
-if (proveedor.isEmpty()) {
-    camposVacios.append("- Proveedor\n");
-}
-if (fecha == null) {
-    camposVacios.append("- Fecha\n");
-}
+        if (proveedor.isEmpty())
+        {
+            camposVacios.append("- Proveedor\n");
+        }
+        if (fecha == null)
+        {
+            camposVacios.append("- Fecha\n");
+        }
         boolean agregarProductoPresionado = true;
-if (!agregarProductoPresionado) {
-    camposVacios.append("- Agregar Producto\n");
-}
+        if (!agregarProductoPresionado)
+        {
+            camposVacios.append("- Agregar Producto\n");
+        }
 
 // Verificar si hay al menos una fila en la tabla
-if (tablecompras.getRowCount() == 0) {
-    camposVacios.append("- Por favor, agregue al menos un producto a la factura.\n");
-}
+        if (tablecompras.getRowCount() == 0)
+        {
+            camposVacios.append("- Por favor, agregue al menos un producto a la factura.\n");
+        }
 
 // Mostrar mensajes de error solo si hay campos vacíos
-if (camposVacios.length() > "Por favor, complete los siguientes campos obligatorios:\n".length()) {
-    JOptionPane.showMessageDialog(null, camposVacios.toString(), "Error", JOptionPane.ERROR_MESSAGE);
-    return; // Salir del método si falta algún campo obligatorio
-}
+        if (camposVacios.length() > "Por favor, complete los siguientes campos obligatorios:\n".length())
+        {
+            JOptionPane.showMessageDialog(null, camposVacios.toString(), "Error", JOptionPane.ERROR_MESSAGE);
+            return; // Salir del método si falta algún campo obligatorio
+        }
 
+        factura ver = new factura();
+        DefaultTableModel model = (DefaultTableModel) tablecompras.getModel();
 
- 
-    factura ver = new factura();
-    DefaultTableModel model = (DefaultTableModel) tablecompras.getModel();
+        // Verificar si hay al menos una fila en la tabla
+        if (model.getRowCount() == 0)
+        {
+            JOptionPane.showMessageDialog(null, "Por favor, agregue al menos un producto a la factura.", "Error", JOptionPane.ERROR_MESSAGE);
+            return; // Salir del método si la tabla está vacía
+        }
 
-    // Verificar si hay al menos una fila en la tabla
-    if (model.getRowCount() == 0) {
-        JOptionPane.showMessageDialog(null, "Por favor, agregue al menos un producto a la factura.", "Error", JOptionPane.ERROR_MESSAGE);
-        return; // Salir del método si la tabla está vacía
+        StringBuilder facturaText = new StringBuilder();
+
+        // Resto del código para generar la factura
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+        String fechaFormateada = formato.format(fecha);
+
+        facturaText.append("*********************************************************************\n");
+        facturaText.append("                    Factura de compra                   \n");
+        facturaText.append("*********************************************************************\n");
+
+        facturaText.append("No. de Factura: ").append(num).append("\n");
+        facturaText.append("Tipo de compra: ").append(tipo).append("\n");
+        facturaText.append("Proveedor: ").append(proveedor).append("\n");
+        facturaText.append("Fecha: ").append(fechaFormateada).append("\n");
+
+        facturaText.append("*********************************************************************\n");
+        facturaText.append("\n");
+        facturaText.append(String.format("%-20s %-10s %-20s %-10s\n", "Producto", "Cantidad", "Precio unitario", "Total"));
+
+        for (int i = 0; i < model.getRowCount(); i++)
+        {
+            String name = (String) model.getValueAt(i, 0);
+            String cantidad = (String) model.getValueAt(i, 1);
+            String preciounitario = (String) model.getValueAt(i, 2);
+            String total = (String) model.getValueAt(i, 3);
+
+            facturaText.append(String.format("%-20s %-10s %-20s %-10s\n", name, cantidad, preciounitario, total));
+        }
+
+        ver.txtbill.setText(facturaText.toString());
+        ver.txtbill.setText(ver.txtbill.getText() + "*********************************************************************\n");
+        ver.txtbill.setText(ver.txtbill.getText() + "Total: " + Tsum.getText() + "\n");
+        facturaText.append("*********************************************************************\n");
+
+        ver.setVisible(true);
     }
-
-    StringBuilder facturaText = new StringBuilder();
-
-    // Resto del código para generar la factura
-    SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-    String fechaFormateada = formato.format(fecha);
-
-    facturaText.append("*********************************************************************\n");
-    facturaText.append("                    Factura de compra                   \n");
-    facturaText.append("*********************************************************************\n");
-
-    facturaText.append("No. de Factura: ").append(num).append("\n");
-    facturaText.append("Tipo de compra: ").append(tipo).append("\n");
-    facturaText.append("Proveedor: ").append(proveedor).append("\n");
-    facturaText.append("Fecha: ").append(fechaFormateada).append("\n");
-
-    facturaText.append("*********************************************************************\n");
-    facturaText.append("\n");
-    facturaText.append(String.format("%-20s %-10s %-20s %-10s\n", "Producto", "Cantidad", "Precio unitario", "Total"));
-
-    for (int i = 0; i < model.getRowCount(); i++) {
-        String name = (String) model.getValueAt(i, 0);
-        String cantidad = (String) model.getValueAt(i, 1);
-        String preciounitario = (String) model.getValueAt(i, 2);
-        String total = (String) model.getValueAt(i, 3);
-
-        facturaText.append(String.format("%-20s %-10s %-20s %-10s\n", name, cantidad, preciounitario, total));
-    }
-
-    ver.txtbill.setText(facturaText.toString());
-    ver.txtbill.setText(ver.txtbill.getText() + "*********************************************************************\n");
-    ver.txtbill.setText(ver.txtbill.getText() + "Total: " + Tsum.getText() + "\n");
-    facturaText.append("*********************************************************************\n");
-
-    ver.setVisible(true);
-}
-
 
 
     private void numFacturaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_numFacturaKeyTyped
         // Obtiene el texto actual del campo de número de factura
-    String numeroFactura = numFactura.getText().trim();
+        String numeroFactura = numFactura.getText().trim();
 
-    // Permite solo dígitos y el carácter '-'
-    char c = evt.getKeyChar();
-    if (!Character.isDigit(c) && c != '-') {
-        evt.consume(); // Ignora la tecla si no es un dígito ni '-'
-        return;
-    }
+        // Permite solo dígitos y el carácter '-'
+        char c = evt.getKeyChar();
+        if (!Character.isDigit(c) && c != '-')
+        {
+            evt.consume(); // Ignora la tecla si no es un dígito ni '-'
+            return;
+        }
 
-    // Verifica la longitud del número de factura después de la nueva pulsación de tecla
-    if ((numeroFactura + evt.getKeyChar()).length() > 14) {
-        evt.consume(); // Ignora la tecla si supera los 14 caracteres
-        return;
-    }
+        // Verifica la longitud del número de factura después de la nueva pulsación de tecla
+        if ((numeroFactura + evt.getKeyChar()).length() > 14)
+        {
+            evt.consume(); // Ignora la tecla si supera los 14 caracteres
+            return;
+        }
 
-    // Actualiza el número de factura en el campo
-    numFactura.setText(numeroFactura);
-    
-    // Realiza la validación del formato usando la expresión regular
-    if (!numeroFactura.matches("\\d{1,3}-\\d{1,3}-\\d{1,3}-\\d{1,3}")) {
-        // Muestra un mensaje de error o toma alguna acción
-        // Puedes también deshabilitar el botón de guardar, por ejemplo
-        // btnGuardar.setEnabled(false);
-    } else {
-        // Puedes habilitar el botón de guardar si es necesario
-        // btnGuardar.setEnabled(true);
-    }
+        // Actualiza el número de factura en el campo
+        numFactura.setText(numeroFactura);
+
+        // Realiza la validación del formato usando la expresión regular
+        if (!numeroFactura.matches("\\d{1,3}-\\d{1,3}-\\d{1,3}-\\d{1,3}"))
+        {
+            // Muestra un mensaje de error o toma alguna acción
+            // Puedes también deshabilitar el botón de guardar, por ejemplo
+            // btnGuardar.setEnabled(false);
+        } else
+        {
+            // Puedes habilitar el botón de guardar si es necesario
+            // btnGuardar.setEnabled(true);
+        }
     }//GEN-LAST:event_numFacturaKeyTyped
 
     private void tipoCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tipoCompraActionPerformed
@@ -647,94 +648,104 @@ if (camposVacios.length() > "Por favor, complete los siguientes campos obligator
 
     private void btnguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguardarActionPerformed
 
-  String nunfactura = numFactura.getText().trim();
-String id = id_proveedor.getText().trim();
-String tipo = (String) tipoCompra.getSelectedItem();
-Date fecha = (Date) txtfecha.getDate();
-String agregarProducto = btnAgregarproducto.getText().trim(); // Nuevo campo
+        String nunfactura = numFactura.getText().trim();
+        String id = id_proveedor.getText().trim();
+        String tipo = (String) tipoCompra.getSelectedItem();
+        Date fecha = (Date) txtfecha.getDate();
+        String agregarProducto = btnAgregarproducto.getText().trim(); // Nuevo campo
 
-StringBuilder camposVacios = new StringBuilder("Por favor, complete los siguientes campos obligatorios:\n");
+        StringBuilder camposVacios = new StringBuilder("Por favor, complete los siguientes campos obligatorios:\n");
 
-String numeroFacturaSinSeparadores = nunfactura.replaceAll("[\\s-]+", "");
-String digitosSignificativos = numeroFacturaSinSeparadores.replaceAll("\\D", "");
+        String numeroFacturaSinSeparadores = nunfactura.replaceAll("[\\s-]+", "");
+        String digitosSignificativos = numeroFacturaSinSeparadores.replaceAll("\\D", "");
 
-if (digitosSignificativos.length() < 3) {
-    camposVacios.append("- Número de factura\n");
-}
+        if (digitosSignificativos.length() < 3)
+        {
+            camposVacios.append("- Número de factura\n");
+        }
 
-if (tipoCompra.getSelectedItem() == null || tipoCompra.getSelectedItem().toString().trim().isEmpty() ||
-    tipoCompra.getSelectedItem().toString().trim().equalsIgnoreCase("Seleccione")) {
-    camposVacios.append("- Tipo de compra\n");
-}
+        if (tipoCompra.getSelectedItem() == null || tipoCompra.getSelectedItem().toString().trim().isEmpty()
+                || tipoCompra.getSelectedItem().toString().trim().equalsIgnoreCase("Seleccione"))
+        {
+            camposVacios.append("- Tipo de compra\n");
+        }
 
-if (id.isEmpty()) {
-    camposVacios.append("- Proveedor\n");
-}
-if (fecha == null) {
-    camposVacios.append("- Fecha\n");
-}
+        if (id.isEmpty())
+        {
+            camposVacios.append("- Proveedor\n");
+        }
+        if (fecha == null)
+        {
+            camposVacios.append("- Fecha\n");
+        }
 
-boolean agregarProductoPresionado = true;
-if (!agregarProductoPresionado) {
-    camposVacios.append("- Agregar Producto\n");
-}
+        boolean agregarProductoPresionado = true;
+        if (!agregarProductoPresionado)
+        {
+            camposVacios.append("- Agregar Producto\n");
+        }
 
 // Verificar si hay al menos una fila en la tabla
-if (tablecompras.getRowCount() == 0) {
-    camposVacios.append("- Por favor, agregue al menos un producto a la factura.\n");
-}
+        if (tablecompras.getRowCount() == 0)
+        {
+            camposVacios.append("- Por favor, agregue al menos un producto a la factura.\n");
+        }
 
 // Mostrar mensajes de error solo si hay campos vacíos
-if (camposVacios.length() > "Por favor, complete los siguientes campos obligatorios:\n".length()) {
-    JOptionPane.showMessageDialog(null, camposVacios.toString(), "Error", JOptionPane.ERROR_MESSAGE);
-    return; // Salir del método si falta algún campo obligatorio
-}
+        if (camposVacios.length() > "Por favor, complete los siguientes campos obligatorios:\n".length())
+        {
+            JOptionPane.showMessageDialog(null, camposVacios.toString(), "Error", JOptionPane.ERROR_MESSAGE);
+            return; // Salir del método si falta algún campo obligatorio
+        }
 
 // Resto del código para la inserción en la base de datos
-try {
-    Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-    Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
+        try
+        {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
 
-    // Inserción en la tabla Compras
-    PreparedStatement insertCompras = conn.prepareStatement("INSERT INTO Compras (numfactura, tipoCategoria, fecha, total, id_proveedor) VALUES (?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
-    insertCompras.setString(1, nunfactura);
-    insertCompras.setString(2, tipo);
-    insertCompras.setDate(3, new java.sql.Date(fecha.getTime()));
-    // Asegúrate de tener la variable totalFactura definida y con un valor asignado
-    insertCompras.setObject(4, totalFactura);
-    insertCompras.setString(5, id);
+            // Inserción en la tabla Compras
+            PreparedStatement insertCompras = conn.prepareStatement("INSERT INTO Compras (numfactura, tipoCategoria, fecha, total, id_proveedor) VALUES (?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
+            insertCompras.setString(1, nunfactura);
+            insertCompras.setString(2, tipo);
+            insertCompras.setDate(3, new java.sql.Date(fecha.getTime()));
+            // Asegúrate de tener la variable totalFactura definida y con un valor asignado
+            insertCompras.setObject(4, totalFactura);
+            insertCompras.setString(5, id);
 
-    int filasAfectadasCompras = insertCompras.executeUpdate();
+            int filasAfectadasCompras = insertCompras.executeUpdate();
 
-    // Obtener el ID generado para la compra
-    int idCompraGenerado = -1;
-    ResultSet rsCompras = insertCompras.getGeneratedKeys();
-    if (rsCompras.next()) {
-        idCompraGenerado = rsCompras.getInt(1);
-    }
+            // Obtener el ID generado para la compra
+            int idCompraGenerado = -1;
+            ResultSet rsCompras = insertCompras.getGeneratedKeys();
+            if (rsCompras.next())
+            {
+                idCompraGenerado = rsCompras.getInt(1);
+            }
+            
+            // Inserción en la tabla DetallesCompras con valores directos
+            for (int i=0;i<tablecompras.getRowCount();i++)
+            {
+                PreparedStatement insertDetallesCompras = conn.prepareStatement("INSERT INTO DetallesCompras (numfactura, cantidad, precio_unitario, total, cod_producto) VALUES (?,?,?,?,?)");
+                insertDetallesCompras.setString(1, nunfactura);
+                insertDetallesCompras.setString(2, tablecompras.getValueAt(i, 1).toString()); // Ejemplo de valor directo para cod_producto
+                insertDetallesCompras.setString(3, tablecompras.getValueAt(i, 2).toString()); // Ejemplo de valor directo para cantidad
+                insertDetallesCompras.setString(4, tablecompras.getValueAt(i, 3).toString()); // Ejemplo de valor directo para precio_unitario
+                insertDetallesCompras.setString(5,tablecompras.getValueAt(i, 4).toString()); // Ejemplo de valor directo para total
 
-    // Inserción en la tabla DetallesCompras con valores directos
-    if (filasAfectadasCompras > 0) {
-        PreparedStatement insertDetallesCompras = conn.prepareStatement("INSERT INTO DetallesCompras (numfactura, cod_producto, cantidad, precio_unitario, total) VALUES (?,?,?,?,?)");
-        insertDetallesCompras.setString(1, nunfactura);
-        insertDetallesCompras.setInt(2, 1); // Ejemplo de valor directo para cod_producto
-        insertDetallesCompras.setInt(3, 5); // Ejemplo de valor directo para cantidad
-        insertDetallesCompras.setBigDecimal(4, new BigDecimal("10.50")); // Ejemplo de valor directo para precio_unitario
-        insertDetallesCompras.setBigDecimal(5, new BigDecimal("52.50")); // Ejemplo de valor directo para total
+                insertDetallesCompras.executeUpdate();
+            }
 
-        insertDetallesCompras.executeUpdate();
-    }
+            JOptionPane.showMessageDialog(null, "Registro guardado");
 
-    JOptionPane.showMessageDialog(null, "Registro guardado");
-
-} catch (SQLException e) {
-    e.printStackTrace();
-    JOptionPane.showMessageDialog(null, e.getMessage(), "Error de SQL", JOptionPane.ERROR_MESSAGE);
-} catch (ClassNotFoundException ex) {
-    JOptionPane.showMessageDialog(null, "Error de conexión a la base de datos", "Error de Conexión", JOptionPane.ERROR_MESSAGE);
-}
-
-
+        } catch (SQLException e)
+        {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Error de SQL", JOptionPane.ERROR_MESSAGE);
+        } catch (ClassNotFoundException ex)
+        {
+            JOptionPane.showMessageDialog(null, "Error de conexión a la base de datos", "Error de Conexión", JOptionPane.ERROR_MESSAGE);
+        }
 
 
     }//GEN-LAST:event_btnguardarActionPerformed
@@ -754,7 +765,7 @@ try {
     }//GEN-LAST:event_id_proveedorActionPerformed
 
     private void numFacturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numFacturaActionPerformed
-        
+
     }//GEN-LAST:event_numFacturaActionPerformed
 
     /**

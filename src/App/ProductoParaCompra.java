@@ -684,7 +684,7 @@ public class ProductoParaCompra extends javax.swing.JFrame {
         try
         {
             //Variables para capturar los campos de la tabla de productos
-            String nombreProd, cantid, precU, totalP;
+            String nombreProd, cantid, precU, totalP, idProducto;
             double tot = 0.0, calcula = 0.0;
 
             if (fila < 0)
@@ -711,6 +711,7 @@ public class ProductoParaCompra extends javax.swing.JFrame {
             DefaultTableModel modelo = (DefaultTableModel) tblProductosParafactura.getModel();
             nombreProd = tblProductosParafactura.getValueAt(fila, 1).toString();
             precU = tblProductosParafactura.getValueAt(fila, 3).toString();
+            idProducto = tblProductosParafactura.getValueAt(fila, 4).toString();
             cantid = cantidad.getText();
 
             //Se realizan los cálculos para el total en la factura
@@ -754,7 +755,7 @@ public class ProductoParaCompra extends javax.swing.JFrame {
 
                 String filaElemento[] =
                 {
-                    nombreProd, cantid, precU, totalP
+                    nombreProd, cantid, precU, totalP, idProducto
                 };
                 modelo.addRow(filaElemento);
             }

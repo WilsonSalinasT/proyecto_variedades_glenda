@@ -157,7 +157,7 @@ public class ver_envio extends javax.swing.JPanel {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel1.setText("Sastreria");
+        jLabel1.setText("Sastrería");
 
         txtPrenda.setEditable(false);
         txtPrenda.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -189,7 +189,7 @@ public class ver_envio extends javax.swing.JPanel {
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel4.setText("Sublimacion");
+        jLabel4.setText("Sublimación");
 
         txtmaterial.setEditable(false);
         txtmaterial.setHorizontalAlignment(javax.swing.JTextField.CENTER);

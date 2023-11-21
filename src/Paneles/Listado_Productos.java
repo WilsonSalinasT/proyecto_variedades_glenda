@@ -29,7 +29,7 @@ import java.awt.event.ActionListener;
 public class Listado_Productos extends javax.swing.JPanel {
   TextPrompt holder;
     int paginaActual = 1; // Página actual
-    int filasPorPagina = 18; // Número de filas a mostrar por página
+    int filasPorPagina = 20; // Número de filas a mostrar por página
     int totalFilas = 0; // Total de filas en la tabla
     int totalPaginas = 0; // Total de páginas en la tabla
 
@@ -181,7 +181,7 @@ public class Listado_Productos extends javax.swing.JPanel {
             }
         });
 
-        comboBoxCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todas", "sastreria", "sublimación", "arreglos" }));
+        comboBoxCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todas", "sastrería", "sublimación", "arreglos" }));
 
         btn_refrescar.setBackground(new java.awt.Color(255, 153, 51));
         btn_refrescar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N

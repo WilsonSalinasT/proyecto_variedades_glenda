@@ -90,7 +90,7 @@ public class GalleryProduct extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Arial Black", 2, 48)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Galeria de Productos");
+        jLabel1.setText("Galería de productos");
 
         categoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Sastrería", "Arreglos", "Sublimación" }));
         categoria.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 5, true));

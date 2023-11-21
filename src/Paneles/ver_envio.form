@@ -419,7 +419,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="0" green="0" red="0" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Sastreria"/>
+            <Property name="text" type="java.lang.String" value="Sastrer&#xed;a"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtPrenda">
@@ -555,7 +555,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="0" green="0" red="0" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Sublimacion"/>
+            <Property name="text" type="java.lang.String" value="Sublimaci&#xf3;n"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtmaterial">

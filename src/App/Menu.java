@@ -186,7 +186,7 @@ public class Menu extends javax.swing.JFrame {
         pedidoSublimacion1.setBackground(new java.awt.Color(255, 153, 102));
         pedidoSublimacion1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         pedidoSublimacion1.setForeground(new java.awt.Color(204, 255, 255));
-        pedidoSublimacion1.setText("Galeria");
+        pedidoSublimacion1.setText("Galería");
         pedidoSublimacion1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         pedidoSublimacion1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -308,7 +308,6 @@ public class Menu extends javax.swing.JFrame {
         panelprincipal.add(p2, BorderLayout.CENTER);
         panelprincipal.revalidate();
         panelprincipal.repaint();
-
 
     }//GEN-LAST:event_productosActionPerformed
 
