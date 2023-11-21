@@ -42,6 +42,9 @@ public class IngresodeCompra extends javax.swing.JFrame {
     public IngresodeCompra() {
         initComponents();
         
+        
+    
+        
         txtfecha.setMinSelectableDate(new Date());
 
          Calendar maxDate = Calendar.getInstance();
@@ -121,7 +124,7 @@ public class IngresodeCompra extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
         btnguardar = new javax.swing.JButton();
         jSeparator4 = new javax.swing.JSeparator();
-        jButton2 = new javax.swing.JButton();
+        btnAgregarproducto = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         txtfecha = new com.toedter.calendar.JDateChooser();
         jLabel5 = new javax.swing.JLabel();
@@ -194,12 +197,12 @@ public class IngresodeCompra extends javax.swing.JFrame {
         jSeparator4.setForeground(new java.awt.Color(255, 51, 51));
         jSeparator4.setOpaque(true);
 
-        jButton2.setBackground(new java.awt.Color(255, 153, 51));
-        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton2.setText("Agregar Producto");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnAgregarproducto.setBackground(new java.awt.Color(255, 153, 51));
+        btnAgregarproducto.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnAgregarproducto.setText("Agregar Producto");
+        btnAgregarproducto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnAgregarproductoActionPerformed(evt);
             }
         });
 
@@ -209,7 +212,7 @@ public class IngresodeCompra extends javax.swing.JFrame {
 
         jLabel4.setText("Tipo de Compra:");
 
-        tipoCompra.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar", "Credito", "Contado" }));
+        tipoCompra.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "Credito", "Contado" }));
         tipoCompra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tipoCompraActionPerformed(evt);
@@ -280,7 +283,7 @@ public class IngresodeCompra extends javax.swing.JFrame {
             .addComponent(jSeparator4)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnAgregarproducto, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(44, 44, 44))
             .addComponent(jSeparator5)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
@@ -312,7 +315,7 @@ public class IngresodeCompra extends javax.swing.JFrame {
                 .addGap(31, 31, 31)
                 .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnAgregarproducto, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -491,18 +494,59 @@ public class IngresodeCompra extends javax.swing.JFrame {
         Tsum.setText(String.valueOf(suma));
 
 }
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnAgregarproductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarproductoActionPerformed
         ProductoParaCompra prod = new ProductoParaCompra();
         prod.setVisible(true);
         prod.setLocationRelativeTo(null);
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnAgregarproductoActionPerformed
 
    public void bill() {
     // Obtener valores de los campos
-    String num = numFactura.getText();
-    String tipo = (String) tipoCompra.getSelectedItem();
-    String proveedor = (String) txtProveedor.getSelectedItem();
-    Date fecha = txtfecha.getDate();
+  // Obtener valores de los campos
+String num = numFactura.getText();
+String tipo = (String) tipoCompra.getSelectedItem();
+String proveedor = (String) txtProveedor.getSelectedItem();
+Date fecha = txtfecha.getDate();
+String agregarProducto = btnAgregarproducto.getText().trim(); // Nuevo campo
+
+StringBuilder camposVacios = new StringBuilder("Por favor, complete los siguientes campos obligatorios:\n");
+
+String numeroFacturaSinSeparadores = num.replaceAll("[\\s-]+", "");
+String digitosSignificativos = numeroFacturaSinSeparadores.replaceAll("\\D", "");
+
+if (digitosSignificativos.length() < 3) {
+    camposVacios.append("- Número de factura\n");
+}
+
+if (tipoCompra.getSelectedItem() == null || tipoCompra.getSelectedItem().toString().trim().isEmpty() ||
+    tipoCompra.getSelectedItem().toString().trim().equalsIgnoreCase("Seleccione")) {
+    camposVacios.append("- Tipo de compra\n");
+}
+
+
+
+if (proveedor.isEmpty()) {
+    camposVacios.append("- Proveedor\n");
+}
+if (fecha == null) {
+    camposVacios.append("- Fecha\n");
+}
+        boolean agregarProductoPresionado = true;
+if (!agregarProductoPresionado) {
+    camposVacios.append("- Agregar Producto\n");
+}
+
+// Verificar si hay al menos una fila en la tabla
+if (tablecompras.getRowCount() == 0) {
+    camposVacios.append("- Por favor, agregue al menos un producto a la factura.\n");
+}
+
+// Mostrar mensajes de error solo si hay campos vacíos
+if (camposVacios.length() > "Por favor, complete los siguientes campos obligatorios:\n".length()) {
+    JOptionPane.showMessageDialog(null, camposVacios.toString(), "Error", JOptionPane.ERROR_MESSAGE);
+    return; // Salir del método si falta algún campo obligatorio
+}
+
 
  
     factura ver = new factura();
@@ -553,13 +597,34 @@ public class IngresodeCompra extends javax.swing.JFrame {
 
 
     private void numFacturaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_numFacturaKeyTyped
-        // TODO add your handling code here:
-        char validar = evt.getKeyChar();
-        if (Character.isLetter(validar))
-        {
-            getToolkit().beep();
-            evt.consume();
-        }
+        // Obtiene el texto actual del campo de número de factura
+    String numeroFactura = numFactura.getText().trim();
+
+    // Permite solo dígitos y el carácter '-'
+    char c = evt.getKeyChar();
+    if (!Character.isDigit(c) && c != '-') {
+        evt.consume(); // Ignora la tecla si no es un dígito ni '-'
+        return;
+    }
+
+    // Verifica la longitud del número de factura después de la nueva pulsación de tecla
+    if ((numeroFactura + evt.getKeyChar()).length() > 14) {
+        evt.consume(); // Ignora la tecla si supera los 14 caracteres
+        return;
+    }
+
+    // Actualiza el número de factura en el campo
+    numFactura.setText(numeroFactura);
+    
+    // Realiza la validación del formato usando la expresión regular
+    if (!numeroFactura.matches("\\d{1,3}-\\d{1,3}-\\d{1,3}-\\d{1,3}")) {
+        // Muestra un mensaje de error o toma alguna acción
+        // Puedes también deshabilitar el botón de guardar, por ejemplo
+        // btnGuardar.setEnabled(false);
+    } else {
+        // Puedes habilitar el botón de guardar si es necesario
+        // btnGuardar.setEnabled(true);
+    }
     }//GEN-LAST:event_numFacturaKeyTyped
 
     private void tipoCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tipoCompraActionPerformed
@@ -567,36 +632,42 @@ public class IngresodeCompra extends javax.swing.JFrame {
     }//GEN-LAST:event_tipoCompraActionPerformed
 
     private void btnguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguardarActionPerformed
-  String nunfactura = numFactura.getText().trim();
+
+   String nunfactura = numFactura.getText().trim();
 String id = id_proveedor.getText().trim();
 String tipo = (String) tipoCompra.getSelectedItem();
 Date fecha = (Date) txtfecha.getDate();
+String agregarProducto = btnAgregarproducto.getText().trim(); // Nuevo campo
 
 StringBuilder camposVacios = new StringBuilder("Por favor, complete los siguientes campos obligatorios:\n");
 
-
 String numeroFacturaSinSeparadores = nunfactura.replaceAll("[\\s-]+", "");
-
-// Eliminar los separadores y verificar la longitud de los dígitos significativos
 String digitosSignificativos = numeroFacturaSinSeparadores.replaceAll("\\D", "");
 
 if (digitosSignificativos.length() < 3) {
     camposVacios.append("- Número de factura\n");
 }
 
-// Verifica si tipo es nulo, está vacío o es igual al valor predeterminado "Seleccionar"
 if (tipoCompra.getSelectedItem() == null || tipoCompra.getSelectedItem().toString().trim().isEmpty() ||
-    tipoCompra.getSelectedItem().toString().trim().equals("Seleccionar")) {
+    tipoCompra.getSelectedItem().toString().trim().equalsIgnoreCase("Seleccione")) {
     camposVacios.append("- Tipo de compra\n");
 }
-
 
 if (id.isEmpty()) {
     camposVacios.append("- Proveedor\n");
 }
-
 if (fecha == null) {
     camposVacios.append("- Fecha\n");
+}
+
+boolean agregarProductoPresionado = true;
+if (!agregarProductoPresionado) {
+    camposVacios.append("- Agregar Producto\n");
+}
+
+// Verificar si hay al menos una fila en la tabla
+if (tablecompras.getRowCount() == 0) {
+    camposVacios.append("- Por favor, agregue al menos un producto a la factura.\n");
 }
 
 // Mostrar mensajes de error solo si hay campos vacíos
@@ -610,15 +681,37 @@ try {
     Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
     Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
 
-    PreparedStatement insertPs = conn.prepareStatement("INSERT INTO Compras (numfactura, tipoCategoria, fecha, total, id_proveedor) VALUES (?,?,?,?,?)");
-    insertPs.setString(1, nunfactura);
-    insertPs.setString(2, tipo);
-    insertPs.setDate(3, new java.sql.Date(fecha.getTime()));
+    // Inserción en la tabla Compras
+    PreparedStatement insertCompras = conn.prepareStatement("INSERT INTO Compras (numfactura, tipoCategoria, fecha, total, id_proveedor) VALUES (?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
+    insertCompras.setString(1, nunfactura);
+    insertCompras.setString(2, tipo);
+    insertCompras.setDate(3, new java.sql.Date(fecha.getTime()));
     // Asegúrate de tener la variable totalFactura definida y con un valor asignado
-    insertPs.setObject(4, totalFactura);
-    insertPs.setString(5, id);
+    insertCompras.setObject(4, totalFactura);
+    insertCompras.setString(5, id);
 
-    insertPs.executeUpdate();
+    int filasAfectadasCompras = insertCompras.executeUpdate();
+
+    // Obtener el ID generado para la compra
+    int idCompraGenerado = -1;
+    ResultSet rsCompras = insertCompras.getGeneratedKeys();
+    if (rsCompras.next()) {
+        idCompraGenerado = rsCompras.getInt(1);
+    }
+
+    // Inserción en la tabla DetallesCompras
+    if (filasAfectadasCompras > 0) {
+        PreparedStatement insertDetallesCompras = conn.prepareStatement("INSERT INTO DetallesCompras (id_compra, numfactura, tipoCategoria, fecha, total, id_proveedor) VALUES (?,?,?,?,?,?)");
+        insertDetallesCompras.setInt(1, idCompraGenerado);
+        insertDetallesCompras.setString(2, nunfactura);
+        insertDetallesCompras.setString(3, tipo);
+        insertDetallesCompras.setDate(4, new java.sql.Date(fecha.getTime()));
+        // Asegúrate de tener la variable totalFactura definida y con un valor asignado
+        insertDetallesCompras.setObject(5, totalFactura);
+        insertDetallesCompras.setString(6, id);
+
+        insertDetallesCompras.executeUpdate();
+    }
 
     JOptionPane.showMessageDialog(null, "Registro guardado");
 
@@ -628,6 +721,8 @@ try {
 } catch (ClassNotFoundException ex) {
     JOptionPane.showMessageDialog(null, "Error de conexión a la base de datos", "Error de Conexión", JOptionPane.ERROR_MESSAGE);
 }
+
+
 
 
     }//GEN-LAST:event_btnguardarActionPerformed
@@ -694,10 +789,10 @@ try {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JTextField Tsum;
+    private javax.swing.JButton btnAgregarproducto;
     private javax.swing.JButton btnguardar;
     public javax.swing.JTextField id_proveedor;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
@@ -720,4 +815,8 @@ try {
     public javax.swing.JComboBox<String> txtProveedor;
     public com.toedter.calendar.JDateChooser txtfecha;
     // End of variables declaration//GEN-END:variables
+
+    private boolean existeNumeroFactura(Connection conn, String nunfactura) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

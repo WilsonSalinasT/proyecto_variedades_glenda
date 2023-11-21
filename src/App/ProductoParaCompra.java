@@ -6,8 +6,11 @@ package App;
 
 import static App.IngresodeCompra.tablecompras;
 import static App.IngresodeCompra.Tsum;
+import static App.Menu.panelprincipal;
+import Paneles.Crear_Pedido_arreglo;
 import Paneles.IngresarCompra;
 import Paneles.TextPrompt;
+import Paneles.crear_producto;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -282,7 +285,7 @@ public class ProductoParaCompra extends javax.swing.JFrame {
         CuadroBuscarProducto = new javax.swing.JTextField();
         jScrollPane3 = new javax.swing.JScrollPane();
         tblProductosParafactura = new javax.swing.JTable();
-        bntAgregarProducto = new javax.swing.JButton();
+        btncrear = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -291,6 +294,7 @@ public class ProductoParaCompra extends javax.swing.JFrame {
         Texto_Contable = new javax.swing.JLabel();
         btnAnterior = new javax.swing.JButton();
         btnSiguiente = new javax.swing.JButton();
+        btncrearproducto = new javax.swing.JButton();
 
         jList1.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -374,12 +378,12 @@ public class ProductoParaCompra extends javax.swing.JFrame {
         });
         jScrollPane3.setViewportView(tblProductosParafactura);
 
-        bntAgregarProducto.setBackground(new java.awt.Color(255, 153, 51));
-        bntAgregarProducto.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        bntAgregarProducto.setText("Agregar Producto");
-        bntAgregarProducto.addActionListener(new java.awt.event.ActionListener() {
+        btncrear.setBackground(new java.awt.Color(255, 153, 51));
+        btncrear.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btncrear.setText("Agregar Producto");
+        btncrear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bntAgregarProductoActionPerformed(evt);
+                btncrearActionPerformed(evt);
             }
         });
 
@@ -444,32 +448,34 @@ public class ProductoParaCompra extends javax.swing.JFrame {
             }
         });
 
+        btncrearproducto.setBackground(new java.awt.Color(255, 153, 51));
+        btncrearproducto.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btncrearproducto.setText("Crear Productos");
+        btncrearproducto.setActionCommand("Crear Producto");
+        btncrearproducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btncrearproductoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(177, 177, 177)
-                .addComponent(CuadroBuscarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnbuscar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton2)
-                .addContainerGap(169, Short.MAX_VALUE))
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(29, 29, 29)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 818, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 48, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(Texto_Contable, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(50, 50, 50)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(bntAgregarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(btncrear, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(34, 34, 34)
                                 .addComponent(cancelar))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel3)
@@ -479,7 +485,17 @@ public class ProductoParaCompra extends javax.swing.JFrame {
                         .addComponent(btnAnterior, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btnSiguiente, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(58, 58, 58))))
+                        .addGap(58, 58, 58))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(49, 49, 49)
+                        .addComponent(CuadroBuscarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(29, 29, 29)
+                        .addComponent(btnbuscar)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton2)
+                        .addGap(77, 77, 77)
+                        .addComponent(btncrearproducto)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -489,27 +505,27 @@ public class ProductoParaCompra extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(CuadroBuscarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnbuscar)
-                    .addComponent(jButton2))
-                .addGap(34, 34, 34)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButton2)
+                    .addComponent(btncrearproducto))
+                .addGap(33, 33, 33)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(13, 13, 13)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(cantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel3)
-                                    .addComponent(Texto_Contable, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnSiguiente, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addComponent(btnAnterior, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                        .addGap(14, 14, 14)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3)
+                            .addComponent(Texto_Contable, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnSiguiente, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnAnterior, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(28, 28, 28)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(bntAgregarProducto)
-                    .addComponent(cancelar))
-                .addContainerGap(42, Short.MAX_VALUE))
+                    .addComponent(cancelar)
+                    .addComponent(btncrear))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -526,114 +542,6 @@ public class ProductoParaCompra extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void bntAgregarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntAgregarProductoActionPerformed
-
-        int fila = tblProductosParafactura.getSelectedRow();
-
-        try
-        {
-            //Variables para capturar los campos de la tabla de productos
-            String nombreProd, cantid, precU, totalP;
-            double tot = 0.0, calcula = 0.0;
-
-            if (fila < 0)
-            {
-                JOptionPane.showMessageDialog(null, "No se seleccionó ningún producto",
-                        "Error al agregar producto", JOptionPane.WARNING_MESSAGE);
-                return; // Salir del método si no se seleccionó ningún producto
-            }
-
-            if (cantidad.getText().isEmpty())
-            {
-                JOptionPane.showMessageDialog(null, "No se ingresó una cantidad",
-                        "Error al agregar producto", JOptionPane.WARNING_MESSAGE);
-                return; // Salir del método si no se ingresó una cantidad
-            }
-
-            if (cantidad.getText().startsWith("0"))
-            {
-                JOptionPane.showMessageDialog(null, "Ingrese cantidades mayores a cero(0)",
-                        "Error al agregar producto", JOptionPane.WARNING_MESSAGE);
-                return; // Salir del método si no se ingresó una cantidad
-            }
-
-            DefaultTableModel modelo = (DefaultTableModel) tblProductosParafactura.getModel();
-            nombreProd = tblProductosParafactura.getValueAt(fila, 1).toString();
-            precU = tblProductosParafactura.getValueAt(fila, 3).toString();
-            cantid = cantidad.getText();
-
-            //Se realizan los cálculos para el total en la factura
-            tot = (Double.parseDouble(precU) * Integer.parseInt(cantid));
-
-            DecimalFormat df = new DecimalFormat("#0.00");
-            totalP = df.format(tot);
-//            totalP = String.valueOf(tot);
-
-            //Enviar los campos seleccionados de la tabla de productos a la tabla de factura de compras
-            modelo = (DefaultTableModel) tablecompras.getModel();
-            // Buscar el producto en la tabla tblProductosCompras
-            int rowCount = modelo.getRowCount();
-            boolean productoEncontrado = false;
-
-            for (int i = 0; i < rowCount; i++)
-            {
-                String productoExistente = modelo.getValueAt(i, 0).toString();
-                if (productoExistente.equals(nombreProd))
-                {
-                    // El producto ya existe en la tabla, actualizar la cantidad y el total
-                    String cantidadExistente = modelo.getValueAt(i, 1).toString();
-                    int nuevaCantidad = Integer.parseInt(cantidadExistente) + Integer.parseInt(cantid);
-                    modelo.setValueAt(String.valueOf(nuevaCantidad), i, 1);
-
-                    String totalExistente = modelo.getValueAt(i, 3).toString();
-                    double precioUnitario = Double.parseDouble(precU);
-                    double nuevoTotal = precioUnitario * nuevaCantidad;
-                    modelo.setValueAt(String.valueOf(nuevoTotal), i, 3);
-
-                    productoEncontrado = true;
-                    break;
-                }
-            }
-
-            if (!productoEncontrado)
-            {
-                // El producto no existe en la tabla, agregarlo como una nueva fila
-                tot = Double.parseDouble(precU) * Integer.parseInt(cantid);
-                totalP = String.valueOf(tot);
-
-                String filaElemento[] =
-                {
-                    nombreProd, cantid, precU, totalP
-                };
-                modelo.addRow(filaElemento);
-            }
-            calcular();
-
-            //calculo para que se sumen los totales de la factura a uno solo y se envíe a la tabla de facturas
-            calcula = Double.parseDouble(precU) * Integer.parseInt(cantidad.getText());
-            totalFactura += calcula; // Sumar al total existente
-
-            //this.dispose();
-            // Limpiar el campo de cantidad después de agregar el producto
-            cantidad.setText("");
-            JOptionPane.showMessageDialog(null, "Se agrego el producto!");
-
-            
-            
-           
-           
-//            ver.setSize(1024, 640);
-//            ver.setLocation(0, 0);
-//            jPanel1.removeAll();
-//            jPanel1.add(ver, BorderLayout.CENTER);
-//            jPanel1.revalidate();
-//            jPanel1.repaint();
-        } catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-    }//GEN-LAST:event_bntAgregarProductoActionPerformed
 
     public void calcular(){
 
@@ -768,6 +676,121 @@ public class ProductoParaCompra extends javax.swing.JFrame {
     private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
         siguientePagina();
     }//GEN-LAST:event_btnSiguienteActionPerformed
+
+    private void btncrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncrearActionPerformed
+
+        int fila = tblProductosParafactura.getSelectedRow();
+
+        try
+        {
+            //Variables para capturar los campos de la tabla de productos
+            String nombreProd, cantid, precU, totalP;
+            double tot = 0.0, calcula = 0.0;
+
+            if (fila < 0)
+            {
+                JOptionPane.showMessageDialog(null, "No se seleccionó ningún producto",
+                    "Error al agregar producto", JOptionPane.WARNING_MESSAGE);
+                return; // Salir del método si no se seleccionó ningún producto
+            }
+
+            if (cantidad.getText().isEmpty())
+            {
+                JOptionPane.showMessageDialog(null, "No se ingresó una cantidad",
+                    "Error al agregar producto", JOptionPane.WARNING_MESSAGE);
+                return; // Salir del método si no se ingresó una cantidad
+            }
+
+            if (cantidad.getText().startsWith("0"))
+            {
+                JOptionPane.showMessageDialog(null, "Ingrese cantidades mayores a cero(0)",
+                    "Error al agregar producto", JOptionPane.WARNING_MESSAGE);
+                return; // Salir del método si no se ingresó una cantidad
+            }
+
+            DefaultTableModel modelo = (DefaultTableModel) tblProductosParafactura.getModel();
+            nombreProd = tblProductosParafactura.getValueAt(fila, 1).toString();
+            precU = tblProductosParafactura.getValueAt(fila, 3).toString();
+            cantid = cantidad.getText();
+
+            //Se realizan los cálculos para el total en la factura
+            tot = (Double.parseDouble(precU) * Integer.parseInt(cantid));
+
+            DecimalFormat df = new DecimalFormat("#0.00");
+            totalP = df.format(tot);
+            //            totalP = String.valueOf(tot);
+
+            //Enviar los campos seleccionados de la tabla de productos a la tabla de factura de compras
+            modelo = (DefaultTableModel) tablecompras.getModel();
+            // Buscar el producto en la tabla tblProductosCompras
+            int rowCount = modelo.getRowCount();
+            boolean productoEncontrado = false;
+
+            for (int i = 0; i < rowCount; i++)
+            {
+                String productoExistente = modelo.getValueAt(i, 0).toString();
+                if (productoExistente.equals(nombreProd))
+                {
+                    // El producto ya existe en la tabla, actualizar la cantidad y el total
+                    String cantidadExistente = modelo.getValueAt(i, 1).toString();
+                    int nuevaCantidad = Integer.parseInt(cantidadExistente) + Integer.parseInt(cantid);
+                    modelo.setValueAt(String.valueOf(nuevaCantidad), i, 1);
+
+                    String totalExistente = modelo.getValueAt(i, 3).toString();
+                    double precioUnitario = Double.parseDouble(precU);
+                    double nuevoTotal = precioUnitario * nuevaCantidad;
+                    modelo.setValueAt(String.valueOf(nuevoTotal), i, 3);
+
+                    productoEncontrado = true;
+                    break;
+                }
+            }
+
+            if (!productoEncontrado)
+            {
+                // El producto no existe en la tabla, agregarlo como una nueva fila
+                tot = Double.parseDouble(precU) * Integer.parseInt(cantid);
+                totalP = String.valueOf(tot);
+
+                String filaElemento[] =
+                {
+                    nombreProd, cantid, precU, totalP
+                };
+                modelo.addRow(filaElemento);
+            }
+            calcular();
+
+            //calculo para que se sumen los totales de la factura a uno solo y se envíe a la tabla de facturas
+            calcula = Double.parseDouble(precU) * Integer.parseInt(cantidad.getText());
+            totalFactura += calcula; // Sumar al total existente
+
+            //this.dispose();
+            // Limpiar el campo de cantidad después de agregar el producto
+            cantidad.setText("");
+            JOptionPane.showMessageDialog(null, "Se agrego el producto!");
+
+            //            ver.setSize(1024, 640);
+            //            ver.setLocation(0, 0);
+            //            jPanel1.removeAll();
+            //            jPanel1.add(ver, BorderLayout.CENTER);
+            //            jPanel1.revalidate();
+            //            jPanel1.repaint();
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_btncrearActionPerformed
+
+    private void btncrearproductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncrearproductoActionPerformed
+     crear_producto p2 = new crear_producto();
+     p2.setSize(1024, 640);
+     p2.setLocation(0, 0);
+
+     panelprincipal.removeAll();
+     panelprincipal.add(p2, BorderLayout.NORTH);  // Especifica BorderLayout.NORTH aquí
+     panelprincipal.revalidate();
+     panelprincipal.repaint();
+    }//GEN-LAST:event_btncrearproductoActionPerformed
 
     
   int selectedRow2;
@@ -990,10 +1013,11 @@ private void buscarDatos(String texto) {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField CuadroBuscarProducto;
     private javax.swing.JLabel Texto_Contable;
-    public static javax.swing.JButton bntAgregarProducto;
     private javax.swing.JButton btnAnterior;
     private javax.swing.JButton btnSiguiente;
     private javax.swing.JButton btnbuscar;
+    private javax.swing.JButton btncrear;
+    private javax.swing.JButton btncrearproducto;
     private javax.swing.JButton cancelar;
     private javax.swing.JTextField cantidad;
     private javax.swing.JButton jButton2;
