@@ -1016,7 +1016,7 @@ private void buscarDatos(String texto) {
     private javax.swing.JButton btnAnterior;
     private javax.swing.JButton btnSiguiente;
     private javax.swing.JButton btnbuscar;
-    private javax.swing.JButton btncrear;
+    public static javax.swing.JButton btncrear;
     private javax.swing.JButton btncrearproducto;
     private javax.swing.JButton cancelar;
     private javax.swing.JTextField cantidad;

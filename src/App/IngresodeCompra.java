@@ -17,6 +17,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
 import static App.factura.txtbill;
+import java.math.BigDecimal;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -332,12 +333,27 @@ public class IngresodeCompra extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Nombre Producto", "Cantidad", "Precio unitario", "Total"
+                "Nombre Producto", "Cantidad", "Precio unitario", "Total", "id"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                true, true, true, true, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tablecompras.setShowHorizontalLines(true);
         tablecompras.setShowVerticalLines(true);
         jScrollPane1.setViewportView(tablecompras);
+        if (tablecompras.getColumnModel().getColumnCount() > 0) {
+            tablecompras.getColumnModel().getColumn(0).setHeaderValue("Nombre Producto");
+            tablecompras.getColumnModel().getColumn(1).setHeaderValue("Cantidad");
+            tablecompras.getColumnModel().getColumn(2).setHeaderValue("Precio unitario");
+            tablecompras.getColumnModel().getColumn(3).setHeaderValue("Total");
+            tablecompras.getColumnModel().getColumn(4).setHeaderValue("id");
+        }
 
         jButton1.setBackground(new java.awt.Color(255, 153, 51));
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -378,20 +394,19 @@ public class IngresodeCompra extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addGap(133, 133, 133)
                 .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 123, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addGap(30, 30, 30))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(Tsum, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(0, 26, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 543, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(418, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Tsum, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(15, 15, 15))
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1)
+                .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -632,7 +647,7 @@ if (camposVacios.length() > "Por favor, complete los siguientes campos obligator
 
     private void btnguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguardarActionPerformed
 
-   String nunfactura = numFactura.getText().trim();
+  String nunfactura = numFactura.getText().trim();
 String id = id_proveedor.getText().trim();
 String tipo = (String) tipoCompra.getSelectedItem();
 Date fecha = (Date) txtfecha.getDate();
@@ -698,16 +713,14 @@ try {
         idCompraGenerado = rsCompras.getInt(1);
     }
 
-    // Inserción en la tabla DetallesCompras
+    // Inserción en la tabla DetallesCompras con valores directos
     if (filasAfectadasCompras > 0) {
-        PreparedStatement insertDetallesCompras = conn.prepareStatement("INSERT INTO DetallesCompras (id_compra, numfactura, tipoCategoria, fecha, total, id_proveedor) VALUES (?,?,?,?,?,?)");
-        insertDetallesCompras.setInt(1, idCompraGenerado);
-        insertDetallesCompras.setString(2, nunfactura);
-        insertDetallesCompras.setString(3, tipo);
-        insertDetallesCompras.setDate(4, new java.sql.Date(fecha.getTime()));
-        // Asegúrate de tener la variable totalFactura definida y con un valor asignado
-        insertDetallesCompras.setObject(5, totalFactura);
-        insertDetallesCompras.setString(6, id);
+        PreparedStatement insertDetallesCompras = conn.prepareStatement("INSERT INTO DetallesCompras (numfactura, cod_producto, cantidad, precio_unitario, total) VALUES (?,?,?,?,?)");
+        insertDetallesCompras.setString(1, nunfactura);
+        insertDetallesCompras.setInt(2, 1); // Ejemplo de valor directo para cod_producto
+        insertDetallesCompras.setInt(3, 5); // Ejemplo de valor directo para cantidad
+        insertDetallesCompras.setBigDecimal(4, new BigDecimal("10.50")); // Ejemplo de valor directo para precio_unitario
+        insertDetallesCompras.setBigDecimal(5, new BigDecimal("52.50")); // Ejemplo de valor directo para total
 
         insertDetallesCompras.executeUpdate();
     }
@@ -816,6 +829,30 @@ try {
     // End of variables declaration//GEN-END:variables
 
     private boolean existeNumeroFactura(Connection conn, String nunfactura) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    private int obtenerIdProductoSeleccionado() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    private int obtenerCantidad() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    private BigDecimal obtenerPrecioUnitario() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    private BigDecimal obtenerTotal() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    private BigDecimal obtenerTotalDetalle() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    private int obtenerIdProducto() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }
