@@ -559,7 +559,7 @@ public class edit_producto extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField txtPrecio;
+    public javax.swing.JTextField txtPrecio;
     public javax.swing.JTextField txtbytes;
     public javax.swing.JTextArea txtdescripcion;
     public javax.swing.JTextField txtid;

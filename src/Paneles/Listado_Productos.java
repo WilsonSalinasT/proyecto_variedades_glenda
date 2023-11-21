@@ -17,9 +17,20 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import Paneles.verProducto;
 import Paneles.EditarProducto;
+import static Paneles.Listado_Prod.bytesToHexString;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.sql.Blob;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.table.TableColumn;
 //import javafx.event.ActionEvent;
 
 /**
@@ -49,6 +60,14 @@ public class Listado_Productos extends javax.swing.JPanel {
 
         tabla_productos.setRowSelectionAllowed(true);
         tabla_productos.setColumnSelectionAllowed(false);
+        
+         int columnIndexToHide = 4;
+        TableColumn column = tabla_productos.getColumnModel().getColumn(columnIndexToHide);
+
+        column.setMinWidth(0);
+        column.setMaxWidth(0);
+        column.setPreferredWidth(0);
+        column.setResizable(false);
 
     }
 
@@ -139,11 +158,11 @@ public class Listado_Productos extends javax.swing.JPanel {
 
             },
             new String [] {
-                "N°", "Nombre", "Descripción", "Categoría"
+                "N°", "Nombre", "Descripción", "Categoría", "cod_producto"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -476,64 +495,148 @@ try
     }//GEN-LAST:event_btnverActionPerformed
 
     private void btneditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btneditarActionPerformed
-   
-  selectedRow1 = tabla_productos.getSelectedRow();
-if (selectedRow1 == -1) {
-    JOptionPane.showMessageDialog(null, "Seleccione un producto para poder editarlo");
-    return;
-}
-
-try {
-    int fila = tabla_productos.getSelectedRow();
-    String valorCelda = tabla_productos.getValueAt(fila, 1).toString();
-    String valorCelda2 = tabla_productos.getValueAt(fila, 2).toString();
-    String valorCelda3 = tabla_productos.getValueAt(fila, 3).toString();
-
-    // Verificar que todos los campos sean obligatorios
-    if (valorCelda.isEmpty() || valorCelda2.isEmpty() || valorCelda3.isEmpty()) {
-        JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios. Por favor, completa todos los campos antes de actualizar.");
-        return;
-    }
-
-    // Crear una conexión y un PreparedStatement usando try-with-resources
-    try (Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
-         PreparedStatement ps = conn.prepareStatement("SELECT * FROM Producto WHERE nombre=? AND descripcion=? AND categoria=?")) {
-
-        ps.setString(1, valorCelda);
-        ps.setString(2, valorCelda2);
-        ps.setString(3, valorCelda3);
-
-        try (ResultSet rs = ps.executeQuery()) {
-            if (rs.next()) {
-                String nombre = rs.getString("nombre");
-                String descripcion = rs.getString("descripcion");
-  
-                String Id = rs.getString("cod_producto");
-
-                EditarProducto mostrar = new EditarProducto();
-                mostrar.txtnombre.setText(nombre);
-                mostrar.txtdescripcion.setText(descripcion);
-               mostrar.jComboBox1.setSelectedItem(rs.getString("categoria"));
-
-                mostrar.txtId.setText(Id);
-
-                mostrar.setSize(1024, 640);
-                mostrar.setLocation(0, 0);
-
-                jPanel2.revalidate();
-                jPanel2.repaint();
-                jPanel2.removeAll();
-                jPanel2.add(mostrar, BorderLayout.CENTER);
-
-                jPanel2.revalidate();
-                jPanel2.repaint();
-            }
+    selectedRow1 = tabla_productos.getSelectedRow();
+        if (selectedRow1 == -1)
+        {
+            JOptionPane.showMessageDialog(null, "Seleccione un producto para poder editarlo");
+            return;
         }
-    }
-} catch (SQLException e) {
-    e.printStackTrace();
-    JOptionPane.showMessageDialog(null, "Error al consultar la base de datos: " + e.getMessage());
-}
+
+        try
+        {
+            int fila = tabla_productos.getSelectedRow();
+             int valorEntero = Integer.parseInt(tabla_productos.getValueAt(fila, 4).toString());
+//            String valorCelda2 = tabla_productos.getValueAt(fila, 2).toString();
+//            String valorCelda3 = tabla_productos.getValueAt(fila, 3).toString();
+
+            // Crear una conexión y un PreparedStatement usando try-with-resources
+            try (Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789"); 
+                    PreparedStatement ps = conn.prepareStatement("SELECT * FROM Productos WHERE cod_producto=?"))
+            {
+
+                ps.setInt(1, valorEntero);
+//                ps.setString(2, valorCelda2);
+
+                try (ResultSet rs = ps.executeQuery())
+                {
+                    if (rs.next())
+                    {
+                        String nombre = rs.getString("nombre");
+                        String precio = rs.getString("precio");
+                        String descripcion = rs.getString("descripcion");
+
+                        String Id = rs.getString("cod_producto");
+
+                        edit_producto mostrar = new edit_producto();
+                        mostrar.txtnombre.setText(nombre);
+                        mostrar.txtPrecio.setText(precio);
+                        mostrar.txtdescripcion.setText(descripcion);
+                        mostrar.jComboBox1.setSelectedItem(rs.getString("categoria"));
+
+                        Blob fotos = rs.getBlob("foto");
+
+                        if (fotos != null)
+                        {
+                            byte[] recuperar = fotos.getBytes(1, (int) fotos.length());
+                            BufferedImage img = ImageIO.read(new ByteArrayInputStream(recuperar));
+
+// Define las dimensiones deseadas para la imagen
+                            int anchoDeseado = 200; // Reemplaza esto con el ancho que desees
+                            int altoDeseado = 150;  // Reemplaza esto con el alto que desees
+
+// Escala la imagen a las dimensiones deseadas
+                            Image imagen = img.getScaledInstance(anchoDeseado, altoDeseado, Image.SCALE_SMOOTH);
+
+// Establece la imagen escalada en el componente mostrar.txtimagen
+                            mostrar.txtimagen.setIcon(new ImageIcon(imagen));
+
+                            mostrar.txtbytes.setText(tabla_productos.getModel().getValueAt(tabla_productos.getSelectedRow(), 3).toString());
+
+                        } else
+                        {
+                            ImageIcon imagenIcon;
+                            // Cargar una imagen predeterminada si no se encuentra la imagen en la base de datos
+                            imagenIcon = new ImageIcon(getClass().getResource("/img/agregar.png"));
+                            mostrar.txtimagen.setIcon(imagenIcon);
+                        }
+
+//                        byte[] byteArray = rs.getBytes("foto");
+//
+//                        StringBuilder hexStringBuilder = new StringBuilder();
+//                        for (byte b : byteArray)
+//                        {
+//                            hexStringBuilder.append(String.format("%02X", b));
+//                        }
+//
+//                        String hexString = hexStringBuilder.toString();
+//                        
+//                        mostrar.txtbytes = new JTextField(hexString);
+//                        byte[] byteArray = rs.getBytes("foto");
+//
+//                // Crea un ImageIcon a partir de los bytes
+//                ImageIcon imagenIcono = new ImageIcon(byteArray);
+//
+//                // Crea un JLabel con el ImageIcon y muestra la imagen en una ventana
+//                mostrar.txtimagen = new JLabel(imagenIcono);
+                        byte[] data = rs.getBytes("foto");
+                        String hexString = "0x" + bytesToHexString(data);
+
+                        mostrar.txtbytes.setText(hexString);
+//                        mostrar.bytes.setText(hexString);
+                        mostrar.txtbytes.setText(hexString);
+                        mostrar.txtruta.setText(rs.getString("imagen"));
+
+//                        ImageIcon imagenIcon;
+//                        byte[] bytesImagen = rs.getBytes("foto");
+//                        if (bytesImagen != null)
+//                        {
+//                            imagenIcon = new ImageIcon(bytesImagen);
+//
+//                            // Redimensionar la imagen al tamaño deseado (80x60 píxeles)
+//                            Image imagenOriginal = imagenIcon.getImage();
+//                            Image imagenRedimensionada = imagenOriginal.getScaledInstance(80, 60, Image.SCALE_SMOOTH);
+//
+//                            imagenIcon = new ImageIcon(imagenRedimensionada);
+//                            mostrar.txtimagen.setIcon(imagenIcon);
+//                        } else
+//                        {
+//                            // Cargar una imagen predeterminada si no se encuentra la imagen en la base de datos
+//                            imagenIcon = new ImageIcon(getClass().getResource("/img/agregar.png"));
+//                            mostrar.txtimagen.setIcon(imagenIcon);
+//                        }
+//                        InputStream in = rs.getBinaryStream("foto");
+//                        BufferedImage image = ImageIO.read(in);
+//                        ImageIcon icon = new ImageIcon(image);
+//                        mostrar.txtimagen.setIcon(icon);
+//                        byte[] imagenBytes = rs.getBytes("foto");
+//                        ImageIcon imageIcon = new ImageIcon(imagenBytes);
+//
+//                        mostrar.txtimagen = new JLabel(imageIcon);
+//                  String foto = rs.getString("foto");
+//                       mostrar.txtfotobytes.setText(foto);
+                        mostrar.txtid.setText(Id);
+
+                        mostrar.setSize(1024, 640);
+                        mostrar.setLocation(0, 0);
+
+                        jPanel2.revalidate();
+                        jPanel2.repaint();
+                        jPanel2.removeAll();
+                        jPanel2.add(mostrar, BorderLayout.CENTER);
+
+                        jPanel2.revalidate();
+                        jPanel2.repaint();
+                    }
+                } catch (IOException ex)
+                {
+                    Logger.getLogger(Listado_Prod.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        } catch (SQLException e)
+        {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error al consultar la base de datos: " + e.getMessage());
+        }
 
     }//GEN-LAST:event_btneditarActionPerformed
 
@@ -606,7 +709,7 @@ try {
             }
 
             // Consulta principal con paginación
-            ps = conn.prepareStatement("SELECT ROW_NUMBER() OVER(ORDER BY cod_producto) AS NumRegistro, nombre, descripcion, categoria "
+            ps = conn.prepareStatement("SELECT ROW_NUMBER() OVER(ORDER BY cod_producto) AS NumRegistro, nombre, descripcion, categoria,cod_producto "
                     + "FROM Productos ORDER BY cod_producto OFFSET ? ROWS FETCH NEXT ? ROWS ONLY");
             ps.setInt(1, offset);
             ps.setInt(2, filasPorPagina);
@@ -668,11 +771,11 @@ try {
         String sqlQuery;
         if ("Todas".equals(categoriaSeleccionada))
         {
-            sqlQuery = "SELECT ROW_NUMBER() OVER(ORDER BY cod_producto) AS NumRegistro, nombre, descripcion, categoria"
+            sqlQuery = "SELECT ROW_NUMBER() OVER(ORDER BY cod_producto) AS NumRegistro, nombre, descripcion, categoria, cod_producto "
                     + " FROM Productos WHERE nombre LIKE ? OR descripcion LIKE ?";
         } else
         {
-            sqlQuery = "SELECT ROW_NUMBER() OVER(ORDER BY cod_producto) AS NumRegistro, nombre, descripcion, categoria"
+            sqlQuery = "SELECT ROW_NUMBER() OVER(ORDER BY cod_producto) AS NumRegistro, nombre, descripcion, categoria, cod_producto "
                     + " FROM Productos WHERE categoria = ? AND (nombre LIKE ? OR descripcion LIKE ?)";
         }
 
@@ -699,12 +802,13 @@ try {
                     String nombre = rs.getString("nombre");
                     String descripcion = rs.getString("descripcion");
                     String categoria = rs.getString("categoria");
+                     String id = rs.getString("cod_producto");
 
                     if (nombre != null && descripcion != null && categoria != null)
                     {
                         modelTabla.addRow(new Object[]
                         {
-                            numRegistro, nombre, descripcion, categoria
+                            numRegistro, nombre, descripcion, categoria, id
                         });
                         foundData = true;
                     }
