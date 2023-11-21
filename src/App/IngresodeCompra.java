@@ -716,18 +716,18 @@ public class IngresodeCompra extends javax.swing.JFrame {
             int filasAfectadasCompras = insertCompras.executeUpdate();
 
             // Obtener el ID generado para la compra
-            int idCompraGenerado = -1;
+            
             ResultSet rsCompras = insertCompras.getGeneratedKeys();
             if (rsCompras.next())
             {
-                idCompraGenerado = rsCompras.getInt(1);
-            }
+                int idCompraGenerado = rsCompras.getInt(1);
+            
             
             // Inserción en la tabla DetallesCompras con valores directos
             for (int i=0;i<tablecompras.getRowCount();i++)
             {
-                PreparedStatement insertDetallesCompras = conn.prepareStatement("INSERT INTO DetallesCompras (numfactura, cantidad, precio_unitario, total, cod_producto) VALUES (?,?,?,?,?)");
-                insertDetallesCompras.setString(1, nunfactura);
+                PreparedStatement insertDetallesCompras = conn.prepareStatement("INSERT INTO DetallesCompras (id_compra, cantidad, precio_unitario, total, cod_producto) VALUES (?,?,?,?,?)");
+                insertDetallesCompras.setInt(1, idCompraGenerado );
                 insertDetallesCompras.setString(2, tablecompras.getValueAt(i, 1).toString()); // Ejemplo de valor directo para cod_producto
                 insertDetallesCompras.setString(3, tablecompras.getValueAt(i, 2).toString()); // Ejemplo de valor directo para cantidad
                 insertDetallesCompras.setString(4, tablecompras.getValueAt(i, 3).toString()); // Ejemplo de valor directo para precio_unitario
@@ -738,6 +738,7 @@ public class IngresodeCompra extends javax.swing.JFrame {
 
             JOptionPane.showMessageDialog(null, "Registro guardado");
 
+            }
         } catch (SQLException e)
         {
             e.printStackTrace();
@@ -746,7 +747,7 @@ public class IngresodeCompra extends javax.swing.JFrame {
         {
             JOptionPane.showMessageDialog(null, "Error de conexión a la base de datos", "Error de Conexión", JOptionPane.ERROR_MESSAGE);
         }
-
+        
 
     }//GEN-LAST:event_btnguardarActionPerformed
 
