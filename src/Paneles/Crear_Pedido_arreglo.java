@@ -20,6 +20,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -51,6 +52,12 @@ public class Crear_Pedido_arreglo extends javax.swing.JPanel {
 
         // Mostrar la fecha en el JLabel
         fechaP.setText(fechaFormateada);
+        
+        fechaEntrega.setMinSelectableDate(new Date());
+
+        Calendar maxDate = Calendar.getInstance();
+        maxDate.add(Calendar.MONTH, 5); // Suma meses a la fecha actual
+        fechaEntrega.setMaxSelectableDate(maxDate.getTime());
 
         try
         {
@@ -160,6 +167,7 @@ public class Crear_Pedido_arreglo extends javax.swing.JPanel {
         txtprecio = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtDescripcionArre = new javax.swing.JTextArea();
+        fechaEntrega = new com.toedter.calendar.JDateChooser();
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -341,6 +349,8 @@ public class Crear_Pedido_arreglo extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(txtDescripcionArre);
 
+        fechaEntrega.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Fecha de Entrega", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12))); // NOI18N
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -365,19 +375,22 @@ public class Crear_Pedido_arreglo extends javax.swing.JPanel {
                                             .addComponent(cbxarreglo, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                             .addComponent(cbxEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addComponent(crea_cliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
+                                        .addComponent(crea_cliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(fechaEntrega, javax.swing.GroupLayout.PREFERRED_SIZE, 361, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(197, 197, 197)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 593, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(68, 68, 68)
-                        .addComponent(labelPrendas, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(479, 479, 479)
                         .addComponent(btnCrear))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(371, 371, 371)
-                        .addComponent(txtprecio, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(145, 145, 145)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 691, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addGap(550, 550, 550)
+                                .addComponent(txtprecio, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(22, 22, 22)
+                        .addComponent(labelPrendas, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -407,10 +420,12 @@ public class Crear_Pedido_arreglo extends javax.swing.JPanel {
                         .addComponent(labelPrendas, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(60, 60, 60)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(44, 44, 44)
-                        .addComponent(txtprecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(36, 36, 36)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(33, 33, 33)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtprecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(fechaEntrega, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(35, 35, 35)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(56, 56, 56)
                 .addComponent(btnCrear)
@@ -490,6 +505,8 @@ public class Crear_Pedido_arreglo extends javax.swing.JPanel {
         String precio = txtprecio.getText();
         SimpleDateFormat sdfSQL = new SimpleDateFormat("yyyy-MM-dd");
         String fechaPedido = sdfSQL.format(new Date());
+        
+         Date fecha = fechaEntrega.getDate();
 
         StringBuilder camposVacios = new StringBuilder("Los siguientes campos están vacíos:");
 
@@ -500,6 +517,10 @@ public class Crear_Pedido_arreglo extends javax.swing.JPanel {
         if (arreglo.equals("Seleccione"))
         {
             camposVacios.append("\n - Arreglo");
+        }
+         if (fecha == null)
+        {
+            camposVacios.append("\n - Fecha de Entrega");
         }
         if (imagen1.getIcon() == null)
         {
@@ -532,8 +553,8 @@ public class Crear_Pedido_arreglo extends javax.swing.JPanel {
                 Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
 
                 PreparedStatement insertPs = conn.prepareStatement("INSERT INTO PedidoArreglo (arreglo, estado, descripcion, precio ,imagen1, imagen2, imagen3,"
-                        + " fechaPedido,id_cliente) "
-                        + "VALUES (?,?,?,?,?,?,?,?,?)");
+                        + " fechaPedido,id_cliente, fechaEntrega) "
+                        + "VALUES (?,?,?,?,?,?,?,?,?,?)");
                 insertPs.setString(1, arreglo);
                 insertPs.setString(2, estado);
                 insertPs.setObject(3, descripcion);
@@ -592,6 +613,7 @@ public class Crear_Pedido_arreglo extends javax.swing.JPanel {
 
                 insertPs.setString(8, fechaPedido);
                 insertPs.setObject(9, idC);
+                insertPs.setDate(10, new java.sql.Date(fecha.getTime()));
 
                 insertPs.executeUpdate();
                 JOptionPane.showMessageDialog(null, "Registro guardado");
@@ -688,6 +710,7 @@ public class Crear_Pedido_arreglo extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> cbxEstado;
     private javax.swing.JComboBox<String> cbxarreglo;
     private javax.swing.JLabel crea_cliente;
+    public com.toedter.calendar.JDateChooser fechaEntrega;
     public javax.swing.JLabel fechaP;
     public javax.swing.JLabel id_cliente;
     private javax.swing.JLabel imagen1;

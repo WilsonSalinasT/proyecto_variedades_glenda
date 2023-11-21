@@ -428,6 +428,11 @@ public class Listado_Pedidos_Arreglos extends javax.swing.JPanel {
                 String descripcionA = rs.getString("descripcion");
                 String precioA = rs.getString("precio");
                 String fechapedido = rs.getString("fechaPedido");
+                
+                
+                
+                String fechaEntrega = rs.getDate("fechaEntrega").toString();
+            
 
                 ver_pedido_arreglo ver = new ver_pedido_arreglo();
 
@@ -438,6 +443,9 @@ public class Listado_Pedidos_Arreglos extends javax.swing.JPanel {
                 ver.txtDescripcionA.setText(descripcionA);
                 ver.txtprecio.setText(precioA);
                 ver.id.setText(rs.getString("id_arreglo"));
+                
+                ver.txtFechaEntrega.setText(fechaEntrega);
+                
                 // Recuperar la imagen de la base de datos
                 byte[] imagenA1 = rs.getBytes("imagen1");
                 byte[] imagenA2 = rs.getBytes("imagen2");
@@ -543,6 +551,7 @@ public class Listado_Pedidos_Arreglos extends javax.swing.JPanel {
         panelprincipal.revalidate();
         panelprincipal.repaint();*/
     int selectedRow2;
+    
     private void editarbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarbtnActionPerformed
         selectedRow1 = tblPedidosA.getSelectedRow();
         if (selectedRow1 == -1)
@@ -577,6 +586,7 @@ public class Listado_Pedidos_Arreglos extends javax.swing.JPanel {
                 String precioA = rs.getString("precio");
                 String fechapedido = rs.getString("fechaPedido");
 
+                 Date fechaEntrega = rs.getDate("fechaEntrega");
                 editar_Pedido_arreglo ver = new editar_Pedido_arreglo();
                 ver.lbl_id_arregl.setText(idArreglo);
                 ver.txtCliente.setSelectedItem(nombre + " " + apellido);
@@ -641,6 +651,7 @@ public class Listado_Pedidos_Arreglos extends javax.swing.JPanel {
                 }
 
                 ver.fechaP.setText(fechapedido);
+                ver.JDfechaEntrega.setDate(fechaEntrega);
 
                 ver.setSize(1024, 640);
                 ver.setLocation(0, 0);

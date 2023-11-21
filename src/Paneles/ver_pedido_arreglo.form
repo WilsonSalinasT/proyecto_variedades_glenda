@@ -23,7 +23,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <Component id="jScrollPane1" min="-2" pref="800" max="-2" attributes="0"/>
-              <EmptySpace min="0" pref="73" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -60,16 +60,19 @@
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                       <Component id="id" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="92" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="1" attributes="0">
-                                          <Group type="102" alignment="1" attributes="0">
-                                              <Component id="txtArreglo" min="-2" pref="362" max="-2" attributes="0"/>
-                                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                                              <Component id="txtestado" min="-2" pref="314" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Group type="102" alignment="1" attributes="0">
-                                              <Component id="txtCliente" min="-2" pref="362" max="-2" attributes="0"/>
-                                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                                              <Component id="txtTel" min="-2" pref="314" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="txtDescripcionA" min="-2" pref="694" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="1" attributes="0">
+                                              <Group type="102" alignment="1" attributes="0">
+                                                  <Component id="txtArreglo" min="-2" pref="362" max="-2" attributes="0"/>
+                                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                                  <Component id="txtestado" min="-2" pref="314" max="-2" attributes="0"/>
+                                              </Group>
+                                              <Group type="102" alignment="1" attributes="0">
+                                                  <Component id="txtCliente" min="-2" pref="362" max="-2" attributes="0"/>
+                                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                                  <Component id="txtTel" min="-2" pref="314" max="-2" attributes="0"/>
+                                              </Group>
                                           </Group>
                                       </Group>
                                   </Group>
@@ -77,17 +80,16 @@
                           </Group>
                           <Component id="jPanel2" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="343" max="-2" attributes="0"/>
-                              <Component id="txtprecio" min="-2" pref="240" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="101" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="143" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jPanel3" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Component id="jScrollPane2" min="-2" pref="694" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="txtFechaEntrega" min="-2" pref="346" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="386" max="-2" attributes="0"/>
                                       <Component id="labelPrendas" min="-2" pref="287" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                                      <Component id="txtprecio" min="-2" pref="240" max="-2" attributes="0"/>
+                                      <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -130,18 +132,21 @@
                           </Group>
                       </Group>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
+                          <Group type="102" attributes="0">
                               <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
                               <Component id="labelPrendas" min="-2" pref="35" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
-                              <Component id="jScrollPane2" min="-2" pref="133" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
+                              <Component id="txtDescripcionA" min="-2" pref="127" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
-                      <Component id="txtprecio" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="txtFechaEntrega" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtprecio" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                       <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="224" max="-2" attributes="0"/>
                   </Group>
@@ -400,43 +405,31 @@
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
               </AuxValues>
             </Component>
-            <Container class="javax.swing.JScrollPane" name="jScrollPane2">
-              <AuxValues>
-                <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
-              </AuxValues>
-
-              <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
-              <SubComponents>
-                <Component class="javax.swing.JTextArea" name="txtDescripcionA">
-                  <Properties>
-                    <Property name="editable" type="boolean" value="false"/>
-                    <Property name="columns" type="int" value="20"/>
-                    <Property name="lineWrap" type="boolean" value="true"/>
-                    <Property name="rows" type="int" value="5"/>
-                    <Property name="wrapStyleWord" type="boolean" value="true"/>
-                    <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                      <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                        <TitledBorder justification="2" position="2" title="Descripci&#xf3;n">
-                          <Border PropertyName="innerBorder" info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
-                            <LineBorder roundedCorners="true"/>
-                          </Border>
-                          <Font PropertyName="font" name="Arial Black" size="12" style="2"/>
-                        </TitledBorder>
+            <Component class="javax.swing.JTextArea" name="txtDescripcionA">
+              <Properties>
+                <Property name="editable" type="boolean" value="false"/>
+                <Property name="columns" type="int" value="20"/>
+                <Property name="lineWrap" type="boolean" value="true"/>
+                <Property name="rows" type="int" value="5"/>
+                <Property name="wrapStyleWord" type="boolean" value="true"/>
+                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                  <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+                    <TitledBorder justification="2" position="2" title="Descripci&#xf3;n">
+                      <Border PropertyName="innerBorder" info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                        <LineBorder roundedCorners="true"/>
                       </Border>
-                    </Property>
-                  </Properties>
-                  <AuxValues>
-                    <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
-                  </AuxValues>
-                </Component>
-              </SubComponents>
-            </Container>
+                      <Font PropertyName="font" name="Arial Black" size="12" style="2"/>
+                    </TitledBorder>
+                  </Border>
+                </Property>
+              </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
+            </Component>
             <Component class="javax.swing.JTextField" name="txtCliente">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
-                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                </Property>
                 <Property name="horizontalAlignment" type="int" value="0"/>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
@@ -456,9 +449,6 @@
             <Component class="javax.swing.JTextField" name="txtArreglo">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
-                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                </Property>
                 <Property name="horizontalAlignment" type="int" value="0"/>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
@@ -500,14 +490,29 @@
             <Component class="javax.swing.JTextField" name="id">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
-                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="null"/>
+                </Property>
+              </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
+            </Component>
+            <Component class="javax.swing.JTextField" name="txtFechaEntrega">
+              <Properties>
+                <Property name="horizontalAlignment" type="int" value="0"/>
+                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                  <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+                    <TitledBorder justification="2" position="2" title="Fecha de Entrega">
+                      <Border PropertyName="innerBorder" info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                        <LineBorder roundedCorners="true"/>
+                      </Border>
+                      <Font PropertyName="font" name="Arial Black" size="12" style="2"/>
+                    </TitledBorder>
+                  </Border>
                 </Property>
               </Properties>
               <AuxValues>
