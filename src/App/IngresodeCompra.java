@@ -221,7 +221,6 @@ public class IngresodeCompra extends javax.swing.JFrame {
 
         jLabel3.setText("No. de Factura");
 
-        numFactura.setText("- - -");
         numFactura.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 numFacturaActionPerformed(evt);
