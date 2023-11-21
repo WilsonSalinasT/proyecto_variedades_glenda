@@ -412,7 +412,7 @@ public class Listado_Pedidos_Arreglos extends javax.swing.JPanel {
             ResultSet rs;
 
             Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
-            ps = conn.prepareStatement("SELECT * FROM Cliente JOIN PedidoArreglo ON Cliente.id_cliente = PedidoArreglo.id_cliente WHERE id_arreglo=?");
+            ps = conn.prepareStatement("SELECT * FROM PedidoArreglo JOIN Cliente ON Cliente.id_cliente = PedidoArreglo.id_cliente WHERE id_arreglo=?");
             ps.setInt(1, valorEntero);
 
             rs = ps.executeQuery();
@@ -569,7 +569,7 @@ public class Listado_Pedidos_Arreglos extends javax.swing.JPanel {
             ResultSet rs;
 
             Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
-            ps = conn.prepareStatement("SELECT * FROM Cliente JOIN PedidoArreglo ON Cliente.id_cliente = PedidoArreglo.id_cliente WHERE id_arreglo=?");
+            ps = conn.prepareStatement("SELECT * FROM PedidoArreglo JOIN Cliente ON Cliente.id_cliente = PedidoArreglo.id_cliente WHERE id_arreglo=?");
             ps.setInt(1, valorEntero);
 
             rs = ps.executeQuery();
