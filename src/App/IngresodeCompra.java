@@ -588,10 +588,10 @@ public class IngresodeCompra extends javax.swing.JFrame {
         facturaText.append("                           Factura de compra                   \n");
         facturaText.append("*********************************************************************\n");
 
-        facturaText.append("No. de Factura: ").append(num).append("\n");
-        facturaText.append("Tipo de compra: ").append(tipo).append("\n");
-        facturaText.append("Proveedor: ").append(proveedor).append("\n");
-        facturaText.append("Fecha: ").append(fechaFormateada).append("\n");
+        facturaText.append(" No. de Factura: ").append(num).append("\n");
+        facturaText.append(" Tipo de compra: ").append(tipo).append("\n");
+        facturaText.append(" Proveedor: ").append(proveedor).append("\n");
+        facturaText.append(" Fecha: ").append(fechaFormateada).append("\n");
 
         facturaText.append("*********************************************************************\n");
         facturaText.append("\n");
@@ -609,7 +609,7 @@ public class IngresodeCompra extends javax.swing.JFrame {
 
         ver.txtbill.setText(facturaText.toString());
         ver.txtbill.setText(ver.txtbill.getText() + "*********************************************************************\n");
-        ver.txtbill.setText(ver.txtbill.getText() + "Total: " + Tsum.getText() + "\n");
+        ver.txtbill.setText(ver.txtbill.getText() + " Total: " + Tsum.getText() + "\n");
         facturaText.append("*********************************************************************\n");
 
         ver.setVisible(true);
