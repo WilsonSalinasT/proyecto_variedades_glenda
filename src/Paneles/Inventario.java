@@ -22,20 +22,20 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Inventario extends javax.swing.JPanel {
 
-    
     int paginaActual = 1; // Página actual
     int filasPorPagina = 20; // Número de filas a mostrar por página
     int totalFilas = 0; // Total de filas en la tabla
     int totalPaginas = 0; // Total de páginas en la tabla
     int numRegistro = 0;
     String terminoBusqueda = ""; // Término de búsqueda actual
+
     /**
      * Creates new form Inventario
      */
     public Inventario() {
         initComponents();
         cargarTablaEmpleados();
-        
+
         tabla_inventario.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 12));
         tabla_inventario.getTableHeader().setOpaque(false);
         tabla_inventario.getTableHeader().setBackground(new Color(255, 0, 0));
@@ -46,7 +46,7 @@ public class Inventario extends javax.swing.JPanel {
         tabla_inventario.setColumnSelectionAllowed(false);
     }
 
-      private void cargarTablaEmpleados() {
+    private void cargarTablaEmpleados() {
         DefaultTableModel modeloTabla = (DefaultTableModel) tabla_inventario.getModel();
         modeloTabla.setRowCount(0); // Limpiar los datos existentes en la tabla
 
@@ -56,7 +56,8 @@ public class Inventario extends javax.swing.JPanel {
         int columnas;
         boolean foundData = false;
 
-        try {
+        try
+        {
             Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
 
             // Obtener el total de filas que cumplen con el criterio de búsqueda
@@ -69,42 +70,55 @@ public class Inventario extends javax.swing.JPanel {
             ps.setString(3, "%" + terminoBusqueda + "%");
             rs = ps.executeQuery();
 
-            if (rs.next()) {
+            if (rs.next())
+            {
                 totalFilas = rs.getInt(1);
             }
             totalPaginas = (int) Math.ceil((double) totalFilas / filasPorPagina);
 
-            if (paginaActual < 1) {
+            if (paginaActual < 1)
+            {
                 paginaActual = 1;
-            } else if (paginaActual > totalPaginas) {
+            } else if (paginaActual > totalPaginas)
+            {
                 paginaActual = totalPaginas;
             }
 
             int offset = (paginaActual - 1) * filasPorPagina;
-            if (offset < 0) {
+            if (offset < 0)
+            {
                 offset = 0;
             }
 
             // Consulta para obtener los datos paginados
-            ps = conn.prepareStatement("SELECT ROW_NUMBER() OVER(ORDER BY P.nombre) AS NumRegistro, P.nombre, SUM(D.cantidad) as cantidad_total, D.precio_unitario "
-                    + "FROM Compras C "
-                    + "JOIN DetallesCompras D ON C.id_compra = D.id_compra "
-                    + "JOIN Productos P ON D.cod_producto = P.cod_producto "
-                    +"GROUP BY P.nombre, D.precio_unitario "
-                    + "ORDER BY P.nombre "
+            ps = conn.prepareStatement("SELECT ROW_NUMBER() OVER(ORDER BY nombre_producto) AS NumRegistro,\n"
+                    + "       nombre_producto,\n"
+                    + "       cantidad_total,\n"
+                    + "       precio_unitario\n"
+                    + "FROM (\n"
+                    + "    SELECT DISTINCT\n"
+                    + "           P.nombre AS nombre_producto,\n"
+                    + "           SUM(DC.cantidad) OVER (PARTITION BY P.nombre) AS cantidad_total,\n"
+                    + "           DC.precio_unitario\n"
+                    + "    FROM DetallesCompras DC\n"
+                    + "    INNER JOIN Productos P ON DC.cod_producto = P.cod_producto  WHERE P.nombre Like ? \n"
+                    + ") AS subquery\n"
+                    + "ORDER BY nombre_producto\n"
                     + "OFFSET ? ROWS FETCH NEXT ? ROWS ONLY");
-//            ps.setString(1, "%" + terminoBusqueda + "%");
+            ps.setString(1, "%" + terminoBusqueda + "%");
 //            ps.setString(2, "%" + terminoBusqueda + "%");
 //            ps.setString(3, "%" + terminoBusqueda + "%");
-            ps.setInt(1, offset);
-            ps.setInt(2, filasPorPagina);
+            ps.setInt(2, offset);
+            ps.setInt(3, filasPorPagina);
             rs = ps.executeQuery();
             rsmd = rs.getMetaData();
             columnas = rsmd.getColumnCount();
 
-            while (rs.next()) {
+            while (rs.next())
+            {
                 Object[] fila = new Object[columnas];
-                for (int indice = 0; indice < columnas; indice++) {
+                for (int indice = 0; indice < columnas; indice++)
+                {
                     fila[indice] = rs.getObject(indice + 1);
                 }
                 modeloTabla.addRow(fila);
@@ -113,7 +127,8 @@ public class Inventario extends javax.swing.JPanel {
 
             ajustarTabla(filasPorPagina);
 
-            if (!foundData) {
+            if (!foundData)
+            {
                 JOptionPane.showMessageDialog(null, "No se encontraron datos");
             }
 
@@ -121,14 +136,15 @@ public class Inventario extends javax.swing.JPanel {
             int rowCount = modeloTabla.getRowCount();
 //            Texto_Contable.setText("Cantidad de filas: " + rowCount + " - Página " + paginaActual + "/" + totalPaginas);
 
-        } catch (SQLException e) {
+        } catch (SQLException e)
+        {
             e.printStackTrace(); // Imprime la pila de excepciones para depuración
             JOptionPane.showMessageDialog(null, e.toString());
         }
 
     }
-      
-       private void ajustarTabla(int filasDeseadas) {
+
+    private void ajustarTabla(int filasDeseadas) {
         tabla_inventario.setPreferredScrollableViewportSize(new Dimension(tabla_inventario.getPreferredSize().width, tabla_inventario.getRowHeight() * filasDeseadas));
         tabla_inventario.setFillsViewportHeight(true);
     }
