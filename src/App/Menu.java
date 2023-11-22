@@ -6,6 +6,7 @@ package App;
 
 import Paneles.GalleryProduct;
 import Paneles.IngresarCompra;
+import Paneles.Inventario;
 import Paneles.Listado_Citas;
 import Paneles.Listado_Empleados;
 import Paneles.Listado_Pedidos_Arreglos;
@@ -49,6 +50,7 @@ public class Menu extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
+        clientes1 = new javax.swing.JButton();
         clientes = new javax.swing.JButton();
         nueva_venta = new javax.swing.JButton();
         proveedor = new javax.swing.JButton();
@@ -69,6 +71,21 @@ public class Menu extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(51, 255, 204));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        clientes1.setBackground(new java.awt.Color(255, 153, 102));
+        clientes1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        clientes1.setForeground(new java.awt.Color(204, 255, 255));
+        clientes1.setText("-------");
+        clientes1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        clientes1.setMaximumSize(new java.awt.Dimension(70, 20));
+        clientes1.setMinimumSize(new java.awt.Dimension(70, 20));
+        clientes1.setRolloverEnabled(false);
+        clientes1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clientes1ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(clientes1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 250, 40));
 
         clientes.setBackground(new java.awt.Color(255, 153, 102));
         clientes.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -379,6 +396,18 @@ public class Menu extends javax.swing.JFrame {
 
     }//GEN-LAST:event_pedidoSublimacion2ActionPerformed
 
+    private void clientes1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clientes1ActionPerformed
+        // TODO add your handling code here:
+         Inventario p2 = new Inventario();
+        p2.setSize(1024, 640);
+        p2.setLocation(0, 0);
+
+        panelprincipal.removeAll();
+        panelprincipal.add(p2, BorderLayout.CENTER);
+        panelprincipal.revalidate();
+        panelprincipal.repaint();
+    }//GEN-LAST:event_clientes1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -424,6 +453,7 @@ public class Menu extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton citas;
     private javax.swing.JButton clientes;
+    private javax.swing.JButton clientes1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JButton nueva_venta;
