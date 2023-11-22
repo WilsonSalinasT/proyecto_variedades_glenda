@@ -544,7 +544,7 @@ public class editar_Pedido_arreglo extends javax.swing.JPanel {
                 Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
                 PreparedStatement updatePs = conn.prepareStatement(
                         "UPDATE PedidoArreglo SET arreglo=?, estado=?, descripcion=?, precio=?, "
-                        + "imagen1=?, imagen2=?, imagen3=?, fechaPedido=?, id_cliente=?, fechaEntrega=? "
+                        + "imagen1=?, imagen2=?, imagen3=?, fechaPedido=?, fechaEntrega=? "
                         + "WHERE id_arreglo=?"
                 );
 
@@ -636,10 +636,10 @@ public class editar_Pedido_arreglo extends javax.swing.JPanel {
                 }
 
                 updatePs.setString(8, fechaPedido);
-                updatePs.setString(9, idC);
-                updatePs.setDate(10, new java.sql.Date(fecha.getTime())); // Ajustar el índice a 9
+              
+                updatePs.setDate(9, new java.sql.Date(fecha.getTime())); // Ajustar el índice a 9
                 int numeracion = Integer.parseInt(idA);
-                updatePs.setInt(11, numeracion); // Ajustar el índice a 10
+                updatePs.setInt(10, numeracion); // Ajustar el índice a 10
 
 
                 /*  // Establece el valor de la clave primaria
