@@ -4,8 +4,8 @@
  */
 package App;
 
-import static App.IngresodeCompra.tablecompras;
-import static App.IngresodeCompra.Tsum;
+
+import static App.IngresodeVenta.Tsum;
 import static App.Menu.panelprincipal;
 import Paneles.Crear_Pedido_arreglo;
 import Paneles.IngresarCompra;
@@ -32,12 +32,13 @@ import javax.swing.table.TableColumn;
 import javax.swing.text.JTextComponent;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import static App.IngresodeVenta.tableventas;
 
 /**
  *
  * @author PC
  */
-public class ProductoParaCompra extends javax.swing.JFrame {
+public class ProductoParaVenta extends javax.swing.JFrame {
 
     TextPrompt holder;
 
@@ -48,7 +49,7 @@ public class ProductoParaCompra extends javax.swing.JFrame {
     /**
      * Creates new form ProductoParaCompra
      */
-    public ProductoParaCompra() {
+    public ProductoParaVenta() {
         initComponents();
         this.setLocationRelativeTo(null);
         holder = new TextPrompt("Busque por nombre del producto y tipo de categoría", CuadroBuscarProducto);
@@ -536,11 +537,11 @@ public class ProductoParaCompra extends javax.swing.JFrame {
     public void calcular() {
 
         float suma = 0;
-        for (int i = 0; i < tablecompras.getRowCount(); i++)
+        for (int i = 0; i < tableventas.getRowCount(); i++)
         {
 
             float renglon;
-            renglon = Float.parseFloat(tablecompras.getValueAt(i, 3).toString());
+            renglon = Float.parseFloat(tableventas.getValueAt(i, 3).toString());
 
             suma = suma + renglon;
         }
@@ -713,7 +714,7 @@ public class ProductoParaCompra extends javax.swing.JFrame {
             //            totalP = String.valueOf(tot);
 
             //Enviar los campos seleccionados de la tabla de productos a la tabla de factura de compras
-            modelo = (DefaultTableModel) tablecompras.getModel();
+            modelo = (DefaultTableModel) tableventas.getModel();
             // Buscar el producto en la tabla tblProductosCompras
             int rowCount = modelo.getRowCount();
             boolean productoEncontrado = false;
@@ -991,24 +992,26 @@ public class ProductoParaCompra extends javax.swing.JFrame {
             }
         } catch (ClassNotFoundException ex)
         {
-            java.util.logging.Logger.getLogger(ProductoParaCompra.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ProductoParaVenta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex)
         {
-            java.util.logging.Logger.getLogger(ProductoParaCompra.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ProductoParaVenta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex)
         {
-            java.util.logging.Logger.getLogger(ProductoParaCompra.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ProductoParaVenta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex)
         {
-            java.util.logging.Logger.getLogger(ProductoParaCompra.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ProductoParaVenta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ProductoParaCompra().setVisible(true);
+                new ProductoParaVenta().setVisible(true);
             }
         });
     }
