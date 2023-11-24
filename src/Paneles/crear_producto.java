@@ -76,7 +76,9 @@ public class crear_producto extends javax.swing.JPanel {
         jButton3 = new javax.swing.JButton();
         txtimagen = new javax.swing.JLabel();
         txtruta = new javax.swing.JTextField();
-        txtPrecio = new javax.swing.JTextField();
+        txtPreciounitario = new javax.swing.JTextField();
+        txtPreciocompra = new javax.swing.JTextField();
+        txtPrecioventa = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -201,10 +203,24 @@ public class crear_producto extends javax.swing.JPanel {
         txtruta.setForeground(new java.awt.Color(255, 255, 255));
         txtruta.setBorder(null);
 
-        txtPrecio.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Precio", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12), new java.awt.Color(0, 0, 0))); // NOI18N
-        txtPrecio.addKeyListener(new java.awt.event.KeyAdapter() {
+        txtPreciounitario.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Precio unitario", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12), new java.awt.Color(0, 0, 0))); // NOI18N
+        txtPreciounitario.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtPrecioKeyTyped(evt);
+                txtPreciounitarioKeyTyped(evt);
+            }
+        });
+
+        txtPreciocompra.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Precio de compra", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12), new java.awt.Color(0, 0, 0))); // NOI18N
+        txtPreciocompra.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtPreciocompraKeyTyped(evt);
+            }
+        });
+
+        txtPrecioventa.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Precio de venta", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12), new java.awt.Color(0, 0, 0))); // NOI18N
+        txtPrecioventa.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtPrecioventaKeyTyped(evt);
             }
         });
 
@@ -222,13 +238,20 @@ public class crear_producto extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(359, 359, 359)
                         .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(428, 428, 428)
+                        .addComponent(txtPrecioventa, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(113, 113, 113))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(310, 310, 310)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(txtPreciocompra, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txtPreciounitario, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE)
                             .addComponent(txtnombre)
-                            .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtPrecio))))
+                            .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 92, Short.MAX_VALUE)
@@ -245,7 +268,7 @@ public class crear_producto extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(txtimagen, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -256,18 +279,22 @@ public class crear_producto extends javax.swing.JPanel {
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtPreciocompra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtPreciounitario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jButton3)
                         .addGap(77, 77, 77)
-                        .addComponent(txtruta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(28, 28, 28)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
+                        .addComponent(txtruta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(68, 68, 68))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(txtPrecioventa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)))
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(36, Short.MAX_VALUE))
         );
@@ -282,8 +309,9 @@ public class crear_producto extends javax.swing.JPanel {
         String descripcion = txtdescripcion.getText().trim();
         String imagen = txtruta.getText().trim();
         String categoria = (String) jComboBox1.getSelectedItem();
-        String precio = txtPrecio.getText().trim();
-       
+        String preciounitario = txtPreciounitario.getText().trim();
+        String preciocompra = txtPreciocompra.getText().trim();
+        String precioventa = txtPrecioventa.getText().trim();
 
         StringBuilder camposVacios = new StringBuilder("Los siguientes campos están vacíos:");
 
@@ -334,39 +362,62 @@ public class crear_producto extends javax.swing.JPanel {
                     JOptionPane.showMessageDialog(null, "El producto con nombre '" + existingName + "' ya existe. Por favor, elige otro nombre.");
                 } else
                 {
-                    PreparedStatement insertPs = conn.prepareStatement("INSERT INTO Productos (nombre, descripcion, categoria, imagen, foto, precio) VALUES (?, ?, ?, ?, ?, ?)");
+                    PreparedStatement insertPs = conn.prepareStatement("INSERT INTO Productos (nombre, descripcion, categoria, imagen, foto) VALUES (?, ?, ?, ?, ?)", PreparedStatement.RETURN_GENERATED_KEYS);
 
                     insertPs.setString(1, nombre);
                     insertPs.setString(2, descripcion);
                     insertPs.setString(3, categoria);
 
-                    if (imagen != null && !imagen.isEmpty())
+// Asignar la ruta de la imagen por defecto
+                    if (imagen == null || imagen.isEmpty())
                     {
-                        insertPs.setString(4, imagen);
+                        insertPs.setString(4, "C:\\imagenes\\logo.jpg");
                     } else
                     {
-                        // Asignar la ruta de la imagen por defecto
-                        insertPs.setString(4, "C:\\imagenes\\logo.jpg");
+                        insertPs.setString(4, imagen);
                     }
 
-                    if (txtruta.getText() != null && !txtruta.getText().isEmpty())
+// Asignar la imagen por defecto como un flujo de bytes
+                    InputStream imagenPorDefecto = new FileInputStream("C:\\imagenes\\logo.jpg");
+                    if (txtruta.getText() == null || txtruta.getText().isEmpty())
+                    {
+                        insertPs.setBinaryStream(5, imagenPorDefecto);
+                    } else
                     {
                         archivofoto = new FileInputStream(txtruta.getText());
                         insertPs.setBinaryStream(5, archivofoto);
-                    } else
-                    {
-                        // Asignar la imagen por defecto como un flujo de bytes
-                        InputStream imagenPorDefecto = new FileInputStream("C:\\imagenes\\logo.jpg");
-                        insertPs.setBinaryStream(5, imagenPorDefecto);
                     }
 
-                    insertPs.setString(6, precio);
-                   
-                    
-// Ahora puedes ejecutar la consulta
-                    insertPs.executeUpdate();
-                    JOptionPane.showMessageDialog(null, "Registro guardado");
+// Ejecutar la primera inserción
+                    int filasAfectadasCompras = insertPs.executeUpdate();
 
+// Obtener el valor de cod_producto generado
+                    int codProductoGenerado = -1;
+                    try
+                    {
+                        ResultSet rsProducto = insertPs.getGeneratedKeys();
+
+                        if (rsProducto.next())
+                        {
+                            codProductoGenerado = rsProducto.getInt(1);
+                        }
+                    } catch (SQLException e)
+                    {
+                        // Manejar el caso en el que no se generan claves
+                        JOptionPane.showMessageDialog(null, "Error al guardar el registro");
+                    }
+
+// Ejecutar el segundo insertPs
+                    PreparedStatement insertPss = conn.prepareStatement("INSERT INTO Precio (cod_producto, precio_compra, precio_venta, precio_unitario) VALUES (?, ?, ?, ?)");
+
+                    insertPss.setInt(1, codProductoGenerado);
+                    insertPss.setString(2, preciocompra);
+                    insertPss.setString(3, preciounitario);
+                    insertPss.setString(4, precioventa);
+
+                    insertPss.executeUpdate(); // Aquí se ejecuta el segundo insert
+
+                    JOptionPane.showMessageDialog(null, "Registro guardado");
                     Listado_Productos cli = new Listado_Productos();
 
                     cli.setSize(1024, 640);
@@ -406,7 +457,7 @@ public class crear_producto extends javax.swing.JPanel {
     }//GEN-LAST:event_txtdescripcionKeyTyped
 
     private void txtnombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtnombreKeyTyped
-      char c = evt.getKeyChar(); // Obtener el carácter ingresado
+        char c = evt.getKeyChar(); // Obtener el carácter ingresado
 
         if (txtnombre.getText().isEmpty() && Character.isWhitespace(c))
         {
@@ -457,16 +508,26 @@ public class crear_producto extends javax.swing.JPanel {
 
     }//GEN-LAST:event_txtimagenMouseClicked
 
-    private void txtPrecioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrecioKeyTyped
+    private void txtPreciounitarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPreciounitarioKeyTyped
         char c = evt.getKeyChar();
-        String texto = txtPrecio.getText();
+        String texto = txtPreciounitario.getText();
 
-        if (c == '0' && (texto.isEmpty() || texto.equals("0"))) {
+        if (c == '0' && (texto.isEmpty() || texto.equals("0")))
+        {
             evt.consume(); // Evita que se inicie con un cero
-        } else if ((c < '0' || c > '9') || texto.length() >= 5) {
+        } else if ((c < '0' || c > '9') || texto.length() >= 5)
+        {
             evt.consume(); // Evita que se ingresen más de 6 caracteres o caracteres que no sean dígitos
         }
-    }//GEN-LAST:event_txtPrecioKeyTyped
+    }//GEN-LAST:event_txtPreciounitarioKeyTyped
+
+    private void txtPreciocompraKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPreciocompraKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPreciocompraKeyTyped
+
+    private void txtPrecioventaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrecioventaKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPrecioventaKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -480,7 +541,9 @@ public class crear_producto extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField txtPrecio;
+    private javax.swing.JTextField txtPreciocompra;
+    private javax.swing.JTextField txtPreciounitario;
+    private javax.swing.JTextField txtPrecioventa;
     public javax.swing.JTextArea txtdescripcion;
     private javax.swing.JLabel txtimagen;
     private javax.swing.JTextField txtnombre;

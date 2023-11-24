@@ -587,6 +587,7 @@ public class Crear_Pedido_Sublimacion extends javax.swing.JPanel {
         cbxEstado.setSelectedIndex(0);
         txtPrecio.setText("");
         txtcantidad.setText("");
+        txtTel.setText("");
         jDateChooser1.setDate(null);
         imagen.setIcon(null);
         id_cliente.setText("");
