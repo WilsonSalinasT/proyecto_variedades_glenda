@@ -42,11 +42,11 @@ public class IngresodeVenta extends javax.swing.JFrame {
     public IngresodeVenta() {
         initComponents();
 
-        txtfecha.setMinSelectableDate(new Date());
-
-        Calendar maxDate = Calendar.getInstance();
-        maxDate.add(Calendar.MONTH, 2); // Suma dos meses a la fecha actual
-        txtfecha.setMaxSelectableDate(maxDate.getTime());
+//        txtfecha.setMinSelectableDate(new Date());
+//
+//        Calendar maxDate = Calendar.getInstance();
+//        maxDate.add(Calendar.MONTH, 2); // Suma dos meses a la fecha actual
+//        txtfecha.setMaxSelectableDate(maxDate.getTime());
 
         tableventas.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 12));
         tableventas.getTableHeader().setOpaque(false);
@@ -128,7 +128,6 @@ public class IngresodeVenta extends javax.swing.JFrame {
         jSeparator4 = new javax.swing.JSeparator();
         btnAgregarproducto = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
-        txtfecha = new com.toedter.calendar.JDateChooser();
         jLabel5 = new javax.swing.JLabel();
         txtCliente = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
@@ -137,6 +136,7 @@ public class IngresodeVenta extends javax.swing.JFrame {
         numFactura = new javax.swing.JFormattedTextField();
         jSeparator5 = new javax.swing.JSeparator();
         id_cliente = new javax.swing.JTextField();
+        txtfecha = new com.toedter.calendar.JDateChooser();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableventas = new javax.swing.JTable();
@@ -277,8 +277,8 @@ public class IngresodeVenta extends javax.swing.JFrame {
                                     .addComponent(jLabel6))
                                 .addGap(57, 57, 57)
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtCliente, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(txtfecha, javax.swing.GroupLayout.DEFAULT_SIZE, 263, Short.MAX_VALUE))))
+                                    .addComponent(txtCliente, 0, 263, Short.MAX_VALUE)
+                                    .addComponent(txtfecha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                         .addGap(0, 2, Short.MAX_VALUE)))
                 .addGap(38, 38, 38))
             .addComponent(jSeparator4)
@@ -311,19 +311,22 @@ public class IngresodeVenta extends javax.swing.JFrame {
                     .addComponent(txtCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(40, 40, 40)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel6)
-                    .addComponent(txtfecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(31, 31, 31)
-                .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnAgregarproducto, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton4)
-                    .addComponent(btnguardar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(15, Short.MAX_VALUE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addGap(37, 37, 37)
+                        .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnAgregarproducto, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton4)
+                            .addComponent(btnguardar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap(15, Short.MAX_VALUE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(txtfecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
@@ -872,7 +875,7 @@ public class IngresodeVenta extends javax.swing.JFrame {
     public static javax.swing.JTable tableventas;
     public javax.swing.JComboBox<String> tipoCompra;
     public javax.swing.JComboBox<String> txtCliente;
-    public com.toedter.calendar.JDateChooser txtfecha;
+    private com.toedter.calendar.JDateChooser txtfecha;
     // End of variables declaration//GEN-END:variables
 
     private boolean existeNumeroFactura(Connection conn, String nunfactura) {

@@ -414,7 +414,7 @@ public class Menu extends javax.swing.JFrame {
         Inventario p2 = new Inventario();
         p2.setSize(1024, 640);
         p2.setLocation(0, 0);
-
+    
         panelprincipal.removeAll();
         panelprincipal.add(p2, BorderLayout.CENTER);
         panelprincipal.revalidate();

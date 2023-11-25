@@ -91,19 +91,49 @@ public class Inventario extends javax.swing.JPanel {
             }
 
             // Consulta para obtener los datos paginados
-            ps = conn.prepareStatement("SELECT ROW_NUMBER() OVER(ORDER BY nombre_producto) AS NumRegistro,\n"
-                    + "       nombre_producto,\n"
-                    + "       cantidad_total,\n"
-                    + "       precio_unitario\n"
-                    + "FROM (\n"
-                    + "    SELECT DISTINCT\n"
-                    + "           P.nombre AS nombre_producto,\n"
-                    + "           SUM(DC.cantidad) OVER (PARTITION BY P.nombre) AS cantidad_total,\n"
-                    + "           DC.precio_unitario\n"
-                    + "    FROM DetallesCompras DC\n"
-                    + "    INNER JOIN Productos P ON DC.cod_producto = P.cod_producto  WHERE P.nombre Like ? \n"
-                    + ") AS subquery\n"
-                    + "ORDER BY nombre_producto\n"
+            ps = conn.prepareStatement("SELECT \n"
+                    + "    ROW_NUMBER() OVER (ORDER BY P.nombre) AS NumRegistro,\n"
+                    + "   P.nombre,\n"
+                    + "    P.categoria,\n"
+                    + "    P.cantidad_disponible,\n"
+                    + "    SUM(DC.cantidad_comprada) AS cantidad_comprada,\n"
+                    + "    SUM(V.cantidad_vendida) AS cantidad_vendida "
+                    + "FROM \n"
+                    + "    Productos P "
+                    + "LEFT JOIN\n"
+                    + "    (\n"
+                    + "        SELECT\n"
+                    + "            cod_producto,\n"
+                    + "            SUM(cantidad) AS cantidad_comprada\n"
+                    + "        FROM\n"
+                    + "            DetallesCompras DC\n"
+                    + "        INNER JOIN\n"
+                    + "            Compras co ON DC.id_compra = co.id_compra\n"
+                    + "            AND co.fecha >= DATEADD(WEEK, DATEDIFF(WEEK, 0, GETDATE()), 0)\n"
+                    + "        GROUP BY\n"
+                    + "            cod_producto\n"
+                    + "    ) DC ON P.cod_producto = DC.cod_producto\n"
+                    + "LEFT JOIN\n"
+                    + "    (\n"
+                    + "        SELECT\n"
+                    + "            cod_producto,\n"
+                    + "            SUM(cantidad_vendida) AS cantidad_vendida\n"
+                    + "        FROM\n"
+                    + "            DetallesVentas V\n"
+                    + "        INNER JOIN\n"
+                    + "            Ventas ve ON V.id_venta = ve.id_venta\n"
+                    + "            AND ve.fecha >= DATEADD(WEEK, DATEDIFF(WEEK, 0, GETDATE()), 0)\n"
+                    + "        GROUP BY\n"
+                    + "            cod_producto\n"
+                    + "    ) V ON P.cod_producto = V.cod_producto "
+                    + "WHERE\n"
+                    + "    P.nombre LIKE ? -- Reemplaza 'TuCategoriaEspecifica' con la categoría que deseas filtrar\n"
+                    + "GROUP BY\n"
+                    + "    P.nombre,\n"
+                    + "    P.categoria,\n"
+                    + "    P.cantidad_disponible\n"
+                    + "ORDER BY \n"
+                    + "    P.nombre\n"
                     + "OFFSET ? ROWS FETCH NEXT ? ROWS ONLY");
             ps.setString(1, "%" + terminoBusqueda + "%");
 //            ps.setString(2, "%" + terminoBusqueda + "%");
@@ -169,16 +199,16 @@ public class Inventario extends javax.swing.JPanel {
         jPanel2.setBackground(new java.awt.Color(255, 102, 102));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 2, 36)); // NOI18N
-        jLabel1.setText("Inventario de entradas");
+        jLabel1.setText("Inventario de entradas y salidas");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(327, 327, 327)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(236, 236, 236))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -190,13 +220,10 @@ public class Inventario extends javax.swing.JPanel {
 
         tabla_inventario.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "N°", "Producto", "Disponible", "Precio de compra"
+                "N°", "Producto", "Categoria", "Cantidad disponible", "Cantidad comprada", "cantidad vendida"
             }
         ));
         tabla_inventario.setShowHorizontalLines(true);
