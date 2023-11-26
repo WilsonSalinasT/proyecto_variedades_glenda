@@ -349,7 +349,7 @@ public class ProductoParaVenta extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Num.", "Nombre del Producto", "Tipo de Categoria", "Precio", "Id"
+                "Num.", "Nombre del Producto", "Tipo de Categoria", "Precio unitario", "Id"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -783,6 +783,7 @@ public class ProductoParaVenta extends javax.swing.JFrame {
         panelprincipal.add(p2, BorderLayout.NORTH);  // Especifica BorderLayout.NORTH aquí
         panelprincipal.revalidate();
         panelprincipal.repaint();
+        this.dispose();
     }//GEN-LAST:event_btncrearproductoActionPerformed
 
     int selectedRow2;
