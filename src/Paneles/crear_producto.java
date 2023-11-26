@@ -417,8 +417,9 @@ public class crear_producto extends javax.swing.JPanel {
 
                     insertPss.setInt(1, codProductoGenerado);
                     insertPss.setString(2, preciocompra);
-                    insertPss.setString(3, preciounitario);
-                    insertPss.setString(4, precioventa);
+                    insertPss.setString(3, precioventa);
+                    insertPss.setString(4, preciounitario);
+              
 
                     insertPss.executeUpdate(); // Aquí se ejecuta el segundo insert
 
