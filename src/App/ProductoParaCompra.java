@@ -926,9 +926,17 @@ public class ProductoParaCompra extends javax.swing.JFrame {
             Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
             if (conn != null && !conn.isClosed())
             {
-                PreparedStatement ps = conn.prepareStatement("SELECT ROW_NUMBER() OVER(ORDER BY cod_producto) AS NumRegistro, cod_producto, nombre, descripcion, categoria, precio, imagen, foto "
-                        + "FROM Productos "
-                        + "WHERE nombre LIKE ? OR categoria LIKE ?");
+                PreparedStatement ps = conn.prepareStatement("SELECT ROW_NUMBER() OVER (ORDER BY nombre) AS NumRegistro, \n"
+                    + "       Productos.nombre, \n"
+                    + "       Productos.categoria, \n"
+                    + "       Productos.cantidad_disponible, \n"
+                    + "       Pr.precio_unitario, \n"
+                    + "       Pr.precio_venta, \n"
+                    + "       Pr.precio_compra, \n"
+                    + "       Productos.cod_producto\n"
+                    + "FROM Productos \n"
+                    + "JOIN Precio Pr ON Productos.cod_producto = Pr.cod_producto\n"
+                    + "WHERE Productos.nombre LIKE ? OR Productos.categoria LIKE ? ");
 
                 if (texto != null && !texto.isEmpty())
                 {
@@ -949,19 +957,19 @@ public class ProductoParaCompra extends javax.swing.JFrame {
                     while (rs.next())
                     {
                         int numRegistro = rs.getInt("NumRegistro");
-                        int codProducto = rs.getInt("cod_producto");
                         String nombre = rs.getString("nombre");
-                        String descripcion = rs.getString("descripcion");
                         String categoria = rs.getString("categoria");
-                        String precio = rs.getString("precio");
-                        String imagen = rs.getString("imagen");
-                        String foto = rs.getString("foto");
+                        String cantidad = rs.getString("cantidad_disponible");
+                        String PU = rs.getString("precio_unitario");
+                        String PV = rs.getString("precio_venta");
+                        String PC = rs.getString("precio_compra");
+                        String CP = rs.getString("cod_producto");
 
                         if (nombre != null && categoria != null)
                         {
                             modelTabla.addRow(new Object[]
                             {
-                                numRegistro, codProducto, nombre, descripcion, categoria, precio, imagen, foto
+                                numRegistro, nombre, categoria, cantidad, PU, PV, PC,CP
                             });
                             foundData = true;
                         }
