@@ -6,6 +6,7 @@ package Paneles;
 
 import static App.Menu.panelprincipal;
 import static Paneles.EditarProducto.txtId;
+
 import static Paneles.editar_cliente.txtnombre;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -23,9 +24,11 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
@@ -78,7 +81,7 @@ public class edit_producto extends javax.swing.JPanel {
         txtbytes = new javax.swing.JTextField();
         txtruta = new javax.swing.JTextField();
         txtid = new javax.swing.JTextField();
-        jButton3 = new javax.swing.JButton();
+        btncambiar = new javax.swing.JButton();
         txtPrecio = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(255, 255, 255));
@@ -214,13 +217,13 @@ public class edit_producto extends javax.swing.JPanel {
         txtid.setForeground(new java.awt.Color(255, 255, 255));
         txtid.setBorder(null);
 
-        jButton3.setBackground(new java.awt.Color(255, 153, 51));
-        jButton3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(0, 0, 0));
-        jButton3.setText("Imagen");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btncambiar.setBackground(new java.awt.Color(255, 153, 51));
+        btncambiar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btncambiar.setForeground(new java.awt.Color(0, 0, 0));
+        btncambiar.setText("Editar imagen");
+        btncambiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btncambiarActionPerformed(evt);
             }
         });
 
@@ -263,9 +266,9 @@ public class edit_producto extends javax.swing.JPanel {
                         .addGap(43, 43, 43))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGap(59, 59, 59)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(txtimagen, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btncambiar, javax.swing.GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE)
+                            .addComponent(txtimagen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
@@ -273,9 +276,6 @@ public class edit_producto extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(txtimagen, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(30, 30, 30)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -286,11 +286,14 @@ public class edit_producto extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(txtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(txtimagen, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton3)
+                        .addComponent(btncambiar)
                         .addGap(68, 68, 68)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtruta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -338,26 +341,55 @@ public class edit_producto extends javax.swing.JPanel {
 
             try
             {
+                Icon icon1 = txtimagen.getIcon();
+                String rutaImagen1 = null;
 
-                FileInputStream archivofoto;
-                File nombFile = new File(txtruta.getText());
-                archivofoto = new FileInputStream(nombFile);
+                // Verifica si archivos[0] no es null antes de acceder a sus propiedades
+                if (archivos[0] != null)
+                {
+                    rutaImagen1 = archivos[0].getAbsolutePath();
+                }
 
+//                FileInputStream archivofoto;
+//                File nombFile = new File(txtruta.getText());
+//                archivofoto = new FileInputStream(nombFile);
                 String id = txtid.getText().trim();
                 // Resto del código para la inserción en la base de datos
                 Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
                 Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
 
-                PreparedStatement insertPs = conn.prepareStatement("UPDATE Productos SET nombre=?, descripcion=?,categoria=?,imagen=?,foto =? WHERE cod_producto=?");
+                PreparedStatement insertPs = conn.prepareStatement("UPDATE Productos SET nombre=?, descripcion=?,categoria=?,foto =? WHERE cod_producto=?");
                 insertPs.setString(1, nombre);
                 insertPs.setString(2, descripcion);
                 insertPs.setString(3, categoria);
+                // Verificar si el archivo de imagen 1 existe y agregarlo si es el caso
+                if (rutaImagen1 != null && !rutaImagen1.isEmpty() && new File(rutaImagen1).exists())
+                {
+                    try
+                    {
+                        FileInputStream fis1 = new FileInputStream(new File(rutaImagen1));
+                        insertPs.setBinaryStream(4, fis1, (int) new File(rutaImagen1).length());
+                    } catch (FileNotFoundException e)
+                    {
+                        // Manejar la excepción si el archivo no se encuentra
+                        insertPs.setBinaryStream(4, null, 0); // Imagen 1 no existe
+                    }
+                } else
+                {
+                    insertPs.setBinaryStream(4, null, 0); // Imagen 1 no existe
+                }
 
-                insertPs.setString(4, imagen);
-                archivofoto = new FileInputStream(txtruta.getText());
-                insertPs.setBinaryStream(5, archivofoto);
+                // Verifica y actualiza la imagen 1 solo si hay una nueva imagen
+                if (rutaImagen1 != null && !rutaImagen1.isEmpty())
+                {
+                    actualizarImagen(insertPs, rutaImagen1, 4);
+                } else
+                {
+                    // Si no hay una nueva imagen, mantén la imagen existente en la base de datos
+                    insertPs.setBytes(4, obtenerImagenExistente(4));
+                }
 
-                insertPs.setString(6, id);
+                insertPs.setString(5, id);
 
                 insertPs.executeUpdate();
                 JOptionPane.showMessageDialog(null, "Producto actualizado con éxito");
@@ -380,78 +412,102 @@ public class edit_producto extends javax.swing.JPanel {
             } catch (ClassNotFoundException ex)
             {
                 JOptionPane.showMessageDialog(null, "Error de conexión a la base de datos", "Error de Conexión", JOptionPane.ERROR_MESSAGE);
-            } catch (FileNotFoundException ex)
-            {
-                Logger.getLogger(edit_producto.class.getName()).log(Level.SEVERE, null, ex);
             }
 
-//            if (txtbytes.equals(""))
-//            {
-//
-//                ControllerProductos obcoControllerProductos = new ControllerProductos();
-//                obcoControllerProductos.setNombre(txtnombre.getText());
-//                obcoControllerProductos.setDescripcion(txtdescripcion.getText());
-//                obcoControllerProductos.setCategoria((String) jComboBox1.getSelectedItem());
-//
-//                File ruta = new File(txtruta.getText());
-//                byte[] icono = new byte[(int) ruta.length()];
-//
-//                try (InputStream input = new FileInputStream(ruta))
-//                {
-//                    input.read(icono);
-//                    obcoControllerProductos.setFoto(icono);
-//                } catch (Exception e)
-//                {
-//                    obcoControllerProductos.setFoto(null);
-//                }
-//
-//                int valor = obcoControllerProductos.actualizar();
-//                if (valor == 1)
-//                {
-//                    JOptionPane.showMessageDialog(null, "Producto actualizado correctamente");
-//                }
-//            } else
-//            {
-//                ControllerProductos obcoControllerProductos = new ControllerProductos();
-//                
-//                
-//                obcoControllerProductos.setNombre(txtnombre.getText());
-//                obcoControllerProductos.setDescripcion(txtdescripcion.getText());
-//                obcoControllerProductos.setCategoria((String) jComboBox1.getSelectedItem());
-//
-//                File ruta = new File(txtruta.getText());
-//                byte[] icono = new byte[(int) ruta.length()];
-//
-//                try (InputStream input = new FileInputStream(ruta))
-//                {
-//                    input.read(icono);
-//                    obcoControllerProductos.setFoto(icono);
-//                } catch (Exception e)
-//                {
-//                    obcoControllerProductos.setFoto(null);
-//                }
-//
-//                int valor = obcoControllerProductos.actualizar2();
-//                if (valor == 1)
-//                {
-//                    JOptionPane.showMessageDialog(null, "Producto actualizado correctamente");
-//                }
-//            }
-//
-            Listado_Productos cli = new Listado_Productos();
-
-            cli.setSize(1024, 640);
-            cli.setLocation(0, 0);
-
-            panelprincipal.revalidate();
-            panelprincipal.repaint();
-            panelprincipal.removeAll();
-            panelprincipal.add(cli, BorderLayout.CENTER);
-            panelprincipal.revalidate();
-            panelprincipal.repaint();
-//             
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private File[] archivos = new File[1];
+    private int contador = 0; // Para llevar el registro de cuántas veces se ha presionado el botón
+
+    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {
+        JOptionPane.showMessageDialog(this, "¡Importante! Solo se permite cambiar la imagen una vez. Si necesitas modificarla de nuevo, por favor, sal y vuelve a entrar. ¡Gracias!.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+    }
+
+    // Método para obtener la imagen existente en la base de datos
+    private byte[] obtenerImagenExistente(int posicion) throws SQLException, ClassNotFoundException {
+        byte[] imagenExistente = null;
+
+        Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+
+        String idproducto = txtid.getText();
+
+        if (!idproducto.isEmpty())
+        {
+            try (Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789"))
+            {
+                String sql = "SELECT foto FROM productos WHERE cod_producto = ?";
+                try (PreparedStatement ps = conn.prepareStatement(sql))
+                {
+                    try
+                    {
+                        ps.setInt(1, Integer.parseInt(idproducto));
+                    } catch (NumberFormatException e)
+                    {
+                        // Manejar el caso en que el texto no sea un entero válido
+                        e.printStackTrace(); // Puedes querer registrar esto o manejarlo de manera apropiada
+                        return null; // Otra opción es devolver un valor predeterminado o lanzar una excepción
+                    }
+
+                    try (ResultSet rs = ps.executeQuery())
+                    {
+                        if (rs.next())
+                        {
+                            switch (posicion)
+                            {
+                                case 4:
+                                    imagenExistente = rs.getBytes(1); // Imagen 1
+                                    break;
+                                default:
+                                    // Manejar caso no válido según sea necesario
+                                    break;
+                            }
+                        }
+                    }
+                }
+            } catch (SQLException e)
+            {
+                // Manejar excepciones de SQL o de clase no encontrada según sea necesario
+                e.printStackTrace(); // Puedes querer registrar esto o manejarlo de manera apropiada
+            }
+        } else
+        {
+            // Manejar el caso en que el texto esté vacío
+        }
+
+        return imagenExistente;
+    }
+
+    private byte[] obtenerBytesImagen(File file) throws IOException {
+        try (FileInputStream fis = new FileInputStream(file))
+        {
+            byte[] bytes = new byte[(int) file.length()];
+            fis.read(bytes);
+            return bytes;
+        }
+    }
+
+    private void actualizarImagen(PreparedStatement updatePs, String rutaImagen, int parametro) throws SQLException, ClassNotFoundException {
+        if (rutaImagen != null && !rutaImagen.isEmpty())
+        {
+            File file = new File(rutaImagen);
+            if (file.exists())
+            {
+                try
+                {
+                    byte[] bytes = obtenerBytesImagen(file);
+                    updatePs.setBytes(parametro, bytes);
+                } catch (IOException ex)
+                {
+                    ex.printStackTrace();
+                    updatePs.setNull(parametro, Types.BLOB);
+                }
+            }
+        } else
+        {
+            updatePs.setBytes(parametro, obtenerImagenExistente(parametro));
+        }
+    }
 
     private void txtdescripcionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtdescripcionKeyTyped
         char c = evt.getKeyChar(); // Obtener el carácter ingresado
@@ -510,27 +566,34 @@ public class edit_producto extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        FileNameExtensionFilter filtro = new FileNameExtensionFilter("Formatos de archivos JPEG(*.JPG;*.JPG)", "jpg", "jpeg");
-        JFileChooser archivo = new JFileChooser();
-        archivo.addChoosableFileFilter(filtro);
-        archivo.setDialogTitle("Abrir Archivo");
-        File ruta = new File("C:\\");
-        archivo.setCurrentDirectory(ruta);
-        int ventana = archivo.showOpenDialog(null);
-
-        if (ventana == JFileChooser.APPROVE_OPTION)
+    private void btncambiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncambiarActionPerformed
+        if (contador < 1)
         {
+            JFileChooser fclAbrirArchivo = new JFileChooser();
+            fclAbrirArchivo.setFileFilter(new FileNameExtensionFilter("Archivo de imagen", "jpg", "jpeg", "png"));
 
-            File file = archivo.getSelectedFile();
-            txtruta.setText(String.valueOf(file));
-            Image foto = getToolkit().getImage(txtruta.getText());
-            foto = foto.getScaledInstance(110, 110, Image.SCALE_DEFAULT);
-            txtimagen.setIcon(new ImageIcon(foto));
+            int respuesta = fclAbrirArchivo.showOpenDialog(this);
 
+            if (respuesta == JFileChooser.APPROVE_OPTION)
+            {
+                archivos[contador] = fclAbrirArchivo.getSelectedFile();
+
+                // Cargar la imagen en el label correspondiente (imagen1, imagen2, o imagen3)
+                ImageIcon icono = new ImageIcon(archivos[contador].getAbsolutePath());
+                Image foto = icono.getImage().getScaledInstance(txtimagen.getWidth(), txtimagen.getHeight(), Image.SCALE_DEFAULT);
+
+                if (contador == 0)
+                {
+                    txtimagen.setIcon(new ImageIcon(foto));
+                    //JOptionPane.showMessageDialog(this, "Ya se ha cargado una imagen. No se puede agregar otra.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+                    btncambiar.setEnabled(false); // Desactivar el botón después de cargar la tercera imagen
+                }
+
+                contador++;
+            }
         }
 
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_btncambiarActionPerformed
 
     private void txtimagenKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtimagenKeyTyped
         // TODO add your handling code here:
@@ -540,18 +603,20 @@ public class edit_producto extends javax.swing.JPanel {
         char c = evt.getKeyChar();
         String texto = txtPrecio.getText();
 
-        if (c == '0' && (texto.isEmpty() || texto.equals("0"))) {
+        if (c == '0' && (texto.isEmpty() || texto.equals("0")))
+        {
             evt.consume(); // Evita que se inicie con un cero
-        } else if ((c < '0' || c > '9') || texto.length() >= 5) {
+        } else if ((c < '0' || c > '9') || texto.length() >= 5)
+        {
             evt.consume(); // Evita que se ingresen más de 6 caracteres o caracteres que no sean dígitos
         }
     }//GEN-LAST:event_txtPrecioKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btncambiar;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     public javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;

@@ -38,7 +38,8 @@ import javax.swing.table.TableColumn;
  * @author Fernando Amador
  */
 public class Listado_Productos extends javax.swing.JPanel {
-  TextPrompt holder;
+
+    TextPrompt holder;
     int paginaActual = 1; // Página actual
     int filasPorPagina = 20; // Número de filas a mostrar por página
     int totalFilas = 0; // Total de filas en la tabla
@@ -60,8 +61,8 @@ public class Listado_Productos extends javax.swing.JPanel {
 
         tabla_productos.setRowSelectionAllowed(true);
         tabla_productos.setColumnSelectionAllowed(false);
-        
-         int columnIndexToHide = 4;
+
+        int columnIndexToHide = 4;
         TableColumn column = tabla_productos.getColumnModel().getColumn(columnIndexToHide);
 
         column.setMinWidth(0);
@@ -405,97 +406,92 @@ public class Listado_Productos extends javax.swing.JPanel {
 //            panelprincipal.repaint();
 //        }
 
-       selectedRow1 = tabla_productos.getSelectedRow();
-if (selectedRow1 == -1)
-{
-    JOptionPane.showMessageDialog(null, "Seleccione un producto para poder visualizarlo");
-    return;
-}
+        selectedRow1 = tabla_productos.getSelectedRow();
+        if (selectedRow1 == -1)
+        {
+            JOptionPane.showMessageDialog(null, "Seleccione un producto para poder visualizarlo");
+            return;
+        }
 
-try
-{
+        try
+        {
 
-    int fila = tabla_productos.getSelectedRow();
-    String valorCelda = tabla_productos.getValueAt(fila, 1).toString();
-    String valorCelda2 = tabla_productos.getValueAt(fila, 2).toString();
-    String valorCelda3 = tabla_productos.getValueAt(fila, 3).toString();
-    PreparedStatement ps;
-    ResultSet rs;
+            int fila = tabla_productos.getSelectedRow();
+            String valorCelda = tabla_productos.getValueAt(fila, 1).toString();
+            String valorCelda2 = tabla_productos.getValueAt(fila, 2).toString();
+            String valorCelda3 = tabla_productos.getValueAt(fila, 3).toString();
+            PreparedStatement ps;
+            ResultSet rs;
 
-    Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
-    ps = conn.prepareStatement("SELECT * FROM Producto WHERE nombre=? and descripcion=? and categoria=?");
-    ps.setString(1, valorCelda);
-    ps.setString(2, valorCelda2);
-    ps.setString(3, valorCelda3);
-    rs = ps.executeQuery();
+            Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
+            ps = conn.prepareStatement("SELECT * FROM Producto WHERE nombre=? and descripcion=? and categoria=?");
+            ps.setString(1, valorCelda);
+            ps.setString(2, valorCelda2);
+            ps.setString(3, valorCelda3);
+            rs = ps.executeQuery();
 
-    while (rs.next())
-    {
+            while (rs.next())
+            {
 
-        String nombre = rs.getString("nombre");
-        String descripcion = rs.getString("descripcion");
+                String nombre = rs.getString("nombre");
+                String descripcion = rs.getString("descripcion");
 
-    
-        String categoria = rs.getString("categoria");
+                String categoria = rs.getString("categoria");
 
-        String Id = rs.getString("cod_producto");
+                String Id = rs.getString("cod_producto");
 
-        verProducto mostrar = new verProducto();
+                verProducto mostrar = new verProducto();
 
-        mostrar.txtNombre.setText(nombre);
-        mostrar.txtNombre.setEditable(false); // Establece el campo de texto como no editable
+                mostrar.txtNombre.setText(nombre);
+                mostrar.txtNombre.setEditable(false); // Establece el campo de texto como no editable
 
-        mostrar.AreaDescripcion.setText(descripcion);
-        mostrar.AreaDescripcion.setEditable(false); // Establece el área de texto como no editable
+                mostrar.AreaDescripcion.setText(descripcion);
+                mostrar.AreaDescripcion.setEditable(false); // Establece el área de texto como no editable
 
 //        mostrar.txtExistencia.setText(existencias);
 //        mostrar.txtExistencia.setEditable(false); // Establece el campo de texto como no editable
-
 //        mostrar.txtPrecio.setText(precio);
 //        mostrar.txtPrecio.setEditable(false); // Establece el campo de texto como no editable
-
-        mostrar.txtCategoria.setText(categoria);
-        mostrar.txtCategoria.setEditable(false); // Establece el campo de texto como no editable
+                mostrar.txtCategoria.setText(categoria);
+                mostrar.txtCategoria.setEditable(false); // Establece el campo de texto como no editable
 
 //        mostrar.txtProveedor.setText(proveedor);
 //        mostrar.txtProveedor.setEditable(false); // Establece el campo de texto como no editable
-
 //        mostrar.txtFechaAdquision.setText(fecha);
 //        mostrar.txtFechaAdquision.setEditable(false); // Establece el campo de texto como no editable
+                mostrar.txtId.setText(Id);
+                mostrar.txtId.setEditable(false); // Establece el campo de texto como no editable
 
-        mostrar.txtId.setText(Id);
-        mostrar.txtId.setEditable(false); // Establece el campo de texto como no editable
+                mostrar.setSize(1024, 640);
+                mostrar.setLocation(0, 0);
 
-        mostrar.setSize(1024, 640);
-        mostrar.setLocation(0, 0);
+                jPanel2.revalidate();
+                jPanel2.repaint();
+                jPanel2.removeAll();
+                jPanel2.add(mostrar, BorderLayout.CENTER);
 
-        jPanel2.revalidate();
-        jPanel2.repaint();
-        jPanel2.removeAll();
-        jPanel2.add(mostrar, BorderLayout.CENTER);
+                jPanel2.revalidate();
+                jPanel2.repaint();
 
-        jPanel2.revalidate();
-        jPanel2.repaint();
+                break; // Salir del bucle después de encontrar el elemento seleccionado
 
-        break; // Salir del bucle después de encontrar el elemento seleccionado
+            }
 
-    }
+            rs.close();
+            ps.close();
+            conn.close();
 
-    rs.close();
-    ps.close();
-    conn.close();
-
-} catch (SQLException e)
-{
-    e.printStackTrace();
-    // Manejar cualquier excepción que pueda ocurrir durante la consulta a la base de datos
-}
+        } catch (SQLException e)
+        {
+            e.printStackTrace();
+            // Manejar cualquier excepción que pueda ocurrir durante la consulta a la base de datos
+        }
 
 
     }//GEN-LAST:event_btnverActionPerformed
 
     private void btneditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btneditarActionPerformed
-    selectedRow1 = tabla_productos.getSelectedRow();
+        selectedRow1 = tabla_productos.getSelectedRow();
         if (selectedRow1 == -1)
         {
             JOptionPane.showMessageDialog(null, "Seleccione un producto para poder editarlo");
@@ -505,13 +501,15 @@ try
         try
         {
             int fila = tabla_productos.getSelectedRow();
-             int valorEntero = Integer.parseInt(tabla_productos.getValueAt(fila, 4).toString());
+            int valorEntero = Integer.parseInt(tabla_productos.getValueAt(fila, 4).toString());
 //            String valorCelda2 = tabla_productos.getValueAt(fila, 2).toString();
 //            String valorCelda3 = tabla_productos.getValueAt(fila, 3).toString();
 
             // Crear una conexión y un PreparedStatement usando try-with-resources
-            try (Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789"); 
-                    PreparedStatement ps = conn.prepareStatement("SELECT * FROM Productos WHERE cod_producto=?"))
+            try (Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789"); PreparedStatement ps = conn.prepareStatement("SELECT *\n"
+                    + "FROM Productos\n"
+                    + "JOIN Precio ON Productos.cod_producto = Precio.cod_producto\n"
+                    + "WHERE Productos.cod_producto = ?"))
             {
 
                 ps.setInt(1, valorEntero);
@@ -522,7 +520,7 @@ try
                     if (rs.next())
                     {
                         String nombre = rs.getString("nombre");
-                        String precio = rs.getString("precio");
+                        String precio = rs.getString("precio_unitario");
                         String descripcion = rs.getString("descripcion");
 
                         String Id = rs.getString("cod_producto");
@@ -533,58 +531,27 @@ try
                         mostrar.txtdescripcion.setText(descripcion);
                         mostrar.jComboBox1.setSelectedItem(rs.getString("categoria"));
 
-                        Blob fotos = rs.getBlob("foto");
+                        // Recuperar la imagen de la base de datos
+                        byte[] bytesImagen = rs.getBytes("foto");
 
-                        if (fotos != null)
+                        // Crear objetos ImageIcon solo si las imágenes no son nulas
+                        ImageIcon imagenIcono1 = (bytesImagen != null) ? new ImageIcon(bytesImagen) : null;
+
+                        // Escalar las imágenes al tamaño del JLabel
+                        if (imagenIcono1 != null)
                         {
-                            byte[] recuperar = fotos.getBytes(1, (int) fotos.length());
-                            BufferedImage img = ImageIO.read(new ByteArrayInputStream(recuperar));
-
-// Define las dimensiones deseadas para la imagen
-                            int anchoDeseado = 200; // Reemplaza esto con el ancho que desees
-                            int altoDeseado = 150;  // Reemplaza esto con el alto que desees
-
-// Escala la imagen a las dimensiones deseadas
-                            Image imagen = img.getScaledInstance(anchoDeseado, altoDeseado, Image.SCALE_SMOOTH);
-
-// Establece la imagen escalada en el componente mostrar.txtimagen
-                            mostrar.txtimagen.setIcon(new ImageIcon(imagen));
-
-                            mostrar.txtbytes.setText(tabla_productos.getModel().getValueAt(tabla_productos.getSelectedRow(), 3).toString());
-
-                        } else
-                        {
-                            ImageIcon imagenIcon;
-                            // Cargar una imagen predeterminada si no se encuentra la imagen en la base de datos
-                            imagenIcon = new ImageIcon(getClass().getResource("/img/agregar.png"));
-                            mostrar.txtimagen.setIcon(imagenIcon);
+                            imagenIcono1 = escalarImagen(imagenIcono1, mostrar.txtimagen.getWidth(), mostrar.txtimagen.getHeight());
+                            mostrar.txtimagen.setIcon(imagenIcono1);
                         }
 
-//                        byte[] byteArray = rs.getBytes("foto");
-//
-//                        StringBuilder hexStringBuilder = new StringBuilder();
-//                        for (byte b : byteArray)
-//                        {
-//                            hexStringBuilder.append(String.format("%02X", b));
-//                        }
-//
-//                        String hexString = hexStringBuilder.toString();
-//                        
-//                        mostrar.txtbytes = new JTextField(hexString);
-//                        byte[] byteArray = rs.getBytes("foto");
-//
-//                // Crea un ImageIcon a partir de los bytes
-//                ImageIcon imagenIcono = new ImageIcon(byteArray);
-//
-//                // Crea un JLabel con el ImageIcon y muestra la imagen en una ventana
-//                mostrar.txtimagen = new JLabel(imagenIcono);
-                        byte[] data = rs.getBytes("foto");
-                        String hexString = "0x" + bytesToHexString(data);
 
-                        mostrar.txtbytes.setText(hexString);
-//                        mostrar.bytes.setText(hexString);
-                        mostrar.txtbytes.setText(hexString);
-                        mostrar.txtruta.setText(rs.getString("imagen"));
+//                        byte[] data = rs.getBytes("foto");
+//                        String hexString = "0x" + bytesToHexString(data);
+//
+//                        mostrar.txtbytes.setText(hexString);
+////                        mostrar.bytes.setText(hexString);
+//                        mostrar.txtbytes.setText(hexString);
+//                       
 
 //                        ImageIcon imagenIcon;
 //                        byte[] bytesImagen = rs.getBytes("foto");
@@ -627,11 +594,7 @@ try
                         jPanel2.revalidate();
                         jPanel2.repaint();
                     }
-                } catch (IOException ex)
-                {
-                    Logger.getLogger(Listado_Prod.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
+                }            }
         } catch (SQLException e)
         {
             e.printStackTrace();
@@ -640,6 +603,12 @@ try
 
     }//GEN-LAST:event_btneditarActionPerformed
 
+     public ImageIcon escalarImagen(ImageIcon icono, int ancho, int alto) {
+        Image imagen = icono.getImage();
+        Image imagenEscalada = imagen.getScaledInstance(170, 220, java.awt.Image.SCALE_SMOOTH);
+        return new ImageIcon(imagenEscalada);
+    }
+     
     private void btneditarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btneditarMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_btneditarMouseClicked
@@ -802,7 +771,7 @@ try
                     String nombre = rs.getString("nombre");
                     String descripcion = rs.getString("descripcion");
                     String categoria = rs.getString("categoria");
-                     String id = rs.getString("cod_producto");
+                    String id = rs.getString("cod_producto");
 
                     if (nombre != null && descripcion != null && categoria != null)
                     {
@@ -899,10 +868,6 @@ try
             throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
         }
 
-       
+    }
 
-    
-}
-
-    
 }

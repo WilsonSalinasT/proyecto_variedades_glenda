@@ -596,26 +596,26 @@ public class Editar_Pedido_Sublimacion extends javax.swing.JPanel {
                 updatePs.setObject(4, descripcion);
                 updatePs.setObject(5, precio);
 
-                // Verificar si el archivo de imagen 1 existe y agregarlo si es el caso
-                if (rutaImagen1 != null && !rutaImagen1.isEmpty() && new File(rutaImagen1).exists()) {
-                    try {
-                        FileInputStream fis1 = new FileInputStream(new File(rutaImagen1));
-                        updatePs.setBinaryStream(6, fis1, (int) new File(rutaImagen1).length());
-                    } catch (FileNotFoundException e) {
-                        // Manejar la excepción si el archivo no se encuentra
+                    // Verificar si el archivo de imagen 1 existe y agregarlo si es el caso
+                    if (rutaImagen1 != null && !rutaImagen1.isEmpty() && new File(rutaImagen1).exists()) {
+                        try {
+                            FileInputStream fis1 = new FileInputStream(new File(rutaImagen1));
+                            updatePs.setBinaryStream(6, fis1, (int) new File(rutaImagen1).length());
+                        } catch (FileNotFoundException e) {
+                            // Manejar la excepción si el archivo no se encuentra
+                            updatePs.setBinaryStream(6, null, 0); // Imagen 1 no existe
+                        }
+                    } else {
                         updatePs.setBinaryStream(6, null, 0); // Imagen 1 no existe
                     }
-                } else {
-                    updatePs.setBinaryStream(6, null, 0); // Imagen 1 no existe
-                }
 
-                // Verifica y actualiza la imagen 1 solo si hay una nueva imagen
-                if (rutaImagen1 != null && !rutaImagen1.isEmpty()) {
-                    actualizarImagen(updatePs, rutaImagen1, 6);
-                } else {
-                    // Si no hay una nueva imagen, mantén la imagen existente en la base de datos
-                    updatePs.setBytes(6, obtenerImagenExistente(6));
-                }
+                    // Verifica y actualiza la imagen 1 solo si hay una nueva imagen
+                    if (rutaImagen1 != null && !rutaImagen1.isEmpty()) {
+                        actualizarImagen(updatePs, rutaImagen1, 6);
+                    } else {
+                        // Si no hay una nueva imagen, mantén la imagen existente en la base de datos
+                        updatePs.setBytes(6, obtenerImagenExistente(6));
+                    }
 
                 updatePs.setString(7, fechaPedido);
                 updatePs.setObject(8, idC);
