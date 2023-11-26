@@ -775,6 +775,7 @@ public class IngresodeVenta extends javax.swing.JFrame {
                 }
 
                 JOptionPane.showMessageDialog(null, "Registro guardado");
+                this.dispose();
             }
 
         } catch (SQLException e)

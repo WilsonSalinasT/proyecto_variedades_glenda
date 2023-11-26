@@ -23,7 +23,7 @@ import javax.swing.table.DefaultTableModel;
 public class Inventario extends javax.swing.JPanel {
 
     int paginaActual = 1; // Página actual
-    int filasPorPagina = 20; // Número de filas a mostrar por página
+    int filasPorPagina = 100; // Número de filas a mostrar por página
     int totalFilas = 0; // Total de filas en la tabla
     int totalPaginas = 0; // Total de páginas en la tabla
     int numRegistro = 0;

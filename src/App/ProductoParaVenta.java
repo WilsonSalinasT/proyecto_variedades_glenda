@@ -302,7 +302,7 @@ public class ProductoParaVenta extends javax.swing.JFrame {
 
         cancelar.setBackground(new java.awt.Color(255, 153, 51));
         cancelar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        cancelar.setText("Cancelar");
+        cancelar.setText("volver");
         cancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cancelarActionPerformed(evt);
