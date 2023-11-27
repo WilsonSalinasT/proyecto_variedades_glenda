@@ -587,15 +587,15 @@ public class Listado_Pedidos_Arreglos extends javax.swing.JPanel {
                 String fechapedido = rs.getString("fechaPedido");
 
                  Date fechaEntrega = rs.getDate("fechaEntrega");
-                editar_Pedido_arreglo ver = new editar_Pedido_arreglo();
-                ver.lbl_id_arregl.setText(idArreglo);
-                ver.txtCliente.setSelectedItem(nombre + " " + apellido);
-                ver.txtTel.setText(tel);
-                ver.cbxarreglo.setSelectedItem(arregloA);
-                ver.cbxEstado.setSelectedItem(estadoA);
-                ver.txtDescripcionArre.setText(descripcionA);
-                ver.txtprecio.setText(precioA);
-                ver.id_client.setText(rs.getString("id_arreglo"));
+                editar_Pedido_arreglo ver12 = new editar_Pedido_arreglo();
+                ver12.lbl_id_arregl.setText(idArreglo);
+                ver12.txtCliente.setSelectedItem(nombre + " " + apellido);
+                ver12.txtTel.setText(tel);
+                ver12.cbxarreglo.setSelectedItem(arregloA);
+                ver12.cbxEstado.setSelectedItem(estadoA);
+                ver12.txtDescripcionArre.setText(descripcionA);
+                ver12.txtprecio.setText(precioA);
+                ver12.id_client.setText(rs.getString("id_arreglo"));
 
                 //Recuperar la imagen de la base de datos
                 byte[] imagenA1 = rs.getBytes("imagen1");
@@ -613,13 +613,13 @@ public class Listado_Pedidos_Arreglos extends javax.swing.JPanel {
                     ImageIcon imagenT1 = new ImageIcon(imagenT);
 
                     // Establecer el ImageIcon escalado en el JLabel
-                    ver.imagen1.setIcon(imagenT1);
+                    ver12.imagen1.setIcon(imagenT1);
 
                     // Establecer el ImageIcon en el JLabel
                 } else
                 {
                     // Si el arreglo de bytes de imagen es nulo, puedes mostrar un mensaje o establecer un valor predeterminado.
-                    ver.imagen1.setIcon(null); // O establecer un icono predeterminado
+                    ver12.imagen1.setIcon(null); // O establecer un icono predeterminado
                 }
 
                 if (imagenA2 != null)
@@ -630,10 +630,10 @@ public class Listado_Pedidos_Arreglos extends javax.swing.JPanel {
                     ImageIcon imagenT2 = new ImageIcon(imagenT);
 
                     // Establecer el ImageIcon escalado en el JLabel
-                    ver.imagen2.setIcon(imagenT2);
+                    ver12.imagen2.setIcon(imagenT2);
                 } else
                 {
-                    ver.imagen2.setIcon(null);
+                    ver12.imagen2.setIcon(null);
                 }
 
                 if (imagenA3 != null)
@@ -644,22 +644,22 @@ public class Listado_Pedidos_Arreglos extends javax.swing.JPanel {
                     ImageIcon imagenT3 = new ImageIcon(imagenT);
 
                     // Establecer el ImageIcon escalado en el JLabel
-                    ver.imagen3.setIcon(imagenT3);
+                    ver12.imagen3.setIcon(imagenT3);
                 } else
                 {
-                    ver.imagen3.setIcon(null);
+                    ver12.imagen3.setIcon(null);
                 }
 
-                ver.fechaP.setText(fechapedido);
-                ver.JDfechaEntrega.setDate(fechaEntrega);
+                ver12.fechaP.setText(fechapedido);
+                ver12.JDfechaEntrega.setDate(fechaEntrega);
 
-                ver.setSize(1024, 640);
-                ver.setLocation(0, 0);
+                ver12.setSize(1024, 640);
+                ver12.setLocation(0, 0);
 
                 panelprincipal.revalidate();
                 panelprincipal.repaint();
                 panelprincipal.removeAll();
-                panelprincipal.add(ver, BorderLayout.CENTER);
+                panelprincipal.add(ver12, BorderLayout.CENTER);
 
                 panelprincipal.revalidate();
                 panelprincipal.repaint();
@@ -961,8 +961,18 @@ public class Listado_Pedidos_Arreglos extends javax.swing.JPanel {
     private javax.swing.JButton verbtn;
     // End of variables declaration//GEN-END:variables
 
-    private void mostrarVentanaDeEdicion(EditarCita editarCita) {
+   private void mostrarVentanaDeEdicion(EditarCita editarCita) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
+    // Método para escalar una imagen al tamaño deseado
+    public ImageIcon escalarImagen(ImageIcon icono, int ancho, int alto) {
+        Image imagen = icono.getImage();
+        Image imagenEscalada = imagen.getScaledInstance(191, 169, java.awt.Image.SCALE_SMOOTH);
+        return new ImageIcon(imagenEscalada);
+    }
+
+    private void cambiarImagen(Object identificador) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

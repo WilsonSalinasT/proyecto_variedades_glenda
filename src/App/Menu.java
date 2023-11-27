@@ -355,12 +355,12 @@ public class Menu extends javax.swing.JFrame {
     private void pedidoSastreria1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pedidoSastreria1ActionPerformed
         // TODO add your handling code here:
 
-        Listado_Pedidos_Arreglos p2 = new Listado_Pedidos_Arreglos();
-        p2.setSize(1024, 640);
-        p2.setLocation(0, 0);
+        Listado_Pedidos_Arreglos p3 = new Listado_Pedidos_Arreglos();
+        p3.setSize(1024, 640);
+        p3.setLocation(0, 0);
 
         panelprincipal.removeAll();
-        panelprincipal.add(p2, BorderLayout.CENTER);
+        panelprincipal.add(p3, BorderLayout.CENTER);
         panelprincipal.revalidate();
         panelprincipal.repaint();
     }//GEN-LAST:event_pedidoSastreria1ActionPerformed
