@@ -36,6 +36,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JFrame;
 
+
 /**
  *
  * @author PC
@@ -773,20 +774,30 @@ public class ProductoParaCompra extends javax.swing.JFrame {
 
     private void btncrearproductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncrearproductoActionPerformed
 
-        IngresodeCompra j = new IngresodeCompra();
-        j.dispose();
-        
-        crear_producto p2 = new crear_producto();
-        p2.setSize(1024, 640);
-        p2.setLocation(0, 0);
+     // Crear una instancia de IngresodeCompra y cerrarla
+  
+IngresodeCompra j = new IngresodeCompra();
+j.dispose();
+// Crear una instancia de ProductoParaCompra y cerrarla
+ProductoParaCompra s = new ProductoParaCompra();
+s.dispose();
 
-        panelprincipal.removeAll();
-        panelprincipal.add(p2, BorderLayout.NORTH);
-        panelprincipal.revalidate();
-        panelprincipal.repaint();
+// Crear una instancia de crear_producto
+crear_producto p2 = new crear_producto();
+p2.setSize(1024, 640);
+p2.setLocation(0, 0);
+
+// Actualizar el panel principal
+panelprincipal.removeAll();
+panelprincipal.add(p2, BorderLayout.NORTH);
+panelprincipal.revalidate();
+panelprincipal.repaint();
+
+// Cerrar la ventana actual (la que llama a este código)
+this.dispose();
 
 
-        this.dispose();
+    
 
        
 
@@ -1028,6 +1039,13 @@ public class ProductoParaCompra extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new ProductoParaCompra().setVisible(true);
+                
+                // Cerrar la ventana actual (la ventana que llama a este código)
+                this.dispose();
+            }
+
+            private void dispose() {
+                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
             }
         });
     }
