@@ -146,12 +146,6 @@ public class IngresodeCompra extends javax.swing.JFrame {
         numFactura = new javax.swing.JFormattedTextField();
         jSeparator5 = new javax.swing.JSeparator();
         id_proveedor = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        txtpreciov = new javax.swing.JTextField();
-        jLabel9 = new javax.swing.JLabel();
-        txtcantidad = new javax.swing.JTextField();
-        txtprecioc = new javax.swing.JTextField();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablecompras = new javax.swing.JTable();
@@ -263,35 +257,6 @@ public class IngresodeCompra extends javax.swing.JFrame {
             }
         });
 
-        jLabel7.setText("Precio de venta");
-
-        jLabel8.setText("Precio de Compra");
-
-        txtpreciov.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtpreciovActionPerformed(evt);
-            }
-        });
-        txtpreciov.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtpreciovKeyTyped(evt);
-            }
-        });
-
-        jLabel9.setText("Cantidad");
-
-        txtcantidad.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtcantidadKeyTyped(evt);
-            }
-        });
-
-        txtprecioc.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtpreciocKeyTyped(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -304,7 +269,7 @@ public class IngresodeCompra extends javax.swing.JFrame {
                 .addGap(46, 46, 46))
             .addComponent(jSeparator4)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addGap(0, 49, Short.MAX_VALUE)
                 .addComponent(btnAgregarproducto, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(44, 44, 44))
             .addComponent(jSeparator5)
@@ -312,37 +277,30 @@ public class IngresodeCompra extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(id_proveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+            .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(tipoCompra, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(25, 25, 25))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel3)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGap(12, 12, 12)
-                                .addComponent(jLabel6)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(numFactura)
-                            .addComponent(tipoCompra, javax.swing.GroupLayout.Alignment.TRAILING, 0, 278, Short.MAX_VALUE)
-                            .addComponent(txtProveedor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtfecha, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(14, 14, 14)
+                        .addComponent(jLabel6)
+                        .addGap(55, 55, 55)
+                        .addComponent(txtfecha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addContainerGap()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
-                                .addComponent(jLabel8)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtprecioc))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
-                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtpreciov)))
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel9)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtcantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addGap(37, 37, 37)
+                                .addComponent(txtProveedor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addGap(17, 17, 17)
+                                .addComponent(numFactura)))))
                 .addGap(25, 25, 25))
         );
         jPanel3Layout.setVerticalGroup(
@@ -353,31 +311,19 @@ public class IngresodeCompra extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(numFactura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(24, 24, 24)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(40, 40, 40)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5)
-                            .addComponent(txtProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel4)
-                        .addComponent(tipoCompra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(20, 20, 20)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtfecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
-                .addGap(15, 15, 15)
+                .addGap(44, 44, 44)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(txtpreciov, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel9)
-                    .addComponent(txtcantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(24, 24, 24)
+                    .addComponent(jLabel4)
+                    .addComponent(tipoCompra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(33, 33, 33)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
-                    .addComponent(txtprecioc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(23, 23, 23)
+                    .addComponent(jLabel5)
+                    .addComponent(txtProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(38, 38, 38)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel6)
+                    .addComponent(txtfecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(53, 53, 53)
                 .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnAgregarproducto, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -387,7 +333,7 @@ public class IngresodeCompra extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton4)
                     .addComponent(btnguardar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
@@ -463,7 +409,7 @@ public class IngresodeCompra extends javax.swing.JFrame {
                 .addComponent(jButton1)
                 .addGap(30, 30, 30))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap(418, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Tsum, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -493,34 +439,36 @@ public class IngresodeCompra extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(31, 31, 31)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(46, Short.MAX_VALUE))
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(23, 23, 23)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(50, Short.MAX_VALUE))
+                .addContainerGap(44, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 12, Short.MAX_VALUE))
         );
 
         pack();
@@ -586,8 +534,7 @@ public class IngresodeCompra extends javax.swing.JFrame {
         String num = numFactura.getText();
         String tipo = (String) tipoCompra.getSelectedItem();
         String proveedor = (String) txtProveedor.getSelectedItem();
-        String precioventa = txtpreciov.getText().trim();
-        String preciocompra = txtprecioc.getText().trim();
+        
         Date fecha = txtfecha.getDate();
         String agregarProducto = btnAgregarproducto.getText().trim(); // Nuevo campo
 
@@ -613,13 +560,7 @@ public class IngresodeCompra extends javax.swing.JFrame {
         }
         if (fecha == null)
         {
-            if (precioventa.isEmpty()) {
-        camposVacios.append("- Precio de venta\n");
-         }
-
-          if (preciocompra.isEmpty()) {
-        camposVacios.append("- Precio de compra\n");
-        }
+          
             camposVacios.append("- Fecha\n");
         }
         boolean agregarProductoPresionado = true;
@@ -733,13 +674,11 @@ public class IngresodeCompra extends javax.swing.JFrame {
 
     private void btnguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguardarActionPerformed
 
-       String nunfactura = numFactura.getText().trim();
+      String nunfactura = numFactura.getText().trim();
 String id = id_proveedor.getText().trim();
 String tipo = (String) tipoCompra.getSelectedItem();
 Date fecha = (Date) txtfecha.getDate();
-String precioventa = txtpreciov.getText().trim();
-String preciocompra = txtprecioc.getText().trim();
-String cantidad = txtcantidad.getText().trim();
+
 String agregarProducto = btnAgregarproducto.getText().trim(); // Nuevo campo
 
 StringBuilder camposVacios = new StringBuilder("Por favor, complete los siguientes campos obligatorios:\n");
@@ -764,110 +703,102 @@ if (fecha == null) {
     camposVacios.append("- Fecha\n");
 }
 
-if (precioventa.isEmpty()) {
-    camposVacios.append("- Precio de venta\n");
-}
 
-if (preciocompra.isEmpty()) {
-    camposVacios.append("- Precio de compra\n");
-}
 
-if (cantidad.isEmpty()) {
-    camposVacios.append("- Cantidad\n");
-}
 
-        boolean agregarProductoPresionado = true;
-        if (!agregarProductoPresionado)
-        {
-            camposVacios.append("- Agregar Producto\n");
-        }
+
+boolean agregarProductoPresionado = true;
+if (!agregarProductoPresionado)
+{
+    camposVacios.append("- Agregar Producto\n");
+}
 
 // Verificar si hay al menos una fila en la tabla
-        if (tablecompras.getRowCount() == 0)
-        {
-            camposVacios.append("- Por favor, agregue al menos un producto a la factura.\n");
-        }
+if (tablecompras.getRowCount() == 0)
+{
+    camposVacios.append("- Por favor, agregue al menos un producto a la factura.\n");
+}
 
 // Mostrar mensajes de error solo si hay campos vacíos
-        if (camposVacios.length() > "Por favor, complete los siguientes campos obligatorios:\n".length())
-        {
-            JOptionPane.showMessageDialog(null, camposVacios.toString(), "Error", JOptionPane.ERROR_MESSAGE);
-            return; // Salir del método si falta algún campo obligatorio
-        }
+if (camposVacios.length() > "Por favor, complete los siguientes campos obligatorios:\n".length())
+{
+    JOptionPane.showMessageDialog(null, camposVacios.toString(), "Error", JOptionPane.ERROR_MESSAGE);
+    return; // Salir del método si falta algún campo obligatorio
+}
 
 // Resto del código para la inserción en la base de datos
-        try
+try
+{
+    Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+    Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
+
+    // Verificar si el número de factura ya existe en la base de datos
+    PreparedStatement checkNumFactura = conn.prepareStatement("SELECT COUNT(*) FROM Compras WHERE numfactura = ?");
+    checkNumFactura.setString(1, nunfactura);
+    ResultSet rsCheckNumFactura = checkNumFactura.executeQuery();
+    rsCheckNumFactura.next();
+    int count = rsCheckNumFactura.getInt(1);
+
+    if (count > 0)
+    {
+        // Si ya existe un registro con el mismo número de factura, mostrar un mensaje de error
+        JOptionPane.showMessageDialog(null, "Error: El número de factura ya existe en la base de datos.", "Error", JOptionPane.ERROR_MESSAGE);
+        return; // Salir del método si el número de factura ya existe
+    }
+
+    // Continuar con la inserción en la tabla Compras si el número de factura es único
+
+    // Resto del código para la inserción en la base de datos
+    PreparedStatement insertCompras = conn.prepareStatement("INSERT INTO Compras (numfactura, tipoCategoria, fecha, total, id_proveedor) VALUES (?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
+    insertCompras.setString(1, nunfactura);
+    insertCompras.setString(2, tipo);
+    insertCompras.setDate(3, new java.sql.Date(fecha.getTime()));
+    // Asegúrate de tener la variable totalFactura definida y con un valor asignado
+    insertCompras.setObject(4, totalFactura);
+    insertCompras.setString(5, id);
+
+    int filasAfectadasCompras = insertCompras.executeUpdate();
+
+    // Obtener el ID generado para la compra
+    ResultSet rsCompras = insertCompras.getGeneratedKeys();
+    if (rsCompras.next())
+    {
+        int idCompraGenerado = rsCompras.getInt(1);
+
+        // Inserción en la tabla DetallesCompras con valores directos
+        for (int i = 0; i < tablecompras.getRowCount(); i++)
         {
-            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
+            PreparedStatement insertDetallesCompras = conn.prepareStatement("INSERT INTO DetallesCompras (id_compra, cantidad, precio_unitario, total, cod_producto) VALUES (?,?,?,?,?)");
+            insertDetallesCompras.setInt(1, idCompraGenerado);
+            insertDetallesCompras.setString(2, tablecompras.getValueAt(i, 1).toString()); // Ejemplo de valor directo para cod_producto
+            insertDetallesCompras.setString(3, tablecompras.getValueAt(i, 2).toString()); // Ejemplo de valor directo para cantidad
+            insertDetallesCompras.setString(4, tablecompras.getValueAt(i, 3).toString()); // Ejemplo de valor directo para precio_unitario
+            insertDetallesCompras.setString(5, tablecompras.getValueAt(i, 4).toString()); // Ejemplo de valor directo para total
 
-            // Verificar si el número de factura ya existe en la base de datos
-            PreparedStatement checkNumFactura = conn.prepareStatement("SELECT COUNT(*) FROM Compras WHERE numfactura = ?");
-            checkNumFactura.setString(1, nunfactura);
-            ResultSet rsCheckNumFactura = checkNumFactura.executeQuery();
-            rsCheckNumFactura.next();
-            int count = rsCheckNumFactura.getInt(1);
+            insertDetallesCompras.executeUpdate();
 
-            if (count > 0)
+            String queryActualizarInventario = "UPDATE Productos SET cantidad_disponible = cantidad_disponible + ? WHERE cod_producto = ?";
+            try (PreparedStatement pstmtActualizarInventario = conn.prepareStatement(queryActualizarInventario))
             {
-                // Si ya existe un registro con el mismo número de factura, mostrar un mensaje de error
-                JOptionPane.showMessageDialog(null, "Error: El número de factura ya existe en la base de datos.", "Error", JOptionPane.ERROR_MESSAGE);
-                return; // Salir del método si el número de factura ya existe
+                pstmtActualizarInventario.setString(1, tablecompras.getValueAt(i, 1).toString());
+                pstmtActualizarInventario.setString(2, tablecompras.getValueAt(i, 4).toString());
+                pstmtActualizarInventario.executeUpdate();
             }
 
-            // Continuar con la inserción en la tabla Compras si el número de factura es único
-            // ...
-            // Resto del código para la inserción en la base de datos
-            PreparedStatement insertCompras = conn.prepareStatement("INSERT INTO Compras (numfactura, tipoCategoria, fecha, total, id_proveedor) VALUES (?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
-            insertCompras.setString(1, nunfactura);
-            insertCompras.setString(2, tipo);
-            insertCompras.setDate(3, new java.sql.Date(fecha.getTime()));
-            // Asegúrate de tener la variable totalFactura definida y con un valor asignado
-            insertCompras.setObject(4, totalFactura);
-            insertCompras.setString(5, id);
-
-            int filasAfectadasCompras = insertCompras.executeUpdate();
-
-            // Obtener el ID generado para la compra
-            ResultSet rsCompras = insertCompras.getGeneratedKeys();
-            if (rsCompras.next())
-            {
-                int idCompraGenerado = rsCompras.getInt(1);
-
-                // Inserción en la tabla DetallesCompras con valores directos
-                for (int i = 0; i < tablecompras.getRowCount(); i++)
-                {
-                    PreparedStatement insertDetallesCompras = conn.prepareStatement("INSERT INTO DetallesCompras (id_compra, cantidad, precio_unitario, total, cod_producto) VALUES (?,?,?,?,?)");
-                    insertDetallesCompras.setInt(1, idCompraGenerado);
-                    insertDetallesCompras.setString(2, tablecompras.getValueAt(i, 1).toString()); // Ejemplo de valor directo para cod_producto
-                    insertDetallesCompras.setString(3, tablecompras.getValueAt(i, 2).toString()); // Ejemplo de valor directo para cantidad
-                    insertDetallesCompras.setString(4, tablecompras.getValueAt(i, 3).toString()); // Ejemplo de valor directo para precio_unitario
-                    insertDetallesCompras.setString(5, tablecompras.getValueAt(i, 4).toString()); // Ejemplo de valor directo para total
-
-                    insertDetallesCompras.executeUpdate();
-
-                    String queryActualizarInventario = "UPDATE Productos SET cantidad_disponible = cantidad_disponible + ? WHERE cod_producto = ?";
-                    try (PreparedStatement pstmtActualizarInventario = conn.prepareStatement(queryActualizarInventario))
-                    {
-                        pstmtActualizarInventario.setString(1, tablecompras.getValueAt(i, 1).toString());
-                        pstmtActualizarInventario.setString(2, tablecompras.getValueAt(i, 4).toString());
-                        pstmtActualizarInventario.executeUpdate();
-                    }
-
-                }
-
-                JOptionPane.showMessageDialog(null, "Registro guardado");
-                this.dispose();
-            }
-
-        } catch (SQLException e)
-        {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(null, e.getMessage(), "Error de SQL", JOptionPane.ERROR_MESSAGE);
-        } catch (ClassNotFoundException ex)
-        {
-            JOptionPane.showMessageDialog(null, "Error de conexión a la base de datos", "Error de Conexión", JOptionPane.ERROR_MESSAGE);
         }
+
+        JOptionPane.showMessageDialog(null, "Registro guardado");
+        this.dispose();
+    }
+
+} catch (SQLException e)
+{
+    e.printStackTrace();
+    JOptionPane.showMessageDialog(null, e.getMessage(), "Error de SQL", JOptionPane.ERROR_MESSAGE);
+} catch (ClassNotFoundException ex)
+{
+    JOptionPane.showMessageDialog(null, "Error de conexión a la base de datos", "Error de Conexión", JOptionPane.ERROR_MESSAGE);
+}
 
     }//GEN-LAST:event_btnguardarActionPerformed
 
@@ -888,37 +819,6 @@ if (cantidad.isEmpty()) {
     private void numFacturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numFacturaActionPerformed
 
     }//GEN-LAST:event_numFacturaActionPerformed
-
-    private void txtpreciovActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtpreciovActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtpreciovActionPerformed
-
-    private void txtpreciovKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtpreciovKeyTyped
-        char c = evt.getKeyChar();
-
-        // Asegurarse de que el carácter sea un número y que la longitud sea menor o igual a 5
-        if (!Character.isDigit(c) || txtpreciov.getText().length() >= 5) {
-            evt.consume();  // Consumir el evento para evitar que se procese
-        }
-    }//GEN-LAST:event_txtpreciovKeyTyped
-
-    private void txtcantidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtcantidadKeyTyped
-        char c = evt.getKeyChar();
-
-        // Asegurarse de que el carácter sea un número y que la longitud sea menor o igual a 5
-        if (!Character.isDigit(c) || txtcantidad.getText().length() >= 4) {
-            evt.consume();  // Consumir el evento para evitar que se procese
-        }
-    }//GEN-LAST:event_txtcantidadKeyTyped
-
-    private void txtpreciocKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtpreciocKeyTyped
-       char c = evt.getKeyChar();
-
-        // Asegurarse de que el carácter sea un número y que la longitud sea menor o igual a 5
-        if (!Character.isDigit(c) || txtprecioc.getText().length() >= 5) {
-            evt.consume();  // Consumir el evento para evitar que se procese
-        }
-    }//GEN-LAST:event_txtpreciocKeyTyped
 
     /**
      * @param args the command line arguments
@@ -989,9 +889,6 @@ if (cantidad.isEmpty()) {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -1004,10 +901,7 @@ if (cantidad.isEmpty()) {
     public static javax.swing.JTable tablecompras;
     public javax.swing.JComboBox<String> tipoCompra;
     public javax.swing.JComboBox<String> txtProveedor;
-    private javax.swing.JTextField txtcantidad;
     public com.toedter.calendar.JDateChooser txtfecha;
-    private javax.swing.JTextField txtprecioc;
-    private javax.swing.JTextField txtpreciov;
     // End of variables declaration//GEN-END:variables
 
     private boolean existeNumeroFactura(Connection conn, String nunfactura) {

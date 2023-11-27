@@ -37,10 +37,13 @@ import java.util.List;
 import javax.swing.JFrame;
 
 
+
 /**
  *
  * @author PC
  */
+
+
 public class ProductoParaCompra extends javax.swing.JFrame {
 
     TextPrompt holder;
@@ -297,7 +300,7 @@ public class ProductoParaCompra extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jList1);
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Ingresar productos a la factura");
         setResizable(false);
 
@@ -775,9 +778,9 @@ public class ProductoParaCompra extends javax.swing.JFrame {
     private void btncrearproductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncrearproductoActionPerformed
 
      // Crear una instancia de IngresodeCompra y cerrarla
-  
 IngresodeCompra j = new IngresodeCompra();
 j.dispose();
+
 // Crear una instancia de ProductoParaCompra y cerrarla
 ProductoParaCompra s = new ProductoParaCompra();
 s.dispose();
@@ -796,8 +799,6 @@ panelprincipal.repaint();
 // Cerrar la ventana actual (la que llama a este código)
 this.dispose();
 
-
-    
 
        
 
