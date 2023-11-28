@@ -356,11 +356,9 @@ public class Listado_Pedidos_Arreglos extends javax.swing.JPanel {
     private void txtBuscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyTyped
         char c = evt.getKeyChar(); // Obtener el carácter ingresado
 
-        if (txtBuscar.getText().isEmpty() && Character.isWhitespace(c))
-        {
+        if (txtBuscar.getText().isEmpty() && Character.isWhitespace(c)) {
             evt.consume(); // Consumir el evento si es un espacio en blanco en la primera letra
-        } else if (txtBuscar.getText().length() >= 100)
-        {
+        } else if (txtBuscar.getText().length() >= 100) {
             evt.consume(); // Consumir el evento si se ha alcanzado la longitud máxima
         }
     }//GEN-LAST:event_txtBuscarKeyTyped
@@ -369,11 +367,9 @@ public class Listado_Pedidos_Arreglos extends javax.swing.JPanel {
         String texto = txtBuscar.getText().trim();
 
         //Validacion del texto ingresado
-        if (!texto.isEmpty())
-        {
+        if (!texto.isEmpty()) {
             buscarDatos(texto);
-        } else
-        {
+        } else {
             JOptionPane.showMessageDialog(null, "Tiene que ingresar texto para hacer la respectiva búsqueda");
         }
     }//GEN-LAST:event_Btn_BuscarActionPerformed
@@ -402,14 +398,12 @@ public class Listado_Pedidos_Arreglos extends javax.swing.JPanel {
     private void verbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verbtnActionPerformed
 
         selectedRow1 = tblPedidosA.getSelectedRow();
-        if (selectedRow1 == -1)
-        {
+        if (selectedRow1 == -1) {
             JOptionPane.showMessageDialog(null, "Seleccione un pedido para poder visualizarlo");
             return;
         }
 
-        try
-        {
+        try {
 
             int fila = tblPedidosA.getSelectedRow();
             int valorEntero = Integer.parseInt(tblPedidosA.getValueAt(fila, 6).toString());
@@ -422,8 +416,7 @@ public class Listado_Pedidos_Arreglos extends javax.swing.JPanel {
 
             rs = ps.executeQuery();
 
-            while (rs.next())
-            {
+            while (rs.next()) {
 
                 String nombre = rs.getString("nombre");
                 String apellido = rs.getString("apellido");
@@ -454,8 +447,7 @@ public class Listado_Pedidos_Arreglos extends javax.swing.JPanel {
                 byte[] imagenA3 = rs.getBytes("imagen3");
 
 // Mostrar u ocultar el label de imagen1 según la disponibilidad de la imagen
-                if (imagenA1 != null)
-                {
+                if (imagenA1 != null) {
                     ImageIcon imagenIcono = new ImageIcon(imagenA1);
                     Image imagen = imagenIcono.getImage();
                     Image imagenEscalada = imagen.getScaledInstance(191, 169, Image.SCALE_DEFAULT);
@@ -469,8 +461,7 @@ public class Listado_Pedidos_Arreglos extends javax.swing.JPanel {
 
                     // Hacer visible el label de imagen1
                     ver.imagen1.setVisible(true);
-                } else
-                {
+                } else {
                     // Si el arreglo de bytes de imagen es nulo, puedes mostrar un mensaje o establecer un valor predeterminado.
                     ver.imagen1.setIcon(null); // O establecer un icono predeterminado
                     // Ocultar el label de imagen1
@@ -478,8 +469,7 @@ public class Listado_Pedidos_Arreglos extends javax.swing.JPanel {
                 }
 
 // Mostrar u ocultar el label de imagen2 según la disponibilidad de la imagen
-                if (imagenA2 != null)
-                {
+                if (imagenA2 != null) {
                     ImageIcon imagenIcono = new ImageIcon(imagenA2);
                     Image imagen = imagenIcono.getImage();
                     Image imagenEscalada = imagen.getScaledInstance(191, 169, Image.SCALE_DEFAULT);
@@ -489,16 +479,14 @@ public class Listado_Pedidos_Arreglos extends javax.swing.JPanel {
 
                     // Hacer visible el label de imagen2
                     ver.imagen2.setVisible(true);
-                } else
-                {
+                } else {
                     // Ocultar el label de imagen2
                     ver.imagen2.setIcon(null);
                     ver.imagen2.setVisible(false);
                 }
 
 // Mostrar u ocultar el label de imagen3 según la disponibilidad de la imagen
-                if (imagenA3 != null)
-                {
+                if (imagenA3 != null) {
                     ImageIcon imagenIcono = new ImageIcon(imagenA3);
                     Image imagen = imagenIcono.getImage();
                     Image imagenEscalada = imagen.getScaledInstance(191, 169, Image.SCALE_DEFAULT);
@@ -508,8 +496,7 @@ public class Listado_Pedidos_Arreglos extends javax.swing.JPanel {
 
                     // Hacer visible el label de imagen3
                     ver.imagen3.setVisible(true);
-                } else
-                {
+                } else {
                     // Ocultar el label de imagen3
                     ver.imagen3.setIcon(null);
                     ver.imagen3.setVisible(false);
@@ -536,8 +523,7 @@ public class Listado_Pedidos_Arreglos extends javax.swing.JPanel {
             ps.close();
             conn.close();
 
-        } catch (SQLException e)
-        {
+        } catch (SQLException e) {
             e.printStackTrace();
             // Manejar cualquier excepción que pueda ocurrir durante la consulta a la base de datos
         }
@@ -556,14 +542,12 @@ public class Listado_Pedidos_Arreglos extends javax.swing.JPanel {
 
     private void editarbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarbtnActionPerformed
         selectedRow1 = tblPedidosA.getSelectedRow();
-        if (selectedRow1 == -1)
-        {
+        if (selectedRow1 == -1) {
             JOptionPane.showMessageDialog(null, "Seleccione un pedido para poder editar");
             return;
         }
 
-        try
-        {
+        try {
 
             int fila = tblPedidosA.getSelectedRow();
             int valorEntero = Integer.parseInt(tblPedidosA.getValueAt(fila, 6).toString());
@@ -576,8 +560,7 @@ public class Listado_Pedidos_Arreglos extends javax.swing.JPanel {
 
             rs = ps.executeQuery();
 
-            while (rs.next())
-            {
+            while (rs.next()) {
                 String idArreglo = rs.getString("id_arreglo");
                 String nombre = rs.getString("nombre");
                 String apellido = rs.getString("apellido");
@@ -599,16 +582,38 @@ public class Listado_Pedidos_Arreglos extends javax.swing.JPanel {
                 ver12.txtprecio.setText(precioA);
                 ver12.txtid.setText(idArreglo);
 
-              byte[] bytesImagen = rs.getBytes("imagen1");
+                byte[] bytesImagen = rs.getBytes("imagen1");
+
+                // Crear objetos ImageIcon solo si las imágenes no son nulas
+                ImageIcon imagenIcono1 = (bytesImagen != null) ? new ImageIcon(bytesImagen) : null;
+
+                // Escalar las imágenes al tamaño del JLabel
+                if (imagenIcono1 != null) {
+                    imagenIcono1 = escalarImagen(imagenIcono1, ver12.imagen2.getWidth(), ver12.imagen2.getHeight());
+                    ver12.imagen1.setIcon(imagenIcono1);
+                }
+
+                byte[] bytesImagen1 = rs.getBytes("imagen2");
+
+                // Crear objetos ImageIcon solo si las imágenes no son nulas
+                ImageIcon imagenIcono2 = (bytesImagen1 != null) ? new ImageIcon(bytesImagen1) : null;
+
+                // Escalar las imágenes al tamaño del JLabel
+                if (imagenIcono2 != null) {
+                    imagenIcono2 = escalarImagen(imagenIcono2, ver12.imagen2.getWidth(), ver12.imagen2.getHeight());
+                    ver12.imagen2.setIcon(imagenIcono2);
+                }
+                
+                byte[] bytesImagen2 = rs.getBytes("imagen3");
 
                         // Crear objetos ImageIcon solo si las imágenes no son nulas
-                        ImageIcon imagenIcono1 = (bytesImagen != null) ? new ImageIcon(bytesImagen) : null;
+                        ImageIcon imagenIcono3 = (bytesImagen2 != null) ? new ImageIcon(bytesImagen2) : null;
 
                         // Escalar las imágenes al tamaño del JLabel
-                        if (imagenIcono1 != null)
+                        if (imagenIcono3 != null)
                         {
-                            imagenIcono1 = escalarImagen(imagenIcono1, ver12.imagen1.getWidth(), ver12.imagen1.getHeight());
-                            ver12.imagen1.setIcon(imagenIcono1);
+                            imagenIcono3 = escalarImagen(imagenIcono3, ver12.imagen3.getWidth(), ver12.imagen3.getHeight());
+                            ver12.imagen3.setIcon(imagenIcono3);
                         }
 
                 ver12.fechaP.setText(fechapedido);
@@ -624,16 +629,13 @@ public class Listado_Pedidos_Arreglos extends javax.swing.JPanel {
                 jPanel1.revalidate();
                 jPanel1.repaint();
 
-              
-
             }
 
             rs.close();
             ps.close();
             conn.close();
 
-        } catch (SQLException e)
-        {
+        } catch (SQLException e) {
             e.printStackTrace();
             // Manejar cualquier excepción que pueda ocurrir durante la consulta a la base de datos
         }
@@ -666,24 +668,20 @@ public class Listado_Pedidos_Arreglos extends javax.swing.JPanel {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         int selectedRow = tblPedidosA.getSelectedRow();
-        if (selectedRow == -1)
-        {
+        if (selectedRow == -1) {
             JOptionPane.showMessageDialog(null, "Por favor, selecciona un registro para eliminar.", "Advertencia", JOptionPane.WARNING_MESSAGE);
-        } else
-        {
-            Object[] options =
-            {
-                "Sí, eliminar", "No, cancelar"
-            };
+        } else {
+            Object[] options
+                    = {
+                        "Sí, eliminar", "No, cancelar"
+                    };
             int choice = JOptionPane.showOptionDialog(null, "¿Estás seguro de que deseas eliminar este registro?", "Confirmación",
                     JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]);
 
-            if (choice == 0)
-            {
+            if (choice == 0) {
                 Number id_sublimacion = (Number) tblPedidosA.getValueAt(selectedRow, 6); // Obtén el ID del registro seleccionado
 
-                try
-                {
+                try {
                     Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
 
                     String sql = "DELETE FROM PedidoArreglo WHERE id_arreglo = ?";
@@ -695,8 +693,7 @@ public class Listado_Pedidos_Arreglos extends javax.swing.JPanel {
                     // Lógica para actualizar la tabla después de la eliminación
                     cargarTablaEmpleados();
 
-                } catch (SQLException ex)
-                {
+                } catch (SQLException ex) {
                     ex.printStackTrace();
                     JOptionPane.showMessageDialog(null, "Error al eliminar el registro: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                 }
@@ -721,8 +718,7 @@ public class Listado_Pedidos_Arreglos extends javax.swing.JPanel {
         int columnas;
         boolean foundData = false;
 
-        try
-        {
+        try {
             Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
 
             // Obtener el total de filas que cumplen con el criterio de búsqueda
@@ -735,23 +731,19 @@ public class Listado_Pedidos_Arreglos extends javax.swing.JPanel {
             ps.setString(3, "%" + terminoBusqueda + "%");
             rs = ps.executeQuery();
 
-            if (rs.next())
-            {
+            if (rs.next()) {
                 totalFilas = rs.getInt(1);
             }
             totalPaginas = (int) Math.ceil((double) totalFilas / filasPorPagina);
 
-            if (paginaActual < 1)
-            {
+            if (paginaActual < 1) {
                 paginaActual = 1;
-            } else if (paginaActual > totalPaginas)
-            {
+            } else if (paginaActual > totalPaginas) {
                 paginaActual = totalPaginas;
             }
 
             int offset = (paginaActual - 1) * filasPorPagina;
-            if (offset < 0)
-            {
+            if (offset < 0) {
                 offset = 0;
             }
 
@@ -771,11 +763,9 @@ public class Listado_Pedidos_Arreglos extends javax.swing.JPanel {
             rsmd = rs.getMetaData();
             columnas = rsmd.getColumnCount();
 
-            while (rs.next())
-            {
+            while (rs.next()) {
                 Object[] fila = new Object[columnas];
-                for (int indice = 0; indice < columnas; indice++)
-                {
+                for (int indice = 0; indice < columnas; indice++) {
                     fila[indice] = rs.getObject(indice + 1);
                 }
                 modeloTabla.addRow(fila);
@@ -784,8 +774,7 @@ public class Listado_Pedidos_Arreglos extends javax.swing.JPanel {
 
             ajustarTabla(filasPorPagina);
 
-            if (!foundData)
-            {
+            if (!foundData) {
                 JOptionPane.showMessageDialog(null, "No se encontraron datos");
             }
 
@@ -793,8 +782,7 @@ public class Listado_Pedidos_Arreglos extends javax.swing.JPanel {
             int rowCount = modeloTabla.getRowCount();
             Texto_Contable.setText("Cantidad de filas: " + rowCount + " - Página " + paginaActual + "/" + totalPaginas);
 
-        } catch (SQLException e)
-        {
+        } catch (SQLException e) {
             e.printStackTrace(); // Imprime la pila de excepciones para depuración
             JOptionPane.showMessageDialog(null, e.toString());
         }
@@ -807,16 +795,14 @@ public class Listado_Pedidos_Arreglos extends javax.swing.JPanel {
     }
 
     private void siguientePagina() {
-        if (paginaActual < totalPaginas)
-        {
+        if (paginaActual < totalPaginas) {
             paginaActual++;
             cargarTablaEmpleados();
         }
     }
 
     private void paginaAnterior() {
-        if (paginaActual > 1)
-        {
+        if (paginaActual > 1) {
             paginaActual--;
             cargarTablaEmpleados();
         }
@@ -827,11 +813,9 @@ public class Listado_Pedidos_Arreglos extends javax.swing.JPanel {
         modelTabla.setRowCount(0);
         boolean foundData = false;
 
-        try
-        {
+        try {
             Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
-            if (conn != null && !conn.isClosed())
-            {
+            if (conn != null && !conn.isClosed()) {
                 PreparedStatement ps = conn.prepareStatement("SELECT ROW_NUMBER() OVER(ORDER BY E.nombre) AS NumRegistro, E.nombre, E.apellido, V.estado, V.arreglo, V.fechaPedido, V.id_arreglo "
                         + "FROM Cliente E "
                         + "JOIN PedidoArreglo V ON E.id_cliente = V.id_cliente "
@@ -839,14 +823,12 @@ public class Listado_Pedidos_Arreglos extends javax.swing.JPanel {
                         + "ORDER BY E.nombre "
                         + "OFFSET ? ROWS FETCH NEXT ? ROWS ONLY");
 
-                if (texto != null && !texto.isEmpty())
-                {
+                if (texto != null && !texto.isEmpty()) {
                     ps.setString(1, "%" + texto + "%");
                     ps.setString(2, "%" + texto + "%");
                     ps.setString(3, "%" + texto + "%");
                     terminoBusqueda = texto; // Actualizar el término de búsqueda
-                } else
-                {
+                } else {
                     ps.setString(1, "%");
                     ps.setString(2, "%");
                     ps.setString(3, "%");
@@ -862,10 +844,8 @@ public class Listado_Pedidos_Arreglos extends javax.swing.JPanel {
 
                 ResultSet rs = ps.executeQuery();
 
-                if (rs != null)
-                {
-                    while (rs.next())
-                    {
+                if (rs != null) {
+                    while (rs.next()) {
                         int numRegistro = rs.getInt("NumRegistro");
                         String nombre = rs.getString("nombre");
                         String apellido = rs.getString("apellido");
@@ -874,10 +854,8 @@ public class Listado_Pedidos_Arreglos extends javax.swing.JPanel {
                         String fechaPedido = rs.getString("fechaPedido");
                         int idArreglo = Integer.parseInt(rs.getString("id_arreglo"));
 
-                        if (nombre != null && apellido != null && numeroTelefono != null)
-                        {
-                            modelTabla.addRow(new Object[]
-                            {
+                        if (nombre != null && apellido != null && numeroTelefono != null) {
+                            modelTabla.addRow(new Object[]{
                                 numRegistro, nombre, apellido, numeroTelefono, arreglo, fechaPedido, idArreglo
                             });
                             foundData = true;
@@ -890,8 +868,7 @@ public class Listado_Pedidos_Arreglos extends javax.swing.JPanel {
                 ps.close();
                 conn.close();
             }
-        } catch (Exception e)
-        {
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.toString());
         }
 

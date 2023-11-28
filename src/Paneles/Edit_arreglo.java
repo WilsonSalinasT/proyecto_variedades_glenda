@@ -27,6 +27,7 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -45,11 +46,11 @@ public class Edit_arreglo extends javax.swing.JPanel {
         Cimagen2.setEnabled(true);
         Cimagen3.setEnabled(true);
     }
-    
+
     public Edit_arreglo() {
         initComponents();
-        
-       // Llama al método para habilitar los botones
+
+        // Llama al método para habilitar los botones
         habilitarBotones();
     }
 
@@ -716,19 +717,34 @@ public class Edit_arreglo extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private File[] archivo1 = new File[1];
-    private int contador1 = 0; // Para llevar el registro de cuántas veces se ha presionado el botón
-    private File[] archivo2 = new File[1];
-    private int contador2 = 0; // Para llevar el registro de cuántas veces se ha presionado el botón
-    private File[] archivo3 = new File[1];
-    private int contador3 = 0; // Para llevar el registro de cuántas veces se ha presionado el botón
+    private int contador1 = 0;
+    private File[] archivo2 = new File[2];
+    private int contador2 = 0;
+    private File[] archivo3 = new File[3];
+    private int contador3 = 0;
 
-    // Función para reactivar el botón correspondiente después de cargar al menos una imagen
-    private void reactivarBoton(JButton boton, int contador) {
-        if (contador >= 1) { // Si se ha cargado al menos una imagen, se reactiva el botón
-            boton.setEnabled(true);
-        }
+// Método para habilitar los botones según los contadores
+    private void habilitarBotonesSegunContador() {
+        Cimagen1.setEnabled(contador1 < 1);
+        Cimagen2.setEnabled(contador2 < 2);
+        Cimagen3.setEnabled(contador3 < 3);
     }
 
+// Método para reiniciar los contadores y habilitar los botones al volver al JPanel
+    private void habilitarBotonesPorDefecto() {
+        contador1 = 0;
+        contador2 = 0;
+        contador3 = 0;
+
+        habilitarBotonesSegunContador(); // Habilitar botones según los contadores restablecidos
+    }
+
+// Llamada al método para habilitar botones al reiniciar el panel
+    private void reiniciarPanel() {
+        // Código de reinicio del panel si es necesario
+
+        habilitarBotonesPorDefecto(); // Restablecer contadores y habilitar botones
+    }
 
     private void Cimagen1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Cimagen1ActionPerformed
 
@@ -744,17 +760,13 @@ public class Edit_arreglo extends javax.swing.JPanel {
                 // Cargar la imagen en el label correspondiente (imagen1, imagen2, o imagen3)
                 ImageIcon icono = new ImageIcon(archivo1[contador1].getAbsolutePath());
                 Image foto = icono.getImage().getScaledInstance(imagen1.getWidth(), imagen1.getHeight(), Image.SCALE_DEFAULT);
-
-                if (contador1 == 0) {
-                    imagen1.setIcon(new ImageIcon(foto));
-                    //JOptionPane.showMessageDialog(this, "Ya se ha cargado una imagen. No se puede agregar otra.", "Advertencia", JOptionPane.WARNING_MESSAGE);
-                    Cimagen1.setEnabled(false); // Desactivar el botón después de cargar la tercera imagen
-                }
+                imagen1.setIcon(new ImageIcon(foto));
 
                 contador1++;
+                habilitarBotonesSegunContador(); // Actualizar el estado de los botones
             }
         }
-
+        // ...
     }//GEN-LAST:event_Cimagen1ActionPerformed
 
     private byte[] obtenerImagenExistente(int posicion) throws SQLException, ClassNotFoundException {
