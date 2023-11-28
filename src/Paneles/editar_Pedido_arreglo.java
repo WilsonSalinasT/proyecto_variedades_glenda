@@ -64,69 +64,6 @@ public class editar_Pedido_arreglo extends javax.swing.JPanel {
         maxDate.add(Calendar.MONTH, 5); // Suma meses a la fecha actual
         JDfechaEntrega.setMaxSelectableDate(maxDate.getTime());
 
-        try {
-            Connection connection = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
-
-            Statement stmt = connection.createStatement();
-            String sql = "SELECT id_cliente, nombre, apellido, numero_telefono FROM Cliente";
-            ResultSet rs = stmt.executeQuery(sql);
-
-            txtCliente.addItem("Seleccione"); // Agrega el elemento "Seleccione" al principio
-
-            while (rs.next()) {
-                String nombre = rs.getString("nombre");
-                String apellido = rs.getString("apellido");
-                int idCliente = rs.getInt("id_cliente");
-                String telefono = rs.getString("numero_telefono");
-
-                String nombreCompleto = nombre + " " + apellido;
-                txtCliente.addItem(nombreCompleto);
-            }
-
-            connection.close();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        txtCliente.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (txtCliente.getSelectedIndex() > 0) {
-                    String selectedClient = (String) txtCliente.getSelectedItem();
-
-                    // Verifica si se seleccionó el elemento "Seleccione"
-                    if (!selectedClient.equals("Seleccione")) {
-                        // Buscar nuevamente el ID y el teléfono en la base de datos
-                        try {
-                            Connection connection = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
-
-                            Statement stmt = connection.createStatement();
-                            String sql = "SELECT id_cliente, numero_telefono FROM Cliente WHERE CONCAT(nombre, ' ', apellido) = '" + selectedClient + "'";
-                            ResultSet rs = stmt.executeQuery(sql);
-
-                            if (rs.next()) {
-                                int selectedClientId = rs.getInt("id_cliente");
-                                String selectedClientTelefono = rs.getString("numero_telefono");
-
-                                // Actualiza los campos de texto con el ID y el teléfono del cliente seleccionado
-                                id_client.setText(Integer.toString(selectedClientId));
-                                txtTel.setText(selectedClientTelefono);
-                            }
-
-                            connection.close();
-                        } catch (Exception ex) {
-                            ex.printStackTrace();
-                        }
-                    } else {
-                        // Si se selecciona "Seleccione", establece los campos en blanco
-                        id_client.setText("");
-                        txtTel.setText("");
-                    }
-                }
-            }
-        });
-
     }
 
     /**
@@ -147,6 +84,10 @@ public class editar_Pedido_arreglo extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         crea_cliente = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        imagen2 = new javax.swing.JLabel();
+        imagen3 = new javax.swing.JLabel();
+        imagen1 = new javax.swing.JLabel();
         Cimagen1 = new javax.swing.JButton();
         Cimagen2 = new javax.swing.JButton();
         Cimagen3 = new javax.swing.JButton();
@@ -492,44 +433,15 @@ public class editar_Pedido_arreglo extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void Cimagen1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Cimagen1ActionPerformed
-        if (contador1 < 1) {
-            JFileChooser fclAbrirArchivo = new JFileChooser();
-            fclAbrirArchivo.setFileFilter(new FileNameExtensionFilter("Archivo de imagen", "jpg", "jpeg", "png"));
-
-            int respuesta = fclAbrirArchivo.showOpenDialog(this);
-
-            if (respuesta == JFileChooser.APPROVE_OPTION) {
-                archivo1[contador1] = fclAbrirArchivo.getSelectedFile();
-
-                // Cargar la imagen en el label correspondiente (imagen1, imagen2, o imagen3)
-                ImageIcon icono = new ImageIcon(archivo1[contador1].getAbsolutePath());
-                Image foto = icono.getImage().getScaledInstance(imagen1.getWidth(), imagen1.getHeight(), Image.SCALE_DEFAULT);
-
-                if (contador1 == 0) {
-                    imagen1.setIcon(new ImageIcon(foto));
-                    //JOptionPane.showMessageDialog(this, "Ya se ha cargado una imagen. No se puede agregar otra.", "Advertencia", JOptionPane.WARNING_MESSAGE);
-                    Cimagen1.setEnabled(false); // Desactivar el botón después de cargar la tercera imagen
-                }
-
-                contador1++;
-                // Reactivar el botón después de cargar la tercera imagen
-            if (contador1 == 1) {
-                Cimagen1.setEnabled(true);
-            }
-            }
-        }
-    }//GEN-LAST:event_Cimagen1ActionPerformed
-
 // ...
 
     private void btneditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btneditarActionPerformed
-        String nombre = (String) txtCliente.getSelectedItem();
+
         String arreglo = (String) cbxarreglo.getSelectedItem();
         String estado = (String) cbxEstado.getSelectedItem();
-        String idC = id_client.getText();
+
         String idA = lbl_id_arregl.getText();
-        String imagenM1 = imagen1.getText();
+
         String descripcion = txtDescripcionArre.getText();
         String precio = txtprecio.getText();
         SimpleDateFormat sdfSQL = new SimpleDateFormat("yyyy-MM-dd");
@@ -537,390 +449,55 @@ public class editar_Pedido_arreglo extends javax.swing.JPanel {
 
         Date fecha = JDfechaEntrega.getDate();
 
-        StringBuilder camposVacios = new StringBuilder("Los siguientes campos están vacíos:");
-
-        if ("Seleccione".equals(nombre)) {
-            camposVacios.append("\n - Nombre del cliente");
-        }
-        if ("Seleccione".equals(arreglo)) {
-            camposVacios.append("\n - Arreglo");
-        }
-        if (fecha == null) {
-            camposVacios.append("\n - Fecha de Entrega");
-        }
-        if (imagen1.getIcon() == null) {
-            camposVacios.append("\n - Agregue al menos una imagen de muestra");
-        }
-        if (descripcion.isEmpty()) {
-            camposVacios.append("\n - Descripción");
-        }
-        if (precio.isEmpty()) {
-            camposVacios.append("\n - Precio");
-        }
-
-        if (!camposVacios.toString().equals("Los siguientes campos están vacíos:")) {
-            JOptionPane.showMessageDialog(null, camposVacios.toString(), "Campos Vacíos", JOptionPane.ERROR_MESSAGE);
-        } else {
-            try {
-
-                // Obtén las imágenes actuales de los JLabel
-                Icon icon1 = imagen1.getIcon();
-                Icon icon2 = imagen2.getIcon();
-                Icon icon3 = imagen3.getIcon();
-                String rutaImagen1 = null;
-                String rutaImagen2 = null;
-                String rutaImagen3 = null;
-
-                // Verifica si archivos[0] no es null antes de acceder a sus propiedades
-                if (archivo1[0] != null) {
-                    rutaImagen1 = archivo1[0].getAbsolutePath();
-                }
-
-                if (archivo2[0] != null) {
-                    rutaImagen2 = archivo2[0].getAbsolutePath();
-                }
-
-                if (archivo3[0] != null) {
-                    rutaImagen3 = archivo3[0].getAbsolutePath();
-                }
-
+            
+            try
+            {
                 // Resto del código para la inserción en la base de datos
                 Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-                Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
-                PreparedStatement updatePs = conn.prepareStatement(
-                        "UPDATE PedidoArreglo SET arreglo=?, estado=?, descripcion=?, precio=?, "
-                        + "imagen1=?, imagen2=?, imagen3=?, fechaPedido=?, fechaEntrega=? "
-                        + "WHERE id_arreglo=?"
-                );
-
-                // Luego, establece los parámetros como lo estabas haciendo antes
+                 Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
+                PreparedStatement updatePs = conn.prepareStatement("UPDATE PedidoArreglo SET arreglo=?, estado=?, descripcion=?, precio=?,fechaPedido=?, fechaEntrega=? WHERE id_arreglo=? ");
+                
+                 // Luego, establece los parámetros como lo estabas haciendo antes
                 updatePs.setString(1, arreglo);
                 updatePs.setString(2, estado);
                 updatePs.setString(3, descripcion);
                 updatePs.setString(4, precio);
 
-                // Verificar y actualizar la imagen 1 solo si hay una nueva imagen
-                if (rutaImagen1 != null && !rutaImagen1.isEmpty() && archivo1[0] != null) {
-                    File file1 = new File(rutaImagen1);
-                    if (file1.exists()) {
-                        try (FileInputStream fis1 = new FileInputStream(file1)) {
-                            byte[] bytes1 = new byte[(int) file1.length()];
-                            fis1.read(bytes1);
-                            updatePs.setBytes(5, bytes1);
-                        } catch (IOException ex) {
-                            ex.printStackTrace();
-                            Logger.getLogger(editar_pedidoSas.class.getName()).log(Level.SEVERE, null, ex);
-                            updatePs.setNull(5, Types.BLOB); // Imagen 1 no pudo ser leída
-                        }
-                    }
-                } else {
-                    // Si no hay una nueva imagen, mantén la imagen existente en la base de datos
-                    updatePs.setBytes(5, obtenerImagenExistente(5));
-                }
 
-                // Verificar y actualizar la imagen 2 solo si hay una nueva imagen y no se ha cargado antes
-                if (rutaImagen2 != null && !rutaImagen2.isEmpty() && archivo2[0] != null) {
-                    File file2 = new File(rutaImagen2);
-                    if (file2.exists()) {
-                        try (FileInputStream fis2 = new FileInputStream(file2)) {
-                            byte[] bytes2 = new byte[(int) file2.length()];
-                            fis2.read(bytes2);
-                            updatePs.setBytes(6, bytes2);
-                        } catch (IOException ex) {
-                            ex.printStackTrace();
-                            Logger.getLogger(editar_pedidoSas.class.getName()).log(Level.SEVERE, null, ex);
-                            updatePs.setNull(6, Types.BLOB); // Imagen 2 no pudo ser leída
-                        }
-                    }
-                } else {
-                    // Si no hay una nueva imagen, mantén la imagen existente en la base de datos
-                    updatePs.setBytes(6, obtenerImagenExistente(6));
-                }
+                updatePs.setString(5, fechaPedido);
 
-                // Verificar y actualizar la imagen 3 solo si hay una nueva imagen y no se ha cargado antes
-                if (rutaImagen3 != null && !rutaImagen3.isEmpty() && archivo3[0] != null) {
-                    File file3 = new File(rutaImagen3);
-                    if (file3.exists()) {
-                        try (FileInputStream fis3 = new FileInputStream(file3)) {
-                            byte[] bytes3 = new byte[(int) file3.length()];
-                            fis3.read(bytes3);
-                            updatePs.setBytes(7, bytes3);
-                        } catch (IOException ex) {
-                            ex.printStackTrace();
-                            Logger.getLogger(editar_pedidoSas.class.getName()).log(Level.SEVERE, null, ex);
-                            updatePs.setNull(7, Types.BLOB); // Imagen 3 no pudo ser leída
-                        }
-                    }
-                } else {
-                    // Si no hay una nueva imagen, mantén la imagen existente en la base de datos
-                    updatePs.setBytes(7, obtenerImagenExistente(7));
-                }
-
-                // Verifica y actualiza la imagen 1 solo si hay una nueva imagen
-                if (rutaImagen1 != null && !rutaImagen1.isEmpty()) {
-                    actualizarImagen(updatePs, rutaImagen1, 5);
-                } else {
-                    // Si no hay una nueva imagen, mantén la imagen existente en la base de datos
-                    updatePs.setBytes(5, obtenerImagenExistente(5));
-                }
-
-                // Verifica y actualiza la imagen 2 solo si hay una nueva imagen
-                if (rutaImagen2 != null && !rutaImagen2.isEmpty()) {
-                    actualizarImagen(updatePs, rutaImagen2, 6);
-                } else {
-                    // Si no hay una nueva imagen, mantén la imagen existente en la base de datos
-                    updatePs.setBytes(6, obtenerImagenExistente(6));
-                }
-
-                // Verifica y actualiza la imagen 3 solo si hay una nueva imagen
-                if (rutaImagen3 != null && !rutaImagen3.isEmpty()) {
-                    actualizarImagen(updatePs, rutaImagen3, 7);
-                } else {
-                    // Si no hay una nueva imagen, mantén la imagen existente en la base de datos
-                    updatePs.setBytes(7, obtenerImagenExistente(7));
-                }
-
-                updatePs.setString(8, fechaPedido);
-
-                updatePs.setDate(9, new java.sql.Date(fecha.getTime())); // Ajustar el índice a 9
+                updatePs.setDate(6, new java.sql.Date(fecha.getTime())); // Ajustar el índice a 9
                 int numeracion = Integer.parseInt(idA);
-                updatePs.setInt(10, numeracion); // Ajustar el índice a 10
+                updatePs.setInt(7, numeracion); // Ajustar el índice a 10
 
+                
                 updatePs.executeUpdate();
-
                 JOptionPane.showMessageDialog(null, "Registro editado exitosamente");
-
-                // Restaura las imágenes en los JLabel después de la actualización
-                imagen1.setIcon(icon1);
-                imagen2.setIcon(icon2);
-                imagen3.setIcon(icon3);
-
+                
+              
                 Listado_Pedidos_Arreglos p = new Listado_Pedidos_Arreglos();
 
                 p.setSize(1024, 640);
                 p.setLocation(0, 0);
 
-                panelprincipal.revalidate();
-                panelprincipal.repaint();
-                panelprincipal.removeAll();
-                panelprincipal.add(p, BorderLayout.CENTER);
-                panelprincipal.revalidate();
-                panelprincipal.repaint();
-                return;
-
-            } catch (SQLException e) {
-                JOptionPane.showMessageDialog(null, e.toString(), "Error de SQL", JOptionPane.ERROR_MESSAGE);
-            } catch (ClassNotFoundException ex) {
-                JOptionPane.showMessageDialog(null, "Error de conexión a la base de datos", "Error de Conexión", JOptionPane.ERROR_MESSAGE);
-            }
+                jPanel4.revalidate();
+                jPanel4.repaint();
+                jPanel4.removeAll();
+                jPanel4.add(p, BorderLayout.CENTER);
+                jPanel4.revalidate();
+                jPanel4.repaint();
+            } catch (ClassNotFoundException ex)
+            {
+                Logger.getLogger(editar_Pedido_arreglo.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex)
+        {
+            Logger.getLogger(editar_Pedido_arreglo.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-
+            
+    
     }//GEN-LAST:event_btneditarActionPerformed
 
-    /*  private void btneditarActionPerformed(java.awt.event.ActionEvent evt) {
-        String nombre = (String) txtCliente.getSelectedItem();
-        String arreglo = (String) cbxarreglo.getSelectedItem();
-        String estado = (String) cbxEstado.getSelectedItem();
-        String idC = id_client.getText();
-        String idA = lbl_id_arregl.getText();
-        String imagenM1 = imagen1.getText();
-        String descripcion = txtDescripcionArre.getText();
-        String precio = txtprecio.getText();
-        SimpleDateFormat sdfSQL = new SimpleDateFormat("yyyy-MM-dd");
-        String fechaPedido = sdfSQL.format(new Date());
 
-        Date fecha = JDfechaEntrega.getDate();
-
-        StringBuilder camposVacios = new StringBuilder("Los siguientes campos están vacíos:");
-
-        if ("Seleccione".equals(nombre)) {
-            camposVacios.append("\n - Nombre del cliente");
-        }
-        if ("Seleccione".equals(arreglo)) {
-            camposVacios.append("\n - Arreglo");
-        }
-        if (fecha == null) {
-            camposVacios.append("\n - Fecha de Entrega");
-        }
-        if (imagen1.getIcon() == null) {
-            camposVacios.append("\n - Agregue al menos una imagen de muestra");
-        }
-        if (descripcion.isEmpty()) {
-            camposVacios.append("\n - Descripción");
-        }
-        if (precio.isEmpty()) {
-            camposVacios.append("\n - Precio");
-        }
-
-        if (!camposVacios.toString().equals("Los siguientes campos están vacíos:")) {
-            JOptionPane.showMessageDialog(null, camposVacios.toString(), "Campos Vacíos", JOptionPane.ERROR_MESSAGE);
-        } else {
-            try {
-
-                // Obtén las imágenes actuales de los JLabel
-                Icon icon1 = imagen1.getIcon();
-                Icon icon2 = imagen2.getIcon();
-                Icon icon3 = imagen3.getIcon();
-                String rutaImagen1 = null;
-                String rutaImagen2 = null;
-                String rutaImagen3 = null;
-
-                // Verifica si archivos[0] no es null antes de acceder a sus propiedades
-                if (archivos[0] != null) {
-                    rutaImagen1 = archivos[0].getAbsolutePath();
-                }
-
-                if (archivos[1] != null) {
-                    rutaImagen2 = archivos[1].getAbsolutePath();
-                }
-
-                if (archivos[2] != null) {
-                    rutaImagen3 = archivos[2].getAbsolutePath();
-                }
-
-                // Resto del código para la inserción en la base de datos
-                Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-                Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
-                PreparedStatement updatePs = conn.prepareStatement(
-                        "UPDATE PedidoArreglo SET arreglo=?, estado=?, descripcion=?, precio=?, "
-                        + "imagen1=?, imagen2=?, imagen3=?, fechaPedido=?, id_cliente=?, fechaEntrega=? "
-                        + "WHERE id_arreglo=?"
-                );
-
-                // Luego, establece los parámetros como lo estabas haciendo antes
-                updatePs.setString(1, arreglo);
-                updatePs.setString(2, estado);
-                updatePs.setString(3, descripcion);
-                updatePs.setString(4, precio);
-
-                // Verificar y actualizar la imagen 1 solo si hay una nueva imagen
-                if (rutaImagen1 != null && !rutaImagen1.isEmpty() && archivos[0] != null) {
-                    File file1 = new File(rutaImagen1);
-                    if (file1.exists()) {
-                        try (FileInputStream fis1 = new FileInputStream(file1)) {
-                            byte[] bytes1 = new byte[(int) file1.length()];
-                            fis1.read(bytes1);
-                            updatePs.setBytes(5, bytes1);
-                        } catch (IOException ex) {
-                            ex.printStackTrace();
-                            Logger.getLogger(editar_pedidoSas.class.getName()).log(Level.SEVERE, null, ex);
-                            updatePs.setNull(5, Types.BLOB); // Imagen 1 no pudo ser leída
-                        }
-                    }
-                } else {
-                    // Si no hay una nueva imagen, mantén la imagen existente en la base de datos
-                    updatePs.setBytes(5, obtenerImagenExistente(5));
-                }
-
-                // Verificar y actualizar la imagen 2 solo si hay una nueva imagen y no se ha cargado antes
-                if (rutaImagen2 != null && !rutaImagen2.isEmpty() && archivos[1] != null) {
-                    File file2 = new File(rutaImagen2);
-                    if (file2.exists()) {
-                        try (FileInputStream fis2 = new FileInputStream(file2)) {
-                            byte[] bytes2 = new byte[(int) file2.length()];
-                            fis2.read(bytes2);
-                            updatePs.setBytes(6, bytes2);
-                        } catch (IOException ex) {
-                            ex.printStackTrace();
-                            Logger.getLogger(editar_pedidoSas.class.getName()).log(Level.SEVERE, null, ex);
-                            updatePs.setNull(6, Types.BLOB); // Imagen 2 no pudo ser leída
-                        }
-                    }
-                } else {
-                    // Si no hay una nueva imagen, mantén la imagen existente en la base de datos
-                    updatePs.setBytes(6, obtenerImagenExistente(6));
-                }
-
-                // Verificar y actualizar la imagen 3 solo si hay una nueva imagen y no se ha cargado antes
-                if (rutaImagen3 != null && !rutaImagen3.isEmpty() && archivos[2] != null) {
-                    File file3 = new File(rutaImagen3);
-                    if (file3.exists()) {
-                        try (FileInputStream fis3 = new FileInputStream(file3)) {
-                            byte[] bytes3 = new byte[(int) file3.length()];
-                            fis3.read(bytes3);
-                            updatePs.setBytes(7, bytes3);
-                        } catch (IOException ex) {
-                            ex.printStackTrace();
-                            Logger.getLogger(editar_pedidoSas.class.getName()).log(Level.SEVERE, null, ex);
-                            updatePs.setNull(7, Types.BLOB); // Imagen 3 no pudo ser leída
-                        }
-                    }
-                } else {
-                    // Si no hay una nueva imagen, mantén la imagen existente en la base de datos
-                    updatePs.setBytes(7, obtenerImagenExistente(7));
-                }
-
-                // Verifica y actualiza la imagen 1 solo si hay una nueva imagen
-                if (rutaImagen1 != null && !rutaImagen1.isEmpty()) {
-                    actualizarImagen(updatePs, rutaImagen1, 5);
-                } else {
-                    // Si no hay una nueva imagen, mantén la imagen existente en la base de datos
-                    updatePs.setBytes(5, obtenerImagenExistente(5));
-                }
-
-                // Verifica y actualiza la imagen 2 solo si hay una nueva imagen
-                if (rutaImagen2 != null && !rutaImagen2.isEmpty()) {
-                    actualizarImagen(updatePs, rutaImagen2, 6);
-                } else {
-                    // Si no hay una nueva imagen, mantén la imagen existente en la base de datos
-                    updatePs.setBytes(6, obtenerImagenExistente(6));
-                }
-
-                // Verifica y actualiza la imagen 3 solo si hay una nueva imagen
-                if (rutaImagen3 != null && !rutaImagen3.isEmpty()) {
-                    actualizarImagen(updatePs, rutaImagen3, 7);
-                } else {
-                    // Si no hay una nueva imagen, mantén la imagen existente en la base de datos
-                    updatePs.setBytes(7, obtenerImagenExistente(7));
-                }
-
-                updatePs.setString(8, fechaPedido);
-                updatePs.setString(9, idC);
-                updatePs.setDate(10, new java.sql.Date(fecha.getTime())); // Ajustar el índice a 9
-                int numeracion = Integer.parseInt(idA);
-                updatePs.setInt(11, numeracion); // Ajustar el índice a 10
-
-
-                  // Establece el valor de la clave primaria
-                try {
-                    int numeracion = Integer.parseInt(lbl_id_arregl.getText());
-                    updatePs.setInt(11, numeracion);
-                } catch (NumberFormatException e) {
-                    JOptionPane.showMessageDialog(null, "Error: El valor de lbl_id_arregl no es un número válido", "Error de formato", JOptionPane.ERROR_MESSAGE);
-                    return; // Sale del método para evitar continuar con la ejecución
-                }
-                 
-                updatePs.executeUpdate();
-
-                // Restaura las imágenes en los JLabel después de la actualización
-                imagen1.setIcon(icon1);
-                imagen2.setIcon(icon2);
-                imagen3.setIcon(icon3);
-
-                JOptionPane.showMessageDialog(null, "Registro editado exitosamente");
-
-                Listado_Pedidos_Arreglos p = new Listado_Pedidos_Arreglos();
-
-                p.setSize(1024, 640);
-                p.setLocation(0, 0);
-
-                panelprincipal.revalidate();
-                panelprincipal.repaint();
-                panelprincipal.removeAll();
-                panelprincipal.add(p, BorderLayout.CENTER);
-                panelprincipal.revalidate();
-                panelprincipal.repaint();
-
-            } catch (SQLException e) {
-                JOptionPane.showMessageDialog(null, e.toString(), "Error de SQL", JOptionPane.ERROR_MESSAGE);
-            } catch (ClassNotFoundException ex) {
-                JOptionPane.showMessageDialog(null, "Error de conexión a la base de datos", "Error de Conexión", JOptionPane.ERROR_MESSAGE);
-            }
-        }
-
-    }
-     */
 
     private void cbxarregloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxarregloActionPerformed
 
@@ -965,9 +542,11 @@ public class editar_Pedido_arreglo extends javax.swing.JPanel {
         char c = evt.getKeyChar();
         String texto = txtprecio.getText();
 
-        if (c == '0' && (texto.isEmpty() || texto.equals("0"))) {
+        if (c == '0' && (texto.isEmpty() || texto.equals("0")))
+        {
             evt.consume(); // Evita que se inicie con un cero
-        } else if (!Character.isDigit(c) || texto.length() >= 5) {
+        } else if (!Character.isDigit(c) || texto.length() >= 5)
+        {
             evt.consume(); // Evita que se ingresen más de 5 cifras o caracteres que no sean dígitos
         }
 
@@ -988,146 +567,109 @@ public class editar_Pedido_arreglo extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_cbxEstadoActionPerformed
 
-    private void Cimagen2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Cimagen2ActionPerformed
-        if (contador2 < 1) {
-            JFileChooser fclAbrirArchivo = new JFileChooser();
-            fclAbrirArchivo.setFileFilter(new FileNameExtensionFilter("Archivo de imagen", "jpg", "jpeg", "png"));
-
-            int respuesta = fclAbrirArchivo.showOpenDialog(this);
-
-            if (respuesta == JFileChooser.APPROVE_OPTION) {
-                archivo2[contador2] = fclAbrirArchivo.getSelectedFile();
-
-                // Cargar la imagen en el label correspondiente (imagen1, imagen2, o imagen3)
-                ImageIcon icono = new ImageIcon(archivo2[contador2].getAbsolutePath());
-                Image foto = icono.getImage().getScaledInstance(imagen2.getWidth(), imagen2.getHeight(), Image.SCALE_DEFAULT);
-
-                if (contador2 == 0) {
-                    imagen2.setIcon(new ImageIcon(foto));
-                    //JOptionPane.showMessageDialog(this, "Ya se ha cargado una imagen. No se puede agregar otra.", "Advertencia", JOptionPane.WARNING_MESSAGE);
-                    Cimagen2.setEnabled(false); // Desactivar el botón después de cargar la tercera imagen
-                }
-
-                contador2++;
-                // Reactivar el botón después de cargar la tercera imagen
-            if (contador2 == 1) {
-                Cimagen2.setEnabled(true);
-            }
-            }
-        }
-    }//GEN-LAST:event_Cimagen2ActionPerformed
-
-    private void Cimagen3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Cimagen3ActionPerformed
-        if (contador3 < 1) {
-            JFileChooser fclAbrirArchivo = new JFileChooser();
-            fclAbrirArchivo.setFileFilter(new FileNameExtensionFilter("Archivo de imagen", "jpg", "jpeg", "png"));
-
-            int respuesta = fclAbrirArchivo.showOpenDialog(this);
-
-            if (respuesta == JFileChooser.APPROVE_OPTION) {
-                archivo3[contador3] = fclAbrirArchivo.getSelectedFile();
-
-                // Cargar la imagen en el label correspondiente (imagen1, imagen2, o imagen3)
-                ImageIcon icono = new ImageIcon(archivo3[contador3].getAbsolutePath());
-                Image foto = icono.getImage().getScaledInstance(imagen3.getWidth(), imagen3.getHeight(), Image.SCALE_DEFAULT);
-
-                if (contador3 == 0) {
-                    imagen3.setIcon(new ImageIcon(foto));
-                    //JOptionPane.showMessageDialog(this, "Ya se ha cargado una imagen. No se puede agregar otra.", "Advertencia", JOptionPane.WARNING_MESSAGE);
-                    Cimagen3.setEnabled(false); // Desactivar el botón después de cargar la tercera imagen
-                }
-
-                contador3++;
-                // Reactivar el botón después de cargar la tercera imagen
-                if (contador3 == 1) {
-                    Cimagen3.setEnabled(true);
-                }
-            }
-        }
-    }//GEN-LAST:event_Cimagen3ActionPerformed
-
     private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
-        JOptionPane.showMessageDialog(this, "¡Atención! Si cambiaste una imagen en una de las tres secciones diferentes y necesitas más cambios, por favor, sal y vuelve a entrar. ¡Gracias!", "Advertencia", JOptionPane.WARNING_MESSAGE);
+        //        JOptionPane.showMessageDialog(this, "¡Atención! Si cambiaste una imagen en una de las tres secciones diferentes y necesitas más cambios, por favor, sal y vuelve a entrar. ¡Gracias!", "Advertencia", JOptionPane.WARNING_MESSAGE);
     }//GEN-LAST:event_jLabel1MouseClicked
 
-    private File[] archivo1 = new File[1];
-    private int contador1 = 0; // Para llevar el registro de cuántas veces se ha presionado el botón
-    private File[] archivo2 = new File[1];
-    private int contador2 = 0; // Para llevar el registro de cuántas veces se ha presionado el botón
-    private File[] archivo3 = new File[1];
-    private int contador3 = 0; // Para llevar el registro de cuántas veces se ha presionado el botón
+    private void Cimagen3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Cimagen3ActionPerformed
+        //        if (contador3 < 1)
+        //        {
+            //            JFileChooser fclAbrirArchivo = new JFileChooser();
+            //            fclAbrirArchivo.setFileFilter(new FileNameExtensionFilter("Archivo de imagen", "jpg", "jpeg", "png"));
+            //
+            //            int respuesta = fclAbrirArchivo.showOpenDialog(this);
+            //
+            //            if (respuesta == JFileChooser.APPROVE_OPTION)
+            //            {
+                //                archivo3[contador3] = fclAbrirArchivo.getSelectedFile();
+                //
+                //                // Cargar la imagen en el label correspondiente (imagen1, imagen2, o imagen3)
+                //                ImageIcon icono = new ImageIcon(archivo3[contador3].getAbsolutePath());
+                //                Image foto = icono.getImage().getScaledInstance(imagen3.getWidth(), imagen3.getHeight(), Image.SCALE_DEFAULT);
+                //
+                //                if (contador3 == 0)
+                //                {
+                    //                    imagen3.setIcon(new ImageIcon(foto));
+                    //                    //JOptionPane.showMessageDialog(this, "Ya se ha cargado una imagen. No se puede agregar otra.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+                    //                    Cimagen3.setEnabled(false); // Desactivar el botón después de cargar la tercera imagen
+                    //                }
+                //
+                //                contador3++;
+                //                // Reactivar el botón después de cargar la tercera imagen
+                //                if (contador3 == 1)
+                //                {
+                    //                    Cimagen3.setEnabled(true);
+                    //                }
+                //            }
+            //        }
+    }//GEN-LAST:event_Cimagen3ActionPerformed
 
-    private void resetearBotones() {
-        Cimagen1.setEnabled(true);
-        Cimagen2.setEnabled(true);
-        Cimagen3.setEnabled(true);
+    private void Cimagen2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Cimagen2ActionPerformed
+        //        if (contador2 < 1)
+        //        {
+            //            JFileChooser fclAbrirArchivo = new JFileChooser();
+            //            fclAbrirArchivo.setFileFilter(new FileNameExtensionFilter("Archivo de imagen", "jpg", "jpeg", "png"));
+            //
+            //            int respuesta = fclAbrirArchivo.showOpenDialog(this);
+            //
+            //            if (respuesta == JFileChooser.APPROVE_OPTION)
+            //            {
+                //                archivo2[contador2] = fclAbrirArchivo.getSelectedFile();
+                //
+                //                // Cargar la imagen en el label correspondiente (imagen1, imagen2, o imagen3)
+                //                ImageIcon icono = new ImageIcon(archivo2[contador2].getAbsolutePath());
+                //                Image foto = icono.getImage().getScaledInstance(imagen2.getWidth(), imagen2.getHeight(), Image.SCALE_DEFAULT);
+                //
+                //                if (contador2 == 0)
+                //                {
+                    //                    imagen2.setIcon(new ImageIcon(foto));
+                    //                    //JOptionPane.showMessageDialog(this, "Ya se ha cargado una imagen. No se puede agregar otra.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+                    //                    Cimagen2.setEnabled(false); // Desactivar el botón después de cargar la tercera imagen
+                    //                }
+                //
+                //                contador2++;
+                //                // Reactivar el botón después de cargar la tercera imagen
+                //                if (contador2 == 1)
+                //                {
+                    //                    Cimagen2.setEnabled(true);
+                    //                }
+                //            }
+            //        }
+    }//GEN-LAST:event_Cimagen2ActionPerformed
 
-        contador1 = 0;
-        contador2 = 0;
-        contador3 = 0;
+    private void Cimagen1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Cimagen1ActionPerformed
+        //        if (contador1 < 1)
+        //        {
+            //            JFileChooser fclAbrirArchivo = new JFileChooser();
+            //            fclAbrirArchivo.setFileFilter(new FileNameExtensionFilter("Archivo de imagen", "jpg", "jpeg", "png"));
+            //
+            //            int respuesta = fclAbrirArchivo.showOpenDialog(this);
+            //
+            //            if (respuesta == JFileChooser.APPROVE_OPTION)
+            //            {
+                //                archivo1[contador1] = fclAbrirArchivo.getSelectedFile();
+                //
+                //                // Cargar la imagen en el label correspondiente (imagen1, imagen2, o imagen3)
+                //                ImageIcon icono = new ImageIcon(archivo1[contador1].getAbsolutePath());
+                //                Image foto = icono.getImage().getScaledInstance(imagen1.getWidth(), imagen1.getHeight(), Image.SCALE_DEFAULT);
+                //
+                //                if (contador1 == 0)
+                //                {
+                    //                    imagen1.setIcon(new ImageIcon(foto));
+                    //                    //JOptionPane.showMessageDialog(this, "Ya se ha cargado una imagen. No se puede agregar otra.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+                    //                    Cimagen1.setEnabled(false); // Desactivar el botón después de cargar la tercera imagen
+                    //                }
+                //
+                //                contador1++;
+                //                // Reactivar el botón después de cargar la tercera imagen
+                //                if (contador1 == 1)
+                //                {
+                    //                    Cimagen1.setEnabled(true);
+                    //                }
+                //            }
+            //        }
+    }//GEN-LAST:event_Cimagen1ActionPerformed
 
-        archivo1 = new File[1];
-        archivo2 = new File[1];
-        archivo3 = new File[1];
-    }
-
-// Método para obtener la imagen existente en la base de datos
-    private byte[] obtenerImagenExistente(int posicion) throws SQLException, ClassNotFoundException {
-        byte[] imagenExistente = null;
-
-        Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-        try (Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789")) {
-            String sql = "SELECT imagen1, imagen2, imagen3 FROM PedidoArreglo WHERE id_arreglo = ?";
-            try (PreparedStatement ps = conn.prepareStatement(sql)) {
-                ps.setInt(1, Integer.parseInt(lbl_id_arregl.getText()));
-                try (ResultSet rs = ps.executeQuery()) {
-                    if (rs.next()) {
-                        switch (posicion) {
-                            case 5:
-                                imagenExistente = rs.getBytes(1); // Imagen 1
-                                break;
-                            case 6:
-                                imagenExistente = rs.getBytes(2); // Imagen 2
-                                break;
-                            case 7:
-                                imagenExistente = rs.getBytes(3); // Imagen 3
-                                break;
-                            default:
-                                // Manejar caso no válido según sea necesario
-                                break;
-                        }
-                    }
-                }
-            }
-        }
-
-        return imagenExistente;
-    }
-
-    private byte[] obtenerBytesImagen(File file) throws IOException {
-        try (FileInputStream fis = new FileInputStream(file)) {
-            byte[] bytes = new byte[(int) file.length()];
-            fis.read(bytes);
-            return bytes;
-        }
-    }
-
-    private void actualizarImagen(PreparedStatement updatePs, String rutaImagen, int parametro) throws SQLException, ClassNotFoundException {
-        if (rutaImagen != null && !rutaImagen.isEmpty()) {
-            File file = new File(rutaImagen);
-            if (file.exists()) {
-                try {
-                    byte[] bytes = obtenerBytesImagen(file);
-                    updatePs.setBytes(parametro, bytes);
-                } catch (IOException ex) {
-                    ex.printStackTrace();
-                    updatePs.setNull(parametro, Types.BLOB);
-                }
-            }
-        } else {
-            updatePs.setBytes(parametro, obtenerImagenExistente(parametro));
-        }
-    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Cimagen1;
     private javax.swing.JButton Cimagen2;
@@ -1140,16 +682,16 @@ public class editar_Pedido_arreglo extends javax.swing.JPanel {
     private javax.swing.JLabel crea_cliente;
     public javax.swing.JLabel fechaP;
     public static final javax.swing.JLabel id_client = new javax.swing.JLabel();
-    public static final javax.swing.JLabel imagen1 = new javax.swing.JLabel();
-    public static final javax.swing.JLabel imagen2 = new javax.swing.JLabel();
-    public static final javax.swing.JLabel imagen3 = new javax.swing.JLabel();
+    private javax.swing.JLabel imagen1;
+    private javax.swing.JLabel imagen2;
+    private javax.swing.JLabel imagen3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    public static final javax.swing.JPanel jPanel3 = new javax.swing.JPanel();
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;

@@ -83,9 +83,8 @@ public class Listado_Pedidos_Arreglos extends javax.swing.JPanel {
         jButton1 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         editarbtn = new javax.swing.JButton();
-        verbtn = new javax.swing.JButton();
         crearbtn1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        verbtn = new javax.swing.JButton();
         Texto_Buscar = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblPedidosA = new javax.swing.JTable();
@@ -95,6 +94,7 @@ public class Listado_Pedidos_Arreglos extends javax.swing.JPanel {
         Texto_Contable = new javax.swing.JLabel();
         btnAnterior = new javax.swing.JButton();
         btnSiguiente = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -134,7 +134,7 @@ public class Listado_Pedidos_Arreglos extends javax.swing.JPanel {
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(33, 33, 33)
                         .addComponent(jButton1)))
-                .addContainerGap(51, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
@@ -148,15 +148,6 @@ public class Listado_Pedidos_Arreglos extends javax.swing.JPanel {
             }
         });
 
-        verbtn.setBackground(new java.awt.Color(255, 153, 51));
-        verbtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        verbtn.setText("VER");
-        verbtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                verbtnActionPerformed(evt);
-            }
-        });
-
         crearbtn1.setBackground(new java.awt.Color(255, 153, 51));
         crearbtn1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         crearbtn1.setText("CREAR ");
@@ -166,12 +157,12 @@ public class Listado_Pedidos_Arreglos extends javax.swing.JPanel {
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(255, 153, 51));
-        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton2.setText("ELIMINAR");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        verbtn.setBackground(new java.awt.Color(255, 153, 51));
+        verbtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        verbtn.setText("VER");
+        verbtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                verbtnActionPerformed(evt);
             }
         });
 
@@ -182,24 +173,20 @@ public class Listado_Pedidos_Arreglos extends javax.swing.JPanel {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)
-                    .addComponent(crearbtn1, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)
-                    .addComponent(editarbtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)
-                    .addComponent(verbtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(28, Short.MAX_VALUE))
+                    .addComponent(verbtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(crearbtn1, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)
+                    .addComponent(editarbtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(66, 66, 66)
+                .addContainerGap(109, Short.MAX_VALUE)
                 .addComponent(crearbtn1)
                 .addGap(18, 18, 18)
                 .addComponent(editarbtn)
-                .addGap(18, 18, 18)
-                .addComponent(verbtn)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton2)
-                .addContainerGap(53, Short.MAX_VALUE))
+                .addGap(19, 19, 19)
+                .addComponent(verbtn))
         );
 
         Texto_Buscar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -210,7 +197,7 @@ public class Listado_Pedidos_Arreglos extends javax.swing.JPanel {
 
             },
             new String [] {
-                "N°", "Nombre del cliente", "Apellido del cliente", "Celular", "Producto", "Fecha de Pedido", "id_arreglo"
+                "N°", "Nombre del cliente", "Apellido del cliente", "Estado", "Producto", "Fecha de Pedido", "id_arreglo"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -277,6 +264,15 @@ public class Listado_Pedidos_Arreglos extends javax.swing.JPanel {
             }
         });
 
+        jButton2.setBackground(new java.awt.Color(255, 153, 51));
+        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButton2.setText("ELIMINAR");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -303,8 +299,14 @@ public class Listado_Pedidos_Arreglos extends javax.swing.JPanel {
                                 .addGap(18, 18, 18)
                                 .addComponent(btnSiguiente, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 849, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton2)
+                        .addGap(41, 41, 41)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -314,7 +316,10 @@ public class Listado_Pedidos_Arreglos extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(12, 12, 12)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton2)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(35, 35, 35)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -322,7 +327,7 @@ public class Listado_Pedidos_Arreglos extends javax.swing.JPanel {
                             .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(Btn_Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(refrescarbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -340,7 +345,7 @@ public class Listado_Pedidos_Arreglos extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -428,11 +433,8 @@ public class Listado_Pedidos_Arreglos extends javax.swing.JPanel {
                 String descripcionA = rs.getString("descripcion");
                 String precioA = rs.getString("precio");
                 String fechapedido = rs.getString("fechaPedido");
-                
-                
-                
+
                 String fechaEntrega = rs.getDate("fechaEntrega").toString();
-            
 
                 ver_pedido_arreglo ver = new ver_pedido_arreglo();
 
@@ -443,9 +445,9 @@ public class Listado_Pedidos_Arreglos extends javax.swing.JPanel {
                 ver.txtDescripcionA.setText(descripcionA);
                 ver.txtprecio.setText(precioA);
                 ver.id.setText(rs.getString("id_arreglo"));
-                
+
                 ver.txtFechaEntrega.setText(fechaEntrega);
-                
+
                 // Recuperar la imagen de la base de datos
                 byte[] imagenA1 = rs.getBytes("imagen1");
                 byte[] imagenA2 = rs.getBytes("imagen2");
@@ -551,7 +553,7 @@ public class Listado_Pedidos_Arreglos extends javax.swing.JPanel {
         panelprincipal.revalidate();
         panelprincipal.repaint();*/
     int selectedRow2;
-    
+
     private void editarbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarbtnActionPerformed
         selectedRow1 = tblPedidosA.getSelectedRow();
         if (selectedRow1 == -1)
@@ -586,69 +588,28 @@ public class Listado_Pedidos_Arreglos extends javax.swing.JPanel {
                 String precioA = rs.getString("precio");
                 String fechapedido = rs.getString("fechaPedido");
 
-                 Date fechaEntrega = rs.getDate("fechaEntrega");
-                editar_Pedido_arreglo ver12 = new editar_Pedido_arreglo();
-                ver12.lbl_id_arregl.setText(idArreglo);
-                ver12.txtCliente.setSelectedItem(nombre + " " + apellido);
+                Date fechaEntrega = rs.getDate("fechaEntrega");
+                Edit_arreglo ver12 = new Edit_arreglo();
+
+                ver12.txtCliente.setText(nombre + " " + apellido);
                 ver12.txtTel.setText(tel);
                 ver12.cbxarreglo.setSelectedItem(arregloA);
                 ver12.cbxEstado.setSelectedItem(estadoA);
                 ver12.txtDescripcionArre.setText(descripcionA);
                 ver12.txtprecio.setText(precioA);
-                ver12.id_client.setText(rs.getString("id_arreglo"));
+                ver12.txtid.setText(idArreglo);
 
-                //Recuperar la imagen de la base de datos
-                byte[] imagenA1 = rs.getBytes("imagen1");
-                byte[] imagenA2 = rs.getBytes("imagen2");
-                byte[] imagenA3 = rs.getBytes("imagen3");
+              byte[] bytesImagen = rs.getBytes("imagen1");
 
-                // Comprobar si los arreglos de bytes de imagen no son nulos
-                if (imagenA1 != null)
-                {
-                    // Crear un objeto ImageIcon a partir de los bytes de la imagen
-                    ImageIcon imagenIcono = new ImageIcon(imagenA1);
+                        // Crear objetos ImageIcon solo si las imágenes no son nulas
+                        ImageIcon imagenIcono1 = (bytesImagen != null) ? new ImageIcon(bytesImagen) : null;
 
-                    // Ajustar el tamaño de la imagen
-                    Image imagenT = imagenIcono.getImage().getScaledInstance(170, 169, Image.SCALE_SMOOTH);
-                    ImageIcon imagenT1 = new ImageIcon(imagenT);
-
-                    // Establecer el ImageIcon escalado en el JLabel
-                    ver12.imagen1.setIcon(imagenT1);
-
-                    // Establecer el ImageIcon en el JLabel
-                } else
-                {
-                    // Si el arreglo de bytes de imagen es nulo, puedes mostrar un mensaje o establecer un valor predeterminado.
-                    ver12.imagen1.setIcon(null); // O establecer un icono predeterminado
-                }
-
-                if (imagenA2 != null)
-                {
-                    ImageIcon imagenIcon2 = new ImageIcon(imagenA2);
-                    // Ajustar el tamaño de la imagen
-                    Image imagenT = imagenIcon2.getImage().getScaledInstance(170, 169, Image.SCALE_SMOOTH);
-                    ImageIcon imagenT2 = new ImageIcon(imagenT);
-
-                    // Establecer el ImageIcon escalado en el JLabel
-                    ver12.imagen2.setIcon(imagenT2);
-                } else
-                {
-                    ver12.imagen2.setIcon(null);
-                }
-
-                if (imagenA3 != null)
-                {
-                    ImageIcon imagenIcon3 = new ImageIcon(imagenA3);
-                    // Ajustar el tamaño de la imagen
-                    Image imagenT = imagenIcon3.getImage().getScaledInstance(170, 169, Image.SCALE_SMOOTH);
-                    ImageIcon imagenT3 = new ImageIcon(imagenT);
-
-                    // Establecer el ImageIcon escalado en el JLabel
-                    ver12.imagen3.setIcon(imagenT3);
-                } else
-                {
-                    ver12.imagen3.setIcon(null);
-                }
+                        // Escalar las imágenes al tamaño del JLabel
+                        if (imagenIcono1 != null)
+                        {
+                            imagenIcono1 = escalarImagen(imagenIcono1, ver12.imagen1.getWidth(), ver12.imagen1.getHeight());
+                            ver12.imagen1.setIcon(imagenIcono1);
+                        }
 
                 ver12.fechaP.setText(fechapedido);
                 ver12.JDfechaEntrega.setDate(fechaEntrega);
@@ -656,15 +617,14 @@ public class Listado_Pedidos_Arreglos extends javax.swing.JPanel {
                 ver12.setSize(1024, 640);
                 ver12.setLocation(0, 0);
 
-                panelprincipal.revalidate();
-                panelprincipal.repaint();
-                panelprincipal.removeAll();
-                panelprincipal.add(ver12, BorderLayout.CENTER);
+                jPanel1.revalidate();
+                jPanel1.repaint();
+                jPanel1.removeAll();
+                jPanel1.add(ver12, BorderLayout.CENTER);
+                jPanel1.revalidate();
+                jPanel1.repaint();
 
-                panelprincipal.revalidate();
-                panelprincipal.repaint();
-
-                break; // Salir del bucle después de encontrar el elemento seleccionado
+              
 
             }
 
@@ -694,7 +654,7 @@ public class Listado_Pedidos_Arreglos extends javax.swing.JPanel {
     }//GEN-LAST:event_crearbtn1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       /*Listado_Pedidos_Entregado_arreglo p2 = new Listado_Pedidos_Entregado_arreglo();
+        /*Listado_Pedidos_Entregado_arreglo p2 = new Listado_Pedidos_Entregado_arreglo();
         p2.setSize(1024, 640);
         p2.setLocation(0, 0);
 
@@ -961,7 +921,7 @@ public class Listado_Pedidos_Arreglos extends javax.swing.JPanel {
     private javax.swing.JButton verbtn;
     // End of variables declaration//GEN-END:variables
 
-   private void mostrarVentanaDeEdicion(EditarCita editarCita) {
+    private void mostrarVentanaDeEdicion(EditarCita editarCita) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 

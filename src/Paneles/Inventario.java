@@ -127,7 +127,7 @@ public class Inventario extends javax.swing.JPanel {
                     + "            cod_producto\n"
                     + "    ) V ON P.cod_producto = V.cod_producto "
                     + "WHERE\n"
-                    + "    P.nombre LIKE ? -- Reemplaza 'TuCategoriaEspecifica' con la categoría que deseas filtrar\n"
+                    + "    P.nombre LIKE ? \n"
                     + "GROUP BY\n"
                     + "    P.nombre,\n"
                     + "    P.categoria,\n"
