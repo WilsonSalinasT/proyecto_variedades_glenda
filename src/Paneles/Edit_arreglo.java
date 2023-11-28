@@ -25,6 +25,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -38,8 +39,18 @@ public class Edit_arreglo extends javax.swing.JPanel {
     /**
      * Creates new form Edit_arreglo
      */
+    // Método para habilitar los botones
+    private void habilitarBotones() {
+        Cimagen1.setEnabled(true);
+        Cimagen2.setEnabled(true);
+        Cimagen3.setEnabled(true);
+    }
+    
     public Edit_arreglo() {
         initComponents();
+        
+       // Llama al método para habilitar los botones
+        habilitarBotones();
     }
 
     /**
@@ -57,9 +68,9 @@ public class Edit_arreglo extends javax.swing.JPanel {
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         btnvolver1 = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         crea_cliente = new javax.swing.JLabel();
         fechaP = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -70,6 +81,7 @@ public class Edit_arreglo extends javax.swing.JPanel {
         Cimagen1 = new javax.swing.JButton();
         Cimagen2 = new javax.swing.JButton();
         Cimagen3 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -97,45 +109,50 @@ public class Edit_arreglo extends javax.swing.JPanel {
             }
         });
 
-        jLabel2.setFont(new java.awt.Font("Arial Black", 3, 36)); // NOI18N
-        jLabel2.setText("Editar Pedido de Arreglo");
+        jLabel4.setFont(new java.awt.Font("Segoe Script", 1, 14)); // NOI18N
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setText("Trojes, El Paraíso");
 
         jLabel3.setFont(new java.awt.Font("Segoe Script", 1, 14)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("9801-4550 / 3308-9197");
 
-        jLabel4.setFont(new java.awt.Font("Segoe Script", 1, 14)); // NOI18N
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("Trojes, El Paraíso");
+        jLabel2.setFont(new java.awt.Font("Arial Black", 3, 36)); // NOI18N
+        jLabel2.setText("Editar Pedido de Arreglo");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap(134, Short.MAX_VALUE)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 698, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(256, 256, 256)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 592, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(318, 318, 318)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(299, 299, 299)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(btnvolver1, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(48, 48, 48))
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(175, 175, 175))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap(38, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnvolver1, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addContainerGap(23, Short.MAX_VALUE)
+                .addComponent(btnvolver1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel4)
-                .addGap(23, 23, 23))
+                .addContainerGap())
         );
 
         crea_cliente.setFont(new java.awt.Font("Arial Black", 3, 12)); // NOI18N
@@ -256,6 +273,13 @@ public class Edit_arreglo extends javax.swing.JPanel {
             }
         });
 
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/admiracion.png"))); // NOI18N
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel1MouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -269,7 +293,9 @@ public class Edit_arreglo extends javax.swing.JPanel {
                 .addComponent(imagen3, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(51, Short.MAX_VALUE))
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(93, 93, 93)
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addGap(63, 63, 63)
                 .addComponent(Cimagen1)
                 .addGap(89, 89, 89)
                 .addComponent(Cimagen2)
@@ -280,12 +306,18 @@ public class Edit_arreglo extends javax.swing.JPanel {
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap(18, Short.MAX_VALUE)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Cimagen1)
-                    .addComponent(Cimagen2)
-                    .addComponent(Cimagen3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addContainerGap(18, Short.MAX_VALUE)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(Cimagen1)
+                            .addComponent(Cimagen2)
+                            .addComponent(Cimagen3))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(imagen2, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(imagen1, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -331,7 +363,7 @@ public class Edit_arreglo extends javax.swing.JPanel {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(146, 146, 146)
                         .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(274, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -374,7 +406,7 @@ public class Edit_arreglo extends javax.swing.JPanel {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1026, Short.MAX_VALUE)
+            .addGap(0, 1144, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -397,35 +429,29 @@ public class Edit_arreglo extends javax.swing.JPanel {
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1036, Short.MAX_VALUE)
-            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel4Layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 1024, Short.MAX_VALUE)
-                    .addContainerGap()))
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 1024, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 652, Short.MAX_VALUE)
-            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel4Layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 640, Short.MAX_VALUE)
-                    .addContainerGap()))
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 624, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 624, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -477,11 +503,9 @@ public class Edit_arreglo extends javax.swing.JPanel {
         char c = evt.getKeyChar();
         String texto = txtprecio.getText();
 
-        if (c == '0' && (texto.isEmpty() || texto.equals("0")))
-        {
+        if (c == '0' && (texto.isEmpty() || texto.equals("0"))) {
             evt.consume(); // Evita que se inicie con un cero
-        } else if (!Character.isDigit(c) || texto.length() >= 5)
-        {
+        } else if (!Character.isDigit(c) || texto.length() >= 5) {
             evt.consume(); // Evita que se ingresen más de 5 cifras o caracteres que no sean dígitos
         }
     }//GEN-LAST:event_txtprecioKeyTyped
@@ -510,8 +534,7 @@ public class Edit_arreglo extends javax.swing.JPanel {
 
         Date fecha = JDfechaEntrega.getDate();
 
-        try
-        {
+        try {
 
             // Obtén las imágenes actuales de los JLabel
             Icon icon1 = imagen1.getIcon();
@@ -522,200 +545,173 @@ public class Edit_arreglo extends javax.swing.JPanel {
             String rutaImagen3 = null;
 
             // Verifica si archivos[0] no es null antes de acceder a sus propiedades
-            if (archivo1[0] != null)
-            {
+            if (archivo1[0] != null) {
                 rutaImagen1 = archivo1[0].getAbsolutePath();
             }
 
-            if (archivo2[0] != null)
-            {
+            if (archivo2[0] != null) {
                 rutaImagen2 = archivo2[0].getAbsolutePath();
             }
 
-            if (archivo3[0] != null)
-            {
+            if (archivo3[0] != null) {
                 rutaImagen3 = archivo3[0].getAbsolutePath();
             }
-            
-             StringBuilder camposVacios = new StringBuilder("Los siguientes campos están vacíos:");
 
-      
-        if ("Seleccione".equals(arreglo)) {
-            camposVacios.append("\n - Arreglo");
-        }
-        if (fecha == null) {
-            camposVacios.append("\n - Fecha de Entrega");
-        }
-        if (imagen1.getIcon() == null) {
-            camposVacios.append("\n - Agregue al menos una imagen de muestra");
-        }
-        if (descripcion.isEmpty()) {
-            camposVacios.append("\n - Descripción");
-        }
-        if (precio.isEmpty()) {
-            camposVacios.append("\n - Precio");
-        }
+            StringBuilder camposVacios = new StringBuilder("Los siguientes campos están vacíos:");
 
-        if (!camposVacios.toString().equals("Los siguientes campos están vacíos:")) {
-            JOptionPane.showMessageDialog(null, camposVacios.toString(), "Campos Vacíos", JOptionPane.ERROR_MESSAGE);
-        } else {
+            if ("Seleccione".equals(arreglo)) {
+                camposVacios.append("\n - Arreglo");
+            }
+            if (fecha == null) {
+                camposVacios.append("\n - Fecha de Entrega");
+            }
+            if (imagen1.getIcon() == null) {
+                camposVacios.append("\n - Agregue al menos una imagen de muestra");
+            }
+            if (descripcion.isEmpty()) {
+                camposVacios.append("\n - Descripción");
+            }
+            if (precio.isEmpty()) {
+                camposVacios.append("\n - Precio");
+            }
 
-            // Resto del código para la inserción en la base de datos
-            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
-            PreparedStatement updatePs = conn.prepareStatement(
-                    "UPDATE PedidoArreglo SET arreglo=?, estado=?, descripcion=?, precio=?, "
-                    + "imagen1=?, imagen2=?, imagen3=?, fechaPedido=?, fechaEntrega=? "
-                    + "WHERE id_arreglo=?"
-            );
+            if (!camposVacios.toString().equals("Los siguientes campos están vacíos:")) {
+                JOptionPane.showMessageDialog(null, camposVacios.toString(), "Campos Vacíos", JOptionPane.ERROR_MESSAGE);
+            } else {
 
-            // Luego, establece los parámetros como lo estabas haciendo antes
-            updatePs.setString(1, arreglo);
-            updatePs.setString(2, estado);
-            updatePs.setString(3, descripcion);
-            updatePs.setString(4, precio);
+                // Resto del código para la inserción en la base de datos
+                Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+                Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
+                PreparedStatement updatePs = conn.prepareStatement(
+                        "UPDATE PedidoArreglo SET arreglo=?, estado=?, descripcion=?, precio=?, "
+                        + "imagen1=?, imagen2=?, imagen3=?, fechaPedido=?, fechaEntrega=? "
+                        + "WHERE id_arreglo=?"
+                );
 
-            // Verificar y actualizar la imagen 1 solo si hay una nueva imagen
-            if (rutaImagen1 != null && !rutaImagen1.isEmpty() && archivo1[0] != null)
-            {
-                File file1 = new File(rutaImagen1);
-                if (file1.exists())
-                {
-                    try (FileInputStream fis1 = new FileInputStream(file1))
-                    {
-                        byte[] bytes1 = new byte[(int) file1.length()];
-                        fis1.read(bytes1);
-                        updatePs.setBytes(5, bytes1);
-                    } catch (IOException ex)
-                    {
-                        ex.printStackTrace();
-                        Logger.getLogger(editar_pedidoSas.class.getName()).log(Level.SEVERE, null, ex);
-                        updatePs.setNull(5, Types.BLOB); // Imagen 1 no pudo ser leída
+                // Luego, establece los parámetros como lo estabas haciendo antes
+                updatePs.setString(1, arreglo);
+                updatePs.setString(2, estado);
+                updatePs.setString(3, descripcion);
+                updatePs.setString(4, precio);
+
+                // Verificar y actualizar la imagen 1 solo si hay una nueva imagen
+                if (rutaImagen1 != null && !rutaImagen1.isEmpty() && archivo1[0] != null) {
+                    File file1 = new File(rutaImagen1);
+                    if (file1.exists()) {
+                        try (FileInputStream fis1 = new FileInputStream(file1)) {
+                            byte[] bytes1 = new byte[(int) file1.length()];
+                            fis1.read(bytes1);
+                            updatePs.setBytes(5, bytes1);
+                        } catch (IOException ex) {
+                            ex.printStackTrace();
+                            Logger.getLogger(editar_pedidoSas.class.getName()).log(Level.SEVERE, null, ex);
+                            updatePs.setNull(5, Types.BLOB); // Imagen 1 no pudo ser leída
+                        }
                     }
+                } else {
+                    // Si no hay una nueva imagen, mantén la imagen existente en la base de datos
+                    updatePs.setBytes(5, obtenerImagenExistente(5));
                 }
-            } else
-            {
-                // Si no hay una nueva imagen, mantén la imagen existente en la base de datos
-                updatePs.setBytes(5, obtenerImagenExistente(5));
-            }
 
-            // Verificar y actualizar la imagen 2 solo si hay una nueva imagen y no se ha cargado antes
-            if (rutaImagen2 != null && !rutaImagen2.isEmpty() && archivo2[0] != null)
-            {
-                File file2 = new File(rutaImagen2);
-                if (file2.exists())
-                {
-                    try (FileInputStream fis2 = new FileInputStream(file2))
-                    {
-                        byte[] bytes2 = new byte[(int) file2.length()];
-                        fis2.read(bytes2);
-                        updatePs.setBytes(6, bytes2);
-                    } catch (IOException ex)
-                    {
-                        ex.printStackTrace();
-                        Logger.getLogger(editar_pedidoSas.class.getName()).log(Level.SEVERE, null, ex);
-                        updatePs.setNull(6, Types.BLOB); // Imagen 2 no pudo ser leída
+                // Verificar y actualizar la imagen 2 solo si hay una nueva imagen y no se ha cargado antes
+                if (rutaImagen2 != null && !rutaImagen2.isEmpty() && archivo2[0] != null) {
+                    File file2 = new File(rutaImagen2);
+                    if (file2.exists()) {
+                        try (FileInputStream fis2 = new FileInputStream(file2)) {
+                            byte[] bytes2 = new byte[(int) file2.length()];
+                            fis2.read(bytes2);
+                            updatePs.setBytes(6, bytes2);
+                        } catch (IOException ex) {
+                            ex.printStackTrace();
+                            Logger.getLogger(editar_pedidoSas.class.getName()).log(Level.SEVERE, null, ex);
+                            updatePs.setNull(6, Types.BLOB); // Imagen 2 no pudo ser leída
+                        }
                     }
+                } else {
+                    // Si no hay una nueva imagen, mantén la imagen existente en la base de datos
+                    updatePs.setBytes(6, obtenerImagenExistente(6));
                 }
-            } else
-            {
-                // Si no hay una nueva imagen, mantén la imagen existente en la base de datos
-                updatePs.setBytes(6, obtenerImagenExistente(6));
-            }
 
-            // Verificar y actualizar la imagen 3 solo si hay una nueva imagen y no se ha cargado antes
-            if (rutaImagen3 != null && !rutaImagen3.isEmpty() && archivo3[0] != null)
-            {
-                File file3 = new File(rutaImagen3);
-                if (file3.exists())
-                {
-                    try (FileInputStream fis3 = new FileInputStream(file3))
-                    {
-                        byte[] bytes3 = new byte[(int) file3.length()];
-                        fis3.read(bytes3);
-                        updatePs.setBytes(7, bytes3);
-                    } catch (IOException ex)
-                    {
-                        ex.printStackTrace();
-                        Logger.getLogger(editar_pedidoSas.class.getName()).log(Level.SEVERE, null, ex);
-                        updatePs.setNull(7, Types.BLOB); // Imagen 3 no pudo ser leída
+                // Verificar y actualizar la imagen 3 solo si hay una nueva imagen y no se ha cargado antes
+                if (rutaImagen3 != null && !rutaImagen3.isEmpty() && archivo3[0] != null) {
+                    File file3 = new File(rutaImagen3);
+                    if (file3.exists()) {
+                        try (FileInputStream fis3 = new FileInputStream(file3)) {
+                            byte[] bytes3 = new byte[(int) file3.length()];
+                            fis3.read(bytes3);
+                            updatePs.setBytes(7, bytes3);
+                        } catch (IOException ex) {
+                            ex.printStackTrace();
+                            Logger.getLogger(editar_pedidoSas.class.getName()).log(Level.SEVERE, null, ex);
+                            updatePs.setNull(7, Types.BLOB); // Imagen 3 no pudo ser leída
+                        }
                     }
+                } else {
+                    // Si no hay una nueva imagen, mantén la imagen existente en la base de datos
+                    updatePs.setBytes(7, obtenerImagenExistente(7));
                 }
-            } else
-            {
-                // Si no hay una nueva imagen, mantén la imagen existente en la base de datos
-                updatePs.setBytes(7, obtenerImagenExistente(7));
+
+                // Verifica y actualiza la imagen 1 solo si hay una nueva imagen
+                if (rutaImagen1 != null && !rutaImagen1.isEmpty()) {
+                    actualizarImagen(updatePs, rutaImagen1, 5);
+                } else {
+                    // Si no hay una nueva imagen, mantén la imagen existente en la base de datos
+                    updatePs.setBytes(5, obtenerImagenExistente(5));
+                }
+
+                // Verifica y actualiza la imagen 2 solo si hay una nueva imagen
+                if (rutaImagen2 != null && !rutaImagen2.isEmpty()) {
+                    actualizarImagen(updatePs, rutaImagen2, 6);
+                } else {
+                    // Si no hay una nueva imagen, mantén la imagen existente en la base de datos
+                    updatePs.setBytes(6, obtenerImagenExistente(6));
+                }
+
+                // Verifica y actualiza la imagen 3 solo si hay una nueva imagen
+                if (rutaImagen3 != null && !rutaImagen3.isEmpty()) {
+                    actualizarImagen(updatePs, rutaImagen3, 7);
+                } else {
+                    // Si no hay una nueva imagen, mantén la imagen existente en la base de datos
+                    updatePs.setBytes(7, obtenerImagenExistente(7));
+                }
+
+                updatePs.setString(8, fechaPedido);
+
+                updatePs.setDate(9, new java.sql.Date(fecha.getTime())); // Ajustar el índice a 9
+                int numeracion = Integer.parseInt(txtid.getText());
+                updatePs.setInt(10, numeracion); // Ajustar el índice a 10
+
+                updatePs.executeUpdate();
+
+                JOptionPane.showMessageDialog(null, "Registro editado exitosamente");
+
+                // Restaura las imágenes en los JLabel después de la actualización
+                imagen1.setIcon(icon1);
+                imagen2.setIcon(icon2);
+                imagen3.setIcon(icon3);
+
+                Listado_Pedidos_Arreglos p = new Listado_Pedidos_Arreglos();
+
+                p.setSize(1024, 640);
+                p.setLocation(0, 0);
+
+                panelprincipal.revalidate();
+                panelprincipal.repaint();
+                panelprincipal.removeAll();
+                panelprincipal.add(p, BorderLayout.CENTER);
+                panelprincipal.revalidate();
+                panelprincipal.repaint();
+                return;
+
             }
 
-            // Verifica y actualiza la imagen 1 solo si hay una nueva imagen
-            if (rutaImagen1 != null && !rutaImagen1.isEmpty())
-            {
-                actualizarImagen(updatePs, rutaImagen1, 5);
-            } else
-            {
-                // Si no hay una nueva imagen, mantén la imagen existente en la base de datos
-                updatePs.setBytes(5, obtenerImagenExistente(5));
-            }
-
-            // Verifica y actualiza la imagen 2 solo si hay una nueva imagen
-            if (rutaImagen2 != null && !rutaImagen2.isEmpty())
-            {
-                actualizarImagen(updatePs, rutaImagen2, 6);
-            } else
-            {
-                // Si no hay una nueva imagen, mantén la imagen existente en la base de datos
-                updatePs.setBytes(6, obtenerImagenExistente(6));
-            }
-
-            // Verifica y actualiza la imagen 3 solo si hay una nueva imagen
-            if (rutaImagen3 != null && !rutaImagen3.isEmpty())
-            {
-                actualizarImagen(updatePs, rutaImagen3, 7);
-            } else
-            {
-                // Si no hay una nueva imagen, mantén la imagen existente en la base de datos
-                updatePs.setBytes(7, obtenerImagenExistente(7));
-            }
-
-            updatePs.setString(8, fechaPedido);
-
-            updatePs.setDate(9, new java.sql.Date(fecha.getTime())); // Ajustar el índice a 9
-            int numeracion = Integer.parseInt(txtid.getText());
-            updatePs.setInt(10, numeracion); // Ajustar el índice a 10
-
-            updatePs.executeUpdate();
-
-            JOptionPane.showMessageDialog(null, "Registro editado exitosamente");
-
-            // Restaura las imágenes en los JLabel después de la actualización
-            imagen1.setIcon(icon1);
-            imagen2.setIcon(icon2);
-            imagen3.setIcon(icon3);
-
-            Listado_Pedidos_Arreglos p = new Listado_Pedidos_Arreglos();
-
-            p.setSize(1024, 640);
-            p.setLocation(0, 0);
-
-            panelprincipal.revalidate();
-            panelprincipal.repaint();
-            panelprincipal.removeAll();
-            panelprincipal.add(p, BorderLayout.CENTER);
-            panelprincipal.revalidate();
-            panelprincipal.repaint();
-            return;
-
-        }
-        
-        } catch (ClassNotFoundException ex)
-        {
+        } catch (ClassNotFoundException ex) {
             Logger.getLogger(editar_Pedido_arreglo.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex)
-        {
+        } catch (SQLException ex) {
             Logger.getLogger(editar_Pedido_arreglo.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private File[] archivo1 = new File[1];
@@ -725,36 +721,36 @@ public class Edit_arreglo extends javax.swing.JPanel {
     private File[] archivo3 = new File[1];
     private int contador3 = 0; // Para llevar el registro de cuántas veces se ha presionado el botón
 
+    // Función para reactivar el botón correspondiente después de cargar al menos una imagen
+    private void reactivarBoton(JButton boton, int contador) {
+        if (contador >= 1) { // Si se ha cargado al menos una imagen, se reactiva el botón
+            boton.setEnabled(true);
+        }
+    }
+
 
     private void Cimagen1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Cimagen1ActionPerformed
-        if (contador1 < 1)
-        {
+
+        if (contador1 < 1) {
             JFileChooser fclAbrirArchivo = new JFileChooser();
             fclAbrirArchivo.setFileFilter(new FileNameExtensionFilter("Archivo de imagen", "jpg", "jpeg", "png"));
 
             int respuesta = fclAbrirArchivo.showOpenDialog(this);
 
-            if (respuesta == JFileChooser.APPROVE_OPTION)
-            {
+            if (respuesta == JFileChooser.APPROVE_OPTION) {
                 archivo1[contador1] = fclAbrirArchivo.getSelectedFile();
 
                 // Cargar la imagen en el label correspondiente (imagen1, imagen2, o imagen3)
                 ImageIcon icono = new ImageIcon(archivo1[contador1].getAbsolutePath());
                 Image foto = icono.getImage().getScaledInstance(imagen1.getWidth(), imagen1.getHeight(), Image.SCALE_DEFAULT);
 
-                if (contador1 == 0)
-                {
+                if (contador1 == 0) {
                     imagen1.setIcon(new ImageIcon(foto));
                     //JOptionPane.showMessageDialog(this, "Ya se ha cargado una imagen. No se puede agregar otra.", "Advertencia", JOptionPane.WARNING_MESSAGE);
                     Cimagen1.setEnabled(false); // Desactivar el botón después de cargar la tercera imagen
                 }
 
                 contador1++;
-                // Reactivar el botón después de cargar la tercera imagen
-                if (contador1 == 1)
-                {
-                    Cimagen1.setEnabled(true);
-                }
             }
         }
 
@@ -764,18 +760,13 @@ public class Edit_arreglo extends javax.swing.JPanel {
         byte[] imagenExistente = null;
 
         Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-        try (Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789"))
-        {
+        try (Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789")) {
             String sql = "SELECT imagen1, imagen2, imagen3 FROM PedidoArreglo WHERE id_arreglo = ?";
-            try (PreparedStatement ps = conn.prepareStatement(sql))
-            {
+            try (PreparedStatement ps = conn.prepareStatement(sql)) {
                 ps.setInt(1, Integer.parseInt(txtid.getText()));
-                try (ResultSet rs = ps.executeQuery())
-                {
-                    if (rs.next())
-                    {
-                        switch (posicion)
-                        {
+                try (ResultSet rs = ps.executeQuery()) {
+                    if (rs.next()) {
+                        switch (posicion) {
                             case 5:
                                 imagenExistente = rs.getBytes(1); // Imagen 1
                                 break;
@@ -798,8 +789,7 @@ public class Edit_arreglo extends javax.swing.JPanel {
     }
 
     private byte[] obtenerBytesImagen(File file) throws IOException {
-        try (FileInputStream fis = new FileInputStream(file))
-        {
+        try (FileInputStream fis = new FileInputStream(file)) {
             byte[] bytes = new byte[(int) file.length()];
             fis.read(bytes);
             return bytes;
@@ -807,92 +797,76 @@ public class Edit_arreglo extends javax.swing.JPanel {
     }
 
     private void actualizarImagen(PreparedStatement updatePs, String rutaImagen, int parametro) throws SQLException, ClassNotFoundException {
-        if (rutaImagen != null && !rutaImagen.isEmpty())
-        {
+        if (rutaImagen != null && !rutaImagen.isEmpty()) {
             File file = new File(rutaImagen);
-            if (file.exists())
-            {
-                try
-                {
+            if (file.exists()) {
+                try {
                     byte[] bytes = obtenerBytesImagen(file);
                     updatePs.setBytes(parametro, bytes);
-                } catch (IOException ex)
-                {
+                } catch (IOException ex) {
                     ex.printStackTrace();
                     updatePs.setNull(parametro, Types.BLOB);
                 }
             }
-        } else
-        {
+        } else {
             updatePs.setBytes(parametro, obtenerImagenExistente(parametro));
         }
     }
 
     private void Cimagen2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Cimagen2ActionPerformed
-        if (contador2 < 1)
-        {
+        if (contador2 < 1) {
             JFileChooser fclAbrirArchivo = new JFileChooser();
             fclAbrirArchivo.setFileFilter(new FileNameExtensionFilter("Archivo de imagen", "jpg", "jpeg", "png"));
 
             int respuesta = fclAbrirArchivo.showOpenDialog(this);
 
-            if (respuesta == JFileChooser.APPROVE_OPTION)
-            {
+            if (respuesta == JFileChooser.APPROVE_OPTION) {
                 archivo2[contador2] = fclAbrirArchivo.getSelectedFile();
 
                 // Cargar la imagen en el label correspondiente (imagen1, imagen2, o imagen3)
                 ImageIcon icono = new ImageIcon(archivo2[contador2].getAbsolutePath());
                 Image foto = icono.getImage().getScaledInstance(imagen2.getWidth(), imagen2.getHeight(), Image.SCALE_DEFAULT);
 
-                if (contador2 == 0)
-                {
+                if (contador2 == 0) {
                     imagen2.setIcon(new ImageIcon(foto));
                     //JOptionPane.showMessageDialog(this, "Ya se ha cargado una imagen. No se puede agregar otra.", "Advertencia", JOptionPane.WARNING_MESSAGE);
                     Cimagen2.setEnabled(false); // Desactivar el botón después de cargar la tercera imagen
                 }
 
                 contador2++;
-                // Reactivar el botón después de cargar la tercera imagen
-                if (contador2 == 1)
-                {
-                    Cimagen2.setEnabled(true);
-                }
             }
         }
     }//GEN-LAST:event_Cimagen2ActionPerformed
 
     private void Cimagen3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Cimagen3ActionPerformed
-        if (contador3 < 1)
-        {
+        if (contador3 < 1) {
             JFileChooser fclAbrirArchivo = new JFileChooser();
             fclAbrirArchivo.setFileFilter(new FileNameExtensionFilter("Archivo de imagen", "jpg", "jpeg", "png"));
 
             int respuesta = fclAbrirArchivo.showOpenDialog(this);
 
-            if (respuesta == JFileChooser.APPROVE_OPTION)
-            {
+            if (respuesta == JFileChooser.APPROVE_OPTION) {
                 archivo3[contador3] = fclAbrirArchivo.getSelectedFile();
 
                 // Cargar la imagen en el label correspondiente (imagen1, imagen2, o imagen3)
                 ImageIcon icono = new ImageIcon(archivo3[contador3].getAbsolutePath());
                 Image foto = icono.getImage().getScaledInstance(imagen3.getWidth(), imagen3.getHeight(), Image.SCALE_DEFAULT);
 
-                if (contador3 == 0)
-                {
+                if (contador3 == 0) {
                     imagen3.setIcon(new ImageIcon(foto));
                     //JOptionPane.showMessageDialog(this, "Ya se ha cargado una imagen. No se puede agregar otra.", "Advertencia", JOptionPane.WARNING_MESSAGE);
                     Cimagen3.setEnabled(false); // Desactivar el botón después de cargar la tercera imagen
                 }
 
                 contador3++;
-                // Reactivar el botón después de cargar la tercera imagen
-                if (contador3 == 1)
-                {
-                    Cimagen3.setEnabled(true);
-                }
             }
         }
     }//GEN-LAST:event_Cimagen3ActionPerformed
+
+    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(this, "¡Atención! Si cambiaste una imagen en una de las tres secciones diferentes y necesitas más cambios, por favor, sal y vuelve a entrar. ¡Gracias!", "Advertencia", JOptionPane.WARNING_MESSAGE);
+    }//GEN-LAST:event_jLabel1MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -909,6 +883,7 @@ public class Edit_arreglo extends javax.swing.JPanel {
     public static final javax.swing.JLabel imagen2 = new javax.swing.JLabel();
     public static final javax.swing.JLabel imagen3 = new javax.swing.JLabel();
     private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
