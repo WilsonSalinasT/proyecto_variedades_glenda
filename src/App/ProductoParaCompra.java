@@ -7,6 +7,7 @@ package App;
 import static App.IngresodeCompra.tablecompras;
 import static App.IngresodeCompra.Tsum;
 import static App.Menu.panelprincipal;
+
 import Paneles.Crear_Pedido_arreglo;
 import Paneles.IngresarCompra;
 import Paneles.TextPrompt;
@@ -32,18 +33,16 @@ import javax.swing.table.TableColumn;
 import javax.swing.text.JTextComponent;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JFrame;
-
-
 
 /**
  *
  * @author PC
  */
-
-
 public class ProductoParaCompra extends javax.swing.JFrame {
 
     TextPrompt holder;
@@ -55,7 +54,10 @@ public class ProductoParaCompra extends javax.swing.JFrame {
     /**
      * Creates new form ProductoParaCompra
      */
+    private IngresodeCompra ingresodeCompra;
     public ProductoParaCompra() {
+       
+        
         initComponents();
         this.setLocationRelativeTo(null);
         holder = new TextPrompt("Busque por nombre del producto y tipo de categoría", CuadroBuscarProducto);
@@ -91,6 +93,7 @@ public class ProductoParaCompra extends javax.swing.JFrame {
 //        });   
     }
 
+    
 //    public static void calcular(){
 //        suma = 0;
 //        for(int i = 0; i< tblProductosCompras.getRowCount(); i++){
@@ -541,7 +544,7 @@ public class ProductoParaCompra extends javax.swing.JFrame {
         {
 
             float renglon;
-            renglon = Float.parseFloat(tablecompras.getValueAt(i, 3).toString());
+            renglon = Float.parseFloat(tablecompras.getValueAt(i, 5).toString());
 
             suma = suma + renglon;
         }
@@ -676,7 +679,7 @@ public class ProductoParaCompra extends javax.swing.JFrame {
         try
         {
             //Variables para capturar los campos de la tabla de productos
-            String nombreProd, cantid, precU, totalP, idProducto;
+            String nombreProd, cantid, precU, PrecV, PrecC, totalP, idProducto;
             double tot = 0.0, calcula = 0.0;
 
             if (fila < 0)
@@ -702,7 +705,9 @@ public class ProductoParaCompra extends javax.swing.JFrame {
 
             DefaultTableModel modelo = (DefaultTableModel) tblProductosParafactura.getModel();
             nombreProd = tblProductosParafactura.getValueAt(fila, 1).toString();
-            precU = tblProductosParafactura.getValueAt(fila, 3).toString();
+            precU = tblProductosParafactura.getValueAt(fila, 4).toString();
+            PrecV = tblProductosParafactura.getValueAt(fila, 5).toString();
+            PrecC = tblProductosParafactura.getValueAt(fila, 6).toString();
             idProducto = tblProductosParafactura.getValueAt(fila, 7).toString();
             cantid = cantidad.getText();
 
@@ -747,7 +752,7 @@ public class ProductoParaCompra extends javax.swing.JFrame {
 
                 String filaElemento[] =
                 {
-                    nombreProd, cantid, precU, totalP, idProducto
+                    nombreProd, cantid, precU,PrecV,PrecC, totalP, idProducto
                 };
                 modelo.addRow(filaElemento);
             }
@@ -774,40 +779,36 @@ public class ProductoParaCompra extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btncrearActionPerformed
 
+   
 
     private void btncrearproductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncrearproductoActionPerformed
 
-     // Crear una instancia de IngresodeCompra
-IngresodeCompra j = new IngresodeCompra();
-j.setVisible(true);  // Asegúrate de que la ventana sea visible
+        ingresodeCompra.dispose();
+      
+        // Crear una instancia de IngresodeCompra
 
-// Crear una instancia de ProductoParaCompra
-ProductoParaCompra s = new ProductoParaCompra();
-s.setVisible(true);  // Asegúrate de que la ventana sea visible
+        // Mostrar mensaje para confirmar el cierre
+//    int confirmacion = JOptionPane.showConfirmDialog(null, "¿Deseas cerrar las ventanas?", "Confirmación", JOptionPane.YES_NO_OPTION);
+//
+//    if (confirmacion == JOptionPane.YES_OPTION) {
+//  
+        // Crear una instancia de crear_producto
+        crear_producto p2 = new crear_producto();
+        p2.setSize(1024, 640);
+        p2.setLocation(0, 0);
 
-// Mostrar mensaje para confirmar el cierre
-int confirmacion = JOptionPane.showConfirmDialog(null, "¿Deseas cerrar las ventanas?", "Confirmación", JOptionPane.YES_NO_OPTION);
+        // Actualizar el panel principal
+        panelprincipal.removeAll();
+        panelprincipal.add(p2, BorderLayout.NORTH);
+        panelprincipal.revalidate();
+        panelprincipal.repaint();
 
-if (confirmacion == JOptionPane.YES_OPTION) {
-    // Cierra las ventanas
-    j.dispose(); // Utiliza dispose() para cerrar un JFrame
-    s.dispose(); // Utiliza dispose() para cerrar un JFrame
+        // Hacer visible la nueva ventana
+        p2.setVisible(true);
 
-    // Crear una instancia de crear_producto
-    crear_producto p2 = new crear_producto();
-    p2.setSize(1024, 640);
-    p2.setLocation(0, 0);
-
-    // Actualizar el panel principal
-    panelprincipal.removeAll();
-    panelprincipal.add(p2, BorderLayout.NORTH);
-    panelprincipal.revalidate();
-    panelprincipal.repaint();
-
-    // Cerrar la ventana actual (la que llama a este código)
-    this.dispose();
-}
-       
+        // Cerrar la ventana actual (la que llama a este código)
+        this.dispose();
+//    }
 
     }//GEN-LAST:event_btncrearproductoActionPerformed
 
@@ -946,16 +947,16 @@ if (confirmacion == JOptionPane.YES_OPTION) {
             if (conn != null && !conn.isClosed())
             {
                 PreparedStatement ps = conn.prepareStatement("SELECT ROW_NUMBER() OVER (ORDER BY nombre) AS NumRegistro, \n"
-                    + "       Productos.nombre, \n"
-                    + "       Productos.categoria, \n"
-                    + "       Productos.cantidad_disponible, \n"
-                    + "       Pr.precio_unitario, \n"
-                    + "       Pr.precio_venta, \n"
-                    + "       Pr.precio_compra, \n"
-                    + "       Productos.cod_producto\n"
-                    + "FROM Productos \n"
-                    + "JOIN Precio Pr ON Productos.cod_producto = Pr.cod_producto\n"
-                    + "WHERE Productos.nombre LIKE ? OR Productos.categoria LIKE ? ");
+                        + "       Productos.nombre, \n"
+                        + "       Productos.categoria, \n"
+                        + "       Productos.cantidad_disponible, \n"
+                        + "       Pr.precio_unitario, \n"
+                        + "       Pr.precio_venta, \n"
+                        + "       Pr.precio_compra, \n"
+                        + "       Productos.cod_producto\n"
+                        + "FROM Productos \n"
+                        + "JOIN Precio Pr ON Productos.cod_producto = Pr.cod_producto\n"
+                        + "WHERE Productos.nombre LIKE ? OR Productos.categoria LIKE ? ");
 
                 if (texto != null && !texto.isEmpty())
                 {
@@ -988,7 +989,7 @@ if (confirmacion == JOptionPane.YES_OPTION) {
                         {
                             modelTabla.addRow(new Object[]
                             {
-                                numRegistro, nombre, categoria, cantidad, PU, PV, PC,CP
+                                numRegistro, nombre, categoria, cantidad, PU, PV, PC, CP
                             });
                             foundData = true;
                         }
@@ -1047,7 +1048,7 @@ if (confirmacion == JOptionPane.YES_OPTION) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new ProductoParaCompra().setVisible(true);
-                
+
                 // Cerrar la ventana actual (la ventana que llama a este código)
                 this.dispose();
             }

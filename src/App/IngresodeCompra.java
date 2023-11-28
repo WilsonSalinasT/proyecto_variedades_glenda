@@ -5,6 +5,7 @@
 package App;
 
 import static App.Menu.panelprincipal;
+
 import java.awt.Color;
 import java.awt.Font;
 import javax.swing.JOptionPane;
@@ -17,6 +18,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
 import static App.factura.txtbill;
+import java.awt.event.WindowEvent;
 import java.math.BigDecimal;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -32,12 +34,7 @@ import java.util.Date;
  *
  * @author novastar
  */
-  
-
 public class IngresodeCompra extends javax.swing.JFrame {
-
-
-   
 
     DefaultTableModel modelo;
 
@@ -46,17 +43,16 @@ public class IngresodeCompra extends javax.swing.JFrame {
      */
     public IngresodeCompra() {
         initComponents();
-    
+
         // Establecer la fecha mínima como dos meses atrás desde la fecha actual
-         Calendar minDate = Calendar.getInstance();
-         minDate.add(Calendar.MONTH, -2); // Resta dos meses a la fecha actual
-         txtfecha.setMinSelectableDate(minDate.getTime());
+        Calendar minDate = Calendar.getInstance();
+        minDate.add(Calendar.MONTH, -1); // Resta dos meses a la fecha actual
+        txtfecha.setMinSelectableDate(minDate.getTime());
 
-       // Establecer la fecha máxima como dos meses en el futuro desde la fecha actual
-         Calendar maxDate = Calendar.getInstance();
-         maxDate.add(Calendar.MONTH, 2); // Suma dos meses a la fecha actual
-         txtfecha.setMaxSelectableDate(maxDate.getTime());
-
+        // Establecer la fecha máxima como dos meses en el futuro desde la fecha actual
+        Calendar maxDate = Calendar.getInstance();
+        maxDate.add(Calendar.MONTH, 2); // Suma dos meses a la fecha actual
+        txtfecha.setMaxSelectableDate(maxDate.getTime());
 
         tablecompras.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 12));
         tablecompras.getTableHeader().setOpaque(false);
@@ -67,7 +63,7 @@ public class IngresodeCompra extends javax.swing.JFrame {
         tablecompras.setRowSelectionAllowed(true);
         tablecompras.setColumnSelectionAllowed(false);
 
-        int columnIndexToHide = 4;
+        int columnIndexToHide = 6;
         TableColumn column = tablecompras.getColumnModel().getColumn(columnIndexToHide);
 
         column.setMinWidth(0);
@@ -75,6 +71,7 @@ public class IngresodeCompra extends javax.swing.JFrame {
         column.setPreferredWidth(0);
         column.setResizable(false);
 
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 //     sumarColumna();
 //        Tsum.setText(Integer.toString((int) getsumarColumna()));
         try
@@ -173,7 +170,7 @@ public class IngresodeCompra extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(361, 361, 361)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(629, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -344,11 +341,11 @@ public class IngresodeCompra extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Nombre Producto", "Cantidad", "Precio unitario", "Total", "id"
+                "Nombre Producto", "Cantidad", "Precio unitario", "Precio de compra", "Precio de venta", "Total", "id"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                true, true, true, true, false
+                true, true, true, true, true, true, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -358,13 +355,6 @@ public class IngresodeCompra extends javax.swing.JFrame {
         tablecompras.setShowHorizontalLines(true);
         tablecompras.setShowVerticalLines(true);
         jScrollPane1.setViewportView(tablecompras);
-        if (tablecompras.getColumnModel().getColumnCount() > 0) {
-            tablecompras.getColumnModel().getColumn(0).setHeaderValue("Nombre Producto");
-            tablecompras.getColumnModel().getColumn(1).setHeaderValue("Cantidad");
-            tablecompras.getColumnModel().getColumn(2).setHeaderValue("Precio unitario");
-            tablecompras.getColumnModel().getColumn(3).setHeaderValue("Total");
-            tablecompras.getColumnModel().getColumn(4).setHeaderValue("id");
-        }
 
         jButton1.setBackground(new java.awt.Color(255, 153, 51));
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -405,7 +395,7 @@ public class IngresodeCompra extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addGap(133, 133, 133)
                 .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 123, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 275, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addGap(30, 30, 30))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
@@ -444,7 +434,7 @@ public class IngresodeCompra extends javax.swing.JFrame {
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(46, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
@@ -455,7 +445,7 @@ public class IngresodeCompra extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(44, Short.MAX_VALUE))
+                .addContainerGap(56, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -466,9 +456,7 @@ public class IngresodeCompra extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 12, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -487,7 +475,7 @@ public class IngresodeCompra extends javax.swing.JFrame {
             DefaultTableModel modelo = (DefaultTableModel) tablecompras.getModel();
 
             // Obtener el total de la fila seleccionada
-            double totalP = Double.parseDouble(modelo.getValueAt(filaSeleccionada, 3).toString());
+            double totalP = Double.parseDouble(modelo.getValueAt(filaSeleccionada, 5).toString());
 
             // Eliminar la fila seleccionada del modelo de la tabla
             modelo.removeRow(filaSeleccionada);
@@ -515,7 +503,7 @@ public class IngresodeCompra extends javax.swing.JFrame {
         {
 
             float renglon;
-            renglon = Float.parseFloat(tablecompras.getValueAt(i, 3).toString());
+            renglon = Float.parseFloat(tablecompras.getValueAt(i, 5).toString());
 
             suma = suma + renglon;
         }
@@ -526,6 +514,7 @@ public class IngresodeCompra extends javax.swing.JFrame {
         ProductoParaCompra prod = new ProductoParaCompra();
         prod.setVisible(true);
         prod.setLocationRelativeTo(null);
+        
     }//GEN-LAST:event_btnAgregarproductoActionPerformed
 
     public void bill() {
@@ -534,7 +523,7 @@ public class IngresodeCompra extends javax.swing.JFrame {
         String num = numFactura.getText();
         String tipo = (String) tipoCompra.getSelectedItem();
         String proveedor = (String) txtProveedor.getSelectedItem();
-        
+
         Date fecha = txtfecha.getDate();
         String agregarProducto = btnAgregarproducto.getText().trim(); // Nuevo campo
 
@@ -560,7 +549,7 @@ public class IngresodeCompra extends javax.swing.JFrame {
         }
         if (fecha == null)
         {
-          
+
             camposVacios.append("- Fecha\n");
         }
         boolean agregarProductoPresionado = true;
@@ -616,7 +605,7 @@ public class IngresodeCompra extends javax.swing.JFrame {
             String name = (String) model.getValueAt(i, 0);
             String cantidad = (String) model.getValueAt(i, 1);
             String preciounitario = (String) model.getValueAt(i, 2);
-            String total = (String) model.getValueAt(i, 3);
+            String total = (String) model.getValueAt(i, 5);
 
             facturaText.append(String.format("%-20s %-10s %-20s %-10s\n", name, cantidad, preciounitario, total));
         }
@@ -668,137 +657,138 @@ public class IngresodeCompra extends javax.swing.JFrame {
 
     }//GEN-LAST:event_numFacturaKeyTyped
 
+
+
     private void tipoCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tipoCompraActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tipoCompraActionPerformed
 
     private void btnguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguardarActionPerformed
 
-      String nunfactura = numFactura.getText().trim();
-String id = id_proveedor.getText().trim();
-String tipo = (String) tipoCompra.getSelectedItem();
-Date fecha = (Date) txtfecha.getDate();
+        String nunfactura = numFactura.getText().trim();
+        String id = id_proveedor.getText().trim();
+        String tipo = (String) tipoCompra.getSelectedItem();
+        Date fecha = (Date) txtfecha.getDate();
 
-String agregarProducto = btnAgregarproducto.getText().trim(); // Nuevo campo
+        String agregarProducto = btnAgregarproducto.getText().trim(); // Nuevo campo
 
-StringBuilder camposVacios = new StringBuilder("Por favor, complete los siguientes campos obligatorios:\n");
+        StringBuilder camposVacios = new StringBuilder("Por favor, complete los siguientes campos obligatorios:\n");
 
-String numeroFacturaSinSeparadores = nunfactura.replaceAll("[\\s-]+", "");
-String digitosSignificativos = numeroFacturaSinSeparadores.replaceAll("\\D", "");
+        String numeroFacturaSinSeparadores = nunfactura.replaceAll("[\\s-]+", "");
+        String digitosSignificativos = numeroFacturaSinSeparadores.replaceAll("\\D", "");
 
-if (digitosSignificativos.length() < 3) {
-    camposVacios.append("- Número de factura\n");
-}
-
-if (tipoCompra.getSelectedItem() == null || tipoCompra.getSelectedItem().toString().trim().isEmpty()
-        || tipoCompra.getSelectedItem().toString().trim().equalsIgnoreCase("Seleccione")) {
-    camposVacios.append("- Tipo de compra\n");
-}
-
-if (id.isEmpty()) {
-    camposVacios.append("- Proveedor\n");
-}
-
-if (fecha == null) {
-    camposVacios.append("- Fecha\n");
-}
-
-
-
-
-
-boolean agregarProductoPresionado = true;
-if (!agregarProductoPresionado)
-{
-    camposVacios.append("- Agregar Producto\n");
-}
-
-// Verificar si hay al menos una fila en la tabla
-if (tablecompras.getRowCount() == 0)
-{
-    camposVacios.append("- Por favor, agregue al menos un producto a la factura.\n");
-}
-
-// Mostrar mensajes de error solo si hay campos vacíos
-if (camposVacios.length() > "Por favor, complete los siguientes campos obligatorios:\n".length())
-{
-    JOptionPane.showMessageDialog(null, camposVacios.toString(), "Error", JOptionPane.ERROR_MESSAGE);
-    return; // Salir del método si falta algún campo obligatorio
-}
-
-// Resto del código para la inserción en la base de datos
-try
-{
-    Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-    Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
-
-    // Verificar si el número de factura ya existe en la base de datos
-    PreparedStatement checkNumFactura = conn.prepareStatement("SELECT COUNT(*) FROM Compras WHERE numfactura = ?");
-    checkNumFactura.setString(1, nunfactura);
-    ResultSet rsCheckNumFactura = checkNumFactura.executeQuery();
-    rsCheckNumFactura.next();
-    int count = rsCheckNumFactura.getInt(1);
-
-    if (count > 0)
-    {
-        // Si ya existe un registro con el mismo número de factura, mostrar un mensaje de error
-        JOptionPane.showMessageDialog(null, "Error: El número de factura ya existe en la base de datos.", "Error", JOptionPane.ERROR_MESSAGE);
-        return; // Salir del método si el número de factura ya existe
-    }
-
-    // Continuar con la inserción en la tabla Compras si el número de factura es único
-
-    // Resto del código para la inserción en la base de datos
-    PreparedStatement insertCompras = conn.prepareStatement("INSERT INTO Compras (numfactura, tipoCategoria, fecha, total, id_proveedor) VALUES (?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
-    insertCompras.setString(1, nunfactura);
-    insertCompras.setString(2, tipo);
-    insertCompras.setDate(3, new java.sql.Date(fecha.getTime()));
-    // Asegúrate de tener la variable totalFactura definida y con un valor asignado
-    insertCompras.setObject(4, totalFactura);
-    insertCompras.setString(5, id);
-
-    int filasAfectadasCompras = insertCompras.executeUpdate();
-
-    // Obtener el ID generado para la compra
-    ResultSet rsCompras = insertCompras.getGeneratedKeys();
-    if (rsCompras.next())
-    {
-        int idCompraGenerado = rsCompras.getInt(1);
-
-        // Inserción en la tabla DetallesCompras con valores directos
-        for (int i = 0; i < tablecompras.getRowCount(); i++)
+        if (digitosSignificativos.length() < 3)
         {
-            PreparedStatement insertDetallesCompras = conn.prepareStatement("INSERT INTO DetallesCompras (id_compra, cantidad, precio_unitario, total, cod_producto) VALUES (?,?,?,?,?)");
-            insertDetallesCompras.setInt(1, idCompraGenerado);
-            insertDetallesCompras.setString(2, tablecompras.getValueAt(i, 1).toString()); // Ejemplo de valor directo para cod_producto
-            insertDetallesCompras.setString(3, tablecompras.getValueAt(i, 2).toString()); // Ejemplo de valor directo para cantidad
-            insertDetallesCompras.setString(4, tablecompras.getValueAt(i, 3).toString()); // Ejemplo de valor directo para precio_unitario
-            insertDetallesCompras.setString(5, tablecompras.getValueAt(i, 4).toString()); // Ejemplo de valor directo para total
-
-            insertDetallesCompras.executeUpdate();
-
-            String queryActualizarInventario = "UPDATE Productos SET cantidad_disponible = cantidad_disponible + ? WHERE cod_producto = ?";
-            try (PreparedStatement pstmtActualizarInventario = conn.prepareStatement(queryActualizarInventario))
-            {
-                pstmtActualizarInventario.setString(1, tablecompras.getValueAt(i, 1).toString());
-                pstmtActualizarInventario.setString(2, tablecompras.getValueAt(i, 4).toString());
-                pstmtActualizarInventario.executeUpdate();
-            }
-
+            camposVacios.append("- Número de factura\n");
         }
 
-        JOptionPane.showMessageDialog(null, "Registro guardado");
-        this.dispose();
-    }
+        if (tipoCompra.getSelectedItem() == null || tipoCompra.getSelectedItem().toString().trim().isEmpty()
+                || tipoCompra.getSelectedItem().toString().trim().equalsIgnoreCase("Seleccione"))
+        {
+            camposVacios.append("- Tipo de compra\n");
+        }
 
-} catch (SQLException e)
-{
-    e.printStackTrace();
-    JOptionPane.showMessageDialog(null, e.getMessage(), "Error de SQL", JOptionPane.ERROR_MESSAGE);
-} catch (ClassNotFoundException ex)
-{
-    JOptionPane.showMessageDialog(null, "Error de conexión a la base de datos", "Error de Conexión", JOptionPane.ERROR_MESSAGE);
-}
+        if (id.isEmpty())
+        {
+            camposVacios.append("- Proveedor\n");
+        }
+
+        if (fecha == null)
+        {
+            camposVacios.append("- Fecha\n");
+        }
+
+        boolean agregarProductoPresionado = true;
+        if (!agregarProductoPresionado)
+        {
+            camposVacios.append("- Agregar Producto\n");
+        }
+
+// Verificar si hay al menos una fila en la tabla
+        if (tablecompras.getRowCount() == 0)
+        {
+            camposVacios.append("- Por favor, agregue al menos un producto a la factura.\n");
+        }
+
+// Mostrar mensajes de error solo si hay campos vacíos
+        if (camposVacios.length() > "Por favor, complete los siguientes campos obligatorios:\n".length())
+        {
+            JOptionPane.showMessageDialog(null, camposVacios.toString(), "Error", JOptionPane.ERROR_MESSAGE);
+            return; // Salir del método si falta algún campo obligatorio
+        }
+
+// Resto del código para la inserción en la base de datos
+        try
+        {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
+
+            // Verificar si el número de factura ya existe en la base de datos
+            PreparedStatement checkNumFactura = conn.prepareStatement("SELECT COUNT(*) FROM Compras WHERE numfactura = ?");
+            checkNumFactura.setString(1, nunfactura);
+            ResultSet rsCheckNumFactura = checkNumFactura.executeQuery();
+            rsCheckNumFactura.next();
+            int count = rsCheckNumFactura.getInt(1);
+
+            if (count > 0)
+            {
+                // Si ya existe un registro con el mismo número de factura, mostrar un mensaje de error
+                JOptionPane.showMessageDialog(null, "Error: El número de factura ya existe en la base de datos.", "Error", JOptionPane.ERROR_MESSAGE);
+                return; // Salir del método si el número de factura ya existe
+            }
+
+            // Continuar con la inserción en la tabla Compras si el número de factura es único
+            // Resto del código para la inserción en la base de datos
+            PreparedStatement insertCompras = conn.prepareStatement("INSERT INTO Compras (numfactura, tipoCategoria, fecha, total, id_proveedor) VALUES (?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
+            insertCompras.setString(1, nunfactura);
+            insertCompras.setString(2, tipo);
+            insertCompras.setDate(3, new java.sql.Date(fecha.getTime()));
+            // Asegúrate de tener la variable totalFactura definida y con un valor asignado
+            insertCompras.setObject(4, totalFactura);
+            insertCompras.setString(5, id);
+
+            int filasAfectadasCompras = insertCompras.executeUpdate();
+
+            // Obtener el ID generado para la compra
+            ResultSet rsCompras = insertCompras.getGeneratedKeys();
+            if (rsCompras.next())
+            {
+                int idCompraGenerado = rsCompras.getInt(1);
+
+                // Inserción en la tabla DetallesCompras con valores directos
+                for (int i = 0; i < tablecompras.getRowCount(); i++)
+                {
+                    PreparedStatement insertDetallesCompras = conn.prepareStatement("INSERT INTO DetallesCompras (id_compra, cantidad, precio_unitario, total, cod_producto) VALUES (?,?,?,?,?)");
+                    insertDetallesCompras.setInt(1, idCompraGenerado);
+                    insertDetallesCompras.setString(2, tablecompras.getValueAt(i, 1).toString()); // Ejemplo de valor directo para cod_producto
+                    insertDetallesCompras.setString(3, tablecompras.getValueAt(i, 2).toString()); // Ejemplo de valor directo para cantidad
+                    insertDetallesCompras.setString(4, tablecompras.getValueAt(i, 5).toString()); // Ejemplo de valor directo para precio_unitario
+                    insertDetallesCompras.setString(5, tablecompras.getValueAt(i, 6).toString()); // Ejemplo de valor directo para total
+
+                    insertDetallesCompras.executeUpdate();
+
+                    String queryActualizarInventario = "UPDATE Productos SET cantidad_disponible = cantidad_disponible + ? WHERE cod_producto = ?";
+                    try (PreparedStatement pstmtActualizarInventario = conn.prepareStatement(queryActualizarInventario))
+                    {
+                        pstmtActualizarInventario.setString(1, tablecompras.getValueAt(i, 1).toString());
+                        pstmtActualizarInventario.setString(2, tablecompras.getValueAt(i, 6).toString());
+                        pstmtActualizarInventario.executeUpdate();
+                    }
+
+                }
+
+                JOptionPane.showMessageDialog(null, "Registro guardado");
+                this.dispose();
+            }
+
+        } catch (SQLException e)
+        {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Error de SQL", JOptionPane.ERROR_MESSAGE);
+        } catch (ClassNotFoundException ex)
+        {
+            JOptionPane.showMessageDialog(null, "Error de conexión a la base de datos", "Error de Conexión", JOptionPane.ERROR_MESSAGE);
+        }
 
     }//GEN-LAST:event_btnguardarActionPerformed
 
@@ -823,57 +813,7 @@ try
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try
-        {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels())
-            {
-                if ("Nimbus".equals(info.getName()))
-                {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex)
-        {
-            java.util.logging.Logger.getLogger(IngresodeCompra.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex)
-        {
-            java.util.logging.Logger.getLogger(IngresodeCompra.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex)
-        {
-            java.util.logging.Logger.getLogger(IngresodeCompra.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex)
-        {
-            java.util.logging.Logger.getLogger(IngresodeCompra.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new IngresodeCompra().setVisible(true);
-               
-                
-                // Cerrar la ventana actual (la ventana que llama a este código)
-              this.dispose();
-            }
-      
-            private void dispose() {
-             
-                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-              
-            }
-            
-            
-
-        });
-    }
+ 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JTextField Tsum;
@@ -935,8 +875,8 @@ try
     class dispose {
 
         public dispose() {
-            
+
         }
-        
+
     }
 }
