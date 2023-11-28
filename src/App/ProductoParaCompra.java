@@ -777,29 +777,36 @@ public class ProductoParaCompra extends javax.swing.JFrame {
 
     private void btncrearproductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncrearproductoActionPerformed
 
-     // Crear una instancia de IngresodeCompra y cerrarla
+     // Crear una instancia de IngresodeCompra
 IngresodeCompra j = new IngresodeCompra();
-j.dispose();
+j.setVisible(true);  // Asegúrate de que la ventana sea visible
 
-// Crear una instancia de ProductoParaCompra y cerrarla
+// Crear una instancia de ProductoParaCompra
 ProductoParaCompra s = new ProductoParaCompra();
-s.dispose();
+s.setVisible(true);  // Asegúrate de que la ventana sea visible
 
-// Crear una instancia de crear_producto
-crear_producto p2 = new crear_producto();
-p2.setSize(1024, 640);
-p2.setLocation(0, 0);
+// Mostrar mensaje para confirmar el cierre
+int confirmacion = JOptionPane.showConfirmDialog(null, "¿Deseas cerrar las ventanas?", "Confirmación", JOptionPane.YES_NO_OPTION);
 
-// Actualizar el panel principal
-panelprincipal.removeAll();
-panelprincipal.add(p2, BorderLayout.NORTH);
-panelprincipal.revalidate();
-panelprincipal.repaint();
+if (confirmacion == JOptionPane.YES_OPTION) {
+    // Cierra las ventanas
+    j.dispose(); // Utiliza dispose() para cerrar un JFrame
+    s.dispose(); // Utiliza dispose() para cerrar un JFrame
 
-// Cerrar la ventana actual (la que llama a este código)
-this.dispose();
+    // Crear una instancia de crear_producto
+    crear_producto p2 = new crear_producto();
+    p2.setSize(1024, 640);
+    p2.setLocation(0, 0);
 
+    // Actualizar el panel principal
+    panelprincipal.removeAll();
+    panelprincipal.add(p2, BorderLayout.NORTH);
+    panelprincipal.revalidate();
+    panelprincipal.repaint();
 
+    // Cerrar la ventana actual (la que llama a este código)
+    this.dispose();
+}
        
 
     }//GEN-LAST:event_btncrearproductoActionPerformed
