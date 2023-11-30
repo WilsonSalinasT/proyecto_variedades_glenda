@@ -82,7 +82,6 @@ public class Edit_arreglo extends javax.swing.JPanel {
         Cimagen1 = new javax.swing.JButton();
         Cimagen2 = new javax.swing.JButton();
         Cimagen3 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -136,7 +135,7 @@ public class Edit_arreglo extends javax.swing.JPanel {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(299, 299, 299)
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(294, Short.MAX_VALUE))
+                .addContainerGap(186, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(btnvolver1, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -224,13 +223,11 @@ public class Edit_arreglo extends javax.swing.JPanel {
         JDfechaEntrega.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Fecha de Entrega", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12))); // NOI18N
 
         txtid.setEditable(false);
-        txtid.setBackground(new java.awt.Color(255, 255, 255));
         txtid.setForeground(new java.awt.Color(255, 255, 255));
         txtid.setBorder(null);
 
         jButton1.setBackground(new java.awt.Color(255, 152, 52));
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(0, 0, 0));
+        jButton1.setFont(new java.awt.Font("Arial Black", 2, 14)); // NOI18N
         jButton1.setText("Editar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -277,13 +274,6 @@ public class Edit_arreglo extends javax.swing.JPanel {
             }
         });
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/admiracion.png"))); // NOI18N
-        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel1MouseClicked(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -297,9 +287,7 @@ public class Edit_arreglo extends javax.swing.JPanel {
                 .addComponent(imagen3, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(23, Short.MAX_VALUE))
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addGap(63, 63, 63)
+                .addGap(93, 93, 93)
                 .addComponent(Cimagen1)
                 .addGap(89, 89, 89)
                 .addComponent(Cimagen2)
@@ -310,18 +298,12 @@ public class Edit_arreglo extends javax.swing.JPanel {
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addContainerGap(18, Short.MAX_VALUE)
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(Cimagen1)
-                            .addComponent(Cimagen2)
-                            .addComponent(Cimagen3))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap(18, Short.MAX_VALUE)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Cimagen1)
+                    .addComponent(Cimagen2)
+                    .addComponent(Cimagen3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(imagen2, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(imagen1, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -363,7 +345,7 @@ public class Edit_arreglo extends javax.swing.JPanel {
                                                 .addComponent(cbxEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(527, 527, 527)
+                        .addGap(465, 465, 465)
                         .addComponent(jButton1)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -397,9 +379,9 @@ public class Edit_arreglo extends javax.swing.JPanel {
                     .addComponent(txtprecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
+                .addGap(33, 33, 33)
                 .addComponent(jButton1)
-                .addGap(35, 35, 35))
+                .addGap(30, 30, 30))
         );
 
         fechaP.setVisible(false);
@@ -453,7 +435,7 @@ public class Edit_arreglo extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 624, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -723,38 +705,16 @@ public class Edit_arreglo extends javax.swing.JPanel {
     private File[] archivo3 = new File[3];
     private int contador3 = 0;
 
-// Método para habilitar los botones según los contadores
-    private void habilitarBotonesSegunContador() {
-        Cimagen1.setEnabled(contador1 < 1);
-        Cimagen2.setEnabled(contador2 < 2);
-        Cimagen3.setEnabled(contador3 < 3);
-    }
-
-// Método para reiniciar los contadores y habilitar los botones al volver al JPanel
-    private void habilitarBotonesPorDefecto() {
-        contador1 = 0;
-        contador2 = 0;
-        contador3 = 0;
-
-        habilitarBotonesSegunContador(); // Habilitar botones según los contadores restablecidos
-    }
-
-// Llamada al método para habilitar botones al reiniciar el panel
-    private void reiniciarPanel() {
-        // Código de reinicio del panel si es necesario
-
-        habilitarBotonesPorDefecto(); // Restablecer contadores y habilitar botones
-    }
 
     private void Cimagen1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Cimagen1ActionPerformed
 
-        if (contador1 < 1) {
-            JFileChooser fclAbrirArchivo = new JFileChooser();
-            fclAbrirArchivo.setFileFilter(new FileNameExtensionFilter("Archivo de imagen", "jpg", "jpeg", "png"));
+        JFileChooser fclAbrirArchivo = new JFileChooser();
+        fclAbrirArchivo.setFileFilter(new FileNameExtensionFilter("Archivo de imagen", "jpg", "jpeg", "png"));
 
-            int respuesta = fclAbrirArchivo.showOpenDialog(this);
+        int respuesta = fclAbrirArchivo.showOpenDialog(this);
 
-            if (respuesta == JFileChooser.APPROVE_OPTION) {
+        if (respuesta == JFileChooser.APPROVE_OPTION) {
+            if (contador1 < 1) {
                 archivo1[contador1] = fclAbrirArchivo.getSelectedFile();
 
                 // Cargar la imagen en el label correspondiente (imagen1, imagen2, o imagen3)
@@ -763,10 +723,15 @@ public class Edit_arreglo extends javax.swing.JPanel {
                 imagen1.setIcon(new ImageIcon(foto));
 
                 contador1++;
-                habilitarBotonesSegunContador(); // Actualizar el estado de los botones
+
+                // Reiniciar el contador y habilitar el botón si se ha alcanzado el límite
+                if (contador1 == 1) {
+                    contador1 = 0;
+                    Cimagen1.setEnabled(true);
+                }
             }
         }
-        // ...
+
     }//GEN-LAST:event_Cimagen1ActionPerformed
 
     private byte[] obtenerImagenExistente(int posicion) throws SQLException, ClassNotFoundException {
@@ -827,7 +792,7 @@ public class Edit_arreglo extends javax.swing.JPanel {
     }
 
     private void Cimagen2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Cimagen2ActionPerformed
-        if (contador2 < 1) {
+        if (contador2 < 2) { // Verificar que no se hayan cargado ya dos imágenes
             JFileChooser fclAbrirArchivo = new JFileChooser();
             fclAbrirArchivo.setFileFilter(new FileNameExtensionFilter("Archivo de imagen", "jpg", "jpeg", "png"));
 
@@ -840,19 +805,14 @@ public class Edit_arreglo extends javax.swing.JPanel {
                 ImageIcon icono = new ImageIcon(archivo2[contador2].getAbsolutePath());
                 Image foto = icono.getImage().getScaledInstance(imagen2.getWidth(), imagen2.getHeight(), Image.SCALE_DEFAULT);
 
-                if (contador2 == 0) {
-                    imagen2.setIcon(new ImageIcon(foto));
-                    //JOptionPane.showMessageDialog(this, "Ya se ha cargado una imagen. No se puede agregar otra.", "Advertencia", JOptionPane.WARNING_MESSAGE);
-                    Cimagen2.setEnabled(false); // Desactivar el botón después de cargar la tercera imagen
-                }
-
+                imagen2.setIcon(new ImageIcon(foto));
                 contador2++;
             }
         }
     }//GEN-LAST:event_Cimagen2ActionPerformed
 
     private void Cimagen3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Cimagen3ActionPerformed
-        if (contador3 < 1) {
+        if (contador3 < 2) { // Verificar que no se hayan cargado ya dos imágenes
             JFileChooser fclAbrirArchivo = new JFileChooser();
             fclAbrirArchivo.setFileFilter(new FileNameExtensionFilter("Archivo de imagen", "jpg", "jpeg", "png"));
 
@@ -865,21 +825,12 @@ public class Edit_arreglo extends javax.swing.JPanel {
                 ImageIcon icono = new ImageIcon(archivo3[contador3].getAbsolutePath());
                 Image foto = icono.getImage().getScaledInstance(imagen3.getWidth(), imagen3.getHeight(), Image.SCALE_DEFAULT);
 
-                if (contador3 == 0) {
-                    imagen3.setIcon(new ImageIcon(foto));
-                    //JOptionPane.showMessageDialog(this, "Ya se ha cargado una imagen. No se puede agregar otra.", "Advertencia", JOptionPane.WARNING_MESSAGE);
-                    Cimagen3.setEnabled(false); // Desactivar el botón después de cargar la tercera imagen
-                }
+                imagen3.setIcon(new ImageIcon(foto));
 
                 contador3++;
             }
         }
     }//GEN-LAST:event_Cimagen3ActionPerformed
-
-    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
-        // TODO add your handling code here:
-        JOptionPane.showMessageDialog(this, "¡Atención! Si cambiaste una imagen en una de las tres secciones diferentes y necesitas más cambios, por favor, sal y vuelve a entrar. ¡Gracias!", "Advertencia", JOptionPane.WARNING_MESSAGE);
-    }//GEN-LAST:event_jLabel1MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -896,7 +847,6 @@ public class Edit_arreglo extends javax.swing.JPanel {
     public static final javax.swing.JLabel imagen2 = new javax.swing.JLabel();
     public static final javax.swing.JLabel imagen3 = new javax.swing.JLabel();
     private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
