@@ -43,12 +43,12 @@ public class ConexionSQLServer {
         }
     }
 
-    public static void main(String[] args) {
-        ConexionSQLServer conexion = new ConexionSQLServer();
-        // Puedes utilizar la conexión en tu aplicación
-        Connection conn = conexion.getConnection();
-
-        // Cuando hayas terminado, asegúrate de cerrar la conexión
-        conexion.cerrarConexion();
-    }
+//    public static void main(String[] args) {
+//        ConexionSQLServer conexion = new ConexionSQLServer();
+//        // Puedes utilizar la conexión en tu aplicación
+//        Connection conn = conexion.getConnection();
+//
+//        // Cuando hayas terminado, asegúrate de cerrar la conexión
+//        conexion.cerrarConexion();
+//    }
 }
