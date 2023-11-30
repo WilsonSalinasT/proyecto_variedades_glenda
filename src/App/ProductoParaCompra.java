@@ -38,6 +38,10 @@ import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JFrame;
+import static App.IngresodeCompra.panelcompra;
+import static Paneles.Crear_Pedido_Sublimacion.txtPrecio;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 /**
  *
@@ -55,9 +59,9 @@ public class ProductoParaCompra extends javax.swing.JFrame {
      * Creates new form ProductoParaCompra
      */
     private IngresodeCompra ingresodeCompra;
+
     public ProductoParaCompra() {
-       
-        
+
         initComponents();
         this.setLocationRelativeTo(null);
         holder = new TextPrompt("Busque por nombre del producto y tipo de categoría", CuadroBuscarProducto);
@@ -82,6 +86,42 @@ public class ProductoParaCompra extends javax.swing.JFrame {
         column.setMaxWidth(0);
         column.setPreferredWidth(0);
         column.setResizable(false);
+        
+        // Agregar DocumentListener a textField1
+        cantidad.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                actualizarResultado();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                actualizarResultado();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                actualizarResultado();
+            }
+        });
+
+        // Agregar DocumentListener a textField2
+        txtPrecioUnitario.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                actualizarResultado();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                actualizarResultado();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                actualizarResultado();
+            }
+        });
 
 //        tblProductosParafactura.getTableHeader().setReorderingAllowed(false);
 //        Controlador.ProductosFactura.ProductoParaCompra("");
@@ -93,7 +133,6 @@ public class ProductoParaCompra extends javax.swing.JFrame {
 //        });   
     }
 
-    
 //    public static void calcular(){
 //        suma = 0;
 //        for(int i = 0; i< tblProductosCompras.getRowCount(); i++){
@@ -294,7 +333,9 @@ public class ProductoParaCompra extends javax.swing.JFrame {
         Texto_Contable = new javax.swing.JLabel();
         btnAnterior = new javax.swing.JButton();
         btnSiguiente = new javax.swing.JButton();
-        btncrearproducto = new javax.swing.JButton();
+        txtPrecioventa = new javax.swing.JTextField();
+        txtPrecioCompra = new javax.swing.JTextField();
+        txtPrecioUnitario = new javax.swing.JTextField();
 
         jList1.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -448,13 +489,35 @@ public class ProductoParaCompra extends javax.swing.JFrame {
             }
         });
 
-        btncrearproducto.setBackground(new java.awt.Color(255, 153, 51));
-        btncrearproducto.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btncrearproducto.setText("Crear Productos");
-        btncrearproducto.setActionCommand("Crear Producto");
-        btncrearproducto.addActionListener(new java.awt.event.ActionListener() {
+        txtPrecioventa.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Precio de venta", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12))); // NOI18N
+        txtPrecioventa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btncrearproductoActionPerformed(evt);
+                txtPrecioventaActionPerformed(evt);
+            }
+        });
+        txtPrecioventa.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtPrecioventaKeyTyped(evt);
+            }
+        });
+
+        txtPrecioCompra.setEditable(false);
+        txtPrecioCompra.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Precio de Compra", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12))); // NOI18N
+        txtPrecioCompra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPrecioCompraActionPerformed(evt);
+            }
+        });
+
+        txtPrecioUnitario.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Precio unitario", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12))); // NOI18N
+        txtPrecioUnitario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPrecioUnitarioActionPerformed(evt);
+            }
+        });
+        txtPrecioUnitario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtPrecioUnitarioKeyTyped(evt);
             }
         });
 
@@ -473,13 +536,11 @@ public class ProductoParaCompra extends javax.swing.JFrame {
                         .addGap(29, 29, 29)
                         .addComponent(btnbuscar)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton2)
-                        .addGap(77, 77, 77)
-                        .addComponent(btncrearproducto))
+                        .addComponent(jButton2))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(6, 6, 6)
                         .addComponent(Texto_Contable, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(101, 101, 101)
+                        .addGap(113, 113, 113)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(btncrear, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -487,12 +548,19 @@ public class ProductoParaCompra extends javax.swing.JFrame {
                                 .addComponent(cancelar))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel3)
-                                .addGap(18, 18, 18)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(cantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(258, 258, 258)
                         .addComponent(btnAnterior, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btnSiguiente, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnSiguiente, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(234, 234, 234)
+                        .addComponent(txtPrecioUnitario, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(28, 28, 28)
+                        .addComponent(txtPrecioventa, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(28, 28, 28)
+                        .addComponent(txtPrecioCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(15, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -503,8 +571,7 @@ public class ProductoParaCompra extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(CuadroBuscarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnbuscar)
-                    .addComponent(jButton2)
-                    .addComponent(btncrearproducto))
+                    .addComponent(jButton2))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -515,11 +582,16 @@ public class ProductoParaCompra extends javax.swing.JFrame {
                         .addComponent(jLabel3)
                         .addComponent(cantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(btnSiguiente, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtPrecioUnitario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtPrecioCompra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtPrecioventa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btncrear)
                     .addComponent(cancelar))
-                .addContainerGap(51, Short.MAX_VALUE))
+                .addGap(20, 20, 20))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -563,6 +635,18 @@ public class ProductoParaCompra extends javax.swing.JFrame {
 
     }//GEN-LAST:event_CuadroBuscarProductoKeyTyped
 
+    private void actualizarResultado() {
+        try
+        {
+            double value1 = Double.parseDouble(cantidad.getText());
+            double value2 = Double.parseDouble(txtPrecioUnitario.getText());
+            double result = value1 * value2;
+            txtPrecioCompra.setText(String.valueOf(result));
+        } catch (NumberFormatException ex)
+        {
+             txtPrecioCompra.setText("0.0");
+        }
+    }
     private void CuadroBuscarProductoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_CuadroBuscarProductoKeyReleased
         // TODO add your handling code here:
 //        filtrarDatosProductos(CuadroBuscarProducto.getText());
@@ -703,12 +787,44 @@ public class ProductoParaCompra extends javax.swing.JFrame {
                 return; // Salir del método si no se ingresó una cantidad
             }
 
+            if (txtPrecioUnitario.getText().isEmpty())
+            {
+                JOptionPane.showMessageDialog(null, "No se ingresó un Precio unitario",
+                        "Error al agregar producto", JOptionPane.WARNING_MESSAGE);
+                return; // Salir del método si no se ingresó una cantidad
+            }
+
+            if (txtPrecioUnitario.getText().startsWith("0"))
+            {
+                JOptionPane.showMessageDialog(null, "Ingrese un precio unitario mayor a cero(0)",
+                        "Error al agregar producto", JOptionPane.WARNING_MESSAGE);
+                return; // Salir del método si no se ingresó una cantidad
+            }
+            
+              if (txtPrecioventa.getText().isEmpty())
+            {
+                JOptionPane.showMessageDialog(null, "No se ingresó un Precio de venta",
+                        "Error al agregar producto", JOptionPane.WARNING_MESSAGE);
+                return; // Salir del método si no se ingresó una cantidad
+            }
+
+            if (txtPrecioventa.getText().startsWith("0"))
+            {
+                JOptionPane.showMessageDialog(null, "Ingrese un precio de venta mayor a cero(0)",
+                        "Error al agregar producto", JOptionPane.WARNING_MESSAGE);
+                return; // Salir del método si no se ingresó una cantidad
+            }
+            
+
             DefaultTableModel modelo = (DefaultTableModel) tblProductosParafactura.getModel();
             nombreProd = tblProductosParafactura.getValueAt(fila, 1).toString();
-            precU = tblProductosParafactura.getValueAt(fila, 4).toString();
-            PrecV = tblProductosParafactura.getValueAt(fila, 5).toString();
-            PrecC = tblProductosParafactura.getValueAt(fila, 6).toString();
+//            precU = tblProductosParafactura.getValueAt(fila, 4).toString();
+//            PrecV = tblProductosParafactura.getValueAt(fila, 5).toString();
+//            PrecC = tblProductosParafactura.getValueAt(fila, 6).toString();
             idProducto = tblProductosParafactura.getValueAt(fila, 7).toString();
+            precU = txtPrecioUnitario.getText();
+            PrecV = txtPrecioventa.getText();
+            PrecC = txtPrecioCompra.getText();
             cantid = cantidad.getText();
 
             //Se realizan los cálculos para el total en la factura
@@ -734,10 +850,15 @@ public class ProductoParaCompra extends javax.swing.JFrame {
                     int nuevaCantidad = Integer.parseInt(cantidadExistente) + Integer.parseInt(cantid);
                     modelo.setValueAt(String.valueOf(nuevaCantidad), i, 1);
 
-                    String totalExistente = modelo.getValueAt(i, 3).toString();
+                    String totalExistente = modelo.getValueAt(i, 5).toString();
                     double precioUnitario = Double.parseDouble(precU);
                     double nuevoTotal = precioUnitario * nuevaCantidad;
-                    modelo.setValueAt(String.valueOf(nuevoTotal), i, 3);
+                    modelo.setValueAt(String.valueOf(nuevoTotal), i, 5);
+                    
+                    String totalExistentes = modelo.getValueAt(i, 4).toString();
+                    double precioUnitarios = Double.parseDouble(precU);
+                    double nuevoTotals = precioUnitarios * nuevaCantidad;
+                    modelo.setValueAt(String.valueOf(nuevoTotals), i, 4);
 
                     productoEncontrado = true;
                     break;
@@ -752,7 +873,7 @@ public class ProductoParaCompra extends javax.swing.JFrame {
 
                 String filaElemento[] =
                 {
-                    nombreProd, cantid, precU,PrecV,PrecC, totalP, idProducto
+                    nombreProd, cantid, precU, PrecV, PrecC, totalP, idProducto
                 };
                 modelo.addRow(filaElemento);
             }
@@ -765,6 +886,10 @@ public class ProductoParaCompra extends javax.swing.JFrame {
             //this.dispose();
             // Limpiar el campo de cantidad después de agregar el producto
             cantidad.setText("");
+            txtPrecioCompra.setText("");
+            txtPrecioUnitario.setText("");
+            txtPrecioventa.setText("");
+
             JOptionPane.showMessageDialog(null, "Se agrego el producto!");
 
             //            ver.setSize(1024, 640);
@@ -779,38 +904,76 @@ public class ProductoParaCompra extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btncrearActionPerformed
 
-   
+    private void txtPrecioventaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPrecioventaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPrecioventaActionPerformed
 
-    private void btncrearproductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncrearproductoActionPerformed
+    private void txtPrecioCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPrecioCompraActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPrecioCompraActionPerformed
 
-        ingresodeCompra.dispose();
-      
-        // Crear una instancia de IngresodeCompra
+    private void txtPrecioUnitarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPrecioUnitarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPrecioUnitarioActionPerformed
 
-        // Mostrar mensaje para confirmar el cierre
-//    int confirmacion = JOptionPane.showConfirmDialog(null, "¿Deseas cerrar las ventanas?", "Confirmación", JOptionPane.YES_NO_OPTION);
-//
-//    if (confirmacion == JOptionPane.YES_OPTION) {
-//  
-        // Crear una instancia de crear_producto
-        crear_producto p2 = new crear_producto();
-        p2.setSize(1024, 640);
-        p2.setLocation(0, 0);
+    private void txtPrecioUnitarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrecioUnitarioKeyTyped
+         char validar = evt.getKeyChar();
+        if (Character.isLetter(validar))
+        {
+            getToolkit().beep();
+            evt.consume();
+        }
+        //validacion de que no permita espacios o caracteres especiales
+        if (evt.getKeyChar() >= 30 && evt.getKeyChar() <= 47 || evt.getKeyChar() >= 58 && evt.getKeyChar() <= 97)
+        {
+            getToolkit().beep();
+            evt.consume();
+        }
+        //Validar que solo se puedan ingresar una cantidad de 3 numeros
+        if (txtPrecioUnitario.getText().length() >= 5)
+        {
+            getToolkit().beep();
+            evt.consume();
+        }
+        //validar que no se ingrese primero un cero
+        if (txtPrecioUnitario.getText().startsWith("0"))
+        {
+            // Emitir un sonido de error
+            getToolkit().beep();
+            // Consumir el evento para evitar que se ingrese el cero
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtPrecioUnitarioKeyTyped
 
-        // Actualizar el panel principal
-        panelprincipal.removeAll();
-        panelprincipal.add(p2, BorderLayout.NORTH);
-        panelprincipal.revalidate();
-        panelprincipal.repaint();
-
-        // Hacer visible la nueva ventana
-        p2.setVisible(true);
-
-        // Cerrar la ventana actual (la que llama a este código)
-        this.dispose();
-//    }
-
-    }//GEN-LAST:event_btncrearproductoActionPerformed
+    private void txtPrecioventaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrecioventaKeyTyped
+        // TODO add your handling code here:
+           char validar = evt.getKeyChar();
+        if (Character.isLetter(validar))
+        {
+            getToolkit().beep();
+            evt.consume();
+        }
+        //validacion de que no permita espacios o caracteres especiales
+        if (evt.getKeyChar() >= 30 && evt.getKeyChar() <= 47 || evt.getKeyChar() >= 58 && evt.getKeyChar() <= 97)
+        {
+            getToolkit().beep();
+            evt.consume();
+        }
+        //Validar que solo se puedan ingresar una cantidad de 3 numeros
+        if (txtPrecioventa.getText().length() >= 5)
+        {
+            getToolkit().beep();
+            evt.consume();
+        }
+        //validar que no se ingrese primero un cero
+        if (txtPrecioventa.getText().startsWith("0"))
+        {
+            // Emitir un sonido de error
+            getToolkit().beep();
+            // Consumir el evento para evitar que se ingrese el cero
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtPrecioventaKeyTyped
 
     int selectedRow2;
     int paginaActual = 1; // Página actual
@@ -1012,52 +1175,8 @@ public class ProductoParaCompra extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try
-        {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels())
-            {
-                if ("Nimbus".equals(info.getName()))
-                {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex)
-        {
-            java.util.logging.Logger.getLogger(ProductoParaCompra.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex)
-        {
-            java.util.logging.Logger.getLogger(ProductoParaCompra.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex)
-        {
-            java.util.logging.Logger.getLogger(ProductoParaCompra.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex)
-        {
-            java.util.logging.Logger.getLogger(ProductoParaCompra.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ProductoParaCompra().setVisible(true);
-
-                // Cerrar la ventana actual (la ventana que llama a este código)
-                this.dispose();
-            }
-
-            private void dispose() {
-                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-            }
-        });
-    }
+  
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField CuadroBuscarProducto;
@@ -1066,7 +1185,6 @@ public class ProductoParaCompra extends javax.swing.JFrame {
     private javax.swing.JButton btnSiguiente;
     private javax.swing.JButton btnbuscar;
     public static javax.swing.JButton btncrear;
-    private javax.swing.JButton btncrearproducto;
     private javax.swing.JButton cancelar;
     private javax.swing.JTextField cantidad;
     private javax.swing.JButton jButton2;
@@ -1078,6 +1196,9 @@ public class ProductoParaCompra extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
     public static javax.swing.JTable tblProductosParafactura;
+    private javax.swing.JTextField txtPrecioCompra;
+    private javax.swing.JTextField txtPrecioUnitario;
+    private javax.swing.JTextField txtPrecioventa;
     // End of variables declaration//GEN-END:variables
 
 }

@@ -125,7 +125,7 @@ public class IngresodeCompra extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        panelcompra = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
@@ -155,7 +155,7 @@ public class IngresodeCompra extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        panelcompra.setBackground(new java.awt.Color(255, 255, 255));
 
         jPanel2.setBackground(new java.awt.Color(255, 102, 102));
 
@@ -341,7 +341,7 @@ public class IngresodeCompra extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Nombre Producto", "Cantidad", "Precio unitario", "Precio de compra", "Precio de venta", "Total", "id"
+                "Nombre Producto", "Cantidad", "Precio unitario", "Precio de venta", "Precio de compra", "Total", "id"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -425,11 +425,11 @@ public class IngresodeCompra extends javax.swing.JFrame {
                     .addComponent(jLabel2)))
         );
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout panelcompraLayout = new javax.swing.GroupLayout(panelcompra);
+        panelcompra.setLayout(panelcompraLayout);
+        panelcompraLayout.setHorizontalGroup(
+            panelcompraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelcompraLayout.createSequentialGroup()
                 .addGap(31, 31, 31)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -437,12 +437,12 @@ public class IngresodeCompra extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        panelcompraLayout.setVerticalGroup(
+            panelcompraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelcompraLayout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(23, 23, 23)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(panelcompraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(56, Short.MAX_VALUE))
@@ -452,11 +452,11 @@ public class IngresodeCompra extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panelcompra, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panelcompra, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -514,7 +514,7 @@ public class IngresodeCompra extends javax.swing.JFrame {
         ProductoParaCompra prod = new ProductoParaCompra();
         prod.setVisible(true);
         prod.setLocationRelativeTo(null);
-        
+
     }//GEN-LAST:event_btnAgregarproductoActionPerformed
 
     public void bill() {
@@ -658,7 +658,6 @@ public class IngresodeCompra extends javax.swing.JFrame {
     }//GEN-LAST:event_numFacturaKeyTyped
 
 
-
     private void tipoCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tipoCompraActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tipoCompraActionPerformed
@@ -758,14 +757,22 @@ public class IngresodeCompra extends javax.swing.JFrame {
                 // Inserción en la tabla DetallesCompras con valores directos
                 for (int i = 0; i < tablecompras.getRowCount(); i++)
                 {
-                    PreparedStatement insertDetallesCompras = conn.prepareStatement("INSERT INTO DetallesCompras (id_compra, cantidad, precio_unitario, total, cod_producto) VALUES (?,?,?,?,?)");
+                    PreparedStatement insertDetallesCompras = conn.prepareStatement("INSERT INTO DetallesCompras (id_compra, cantidad, total, cod_producto) VALUES (?,?,?,?)");
                     insertDetallesCompras.setInt(1, idCompraGenerado);
                     insertDetallesCompras.setString(2, tablecompras.getValueAt(i, 1).toString()); // Ejemplo de valor directo para cod_producto
-                    insertDetallesCompras.setString(3, tablecompras.getValueAt(i, 2).toString()); // Ejemplo de valor directo para cantidad
-                    insertDetallesCompras.setString(4, tablecompras.getValueAt(i, 5).toString()); // Ejemplo de valor directo para precio_unitario
-                    insertDetallesCompras.setString(5, tablecompras.getValueAt(i, 6).toString()); // Ejemplo de valor directo para total
+                    insertDetallesCompras.setString(3, tablecompras.getValueAt(i, 5).toString()); // Ejemplo de valor directo para precio_unitario
+                    insertDetallesCompras.setString(4, tablecompras.getValueAt(i, 6).toString()); // Ejemplo de valor directo para total
 
                     insertDetallesCompras.executeUpdate();
+
+                    PreparedStatement insertpreciohistorial = conn.prepareStatement("INSERT INTO PrecioHistorial (id_compra,precio_compra ,precio_venta,precio_unitario,cod_producto ) VALUES (?,?,?,?,?)");
+                    insertpreciohistorial.setInt(1, idCompraGenerado);
+                    insertpreciohistorial.setString(2, tablecompras.getValueAt(i, 4).toString()); // Ejemplo de valor directo para cod_producto
+                    insertpreciohistorial.setString(3, tablecompras.getValueAt(i, 3).toString()); // Ejemplo de valor directo para precio_unitario
+                    insertpreciohistorial.setString(4, tablecompras.getValueAt(i, 2).toString()); // Ejemplo de valor directo para total
+                    insertpreciohistorial.setString(5, tablecompras.getValueAt(i, 6).toString());
+                    
+                    insertpreciohistorial.executeUpdate();
 
                     String queryActualizarInventario = "UPDATE Productos SET cantidad_disponible = cantidad_disponible + ? WHERE cod_producto = ?";
                     try (PreparedStatement pstmtActualizarInventario = conn.prepareStatement(queryActualizarInventario))
@@ -775,6 +782,24 @@ public class IngresodeCompra extends javax.swing.JFrame {
                         pstmtActualizarInventario.executeUpdate();
                     }
 
+                }
+
+                if (rsCompras.next())
+                {
+                    int idCompraGenerados = rsCompras.getInt(1);
+
+                    // Inserción en la tabla DetallesCompras con valores directos
+                    for (int i = 0; i < tablecompras.getRowCount(); i++)
+                    {
+                        PreparedStatement insertpreciohistorial = conn.prepareStatement("INSERT INTO PrecioHistorial (id_compra,precio_compra ,precio_venta,precio_unitario,cod_producto ) VALUES (?,?,?,?,?)");
+                        insertpreciohistorial.setInt(1, idCompraGenerados);
+                        insertpreciohistorial.setString(2, tablecompras.getValueAt(i, 4).toString()); // Ejemplo de valor directo para cod_producto
+                        insertpreciohistorial.setString(3, tablecompras.getValueAt(i, 3).toString()); // Ejemplo de valor directo para precio_unitario
+                        insertpreciohistorial.setString(4, tablecompras.getValueAt(i, 2).toString()); // Ejemplo de valor directo para total
+
+                        insertpreciohistorial.executeUpdate();
+
+                    }
                 }
 
                 JOptionPane.showMessageDialog(null, "Registro guardado");
@@ -813,7 +838,6 @@ public class IngresodeCompra extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
- 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JTextField Tsum;
@@ -829,7 +853,6 @@ public class IngresodeCompra extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -838,6 +861,7 @@ public class IngresodeCompra extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
     public javax.swing.JFormattedTextField numFactura;
+    public static javax.swing.JPanel panelcompra;
     public static javax.swing.JTable tablecompras;
     public javax.swing.JComboBox<String> tipoCompra;
     public javax.swing.JComboBox<String> txtProveedor;
