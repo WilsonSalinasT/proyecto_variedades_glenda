@@ -8,6 +8,7 @@ import Paneles.GalleryProduct;
 import Paneles.IngresarCompra;
 import Paneles.Inventario;
 import Paneles.Listado_Citas;
+import Paneles.Listado_Compras;
 import Paneles.Listado_Empleados;
 import Paneles.Listado_Pedidos_Arreglos;
 import Paneles.Listado_Pedidos_Pendientes;
@@ -402,7 +403,7 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_pedidoSublimacion1ActionPerformed
 
     private void pedidoSublimacion2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pedidoSublimacion2ActionPerformed
-        IngresodeCompra ver = new IngresodeCompra();
+        IngresodeCompra ver = new  IngresodeCompra ();
         ver.setVisible(true);
         ver.setLocationRelativeTo(null);
 
