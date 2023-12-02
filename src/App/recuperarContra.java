@@ -4,6 +4,7 @@
  */
 package App;
 
+import Paneles.TextPrompt;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -19,9 +20,13 @@ public class recuperarContra extends javax.swing.JFrame {
     /**
      * Creates new form recuperarContra
      */
+    TextPrompt holder;
     public recuperarContra() {
         initComponents();
         setLocationRelativeTo(null);
+        
+        holder = new TextPrompt("Introduzca la contraseña", txtContra1);
+        holder = new TextPrompt("Vuelva a introducir la contraseña", txtContra2);
 
         /*  usuario = c.txtNombre.getText().trim();
         txtNUsuario.setText("Restablecer contraseña de " + usuario );*/

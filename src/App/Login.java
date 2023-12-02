@@ -231,8 +231,6 @@ public class Login extends javax.swing.JFrame {
             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        lblRecuperar.setVisible(false);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -326,11 +324,7 @@ public class Login extends javax.swing.JFrame {
             evt.consume(); // Consumir el evento si se ha alcanzado la longitud máxima
         }
 
-        if (txtNombre.getText().isEmpty()) {
-            lblRecuperar.setVisible(false);
-        } else {
-            lblRecuperar.setVisible(true);
-        }
+       
     }//GEN-LAST:event_txtNombreKeyTyped
 
     private void txtPasswordKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPasswordKeyTyped
@@ -371,10 +365,15 @@ public class Login extends javax.swing.JFrame {
             // Muestra el formulario recuperarContra y cierra el formulario de login actual
             r.setVisible(true);
             this.dispose();
-        } else {
+        }
+        else if (txtNombre.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Ingrese un nombre de usuario para poder restablecer la contraseña.", "Error", JOptionPane.ERROR_MESSAGE);                
+                
+        }
+         else {
             // Si el usuario no existe, muestra un mensaje de error
             JOptionPane.showMessageDialog(null, "El usuario no existe.", "Error", JOptionPane.ERROR_MESSAGE);
-            lblRecuperar.setVisible(false);
+            
         }
 
         System.out.println("Valor de txtNombre: " + txtNombre.getText());
@@ -382,11 +381,7 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_lblRecuperarMouseClicked
 
     private boolean usuarioExiste(String usuario) {
-        // Realiza una consulta a la base de datos para verificar la existencia del usuario
-        // Implementa la lógica adecuada según tu estructura de base de datos y conexión
-        // Devuelve true si el usuario existe, false si no existe (pseudocódigo)
-
-        // Ejemplo usando JDBC:
+        
         try (
                 Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789"); PreparedStatement stmt = conn.prepareStatement("SELECT COUNT(*) FROM Usuarios WHERE nombre_usuario = ?")) {
 
@@ -406,9 +401,7 @@ public class Login extends javax.swing.JFrame {
     }
 
     private void txtNombreFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNombreFocusLost
-        if (!txtNombre.equals("")) {
-            lblRecuperar.setVisible(true);
-        }
+       
     }//GEN-LAST:event_txtNombreFocusLost
 
     /**
