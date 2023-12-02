@@ -9,8 +9,10 @@ import Paneles.IngresarCompra;
 import Paneles.Inventario;
 import Paneles.Listado_Citas;
 import Paneles.Listado_Compras;
+
 import Paneles.Listado_Empleados;
 import Paneles.Listado_Pedidos_Arreglos;
+import Paneles.Listado_Pedidos_Entregado_Sastreria;
 import Paneles.Listado_Pedidos_Pendientes;
 import Paneles.Listado_Prod;
 
@@ -403,9 +405,14 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_pedidoSublimacion1ActionPerformed
 
     private void pedidoSublimacion2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pedidoSublimacion2ActionPerformed
-        IngresodeCompra ver = new  IngresodeCompra ();
-        ver.setVisible(true);
-        ver.setLocationRelativeTo(null);
+   Listado_Compras p2 = new  Listado_Compras();
+        p2.setSize(1024, 640);
+        p2.setLocation(0, 0);
+
+        panelprincipal.removeAll();
+        panelprincipal.add(p2, BorderLayout.CENTER);
+        panelprincipal.revalidate();
+        panelprincipal.repaint();        
 
 
     }//GEN-LAST:event_pedidoSublimacion2ActionPerformed

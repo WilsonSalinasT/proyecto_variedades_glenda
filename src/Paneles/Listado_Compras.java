@@ -1,74 +1,51 @@
-package Paneles;
-
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
+package Paneles;
+
+import App.IngresodeCompra;
 import static App.Menu.panelprincipal;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
-import java.sql.Time;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import static java.time.Clock.offset;
 import javax.swing.JOptionPane;
-import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
-import com.toedter.calendar.JDateChooser;
-import java.awt.Image;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.sql.Blob;
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
-import javax.swing.table.TableColumn;
 
 /**
  *
- * @author Admin
+ * @author novastar
  */
 public class Listado_Compras extends javax.swing.JPanel {
 
-    int selectedRow;
+    
     TextPrompt holder;
 
     /**
-     * Creates new form Listado_Empleados
+     * Creates new form Nueva_venta
      */
     public Listado_Compras() {
         initComponents();
+        cargarTabla();
+        TextPrompt holder = new TextPrompt("Busque por nombre de proveedor / n° de factura / fecha", txtbuscar);
 
-        cargarTablaEmpleados();
+        tblcompras.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 12));
+        tblcompras.getTableHeader().setOpaque(false);
+        tblcompras.getTableHeader().setBackground(new Color(255, 0, 0));
+        tblcompras.getTableHeader().setForeground(new Color(255, 0, 0));
+        tblcompras.setRowHeight(25);
 
-        holder = new TextPrompt("Busque por nombre/apellido del cliente/precio", txtBuscar);
-
-        tblPedidos.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 12));
-        tblPedidos.getTableHeader().setOpaque(false);
-        tblPedidos.getTableHeader().setBackground(new Color(255, 0, 0));
-        tblPedidos.getTableHeader().setForeground(new Color(255, 0, 0));
-        tblPedidos.setRowHeight(25);
-
-        tblPedidos.setRowSelectionAllowed(true);
-        tblPedidos.setColumnSelectionAllowed(false);
-
-        int columnIndexToHide = 6;
-        TableColumn column = tblPedidos.getColumnModel().getColumn(columnIndexToHide);
-
-        column.setMinWidth(0);
-        column.setMaxWidth(0);
-        column.setPreferredWidth(0);
-        column.setResizable(false);
+        tblcompras.setRowSelectionAllowed(true);
+        tblcompras.setColumnSelectionAllowed(false);
     }
 
     /**
@@ -81,115 +58,108 @@ public class Listado_Compras extends javax.swing.JPanel {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jPanel4 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        Texto_Buscar = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        tblPedidos = new javax.swing.JTable();
-        txtBuscar = new javax.swing.JTextField();
-        Btn_Buscar = new javax.swing.JButton();
-        refrescarbtn = new javax.swing.JButton();
-        Texto_Contable = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblcompras = new javax.swing.JTable();
+        txtbuscar = new javax.swing.JTextField();
+        btnbuscar = new javax.swing.JButton();
+        btncrear = new javax.swing.JButton();
+        btnrefrescar = new javax.swing.JButton();
         btnAnterior = new javax.swing.JButton();
         btnSiguiente = new javax.swing.JButton();
+        Contable_Registro = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        setBackground(new java.awt.Color(255, 255, 255));
+        setForeground(new java.awt.Color(255, 255, 255));
 
-        jPanel4.setBackground(new java.awt.Color(255, 102, 102));
+        jPanel1.setBackground(new java.awt.Color(255, 102, 102));
 
         jLabel2.setBackground(new java.awt.Color(0, 0, 0));
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel2.setText("Listado de Compras");
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel2.setText("Listado de compras");
 
-        jButton1.setBackground(new java.awt.Color(255, 153, 51));
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton1.setText("Volver");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(35, 35, 35)
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(14, 14, 14)
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(56, 56, 56))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(42, 42, 42)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jLabel2))
-                .addContainerGap(36, Short.MAX_VALUE))
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addComponent(jLabel2)
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
-        Texto_Buscar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        Texto_Buscar.setText("Buscar:");
-
-        tblPedidos.setModel(new javax.swing.table.DefaultTableModel(
+        tblcompras.setForeground(new java.awt.Color(0, 0, 0));
+        tblcompras.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "N°", "Nombre del proveedor", "N° de factura", "Fecha", "Tipo de compra", "id_sastreria"
+                "N°", "Nombre de proveedor", "N° de factura", "Fecha", "Tipo de Compra"
             }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, true
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        tblPedidos.setGridColor(new java.awt.Color(255, 51, 51));
-        tblPedidos.setSelectionBackground(new java.awt.Color(255, 102, 102));
-        tblPedidos.setShowHorizontalLines(true);
-        tblPedidos.setShowVerticalLines(true);
-        jScrollPane2.setViewportView(tblPedidos);
-        if (tblPedidos.getColumnModel().getColumnCount() > 0) {
-            tblPedidos.getColumnModel().getColumn(0).setPreferredWidth(1);
+        ));
+        tblcompras.setGridColor(new java.awt.Color(255, 51, 51));
+        tblcompras.setSelectionBackground(new java.awt.Color(255, 102, 102));
+        tblcompras.setSelectionForeground(new java.awt.Color(0, 0, 0));
+        tblcompras.setShowHorizontalLines(true);
+        tblcompras.setShowVerticalLines(true);
+        jScrollPane1.setViewportView(tblcompras);
+        if (tblcompras.getColumnModel().getColumnCount() > 0) {
+            tblcompras.getColumnModel().getColumn(0).setMinWidth(100);
+            tblcompras.getColumnModel().getColumn(0).setPreferredWidth(50);
+            tblcompras.getColumnModel().getColumn(0).setMaxWidth(100);
+            tblcompras.getColumnModel().getColumn(2).setResizable(false);
+            tblcompras.getColumnModel().getColumn(4).setResizable(false);
         }
 
-        txtBuscar.addActionListener(new java.awt.event.ActionListener() {
+        txtbuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtBuscarActionPerformed(evt);
+                txtbuscarActionPerformed(evt);
             }
         });
-        txtBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
+        txtbuscar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtBuscarKeyTyped(evt);
+                txtbuscarKeyTyped(evt);
             }
         });
 
-        Btn_Buscar.setBackground(new java.awt.Color(255, 153, 51));
-        Btn_Buscar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        Btn_Buscar.setText("Buscar");
-        Btn_Buscar.addActionListener(new java.awt.event.ActionListener() {
+        btnbuscar.setBackground(new java.awt.Color(255, 153, 51));
+        btnbuscar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnbuscar.setForeground(new java.awt.Color(0, 0, 0));
+        btnbuscar.setText("Buscar");
+        btnbuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Btn_BuscarActionPerformed(evt);
+                btnbuscarActionPerformed(evt);
             }
         });
 
-        refrescarbtn.setBackground(new java.awt.Color(255, 153, 51));
-        refrescarbtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        refrescarbtn.setText("Refrescar");
-        refrescarbtn.addActionListener(new java.awt.event.ActionListener() {
+        btncrear.setBackground(new java.awt.Color(255, 153, 51));
+        btncrear.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btncrear.setForeground(new java.awt.Color(0, 0, 0));
+        btncrear.setText("Crear");
+        btncrear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                refrescarbtnActionPerformed(evt);
+                btncrearActionPerformed(evt);
             }
         });
 
-        Texto_Contable.setText("0");
+        btnrefrescar.setBackground(new java.awt.Color(255, 153, 51));
+        btnrefrescar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnrefrescar.setForeground(new java.awt.Color(0, 0, 0));
+        btnrefrescar.setText("Refrescar");
+        btnrefrescar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnrefrescarActionPerformed(evt);
+            }
+        });
 
         btnAnterior.setBackground(new java.awt.Color(255, 102, 102));
         btnAnterior.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/previous.png"))); // NOI18N
@@ -207,81 +177,82 @@ public class Listado_Compras extends javax.swing.JPanel {
             }
         });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(37, 37, 37)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(Texto_Contable, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnAnterior, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnSiguiente, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 969, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(Texto_Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(17, 17, 17)
-                        .addComponent(Btn_Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(refrescarbtn)))
-                .addContainerGap(39, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Texto_Buscar)
-                    .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Btn_Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(refrescarbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Texto_Contable, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSiguiente, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnAnterior, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(98, 98, 98))
-        );
+        Contable_Registro.setForeground(new java.awt.Color(0, 0, 0));
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel3.setText("Buscar:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(43, 43, 43)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(28, 28, 28)
+                        .addComponent(btnbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnrefrescar))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(Contable_Registro, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnAnterior, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnSiguiente, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 819, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(btncrear, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(48, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(40, 40, 40)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnrefrescar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btncrear))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnAnterior, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSiguiente, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Contable_Registro, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(51, 51, 51))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtBuscarActionPerformed
+    private void btncrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncrearActionPerformed
+        IngresodeCompra ver = new  IngresodeCompra ();
+        ver.setVisible(true);
+        ver.setLocationRelativeTo(null);
 
-    private void txtBuscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyTyped
-        char c = evt.getKeyChar(); // Obtener el carácter ingresado
+    }//GEN-LAST:event_btncrearActionPerformed
 
-        if (txtBuscar.getText().isEmpty() && Character.isWhitespace(c))
-        {
-            evt.consume(); // Consumir el evento si es un espacio en blanco en la primera letra
-        } else if (txtBuscar.getText().length() >= 100)
-        {
-            evt.consume(); // Consumir el evento si se ha alcanzado la longitud máxima
-        }
-    }//GEN-LAST:event_txtBuscarKeyTyped
+    private void btnAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnteriorActionPerformed
+        paginaAnterior();
+    }//GEN-LAST:event_btnAnteriorActionPerformed
 
-    private void Btn_BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_BuscarActionPerformed
-        String texto = txtBuscar.getText().trim();
+    private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
+        siguientePagina();
+    }//GEN-LAST:event_btnSiguienteActionPerformed
+
+    private void btnbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbuscarActionPerformed
+      String texto = txtbuscar.getText().trim();
 
         //Validacion del texto ingresado
         if (!texto.isEmpty())
@@ -291,41 +262,41 @@ public class Listado_Compras extends javax.swing.JPanel {
         {
             JOptionPane.showMessageDialog(null, "Tiene que ingresar texto para hacer la respectiva búsqueda");
         }
-    }//GEN-LAST:event_Btn_BuscarActionPerformed
+    }//GEN-LAST:event_btnbuscarActionPerformed
 
-    private void refrescarbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refrescarbtnActionPerformed
+    private void btnrefrescarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnrefrescarActionPerformed
+
+        // Restablecer la página actual y el término de búsqueda
         paginaActual = 1;
         terminoBusqueda = "";
 
         // Limpiar el campo de búsqueda
-        txtBuscar.setText("");
+        txtbuscar.setText("");
 
         // Cargar la tabla con los datos actualizados
-        cargarTablaEmpleados();
-    }//GEN-LAST:event_refrescarbtnActionPerformed
+        cargarTabla();
+    }//GEN-LAST:event_btnrefrescarActionPerformed
+    
+    private void txtbuscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtbuscarKeyTyped
+           char c = evt.getKeyChar(); // Obtener el carácter ingresado
 
-    private void btnAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnteriorActionPerformed
-        // TODO add your handling code here:
-        paginaAnterior();
-    }//GEN-LAST:event_btnAnteriorActionPerformed
+        if (txtbuscar.getText().isEmpty() && Character.isWhitespace(c))
+        {
+            evt.consume(); // Consumir el evento si es un espacio en blanco en la primera letra
+        } else if (txtbuscar.getText().length() >= 100)
+        {
+            evt.consume(); // Consumir el evento si se ha alcanzado la longitud máxima
+        }
+    }//GEN-LAST:event_txtbuscarKeyTyped
 
-    private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
-        siguientePagina();
-    }//GEN-LAST:event_btnSiguienteActionPerformed
-    int selectedRow1;
+    private void txtbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtbuscarActionPerformed
+       
+    }//GEN-LAST:event_txtbuscarActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       Listado_Pedidos_Pendientes p2 = new Listado_Pedidos_Pendientes();
-        p2.setSize(1024, 640);
-        p2.setLocation(0, 0);
+   
 
-        panelprincipal.removeAll();
-        panelprincipal.add(p2, BorderLayout.CENTER);
-        panelprincipal.revalidate();
-        panelprincipal.repaint();
-    }//GEN-LAST:event_jButton1ActionPerformed
 
-    int selectedRow2;
+ int selectedRow2;
     int paginaActual = 1; // Página actual
     int filasPorPagina = 20; // Número de filas a mostrar por página
     int totalFilas = 0; // Total de filas en la tabla
@@ -333,297 +304,191 @@ public class Listado_Compras extends javax.swing.JPanel {
     int numRegistro = 0;
     String terminoBusqueda = ""; // Término de búsqueda actual
 
-    private void cargarTablaEmpleados() {
-        DefaultTableModel modeloTabla = (DefaultTableModel) tblPedidos.getModel();
-        modeloTabla.setRowCount(0); // Limpiar los datos existentes en la tabla
+    private void cargarTabla() {
+    DefaultTableModel modeloTabla = (DefaultTableModel) tblcompras.getModel();
+    modeloTabla.setRowCount(0); // Limpiar los datos existentes en la tabla
 
-        PreparedStatement ps;
-        ResultSet rs;
-        ResultSetMetaData rsmd;
-        int columnas;
-        boolean foundData = false;
+    PreparedStatement ps;
+    ResultSet rs;
+    ResultSetMetaData rsmd;
+    int columnas;
+    boolean foundData = false;
 
-        try
-        {
-            Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
+    try {
+        Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
 
-            // Obtener el total de filas que cumplen con el criterio de búsqueda
-        ps = conn.prepareStatement("SELECT COUNT(*) AS TotalFilas "
-        + "FROM Compras C "
-        + "JOIN Proveedor P ON C.id_proveedor = P.id_proveedor "
-        + "WHERE (P.nombreProveedor LIKE ? OR C.numfactura LIKE ? OR C.fecha LIKE ? OR C.tipoCategoria LIKE ?) ");
+        // Obtener el total de filas que cumplen con el criterio de búsqueda
+        ps = conn.prepareStatement("SELECT COUNT(*) AS TotalFilas " +
+                "FROM Proveedor P " +
+                "JOIN Compras C ON P.id_proveedor = C.id_proveedor " +
+                "WHERE P.nombreProveedor LIKE ? " +
+                "OR C.numfactura LIKE ? OR C.fecha LIKE ? OR C.tipoCategoria LIKE ?");
         ps.setString(1, "%" + terminoBusqueda + "%");
         ps.setString(2, "%" + terminoBusqueda + "%");
         ps.setString(3, "%" + terminoBusqueda + "%");
         ps.setString(4, "%" + terminoBusqueda + "%");
         rs = ps.executeQuery();
 
-            if (rs.next())
-            {
-                totalFilas = rs.getInt(1);
-            }
-            totalPaginas = (int) Math.ceil((double) totalFilas / filasPorPagina);
+        if (rs.next()) {
+            totalFilas = rs.getInt("TotalFilas");
+        }
+        totalPaginas = (int) Math.ceil((double) totalFilas / filasPorPagina);
 
-            if (paginaActual < 1)
-            {
-                paginaActual = 1;
-            } else if (paginaActual > totalPaginas)
-            {
-                paginaActual = totalPaginas;
-            }
+        if (paginaActual < 1) {
+            paginaActual = 1;
+        } else if (paginaActual > totalPaginas) {
+            paginaActual = totalPaginas;
+        }
 
-            int offset = (paginaActual - 1) * filasPorPagina;
-            if (offset < 0)
-            {
-                offset = 0;
-            }
+        int offset = (paginaActual - 1) * filasPorPagina;
+        if (offset < 0) {
+            offset = 0;
+        }
 
-            // Consulta para obtener los datos paginados
-            ps = conn.prepareStatement("SELECT ROW_NUMBER() OVER(ORDER BY E.nombre) AS NumRegistro, E.nombre, E.apellido, V.estado, V.prenda, V.precio ,V.id_sastreria "
-                    + "FROM Cliente E "
-                    + "JOIN PedidoSastreria V ON E.id_cliente = V.id_cliente "
-                    + "WHERE (E.nombre LIKE ? OR E.apellido LIKE ? OR V.fechaPedido LIKE ?) and V.estado = 'entregado' "
-                    + "ORDER BY E.nombre "
+        // Consulta para obtener los datos paginados
+        ps = conn.prepareStatement("SELECT ROW_NUMBER() OVER (ORDER BY P.nombreProveedor) AS NumRegistro, " +
+                "P.nombreProveedor, C.numfactura, C.fecha, C.tipoCategoria " +
+                "FROM Proveedor P " +
+                "JOIN Compras C ON P.id_proveedor = C.id_proveedor " +
+                "WHERE P.nombreProveedor LIKE ? " +
+                "OR C.numfactura LIKE ? OR C.fecha LIKE ? OR C.tipoCategoria LIKE ? " +
+                "ORDER BY P.nombreProveedor " +
+                "OFFSET ? ROWS FETCH NEXT ? ROWS ONLY");
+        ps.setString(1, "%" + terminoBusqueda + "%");
+        ps.setString(2, "%" + terminoBusqueda + "%");
+        ps.setString(3, "%" + terminoBusqueda + "%");
+        ps.setString(4, "%" + terminoBusqueda + "%");
+        ps.setInt(5, offset);
+        ps.setInt(6, filasPorPagina);
+        rs = ps.executeQuery();
+        rsmd = rs.getMetaData();
+        columnas = rsmd.getColumnCount();
+
+        while (rs.next()) {
+            Object[] fila = new Object[columnas];
+            for (int indice = 0; indice < columnas; indice++) {
+                fila[indice] = rs.getObject(indice + 1);
+            }
+            modeloTabla.addRow(fila);
+            foundData = true;
+        }
+
+        ajustarTabla(filasPorPagina);
+
+        if (!foundData) {
+            JOptionPane.showMessageDialog(null, "No se encontraron datos");
+        }
+
+        // Obtener el número de filas actualizado
+        int rowCount = modeloTabla.getRowCount();
+        Contable_Registro.setText("Cantidad de filas: " + rowCount + " - Página " + paginaActual + "/" + totalPaginas);
+
+    } catch (SQLException e) {
+        e.printStackTrace(); // Imprime la pila de excepciones para depuración
+        JOptionPane.showMessageDialog(null, e.toString());
+    }
+}
+
+private void ajustarTabla(int filasDeseadas) {
+    tblcompras.setPreferredScrollableViewportSize(new Dimension(tblcompras.getPreferredSize().width, tblcompras.getRowHeight() * filasDeseadas));
+    tblcompras.setFillsViewportHeight(true);
+}
+
+private void siguientePagina() {
+    if (paginaActual < totalPaginas) {
+        paginaActual++;
+        cargarTabla();
+    }
+}
+
+private void paginaAnterior() {
+    if (paginaActual > 1) {
+        paginaActual--;
+        cargarTabla();
+    }
+}
+
+
+   private void buscarDatos(String texto) {
+    DefaultTableModel modelTabla = (DefaultTableModel) tblcompras.getModel();
+    modelTabla.setRowCount(0);
+    boolean foundData = false;
+
+    try {
+        Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
+
+        if (conn != null && !conn.isClosed()) {
+            PreparedStatement ps = conn.prepareStatement("SELECT ROW_NUMBER() OVER(ORDER BY P.nombreProveedor) AS NumRegistro, P.nombreProveedor, C.numfactura, C.fecha, C.tipoCategoria "
+                    + "FROM Proveedor P "
+                    + "JOIN Compras C ON P.id_proveedor = C.id_proveedor "
+                    + "WHERE P.nombreProveedor LIKE ? OR C.numfactura LIKE ? OR C.fecha LIKE ? "
+                    + "ORDER BY P.nombreProveedor "
                     + "OFFSET ? ROWS FETCH NEXT ? ROWS ONLY");
-            ps.setString(1, "%" + terminoBusqueda + "%");
-            ps.setString(2, "%" + terminoBusqueda + "%");
-            ps.setString(3, "%" + terminoBusqueda + "%");
+
+            if (texto != null) {
+                ps.setString(1, "%" + texto + "%");
+                ps.setString(2, "%" + texto + "%");
+                ps.setString(3, "%" + texto + "%");
+                terminoBusqueda = texto; // Actualizar el término de búsqueda
+            } else {
+                ps.setString(1, "%");
+                ps.setString(2, "%");
+                ps.setString(3, "%");
+                terminoBusqueda = ""; // Limpiar el término de búsqueda
+            }
+
+            // Define el OFFSET y FETCH NEXT de acuerdo a tus necesidades
+            int offset = 0; // Cambia el valor del offset según tus requerimientos
+            int fetchNext = 10; // Cambia la cantidad de registros a recuperar según tus requerimientos
+
             ps.setInt(4, offset);
-            ps.setInt(5, filasPorPagina);
-            rs = ps.executeQuery();
-            rsmd = rs.getMetaData();
-            columnas = rsmd.getColumnCount();
+            ps.setInt(5, fetchNext);
 
-            while (rs.next())
-            {
-                Object[] fila = new Object[columnas];
-                for (int indice = 0; indice < columnas; indice++)
-                {
-                    fila[indice] = rs.getObject(indice + 1);
-                }
-                modeloTabla.addRow(fila);
-                foundData = true;
-            }
+            ResultSet rs = ps.executeQuery();
 
-            ajustarTabla(filasPorPagina);
+            if (rs != null) {
+                while (rs.next()) {
+                    int numRegistro = rs.getInt("NumRegistro");
+                    String nombreProveedor = rs.getString("nombreProveedor");
+                    String numFactura = rs.getString("numfactura");
+                    String fecha = rs.getString("fecha");
+                    String tipoCategoria = rs.getString("tipoCategoria");
 
-            if (!foundData)
-            {
-                JOptionPane.showMessageDialog(null, "No se encontraron datos");
-            }
-
-            // Obtener el número de filas actualizado
-            int rowCount = modeloTabla.getRowCount();
-            Texto_Contable.setText("Cantidad de filas: " + rowCount + " - Página " + paginaActual + "/" + totalPaginas);
-
-        } catch (SQLException e)
-        {
-            e.printStackTrace(); // Imprime la pila de excepciones para depuración
-            JOptionPane.showMessageDialog(null, e.toString());
-        }
-
-    }
-
-    private void ajustarTabla(int filasDeseadas) {
-        tblPedidos.setPreferredScrollableViewportSize(new Dimension(tblPedidos.getPreferredSize().width, tblPedidos.getRowHeight() * filasDeseadas));
-        tblPedidos.setFillsViewportHeight(true);
-    }
-
-    private void siguientePagina() {
-        if (paginaActual < totalPaginas)
-        {
-            paginaActual++;
-            cargarTablaEmpleados();
-        }
-    }
-
-    private void paginaAnterior() {
-        if (paginaActual > 1)
-        {
-            paginaActual--;
-            cargarTablaEmpleados();
-        }
-    }
-
-    private void buscarDatos(String texto) {
-        DefaultTableModel modelTabla = (DefaultTableModel) tblPedidos.getModel();
-        modelTabla.setRowCount(0);
-        boolean foundData = false;
-
-        try
-        {
-            Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
-            if (conn != null && !conn.isClosed())
-            {
-                PreparedStatement ps = conn.prepareStatement("SELECT ROW_NUMBER() OVER(ORDER BY E.nombre) AS NumRegistro, E.nombre, E.apellido, V.estado, V.prenda, V.precio ,V.id_sastreria "
-                        + "FROM Cliente E "
-                        + "JOIN PedidoSastreria V ON E.id_cliente = V.id_cliente "
-                        + "WHERE (E.nombre LIKE ? OR E.apellido LIKE ? OR V.precio LIKE ?) and V.estado = 'entregado' "
-                        + "ORDER BY E.nombre "
-                        + "OFFSET ? ROWS FETCH NEXT ? ROWS ONLY");
-
-                if (texto != null && !texto.isEmpty())
-                {
-                    ps.setString(1, "%" + texto + "%");
-                    ps.setString(2, "%" + texto + "%");
-                    ps.setString(3, "%" + texto + "%");
-                    terminoBusqueda = texto; // Actualizar el término de búsqueda
-                } else
-                {
-                    ps.setString(1, "%");
-                    ps.setString(2, "%");
-                    ps.setString(3, "%");
-                    terminoBusqueda = ""; // Limpiar el término de búsqueda
-                }
-
-                // Define el OFFSET y FETCH NEXT de acuerdo a tus necesidades
-                int offset = 0; // Cambia el valor del offset según tus requerimientos
-                int fetchNext = 10; // Cambia la cantidad de registros a recuperar según tus requerimientos
-
-                ps.setInt(4, offset);
-                ps.setInt(5, fetchNext);
-
-                ResultSet rs = ps.executeQuery();
-
-                if (rs != null)
-                {
-                    while (rs.next())
-                    {
-                        int numRegistro = rs.getInt("NumRegistro");
-                        String nombre = rs.getString("nombre");
-                        String apellido = rs.getString("apellido");
-                        String numeroTelefono = rs.getString("estado");
-                        String prenda = rs.getString("prenda");
-                        String precio = rs.getString("precio");
-                        int idSastreria = Integer.parseInt(rs.getString("id_sastreria"));
-
-                        if (nombre != null && apellido != null && numeroTelefono != null)
-                        {
-                            modelTabla.addRow(new Object[]
-                            {
-                                numRegistro, nombre, apellido, numeroTelefono, prenda, precio, idSastreria
-                            });
-                            foundData = true;
-                        }
+                    if (nombreProveedor != null && numFactura != null && fecha != null && tipoCategoria != null) {
+                        modelTabla.addRow(new Object[]{
+                                numRegistro, nombreProveedor, numFactura, fecha, tipoCategoria
+                        });
+                        foundData = true;
                     }
-
-                    rs.close();
                 }
 
-                ps.close();
-                conn.close();
+                rs.close();
             }
-        } catch (Exception e)
-        {
-            JOptionPane.showMessageDialog(null, e.toString());
-        }
 
-        // Llama a la función de cargarTablaEmpleados() si es necesario recargar la tabla después de la búsqueda
-        cargarTablaEmpleados(); // Recargar la tabla después de la búsqueda
+            ps.close();
+            conn.close();
+        }
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(null, e.toString());
     }
 
-//    private void buscarDatos(String texto) {
-//        DefaultTableModel modelTabla = (DefaultTableModel) tblPedidos.getModel();
-//        modelTabla.setRowCount(0);
-//        boolean foundData = false;
-//
-//        try {
-//            Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
-//            if (conn != null && !conn.isClosed()) {
-//                PreparedStatement ps;
-//
-//                // Modificar la consulta SQL para buscar por nombre o fecha
-//                if (!texto.isEmpty()) {
-//                    ps = conn.prepareStatement("SELECT ROW_NUMBER() OVER(ORDER BY E.nombre) AS NumRegistro, E.nombre, E.apellido, E.numero_telefono, V.prenda, V.fechaPedido ,V.id_sastreria "
-//                            + "FROM Cliente E "
-//                            + "JOIN PedidoSastreria V ON E.id_cliente = V.id_cliente "
-//                            + "WHERE E.nombre LIKE ? OR E.apellido LIKE ? OR V.fechaPedido LIKE ? "
-//                            + "ORDER BY E.nombre "
-//                            + "OFFSET ? ROWS FETCH NEXT ? ROWS ONLY");
-//
-//                    ps.setString(1, "%" + texto + "%");
-//                    ps.setString(2, "%" + texto + "%");
-//                    ps.setString(3, texto);
-//                    ps.setInt(4, 0); // Configura el valor del offset incluso cuando texto está vacío
-//                    ps.setInt(5, 10); // Cambia la cantidad de registros a recuperar según tus requerimientos
-//                    terminoBusqueda = texto; // Actualizar el término de búsqueda
-//                } else {
-//                    ps = conn.prepareStatement("SELECT ROW_NUMBER() OVER(ORDER BY E.nombre) AS NumRegistro, E.nombre, E.apellido, E.numero_telefono, V.prenda, V.fechaPedido , V.id_sastreria "
-//                            + "FROM Cliente E "
-//                            + "JOIN PedidoSastreria V ON E.id_cliente = V.id_cliente "
-//                            + "ORDER BY E.nombre "
-//                            + "OFFSET ? ROWS FETCH NEXT ? ROWS ONLY");
-//
-//                    ps.setInt(1, 0); // Configura el valor del offset incluso cuando texto está vacío
-//                    ps.setInt(2, 10); // Cambia la cantidad de registros a recuperar según tus requerimientos
-//                    terminoBusqueda = ""; // Limpiar el término de búsqueda
-//                }
-//
-//                ResultSet rs = ps.executeQuery();
-//
-//                if (rs != null) {
-//                    while (rs.next()) {
-//                        int numRegistro = rs.getInt("NumRegistro");
-//                        String nombre = rs.getString("nombre");
-//                        String apellido = rs.getString("apellido");
-//                        String numeroTelefono = rs.getString("numero_telefono");
-//                        String prenda = rs.getString("prenda");
-//                        String fechaPedido = rs.getString("fechaPedido");
-//                        int idSastreria = Integer.parseInt(rs.getString("id_sastreria"));
-//
-//                        if (nombre != null && apellido != null && numeroTelefono != null) {
-//                            modelTabla.addRow(new Object[]{
-//                                numRegistro, nombre, apellido, numeroTelefono, prenda, fechaPedido, idSastreria
-//                            });
-//                            foundData = true;
-//                        }
-//                    }
-//
-//                    rs.close();
-//                }
-//
-//                ps.close();
-//                conn.close();
-//            }
-//        } catch (Exception e) {
-//            JOptionPane.showMessageDialog(null, e.toString());
-//        }
-//
-//        // Llama a la función de cargarTablaEmpleados() si es necesario recargar la tabla después de la búsqueda
-//        //cargarTabla(); // Recargar la tabla después de la búsqueda
-//    }
+    // Llama a la función de cargarTablaEmpleados() si es necesario recargar la tabla después de la búsqueda
+    cargarTabla(); // Recargar la tabla después de la búsqueda
+}
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JButton Btn_Buscar;
-    private javax.swing.JLabel Texto_Buscar;
-    private javax.swing.JLabel Texto_Contable;
+    private javax.swing.JLabel Contable_Registro;
     private javax.swing.JButton btnAnterior;
     private javax.swing.JButton btnSiguiente;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnbuscar;
+    private javax.swing.JButton btncrear;
+    private javax.swing.JButton btnrefrescar;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JButton refrescarbtn;
-    private javax.swing.JTable tblPedidos;
-    public javax.swing.JTextField txtBuscar;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable tblcompras;
+    private javax.swing.JTextField txtbuscar;
     // End of variables declaration//GEN-END:variables
-
-    private void mostrarVentanaDeEdicion(EditarCita editarCita) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    public void setLocationRelativeTo(Object object) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    private static class txtCliente {
-
-        private static void getString(String nombreCompleto) {
-            throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-        }
-
-        public txtCliente() {
-        }
-    }
 }
