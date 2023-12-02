@@ -4,7 +4,6 @@
  */
 package App;
 
-
 import static App.IngresodeVenta.Tsum;
 import static App.Menu.panelprincipal;
 import Paneles.Crear_Pedido_arreglo;
@@ -67,14 +66,13 @@ public class ProductoParaVenta extends javax.swing.JFrame {
         tblProductosParafactura.setRowSelectionAllowed(true);
         tblProductosParafactura.setColumnSelectionAllowed(false);
 
-        int columnIndexToHide = 4;
-        TableColumn column = tblProductosParafactura.getColumnModel().getColumn(columnIndexToHide);
-
-        column.setMinWidth(0);
-        column.setMaxWidth(0);
-        column.setPreferredWidth(0);
-        column.setResizable(false);
-
+//        int columnIndexToHide = 4;
+//        TableColumn column = tblProductosParafactura.getColumnModel().getColumn(columnIndexToHide);
+//
+//        column.setMinWidth(0);
+//        column.setMaxWidth(0);
+//        column.setPreferredWidth(0);
+//        column.setResizable(false);
 //        tblProductosParafactura.getTableHeader().setReorderingAllowed(false);
 //        Controlador.ProductosFactura.ProductoParaCompra("");
 //        
@@ -285,7 +283,6 @@ public class ProductoParaVenta extends javax.swing.JFrame {
         Texto_Contable = new javax.swing.JLabel();
         btnAnterior = new javax.swing.JButton();
         btnSiguiente = new javax.swing.JButton();
-        btncrearproducto = new javax.swing.JButton();
 
         jList1.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -349,11 +346,11 @@ public class ProductoParaVenta extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Num.", "Nombre del Producto", "Tipo de Categoria", "Precio unitario", "Id"
+                "Num.", "Nombre del Producto", "Tipo de Categoria", "Cantidad disponible", "Precio venta", "Id"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, true, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -439,16 +436,6 @@ public class ProductoParaVenta extends javax.swing.JFrame {
             }
         });
 
-        btncrearproducto.setBackground(new java.awt.Color(255, 153, 51));
-        btncrearproducto.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btncrearproducto.setText("Crear Productos");
-        btncrearproducto.setActionCommand("Crear Producto");
-        btncrearproducto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btncrearproductoActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -458,35 +445,33 @@ public class ProductoParaVenta extends javax.swing.JFrame {
                 .addGap(29, 29, 29)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 818, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 48, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(Texto_Contable, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(50, 50, 50)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(btncrear, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(34, 34, 34)
-                                .addComponent(cancelar))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addGap(26, 26, 26)
-                                .addComponent(cantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnAnterior, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnSiguiente, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(58, 58, 58))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(49, 49, 49)
                         .addComponent(CuadroBuscarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(29, 29, 29)
                         .addComponent(btnbuscar)
                         .addGap(18, 18, 18)
                         .addComponent(jButton2)
-                        .addGap(77, 77, 77)
-                        .addComponent(btncrearproducto)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(Texto_Contable, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(50, 50, 50)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                        .addComponent(btncrear, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(34, 34, 34)
+                                        .addComponent(cancelar))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel3)
+                                        .addGap(26, 26, 26)
+                                        .addComponent(cantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnAnterior, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnSiguiente, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 818, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 48, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -496,8 +481,7 @@ public class ProductoParaVenta extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(CuadroBuscarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnbuscar)
-                    .addComponent(jButton2)
-                    .addComponent(btncrearproducto))
+                    .addComponent(jButton2))
                 .addGap(33, 33, 33)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -702,8 +686,8 @@ public class ProductoParaVenta extends javax.swing.JFrame {
 
             DefaultTableModel modelo = (DefaultTableModel) tblProductosParafactura.getModel();
             nombreProd = tblProductosParafactura.getValueAt(fila, 1).toString();
-            precU = tblProductosParafactura.getValueAt(fila, 3).toString();
-            idProducto = tblProductosParafactura.getValueAt(fila, 4).toString();
+            precU = tblProductosParafactura.getValueAt(fila, 4).toString();
+            idProducto = tblProductosParafactura.getValueAt(fila, 5).toString();
             cantid = cantidad.getText();
 
             //Se realizan los cálculos para el total en la factura
@@ -774,18 +758,6 @@ public class ProductoParaVenta extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btncrearActionPerformed
 
-    private void btncrearproductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncrearproductoActionPerformed
-        crear_producto p2 = new crear_producto();
-        p2.setSize(1024, 640);
-        p2.setLocation(0, 0);
-
-        panelprincipal.removeAll();
-        panelprincipal.add(p2, BorderLayout.NORTH);  // Especifica BorderLayout.NORTH aquí
-        panelprincipal.revalidate();
-        panelprincipal.repaint();
-        this.dispose();
-    }//GEN-LAST:event_btncrearproductoActionPerformed
-
     int selectedRow2;
     int paginaActual = 1; // Página actual
     int filasPorPagina = 20; // Número de filas a mostrar por página
@@ -838,23 +810,31 @@ public class ProductoParaVenta extends javax.swing.JFrame {
             }
 
             // Consulta para obtener los datos paginados
-            ps = conn.prepareStatement("SELECT ROW_NUMBER() OVER (ORDER BY nombre) AS NumRegistro, \n"
-                    + "       Productos.nombre, \n"
-                    + "       Productos.categoria, \n"
-                    + "       Pr.precio_unitario, \n"
-                    + "       Productos.cod_producto\n"
-                    + "FROM Productos \n"
-                    + "JOIN Precio Pr ON Productos.cod_producto = Pr.cod_producto\n"
-                    + "WHERE Productos.nombre LIKE ? OR Productos.categoria LIKE ? \n"
-                    + "ORDER BY Productos.nombre \n"
-                    + "OFFSET ? ROWS FETCH NEXT ? ROWS ONLY");
-            ps.setString(1, "%" + terminoBusqueda + "%");
-            ps.setString(2, "%" + terminoBusqueda + "%");
-            ps.setInt(3, offset);
-            ps.setInt(4, filasPorPagina);
-            rs = ps.executeQuery();
-            rsmd = rs.getMetaData();
-            columnas = rsmd.getColumnCount();
+           ps = conn.prepareStatement("SELECT ROW_NUMBER() OVER (ORDER BY P.nombre) AS NumRegistro, \n"
+        + "       P.nombre, \n"
+        + "       P.categoria, \n"
+        + "       P.cantidad_disponible, \n"
+        + "       PH.precio_venta AS ultimo_precio_venta, \n"
+        + "       P.cod_producto \n"
+        + "FROM Productos P \n"
+        + "JOIN (SELECT cod_producto, MAX(id_precioHistorial) AS ultimo_precio_id \n"
+        + "      FROM PrecioHistorial \n"
+        + "      GROUP BY cod_producto) PHMax \n"
+        + "ON P.cod_producto = PHMax.cod_producto \n"
+        + "JOIN PrecioHistorial PH ON PH.id_precioHistorial = PHMax.ultimo_precio_id \n"
+        + "JOIN Precio Pr ON PH.cod_producto = Pr.cod_producto \n"
+        + "WHERE P.nombre LIKE ? OR P.categoria LIKE ? \n"
+        + "ORDER BY P.nombre \n"
+        + "OFFSET ? ROWS FETCH NEXT ? ROWS ONLY");
+
+ps.setString(1, "%" + terminoBusqueda + "%");
+ps.setString(2, "%" + terminoBusqueda + "%");
+ps.setInt(3, offset);
+ps.setInt(4, filasPorPagina);
+
+rs = ps.executeQuery();
+rsmd = rs.getMetaData();
+columnas = rsmd.getColumnCount();
 
             while (rs.next())
             {
@@ -975,8 +955,6 @@ public class ProductoParaVenta extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField CuadroBuscarProducto;
@@ -985,7 +963,6 @@ public class ProductoParaVenta extends javax.swing.JFrame {
     private javax.swing.JButton btnSiguiente;
     private javax.swing.JButton btnbuscar;
     public static javax.swing.JButton btncrear;
-    private javax.swing.JButton btncrearproducto;
     private javax.swing.JButton cancelar;
     private javax.swing.JTextField cantidad;
     private javax.swing.JButton jButton2;

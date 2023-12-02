@@ -480,12 +480,12 @@ public class editar_Pedido_arreglo extends javax.swing.JPanel {
                 p.setSize(1024, 640);
                 p.setLocation(0, 0);
 
-                jPanel4.revalidate();
-                jPanel4.repaint();
-                jPanel4.removeAll();
-                jPanel4.add(p, BorderLayout.CENTER);
-                jPanel4.revalidate();
-                jPanel4.repaint();
+                panelprincipal.revalidate();
+                panelprincipal.repaint();
+                panelprincipal.removeAll();
+                panelprincipal.add(p, BorderLayout.CENTER);
+                panelprincipal.revalidate();
+                panelprincipal.repaint();
             } catch (ClassNotFoundException ex)
             {
                 Logger.getLogger(editar_Pedido_arreglo.class.getName()).log(Level.SEVERE, null, ex);

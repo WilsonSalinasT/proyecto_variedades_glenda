@@ -86,7 +86,7 @@ public class ProductoParaCompra extends javax.swing.JFrame {
         column.setMaxWidth(0);
         column.setPreferredWidth(0);
         column.setResizable(false);
-        
+
         // Agregar DocumentListener a textField1
         cantidad.getDocument().addDocumentListener(new DocumentListener() {
             @Override
@@ -502,14 +502,14 @@ public class ProductoParaCompra extends javax.swing.JFrame {
         });
 
         txtPrecioCompra.setEditable(false);
-        txtPrecioCompra.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Precio de Compra", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12))); // NOI18N
+        txtPrecioCompra.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Sub total", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12))); // NOI18N
         txtPrecioCompra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtPrecioCompraActionPerformed(evt);
             }
         });
 
-        txtPrecioUnitario.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Precio unitario", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12))); // NOI18N
+        txtPrecioUnitario.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Precio de compra(unitario)", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12))); // NOI18N
         txtPrecioUnitario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtPrecioUnitarioActionPerformed(evt);
@@ -555,8 +555,8 @@ public class ProductoParaCompra extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(btnSiguiente, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(234, 234, 234)
-                        .addComponent(txtPrecioUnitario, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(180, 180, 180)
+                        .addComponent(txtPrecioUnitario, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(28, 28, 28)
                         .addComponent(txtPrecioventa, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(28, 28, 28)
@@ -616,7 +616,7 @@ public class ProductoParaCompra extends javax.swing.JFrame {
         {
 
             float renglon;
-            renglon = Float.parseFloat(tablecompras.getValueAt(i, 5).toString());
+            renglon = Float.parseFloat(tablecompras.getValueAt(i, 4).toString());
 
             suma = suma + renglon;
         }
@@ -644,7 +644,7 @@ public class ProductoParaCompra extends javax.swing.JFrame {
             txtPrecioCompra.setText(String.valueOf(result));
         } catch (NumberFormatException ex)
         {
-             txtPrecioCompra.setText("0.0");
+            txtPrecioCompra.setText("0.0");
         }
     }
     private void CuadroBuscarProductoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_CuadroBuscarProductoKeyReleased
@@ -763,7 +763,7 @@ public class ProductoParaCompra extends javax.swing.JFrame {
         try
         {
             //Variables para capturar los campos de la tabla de productos
-            String nombreProd, cantid, precU, PrecV, PrecC, totalP, idProducto;
+            String nombreProd, cantid, precU, PrecV, PrecC, idProducto;
             double tot = 0.0, calcula = 0.0;
 
             if (fila < 0)
@@ -800,8 +800,8 @@ public class ProductoParaCompra extends javax.swing.JFrame {
                         "Error al agregar producto", JOptionPane.WARNING_MESSAGE);
                 return; // Salir del método si no se ingresó una cantidad
             }
-            
-              if (txtPrecioventa.getText().isEmpty())
+
+            if (txtPrecioventa.getText().isEmpty())
             {
                 JOptionPane.showMessageDialog(null, "No se ingresó un Precio de venta",
                         "Error al agregar producto", JOptionPane.WARNING_MESSAGE);
@@ -814,7 +814,6 @@ public class ProductoParaCompra extends javax.swing.JFrame {
                         "Error al agregar producto", JOptionPane.WARNING_MESSAGE);
                 return; // Salir del método si no se ingresó una cantidad
             }
-            
 
             DefaultTableModel modelo = (DefaultTableModel) tblProductosParafactura.getModel();
             nombreProd = tblProductosParafactura.getValueAt(fila, 1).toString();
@@ -831,7 +830,7 @@ public class ProductoParaCompra extends javax.swing.JFrame {
             tot = (Double.parseDouble(precU) * Integer.parseInt(cantid));
 
             DecimalFormat df = new DecimalFormat("#0.00");
-            totalP = df.format(tot);
+//            totalP = df.format(tot);
             //            totalP = String.valueOf(tot);
 
             //Enviar los campos seleccionados de la tabla de productos a la tabla de factura de compras
@@ -854,7 +853,7 @@ public class ProductoParaCompra extends javax.swing.JFrame {
                     double precioUnitario = Double.parseDouble(precU);
                     double nuevoTotal = precioUnitario * nuevaCantidad;
                     modelo.setValueAt(String.valueOf(nuevoTotal), i, 5);
-                    
+
                     String totalExistentes = modelo.getValueAt(i, 4).toString();
                     double precioUnitarios = Double.parseDouble(precU);
                     double nuevoTotals = precioUnitarios * nuevaCantidad;
@@ -869,11 +868,11 @@ public class ProductoParaCompra extends javax.swing.JFrame {
             {
                 // El producto no existe en la tabla, agregarlo como una nueva fila
                 tot = Double.parseDouble(precU) * Integer.parseInt(cantid);
-                totalP = String.valueOf(tot);
+//                totalP = String.valueOf(tot);
 
                 String filaElemento[] =
                 {
-                    nombreProd, cantid, precU, PrecV, PrecC, totalP, idProducto
+                    nombreProd, cantid, precU, PrecV, PrecC, idProducto
                 };
                 modelo.addRow(filaElemento);
             }
@@ -917,7 +916,7 @@ public class ProductoParaCompra extends javax.swing.JFrame {
     }//GEN-LAST:event_txtPrecioUnitarioActionPerformed
 
     private void txtPrecioUnitarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrecioUnitarioKeyTyped
-         char validar = evt.getKeyChar();
+        char validar = evt.getKeyChar();
         if (Character.isLetter(validar))
         {
             getToolkit().beep();
@@ -947,7 +946,7 @@ public class ProductoParaCompra extends javax.swing.JFrame {
 
     private void txtPrecioventaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrecioventaKeyTyped
         // TODO add your handling code here:
-           char validar = evt.getKeyChar();
+        char validar = evt.getKeyChar();
         if (Character.isLetter(validar))
         {
             getToolkit().beep();
@@ -1175,8 +1174,6 @@ public class ProductoParaCompra extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-  
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField CuadroBuscarProducto;

@@ -328,8 +328,8 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_txtNombreKeyTyped
 
     private void txtPasswordKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPasswordKeyTyped
-        // TODO add your handling code here:
-
+//        // TODO add your handling code here:
+//
         char[] passwordChars = txtPassword.getPassword();
         String password = new String(passwordChars);
 

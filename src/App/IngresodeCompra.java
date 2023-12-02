@@ -63,7 +63,7 @@ public class IngresodeCompra extends javax.swing.JFrame {
         tablecompras.setRowSelectionAllowed(true);
         tablecompras.setColumnSelectionAllowed(false);
 
-        int columnIndexToHide = 6;
+        int columnIndexToHide = 5;
         TableColumn column = tablecompras.getColumnModel().getColumn(columnIndexToHide);
 
         column.setMinWidth(0);
@@ -341,11 +341,11 @@ public class IngresodeCompra extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Nombre Producto", "Cantidad", "Precio unitario", "Precio de venta", "Precio de compra", "Total", "id"
+                "Nombre Producto", "Cantidad", "Precio unitario", "Precio de venta", "Sub total", "id"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                true, true, true, true, true, true, false
+                true, true, true, true, true, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -503,7 +503,7 @@ public class IngresodeCompra extends javax.swing.JFrame {
         {
 
             float renglon;
-            renglon = Float.parseFloat(tablecompras.getValueAt(i, 5).toString());
+            renglon = Float.parseFloat(tablecompras.getValueAt(i, 4).toString());
 
             suma = suma + renglon;
         }
@@ -743,7 +743,7 @@ public class IngresodeCompra extends javax.swing.JFrame {
             insertCompras.setString(2, tipo);
             insertCompras.setDate(3, new java.sql.Date(fecha.getTime()));
             // Asegúrate de tener la variable totalFactura definida y con un valor asignado
-            insertCompras.setObject(4, totalFactura);
+            insertCompras.setObject(4, Tsum.getText());
             insertCompras.setString(5, id);
 
             int filasAfectadasCompras = insertCompras.executeUpdate();
@@ -761,7 +761,7 @@ public class IngresodeCompra extends javax.swing.JFrame {
                     insertDetallesCompras.setInt(1, idCompraGenerado);
                     insertDetallesCompras.setString(2, tablecompras.getValueAt(i, 1).toString()); // Ejemplo de valor directo para cod_producto
                     insertDetallesCompras.setString(3, tablecompras.getValueAt(i, 5).toString()); // Ejemplo de valor directo para precio_unitario
-                    insertDetallesCompras.setString(4, tablecompras.getValueAt(i, 6).toString()); // Ejemplo de valor directo para total
+                    insertDetallesCompras.setString(4, tablecompras.getValueAt(i, 5).toString()); // Ejemplo de valor directo para total
 
                     insertDetallesCompras.executeUpdate();
 
@@ -770,7 +770,7 @@ public class IngresodeCompra extends javax.swing.JFrame {
                     insertpreciohistorial.setString(2, tablecompras.getValueAt(i, 4).toString()); // Ejemplo de valor directo para cod_producto
                     insertpreciohistorial.setString(3, tablecompras.getValueAt(i, 3).toString()); // Ejemplo de valor directo para precio_unitario
                     insertpreciohistorial.setString(4, tablecompras.getValueAt(i, 2).toString()); // Ejemplo de valor directo para total
-                    insertpreciohistorial.setString(5, tablecompras.getValueAt(i, 6).toString());
+                    insertpreciohistorial.setString(5, tablecompras.getValueAt(i, 5).toString());
                     
                     insertpreciohistorial.executeUpdate();
 
@@ -778,7 +778,7 @@ public class IngresodeCompra extends javax.swing.JFrame {
                     try (PreparedStatement pstmtActualizarInventario = conn.prepareStatement(queryActualizarInventario))
                     {
                         pstmtActualizarInventario.setString(1, tablecompras.getValueAt(i, 1).toString());
-                        pstmtActualizarInventario.setString(2, tablecompras.getValueAt(i, 6).toString());
+                        pstmtActualizarInventario.setString(2, tablecompras.getValueAt(i, 5).toString());
                         pstmtActualizarInventario.executeUpdate();
                     }
 
