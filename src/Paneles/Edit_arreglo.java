@@ -508,62 +508,40 @@ public class Edit_arreglo extends javax.swing.JPanel {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         String arreglo = (String) cbxarreglo.getSelectedItem();
         String estado = (String) cbxEstado.getSelectedItem();
-
-//        String idA = lbl_id_arregl.getText();
         String descripcion = txtDescripcionArre.getText();
         String precio = txtprecio.getText();
         SimpleDateFormat sdfSQL = new SimpleDateFormat("yyyy-MM-dd");
         String fechaPedido = sdfSQL.format(new Date());
-//        String idArreglo = txtid.getText();
-
         Date fecha = JDfechaEntrega.getDate();
 
-        try {
-
-            // Obtén las imágenes actuales de los JLabel
-            Icon icon1 = imagen1.getIcon();
-            Icon icon2 = imagen2.getIcon();
-            Icon icon3 = imagen3.getIcon();
-            String rutaImagen1 = null;
-            String rutaImagen2 = null;
-            String rutaImagen3 = null;
-
-            // Verifica si archivos[0] no es null antes de acceder a sus propiedades
-            if (archivo1[0] != null) {
-                rutaImagen1 = archivo1[0].getAbsolutePath();
-            }
-
-            if (archivo2[0] != null) {
-                rutaImagen2 = archivo2[0].getAbsolutePath();
-            }
-
-            if (archivo3[0] != null) {
-                rutaImagen3 = archivo3[0].getAbsolutePath();
-            }
-
-            StringBuilder camposVacios = new StringBuilder("Los siguientes campos están vacíos:");
-
-            if ("Seleccione".equals(arreglo)) {
-                camposVacios.append("\n - Arreglo");
-            }
-            if (fecha == null) {
-                camposVacios.append("\n - Fecha de Entrega");
-            }
-            if (imagen1.getIcon() == null) {
-                camposVacios.append("\n - Agregue al menos una imagen de muestra");
-            }
-            if (descripcion.isEmpty()) {
-                camposVacios.append("\n - Descripción");
-            }
-            if (precio.isEmpty()) {
-                camposVacios.append("\n - Precio");
-            }
-
-            if (!camposVacios.toString().equals("Los siguientes campos están vacíos:")) {
-                JOptionPane.showMessageDialog(null, camposVacios.toString(), "Campos Vacíos", JOptionPane.ERROR_MESSAGE);
-            } else {
-
-                // Resto del código para la inserción en la base de datos
+        // Obtén las imágenes actuales de los JLabel
+        Icon icon1 = imagen1.getIcon();
+        Icon icon2 = imagen2.getIcon();
+        Icon icon3 = imagen3.getIcon();
+        String rutaImagen1 = (archivo1[0] != null) ? archivo1[0].getAbsolutePath() : null;
+        String rutaImagen2 = (archivo2[0] != null) ? archivo2[0].getAbsolutePath() : null;
+        String rutaImagen3 = (archivo3[0] != null) ? archivo3[0].getAbsolutePath() : null;
+        StringBuilder camposVacios = new StringBuilder("Los siguientes campos están vacíos:");
+        if ("Seleccione".equals(arreglo)) {
+            camposVacios.append("\n - Arreglo");
+        }
+        if (fecha == null) {
+            camposVacios.append("\n - Fecha de Entrega");
+        }
+        if (imagen1.getIcon() == null) {
+            camposVacios.append("\n - Agregue al menos una imagen de muestra");
+        }
+        if (descripcion.isEmpty()) {
+            camposVacios.append("\n - Descripción");
+        }
+        if (precio.isEmpty()) {
+            camposVacios.append("\n - Precio");
+        }
+        if (!camposVacios.toString().equals("Los siguientes campos están vacíos:")) {
+            JOptionPane.showMessageDialog(null, camposVacios.toString(), "Campos Vacíos", JOptionPane.ERROR_MESSAGE);
+        } else {
+            // Resto del código para la inserción en la base de datos
+            try {
                 Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
                 Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
                 PreparedStatement updatePs = conn.prepareStatement(
@@ -578,104 +556,28 @@ public class Edit_arreglo extends javax.swing.JPanel {
                 updatePs.setString(3, descripcion);
                 updatePs.setString(4, precio);
 
-                // Verificar y actualizar la imagen 1 solo si hay una nueva imagen
-                if (rutaImagen1 != null && !rutaImagen1.isEmpty() && archivo1[0] != null) {
-                    File file1 = new File(rutaImagen1);
-                    if (file1.exists()) {
-                        try (FileInputStream fis1 = new FileInputStream(file1)) {
-                            byte[] bytes1 = new byte[(int) file1.length()];
-                            fis1.read(bytes1);
-                            updatePs.setBytes(5, bytes1);
-                        } catch (IOException ex) {
-                            ex.printStackTrace();
-                            Logger.getLogger(editar_pedidoSas.class.getName()).log(Level.SEVERE, null, ex);
-                            updatePs.setNull(5, Types.BLOB); // Imagen 1 no pudo ser leída
-                        }
-                    }
-                } else {
-                    // Si no hay una nueva imagen, mantén la imagen existente en la base de datos
-                    updatePs.setBytes(5, obtenerImagenExistente(5));
-                }
+                // Actualizar imagen 1
+                actualizarImagen(updatePs, rutaImagen1, archivo1[0], 5);
 
-                // Verificar y actualizar la imagen 2 solo si hay una nueva imagen y no se ha cargado antes
-                if (rutaImagen2 != null && !rutaImagen2.isEmpty() && archivo2[0] != null) {
-                    File file2 = new File(rutaImagen2);
-                    if (file2.exists()) {
-                        try (FileInputStream fis2 = new FileInputStream(file2)) {
-                            byte[] bytes2 = new byte[(int) file2.length()];
-                            fis2.read(bytes2);
-                            updatePs.setBytes(6, bytes2);
-                        } catch (IOException ex) {
-                            ex.printStackTrace();
-                            Logger.getLogger(editar_pedidoSas.class.getName()).log(Level.SEVERE, null, ex);
-                            updatePs.setNull(6, Types.BLOB); // Imagen 2 no pudo ser leída
-                        }
-                    }
-                } else {
-                    // Si no hay una nueva imagen, mantén la imagen existente en la base de datos
-                    updatePs.setBytes(6, obtenerImagenExistente(6));
-                }
+                // Actualizar imagen 2
+                actualizarImagen(updatePs, rutaImagen2, archivo2[0], 6);
 
-                // Verificar y actualizar la imagen 3 solo si hay una nueva imagen y no se ha cargado antes
-                if (rutaImagen3 != null && !rutaImagen3.isEmpty() && archivo3[0] != null) {
-                    File file3 = new File(rutaImagen3);
-                    if (file3.exists()) {
-                        try (FileInputStream fis3 = new FileInputStream(file3)) {
-                            byte[] bytes3 = new byte[(int) file3.length()];
-                            fis3.read(bytes3);
-                            updatePs.setBytes(7, bytes3);
-                        } catch (IOException ex) {
-                            ex.printStackTrace();
-                            Logger.getLogger(editar_pedidoSas.class.getName()).log(Level.SEVERE, null, ex);
-                            updatePs.setNull(7, Types.BLOB); // Imagen 3 no pudo ser leída
-                        }
-                    }
-                } else {
-                    // Si no hay una nueva imagen, mantén la imagen existente en la base de datos
-                    updatePs.setBytes(7, obtenerImagenExistente(7));
-                }
-
-                // Verifica y actualiza la imagen 1 solo si hay una nueva imagen
-                if (rutaImagen1 != null && !rutaImagen1.isEmpty()) {
-                    actualizarImagen(updatePs, rutaImagen1, 5);
-                } else {
-                    // Si no hay una nueva imagen, mantén la imagen existente en la base de datos
-                    updatePs.setBytes(5, obtenerImagenExistente(5));
-                }
-
-                // Verifica y actualiza la imagen 2 solo si hay una nueva imagen
-                if (rutaImagen2 != null && !rutaImagen2.isEmpty()) {
-                    actualizarImagen(updatePs, rutaImagen2, 6);
-                } else {
-                    // Si no hay una nueva imagen, mantén la imagen existente en la base de datos
-                    updatePs.setBytes(6, obtenerImagenExistente(6));
-                }
-
-                // Verifica y actualiza la imagen 3 solo si hay una nueva imagen
-                if (rutaImagen3 != null && !rutaImagen3.isEmpty()) {
-                    actualizarImagen(updatePs, rutaImagen3, 7);
-                } else {
-                    // Si no hay una nueva imagen, mantén la imagen existente en la base de datos
-                    updatePs.setBytes(7, obtenerImagenExistente(7));
-                }
+                // Actualizar imagen 3
+                actualizarImagen(updatePs, rutaImagen3, archivo3[0], 7);
 
                 updatePs.setString(8, fechaPedido);
-
-                updatePs.setDate(9, new java.sql.Date(fecha.getTime())); // Ajustar el índice a 9
+                updatePs.setDate(9, new java.sql.Date(fecha.getTime()));
                 int numeracion = Integer.parseInt(txtid.getText());
-                updatePs.setInt(10, numeracion); // Ajustar el índice a 10
-
-                updatePs.executeUpdate();
+                updatePs.setInt(10, numeracion);
 
                 JOptionPane.showMessageDialog(null, "Registro editado exitosamente");
 
-                // Restaura las imágenes en los JLabel después de la actualización
-                imagen1.setIcon(icon1);
-                imagen2.setIcon(icon2);
-                imagen3.setIcon(icon3);
+                // Restablece los contadores después de una actualización exitosa
+                contador1 = 0;
+                contador2 = 0;
+                contador3 = 0;
 
                 Listado_Pedidos_Arreglos p = new Listado_Pedidos_Arreglos();
-
                 p.setSize(1024, 640);
                 p.setLocation(0, 0);
 
@@ -687,15 +589,12 @@ public class Edit_arreglo extends javax.swing.JPanel {
                 panelprincipal.repaint();
                 return;
 
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(editar_Pedido_arreglo.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(editar_Pedido_arreglo.class.getName()).log(Level.SEVERE, null, ex);
             }
-
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(editar_Pedido_arreglo.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(editar_Pedido_arreglo.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private File[] archivo1 = new File[1];
@@ -774,20 +673,21 @@ public class Edit_arreglo extends javax.swing.JPanel {
         }
     }
 
-    private void actualizarImagen(PreparedStatement updatePs, String rutaImagen, int parametro) throws SQLException, ClassNotFoundException {
-        if (rutaImagen != null && !rutaImagen.isEmpty()) {
+    private void actualizarImagen(PreparedStatement updateImagePs, String rutaImagen, File archivo, int parametro) throws SQLException, ClassNotFoundException {
+        if (rutaImagen != null && !rutaImagen.isEmpty() && archivo != null) {
             File file = new File(rutaImagen);
             if (file.exists()) {
-                try {
-                    byte[] bytes = obtenerBytesImagen(file);
-                    updatePs.setBytes(parametro, bytes);
+                try (FileInputStream fis = new FileInputStream(file)) {
+                    updateImagePs.setBinaryStream(1, fis, (int) file.length());
                 } catch (IOException ex) {
                     ex.printStackTrace();
-                    updatePs.setNull(parametro, Types.BLOB);
+                    Logger.getLogger(editar_pedidoSas.class.getName()).log(Level.SEVERE, null, ex);
+                    updateImagePs.setNull(1, Types.BLOB); // Imagen no pudo ser leída
                 }
             }
         } else {
-            updatePs.setBytes(parametro, obtenerImagenExistente(parametro));
+            // Si no hay una nueva imagen, mantén la imagen existente en la base de datos
+            updateImagePs.setBytes(1, obtenerImagenExistente(parametro));
         }
     }
 

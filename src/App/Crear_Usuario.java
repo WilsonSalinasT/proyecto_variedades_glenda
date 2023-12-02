@@ -127,6 +127,14 @@ public class Crear_Usuario extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel6.setText("Dale seguridad.");
 
+        txtcontrasena1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtcontrasena1FocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtcontrasena1FocusLost(evt);
+            }
+        });
         txtcontrasena1.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtcontrasena1KeyTyped(evt);
@@ -335,22 +343,20 @@ public class Crear_Usuario extends javax.swing.JFrame {
     }//GEN-LAST:event_txtNombreKeyTyped
 
     private void txtcontrasena1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtcontrasena1KeyTyped
-        // TODO add your handling code here:
-       
+
     }//GEN-LAST:event_txtcontrasena1KeyTyped
 
     private void txtcontrasena2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtcontrasena2KeyTyped
-        // TODO add your handling code here:
-        String password = txtcontrasena2.getText();
 
-        if (password.isEmpty() || password.startsWith(" ")) {
-            evt.consume(); // Consumir el evento si está vacío o comienza con un espacio en blanco
-        } else if (password.length() < 8 || password.length() > 20) {
-            evt.consume(); // Consumir el evento si la longitud está fuera del rango permitido
-        } else if (!password.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,20}$")) {
-            evt.consume(); // Consumir el evento si no cumple con los requisitos de contenido
-        }
     }//GEN-LAST:event_txtcontrasena2KeyTyped
+
+    private void txtcontrasena1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtcontrasena1FocusLost
+        validatePassword();
+    }//GEN-LAST:event_txtcontrasena1FocusLost
+
+    private void txtcontrasena1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtcontrasena1FocusGained
+
+    }//GEN-LAST:event_txtcontrasena1FocusGained
 
     /**
      * @param args the command line arguments
@@ -387,6 +393,25 @@ public class Crear_Usuario extends javax.swing.JFrame {
         });
     }
 
+    private void validatePassword() {
+        String currentPassword = txtcontrasena1.getText();
+
+        // Verificar la longitud de la contraseña
+        if (currentPassword.length() < 8 || currentPassword.length() > 25) {
+            JOptionPane.showMessageDialog(null, "La contraseña debe tener más de 8 dígitos y menos de 25", "Error en contraseña", JOptionPane.ERROR_MESSAGE);
+            txtcontrasena2.setEnabled(false);
+            btnGuardar.setEnabled(false);
+        } else {
+            txtcontrasena2.setEnabled(true);
+            btnGuardar.setEnabled(true);
+        }
+    }
+
+    private boolean isSpecialCharacter(char c) {
+        // Lógica para verificar si el carácter es especial
+        String specialCharacters = "!@#$%^&*()-_=+[]{}|;:'\",.<>/?";
+        return specialCharacters.indexOf(c) != -1;
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnvolver;
