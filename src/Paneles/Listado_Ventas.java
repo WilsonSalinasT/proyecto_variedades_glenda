@@ -25,7 +25,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author novastar
  */
-public class Listado_Compras extends javax.swing.JPanel {
+public class Listado_Ventas extends javax.swing.JPanel {
 
     
     TextPrompt holder;
@@ -33,7 +33,7 @@ public class Listado_Compras extends javax.swing.JPanel {
     /**
      * Creates new form Nueva_venta
      */
-    public Listado_Compras() {
+    public Listado_Ventas() {
         initComponents();
         cargarTabla();
         TextPrompt holder = new TextPrompt("Busque por nombre de proveedor / n° de factura / fecha", txtbuscar);
@@ -78,7 +78,7 @@ public class Listado_Compras extends javax.swing.JPanel {
         jLabel2.setBackground(new java.awt.Color(0, 0, 0));
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel2.setText("Listado de compras");
+        jLabel2.setText("Listado de Ventas");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -103,7 +103,7 @@ public class Listado_Compras extends javax.swing.JPanel {
 
             },
             new String [] {
-                "N°", "Nombre de proveedor", "N° de factura", "Fecha", "Tipo de Compra"
+                "N°", "Nombre de cliente", "N° de factura", "Fecha", "Tipo de Venta"
             }
         ));
         tblcompras.setGridColor(new java.awt.Color(255, 51, 51));
@@ -144,7 +144,7 @@ public class Listado_Compras extends javax.swing.JPanel {
         btncrear.setBackground(new java.awt.Color(255, 153, 51));
         btncrear.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btncrear.setForeground(new java.awt.Color(0, 0, 0));
-        btncrear.setText("Crear compras");
+        btncrear.setText("Crear ventas");
         btncrear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btncrearActionPerformed(evt);
@@ -211,7 +211,7 @@ public class Listado_Compras extends javax.swing.JPanel {
                         .addComponent(btnbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnrefrescar)))
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addContainerGap(50, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

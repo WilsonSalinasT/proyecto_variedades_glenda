@@ -76,12 +76,12 @@ public class Edit_arreglo extends javax.swing.JPanel {
         fechaP = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         JDfechaEntrega = new com.toedter.calendar.JDateChooser();
-        txtid = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         txtCliente = new javax.swing.JTextField();
         Cimagen1 = new javax.swing.JButton();
         Cimagen2 = new javax.swing.JButton();
         Cimagen3 = new javax.swing.JButton();
+        txtid = new javax.swing.JTextField();
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -222,10 +222,6 @@ public class Edit_arreglo extends javax.swing.JPanel {
 
         JDfechaEntrega.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Fecha de Entrega", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12))); // NOI18N
 
-        txtid.setEditable(false);
-        txtid.setForeground(new java.awt.Color(255, 255, 255));
-        txtid.setBorder(null);
-
         jButton1.setBackground(new java.awt.Color(255, 152, 52));
         jButton1.setFont(new java.awt.Font("Arial Black", 2, 14)); // NOI18N
         jButton1.setText("Editar");
@@ -322,11 +318,10 @@ public class Edit_arreglo extends javax.swing.JPanel {
                         .addGap(16, 16, 16)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(fechaP)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(crea_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 691, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(jPanel2Layout.createSequentialGroup()
-                                    .addComponent(txtid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(115, 115, 115)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(164, 164, 164)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(crea_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 691, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                         .addGroup(jPanel2Layout.createSequentialGroup()
                                             .addGap(4, 4, 4)
@@ -342,8 +337,8 @@ public class Edit_arreglo extends javax.swing.JPanel {
                                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                                                 .addComponent(cbxarreglo, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(cbxEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                                .addComponent(cbxEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(465, 465, 465)
                         .addComponent(jButton1)))
@@ -362,9 +357,7 @@ public class Edit_arreglo extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addComponent(crea_cliente))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addComponent(txtid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(29, 29, 29)
+                        .addGap(75, 75, 75)
                         .addComponent(fechaP)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(30, 30, 30)
@@ -386,11 +379,18 @@ public class Edit_arreglo extends javax.swing.JPanel {
 
         fechaP.setVisible(false);
 
+        txtid.setEditable(false);
+        txtid.setForeground(new java.awt.Color(255, 255, 255));
+        txtid.setBorder(null);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1144, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(48, 48, 48)
+                .addComponent(txtid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(1032, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -399,7 +399,10 @@ public class Edit_arreglo extends javax.swing.JPanel {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 942, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(213, 213, 213)
+                .addComponent(txtid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(717, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -503,7 +506,7 @@ public class Edit_arreglo extends javax.swing.JPanel {
     private void jPanel1ComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jPanel1ComponentShown
         // TODO add your handling code here:
     }//GEN-LAST:event_jPanel1ComponentShown
-
+//crear
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         String arreglo = (String) cbxarreglo.getSelectedItem();

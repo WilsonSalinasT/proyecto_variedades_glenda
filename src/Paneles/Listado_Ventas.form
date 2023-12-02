@@ -53,7 +53,7 @@
                       <Component id="btnrefrescar" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="35" max="32767" attributes="0"/>
+              <EmptySpace pref="50" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -124,7 +124,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="0" green="0" red="0" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Listado de compras"/>
+            <Property name="text" type="java.lang.String" value="Listado de Ventas"/>
           </Properties>
         </Component>
       </SubComponents>
@@ -144,10 +144,10 @@
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
               <Table columnCount="5" rowCount="0">
                 <Column editable="true" title="N&#xb0;" type="java.lang.Object"/>
-                <Column editable="true" title="Nombre de proveedor" type="java.lang.Object"/>
+                <Column editable="true" title="Nombre de cliente" type="java.lang.Object"/>
                 <Column editable="true" title="N&#xb0; de factura" type="java.lang.Object"/>
                 <Column editable="true" title="Fecha" type="java.lang.Object"/>
-                <Column editable="true" title="Tipo de Compra" type="java.lang.Object"/>
+                <Column editable="true" title="Tipo de Venta" type="java.lang.Object"/>
               </Table>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -231,7 +231,7 @@
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="0" green="0" red="0" type="rgb"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Crear compras"/>
+        <Property name="text" type="java.lang.String" value="Crear ventas"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btncrearActionPerformed"/>
