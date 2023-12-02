@@ -128,9 +128,6 @@ public class Crear_Usuario extends javax.swing.JFrame {
         jLabel6.setText("Dale seguridad.");
 
         txtcontrasena1.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                txtcontrasena1FocusGained(evt);
-            }
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txtcontrasena1FocusLost(evt);
             }
@@ -422,10 +419,12 @@ public class Crear_Usuario extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JTextField txtNombre;
+    private javax.swing.JPanel jPanel5;
+    public javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtcontrasena1;
     private javax.swing.JTextField txtcontrasena2;
     // End of variables declaration//GEN-END:variables

@@ -51,7 +51,7 @@ public class Login extends javax.swing.JFrame {
         bntIniciar_sesion = new javax.swing.JButton();
         txtPassword = new javax.swing.JPasswordField();
         txtNombre = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
+        lblRecuperar = new javax.swing.JLabel();
         Mostrar_Ocultar = new javax.swing.JLabel();
         Registrarse = new javax.swing.JLabel();
 
@@ -134,15 +134,30 @@ public class Login extends javax.swing.JFrame {
 
         txtNombre.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         txtNombre.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtNombre.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtNombreFocusLost(evt);
+            }
+        });
+        txtNombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNombreActionPerformed(evt);
+            }
+        });
         txtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtNombreKeyTyped(evt);
             }
         });
 
-        jLabel6.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/secure_security_icon.png"))); // NOI18N
-        jLabel6.setText("¿Olvidaste la contraseña?");
+        lblRecuperar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        lblRecuperar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/secure_security_icon.png"))); // NOI18N
+        lblRecuperar.setText("¿Olvidaste la contraseña?");
+        lblRecuperar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblRecuperarMouseClicked(evt);
+            }
+        });
 
         Mostrar_Ocultar.setText("Mostrar");
         Mostrar_Ocultar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -177,22 +192,19 @@ public class Login extends javax.swing.JFrame {
                                 .addComponent(jLabel3)
                                 .addGap(168, 168, 168))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(bntIniciar_sesion, javax.swing.GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE)
-                                    .addComponent(txtNombre)
-                                    .addComponent(txtPassword))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(lblRecuperar)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(bntIniciar_sesion, javax.swing.GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE)
+                                        .addComponent(txtNombre)
+                                        .addComponent(txtPassword)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(Mostrar_Ocultar, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(65, 65, 65))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel6)
-                                .addGap(141, 141, 141))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(Registrarse, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(159, 159, 159))))))
+                        .addComponent(Registrarse, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(159, 159, 159))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -213,11 +225,13 @@ public class Login extends javax.swing.JFrame {
                 .addComponent(bntIniciar_sesion, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(Registrarse)
-                .addGap(28, 28, 28)
-                .addComponent(jLabel6)
-                .addGap(16, 16, 16))
+                .addGap(18, 18, 18)
+                .addComponent(lblRecuperar)
+                .addGap(26, 26, 26))
             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
+
+        lblRecuperar.setVisible(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -311,6 +325,12 @@ public class Login extends javax.swing.JFrame {
         } else if (txtNombre.getText().length() >= 50) {
             evt.consume(); // Consumir el evento si se ha alcanzado la longitud máxima
         }
+
+        if (txtNombre.getText().isEmpty()) {
+            lblRecuperar.setVisible(false);
+        } else {
+            lblRecuperar.setVisible(true);
+        }
     }//GEN-LAST:event_txtNombreKeyTyped
 
     private void txtPasswordKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPasswordKeyTyped
@@ -327,6 +347,69 @@ public class Login extends javax.swing.JFrame {
             evt.consume(); // Consumir el evento si no cumple con los requisitos de contenido
         }
     }//GEN-LAST:event_txtPasswordKeyTyped
+
+    private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
+
+    }//GEN-LAST:event_txtNombreActionPerformed
+
+    private void lblRecuperarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblRecuperarMouseClicked
+
+        // Obtén el nombre de usuario del formulario de login actual
+        String usuario = txtNombre.getText().trim();
+
+        // Verifica si el usuario existe en la base de datos
+        if (usuarioExiste(usuario)) {
+            // Si el usuario existe, continúa con el proceso de recuperación de contraseña
+
+            // Crea una instancia del formulario recuperarContra
+            recuperarContra r = new recuperarContra();
+
+            // Establece el texto en el campo de texto del formulario recuperarContra
+            r.txtNUsuario.setText("Restablecer contraseña de " + usuario);
+            r.txtNombreR.setText(usuario);
+
+            // Muestra el formulario recuperarContra y cierra el formulario de login actual
+            r.setVisible(true);
+            this.dispose();
+        } else {
+            // Si el usuario no existe, muestra un mensaje de error
+            JOptionPane.showMessageDialog(null, "El usuario no existe.", "Error", JOptionPane.ERROR_MESSAGE);
+            lblRecuperar.setVisible(false);
+        }
+
+        System.out.println("Valor de txtNombre: " + txtNombre.getText());
+
+    }//GEN-LAST:event_lblRecuperarMouseClicked
+
+    private boolean usuarioExiste(String usuario) {
+        // Realiza una consulta a la base de datos para verificar la existencia del usuario
+        // Implementa la lógica adecuada según tu estructura de base de datos y conexión
+        // Devuelve true si el usuario existe, false si no existe (pseudocódigo)
+
+        // Ejemplo usando JDBC:
+        try (
+                Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789"); PreparedStatement stmt = conn.prepareStatement("SELECT COUNT(*) FROM Usuarios WHERE nombre_usuario = ?")) {
+
+            stmt.setString(1, usuario);
+            ResultSet resultSet = stmt.executeQuery();
+
+            if (resultSet.next()) {
+                int count = resultSet.getInt(1);
+                return count > 0; // Devuelve true si el usuario existe
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return false; // En caso de error, devuelve false por precaución
+    }
+
+    private void txtNombreFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNombreFocusLost
+        if (!txtNombre.equals("")) {
+            lblRecuperar.setVisible(true);
+        }
+    }//GEN-LAST:event_txtNombreFocusLost
 
     /**
      * @param args the command line arguments
@@ -372,11 +455,11 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JTextField txtNombre;
+    public javax.swing.JLabel lblRecuperar;
+    public javax.swing.JTextField txtNombre;
     private javax.swing.JPasswordField txtPassword;
     // End of variables declaration//GEN-END:variables
 }
