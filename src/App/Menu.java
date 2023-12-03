@@ -133,7 +133,7 @@ public class Menu extends javax.swing.JFrame {
         envios.setBackground(new java.awt.Color(255, 153, 102));
         envios.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         envios.setForeground(new java.awt.Color(204, 255, 255));
-        envios.setText("Listado de envios");
+        envios.setText("Listado de envíos");
         envios.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         envios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -157,7 +157,7 @@ public class Menu extends javax.swing.JFrame {
         pedidoSastreria.setBackground(new java.awt.Color(255, 153, 102));
         pedidoSastreria.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         pedidoSastreria.setForeground(new java.awt.Color(204, 255, 255));
-        pedidoSastreria.setText("Listado de sastreria");
+        pedidoSastreria.setText("Listado de sastrería");
         pedidoSastreria.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         pedidoSastreria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -253,7 +253,7 @@ public class Menu extends javax.swing.JFrame {
         cerrarsecion.setBackground(new java.awt.Color(255, 153, 102));
         cerrarsecion.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         cerrarsecion.setForeground(new java.awt.Color(255, 255, 255));
-        cerrarsecion.setText("Cerrar sesion");
+        cerrarsecion.setText("Cerrar sesión");
         cerrarsecion.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         cerrarsecion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
