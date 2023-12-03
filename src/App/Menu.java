@@ -18,6 +18,7 @@ import Paneles.Listado_Prod;
 
 import Paneles.Listado_Productos;
 import Paneles.Listado_Sublimacion;
+import Paneles.Listado_Ventas;
 import Paneles.Listado_de_envios;
 import Paneles.Listado_pedido_entregado;
 
@@ -430,9 +431,14 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_clientes1ActionPerformed
 
     private void pedidoSublimacion3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pedidoSublimacion3ActionPerformed
-        IngresodeVenta ver = new IngresodeVenta();
-        ver.setVisible(true);
-        ver.setLocationRelativeTo(null);
+        Listado_Ventas p2 = new  Listado_Ventas ();
+        p2.setSize(1024, 640);
+        p2.setLocation(0, 0);
+    
+        panelprincipal.removeAll();
+        panelprincipal.add(p2, BorderLayout.CENTER);
+        panelprincipal.revalidate();
+        panelprincipal.repaint();
     }//GEN-LAST:event_pedidoSublimacion3ActionPerformed
 
     /**

@@ -5,6 +5,7 @@
 package Paneles;
 
 import App.IngresodeCompra;
+import App.IngresodeVenta;
 import static App.Menu.panelprincipal;
 
 import java.awt.BorderLayout;
@@ -36,7 +37,7 @@ public class Listado_Ventas extends javax.swing.JPanel {
     public Listado_Ventas() {
         initComponents();
         cargarTabla();
-        TextPrompt holder = new TextPrompt("Busque por nombre de proveedor / n° de factura / fecha", txtbuscar);
+        TextPrompt holder = new TextPrompt("Busque por nombre de cliente / n° de factura / fecha", txtbuscar);
 
         tblcompras.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 12));
         tblcompras.getTableHeader().setOpaque(false);
@@ -237,7 +238,7 @@ public class Listado_Ventas extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btncrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncrearActionPerformed
-        IngresodeCompra ver = new  IngresodeCompra ();
+        IngresodeVenta ver = new  IngresodeVenta();
         ver.setVisible(true);
         ver.setLocationRelativeTo(null);
 
@@ -318,16 +319,17 @@ public class Listado_Ventas extends javax.swing.JPanel {
         Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
 
         // Obtener el total de filas que cumplen con el criterio de búsqueda
-        ps = conn.prepareStatement("SELECT COUNT(*) AS TotalFilas " +
-                "FROM Proveedor P " +
-                "JOIN Compras C ON P.id_proveedor = C.id_proveedor " +
-                "WHERE P.nombreEmpresa LIKE ? " +
-                "OR C.numfactura LIKE ? OR C.fecha LIKE ? OR C.tipoCategoria LIKE ?");
-        ps.setString(1, "%" + terminoBusqueda + "%");
-        ps.setString(2, "%" + terminoBusqueda + "%");
-        ps.setString(3, "%" + terminoBusqueda + "%");
-        ps.setString(4, "%" + terminoBusqueda + "%");
-        rs = ps.executeQuery();
+ps = conn.prepareStatement("SELECT COUNT(*) AS TotalFilas " +
+        "FROM Clientes C " +
+        "JOIN Ventas V ON C.id_cliente = V.id_cliente " +
+        "WHERE CONCAT(C.nombre, ' ', C.apellido) LIKE ? " +
+        "OR V.numfactura LIKE ? OR V.fecha LIKE ? OR V.tipoCategoria LIKE ?");
+ps.setString(1, "%" + terminoBusqueda + "%");
+ps.setString(2, "%" + terminoBusqueda + "%");
+ps.setString(3, "%" + terminoBusqueda + "%");
+ps.setString(4, "%" + terminoBusqueda + "%");
+rs = ps.executeQuery();
+
 
         if (rs.next()) {
             totalFilas = rs.getInt("TotalFilas");
@@ -346,23 +348,24 @@ public class Listado_Ventas extends javax.swing.JPanel {
         }
 
         // Consulta para obtener los datos paginados
-        ps = conn.prepareStatement("SELECT ROW_NUMBER() OVER (ORDER BY P.nombreEmpresa) AS NumRegistro, " +
-                "P.nombreEmpresa, C.numfactura, C.fecha, C.tipoCategoria " +
-                "FROM Proveedor P " +
-                "JOIN Compras C ON P.id_proveedor = C.id_proveedor " +
-                "WHERE P.nombreEmpresa LIKE ? " +
-                "OR C.numfactura LIKE ? OR C.fecha LIKE ? OR C.tipoCategoria LIKE ? " +
-                "ORDER BY P.nombreEmpresa " +
-                "OFFSET ? ROWS FETCH NEXT ? ROWS ONLY");
-        ps.setString(1, "%" + terminoBusqueda + "%");
-        ps.setString(2, "%" + terminoBusqueda + "%");
-        ps.setString(3, "%" + terminoBusqueda + "%");
-        ps.setString(4, "%" + terminoBusqueda + "%");
-        ps.setInt(5, offset);
-        ps.setInt(6, filasPorPagina);
-        rs = ps.executeQuery();
-        rsmd = rs.getMetaData();
-        columnas = rsmd.getColumnCount();
+ps = conn.prepareStatement("SELECT ROW_NUMBER() OVER (ORDER BY C.nombre, C.apellido) AS NumRegistro, " +
+        "CONCAT(C.nombre, ' ', C.apellido) AS NombreCompleto, V.numfactura, V.fecha, V.tipoCategoria " +
+        "FROM Clientes C " +
+        "JOIN Ventas V ON C.id_cliente = V.id_cliente " +
+        "WHERE CONCAT(C.nombre, ' ', C.apellido) LIKE ? " +
+        "OR V.numfactura LIKE ? OR V.fecha LIKE ? OR V.tipoCategoria LIKE ? " +
+        "ORDER BY C.nombre, C.apellido " +
+        "OFFSET ? ROWS FETCH NEXT ? ROWS ONLY");
+ps.setString(1, "%" + terminoBusqueda + "%");
+ps.setString(2, "%" + terminoBusqueda + "%");
+ps.setString(3, "%" + terminoBusqueda + "%");
+ps.setString(4, "%" + terminoBusqueda + "%");
+ps.setInt(5, offset);
+ps.setInt(6, filasPorPagina);
+rs = ps.executeQuery();
+rsmd = rs.getMetaData();
+columnas = rsmd.getColumnCount();
+
 
         while (rs.next()) {
             Object[] fila = new Object[columnas];
@@ -418,22 +421,25 @@ private void paginaAnterior() {
         Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
 
         if (conn != null && !conn.isClosed()) {
-            PreparedStatement ps = conn.prepareStatement("SELECT ROW_NUMBER() OVER(ORDER BY P.nombreEmpresa) AS NumRegistro, P.nombreEmpresa, C.numfactura, C.fecha, C.tipoCategoria "
-                    + "FROM Proveedor P "
-                    + "JOIN Compras C ON P.id_proveedor = C.id_proveedor "
-                    + "WHERE P.nombreEmpresa LIKE ? OR C.numfactura LIKE ? OR C.fecha LIKE ? "
-                    + "ORDER BY P.nombreEmpresa "
-                    + "OFFSET ? ROWS FETCH NEXT ? ROWS ONLY");
+            PreparedStatement ps = conn.prepareStatement("SELECT ROW_NUMBER() OVER(ORDER BY C.nombre, C.apellido) AS NumRegistro, " +
+                    "CONCAT(C.nombre, ' ', C.apellido) AS NombreCompleto, V.numfactura, V.fecha, V.tipoCategoria " +
+                    "FROM Clientes C " +
+                    "JOIN Ventas V ON C.id_cliente = V.id_cliente " +
+                    "WHERE CONCAT(C.nombre, ' ', C.apellido) LIKE ? OR V.numfactura LIKE ? OR V.fecha LIKE ? OR V.tipoCategoria LIKE ? " +
+                    "ORDER BY C.nombre, C.apellido " +
+                    "OFFSET ? ROWS FETCH NEXT ? ROWS ONLY");
 
             if (texto != null) {
                 ps.setString(1, "%" + texto + "%");
                 ps.setString(2, "%" + texto + "%");
                 ps.setString(3, "%" + texto + "%");
+                ps.setString(4, "%" + texto + "%");
                 terminoBusqueda = texto; // Actualizar el término de búsqueda
             } else {
                 ps.setString(1, "%");
                 ps.setString(2, "%");
                 ps.setString(3, "%");
+                ps.setString(4, "%");
                 terminoBusqueda = ""; // Limpiar el término de búsqueda
             }
 
@@ -441,22 +447,22 @@ private void paginaAnterior() {
             int offset = 0; // Cambia el valor del offset según tus requerimientos
             int fetchNext = 10; // Cambia la cantidad de registros a recuperar según tus requerimientos
 
-            ps.setInt(4, offset);
-            ps.setInt(5, fetchNext);
+            ps.setInt(5, offset);
+            ps.setInt(6, fetchNext);
 
             ResultSet rs = ps.executeQuery();
 
             if (rs != null) {
                 while (rs.next()) {
                     int numRegistro = rs.getInt("NumRegistro");
-                    String nombreEmpresa = rs.getString("nombreEmpresa");
+                    String nombreCompleto = rs.getString("NombreCompleto");
                     String numFactura = rs.getString("numfactura");
                     String fecha = rs.getString("fecha");
                     String tipoCategoria = rs.getString("tipoCategoria");
 
-                    if (nombreEmpresa != null && numFactura != null && fecha != null && tipoCategoria != null) {
+                    if (nombreCompleto != null && numFactura != null && fecha != null && tipoCategoria != null) {
                         modelTabla.addRow(new Object[]{
-                                numRegistro, nombreEmpresa, numFactura, fecha, tipoCategoria
+                                numRegistro, nombreCompleto, numFactura, fecha, tipoCategoria
                         });
                         foundData = true;
                     }
@@ -475,6 +481,7 @@ private void paginaAnterior() {
     // Llama a la función de cargarTablaEmpleados() si es necesario recargar la tabla después de la búsqueda
     cargarTabla(); // Recargar la tabla después de la búsqueda
 }
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
