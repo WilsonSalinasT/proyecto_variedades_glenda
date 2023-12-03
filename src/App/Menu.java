@@ -71,10 +71,12 @@ public class Menu extends javax.swing.JFrame {
         pedidoSublimacion3 = new javax.swing.JButton();
         HistorialPrecios = new javax.swing.JButton();
         cerrarsecion = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
         javax.swing.JLabel jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Menu");
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -92,7 +94,7 @@ public class Menu extends javax.swing.JFrame {
                 productoActionPerformed(evt);
             }
         });
-        jPanel2.add(producto, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 250, 30));
+        jPanel2.add(producto, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 250, 30));
 
         Listadoclientes.setBackground(new java.awt.Color(255, 153, 102));
         Listadoclientes.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -104,7 +106,7 @@ public class Menu extends javax.swing.JFrame {
                 ListadoclientesActionPerformed(evt);
             }
         });
-        jPanel2.add(Listadoclientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 250, 30));
+        jPanel2.add(Listadoclientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 250, 30));
 
         proveedores.setBackground(new java.awt.Color(255, 153, 102));
         proveedores.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -116,7 +118,7 @@ public class Menu extends javax.swing.JFrame {
                 proveedoresActionPerformed(evt);
             }
         });
-        jPanel2.add(proveedores, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 250, 30));
+        jPanel2.add(proveedores, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 250, 30));
 
         empleados.setBackground(new java.awt.Color(255, 153, 102));
         empleados.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -128,7 +130,7 @@ public class Menu extends javax.swing.JFrame {
                 empleadosActionPerformed(evt);
             }
         });
-        jPanel2.add(empleados, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 160, 250, 30));
+        jPanel2.add(empleados, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 170, 250, 30));
 
         envios.setBackground(new java.awt.Color(255, 153, 102));
         envios.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -140,7 +142,7 @@ public class Menu extends javax.swing.JFrame {
                 enviosActionPerformed(evt);
             }
         });
-        jPanel2.add(envios, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 240, 250, 30));
+        jPanel2.add(envios, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 250, 250, 30));
 
         citas.setBackground(new java.awt.Color(255, 153, 102));
         citas.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -152,7 +154,7 @@ public class Menu extends javax.swing.JFrame {
                 citasActionPerformed(evt);
             }
         });
-        jPanel2.add(citas, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, 250, 30));
+        jPanel2.add(citas, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 210, 250, 30));
 
         pedidoSastreria.setBackground(new java.awt.Color(255, 153, 102));
         pedidoSastreria.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -164,7 +166,7 @@ public class Menu extends javax.swing.JFrame {
                 pedidoSastreriaActionPerformed(evt);
             }
         });
-        jPanel2.add(pedidoSastreria, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 280, 250, 30));
+        jPanel2.add(pedidoSastreria, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 290, 250, 30));
 
         arreglo.setBackground(new java.awt.Color(255, 153, 102));
         arreglo.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -176,7 +178,7 @@ public class Menu extends javax.swing.JFrame {
                 arregloActionPerformed(evt);
             }
         });
-        jPanel2.add(arreglo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 320, 250, -1));
+        jPanel2.add(arreglo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 330, 250, -1));
 
         pedidoSublimacion.setBackground(new java.awt.Color(255, 153, 102));
         pedidoSublimacion.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -188,7 +190,7 @@ public class Menu extends javax.swing.JFrame {
                 pedidoSublimacionActionPerformed(evt);
             }
         });
-        jPanel2.add(pedidoSublimacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 360, 250, 30));
+        jPanel2.add(pedidoSublimacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 370, 250, 30));
 
         Galeria.setBackground(new java.awt.Color(255, 153, 102));
         Galeria.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -200,7 +202,7 @@ public class Menu extends javax.swing.JFrame {
                 GaleriaActionPerformed(evt);
             }
         });
-        jPanel2.add(Galeria, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 560, 250, 30));
+        jPanel2.add(Galeria, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 570, 250, 30));
 
         inventario.setBackground(new java.awt.Color(255, 153, 102));
         inventario.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -212,7 +214,7 @@ public class Menu extends javax.swing.JFrame {
                 inventarioActionPerformed(evt);
             }
         });
-        jPanel2.add(inventario, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 480, 250, 30));
+        jPanel2.add(inventario, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 490, 250, 30));
 
         Compras.setBackground(new java.awt.Color(255, 153, 102));
         Compras.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -224,7 +226,7 @@ public class Menu extends javax.swing.JFrame {
                 ComprasActionPerformed(evt);
             }
         });
-        jPanel2.add(Compras, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 400, 250, 30));
+        jPanel2.add(Compras, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 410, 250, 30));
 
         pedidoSublimacion3.setBackground(new java.awt.Color(255, 153, 102));
         pedidoSublimacion3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -236,7 +238,7 @@ public class Menu extends javax.swing.JFrame {
                 pedidoSublimacion3ActionPerformed(evt);
             }
         });
-        jPanel2.add(pedidoSublimacion3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 440, 250, 30));
+        jPanel2.add(pedidoSublimacion3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 450, 250, 30));
 
         HistorialPrecios.setBackground(new java.awt.Color(255, 153, 102));
         HistorialPrecios.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -248,7 +250,7 @@ public class Menu extends javax.swing.JFrame {
                 HistorialPreciosActionPerformed(evt);
             }
         });
-        jPanel2.add(HistorialPrecios, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 520, 250, 30));
+        jPanel2.add(HistorialPrecios, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 530, 250, 30));
 
         cerrarsecion.setBackground(new java.awt.Color(255, 153, 102));
         cerrarsecion.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -260,7 +262,14 @@ public class Menu extends javax.swing.JFrame {
                 cerrarsecionActionPerformed(evt);
             }
         });
-        jPanel2.add(cerrarsecion, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 600, 250, 30));
+        jPanel2.add(cerrarsecion, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 610, 250, 30));
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/work-from-home.png"))); // NOI18N
+        jLabel3.setText("Inicio");
+        jLabel3.setToolTipText("");
+        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 10, -1, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Hyper.png"))); // NOI18N
         jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -271,7 +280,7 @@ public class Menu extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 70)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 153, 51));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Bienvenido al Sistema");
+        jLabel2.setText("Bienvenido al sistema");
 
         javax.swing.GroupLayout panelprincipalLayout = new javax.swing.GroupLayout(panelprincipal);
         panelprincipal.setLayout(panelprincipalLayout);
@@ -599,6 +608,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JButton envios;
     private javax.swing.JButton inventario;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     public static final javax.swing.JPanel panelprincipal = new javax.swing.JPanel();
