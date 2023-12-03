@@ -36,7 +36,7 @@
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
+          <Component id="jPanel1" min="-2" pref="640" max="-2" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -204,6 +204,9 @@
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                 <TitledBorder justification="2" position="2" title="Nombre:">
+                  <Border PropertyName="innerBorder" info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                    <LineBorder roundedCorners="true" thickness="2"/>
+                  </Border>
                   <Font PropertyName="font" name="Arial Black" size="12" style="2"/>
                   <Color PropertyName="color" blue="3b" green="3b" red="3b" type="rgb"/>
                 </TitledBorder>
@@ -224,6 +227,9 @@
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                 <TitledBorder justification="2" position="2" title="Apellido:">
+                  <Border PropertyName="innerBorder" info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                    <LineBorder roundedCorners="true" thickness="2"/>
+                  </Border>
                   <Font PropertyName="font" name="Arial Black" size="12" style="2"/>
                   <Color PropertyName="color" blue="3b" green="3b" red="3b" type="rgb"/>
                 </TitledBorder>
@@ -283,6 +289,9 @@
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                     <TitledBorder justification="2" position="2" title="Direcci&#xf3;n:">
+                      <Border PropertyName="innerBorder" info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                        <LineBorder roundedCorners="true" thickness="2"/>
+                      </Border>
                       <Font PropertyName="font" name="Arial Black" size="12" style="2"/>
                       <Color PropertyName="color" blue="3b" green="3b" red="3b" type="rgb"/>
                     </TitledBorder>
@@ -305,6 +314,9 @@
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                 <TitledBorder justification="2" position="2" title="N&#xfa;mero de celular:">
+                  <Border PropertyName="innerBorder" info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                    <LineBorder roundedCorners="true" thickness="2"/>
+                  </Border>
                   <Font PropertyName="font" name="Arial Black" size="12" style="2"/>
                   <Color PropertyName="color" blue="3b" green="3b" red="3b" type="rgb"/>
                 </TitledBorder>
@@ -325,6 +337,9 @@
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                 <TitledBorder justification="2" position="2" title="Correo electr&#xf3;nico:">
+                  <Border PropertyName="innerBorder" info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                    <LineBorder roundedCorners="true" thickness="2"/>
+                  </Border>
                   <Font PropertyName="font" name="Arial Black" size="12" style="2"/>
                   <Color PropertyName="color" blue="3b" green="3b" red="3b" type="rgb"/>
                 </TitledBorder>
@@ -357,6 +372,9 @@
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                 <TitledBorder justification="2" position="2" title="Fecha de registro:">
+                  <Border PropertyName="innerBorder" info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                    <LineBorder roundedCorners="true" thickness="2"/>
+                  </Border>
                   <Font PropertyName="font" name="Arial Black" size="12" style="2"/>
                   <Color PropertyName="color" blue="3b" green="3b" red="3b" type="rgb"/>
                 </TitledBorder>

@@ -57,7 +57,7 @@ public class edit_producto extends javax.swing.JPanel {
     public edit_producto() {
         initComponents();
 
-         txtcantidades.getDocument().addDocumentListener(new DocumentListener() {
+        txtcantidades.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
                 actualizarResultado();
@@ -93,7 +93,7 @@ public class edit_producto extends javax.swing.JPanel {
         });
     }
 
-     private void actualizarResultado() {
+    private void actualizarResultado() {
         try
         {
             double value1 = Double.parseDouble(txtcantidades.getText());
@@ -105,6 +105,7 @@ public class edit_producto extends javax.swing.JPanel {
             txtPreciocompra.setText("0.0");
         }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -309,6 +310,9 @@ public class edit_producto extends javax.swing.JPanel {
         });
 
         idprecio.setEditable(false);
+        idprecio.setBackground(new java.awt.Color(255, 255, 255));
+        idprecio.setForeground(new java.awt.Color(255, 255, 255));
+        idprecio.setBorder(null);
         idprecio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 idprecioActionPerformed(evt);
@@ -495,6 +499,15 @@ public class edit_producto extends javax.swing.JPanel {
                 insertPs.setString(5, id);
 
                 insertPs.executeUpdate();
+
+                PreparedStatement insertPss = conn.prepareStatement("UPDATE Precio SET precio_unitario=?, precio_venta=?,precio_compra=? WHERE id_precio=?");
+                insertPss.setString(1, txtPreciounitario.getText());
+                insertPss.setString(2, txtPrecioventa.getText());
+                insertPss.setString(3, txtPreciocompra.getText());
+                insertPss.setString(4, idprecio.getText());
+                
+                 insertPss.executeUpdate();
+
                 JOptionPane.showMessageDialog(null, "Producto actualizado con éxito");
 
                 Listado_Productos cli = new Listado_Productos();

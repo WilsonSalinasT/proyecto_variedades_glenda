@@ -376,35 +376,6 @@ public class Listado_Productos extends javax.swing.JPanel {
 
     int selectedRow1;
     private void btnverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnverActionPerformed
-//        // Obtener la fila seleccionada
-//        int filaSeleccionada = tabla_productos.getSelectedRow();
-//
-//        // Verificar si se ha seleccionado una fila
-//        if (filaSeleccionada >= 0)
-//        {
-//            // Obtener los valores de las celdas en la fila seleccionada
-//            Object idProducto = tabla_productos.getValueAt(filaSeleccionada, 0); // Supongamos que la columna 0 contiene el ID del producto
-//            Object nombreProducto = tabla_productos.getValueAt(filaSeleccionada, 1); // Supongamos que la columna 1 contiene el nombre del producto
-//            Object precioProducto = tabla_productos.getValueAt(filaSeleccionada, 2); // Supongamos que la columna 2 contiene el precio del producto
-//
-//            // Luego puedes usar estos valores como desees, por ejemplo, para pasarlos a la ventana verProducto
-//            verProducto p2 = new verProducto();
-//            p2.setSize(1024, 640);
-//            p2.setLocation(0, 0);
-//
-//            // Puedes pasar los datos recuperados a la ventana verProducto
-//            p2.mostrarDatos(idProducto, nombreProducto, precioProducto);
-//
-//            // Remover el contenido actual del panel principal
-//            panelprincipal.removeAll();
-//
-//            // Agregar la ventana verProducto al panel principal
-//            panelprincipal.add(p2, BorderLayout.CENTER);
-//
-//            // Revalidar y repintar el panel principal para mostrar la nueva ventana
-//            panelprincipal.revalidate();
-//            panelprincipal.repaint();
-//        }
 
         selectedRow1 = tabla_productos.getSelectedRow();
         if (selectedRow1 == -1)
@@ -417,17 +388,17 @@ public class Listado_Productos extends javax.swing.JPanel {
         {
 
             int fila = tabla_productos.getSelectedRow();
-            String valorCelda = tabla_productos.getValueAt(fila, 1).toString();
-            String valorCelda2 = tabla_productos.getValueAt(fila, 2).toString();
-            String valorCelda3 = tabla_productos.getValueAt(fila, 3).toString();
+            int valorEntero = Integer.parseInt(tabla_productos.getValueAt(fila, 4).toString());
             PreparedStatement ps;
             ResultSet rs;
 
             Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
-            ps = conn.prepareStatement("SELECT * FROM Producto WHERE nombre=? and descripcion=? and categoria=?");
-            ps.setString(1, valorCelda);
-            ps.setString(2, valorCelda2);
-            ps.setString(3, valorCelda3);
+            ps = conn.prepareStatement("SELECT *\n"
+                    + "FROM Productos\n"
+                    + "JOIN Precio ON Productos.cod_producto = Precio.cod_producto\n"
+                    + "WHERE Productos.cod_producto = ?");
+            ps.setInt(1, valorEntero);
+            ;
             rs = ps.executeQuery();
 
             while (rs.next())
@@ -440,27 +411,38 @@ public class Listado_Productos extends javax.swing.JPanel {
 
                 String Id = rs.getString("cod_producto");
 
+                String precio = rs.getString("precio_unitario");
+                String precioVenta = rs.getString("precio_venta");
+                String preciocompra = rs.getString("precio_compra");
+
+                String cantidad = rs.getString("cantidad_disponible");
+
                 verProducto mostrar = new verProducto();
+                mostrar.txtPreciounitario.setText(precio);
+                mostrar.txtPreciocompra.setText(precioVenta);
+                mostrar.txtPrecioventa.setText(preciocompra);
+                mostrar.txtcantidades.setText(cantidad);
+
+                // Recuperar la imagen de la base de datos
+                byte[] bytesImagen = rs.getBytes("foto");
+
+                // Crear objetos ImageIcon solo si las imágenes no son nulas
+                ImageIcon imagenIcono1 = (bytesImagen != null) ? new ImageIcon(bytesImagen) : null;
+
+                // Escalar las imágenes al tamaño del JLabel
+                if (imagenIcono1 != null)
+                {
+                    imagenIcono1 = escalarImagen(imagenIcono1, mostrar.txtimagen.getWidth(), mostrar.txtimagen.getHeight());
+                    mostrar.txtimagen.setIcon(imagenIcono1);
+                }
 
                 mostrar.txtNombre.setText(nombre);
-                mostrar.txtNombre.setEditable(false); // Establece el campo de texto como no editable
+                // Establece el campo de texto como no editable
 
                 mostrar.AreaDescripcion.setText(descripcion);
-                mostrar.AreaDescripcion.setEditable(false); // Establece el área de texto como no editable
 
-//        mostrar.txtExistencia.setText(existencias);
-//        mostrar.txtExistencia.setEditable(false); // Establece el campo de texto como no editable
-//        mostrar.txtPrecio.setText(precio);
-//        mostrar.txtPrecio.setEditable(false); // Establece el campo de texto como no editable
                 mostrar.txtCategoria.setText(categoria);
-                mostrar.txtCategoria.setEditable(false); // Establece el campo de texto como no editable
-
-//        mostrar.txtProveedor.setText(proveedor);
-//        mostrar.txtProveedor.setEditable(false); // Establece el campo de texto como no editable
-//        mostrar.txtFechaAdquision.setText(fecha);
-//        mostrar.txtFechaAdquision.setEditable(false); // Establece el campo de texto como no editable
                 mostrar.txtId.setText(Id);
-                mostrar.txtId.setEditable(false); // Establece el campo de texto como no editable
 
                 mostrar.setSize(1024, 640);
                 mostrar.setLocation(0, 0);
@@ -506,8 +488,7 @@ public class Listado_Productos extends javax.swing.JPanel {
 //            String valorCelda3 = tabla_productos.getValueAt(fila, 3).toString();
 
             // Crear una conexión y un PreparedStatement usando try-with-resources
-            try (Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789"); 
-                    PreparedStatement ps = conn.prepareStatement("SELECT *\n"
+            try (Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789"); PreparedStatement ps = conn.prepareStatement("SELECT *\n"
                     + "FROM Productos\n"
                     + "JOIN Precio ON Productos.cod_producto = Precio.cod_producto\n"
                     + "WHERE Productos.cod_producto = ?"))
@@ -522,8 +503,8 @@ public class Listado_Productos extends javax.swing.JPanel {
                     {
                         String nombre = rs.getString("nombre");
                         String precio = rs.getString("precio_unitario");
-                         String precioVenta = rs.getString("precio_venta");
-                         String preciocompra = rs.getString("precio_compra");
+                        String precioVenta = rs.getString("precio_venta");
+                        String preciocompra = rs.getString("precio_compra");
                         String descripcion = rs.getString("descripcion");
                         String cantidad = rs.getString("cantidad_disponible");
 
@@ -533,11 +514,11 @@ public class Listado_Productos extends javax.swing.JPanel {
                         edit_producto mostrar = new edit_producto();
                         mostrar.txtnombre.setText(nombre);
                         mostrar.txtPreciounitario.setText(precio);
-                         mostrar.txtPreciocompra.setText(precioVenta);
+                        mostrar.txtPreciocompra.setText(precioVenta);
                         mostrar.txtPrecioventa.setText(preciocompra);
                         mostrar.txtcantidades.setText(cantidad);
                         mostrar.txtdescripcion.setText(descripcion);
-                         mostrar.idprecio.setText(IdPrecio);
+                        mostrar.idprecio.setText(IdPrecio);
                         mostrar.jComboBox1.setSelectedItem(rs.getString("categoria"));
 
                         // Recuperar la imagen de la base de datos
@@ -553,7 +534,6 @@ public class Listado_Productos extends javax.swing.JPanel {
                             mostrar.txtimagen.setIcon(imagenIcono1);
                         }
 
-
 //                        byte[] data = rs.getBytes("foto");
 //                        String hexString = "0x" + bytesToHexString(data);
 //
@@ -561,7 +541,6 @@ public class Listado_Productos extends javax.swing.JPanel {
 ////                        mostrar.bytes.setText(hexString);
 //                        mostrar.txtbytes.setText(hexString);
 //                       
-
 //                        ImageIcon imagenIcon;
 //                        byte[] bytesImagen = rs.getBytes("foto");
 //                        if (bytesImagen != null)
@@ -603,7 +582,8 @@ public class Listado_Productos extends javax.swing.JPanel {
                         jPanel2.revalidate();
                         jPanel2.repaint();
                     }
-                }            }
+                }
+            }
         } catch (SQLException e)
         {
             e.printStackTrace();
@@ -612,12 +592,12 @@ public class Listado_Productos extends javax.swing.JPanel {
 
     }//GEN-LAST:event_btneditarActionPerformed
 
-     public ImageIcon escalarImagen(ImageIcon icono, int ancho, int alto) {
+    public ImageIcon escalarImagen(ImageIcon icono, int ancho, int alto) {
         Image imagen = icono.getImage();
         Image imagenEscalada = imagen.getScaledInstance(170, 220, java.awt.Image.SCALE_SMOOTH);
         return new ImageIcon(imagenEscalada);
     }
-     
+
     private void btneditarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btneditarMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_btneditarMouseClicked

@@ -107,7 +107,7 @@ public class ver_cliente extends javax.swing.JPanel {
 
         txtnombre.setEditable(false);
         txtnombre.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtnombre.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Nombre:", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12), new java.awt.Color(59, 59, 59))); // NOI18N
+        txtnombre.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true), "Nombre:", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12), new java.awt.Color(59, 59, 59))); // NOI18N
         txtnombre.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtnombreKeyTyped(evt);
@@ -116,7 +116,7 @@ public class ver_cliente extends javax.swing.JPanel {
 
         txtapellido.setEditable(false);
         txtapellido.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtapellido.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Apellido:", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12), new java.awt.Color(59, 59, 59))); // NOI18N
+        txtapellido.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true), "Apellido:", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12), new java.awt.Color(59, 59, 59))); // NOI18N
         txtapellido.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtapellidoKeyTyped(evt);
@@ -137,7 +137,7 @@ public class ver_cliente extends javax.swing.JPanel {
         jtadireccion.setLineWrap(true);
         jtadireccion.setRows(5);
         jtadireccion.setWrapStyleWord(true);
-        jtadireccion.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Dirección:", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12), new java.awt.Color(59, 59, 59))); // NOI18N
+        jtadireccion.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true), "Dirección:", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12), new java.awt.Color(59, 59, 59))); // NOI18N
         jtadireccion.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jtadireccionKeyTyped(evt);
@@ -147,7 +147,7 @@ public class ver_cliente extends javax.swing.JPanel {
 
         txttelefono.setEditable(false);
         txttelefono.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txttelefono.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Número de celular:", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12), new java.awt.Color(59, 59, 59))); // NOI18N
+        txttelefono.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true), "Número de celular:", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12), new java.awt.Color(59, 59, 59))); // NOI18N
         txttelefono.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txttelefonoKeyTyped(evt);
@@ -156,7 +156,7 @@ public class ver_cliente extends javax.swing.JPanel {
 
         txtcorreo.setEditable(false);
         txtcorreo.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtcorreo.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Correo electrónico:", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12), new java.awt.Color(59, 59, 59))); // NOI18N
+        txtcorreo.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true), "Correo electrónico:", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12), new java.awt.Color(59, 59, 59))); // NOI18N
         txtcorreo.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txtcorreoFocusLost(evt);
@@ -178,7 +178,7 @@ public class ver_cliente extends javax.swing.JPanel {
 
         fecha_registro.setEditable(false);
         fecha_registro.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        fecha_registro.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Fecha de registro:", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12), new java.awt.Color(59, 59, 59))); // NOI18N
+        fecha_registro.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true), "Fecha de registro:", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Black", 2, 12), new java.awt.Color(59, 59, 59))); // NOI18N
         fecha_registro.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 fecha_registroFocusLost(evt);
@@ -260,7 +260,7 @@ public class ver_cliente extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 640, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
