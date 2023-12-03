@@ -324,13 +324,22 @@ public class Login extends javax.swing.JFrame {
             evt.consume(); // Consumir el evento si se ha alcanzado la longitud máxima
         }
 
-       
+
     }//GEN-LAST:event_txtNombreKeyTyped
 
     private void txtPasswordKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPasswordKeyTyped
-//        // TODO add your handling code here:
-//
-        char[] passwordChars = txtPassword.getPassword();
+        // TODO add your handling code here:
+
+        char[] contrasena = txtPassword.getPassword();
+        char c = evt.getKeyChar(); // Obtener el carácter ingresado
+
+        if (contrasena.length == 0 && Character.isWhitespace(c)) {
+            evt.consume(); // Consumir el evento si es un espacio en blanco en la primera posición
+        } else if (contrasena.length >= 12) {
+            evt.consume(); // Consumir el evento si se ha alcanzado la longitud máxima
+        }
+
+        /*char[] passwordChars = txtPassword.getPassword();
         String password = new String(passwordChars);
 
         if (password.length() == 0 || password.trim().isEmpty()) {
@@ -339,7 +348,7 @@ public class Login extends javax.swing.JFrame {
             evt.consume(); // Consumir el evento si la longitud está fuera del rango permitido
         } else if (!password.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,20}$")) {
             evt.consume(); // Consumir el evento si no cumple con los requisitos de contenido
-        }
+        }*/
     }//GEN-LAST:event_txtPasswordKeyTyped
 
     private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
@@ -365,15 +374,13 @@ public class Login extends javax.swing.JFrame {
             // Muestra el formulario recuperarContra y cierra el formulario de login actual
             r.setVisible(true);
             this.dispose();
-        }
-        else if (txtNombre.getText().isEmpty()){
-            JOptionPane.showMessageDialog(null, "Ingrese un nombre de usuario para poder restablecer la contraseña.", "Error", JOptionPane.ERROR_MESSAGE);                
-                
-        }
-         else {
+        } else if (txtNombre.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Ingrese un nombre de usuario para poder restablecer la contraseña.", "Error", JOptionPane.ERROR_MESSAGE);
+
+        } else {
             // Si el usuario no existe, muestra un mensaje de error
             JOptionPane.showMessageDialog(null, "El usuario no existe.", "Error", JOptionPane.ERROR_MESSAGE);
-            
+
         }
 
         System.out.println("Valor de txtNombre: " + txtNombre.getText());
@@ -381,7 +388,7 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_lblRecuperarMouseClicked
 
     private boolean usuarioExiste(String usuario) {
-        
+
         try (
                 Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789"); PreparedStatement stmt = conn.prepareStatement("SELECT COUNT(*) FROM Usuarios WHERE nombre_usuario = ?")) {
 
@@ -401,7 +408,7 @@ public class Login extends javax.swing.JFrame {
     }
 
     private void txtNombreFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNombreFocusLost
-       
+
     }//GEN-LAST:event_txtNombreFocusLost
 
     /**

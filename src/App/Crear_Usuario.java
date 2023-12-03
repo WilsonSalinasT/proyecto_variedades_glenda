@@ -187,7 +187,7 @@ public class Crear_Usuario extends javax.swing.JFrame {
 
         contra1.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         contra1.setForeground(new java.awt.Color(255, 0, 0));
-        contra1.setText("La contraseña debe tener al menos 8 caracteres, incluyendo mayúsculas, minúsculas, números y caracteres especiales (*, &, $, etc.).");
+        contra1.setText("La contraseña debe maximo 12 caracteres, puede incluir mayúsculas, minúsculas, números y caracteres especiales (*, &, $, etc.).");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -220,7 +220,7 @@ public class Crear_Usuario extends javax.swing.JFrame {
                                 .addComponent(txtcontrasena2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 387, Short.MAX_VALUE)
                                 .addComponent(txtcontrasena1, javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(txtNombre, javax.swing.GroupLayout.Alignment.LEADING)))
-                        .addGap(0, 28, Short.MAX_VALUE))))
+                        .addGap(0, 46, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -341,14 +341,34 @@ public class Crear_Usuario extends javax.swing.JFrame {
 
     private void txtcontrasena1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtcontrasena1KeyTyped
 
+        String contrasena = txtcontrasena1.getText();
+        char c = evt.getKeyChar(); // Obtener el carácter ingresado
+
+        if (contrasena.isEmpty() && Character.isWhitespace(c)) {
+            evt.consume(); // Consumir el evento si es un espacio en blanco en la primera posición
+        } else if (contrasena.length() >= 12) {
+            evt.consume(); // Consumir el evento si se ha alcanzado la longitud máxima
+        }
+
+
     }//GEN-LAST:event_txtcontrasena1KeyTyped
 
     private void txtcontrasena2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtcontrasena2KeyTyped
 
+        String contrasena = txtcontrasena2.getText();
+        char c = evt.getKeyChar(); // Obtener el carácter ingresado
+
+        if (contrasena.isEmpty() && Character.isWhitespace(c)) {
+            evt.consume(); // Consumir el evento si es un espacio en blanco en la primera posición
+        } else if (contrasena.length() >= 12) {
+            evt.consume(); // Consumir el evento si se ha alcanzado la longitud máxima
+        }
+
+
     }//GEN-LAST:event_txtcontrasena2KeyTyped
 
     private void txtcontrasena1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtcontrasena1FocusLost
-        validatePassword();
+        //validatePassword();
     }//GEN-LAST:event_txtcontrasena1FocusLost
 
     private void txtcontrasena1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtcontrasena1FocusGained
@@ -390,7 +410,7 @@ public class Crear_Usuario extends javax.swing.JFrame {
         });
     }
 
-    private void validatePassword() {
+    /*private void validatePassword() {
         String currentPassword = txtcontrasena1.getText();
 
         // Verificar la longitud de la contraseña
@@ -402,13 +422,13 @@ public class Crear_Usuario extends javax.swing.JFrame {
             txtcontrasena2.setEnabled(true);
             btnGuardar.setEnabled(true);
         }
-    }
+    }*/
 
-    private boolean isSpecialCharacter(char c) {
+    /*private boolean isSpecialCharacter(char c) {
         // Lógica para verificar si el carácter es especial
         String specialCharacters = "!@#$%^&*()-_=+[]{}|;:'\",.<>/?";
         return specialCharacters.indexOf(c) != -1;
-    }
+    }*/
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnvolver;
@@ -419,11 +439,9 @@ public class Crear_Usuario extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel5;
     public javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtcontrasena1;
     private javax.swing.JTextField txtcontrasena2;
