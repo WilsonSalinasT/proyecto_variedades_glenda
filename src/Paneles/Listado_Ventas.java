@@ -28,7 +28,6 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Listado_Ventas extends javax.swing.JPanel {
 
-    
     TextPrompt holder;
 
     /**
@@ -238,7 +237,7 @@ public class Listado_Ventas extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btncrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncrearActionPerformed
-        IngresodeVenta ver = new  IngresodeVenta();
+        IngresodeVenta ver = new IngresodeVenta();
         ver.setVisible(true);
         ver.setLocationRelativeTo(null);
 
@@ -253,7 +252,7 @@ public class Listado_Ventas extends javax.swing.JPanel {
     }//GEN-LAST:event_btnSiguienteActionPerformed
 
     private void btnbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbuscarActionPerformed
-      String texto = txtbuscar.getText().trim();
+        String texto = txtbuscar.getText().trim();
 
         //Validacion del texto ingresado
         if (!texto.isEmpty())
@@ -277,9 +276,9 @@ public class Listado_Ventas extends javax.swing.JPanel {
         // Cargar la tabla con los datos actualizados
         cargarTabla();
     }//GEN-LAST:event_btnrefrescarActionPerformed
-    
+
     private void txtbuscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtbuscarKeyTyped
-           char c = evt.getKeyChar(); // Obtener el carácter ingresado
+        char c = evt.getKeyChar(); // Obtener el carácter ingresado
 
         if (txtbuscar.getText().isEmpty() && Character.isWhitespace(c))
         {
@@ -291,13 +290,10 @@ public class Listado_Ventas extends javax.swing.JPanel {
     }//GEN-LAST:event_txtbuscarKeyTyped
 
     private void txtbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtbuscarActionPerformed
-       
+
     }//GEN-LAST:event_txtbuscarActionPerformed
 
-   
-
-
- int selectedRow2;
+    int selectedRow2;
     int paginaActual = 1; // Página actual
     int filasPorPagina = 20; // Número de filas a mostrar por página
     int totalFilas = 0; // Total de filas en la tabla
@@ -306,182 +302,198 @@ public class Listado_Ventas extends javax.swing.JPanel {
     String terminoBusqueda = ""; // Término de búsqueda actual
 
     private void cargarTabla() {
-    DefaultTableModel modeloTabla = (DefaultTableModel) tblcompras.getModel();
-    modeloTabla.setRowCount(0); // Limpiar los datos existentes en la tabla
+        DefaultTableModel modeloTabla = (DefaultTableModel) tblcompras.getModel();
+        modeloTabla.setRowCount(0); // Limpiar los datos existentes en la tabla
 
-    PreparedStatement ps;
-    ResultSet rs;
-    ResultSetMetaData rsmd;
-    int columnas;
-    boolean foundData = false;
+        PreparedStatement ps;
+        ResultSet rs;
+        ResultSetMetaData rsmd;
+        int columnas;
+        boolean foundData = false;
 
-    try {
-        Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
+        try
+        {
+            Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
 
-        // Obtener el total de filas que cumplen con el criterio de búsqueda
-ps = conn.prepareStatement("SELECT COUNT(*) AS TotalFilas " +
-        "FROM Clientes C " +
-        "JOIN Ventas V ON C.id_cliente = V.id_cliente " +
-        "WHERE CONCAT(C.nombre, ' ', C.apellido) LIKE ? " +
-        "OR V.numfactura LIKE ? OR V.fecha LIKE ? OR V.tipoCategoria LIKE ?");
-ps.setString(1, "%" + terminoBusqueda + "%");
-ps.setString(2, "%" + terminoBusqueda + "%");
-ps.setString(3, "%" + terminoBusqueda + "%");
-ps.setString(4, "%" + terminoBusqueda + "%");
-rs = ps.executeQuery();
+            // Obtener el total de filas que cumplen con el criterio de búsqueda
+            ps = conn.prepareStatement("SELECT COUNT(*) AS TotalFilas "
+                    + "FROM Cliente C "
+                    + "JOIN Ventas V ON C.id_cliente = V.id_cliente "
+                    + "WHERE CONCAT(C.nombre, ' ', C.apellido) LIKE ? "
+                    + "OR V.numfactura LIKE ? OR V.fecha LIKE ? OR V.tipoCategoria LIKE ?");
+            ps.setString(1, "%" + terminoBusqueda + "%");
+            ps.setString(2, "%" + terminoBusqueda + "%");
+            ps.setString(3, "%" + terminoBusqueda + "%");
+            ps.setString(4, "%" + terminoBusqueda + "%");
+            rs = ps.executeQuery();
 
-
-        if (rs.next()) {
-            totalFilas = rs.getInt("TotalFilas");
-        }
-        totalPaginas = (int) Math.ceil((double) totalFilas / filasPorPagina);
-
-        if (paginaActual < 1) {
-            paginaActual = 1;
-        } else if (paginaActual > totalPaginas) {
-            paginaActual = totalPaginas;
-        }
-
-        int offset = (paginaActual - 1) * filasPorPagina;
-        if (offset < 0) {
-            offset = 0;
-        }
-
-        // Consulta para obtener los datos paginados
-ps = conn.prepareStatement("SELECT ROW_NUMBER() OVER (ORDER BY C.nombre, C.apellido) AS NumRegistro, " +
-        "CONCAT(C.nombre, ' ', C.apellido) AS NombreCompleto, V.numfactura, V.fecha, V.tipoCategoria " +
-        "FROM Clientes C " +
-        "JOIN Ventas V ON C.id_cliente = V.id_cliente " +
-        "WHERE CONCAT(C.nombre, ' ', C.apellido) LIKE ? " +
-        "OR V.numfactura LIKE ? OR V.fecha LIKE ? OR V.tipoCategoria LIKE ? " +
-        "ORDER BY C.nombre, C.apellido " +
-        "OFFSET ? ROWS FETCH NEXT ? ROWS ONLY");
-ps.setString(1, "%" + terminoBusqueda + "%");
-ps.setString(2, "%" + terminoBusqueda + "%");
-ps.setString(3, "%" + terminoBusqueda + "%");
-ps.setString(4, "%" + terminoBusqueda + "%");
-ps.setInt(5, offset);
-ps.setInt(6, filasPorPagina);
-rs = ps.executeQuery();
-rsmd = rs.getMetaData();
-columnas = rsmd.getColumnCount();
-
-
-        while (rs.next()) {
-            Object[] fila = new Object[columnas];
-            for (int indice = 0; indice < columnas; indice++) {
-                fila[indice] = rs.getObject(indice + 1);
+            if (rs.next())
+            {
+                totalFilas = rs.getInt("TotalFilas");
             }
-            modeloTabla.addRow(fila);
-            foundData = true;
-        }
+            totalPaginas = (int) Math.ceil((double) totalFilas / filasPorPagina);
 
-        ajustarTabla(filasPorPagina);
-
-        if (!foundData) {
-            JOptionPane.showMessageDialog(null, "No se encontraron datos");
-        }
-
-        // Obtener el número de filas actualizado
-        int rowCount = modeloTabla.getRowCount();
-        Contable_Registro.setText("Cantidad de filas: " + rowCount + " - Página " + paginaActual + "/" + totalPaginas);
-
-    } catch (SQLException e) {
-        e.printStackTrace(); // Imprime la pila de excepciones para depuración
-        JOptionPane.showMessageDialog(null, e.toString());
-    }
-}
-
-private void ajustarTabla(int filasDeseadas) {
-    tblcompras.setPreferredScrollableViewportSize(new Dimension(tblcompras.getPreferredSize().width, tblcompras.getRowHeight() * filasDeseadas));
-    tblcompras.setFillsViewportHeight(true);
-}
-
-private void siguientePagina() {
-    if (paginaActual < totalPaginas) {
-        paginaActual++;
-        cargarTabla();
-    }
-}
-
-private void paginaAnterior() {
-    if (paginaActual > 1) {
-        paginaActual--;
-        cargarTabla();
-    }
-}
-
-
-   private void buscarDatos(String texto) {
-    DefaultTableModel modelTabla = (DefaultTableModel) tblcompras.getModel();
-    modelTabla.setRowCount(0);
-    boolean foundData = false;
-
-    try {
-        Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
-
-        if (conn != null && !conn.isClosed()) {
-            PreparedStatement ps = conn.prepareStatement("SELECT ROW_NUMBER() OVER(ORDER BY C.nombre, C.apellido) AS NumRegistro, " +
-                    "CONCAT(C.nombre, ' ', C.apellido) AS NombreCompleto, V.numfactura, V.fecha, V.tipoCategoria " +
-                    "FROM Clientes C " +
-                    "JOIN Ventas V ON C.id_cliente = V.id_cliente " +
-                    "WHERE CONCAT(C.nombre, ' ', C.apellido) LIKE ? OR V.numfactura LIKE ? OR V.fecha LIKE ? OR V.tipoCategoria LIKE ? " +
-                    "ORDER BY C.nombre, C.apellido " +
-                    "OFFSET ? ROWS FETCH NEXT ? ROWS ONLY");
-
-            if (texto != null) {
-                ps.setString(1, "%" + texto + "%");
-                ps.setString(2, "%" + texto + "%");
-                ps.setString(3, "%" + texto + "%");
-                ps.setString(4, "%" + texto + "%");
-                terminoBusqueda = texto; // Actualizar el término de búsqueda
-            } else {
-                ps.setString(1, "%");
-                ps.setString(2, "%");
-                ps.setString(3, "%");
-                ps.setString(4, "%");
-                terminoBusqueda = ""; // Limpiar el término de búsqueda
+            if (paginaActual < 1)
+            {
+                paginaActual = 1;
+            } else if (paginaActual > totalPaginas)
+            {
+                paginaActual = totalPaginas;
             }
 
-            // Define el OFFSET y FETCH NEXT de acuerdo a tus necesidades
-            int offset = 0; // Cambia el valor del offset según tus requerimientos
-            int fetchNext = 10; // Cambia la cantidad de registros a recuperar según tus requerimientos
+            int offset = (paginaActual - 1) * filasPorPagina;
+            if (offset < 0)
+            {
+                offset = 0;
+            }
 
+            // Consulta para obtener los datos paginados
+            ps = conn.prepareStatement("SELECT ROW_NUMBER() OVER (ORDER BY C.nombre, C.apellido) AS NumRegistro, "
+                    + "CONCAT(C.nombre, ' ', C.apellido) AS NombreCompleto, V.numfactura, V.fecha, V.tipoCategoria "
+                    + "FROM Cliente C "
+                    + "JOIN Ventas V ON C.id_cliente = V.id_cliente "
+                    + "WHERE CONCAT(C.nombre, ' ', C.apellido) LIKE ? "
+                    + "OR V.numfactura LIKE ? OR V.fecha LIKE ? OR V.tipoCategoria LIKE ? "
+                    + "ORDER BY C.nombre, C.apellido "
+                    + "OFFSET ? ROWS FETCH NEXT ? ROWS ONLY");
+            ps.setString(1, "%" + terminoBusqueda + "%");
+            ps.setString(2, "%" + terminoBusqueda + "%");
+            ps.setString(3, "%" + terminoBusqueda + "%");
+            ps.setString(4, "%" + terminoBusqueda + "%");
             ps.setInt(5, offset);
-            ps.setInt(6, fetchNext);
+            ps.setInt(6, filasPorPagina);
+            rs = ps.executeQuery();
+            rsmd = rs.getMetaData();
+            columnas = rsmd.getColumnCount();
 
-            ResultSet rs = ps.executeQuery();
+            while (rs.next())
+            {
+                Object[] fila = new Object[columnas];
+                for (int indice = 0; indice < columnas; indice++)
+                {
+                    fila[indice] = rs.getObject(indice + 1);
+                }
+                modeloTabla.addRow(fila);
+                foundData = true;
+            }
 
-            if (rs != null) {
-                while (rs.next()) {
-                    int numRegistro = rs.getInt("NumRegistro");
-                    String nombreCompleto = rs.getString("NombreCompleto");
-                    String numFactura = rs.getString("numfactura");
-                    String fecha = rs.getString("fecha");
-                    String tipoCategoria = rs.getString("tipoCategoria");
+            ajustarTabla(filasPorPagina);
 
-                    if (nombreCompleto != null && numFactura != null && fecha != null && tipoCategoria != null) {
-                        modelTabla.addRow(new Object[]{
-                                numRegistro, nombreCompleto, numFactura, fecha, tipoCategoria
-                        });
-                        foundData = true;
-                    }
+            if (!foundData)
+            {
+                JOptionPane.showMessageDialog(null, "No se encontraron datos");
+            }
+
+            // Obtener el número de filas actualizado
+            int rowCount = modeloTabla.getRowCount();
+            Contable_Registro.setText("Cantidad de filas: " + rowCount + " - Página " + paginaActual + "/" + totalPaginas);
+
+        } catch (SQLException e)
+        {
+            e.printStackTrace(); // Imprime la pila de excepciones para depuración
+            JOptionPane.showMessageDialog(null, e.toString());
+        }
+    }
+
+    private void ajustarTabla(int filasDeseadas) {
+        tblcompras.setPreferredScrollableViewportSize(new Dimension(tblcompras.getPreferredSize().width, tblcompras.getRowHeight() * filasDeseadas));
+        tblcompras.setFillsViewportHeight(true);
+    }
+
+    private void siguientePagina() {
+        if (paginaActual < totalPaginas)
+        {
+            paginaActual++;
+            cargarTabla();
+        }
+    }
+
+    private void paginaAnterior() {
+        if (paginaActual > 1)
+        {
+            paginaActual--;
+            cargarTabla();
+        }
+    }
+
+    private void buscarDatos(String texto) {
+        DefaultTableModel modelTabla = (DefaultTableModel) tblcompras.getModel();
+        modelTabla.setRowCount(0);
+        boolean foundData = false;
+
+        try
+        {
+            Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
+
+            if (conn != null && !conn.isClosed())
+            {
+                PreparedStatement ps = conn.prepareStatement("SELECT ROW_NUMBER() OVER(ORDER BY C.nombre, C.apellido) AS NumRegistro, "
+                        + "CONCAT(C.nombre, ' ', C.apellido) AS NombreCompleto, V.numfactura, V.fecha, V.tipoCategoria "
+                        + "FROM Cliente C "
+                        + "JOIN Ventas V ON C.id_cliente = V.id_cliente "
+                        + "WHERE CONCAT(C.nombre, ' ', C.apellido) LIKE ? OR V.numfactura LIKE ? OR V.fecha LIKE ? OR V.tipoCategoria LIKE ? "
+                        + "ORDER BY C.nombre, C.apellido "
+                        + "OFFSET ? ROWS FETCH NEXT ? ROWS ONLY");
+
+                if (texto != null)
+                {
+                    ps.setString(1, "%" + texto + "%");
+                    ps.setString(2, "%" + texto + "%");
+                    ps.setString(3, "%" + texto + "%");
+                    ps.setString(4, "%" + texto + "%");
+                    terminoBusqueda = texto; // Actualizar el término de búsqueda
+                } else
+                {
+                    ps.setString(1, "%");
+                    ps.setString(2, "%");
+                    ps.setString(3, "%");
+                    ps.setString(4, "%");
+                    terminoBusqueda = ""; // Limpiar el término de búsqueda
                 }
 
-                rs.close();
+                // Define el OFFSET y FETCH NEXT de acuerdo a tus necesidades
+                int offset = 0; // Cambia el valor del offset según tus requerimientos
+                int fetchNext = 10; // Cambia la cantidad de registros a recuperar según tus requerimientos
+
+                ps.setInt(5, offset);
+                ps.setInt(6, fetchNext);
+
+                ResultSet rs = ps.executeQuery();
+
+                if (rs != null)
+                {
+                    while (rs.next())
+                    {
+                        int numRegistro = rs.getInt("NumRegistro");
+                        String nombreCompleto = rs.getString("NombreCompleto");
+                        String numFactura = rs.getString("numfactura");
+                        String fecha = rs.getString("fecha");
+                        String tipoCategoria = rs.getString("tipoCategoria");
+
+                        if (nombreCompleto != null && numFactura != null && fecha != null && tipoCategoria != null)
+                        {
+                            modelTabla.addRow(new Object[]
+                            {
+                                numRegistro, nombreCompleto, numFactura, fecha, tipoCategoria
+                            });
+                            foundData = true;
+                        }
+                    }
+
+                    rs.close();
+                }
+
+                ps.close();
+                conn.close();
             }
-
-            ps.close();
-            conn.close();
+        } catch (Exception e)
+        {
+            JOptionPane.showMessageDialog(null, e.toString());
         }
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(null, e.toString());
+
+        // Llama a la función de cargarTablaEmpleados() si es necesario recargar la tabla después de la búsqueda
+        cargarTabla(); // Recargar la tabla después de la búsqueda
     }
-
-    // Llama a la función de cargarTablaEmpleados() si es necesario recargar la tabla después de la búsqueda
-    cargarTabla(); // Recargar la tabla después de la búsqueda
-}
-
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

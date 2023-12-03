@@ -73,13 +73,13 @@ public class IngresodeVenta extends javax.swing.JFrame {
         // Mostrar la fecha en el JLabel
         txtfecha.setText(fechaFormateada);
 
-//        int columnIndexToHide = 4;
-//        TableColumn column = tableventas.getColumnModel().getColumn(columnIndexToHide);
-//
-//        column.setMinWidth(0);
-//        column.setMaxWidth(0);
-//        column.setPreferredWidth(0);
-//        column.setResizable(false);
+        int columnIndexToHide = 4;
+        TableColumn column = tableventas.getColumnModel().getColumn(columnIndexToHide);
+
+        column.setMinWidth(0);
+        column.setMaxWidth(0);
+        column.setPreferredWidth(0);
+        column.setResizable(false);
 //     sumarColumna();
 //        Tsum.setText(Integer.toString((int) getsumarColumna()));
         try

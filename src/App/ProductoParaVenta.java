@@ -66,13 +66,13 @@ public class ProductoParaVenta extends javax.swing.JFrame {
         tblProductosParafactura.setRowSelectionAllowed(true);
         tblProductosParafactura.setColumnSelectionAllowed(false);
 
-//        int columnIndexToHide = 4;
-//        TableColumn column = tblProductosParafactura.getColumnModel().getColumn(columnIndexToHide);
-//
-//        column.setMinWidth(0);
-//        column.setMaxWidth(0);
-//        column.setPreferredWidth(0);
-//        column.setResizable(false);
+        int columnIndexToHide = 5;
+        TableColumn column = tblProductosParafactura.getColumnModel().getColumn(columnIndexToHide);
+
+        column.setMinWidth(0);
+        column.setMaxWidth(0);
+        column.setPreferredWidth(0);
+        column.setResizable(false);
 //        tblProductosParafactura.getTableHeader().setReorderingAllowed(false);
 //        Controlador.ProductosFactura.ProductoParaCompra("");
 //        
@@ -782,8 +782,14 @@ public class ProductoParaVenta extends javax.swing.JFrame {
 
             // Obtener el total de filas que cumplen con el criterio de búsqueda
             ps = conn.prepareStatement("SELECT COUNT(*) AS TotalFilas "
-                    + "FROM Productos "
-                    + "WHERE nombre LIKE ? OR categoria LIKE ?");
+                    + "FROM Productos P "
+                    + "JOIN (SELECT cod_producto, MAX(id_precioHistorial) AS ultimo_precio_id \n"
+                    + "      FROM PrecioHistorial \n"
+                    + "      GROUP BY cod_producto) PHMax \n"
+                    + "ON P.cod_producto = PHMax.cod_producto \n"
+                    + "JOIN PrecioHistorial PH ON PH.id_precioHistorial = PHMax.ultimo_precio_id \n"
+                    + "JOIN Precio Pr ON PH.cod_producto = Pr.cod_producto \n"
+                    + "WHERE P.nombre LIKE ? OR P.categoria LIKE ? \n");
             ps.setString(1, "%" + terminoBusqueda + "%");
             ps.setString(2, "%" + terminoBusqueda + "%");
 
@@ -810,31 +816,31 @@ public class ProductoParaVenta extends javax.swing.JFrame {
             }
 
             // Consulta para obtener los datos paginados
-           ps = conn.prepareStatement("SELECT ROW_NUMBER() OVER (ORDER BY P.nombre) AS NumRegistro, \n"
-        + "       P.nombre, \n"
-        + "       P.categoria, \n"
-        + "       P.cantidad_disponible, \n"
-        + "       PH.precio_venta AS ultimo_precio_venta, \n"
-        + "       P.cod_producto \n"
-        + "FROM Productos P \n"
-        + "JOIN (SELECT cod_producto, MAX(id_precioHistorial) AS ultimo_precio_id \n"
-        + "      FROM PrecioHistorial \n"
-        + "      GROUP BY cod_producto) PHMax \n"
-        + "ON P.cod_producto = PHMax.cod_producto \n"
-        + "JOIN PrecioHistorial PH ON PH.id_precioHistorial = PHMax.ultimo_precio_id \n"
-        + "JOIN Precio Pr ON PH.cod_producto = Pr.cod_producto \n"
-        + "WHERE P.nombre LIKE ? OR P.categoria LIKE ? \n"
-        + "ORDER BY P.nombre \n"
-        + "OFFSET ? ROWS FETCH NEXT ? ROWS ONLY");
+            ps = conn.prepareStatement("SELECT ROW_NUMBER() OVER (ORDER BY P.nombre) AS NumRegistro, \n"
+                    + "       P.nombre, \n"
+                    + "       P.categoria, \n"
+                    + "       P.cantidad_disponible, \n"
+                    + "       PH.precio_venta AS ultimo_precio_venta, \n"
+                    + "       P.cod_producto \n"
+                    + "FROM Productos P \n"
+                    + "JOIN (SELECT cod_producto, MAX(id_precioHistorial) AS ultimo_precio_id \n"
+                    + "      FROM PrecioHistorial \n"
+                    + "      GROUP BY cod_producto) PHMax \n"
+                    + "ON P.cod_producto = PHMax.cod_producto \n"
+                    + "JOIN PrecioHistorial PH ON PH.id_precioHistorial = PHMax.ultimo_precio_id \n"
+                    + "JOIN Precio Pr ON PH.cod_producto = Pr.cod_producto \n"
+                    + "WHERE P.nombre LIKE ? OR P.categoria LIKE ? \n"
+                    + "ORDER BY P.nombre \n"
+                    + "OFFSET ? ROWS FETCH NEXT ? ROWS ONLY");
 
-ps.setString(1, "%" + terminoBusqueda + "%");
-ps.setString(2, "%" + terminoBusqueda + "%");
-ps.setInt(3, offset);
-ps.setInt(4, filasPorPagina);
+            ps.setString(1, "%" + terminoBusqueda + "%");
+            ps.setString(2, "%" + terminoBusqueda + "%");
+            ps.setInt(3, offset);
+            ps.setInt(4, filasPorPagina);
 
-rs = ps.executeQuery();
-rsmd = rs.getMetaData();
-columnas = rsmd.getColumnCount();
+            rs = ps.executeQuery();
+            rsmd = rs.getMetaData();
+            columnas = rsmd.getColumnCount();
 
             while (rs.next())
             {
@@ -897,9 +903,20 @@ columnas = rsmd.getColumnCount();
             Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
             if (conn != null && !conn.isClosed())
             {
-                PreparedStatement ps = conn.prepareStatement("SELECT ROW_NUMBER() OVER(ORDER BY cod_producto) AS NumRegistro, cod_producto, nombre, descripcion, categoria, precio, imagen, foto "
-                        + "FROM Productos "
-                        + "WHERE nombre LIKE ? OR categoria LIKE ?");
+                PreparedStatement ps = conn.prepareStatement("SELECT  ROW_NUMBER() OVER (ORDER BY P.nombre) AS NumRegistro, \n"
+                        + "       P.nombre, \n"
+                        + "       P.categoria, \n"
+                        + "       P.cantidad_disponible, \n"
+                        + "       PH.precio_venta AS ultimo_precio_venta, \n"
+                        + "       P.cod_producto \n"
+                        + "FROM Productos P \n"
+                        + "JOIN (SELECT cod_producto, MAX(id_precioHistorial) AS ultimo_precio_id \n"
+                        + "      FROM PrecioHistorial \n"
+                        + "      GROUP BY cod_producto) PHMax \n"
+                        + "ON P.cod_producto = PHMax.cod_producto \n"
+                        + "JOIN PrecioHistorial PH ON PH.id_precioHistorial = PHMax.ultimo_precio_id \n"
+                        + "JOIN Precio Pr ON PH.cod_producto = Pr.cod_producto \n"
+                        + "WHERE P.nombre LIKE ? OR P.categoria LIKE ? ");
 
                 if (texto != null && !texto.isEmpty())
                 {
@@ -920,19 +937,18 @@ columnas = rsmd.getColumnCount();
                     while (rs.next())
                     {
                         int numRegistro = rs.getInt("NumRegistro");
-                        int codProducto = rs.getInt("cod_producto");
+                       
                         String nombre = rs.getString("nombre");
-                        String descripcion = rs.getString("descripcion");
-                        String categoria = rs.getString("categoria");
-                        String precio = rs.getString("precio");
-                        String imagen = rs.getString("imagen");
-                        String foto = rs.getString("foto");
+                        String descripcion = rs.getString("categoria");
+                        String categoria = rs.getString("ultimo_precio_venta");
+                        String precio = rs.getString("cod_producto");
+                        
 
                         if (nombre != null && categoria != null)
                         {
                             modelTabla.addRow(new Object[]
                             {
-                                numRegistro, codProducto, nombre, descripcion, categoria, precio, imagen, foto
+                                numRegistro, nombre, descripcion, categoria, precio
                             });
                             foundData = true;
                         }
