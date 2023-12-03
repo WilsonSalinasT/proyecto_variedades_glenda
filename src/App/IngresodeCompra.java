@@ -598,7 +598,7 @@ public class IngresodeCompra extends javax.swing.JFrame {
 
         facturaText.append("*********************************************************************\n");
         facturaText.append("\n");
-        facturaText.append(String.format("%-20s %-10s %-20s %-10s\n", "Producto", "Cantidad", "Precio unitario", "Total"));
+        facturaText.append(String.format("%-23s %-10s %-20s %-10s\n", "Producto", "Cantidad", "Precio unitario", "Total"));
 
         for (int i = 0; i < model.getRowCount(); i++)
         {
@@ -607,7 +607,7 @@ public class IngresodeCompra extends javax.swing.JFrame {
             String preciounitario = (String) model.getValueAt(i, 2);
             String total = (String) model.getValueAt(i, 5);
 
-            facturaText.append(String.format("%-20s %-10s %-20s %-10s\n", name, cantidad, preciounitario, total));
+            facturaText.append(String.format("%-23s %-10s  %-20s %-10s\n", name, cantidad, preciounitario, total));
         }
 
         ver.txtbill.setText(facturaText.toString());

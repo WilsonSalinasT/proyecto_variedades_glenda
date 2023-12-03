@@ -591,7 +591,7 @@ public class IngresodeVenta extends javax.swing.JFrame {
         String num = numFactura.getText();
         String tipo = (String) tipoCompra.getSelectedItem();
         String proveedor = (String) txtCliente.getSelectedItem();
-
+        String fecha = txtfecha.getText();
         String agregarProducto = btnAgregarproducto.getText().trim(); // Nuevo campo
 
         StringBuilder camposVacios = new StringBuilder("Por favor, complete los siguientes campos obligatorios:\n");
@@ -654,17 +654,17 @@ public class IngresodeVenta extends javax.swing.JFrame {
 //        String fechaFormateada = formato.format(fecha);
 
         facturaText.append("*********************************************************************\n");
-        facturaText.append("                           Factura de compra                   \n");
+        facturaText.append("                           Factura de venta                   \n");
         facturaText.append("*********************************************************************\n");
 
         facturaText.append(" No. de Factura: ").append(num).append("\n");
-        facturaText.append(" Tipo de compra: ").append(tipo).append("\n");
-        facturaText.append(" Proveedor: ").append(proveedor).append("\n");
-//        facturaText.append(" Fecha: ").append(fechaFormateada).append("\n");
+        facturaText.append(" Tipo de venta: ").append(tipo).append("\n");
+        facturaText.append(" Cliente: ").append(proveedor).append("\n");
+        facturaText.append(" Fecha: ").append(fecha).append("\n");
 
         facturaText.append("*********************************************************************\n");
         facturaText.append("\n");
-        facturaText.append(String.format("%-20s %-10s %-20s %-10s\n", "Producto", "Cantidad", "Precio unitario", "Total"));
+        facturaText.append(String.format("%-20s%-10s%-20s%-10s\n", " Producto", " Cantidad", " Precio de venta", " subtotal"));
 
         for (int i = 0; i < model.getRowCount(); i++)
         {
@@ -673,7 +673,7 @@ public class IngresodeVenta extends javax.swing.JFrame {
             String preciounitario = (String) model.getValueAt(i, 2);
             String total = (String) model.getValueAt(i, 3);
 
-            facturaText.append(String.format("%-20s %-10s %-20s %-10s\n", name, cantidad, preciounitario, total));
+            facturaText.append(String.format(" %-20s %-10s %-20s%-10s\n", name, cantidad, preciounitario, total));
         }
 
         ver.txtbill.setText(facturaText.toString());
@@ -709,20 +709,20 @@ public class IngresodeVenta extends javax.swing.JFrame {
         String numeroFacturaSinSeparadores = nunfactura.replaceAll("[\\s-]+", "");
         String digitosSignificativos = numeroFacturaSinSeparadores.replaceAll("\\D", "");
 
-        if (digitosSignificativos.length() < 3)
-        {
-            camposVacios.append("- Número de factura\n");
-        }
+//        if (digitosSignificativos.length() < 3)
+//        {
+//            camposVacios.append("- Número de factura\n");
+//        }
 
         if (tipoCompra.getSelectedItem() == null || tipoCompra.getSelectedItem().toString().trim().isEmpty()
                 || tipoCompra.getSelectedItem().toString().trim().equalsIgnoreCase("Seleccione"))
         {
-            camposVacios.append("- Tipo de compra\n");
+            camposVacios.append("- Tipo de venta\n");
         }
 
         if (id.isEmpty())
         {
-            camposVacios.append("- Proveedor\n");
+            camposVacios.append("- Cliente\n");
         }
 
         boolean agregarProductoPresionado = true;
