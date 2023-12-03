@@ -599,20 +599,17 @@ public class IngresodeVenta extends javax.swing.JFrame {
         String numeroFacturaSinSeparadores = num.replaceAll("[\\s-]+", "");
         String digitosSignificativos = numeroFacturaSinSeparadores.replaceAll("\\D", "");
 
-        if (digitosSignificativos.length() < 3)
-        {
-            camposVacios.append("- Número de factura\n");
-        }
+     
 
         if (tipoCompra.getSelectedItem() == null || tipoCompra.getSelectedItem().toString().trim().isEmpty()
                 || tipoCompra.getSelectedItem().toString().trim().equalsIgnoreCase("Seleccione"))
         {
-            camposVacios.append("- Tipo de compra\n");
+            camposVacios.append("- Tipo de venta\n");
         }
 
         if (proveedor.isEmpty())
         {
-            camposVacios.append("- Proveedor\n");
+            camposVacios.append("- Cliente\n");
         }
 //        if (fecha == null)
 //        {
