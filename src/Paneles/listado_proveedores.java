@@ -8,6 +8,7 @@ import static App.Menu.panelprincipal;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -219,13 +220,13 @@ public class listado_proveedores extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(23, 23, 23)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(Contable_Registro, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 819, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(Contable_Registro, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(btnAnterior, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnSiguiente, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 819, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnSiguiente, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btncrear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -245,19 +246,19 @@ public class listado_proveedores extends javax.swing.JPanel {
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btncrear)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btneditar)
                         .addGap(18, 18, 18)
-                        .addComponent(btnver)))
+                        .addComponent(btnver))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnAnterior, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Contable_Registro, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSiguiente, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Contable_Registro, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(51, 51, 51))
+                    .addComponent(btnAnterior, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(110, 110, 110))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -491,6 +492,8 @@ public class listado_proveedores extends javax.swing.JPanel {
         }
     }
 
+      int totalFilas = 0; // Total de filas en la tabla
+
     private void cargarTabla() {
         DefaultTableModel modeloTabla = (DefaultTableModel) tableProveedor.getModel();
         modeloTabla.setRowCount(0); // Limpiar los datos existentes en la tabla
@@ -505,19 +508,19 @@ public class listado_proveedores extends javax.swing.JPanel {
         {
             Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
 
-            ps = conn.prepareStatement("SELECT COUNT(*) AS TotalFilas FROM Proveedor WHERE nombreEmpresa LIKE ? OR nombreProveedor LIKE ? OR telefonoempresa LIKE ? ");
+            // Obtener el total de filas que cumplen con el criterio de búsqueda
+           ps = conn.prepareStatement("SELECT COUNT(*) AS TotalFilas FROM Proveedor WHERE nombreEmpresa LIKE ? OR nombreProveedor LIKE ? OR telefonoempresa LIKE ? ");
             ps.setString(1, "%" + terminoBusqueda + "%");
             ps.setString(2, "%" + terminoBusqueda + "%");
             ps.setString(3, "%" + terminoBusqueda + "%");
+
             rs = ps.executeQuery();
 
-            int cantidadFilas = 0;
             if (rs.next())
             {
-                cantidadFilas = rs.getInt("TotalFilas");
+                totalFilas = rs.getInt("TotalFilas");
             }
-
-            totalPaginas = (int) Math.ceil((double) cantidadFilas / filasPorPagina);
+            totalPaginas = (int) Math.ceil((double) totalFilas / filasPorPagina);
 
             if (paginaActual < 1)
             {
@@ -533,6 +536,7 @@ public class listado_proveedores extends javax.swing.JPanel {
                 offset = 0;
             }
 
+            // Consulta para obtener los datos paginados
             ps = conn.prepareStatement("SELECT ROW_NUMBER() OVER(ORDER BY nombreEmpresa) AS NumRegistro, nombreEmpresa, nombreProveedor, telefonoempresa, direccion FROM Proveedor WHERE nombreEmpresa LIKE ? OR nombreProveedor LIKE ? OR telefonoempresa LIKE ? ORDER BY nombreEmpresa OFFSET ? ROWS FETCH NEXT ? ROWS ONLY");
             ps.setString(1, "%" + terminoBusqueda + "%");
             ps.setString(2, "%" + terminoBusqueda + "%");
@@ -554,18 +558,30 @@ public class listado_proveedores extends javax.swing.JPanel {
                 foundData = true;
             }
 
+            ajustarTabla(filasPorPagina);
+
             if (!foundData)
             {
                 JOptionPane.showMessageDialog(null, "No se encontraron datos");
             }
 
-            Contable_Registro.setText("Cantidad de filas: " + cantidadFilas + " - Página " + paginaActual + " de " + totalPaginas);
+            // Obtener el número de filas actualizado
+            int rowCount = modeloTabla.getRowCount();
+            Contable_Registro.setText("Cantidad de filas: " + rowCount + " - Página " + paginaActual + "/" + totalPaginas);
+
         } catch (SQLException e)
         {
+            e.printStackTrace(); // Imprime la pila de excepciones para depuración
             JOptionPane.showMessageDialog(null, e.toString());
         }
     }
 
+    private void ajustarTabla(int filasDeseadas) {
+        tableProveedor.setPreferredScrollableViewportSize(new Dimension(tableProveedor.getPreferredSize().width, tableProveedor.getRowHeight() * filasDeseadas));
+        tableProveedor.setFillsViewportHeight(true);
+    }
+
+   
     private void buscarDatos(String texto) {
         DefaultTableModel modelTabla = (DefaultTableModel) tableProveedor.getModel();
         modelTabla.setRowCount(0);

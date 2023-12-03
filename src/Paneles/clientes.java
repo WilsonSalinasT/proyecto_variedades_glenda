@@ -8,6 +8,7 @@ import static App.Menu.panelprincipal;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -40,8 +41,8 @@ public class clientes extends javax.swing.JPanel {
 
         tableClientes.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 12));
         tableClientes.getTableHeader().setOpaque(false);
-        tableClientes.getTableHeader().setBackground(new Color(255,0,0));
-        tableClientes.getTableHeader().setForeground(new Color(255,0,0));
+        tableClientes.getTableHeader().setBackground(new Color(255, 0, 0));
+        tableClientes.getTableHeader().setForeground(new Color(255, 0, 0));
         tableClientes.setRowHeight(25);
 
         tableClientes.setRowSelectionAllowed(true);
@@ -219,13 +220,13 @@ public class clientes extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(23, 23, 23)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(layout.createSequentialGroup()
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 819, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addComponent(Contable_Registro, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(btnAnterior, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnSiguiente, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 819, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnSiguiente, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -245,19 +246,19 @@ public class clientes extends javax.swing.JPanel {
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButton2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton3)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton4)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton4))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnAnterior, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Contable_Registro, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSiguiente, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Contable_Registro, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(51, 51, 51))
+                    .addComponent(btnAnterior, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(114, 114, 114))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -305,10 +306,10 @@ public class clientes extends javax.swing.JPanel {
         // Cargar la tabla con los datos actualizados
         cargarTabla();
     }//GEN-LAST:event_jButton5ActionPerformed
-   int selectedRow2;
+    int selectedRow2;
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-      selectedRow2 = tableClientes.getSelectedRow();
+        selectedRow2 = tableClientes.getSelectedRow();
         if (selectedRow2 == -1)
         {
             JOptionPane.showMessageDialog(null, "Seleccione un cliente para poder editarlo");
@@ -337,22 +338,22 @@ public class clientes extends javax.swing.JPanel {
 
                 String nombre = rs.getString("nombre");
                 String apellido = rs.getString("apellido");
-                
+
                 String direccion = rs.getString("direccion");
                 String telefono = rs.getString("numero_telefono");
                 String correo = rs.getString("correo_electronico");
 //                String fecha = rs.getString("fecha_registro");
-                 String id = rs.getString("id_cliente");
+                String id = rs.getString("id_cliente");
 
                 editar_cliente editar = new editar_cliente();
-                
+
                 editar.txtnombre.setText(nombre);
                 editar.txtapellido.setText(apellido);
                 String sexo = rs.getString("genero");
-               
+
                 if (sexo.equals("Masculino"))
                 {
-                   editar.rbmasculino.setSelected(true);
+                    editar.rbmasculino.setSelected(true);
                 } else if (sexo.equals("Femenino"))
                 {
                     editar.rbfemenino.setSelected(true);
@@ -360,11 +361,9 @@ public class clientes extends javax.swing.JPanel {
                 editar.jtadireccion.setText(direccion);
                 editar.txttelefono.setText(telefono);
                 editar.txtcorreo.setText(correo);
-               
-                 editar.Id_cl.setText(id);
 
+                editar.Id_cl.setText(id);
 
-                
                 editar.setSize(1024, 640);
                 editar.setLocation(0, 0);
 
@@ -424,21 +423,21 @@ public class clientes extends javax.swing.JPanel {
 
                 String nombre = rs.getString("nombre");
                 String apellido = rs.getString("apellido");
-                
+
                 String direccion = rs.getString("direccion");
                 String telefono = rs.getString("numero_telefono");
                 String correo = rs.getString("correo_electronico");
                 String fecha = rs.getString("fecha_registro");
 
                 ver_cliente mostrar = new ver_cliente();
-                
+
                 mostrar.txtnombre.setText(nombre);
                 mostrar.txtapellido.setText(apellido);
                 String sexo = rs.getString("genero");
-               
+
                 if (sexo.equals("Masculino"))
                 {
-                   mostrar.rbmasculino.setSelected(true);
+                    mostrar.rbmasculino.setSelected(true);
                 } else if (sexo.equals("Femenino"))
                 {
                     mostrar.rbfemenino.setSelected(true);
@@ -448,8 +447,6 @@ public class clientes extends javax.swing.JPanel {
                 mostrar.txtcorreo.setText(correo);
                 mostrar.fecha_registro.setText(fecha);
 
-
-                
                 mostrar.setSize(1024, 640);
                 mostrar.setLocation(0, 0);
 
@@ -480,9 +477,11 @@ public class clientes extends javax.swing.JPanel {
     private void txtbuscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtbuscarKeyTyped
         char c = evt.getKeyChar(); // Obtener el carácter ingresado
 
-        if (txtbuscar.getText().isEmpty() && Character.isWhitespace(c)) {
+        if (txtbuscar.getText().isEmpty() && Character.isWhitespace(c))
+        {
             evt.consume(); // Consumir el evento si es un espacio en blanco en la primera letra
-        } else if (txtbuscar.getText().length() >= 100) {
+        } else if (txtbuscar.getText().length() >= 100)
+        {
             evt.consume(); // Consumir el evento si se ha alcanzado la longitud máxima
         }
     }//GEN-LAST:event_txtbuscarKeyTyped
@@ -503,6 +502,8 @@ public class clientes extends javax.swing.JPanel {
         }
     }
 
+    int totalFilas = 0; // Total de filas en la tabla
+
     private void cargarTabla() {
         DefaultTableModel modeloTabla = (DefaultTableModel) tableClientes.getModel();
         modeloTabla.setRowCount(0); // Limpiar los datos existentes en la tabla
@@ -517,19 +518,19 @@ public class clientes extends javax.swing.JPanel {
         {
             Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
 
+            // Obtener el total de filas que cumplen con el criterio de búsqueda
             ps = conn.prepareStatement("SELECT COUNT(*) AS TotalFilas FROM Cliente WHERE nombre LIKE ? OR apellido LIKE ? OR genero LIKE ?");
             ps.setString(1, "%" + terminoBusqueda + "%");
             ps.setString(2, "%" + terminoBusqueda + "%");
             ps.setString(3, "%" + terminoBusqueda + "%");
+
             rs = ps.executeQuery();
 
-            int cantidadFilas = 0;
             if (rs.next())
             {
-                cantidadFilas = rs.getInt("TotalFilas");
+                totalFilas = rs.getInt("TotalFilas");
             }
-
-            totalPaginas = (int) Math.ceil((double) cantidadFilas / filasPorPagina);
+            totalPaginas = (int) Math.ceil((double) totalFilas / filasPorPagina);
 
             if (paginaActual < 1)
             {
@@ -545,7 +546,8 @@ public class clientes extends javax.swing.JPanel {
                 offset = 0;
             }
 
-            ps = conn.prepareStatement("SELECT ROW_NUMBER() OVER(ORDER BY nombre) AS NumRegistro, nombre, apellido, genero, correo_electronico FROM Cliente WHERE nombre LIKE ? OR apellido LIKE ? OR genero LIKE ?  ORDER BY nombre OFFSET ? ROWS FETCH NEXT ? ROWS ONLY");
+            // Consulta para obtener los datos paginados
+           ps = conn.prepareStatement("SELECT ROW_NUMBER() OVER(ORDER BY nombre) AS NumRegistro, nombre, apellido, genero, correo_electronico FROM Cliente WHERE nombre LIKE ? OR apellido LIKE ? OR genero LIKE ?  ORDER BY nombre OFFSET ? ROWS FETCH NEXT ? ROWS ONLY");
             ps.setString(1, "%" + terminoBusqueda + "%");
             ps.setString(2, "%" + terminoBusqueda + "%");
             ps.setString(3, "%" + terminoBusqueda + "%");
@@ -566,18 +568,30 @@ public class clientes extends javax.swing.JPanel {
                 foundData = true;
             }
 
+            ajustarTabla(filasPorPagina);
+
             if (!foundData)
             {
                 JOptionPane.showMessageDialog(null, "No se encontraron datos");
             }
 
-            Contable_Registro.setText("Cantidad de filas: " + cantidadFilas + " - Página " + paginaActual + " de " + totalPaginas);
+            // Obtener el número de filas actualizado
+            int rowCount = modeloTabla.getRowCount();
+            Contable_Registro.setText("Cantidad de filas: " + rowCount + " - Página " + paginaActual + "/" + totalPaginas);
+
         } catch (SQLException e)
         {
+            e.printStackTrace(); // Imprime la pila de excepciones para depuración
             JOptionPane.showMessageDialog(null, e.toString());
         }
     }
 
+    private void ajustarTabla(int filasDeseadas) {
+        tableClientes.setPreferredScrollableViewportSize(new Dimension(tableClientes.getPreferredSize().width, tableClientes.getRowHeight() * filasDeseadas));
+        tableClientes.setFillsViewportHeight(true);
+    }
+
+  
     private void buscarDatos(String texto) {
         DefaultTableModel modelTabla = (DefaultTableModel) tableClientes.getModel();
         modelTabla.setRowCount(0);

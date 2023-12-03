@@ -631,6 +631,7 @@ public class Listado_Empleados extends javax.swing.JPanel {
     int paginaActual = 1; // Página actual
     int totalPaginas = 1; // Total de páginas
     String terminoBusqueda = ""; // Término de búsqueda actual
+  int totalFilas = 0; // Total de filas en la tabla
 
     private void cargarTablaEmpleados() {
         DefaultTableModel modeloTabla = (DefaultTableModel) tblEmpleados.getModel();
@@ -646,18 +647,18 @@ public class Listado_Empleados extends javax.swing.JPanel {
         {
             Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
 
-            ps = conn.prepareStatement("SELECT COUNT(*) AS TotalFilas FROM Empleado WHERE nombre1 LIKE ? OR apellido1 LIKE ?");
+            // Obtener el total de filas que cumplen con el criterio de búsqueda
+             ps = conn.prepareStatement("SELECT COUNT(*) AS TotalFilas FROM Empleado WHERE nombre1 LIKE ? OR apellido1 LIKE ?");
             ps.setString(1, "%" + terminoBusqueda + "%");
             ps.setString(2, "%" + terminoBusqueda + "%");
+
             rs = ps.executeQuery();
 
-            int cantidadFilas = 0;
             if (rs.next())
             {
-                cantidadFilas = rs.getInt("TotalFilas");
+                totalFilas = rs.getInt("TotalFilas");
             }
-
-            totalPaginas = (int) Math.ceil((double) cantidadFilas / filasPorPagina);
+            totalPaginas = (int) Math.ceil((double) totalFilas / filasPorPagina);
 
             if (paginaActual < 1)
             {
@@ -673,6 +674,7 @@ public class Listado_Empleados extends javax.swing.JPanel {
                 offset = 0;
             }
 
+            // Consulta para obtener los datos paginados
             ps = conn.prepareStatement("SELECT ROW_NUMBER() OVER(ORDER BY nombre1) AS NumRegistro, nombre1, apellido1, celular, barrio FROM Empleado WHERE nombre1 LIKE ? OR apellido1 LIKE ? ORDER BY nombre1 OFFSET ? ROWS FETCH NEXT ? ROWS ONLY");
             ps.setString(1, "%" + terminoBusqueda + "%");
             ps.setString(2, "%" + terminoBusqueda + "%");
@@ -693,18 +695,31 @@ public class Listado_Empleados extends javax.swing.JPanel {
                 foundData = true;
             }
 
+            ajustarTabla(filasPorPagina);
+
             if (!foundData)
             {
                 JOptionPane.showMessageDialog(null, "No se encontraron datos");
             }
 
-            Texto_Contable.setText("Cantidad de filas: " + cantidadFilas + " - Página " + paginaActual + " de " + totalPaginas);
+            // Obtener el número de filas actualizado
+            int rowCount = modeloTabla.getRowCount();
+            Texto_Contable.setText("Cantidad de filas: " + rowCount + " - Página " + paginaActual + "/" + totalPaginas);
 
         } catch (SQLException e)
         {
+            e.printStackTrace(); // Imprime la pila de excepciones para depuración
             JOptionPane.showMessageDialog(null, e.toString());
         }
     }
+
+    private void ajustarTabla(int filasDeseadas) {
+        tblEmpleados.setPreferredScrollableViewportSize(new Dimension(tblEmpleados.getPreferredSize().width, tblEmpleados.getRowHeight() * filasDeseadas));
+        tblEmpleados.setFillsViewportHeight(true);
+    }
+
+    
+  
 
     private void siguientePagina() {
         if (paginaActual < totalPaginas)
