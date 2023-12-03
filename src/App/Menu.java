@@ -19,6 +19,7 @@ import Paneles.Listado_Prod;
 import Paneles.Listado_Productos;
 import Paneles.Listado_Sublimacion;
 import Paneles.Listado_Ventas;
+import Paneles.Listado_de_Precios;
 import Paneles.Listado_de_envios;
 import Paneles.Listado_pedido_entregado;
 
@@ -522,6 +523,14 @@ public class Menu extends javax.swing.JFrame {
 
     private void HistorialPreciosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HistorialPreciosActionPerformed
         // TODO add your handling code here:
+        Listado_de_Precios p2 = new Listado_de_Precios();
+        p2.setSize(1024, 640);
+        p2.setLocation(0, 0);
+
+        panelprincipal.removeAll();
+        panelprincipal.add(p2, BorderLayout.CENTER);
+        panelprincipal.revalidate();
+        panelprincipal.repaint();
     }//GEN-LAST:event_HistorialPreciosActionPerformed
 
     private void cerrarsecionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cerrarsecionActionPerformed
