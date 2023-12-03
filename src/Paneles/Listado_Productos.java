@@ -506,7 +506,8 @@ public class Listado_Productos extends javax.swing.JPanel {
 //            String valorCelda3 = tabla_productos.getValueAt(fila, 3).toString();
 
             // Crear una conexión y un PreparedStatement usando try-with-resources
-            try (Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789"); PreparedStatement ps = conn.prepareStatement("SELECT *\n"
+            try (Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789"); 
+                    PreparedStatement ps = conn.prepareStatement("SELECT *\n"
                     + "FROM Productos\n"
                     + "JOIN Precio ON Productos.cod_producto = Precio.cod_producto\n"
                     + "WHERE Productos.cod_producto = ?"))
@@ -521,14 +522,22 @@ public class Listado_Productos extends javax.swing.JPanel {
                     {
                         String nombre = rs.getString("nombre");
                         String precio = rs.getString("precio_unitario");
+                         String precioVenta = rs.getString("precio_venta");
+                         String preciocompra = rs.getString("precio_compra");
                         String descripcion = rs.getString("descripcion");
+                        String cantidad = rs.getString("cantidad_disponible");
 
                         String Id = rs.getString("cod_producto");
+                        String IdPrecio = rs.getString("id_precio");
 
                         edit_producto mostrar = new edit_producto();
                         mostrar.txtnombre.setText(nombre);
-                        mostrar.txtPrecio.setText(precio);
+                        mostrar.txtPreciounitario.setText(precio);
+                         mostrar.txtPreciocompra.setText(precioVenta);
+                        mostrar.txtPrecioventa.setText(preciocompra);
+                        mostrar.txtcantidades.setText(cantidad);
                         mostrar.txtdescripcion.setText(descripcion);
+                         mostrar.idprecio.setText(IdPrecio);
                         mostrar.jComboBox1.setSelectedItem(rs.getString("categoria"));
 
                         // Recuperar la imagen de la base de datos

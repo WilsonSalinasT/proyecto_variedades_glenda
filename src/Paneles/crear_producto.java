@@ -409,7 +409,7 @@ public class crear_producto extends javax.swing.JPanel {
                 Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
 
                 // Verifica si ya existe un producto con el mismo nombre
-                PreparedStatement checkNamePs = conn.prepareStatement("SELECT COUNT(*) FROM Producto WHERE nombre = ?");
+                PreparedStatement checkNamePs = conn.prepareStatement("SELECT COUNT(*) FROM Productos WHERE nombre = ?");
                 checkNamePs.setString(1, nombre);
                 ResultSet result = checkNamePs.executeQuery();
                 result.next();
@@ -418,7 +418,7 @@ public class crear_producto extends javax.swing.JPanel {
                 if (count > 0)
                 {
                     // Obtenemos el nombre del producto que ya existe
-                    PreparedStatement getExistingNamePs = conn.prepareStatement("SELECT nombre FROM Producto WHERE nombre = ?");
+                    PreparedStatement getExistingNamePs = conn.prepareStatement("SELECT nombre FROM Productos WHERE nombre = ?");
                     getExistingNamePs.setString(1, nombre);
                     ResultSet existingNameResult = getExistingNamePs.executeQuery();
                     existingNameResult.next();
