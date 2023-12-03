@@ -5,11 +5,17 @@
 package App;
 
 import Paneles.TextPrompt;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
 
 /**
  *
@@ -21,10 +27,11 @@ public class recuperarContra extends javax.swing.JFrame {
      * Creates new form recuperarContra
      */
     TextPrompt holder;
+
     public recuperarContra() {
         initComponents();
         setLocationRelativeTo(null);
-        
+
         holder = new TextPrompt("Introduzca la contraseña", txtContra1);
         holder = new TextPrompt("Vuelva a introducir la contraseña", txtContra2);
 
@@ -42,17 +49,29 @@ public class recuperarContra extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         txtNUsuario = new javax.swing.JLabel();
         btnRestablecer = new javax.swing.JButton();
         txtContra1 = new javax.swing.JPasswordField();
         txtContra2 = new javax.swing.JPasswordField();
         txtNombreR = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setToolTipText("");
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 102, 102));
+        jLabel1.setText("Mostrar");
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel1MouseClicked(evt);
+            }
+        });
 
         jPanel3.setBackground(new java.awt.Color(240, 128, 128));
 
@@ -99,6 +118,15 @@ public class recuperarContra extends javax.swing.JFrame {
             }
         });
 
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 102, 102));
+        jLabel2.setText("Mostrar");
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel2MouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -107,18 +135,22 @@ public class recuperarContra extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(149, 149, 149)
+                        .addComponent(txtContra1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel1))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(293, 293, 293)
                         .addComponent(btnRestablecer))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(149, 149, 149)
-                        .addComponent(txtContra1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(149, 149, 149)
-                        .addComponent(txtContra2, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtContra2, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel2))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(21, 21, 21)
                         .addComponent(txtNombreR)))
-                .addContainerGap(152, Short.MAX_VALUE))
+                .addContainerGap(105, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -127,10 +159,14 @@ public class recuperarContra extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(txtNombreR)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
-                .addComponent(txtContra1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(41, 41, 41)
-                .addComponent(txtContra2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 118, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtContra1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(48, 48, 48)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtContra2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 123, Short.MAX_VALUE)
                 .addComponent(btnRestablecer)
                 .addGap(38, 38, 38))
         );
@@ -141,17 +177,11 @@ public class recuperarContra extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -167,16 +197,20 @@ public class recuperarContra extends javax.swing.JFrame {
         char[] passwordChars2 = txtContra2.getPassword();
         String confirContra = new String(passwordChars2);
 
-        if (!password.equals("") && !confirContra.equals("")) {
-            if (password.equals(confirContra)) {
+        if (!password.equals("") && !confirContra.equals(""))
+        {
+            if (password.equals(confirContra))
+            {
 
-                try {
+                try
+                {
                     Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
                     Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
 
                     // Utiliza PreparedStatement con parámetros para evitar SQL injection
                     String updateQuery = "UPDATE Usuarios SET contrasena = ? WHERE nombre_usuario = ?";
-                    try (PreparedStatement updatePs = conn.prepareStatement(updateQuery)) {
+                    try (PreparedStatement updatePs = conn.prepareStatement(updateQuery))
+                    {
                         updatePs.setString(1, password);
                         updatePs.setString(2, usuario);
 
@@ -186,58 +220,114 @@ public class recuperarContra extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "Contraseña Modificada");
 
                     dispose(); // Cierra la ventana
-                    
+
                     Login r = new Login();
                     r.txtNombre.setText(usuario);
                     r.setVisible(true);
 
-                } catch (SQLException e) {
+                } catch (SQLException e)
+                {
                     JOptionPane.showMessageDialog(null, e.toString(), "Error de SQL", JOptionPane.ERROR_MESSAGE);
-                } catch (ClassNotFoundException ex) {
+                } catch (ClassNotFoundException ex)
+                {
                     JOptionPane.showMessageDialog(null, "Error de conexión a la base de datos", "Error de Conexión", JOptionPane.ERROR_MESSAGE);
                 }
-            } else {
+            } else
+            {
                 JOptionPane.showMessageDialog(null, "Las Contraseñas no coinciden");
             }
-        } else {
+        } else
+        {
             JOptionPane.showMessageDialog(null, "No se pueden admiten contraseñas vacías");
         }
     }//GEN-LAST:event_btnRestablecerActionPerformed
 
     private void txtContra1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtContra1KeyTyped
-        char[] passwordChars = txtContra1.getPassword();
-        String password = new String(passwordChars);
+        // Obtiene el campo de contraseña
+        JPasswordField passwordField = (JPasswordField) evt.getSource();
 
-        if (password.length() >= 8) {
-            evt.consume();
-        } else if (!password.matches("[a-zA-Z0-9]+")) {
-            // Consumir el evento si no cumple con los requisitos de contenido (letras y números)
+        // Obtiene la contraseña actual
+        char[] password = passwordField.getPassword();
+
+        // Limita la longitud a 12 caracteres
+        if (password.length >= 12)
+        {
+            // Consumir el evento para evitar que se procese
             evt.consume();
         }
     }//GEN-LAST:event_txtContra1KeyTyped
 
-    private void txtContra2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtContra2KeyTyped
-        char[] passwordChars = txtContra2.getPassword();
-        String password = new String(passwordChars);
+    private void mostrarMensajeError(String mensaje) {
+        // Muestra el mensaje de error en un componente visual, como una etiqueta
+        // Ejemplo: lblError.setText(mensaje);
 
-        if (password.length() >= 8) {
-            evt.consume();
-        } else if (!password.matches("[a-zA-Z0-9]+")) {
-            // Consumir el evento si no cumple con los requisitos de contenido (letras y números)
+        // También puedes mostrar un cuadro de diálogo emergente, imprimir en la consola, etc.
+        // Ejemplo: JOptionPane.showMessageDialog(this, mensaje, "Error", JOptionPane.ERROR_MESSAGE);
+    }
+
+    // Otros métodos y código de tu clase...
+
+
+        String rutaImagen = "img/eye_key.png"; // Cambia esto con la ruta de tu imagen
+
+        // Crea un ImageIcon desde la imagen
+        ImageIcon imageIcon = new ImageIcon(rutaImagen);
+
+        // Convierte el ImageIcon a un objeto Icon
+        Icon icono = (Icon) imageIcon;
+        
+    private void txtContra2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtContra2KeyTyped
+      // Obtiene el campo de contraseña
+        JPasswordField passwordField = (JPasswordField) evt.getSource();
+
+        // Obtiene la contraseña actual
+        char[] password = passwordField.getPassword();
+
+        // Limita la longitud a 12 caracteres
+        if (password.length >= 12)
+        {
+            // Consumir el evento para evitar que se procese
             evt.consume();
         }
+        
     }//GEN-LAST:event_txtContra2KeyTyped
+    boolean passwordVisible = false;
+  
+
+    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+       if (passwordVisible) {
+            txtContra1.setEchoChar('*');
+           
+            jLabel1.setText("Mostrar");
+        } else {
+            txtContra1.setEchoChar((char) 0); // Muestra la contraseña
+           
+            jLabel1.setText("Ocultar");
+        }
+        passwordVisible = !passwordVisible;
+    }//GEN-LAST:event_jLabel1MouseClicked
+
+     boolean passwordVisible1 = false;
+    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+        if (passwordVisible1) {
+            txtContra2.setEchoChar('*');
+            jLabel2.setText("Mostrar");
+        } else {
+            txtContra2.setEchoChar((char) 0); // Muestra la contraseña
+            jLabel2.setText("Ocultar");
+        }
+        passwordVisible1 = !passwordVisible1;
+    }//GEN-LAST:event_jLabel2MouseClicked
 
     /**
      * @param args the command line arguments
      */
-  
-
     private void validatePassword() {
         String currentPassword = txtContra1.getPassword().toString();
 
         // Verificar la longitud de la contraseña
-        if (currentPassword.length() < 8 || currentPassword.length() > 25) {
+        if (currentPassword.length() < 8 || currentPassword.length() > 25)
+        {
             JOptionPane.showMessageDialog(null, "La contraseña debe tener más de 8 dígitos y menos de 25", "Error en contraseña", JOptionPane.ERROR_MESSAGE);
             // txtContra2.setEnabled(false);
 
@@ -246,6 +336,8 @@ public class recuperarContra extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnRestablecer;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPasswordField txtContra1;

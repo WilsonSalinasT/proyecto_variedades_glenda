@@ -4,14 +4,15 @@
  */
 package App;
 
+
 import Paneles.TextPrompt;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+
 
 /**
  *
@@ -55,7 +56,7 @@ public class Login extends javax.swing.JFrame {
         Mostrar_Ocultar = new javax.swing.JLabel();
         Registrarse = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Inicio de Sesión");
         setBackground(new java.awt.Color(255, 255, 255));
         setResizable(false);
