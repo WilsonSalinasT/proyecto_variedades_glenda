@@ -783,13 +783,14 @@ public class ProductoParaVenta extends javax.swing.JFrame {
             // Obtener el total de filas que cumplen con el criterio de búsqueda
             ps = conn.prepareStatement("SELECT COUNT(*) AS TotalFilas "
                     + "FROM Productos P "
-                    + "JOIN (SELECT cod_producto, MAX(id_precioHistorial) AS ultimo_precio_id \n"
-                    + "      FROM PrecioHistorial \n"
-                    + "      GROUP BY cod_producto) PHMax \n"
-                    + "ON P.cod_producto = PHMax.cod_producto \n"
-                    + "JOIN PrecioHistorial PH ON PH.id_precioHistorial = PHMax.ultimo_precio_id \n"
-                    + "JOIN Precio Pr ON PH.cod_producto = Pr.cod_producto \n"
-                    + "WHERE P.nombre LIKE ? OR P.categoria LIKE ? \n");
+                    + "LEFT JOIN (\n"
+                    + "    SELECT cod_producto, MAX(id_precioHistorial) AS ultimo_precio_id\n"
+                    + "    FROM PrecioHistorial\n"
+                    + "    GROUP BY cod_producto\n"
+                    + ") PHMax ON P.cod_producto = PHMax.cod_producto\n"
+                    + "LEFT JOIN PrecioHistorial PH ON PH.id_precioHistorial = PHMax.ultimo_precio_id\n"
+                    + "LEFT JOIN Precio Pr ON P.cod_producto = Pr.cod_producto\n"
+                    + "WHERE P.nombre LIKE ? OR P.categoria LIKE ? ");
             ps.setString(1, "%" + terminoBusqueda + "%");
             ps.setString(2, "%" + terminoBusqueda + "%");
 
@@ -816,22 +817,23 @@ public class ProductoParaVenta extends javax.swing.JFrame {
             }
 
             // Consulta para obtener los datos paginados
-            ps = conn.prepareStatement("SELECT ROW_NUMBER() OVER (ORDER BY P.nombre) AS NumRegistro, \n"
-                    + "       P.nombre, \n"
-                    + "       P.categoria, \n"
-                    + "       P.cantidad_disponible, \n"
-                    + "       PH.precio_venta AS ultimo_precio_venta, \n"
-                    + "       P.cod_producto \n"
-                    + "FROM Productos P \n"
-                    + "JOIN (SELECT cod_producto, MAX(id_precioHistorial) AS ultimo_precio_id \n"
-                    + "      FROM PrecioHistorial \n"
-                    + "      GROUP BY cod_producto) PHMax \n"
-                    + "ON P.cod_producto = PHMax.cod_producto \n"
-                    + "JOIN PrecioHistorial PH ON PH.id_precioHistorial = PHMax.ultimo_precio_id \n"
-                    + "JOIN Precio Pr ON PH.cod_producto = Pr.cod_producto \n"
-                    + "WHERE P.nombre LIKE ? OR P.categoria LIKE ? \n"
-                    + "ORDER BY P.nombre \n"
-                    + "OFFSET ? ROWS FETCH NEXT ? ROWS ONLY");
+            ps = conn.prepareStatement("SELECT ROW_NUMBER() OVER (ORDER BY P.nombre) AS NumRegistro,\n"
+                    + "       P.nombre,\n"
+                    + "       P.categoria,\n"
+                    + "       P.cantidad_disponible,\n"
+                    + "       COALESCE(PH.precio_venta, Pr.precio_venta) AS ultimo_precio_venta,\n"
+                    + "       P.cod_producto\n"
+                    + "FROM Productos P\n"
+                    + "LEFT JOIN (\n"
+                    + "    SELECT cod_producto, MAX(id_precioHistorial) AS ultimo_precio_id\n"
+                    + "    FROM PrecioHistorial\n"
+                    + "    GROUP BY cod_producto\n"
+                    + ") PHMax ON P.cod_producto = PHMax.cod_producto\n"
+                    + "LEFT JOIN PrecioHistorial PH ON PH.id_precioHistorial = PHMax.ultimo_precio_id\n"
+                    + "LEFT JOIN Precio Pr ON P.cod_producto = Pr.cod_producto\n"
+                    + "WHERE P.nombre LIKE ? OR P.categoria LIKE ?\n"
+                    + "ORDER BY P.nombre\n"
+                    + "OFFSET ? ROWS FETCH NEXT ? ROWS ONLY;");
 
             ps.setString(1, "%" + terminoBusqueda + "%");
             ps.setString(2, "%" + terminoBusqueda + "%");
@@ -937,12 +939,11 @@ public class ProductoParaVenta extends javax.swing.JFrame {
                     while (rs.next())
                     {
                         int numRegistro = rs.getInt("NumRegistro");
-                       
+
                         String nombre = rs.getString("nombre");
                         String descripcion = rs.getString("categoria");
                         String categoria = rs.getString("ultimo_precio_venta");
                         String precio = rs.getString("cod_producto");
-                        
 
                         if (nombre != null && categoria != null)
                         {
