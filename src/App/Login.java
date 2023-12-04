@@ -220,7 +220,7 @@ public class Login extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(Mostrar_Ocultar))
+                        .addComponent(Mostrar_Ocultar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel5))
                 .addGap(29, 29, 29)
                 .addComponent(bntIniciar_sesion, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -265,11 +265,7 @@ public class Login extends javax.swing.JFrame {
      java.net.URL imgUr2 = recuperarContra.class.getResource(imagePath1);
     // Crear un ImageIcon con la ruta de la imagen
     ImageIcon icon1 = new ImageIcon(imgUr2);
-    
-    
-    
-    
-  
+
     private void Mostrar_OcultarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Mostrar_OcultarMouseClicked
 
         if (passwordVisible)
