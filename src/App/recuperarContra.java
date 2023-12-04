@@ -66,7 +66,7 @@ public class recuperarContra extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 102, 102));
-        jLabel1.setText("Mostrar");
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/eye_key.png"))); // NOI18N
         jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel1MouseClicked(evt);
@@ -120,7 +120,7 @@ public class recuperarContra extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 102, 102));
-        jLabel2.setText("Mostrar");
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/eye_key.png"))); // NOI18N
         jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel2MouseClicked(evt);
@@ -136,21 +136,22 @@ public class recuperarContra extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(149, 149, 149)
-                        .addComponent(txtContra1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel1))
+                        .addComponent(txtContra1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(293, 293, 293)
                         .addComponent(btnRestablecer))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(149, 149, 149)
                         .addComponent(txtContra2, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel2))
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(21, 21, 21)
-                        .addComponent(txtNombreR)))
-                .addContainerGap(105, Short.MAX_VALUE))
+                        .addComponent(txtNombreR))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(530, 530, 530)
+                        .addComponent(jLabel1)))
+                .addContainerGap(126, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -266,18 +267,16 @@ public class recuperarContra extends javax.swing.JFrame {
     }
 
     // Otros métodos y código de tu clase...
+    String rutaImagen = "img/eye_key.png"; // Cambia esto con la ruta de tu imagen
 
+    // Crea un ImageIcon desde la imagen
+    ImageIcon imageIcon = new ImageIcon(rutaImagen);
 
-        String rutaImagen = "img/eye_key.png"; // Cambia esto con la ruta de tu imagen
+    // Convierte el ImageIcon a un objeto Icon
+    Icon icono = (Icon) imageIcon;
 
-        // Crea un ImageIcon desde la imagen
-        ImageIcon imageIcon = new ImageIcon(rutaImagen);
-
-        // Convierte el ImageIcon a un objeto Icon
-        Icon icono = (Icon) imageIcon;
-        
     private void txtContra2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtContra2KeyTyped
-      // Obtiene el campo de contraseña
+        // Obtiene el campo de contraseña
         JPasswordField passwordField = (JPasswordField) evt.getSource();
 
         // Obtiene la contraseña actual
@@ -289,32 +288,48 @@ public class recuperarContra extends javax.swing.JFrame {
             // Consumir el evento para evitar que se procese
             evt.consume();
         }
-        
+
     }//GEN-LAST:event_txtContra2KeyTyped
     boolean passwordVisible = false;
-  
+    String imagePath = "/img/eye_key.png";
+
+    java.net.URL imgUrl = recuperarContra.class.getResource(imagePath);
+    // Crear un ImageIcon con la ruta de la imagen
+    ImageIcon icon = new ImageIcon(imgUrl);
+
+   
+    String imagePath1 = "/img/eye_password.png";
+
+     java.net.URL imgUr2 = recuperarContra.class.getResource(imagePath1);
+    // Crear un ImageIcon con la ruta de la imagen
+    ImageIcon icon1 = new ImageIcon(imgUr2);
 
     private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
-       if (passwordVisible) {
+        if (passwordVisible)
+        {
             txtContra1.setEchoChar('*');
-           
-            jLabel1.setText("Mostrar");
-        } else {
+
+            jLabel1.setIcon(icon);
+        } else
+        {
             txtContra1.setEchoChar((char) 0); // Muestra la contraseña
-           
-            jLabel1.setText("Ocultar");
+
+             jLabel1.setIcon(icon1);
         }
         passwordVisible = !passwordVisible;
     }//GEN-LAST:event_jLabel1MouseClicked
 
-     boolean passwordVisible1 = false;
+    boolean passwordVisible1 = false;
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
-        if (passwordVisible1) {
+        if (passwordVisible1)
+        {
             txtContra2.setEchoChar('*');
-            jLabel2.setText("Mostrar");
-        } else {
+            jLabel2.setIcon(icon);
+
+        } else
+        {
             txtContra2.setEchoChar((char) 0); // Muestra la contraseña
-            jLabel2.setText("Ocultar");
+            jLabel2.setIcon(icon1);
         }
         passwordVisible1 = !passwordVisible1;
     }//GEN-LAST:event_jLabel2MouseClicked
