@@ -64,9 +64,19 @@ public class Inventario extends javax.swing.JPanel {
 
             // Obtener el total de filas que cumplen con el criterio de búsqueda
             ps = conn.prepareStatement("SELECT COUNT(*) AS TotalFilas "
-                    + "FROM Productos E "
-                    + "JOIN PrecioHistorial V ON E.cod_producto = V.cod_producto "
-                    + "WHERE E.nombre LIKE ?  OR E.descripcion LIKE ? OR E.categoria LIKE ? ");
+                    + "  From  Productos P\n"
+                    + "JOIN \n"
+                    + "    PrecioHistorial PH ON P.cod_producto = PH.cod_producto\n"
+                    + "WHERE \n"
+                    + "    PH.id_precioHistorial = (\n"
+                    + "        SELECT \n"
+                    + "            MAX(id_precioHistorial)\n"
+                    + "        FROM \n"
+                    + "            PrecioHistorial\n"
+                    + "        WHERE \n"
+                    + "            cod_producto = P.cod_producto\n"
+                    + "    )\n"
+                    + "    AND P.nombre LIKE ? OR P.descripcion LIKE ? OR P.categoria LIKE ? \n");
             ps.setString(1, "%" + terminoBusqueda + "%");
             ps.setString(2, "%" + terminoBusqueda + "%");
             ps.setString(3, "%" + terminoBusqueda + "%");
@@ -213,7 +223,7 @@ public class Inventario extends javax.swing.JPanel {
 
             },
             new String [] {
-                "N°", "Producto", "Descripcion", "Categoria", "Cantidad disponible", "Precio de compra(unitario)", "precio de venta"
+                "N°", "Producto", "Descripción", "Categoría", "Cantidad disponible", "Precio de compra(unitario)", "Precio de venta"
             }
         ));
         tabla_inventario.setShowHorizontalLines(true);
@@ -223,6 +233,9 @@ public class Inventario extends javax.swing.JPanel {
             tabla_inventario.getColumnModel().getColumn(0).setMinWidth(100);
             tabla_inventario.getColumnModel().getColumn(0).setPreferredWidth(50);
             tabla_inventario.getColumnModel().getColumn(0).setMaxWidth(100);
+            tabla_inventario.getColumnModel().getColumn(6).setMinWidth(100);
+            tabla_inventario.getColumnModel().getColumn(6).setPreferredWidth(50);
+            tabla_inventario.getColumnModel().getColumn(6).setMaxWidth(100);
         }
 
         txtBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -444,8 +457,8 @@ public class Inventario extends javax.swing.JPanel {
                 int offset = 0; // Cambia el valor del offset según tus requerimientos
                 int fetchNext = 10; // Cambia la cantidad de registros a recuperar según tus requerimientos
 
-                ps.setInt(2, offset);
-                ps.setInt(3, fetchNext);
+                ps.setInt(4, offset);
+                ps.setInt(5, fetchNext);
 
                 ResultSet rs = ps.executeQuery();
 

@@ -102,7 +102,7 @@ public class Listado_de_Precios extends javax.swing.JPanel {
 
             },
             new String [] {
-                "N°", "Producto", "Categoria", "Precio de compra(unitario)", "Precio de venta", "Fecha"
+                "N°", "Producto", "Categoría", "Precio de compra(unitario)", "Precio de venta", "Fecha"
             }
         ));
         tblcompras.setGridColor(new java.awt.Color(255, 51, 51));

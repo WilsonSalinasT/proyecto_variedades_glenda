@@ -137,7 +137,7 @@
               <Table columnCount="6" rowCount="0">
                 <Column editable="true" title="N&#xb0;" type="java.lang.Object"/>
                 <Column editable="true" title="Producto" type="java.lang.Object"/>
-                <Column editable="true" title="Categoria" type="java.lang.Object"/>
+                <Column editable="true" title="Categor&#xed;a" type="java.lang.Object"/>
                 <Column editable="true" title="Precio de compra(unitario)" type="java.lang.Object"/>
                 <Column editable="true" title="Precio de venta" type="java.lang.Object"/>
                 <Column editable="true" title="Fecha" type="java.lang.Object"/>
