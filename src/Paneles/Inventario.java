@@ -37,7 +37,7 @@ public class Inventario extends javax.swing.JPanel {
         initComponents();
         cargarTablaEmpleados();
 
-        holder = new TextPrompt("Busque por producto/descripcion/categoria", txtBuscar);
+        holder = new TextPrompt("Busque por producto/descripción/categoría", txtBuscar);
         tabla_inventario.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 12));
         tabla_inventario.getTableHeader().setOpaque(false);
         tabla_inventario.getTableHeader().setBackground(new Color(255, 0, 0));
