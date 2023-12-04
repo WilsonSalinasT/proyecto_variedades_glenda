@@ -4,15 +4,14 @@
  */
 package App;
 
-
 import Paneles.TextPrompt;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
-
 
 /**
  *
@@ -160,7 +159,7 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
-        Mostrar_Ocultar.setText("Mostrar");
+        Mostrar_Ocultar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/eye_key.png"))); // NOI18N
         Mostrar_Ocultar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Mostrar_OcultarMouseClicked(evt);
@@ -201,8 +200,8 @@ public class Login extends javax.swing.JFrame {
                                         .addGap(22, 22, 22)
                                         .addComponent(lblRecuperar)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(Mostrar_Ocultar, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(65, 65, 65))))
+                                .addComponent(Mostrar_Ocultar)
+                                .addGap(85, 85, 85))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(Registrarse, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -221,7 +220,7 @@ public class Login extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(Mostrar_Ocultar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(Mostrar_Ocultar))
                     .addComponent(jLabel5))
                 .addGap(29, 29, 29)
                 .addComponent(bntIniciar_sesion, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -252,15 +251,35 @@ public class Login extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPasswordActionPerformed
 
-    private boolean passwordVisible = false;
+    
+     boolean passwordVisible = false;
+    String imagePath = "/img/eye_key.png";
+
+    java.net.URL imgUrl = recuperarContra.class.getResource(imagePath);
+    // Crear un ImageIcon con la ruta de la imagen
+    ImageIcon icon = new ImageIcon(imgUrl);
+
+   
+    String imagePath1 = "/img/eye_password.png";
+
+     java.net.URL imgUr2 = recuperarContra.class.getResource(imagePath1);
+    // Crear un ImageIcon con la ruta de la imagen
+    ImageIcon icon1 = new ImageIcon(imgUr2);
+    
+    
+    
+    
+  
     private void Mostrar_OcultarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Mostrar_OcultarMouseClicked
 
-        if (passwordVisible) {
+        if (passwordVisible)
+        {
             txtPassword.setEchoChar('*');
-            Mostrar_Ocultar.setText("Mostrar");
-        } else {
+            Mostrar_Ocultar.setIcon(icon);
+        } else
+        {
             txtPassword.setEchoChar((char) 0); // Muestra la contraseña
-            Mostrar_Ocultar.setText("Ocultar");
+            Mostrar_Ocultar.setIcon(icon1);
         }
         passwordVisible = !passwordVisible;
 
@@ -276,10 +295,12 @@ public class Login extends javax.swing.JFrame {
         Crear_Usuario usu = new Crear_Usuario();
         usu.setVisible(true);
         usu.setLocationRelativeTo(null);
+        
     }//GEN-LAST:event_RegistrarseMouseClicked
 
     private void bntIniciar_sesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntIniciar_sesionActionPerformed
-        try {
+        try
+        {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
 
@@ -293,7 +314,8 @@ public class Login extends javax.swing.JFrame {
 
             ResultSet resultSet = selectPs.executeQuery();
 
-            if (resultSet.next()) {
+            if (resultSet.next())
+            {
                 // El usuario y contraseña coinciden, el inicio de sesión es exitoso
 
                 // Abre la ventana principal o cualquier otra ventana después de un inicio de sesión exitoso
@@ -302,15 +324,18 @@ public class Login extends javax.swing.JFrame {
 
                 // Cerrar la ventana actual si es necesario
                 dispose(); // Cierra la ventana actual (ventana de inicio de sesión)
-            } else {
+            } else
+            {
                 // El usuario y/o contraseña son incorrectos
                 JOptionPane.showMessageDialog(null, "Usuario y/o contraseña incorrectos");
             }
 
             // Cerrar recursos (result set, statement, conexión) aquí
-        } catch (SQLException e) {
+        } catch (SQLException e)
+        {
             JOptionPane.showMessageDialog(null, e.toString(), "Error de SQL", JOptionPane.ERROR_MESSAGE);
-        } catch (ClassNotFoundException ex) {
+        } catch (ClassNotFoundException ex)
+        {
             JOptionPane.showMessageDialog(null, "Error de conexión a la base de datos", "Error de Conexión", JOptionPane.ERROR_MESSAGE);
         }
 
@@ -320,9 +345,11 @@ public class Login extends javax.swing.JFrame {
         // TODO add your handling code here:
         char c = evt.getKeyChar(); // Obtener el carácter ingresado
 
-        if (txtNombre.getText().isEmpty() && (Character.isWhitespace(c) || !Character.isLetter(c))) {
+        if (txtNombre.getText().isEmpty() && (Character.isWhitespace(c) || !Character.isLetter(c)))
+        {
             evt.consume(); // Consumir el evento si es un espacio en blanco o no es una letra en la primera posición
-        } else if (txtNombre.getText().length() >= 50) {
+        } else if (txtNombre.getText().length() >= 50)
+        {
             evt.consume(); // Consumir el evento si se ha alcanzado la longitud máxima
         }
 
@@ -335,9 +362,11 @@ public class Login extends javax.swing.JFrame {
         char[] contrasena = txtPassword.getPassword();
         char c = evt.getKeyChar(); // Obtener el carácter ingresado
 
-        if (contrasena.length == 0 && Character.isWhitespace(c)) {
+        if (contrasena.length == 0 && Character.isWhitespace(c))
+        {
             evt.consume(); // Consumir el evento si es un espacio en blanco en la primera posición
-        } else if (contrasena.length >= 12) {
+        } else if (contrasena.length >= 12)
+        {
             evt.consume(); // Consumir el evento si se ha alcanzado la longitud máxima
         }
 
@@ -363,7 +392,8 @@ public class Login extends javax.swing.JFrame {
         String usuario = txtNombre.getText().trim();
 
         // Verifica si el usuario existe en la base de datos
-        if (usuarioExiste(usuario)) {
+        if (usuarioExiste(usuario))
+        {
             // Si el usuario existe, continúa con el proceso de recuperación de contraseña
 
             // Crea una instancia del formulario recuperarContra
@@ -376,10 +406,12 @@ public class Login extends javax.swing.JFrame {
             // Muestra el formulario recuperarContra y cierra el formulario de login actual
             r.setVisible(true);
             this.dispose();
-        } else if (txtNombre.getText().isEmpty()) {
+        } else if (txtNombre.getText().isEmpty())
+        {
             JOptionPane.showMessageDialog(null, "Ingrese un nombre de usuario para poder restablecer la contraseña.", "Error", JOptionPane.ERROR_MESSAGE);
 
-        } else {
+        } else
+        {
             // Si el usuario no existe, muestra un mensaje de error
             JOptionPane.showMessageDialog(null, "El usuario no existe.", "Error", JOptionPane.ERROR_MESSAGE);
 
@@ -392,17 +424,20 @@ public class Login extends javax.swing.JFrame {
     private boolean usuarioExiste(String usuario) {
 
         try (
-                Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789"); PreparedStatement stmt = conn.prepareStatement("SELECT COUNT(*) FROM Usuarios WHERE nombre_usuario = ?")) {
+                Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789"); PreparedStatement stmt = conn.prepareStatement("SELECT COUNT(*) FROM Usuarios WHERE nombre_usuario = ?"))
+        {
 
             stmt.setString(1, usuario);
             ResultSet resultSet = stmt.executeQuery();
 
-            if (resultSet.next()) {
+            if (resultSet.next())
+            {
                 int count = resultSet.getInt(1);
                 return count > 0; // Devuelve true si el usuario existe
             }
 
-        } catch (SQLException e) {
+        } catch (SQLException e)
+        {
             e.printStackTrace();
         }
 
@@ -422,20 +457,27 @@ public class Login extends javax.swing.JFrame {
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+        try
+        {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels())
+            {
+                if ("Nimbus".equals(info.getName()))
+                {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
+        } catch (ClassNotFoundException ex)
+        {
             java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
+        } catch (InstantiationException ex)
+        {
             java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
+        } catch (IllegalAccessException ex)
+        {
             java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (javax.swing.UnsupportedLookAndFeelException ex)
+        {
             java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>

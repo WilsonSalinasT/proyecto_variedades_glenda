@@ -17,6 +17,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
 import static App.factura.txtbill;
+import Paneles.Listado_Citas;
+import Paneles.Listado_Ventas;
 import java.math.BigDecimal;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -254,7 +256,7 @@ public class IngresodeVenta extends javax.swing.JFrame {
 
         jButton4.setBackground(new java.awt.Color(255, 153, 51));
         jButton4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton4.setText("Cancelar");
+        jButton4.setText("Volver");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
@@ -599,22 +601,18 @@ public class IngresodeVenta extends javax.swing.JFrame {
         String numeroFacturaSinSeparadores = num.replaceAll("[\\s-]+", "");
         String digitosSignificativos = numeroFacturaSinSeparadores.replaceAll("\\D", "");
 
-     
-
         if (tipoCompra.getSelectedItem() == null || tipoCompra.getSelectedItem().toString().trim().isEmpty()
                 || tipoCompra.getSelectedItem().toString().trim().equalsIgnoreCase("Seleccione"))
         {
-            camposVacios.append("- Tipo de venta\n");
+            camposVacios.append("- Tipo de venta");
+        }
+        String cliente = txtCliente.getSelectedItem().toString();
+
+        if (cliente.equals("Seleccione"))
+        {
+            camposVacios.append("\n - Cliente\n");
         }
 
-        if (proveedor.isEmpty())
-        {
-            camposVacios.append("- Cliente\n");
-        }
-//        if (fecha == null)
-//        {
-//            camposVacios.append("- Fecha\n");
-//        }
         boolean agregarProductoPresionado = true;
         if (!agregarProductoPresionado)
         {
@@ -710,7 +708,6 @@ public class IngresodeVenta extends javax.swing.JFrame {
 //        {
 //            camposVacios.append("- Número de factura\n");
 //        }
-
         if (tipoCompra.getSelectedItem() == null || tipoCompra.getSelectedItem().toString().trim().isEmpty()
                 || tipoCompra.getSelectedItem().toString().trim().equalsIgnoreCase("Seleccione"))
         {
@@ -806,11 +803,23 @@ public class IngresodeVenta extends javax.swing.JFrame {
                     String queryActualizarInventario = "UPDATE Productos SET cantidad_disponible = cantidad_disponible - ? WHERE cod_producto = ?";
                     try (PreparedStatement pstmtActualizarInventario = conn.prepareStatement(queryActualizarInventario))
                     {
-                        pstmtActualizarInventario.setString(1, tableventas.getValueAt(i,1).toString());
+                        pstmtActualizarInventario.setString(1, tableventas.getValueAt(i, 1).toString());
                         pstmtActualizarInventario.setString(2, tableventas.getValueAt(i, 4).toString());
                         pstmtActualizarInventario.executeUpdate();
                     }
                 }
+                
+                Listado_Ventas cli = new Listado_Ventas();
+
+                cli.setSize(1024, 640);
+                cli.setLocation(0, 0);
+
+                panelprincipal.revalidate();
+                panelprincipal.repaint();
+                panelprincipal.removeAll();
+                panelprincipal.add(cli, BorderLayout.CENTER);
+                panelprincipal.revalidate();
+                panelprincipal.repaint();
 
                 JOptionPane.showMessageDialog(null, "Registro guardado");
                 this.dispose();

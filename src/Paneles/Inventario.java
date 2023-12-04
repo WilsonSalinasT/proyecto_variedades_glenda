@@ -28,7 +28,8 @@ public class Inventario extends javax.swing.JPanel {
     int totalPaginas = 0; // Total de páginas en la tabla
     int numRegistro = 0;
     String terminoBusqueda = ""; // Término de búsqueda actual
- TextPrompt holder;
+    TextPrompt holder;
+
     /**
      * Creates new form Inventario
      */
@@ -36,7 +37,7 @@ public class Inventario extends javax.swing.JPanel {
         initComponents();
         cargarTablaEmpleados();
 
-         holder = new TextPrompt("Busque por nombre/categoria/descripcion", txtBuscar);
+        holder = new TextPrompt("Busque por producto/descripcion/categoria", txtBuscar);
         tabla_inventario.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 12));
         tabla_inventario.getTableHeader().setOpaque(false);
         tabla_inventario.getTableHeader().setBackground(new Color(255, 0, 0));
@@ -65,10 +66,10 @@ public class Inventario extends javax.swing.JPanel {
             ps = conn.prepareStatement("SELECT COUNT(*) AS TotalFilas "
                     + "FROM Productos E "
                     + "JOIN PrecioHistorial V ON E.cod_producto = V.cod_producto "
-                    + "WHERE E.nombre LIKE ?  ");
+                    + "WHERE E.nombre LIKE ?  OR E.descripcion LIKE ? OR E.categoria LIKE ? ");
             ps.setString(1, "%" + terminoBusqueda + "%");
-//            ps.setString(2, "%" + terminoBusqueda + "%");
-//            ps.setString(3, "%" + terminoBusqueda + "%");
+            ps.setString(2, "%" + terminoBusqueda + "%");
+            ps.setString(3, "%" + terminoBusqueda + "%");
             rs = ps.executeQuery();
 
             if (rs.next())
@@ -113,13 +114,15 @@ public class Inventario extends javax.swing.JPanel {
                     + "        WHERE \n"
                     + "            cod_producto = P.cod_producto\n"
                     + "    )\n"
-                    + "    AND P.nombre LIKE ?\n" // Agregada la condición de búsqueda por nombre
+                    + "    AND P.nombre LIKE ? OR P.descripcion LIKE ? OR P.categoria LIKE ? \n" // Agregada la condición de búsqueda por nombre
                     + "ORDER BY \n"
                     + "    P.nombre\n"
                     + "OFFSET ? ROWS FETCH NEXT ? ROWS ONLY");
             ps.setString(1, "%" + terminoBusqueda + "%");
-            ps.setInt(2, offset);
-            ps.setInt(3, filasPorPagina);
+            ps.setString(2, "%" + terminoBusqueda + "%");
+            ps.setString(3, "%" + terminoBusqueda + "%");
+            ps.setInt(4, offset);
+            ps.setInt(5, filasPorPagina);
             rs = ps.executeQuery();
             rsmd = rs.getMetaData();
             columnas = rsmd.getColumnCount();
@@ -216,6 +219,11 @@ public class Inventario extends javax.swing.JPanel {
         tabla_inventario.setShowHorizontalLines(true);
         tabla_inventario.setShowVerticalLines(true);
         jScrollPane1.setViewportView(tabla_inventario);
+        if (tabla_inventario.getColumnModel().getColumnCount() > 0) {
+            tabla_inventario.getColumnModel().getColumn(0).setMinWidth(100);
+            tabla_inventario.getColumnModel().getColumn(0).setPreferredWidth(50);
+            tabla_inventario.getColumnModel().getColumn(0).setMaxWidth(100);
+        }
 
         txtBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -332,18 +340,20 @@ public class Inventario extends javax.swing.JPanel {
     }//GEN-LAST:event_btnSiguienteActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-         String texto = txtBuscar.getText().trim();
+        String texto = txtBuscar.getText().trim();
 
         //Validacion del texto ingresado
-        if (!texto.isEmpty()) {
+        if (!texto.isEmpty())
+        {
             buscarDatos(texto);
-        } else {
+        } else
+        {
             JOptionPane.showMessageDialog(null, "Tiene que ingresar texto para hacer la respectiva búsqueda");
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-         paginaActual = 1;
+        paginaActual = 1;
         terminoBusqueda = "";
 
         // Limpiar el campo de búsqueda
@@ -356,9 +366,11 @@ public class Inventario extends javax.swing.JPanel {
     private void txtBuscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyTyped
         char c = evt.getKeyChar(); // Obtener el carácter ingresado
 
-        if (txtBuscar.getText().isEmpty() && Character.isWhitespace(c)) {
+        if (txtBuscar.getText().isEmpty() && Character.isWhitespace(c))
+        {
             evt.consume(); // Consumir el evento si es un espacio en blanco en la primera letra
-        } else if (txtBuscar.getText().length() >= 100) {
+        } else if (txtBuscar.getText().length() >= 100)
+        {
             evt.consume(); // Consumir el evento si se ha alcanzado la longitud máxima
         }
     }//GEN-LAST:event_txtBuscarKeyTyped
@@ -378,49 +390,53 @@ public class Inventario extends javax.swing.JPanel {
             cargarTablaEmpleados();
         }
     }
-    
+
     private void buscarDatos(String texto) {
         DefaultTableModel modelTabla = (DefaultTableModel) tabla_inventario.getModel();
         modelTabla.setRowCount(0);
         boolean foundData = false;
 
-        try {
+        try
+        {
             Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
-            if (conn != null && !conn.isClosed()) {
+            if (conn != null && !conn.isClosed())
+            {
                 PreparedStatement ps = conn.prepareStatement("SELECT \n"
-                    + "    ROW_NUMBER() OVER (ORDER BY P.nombre) AS NumRegistro,\n"
-                    + "    P.nombre,\n"
-                    + "    P.descripcion,\n"
-                    + "    P.categoria,\n"
-                    + "    P.cantidad_disponible,\n"
-                    + "    PH.precio_unitario,\n"
-                    + "    PH.precio_venta\n"
-                    + "FROM \n"
-                    + "    Productos P\n"
-                    + "JOIN \n"
-                    + "    PrecioHistorial PH ON P.cod_producto = PH.cod_producto\n"
-                    + "WHERE \n"
-                    + "    PH.id_precioHistorial = (\n"
-                    + "        SELECT \n"
-                    + "            MAX(id_precioHistorial)\n"
-                    + "        FROM \n"
-                    + "            PrecioHistorial\n"
-                    + "        WHERE \n"
-                    + "            cod_producto = P.cod_producto\n"
-                    + "    )\n"
-                    + "    AND P.nombre LIKE ?\n"
+                        + "    ROW_NUMBER() OVER (ORDER BY P.nombre) AS NumRegistro,\n"
+                        + "    P.nombre,\n"
+                        + "    P.descripcion,\n"
+                        + "    P.categoria,\n"
+                        + "    P.cantidad_disponible,\n"
+                        + "    PH.precio_unitario,\n"
+                        + "    PH.precio_venta\n"
+                        + "FROM \n"
+                        + "    Productos P\n"
+                        + "JOIN \n"
+                        + "    PrecioHistorial PH ON P.cod_producto = PH.cod_producto\n"
+                        + "WHERE \n"
+                        + "    PH.id_precioHistorial = (\n"
+                        + "        SELECT \n"
+                        + "            MAX(id_precioHistorial)\n"
+                        + "        FROM \n"
+                        + "            PrecioHistorial\n"
+                        + "        WHERE \n"
+                        + "            cod_producto = P.cod_producto\n"
+                        + "    )\n"
+                        + "    AND P.nombre LIKE ? OR P.descripcion LIKE ? OR P.categoria LIKE ? \n"
                         + "ORDER BY P.nombre "
                         + "OFFSET ? ROWS FETCH NEXT ? ROWS ONLY");
 
-                if (texto != null && !texto.isEmpty()) {
+                if (texto != null && !texto.isEmpty())
+                {
                     ps.setString(1, "%" + texto + "%");
-//                    ps.setString(2, "%" + texto + "%");
-//                    ps.setString(3, "%" + texto + "%");
+                    ps.setString(2, "%" + texto + "%");
+                    ps.setString(3, "%" + texto + "%");
                     terminoBusqueda = texto; // Actualizar el término de búsqueda
-                } else {
+                } else
+                {
                     ps.setString(1, "%");
-//                    ps.setString(2, "%");
-//                    ps.setString(3, "%");
+                    ps.setString(2, "%");
+                    ps.setString(3, "%");
                     terminoBusqueda = ""; // Limpiar el término de búsqueda
                 }
 
@@ -433,8 +449,10 @@ public class Inventario extends javax.swing.JPanel {
 
                 ResultSet rs = ps.executeQuery();
 
-                if (rs != null) {
-                    while (rs.next()) {
+                if (rs != null)
+                {
+                    while (rs.next())
+                    {
                         int numRegistro = rs.getInt("NumRegistro");
                         String nombre = rs.getString("nombre");
                         String apellido = rs.getString("descripcion");
@@ -443,8 +461,10 @@ public class Inventario extends javax.swing.JPanel {
                         String fechaCi = rs.getString("precio_unitario");
                         String id = rs.getString("precio_venta");
 
-                        if (nombre != null && apellido != null && numeroTelefono != null) {
-                            modelTabla.addRow(new Object[]{
+                        if (nombre != null && apellido != null && numeroTelefono != null)
+                        {
+                            modelTabla.addRow(new Object[]
+                            {
                                 numRegistro, nombre, apellido, numeroTelefono, material, fechaCi, id
                             });
                             foundData = true;
@@ -457,7 +477,8 @@ public class Inventario extends javax.swing.JPanel {
                 ps.close();
                 conn.close();
             }
-        } catch (Exception e) {
+        } catch (Exception e)
+        {
             JOptionPane.showMessageDialog(null, e.toString());
         }
 

@@ -74,8 +74,8 @@
                                       </Group>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="Mostrar_Ocultar" min="-2" pref="52" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
+                                  <Component id="Mostrar_Ocultar" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="85" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -102,7 +102,7 @@
                   <Group type="103" groupAlignment="1" attributes="0">
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="txtPassword" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
-                          <Component id="Mostrar_Ocultar" alignment="3" max="32767" attributes="0"/>
+                          <Component id="Mostrar_Ocultar" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                   </Group>
@@ -279,7 +279,9 @@
         </Component>
         <Component class="javax.swing.JLabel" name="Mostrar_Ocultar">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Mostrar"/>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/img/eye_key.png"/>
+            </Property>
           </Properties>
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="Mostrar_OcultarMouseClicked"/>

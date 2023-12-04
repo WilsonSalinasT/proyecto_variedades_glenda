@@ -36,7 +36,7 @@ public class Listado_de_Precios extends javax.swing.JPanel {
     public Listado_de_Precios() {
         initComponents();
         cargarTabla();
-        TextPrompt holder = new TextPrompt("Busque por nombre de cliente / n° de factura / fecha", txtbuscar);
+        TextPrompt holder = new TextPrompt("Busque por producto /categoria/fecha", txtbuscar);
 
         tblcompras.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 12));
         tblcompras.getTableHeader().setOpaque(false);
