@@ -280,7 +280,7 @@ public class Menu extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 70)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 153, 51));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Imagen de WhatsApp 2023-12-03 a las 20.20.38_5a75490b.jpg"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Picsart_23-12-03_20-19-20-814.png"))); // NOI18N
 
         javax.swing.GroupLayout panelprincipalLayout = new javax.swing.GroupLayout(panelprincipal);
         panelprincipal.setLayout(panelprincipalLayout);
