@@ -89,7 +89,7 @@ public class Login extends javax.swing.JFrame {
                         .addGap(17, 17, 17))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel7)
-                        .addGap(129, 129, 129))))
+                        .addGap(149, 149, 149))))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
