@@ -18,6 +18,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
 import static App.factura.txtbill;
+import Paneles.Listado_Compras;
+import Paneles.Listado_Ventas;
 import java.awt.event.WindowEvent;
 import java.math.BigDecimal;
 import java.sql.DriverManager;
@@ -771,7 +773,7 @@ public class IngresodeCompra extends javax.swing.JFrame {
                     insertpreciohistorial.setString(3, tablecompras.getValueAt(i, 3).toString()); // Ejemplo de valor directo para precio_unitario
                     insertpreciohistorial.setString(4, tablecompras.getValueAt(i, 2).toString()); // Ejemplo de valor directo para total
                     insertpreciohistorial.setString(5, tablecompras.getValueAt(i, 5).toString());
-                    
+
                     insertpreciohistorial.executeUpdate();
 
                     String queryActualizarInventario = "UPDATE Productos SET cantidad_disponible = cantidad_disponible + ? WHERE cod_producto = ?";
@@ -803,6 +805,17 @@ public class IngresodeCompra extends javax.swing.JFrame {
                 }
 
                 JOptionPane.showMessageDialog(null, "Registro guardado");
+                Listado_Compras cli = new Listado_Compras();
+
+                cli.setSize(1024, 640);
+                cli.setLocation(0, 0);
+
+                panelprincipal.revalidate();
+                panelprincipal.repaint();
+                panelprincipal.removeAll();
+                panelprincipal.add(cli, BorderLayout.CENTER);
+                panelprincipal.revalidate();
+                panelprincipal.repaint();
                 this.dispose();
             }
 

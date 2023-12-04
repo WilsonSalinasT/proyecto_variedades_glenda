@@ -808,7 +808,8 @@ public class IngresodeVenta extends javax.swing.JFrame {
                         pstmtActualizarInventario.executeUpdate();
                     }
                 }
-                
+
+                JOptionPane.showMessageDialog(null, "Registro guardado");
                 Listado_Ventas cli = new Listado_Ventas();
 
                 cli.setSize(1024, 640);
@@ -820,8 +821,6 @@ public class IngresodeVenta extends javax.swing.JFrame {
                 panelprincipal.add(cli, BorderLayout.CENTER);
                 panelprincipal.revalidate();
                 panelprincipal.repaint();
-
-                JOptionPane.showMessageDialog(null, "Registro guardado");
                 this.dispose();
             }
 
