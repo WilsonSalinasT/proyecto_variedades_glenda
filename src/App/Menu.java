@@ -538,18 +538,20 @@ public class Menu extends javax.swing.JFrame {
 
         if (opcion == JOptionPane.YES_OPTION)
         {
-            System.exit(0);
+            Login ver = new Login();
+            ver.setVisible(true);
+            dispose();
         } else
         {
             JOptionPane.showMessageDialog(null, "Operación cancelada.", "Cancelado", JOptionPane.INFORMATION_MESSAGE);
         }
+
     }//GEN-LAST:event_cerrarsecionActionPerformed
 
     private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
         MenuImagen p2 = new MenuImagen();
         p2.setSize(1024, 640);
         p2.setLocation(0, 0);
-        
 
         panelprincipal.removeAll();
         panelprincipal.add(p2, BorderLayout.CENTER);
