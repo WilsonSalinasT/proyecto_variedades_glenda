@@ -20,6 +20,8 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import static java.time.Clock.offset;
 import javax.swing.JOptionPane;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -36,7 +38,7 @@ public class Listado_de_Precios extends javax.swing.JPanel {
     public Listado_de_Precios() {
         initComponents();
         cargarTabla();
-        TextPrompt holder = new TextPrompt("Busque por producto /categoría/fecha", txtbuscar);
+        TextPrompt holder = new TextPrompt("Busque por fecha", txtbuscar);
 
         tblcompras.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 12));
         tblcompras.getTableHeader().setOpaque(false);
@@ -46,6 +48,23 @@ public class Listado_de_Precios extends javax.swing.JPanel {
 
         tblcompras.setRowSelectionAllowed(true);
         tblcompras.setColumnSelectionAllowed(false);
+        
+        NombreH.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+              cargarTabla();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                cargarTabla();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+               cargarTabla();
+            }
+        });
     }
 
     /**
@@ -59,6 +78,8 @@ public class Listado_de_Precios extends javax.swing.JPanel {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
+        jButton6 = new javax.swing.JButton();
+        textohis = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblcompras = new javax.swing.JTable();
         txtbuscar = new javax.swing.JTextField();
@@ -68,6 +89,7 @@ public class Listado_de_Precios extends javax.swing.JPanel {
         btnSiguiente = new javax.swing.JButton();
         Contable_Registro = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        NombreH = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setForeground(new java.awt.Color(255, 255, 255));
@@ -79,6 +101,16 @@ public class Listado_de_Precios extends javax.swing.JPanel {
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Historial de precios");
 
+        jButton6.setBackground(new java.awt.Color(255, 153, 51));
+        jButton6.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jButton6.setForeground(new java.awt.Color(0, 0, 0));
+        jButton6.setText("VOLVER");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -86,15 +118,24 @@ public class Listado_de_Precios extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addComponent(jLabel2)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton6)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addComponent(jLabel2)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addComponent(jLabel2))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(17, 17, 17)
+                        .addComponent(jButton6)))
                 .addContainerGap(28, Short.MAX_VALUE))
         );
+
+        textohis.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
 
         tblcompras.setForeground(new java.awt.Color(0, 0, 0));
         tblcompras.setModel(new javax.swing.table.DefaultTableModel(
@@ -172,6 +213,15 @@ public class Listado_de_Precios extends javax.swing.JPanel {
         jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Buscar:");
 
+        NombreH.setEditable(false);
+        NombreH.setForeground(new java.awt.Color(255, 255, 255));
+        NombreH.setBorder(null);
+        NombreH.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                NombreHActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -198,12 +248,22 @@ public class Listado_de_Precios extends javax.swing.JPanel {
                         .addComponent(btnSiguiente, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 903, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addComponent(textohis, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(NombreH, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(88, 88, 88))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40)
+                .addGap(10, 10, 10)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(textohis, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(NombreH, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -270,6 +330,21 @@ public class Listado_de_Precios extends javax.swing.JPanel {
 
     }//GEN-LAST:event_txtbuscarActionPerformed
 
+    private void NombreHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NombreHActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_NombreHActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        Inventario l2 = new Inventario();
+        l2.setSize(1024, 640);
+        l2.setLocation(0, 0);
+
+        panelprincipal.removeAll();
+        panelprincipal.add(l2, BorderLayout.CENTER);
+        panelprincipal.revalidate();
+        panelprincipal.repaint();
+    }//GEN-LAST:event_jButton6ActionPerformed
+
     int selectedRow2;
     int paginaActual = 1; // Página actual
     int filasPorPagina = 20; // Número de filas a mostrar por página
@@ -278,7 +353,7 @@ public class Listado_de_Precios extends javax.swing.JPanel {
     int numRegistro = 0;
     String terminoBusqueda = ""; // Término de búsqueda actual
 
-    private void cargarTabla() {
+    void cargarTabla() {
         DefaultTableModel modeloTabla = (DefaultTableModel) tblcompras.getModel();
         modeloTabla.setRowCount(0); // Limpiar los datos existentes en la tabla
 
@@ -287,7 +362,7 @@ public class Listado_de_Precios extends javax.swing.JPanel {
         ResultSetMetaData rsmd;
         int columnas;
         boolean foundData = false;
-
+        String nombre = NombreH.getText();
         try
         {
             Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
@@ -295,12 +370,13 @@ public class Listado_de_Precios extends javax.swing.JPanel {
             // Obtener el total de filas que cumplen con el criterio de búsqueda
             ps = conn.prepareStatement("SELECT COUNT(*) AS TotalFilas "
                     + " FROM PrecioHistorial ph "
-                    + "JOIN Productos p ON ph.cod_producto = p.cod_producto\n"
-                    + "JOIN Compras c ON ph.id_compra = c.id_compra Where p.nombre LIKE ? OR p.categoria Like ? OR c.fecha LIKE ?\n");
+                    + " JOIN Productos p ON ph.cod_producto = p.cod_producto "
+                    + " JOIN Compras c ON ph.id_compra = c.id_compra "
+                    + " WHERE p.nombre = '" + nombre + "' AND c.fecha LIKE ? ");
+           
             ps.setString(1, "%" + terminoBusqueda + "%");
-            ps.setString(2, "%" + terminoBusqueda + "%");
-            ps.setString(3, "%" + terminoBusqueda + "%");
-          
+//            ps.setString(2, "%" + terminoBusqueda + "%");
+
             rs = ps.executeQuery();
 
             if (rs.next())
@@ -330,14 +406,14 @@ public class Listado_de_Precios extends javax.swing.JPanel {
                     + "    c.fecha\n"
                     + "FROM PrecioHistorial ph\n"
                     + "JOIN Productos p ON ph.cod_producto = p.cod_producto\n"
-                    + "JOIN Compras c ON ph.id_compra = c.id_compra Where p.nombre LIKE ? OR p.categoria Like ? OR c.fecha LIKE ?\n"
+                    + "JOIN Compras c ON ph.id_compra = c.id_compra Where p.nombre = '" + nombre + "' AND c.fecha LIKE ? "
                     + "ORDER BY p.nombre\n"
                     + "OFFSET ? ROWS FETCH NEXT ? ROWS ONLY");
+          
             ps.setString(1, "%" + terminoBusqueda + "%");
-            ps.setString(2, "%" + terminoBusqueda + "%");
-            ps.setString(3, "%" + terminoBusqueda + "%");
-            ps.setInt(4, offset);
-            ps.setInt(5, filasPorPagina);
+//            ps.setString(2, "%" + terminoBusqueda + "%");
+            ps.setInt(2, offset);
+            ps.setInt(3, filasPorPagina);
             rs = ps.executeQuery();
             rsmd = rs.getMetaData();
             columnas = rsmd.getColumnCount();
@@ -357,7 +433,7 @@ public class Listado_de_Precios extends javax.swing.JPanel {
 
             if (!foundData)
             {
-                JOptionPane.showMessageDialog(null, "No se encontraron datos");
+//                JOptionPane.showMessageDialog(null, "No se encontraron datos");
             }
 
             // Obtener el número de filas actualizado
@@ -396,7 +472,7 @@ public class Listado_de_Precios extends javax.swing.JPanel {
         DefaultTableModel modelTabla = (DefaultTableModel) tblcompras.getModel();
         modelTabla.setRowCount(0);
         boolean foundData = false;
-
+String nombre = NombreH.getText();
         try
         {
             Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
@@ -404,28 +480,28 @@ public class Listado_de_Precios extends javax.swing.JPanel {
             if (conn != null && !conn.isClosed())
             {
                 PreparedStatement ps = conn.prepareStatement("SELECT ROW_NUMBER() OVER (ORDER BY p.nombre) AS NumRegistro, p.nombre,p.categoria,\n"
-                    + "    ph.precio_unitario,\n"
-                    + "    ph.precio_venta,\n"
-                    + "    c.fecha\n"
-                    + "FROM PrecioHistorial ph\n"
-                    + "JOIN Productos p ON ph.cod_producto = p.cod_producto\n"
-                    + "JOIN Compras c ON ph.id_compra = c.id_compra Where p.nombre LIKE ? OR p.categoria Like ? OR c.fecha LIKE ?\n"
-                    + "ORDER BY p.nombre\n"
-                    + "OFFSET ? ROWS FETCH NEXT ? ROWS ONLY");
+                        + "    ph.precio_unitario,\n"
+                        + "    ph.precio_venta,\n"
+                        + "    c.fecha\n"
+                        + "FROM PrecioHistorial ph\n"
+                        + "JOIN Productos p ON ph.cod_producto = p.cod_producto\n"
+                        + "JOIN Compras c ON ph.id_compra = c.id_compra Where p.nombre = '"+ nombre +"' AND c.fecha LIKE ?\n"
+                        + "ORDER BY p.nombre\n"
+                        + "OFFSET ? ROWS FETCH NEXT ? ROWS ONLY");
 
                 if (texto != null)
                 {
                     ps.setString(1, "%" + texto + "%");
-                    ps.setString(2, "%" + texto + "%");
-                    ps.setString(3, "%" + texto + "%");
                    
+                   
+
                     terminoBusqueda = texto; // Actualizar el término de búsqueda
                 } else
                 {
                     ps.setString(1, "%");
-                    ps.setString(2, "%");
-                    ps.setString(3, "%");
                   
+                    
+
                     terminoBusqueda = ""; // Limpiar el término de búsqueda
                 }
 
@@ -433,8 +509,8 @@ public class Listado_de_Precios extends javax.swing.JPanel {
                 int offset = 0; // Cambia el valor del offset según tus requerimientos
                 int fetchNext = 10; // Cambia la cantidad de registros a recuperar según tus requerimientos
 
-                ps.setInt(4, offset);
-                ps.setInt(5, fetchNext);
+                ps.setInt(2, offset);
+                ps.setInt(3, fetchNext);
 
                 ResultSet rs = ps.executeQuery();
 
@@ -448,7 +524,6 @@ public class Listado_de_Precios extends javax.swing.JPanel {
                         String pU = rs.getString("precio_unitario");
                         String PV = rs.getString("precio_venta");
                         String fecha = rs.getString("fecha");
-                        
 
                         if (nombreCompleto != null && categoria != null && pU != null && PV != null && fecha != null)
                         {
@@ -461,6 +536,10 @@ public class Listado_de_Precios extends javax.swing.JPanel {
                     }
 
                     rs.close();
+                     if (!foundData) {
+                    JOptionPane.showMessageDialog(null, "No se encontraron datos");
+                }
+                     
                 }
 
                 ps.close();
@@ -468,6 +547,7 @@ public class Listado_de_Precios extends javax.swing.JPanel {
             }
         } catch (Exception e)
         {
+        
             JOptionPane.showMessageDialog(null, e.toString());
         }
 
@@ -477,16 +557,19 @@ public class Listado_de_Precios extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel Contable_Registro;
+    public static javax.swing.JLabel Contable_Registro;
+    public static javax.swing.JTextField NombreH;
     private javax.swing.JButton btnAnterior;
     private javax.swing.JButton btnSiguiente;
     private javax.swing.JButton btnbuscar;
     private javax.swing.JButton btnrefrescar;
+    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tblcompras;
+    public static javax.swing.JTable tblcompras;
+    public static javax.swing.JLabel textohis;
     private javax.swing.JTextField txtbuscar;
     // End of variables declaration//GEN-END:variables
 }

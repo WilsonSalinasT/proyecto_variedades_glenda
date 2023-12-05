@@ -4,6 +4,8 @@
  */
 package Paneles;
 
+import static App.Menu.panelprincipal;
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -15,6 +17,7 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 /**
  *
@@ -29,6 +32,7 @@ public class Inventario extends javax.swing.JPanel {
     int numRegistro = 0;
     String terminoBusqueda = ""; // Término de búsqueda actual
     TextPrompt holder;
+    final Object[] row = new Object[6];
 
     /**
      * Creates new form Inventario
@@ -197,6 +201,7 @@ public class Inventario extends javax.swing.JPanel {
         Texto_Contable = new javax.swing.JLabel();
         btnAnterior = new javax.swing.JButton();
         btnSiguiente = new javax.swing.JButton();
+        jButton9 = new javax.swing.JButton();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -288,32 +293,46 @@ public class Inventario extends javax.swing.JPanel {
             }
         });
 
+        jButton9.setBackground(new java.awt.Color(255, 153, 51));
+        jButton9.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jButton9.setForeground(new java.awt.Color(0, 0, 0));
+        jButton9.setText("Historial");
+        jButton9.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jButton9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton9ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(55, 55, 55)
-                .addComponent(jLabel2)
-                .addGap(18, 18, 18)
-                .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 331, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1)
-                .addGap(18, 18, 18)
-                .addComponent(jButton2)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(Texto_Contable, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnAnterior, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(55, 55, 55)
+                        .addComponent(jLabel2)
                         .addGap(18, 18, 18)
-                        .addComponent(btnSiguiente, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1))
+                        .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 331, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton1)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton2)
+                        .addGap(223, 223, 223)
+                        .addComponent(jButton9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(Texto_Contable, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnAnterior, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnSiguiente, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane1))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -321,12 +340,14 @@ public class Inventario extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jLabel2))
-                .addGap(14, 14, 14)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton1)
+                        .addComponent(jButton2)
+                        .addComponent(jLabel2))
+                    .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(7, 7, 7)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -391,6 +412,77 @@ public class Inventario extends javax.swing.JPanel {
             evt.consume(); // Consumir el evento si se ha alcanzado la longitud máxima
         }
     }//GEN-LAST:event_txtBuscarKeyTyped
+    int selectedRow2;
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+
+        selectedRow2 = tabla_inventario.getSelectedRow();
+        if (selectedRow2 == -1)
+        {
+            JOptionPane.showMessageDialog(null, "Por favor, elija un producto para acceder al historial de precios.");
+            return;
+        }
+
+        try
+        {
+            // Establecer la conexión con la base de datos
+            Connection connection = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
+
+            // Obtener el modelo de la tabla origen
+            TableModel modelo = tabla_inventario.getModel();
+            int indices[] = tabla_inventario.getSelectedRows();
+
+            Listado_de_Precios panel11 = new Listado_de_Precios();
+            // Crear el modelo de la tabla destino
+//            DefaultTableModel model2 = (DefaultTableModel) panel11.tblcompras.getModel();
+
+            for (int i = 0; i < indices.length; i++)
+            {
+                String nombre = String.valueOf(modelo.getValueAt(indices[i], 1));
+
+                // Preparar la consulta SQL para obtener los datos de la otra tabla
+                String query = "SELECT * FROM Productos  WHERE nombre = ?";
+                PreparedStatement statement = connection.prepareStatement(query);
+                statement.setString(1, nombre);
+
+                // Ejecutar la consulta y obtener los resultados
+                ResultSet resultados = statement.executeQuery();
+
+                // Agregar los resultados a la segunda tabla
+                while (resultados.next())
+                {
+
+                    row[1] = resultados.getString("nombre");
+
+                    Object data = row[1];
+                    String text = (data != null) ? data.toString() : ""; // Si data es null, asigna una cadena vacía
+
+                    panel11.NombreH.setText(text);
+
+                    panel11.textohis.setText("Historial de: " + row[1]);
+
+                    panel11.setSize(1024, 640);
+                    panel11.setLocation(0, 0);
+
+                    panelprincipal.removeAll();
+                    panelprincipal.add(panel11, BorderLayout.CENTER);
+                    panelprincipal.revalidate();
+                    panelprincipal.repaint();
+                }
+
+                // Cerrar el ResultSet y el PreparedStatement
+                resultados.close();
+                statement.close();
+            }
+
+            // Mostrar la segunda tabla
+            connection.close();
+        } catch (SQLException ex)
+        {
+            // Manejar la excepción
+            ex.printStackTrace();
+        }
+
+    }//GEN-LAST:event_jButton9ActionPerformed
 
     private void siguientePagina() {
         if (paginaActual < totalPaginas)
@@ -419,32 +511,32 @@ public class Inventario extends javax.swing.JPanel {
             if (conn != null && !conn.isClosed())
             {
                 PreparedStatement ps = conn.prepareStatement("SELECT \n"
-                    + "    ROW_NUMBER() OVER (ORDER BY P.nombre) AS NumRegistro,\n"
-                    + "    P.nombre,\n"
-                    + "    P.descripcion,\n"
-                    + "    P.categoria,\n"
-                    + "    P.cantidad_disponible,\n"
-                    + "    COALESCE(PH.precio_unitario, PT.precio_unitario) AS precio_unitario,\n"
-                    + "    COALESCE(PH.precio_venta, PT.precio_venta) AS precio_venta\n"
-                    + "FROM \n"
-                    + "    Productos P\n"
-                    + "LEFT JOIN \n"
-                    + "    PrecioHistorial PH ON P.cod_producto = PH.cod_producto\n"
-                    + "LEFT JOIN\n"
-                    + "    Precio PT ON P.cod_producto = PT.cod_producto  -- Asumiendo que hay una tabla de precios llamada PrecioTabla\n"
-                    + "WHERE \n"
-                    + "    (PH.id_precioHistorial = (\n"
-                    + "        SELECT \n"
-                    + "            MAX(id_precioHistorial)\n"
-                    + "        FROM \n"
-                    + "            PrecioHistorial\n"
-                    + "        WHERE \n"
-                    + "            cod_producto = P.cod_producto\n"
-                    + "    ) OR PH.id_precioHistorial IS NULL)\n"
-                    + "    AND (P.nombre LIKE ? OR P.descripcion LIKE ? OR P.categoria LIKE ?)\n"
-                    + "ORDER BY \n"
-                    + "    P.nombre\n"
-                    + "OFFSET ? ROWS FETCH NEXT ? ROWS ONLY");
+                        + "    ROW_NUMBER() OVER (ORDER BY P.nombre) AS NumRegistro,\n"
+                        + "    P.nombre,\n"
+                        + "    P.descripcion,\n"
+                        + "    P.categoria,\n"
+                        + "    P.cantidad_disponible,\n"
+                        + "    COALESCE(PH.precio_unitario, PT.precio_unitario) AS precio_unitario,\n"
+                        + "    COALESCE(PH.precio_venta, PT.precio_venta) AS precio_venta\n"
+                        + "FROM \n"
+                        + "    Productos P\n"
+                        + "LEFT JOIN \n"
+                        + "    PrecioHistorial PH ON P.cod_producto = PH.cod_producto\n"
+                        + "LEFT JOIN\n"
+                        + "    Precio PT ON P.cod_producto = PT.cod_producto  -- Asumiendo que hay una tabla de precios llamada PrecioTabla\n"
+                        + "WHERE \n"
+                        + "    (PH.id_precioHistorial = (\n"
+                        + "        SELECT \n"
+                        + "            MAX(id_precioHistorial)\n"
+                        + "        FROM \n"
+                        + "            PrecioHistorial\n"
+                        + "        WHERE \n"
+                        + "            cod_producto = P.cod_producto\n"
+                        + "    ) OR PH.id_precioHistorial IS NULL)\n"
+                        + "    AND (P.nombre LIKE ? OR P.descripcion LIKE ? OR P.categoria LIKE ?)\n"
+                        + "ORDER BY \n"
+                        + "    P.nombre\n"
+                        + "OFFSET ? ROWS FETCH NEXT ? ROWS ONLY");
 
                 if (texto != null && !texto.isEmpty())
                 {
@@ -514,6 +606,7 @@ public class Inventario extends javax.swing.JPanel {
     private javax.swing.JButton btnSiguiente;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;

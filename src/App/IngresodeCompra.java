@@ -607,7 +607,7 @@ public class IngresodeCompra extends javax.swing.JFrame {
             String name = (String) model.getValueAt(i, 0);
             String cantidad = (String) model.getValueAt(i, 1);
             String preciounitario = (String) model.getValueAt(i, 2);
-            String total = (String) model.getValueAt(i, 5);
+            String total = (String) model.getValueAt(i, 4);
 
             facturaText.append(String.format(" %-23s %-10s  %-20s %-10s\n", name, cantidad, preciounitario, total));
         }

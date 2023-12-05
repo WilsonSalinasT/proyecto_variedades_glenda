@@ -22,6 +22,7 @@ import Paneles.Listado_Ventas;
 import Paneles.Listado_de_Precios;
 import Paneles.Listado_de_envios;
 import Paneles.Listado_pedido_entregado;
+import Paneles.MenuImagen;
 
 import Paneles.clientes;
 import Paneles.crear_envio;
@@ -31,6 +32,9 @@ import Paneles.listado_proveedores;
 
 import Paneles.ventas;
 import java.awt.BorderLayout;
+import java.awt.Window;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 public class Menu extends javax.swing.JFrame {
@@ -69,7 +73,6 @@ public class Menu extends javax.swing.JFrame {
         inventario = new javax.swing.JButton();
         Compras = new javax.swing.JButton();
         pedidoSublimacion3 = new javax.swing.JButton();
-        HistorialPrecios = new javax.swing.JButton();
         cerrarsecion = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         javax.swing.JLabel jLabel1 = new javax.swing.JLabel();
@@ -94,7 +97,7 @@ public class Menu extends javax.swing.JFrame {
                 productoActionPerformed(evt);
             }
         });
-        jPanel2.add(producto, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 250, 30));
+        jPanel2.add(producto, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 250, 30));
 
         Listadoclientes.setBackground(new java.awt.Color(255, 153, 102));
         Listadoclientes.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -106,7 +109,7 @@ public class Menu extends javax.swing.JFrame {
                 ListadoclientesActionPerformed(evt);
             }
         });
-        jPanel2.add(Listadoclientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 250, 30));
+        jPanel2.add(Listadoclientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 250, 30));
 
         proveedores.setBackground(new java.awt.Color(255, 153, 102));
         proveedores.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -118,7 +121,7 @@ public class Menu extends javax.swing.JFrame {
                 proveedoresActionPerformed(evt);
             }
         });
-        jPanel2.add(proveedores, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 250, 30));
+        jPanel2.add(proveedores, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 170, 250, 30));
 
         empleados.setBackground(new java.awt.Color(255, 153, 102));
         empleados.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -130,7 +133,7 @@ public class Menu extends javax.swing.JFrame {
                 empleadosActionPerformed(evt);
             }
         });
-        jPanel2.add(empleados, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 170, 250, 30));
+        jPanel2.add(empleados, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 210, 250, 30));
 
         envios.setBackground(new java.awt.Color(255, 153, 102));
         envios.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -142,7 +145,7 @@ public class Menu extends javax.swing.JFrame {
                 enviosActionPerformed(evt);
             }
         });
-        jPanel2.add(envios, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 250, 250, 30));
+        jPanel2.add(envios, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 290, 250, 30));
 
         citas.setBackground(new java.awt.Color(255, 153, 102));
         citas.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -154,7 +157,7 @@ public class Menu extends javax.swing.JFrame {
                 citasActionPerformed(evt);
             }
         });
-        jPanel2.add(citas, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 210, 250, 30));
+        jPanel2.add(citas, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 250, 250, 30));
 
         pedidoSastreria.setBackground(new java.awt.Color(255, 153, 102));
         pedidoSastreria.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -166,7 +169,7 @@ public class Menu extends javax.swing.JFrame {
                 pedidoSastreriaActionPerformed(evt);
             }
         });
-        jPanel2.add(pedidoSastreria, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 290, 250, 30));
+        jPanel2.add(pedidoSastreria, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 330, 250, 30));
 
         arreglo.setBackground(new java.awt.Color(255, 153, 102));
         arreglo.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -178,7 +181,7 @@ public class Menu extends javax.swing.JFrame {
                 arregloActionPerformed(evt);
             }
         });
-        jPanel2.add(arreglo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 330, 250, -1));
+        jPanel2.add(arreglo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 370, 250, -1));
 
         pedidoSublimacion.setBackground(new java.awt.Color(255, 153, 102));
         pedidoSublimacion.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -190,7 +193,7 @@ public class Menu extends javax.swing.JFrame {
                 pedidoSublimacionActionPerformed(evt);
             }
         });
-        jPanel2.add(pedidoSublimacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 370, 250, 30));
+        jPanel2.add(pedidoSublimacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 410, 250, 30));
 
         Galeria.setBackground(new java.awt.Color(255, 153, 102));
         Galeria.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -214,7 +217,7 @@ public class Menu extends javax.swing.JFrame {
                 inventarioActionPerformed(evt);
             }
         });
-        jPanel2.add(inventario, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 490, 250, 30));
+        jPanel2.add(inventario, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 530, 250, 30));
 
         Compras.setBackground(new java.awt.Color(255, 153, 102));
         Compras.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -226,7 +229,7 @@ public class Menu extends javax.swing.JFrame {
                 ComprasActionPerformed(evt);
             }
         });
-        jPanel2.add(Compras, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 410, 250, 30));
+        jPanel2.add(Compras, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 450, 250, 30));
 
         pedidoSublimacion3.setBackground(new java.awt.Color(255, 153, 102));
         pedidoSublimacion3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -238,19 +241,7 @@ public class Menu extends javax.swing.JFrame {
                 pedidoSublimacion3ActionPerformed(evt);
             }
         });
-        jPanel2.add(pedidoSublimacion3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 450, 250, 30));
-
-        HistorialPrecios.setBackground(new java.awt.Color(255, 153, 102));
-        HistorialPrecios.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        HistorialPrecios.setForeground(new java.awt.Color(255, 255, 255));
-        HistorialPrecios.setText("Historial de precios");
-        HistorialPrecios.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        HistorialPrecios.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                HistorialPreciosActionPerformed(evt);
-            }
-        });
-        jPanel2.add(HistorialPrecios, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 530, 250, 30));
+        jPanel2.add(pedidoSublimacion3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 490, 250, 30));
 
         cerrarsecion.setBackground(new java.awt.Color(255, 153, 102));
         cerrarsecion.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -269,7 +260,12 @@ public class Menu extends javax.swing.JFrame {
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/work-from-home.png"))); // NOI18N
         jLabel3.setText("Inicio");
         jLabel3.setToolTipText("");
-        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 10, -1, -1));
+        jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel3MouseClicked(evt);
+            }
+        });
+        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 40, -1, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Hyper.png"))); // NOI18N
         jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -281,6 +277,11 @@ public class Menu extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(255, 153, 51));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Picsart_23-12-03_20-19-20-814.png"))); // NOI18N
+        jLabel2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jLabel2KeyTyped(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelprincipalLayout = new javax.swing.GroupLayout(panelprincipal);
         panelprincipal.setLayout(panelprincipalLayout);
@@ -532,18 +533,6 @@ public class Menu extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_proveedores1ActionPerformed
 
-    private void HistorialPreciosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HistorialPreciosActionPerformed
-        // TODO add your handling code here:
-        Listado_de_Precios p2 = new Listado_de_Precios();
-        p2.setSize(1024, 640);
-        p2.setLocation(0, 0);
-
-        panelprincipal.removeAll();
-        panelprincipal.add(p2, BorderLayout.CENTER);
-        panelprincipal.revalidate();
-        panelprincipal.repaint();
-    }//GEN-LAST:event_HistorialPreciosActionPerformed
-
     private void cerrarsecionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cerrarsecionActionPerformed
         int opcion = JOptionPane.showConfirmDialog(null, "¿Estás seguro de que deseas salir?", "Confirmar salida", JOptionPane.YES_NO_OPTION);
 
@@ -556,11 +545,27 @@ public class Menu extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_cerrarsecionActionPerformed
 
+    private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
+        MenuImagen p2 = new MenuImagen();
+        p2.setSize(1024, 640);
+        p2.setLocation(0, 0);
+        
+
+        panelprincipal.removeAll();
+        panelprincipal.add(p2, BorderLayout.CENTER);
+        panelprincipal.revalidate();
+        panelprincipal.repaint();
+//      
+    }//GEN-LAST:event_jLabel3MouseClicked
+
+    private void jLabel2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jLabel2KeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel2KeyTyped
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Compras;
     private javax.swing.JButton Galeria;
-    private javax.swing.JButton HistorialPrecios;
     private javax.swing.JButton Listadoclientes;
     private javax.swing.JButton arreglo;
     private javax.swing.JButton cerrarsecion;
