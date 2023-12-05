@@ -560,37 +560,35 @@ public class Crear_Empleado extends javax.swing.JPanel {
 
     private void txt_FijoCeltxt_FijoCelKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_FijoCeltxt_FijoCelKeyTyped
 
-        String texto = txt_FijoCel.getText();
-        char c = evt.getKeyChar();
+       // Obtener el carácter que se está ingresando
+    char c = evt.getKeyChar();
 
-// Verificar si el número de caracteres no excede el formato esperado
-        if (texto.length() < 9)
-        {
-            if (texto.isEmpty())
-            {
-                // Permitir solo 9, 8 o 3 como primer carácter
-                if (c == '2')
-                {
-                    txt_FijoCel.setText(String.valueOf(c));
-                } else
-                {
-                    evt.consume(); // Ignorar cualquier otro carácter al principio
-                }
-            } else if (Character.isDigit(c))
-            {
-                // Formato: XXXX-XXXX (4 dígitos seguidos de un guion y otros 4 dígitos)
-                if (texto.length() == 4)
-                {
-                    txt_FijoCel.setText(texto + "-");
-                }
-            } else
-            {
-                evt.consume(); // Ignorar el carácter ingresado si no cumple con el formato esperado
-            }
-        } else
-        {
-            evt.consume(); // Ignorar el carácter ingresado si ya se alcanzó la longitud máxima
-        }
+    // Validar que el carácter sea un número
+    if (!Character.isDigit(c)) {
+        // Si no es un número, cancelar el evento
+        evt.consume();
+        return;
+    }
+
+    // Obtener el texto actual del campo de texto
+    String texto = txt_FijoCel.getText();
+
+    // Validar que el primer carácter sea 9, 8, o 3
+    if (texto.length() == 0 && (c != '2')) {
+        // Si no es 9, 8, o 3, cancelar el evento
+        evt.consume();
+        return;
+    }
+
+    // Insertar un guion después del cuarto número
+    if (texto.length() == 4) {
+        txt_FijoCel.setText(texto + "-");
+    }
+
+    // No permitir más de 9 caracteres
+    if (texto.length() == 9) {
+        evt.consume();
+    }
     }//GEN-LAST:event_txt_FijoCeltxt_FijoCelKeyTyped
 
     private void txtDnitxtDniKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDnitxtDniKeyReleased
@@ -1064,7 +1062,7 @@ public class Crear_Empleado extends javax.swing.JPanel {
     }//GEN-LAST:event_txtDniFocusLost
 
     private void txtSalarioFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSalarioFocusLost
-  
+
     }//GEN-LAST:event_txtSalarioFocusLost
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -1132,7 +1130,7 @@ public class Crear_Empleado extends javax.swing.JPanel {
         {
             camposVacios.append("\n - Celular");
         }
-       if (salario != null && !salario.isEmpty())
+        if (salario != null && !salario.isEmpty())
         {
             int salarioNumerico = Integer.parseInt(salario);
             if (salarioNumerico > 1000 && salario.length() < 5)
@@ -1203,45 +1201,47 @@ public class Crear_Empleado extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void txtCelularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCelularActionPerformed
-       
+
     }//GEN-LAST:event_txtCelularActionPerformed
 
     private void txtCelularKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCelularKeyTyped
-         String texto = txtCelular.getText();
+        // Obtener el carácter que se está ingresando
         char c = evt.getKeyChar();
 
-// Verificar si el número de caracteres no excede el formato esperado
-        if (texto.length() < 9)
+        // Validar que el carácter sea un número
+        if (!Character.isDigit(c))
         {
-            if (texto.isEmpty())
-            {
-                // Permitir solo 9, 8 o 3 como primer carácter
-                if (c == '9' || c == '8' || c == '3')
-                {
-                    txtCelular.setText(String.valueOf(c));
-                } else
-                {
-                    evt.consume(); // Ignorar cualquier otro carácter al principio
-                }
-            } else if (Character.isDigit(c))
-            {
-                // Formato: XXXX-XXXX (4 dígitos seguidos de un guion y otros 4 dígitos)
-                if (texto.length() == 4)
-                {
-                    txtCelular.setText(texto + "-");
-                }
-            } else
-            {
-                evt.consume(); // Ignorar el carácter ingresado si no cumple con el formato esperado
-            }
-        } else
+            // Si no es un número, cancelar el evento
+            evt.consume();
+            return;
+        }
+
+        // Obtener el texto actual del campo de texto
+        String texto = txtCelular.getText();
+
+        // Validar que el primer carácter sea 9, 8, o 3
+        if (texto.length() == 0 && (c != '9' && c != '8' && c != '3'))
         {
-            evt.consume(); // Ignorar el carácter ingresado si ya se alcanzó la longitud máxima
+            // Si no es 9, 8, o 3, cancelar el evento
+            evt.consume();
+            return;
+        }
+
+        // Insertar un guion después del cuarto número
+        if (texto.length() == 4)
+        {
+            txtCelular.setText(texto + "-");
+        }
+
+        // No permitir más de 9 caracteres
+        if (texto.length() == 9)
+        {
+            evt.consume();
         }
     }//GEN-LAST:event_txtCelularKeyTyped
 
     private void txtCelularFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCelularFocusLost
-         
+
     }//GEN-LAST:event_txtCelularFocusLost
 
     private void txtCelularKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCelularKeyReleased
