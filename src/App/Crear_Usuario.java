@@ -187,7 +187,7 @@ public class Crear_Usuario extends javax.swing.JFrame {
 
         contra1.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         contra1.setForeground(new java.awt.Color(255, 0, 0));
-        contra1.setText("La contraseña debe maximo 12 caracteres, puede incluir mayúsculas, minúsculas, números y caracteres especiales (*, &, $, etc.).");
+        contra1.setText("La contraseña debe tener exactamente 8 caracteres, compuestos únicamente por letras y números.");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -220,7 +220,7 @@ public class Crear_Usuario extends javax.swing.JFrame {
                                 .addComponent(txtcontrasena2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 387, Short.MAX_VALUE)
                                 .addComponent(txtcontrasena1, javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(txtNombre, javax.swing.GroupLayout.Alignment.LEADING)))
-                        .addGap(0, 46, Short.MAX_VALUE))))
+                        .addGap(0, 199, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -290,6 +290,11 @@ public class Crear_Usuario extends javax.swing.JFrame {
 
         if (contrasena.isEmpty()) {
             camposVacios.append("\n - Contraseña");
+        } else {
+            // Verificar si la contraseña no cumple con las especificaciones
+            if (!contrasena.matches("[a-zA-Z0-9]{8}")) {
+                camposVacios.append("\n - La contraseña debe ser de exactamente 8 caracteres");
+            }
         }
 
         if (contrasena1.isEmpty()) {
@@ -346,8 +351,8 @@ public class Crear_Usuario extends javax.swing.JFrame {
 
         if (contrasena.isEmpty() && Character.isWhitespace(c)) {
             evt.consume(); // Consumir el evento si es un espacio en blanco en la primera posición
-        } else if (contrasena.length() >= 12) {
-            evt.consume(); // Consumir el evento si se ha alcanzado la longitud máxima
+        } else if (contrasena.length() >= 8 || !Character.isLetterOrDigit(c)) {
+            evt.consume(); // Consumir el evento si se ha alcanzado la longitud máxima o si el carácter no es una letra o número
         }
 
 
@@ -360,8 +365,8 @@ public class Crear_Usuario extends javax.swing.JFrame {
 
         if (contrasena.isEmpty() && Character.isWhitespace(c)) {
             evt.consume(); // Consumir el evento si es un espacio en blanco en la primera posición
-        } else if (contrasena.length() >= 12) {
-            evt.consume(); // Consumir el evento si se ha alcanzado la longitud máxima
+        } else if (contrasena.length() >= 8 || !Character.isLetterOrDigit(c)) {
+            evt.consume(); // Consumir el evento si se ha alcanzado la longitud máxima o si el carácter no es una letra o número
         }
 
 
@@ -378,7 +383,6 @@ public class Crear_Usuario extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    
     /*private void validatePassword() {
         String currentPassword = txtcontrasena1.getText();
 
@@ -393,7 +397,7 @@ public class Crear_Usuario extends javax.swing.JFrame {
         }
     }*/
 
-    /*private boolean isSpecialCharacter(char c) {
+ /*private boolean isSpecialCharacter(char c) {
         // Lógica para verificar si el carácter es especial
         String specialCharacters = "!@#$%^&*()-_=+[]{}|;:'\",.<>/?";
         return specialCharacters.indexOf(c) != -1;

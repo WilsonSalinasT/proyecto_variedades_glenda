@@ -358,24 +358,11 @@ public class Login extends javax.swing.JFrame {
         char[] contrasena = txtPassword.getPassword();
         char c = evt.getKeyChar(); // Obtener el carácter ingresado
 
-        if (contrasena.length == 0 && Character.isWhitespace(c))
-        {
+        if (contrasena.length == 0 && Character.isWhitespace(c)) {
             evt.consume(); // Consumir el evento si es un espacio en blanco en la primera posición
-        } else if (contrasena.length >= 12)
-        {
-            evt.consume(); // Consumir el evento si se ha alcanzado la longitud máxima
+        } else if (contrasena.length >= 8 || !Character.isLetterOrDigit(c)) {
+            evt.consume(); // Consumir el evento si se ha alcanzado la longitud máxima o si el carácter no es una letra o número
         }
-
-        /*char[] passwordChars = txtPassword.getPassword();
-        String password = new String(passwordChars);
-
-        if (password.length() == 0 || password.trim().isEmpty()) {
-            evt.consume(); // Consumir el evento si está vacío o contiene solo espacios
-        } else if (password.length() < 8 || password.length() > 20) {
-            evt.consume(); // Consumir el evento si la longitud está fuera del rango permitido
-        } else if (!password.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,20}$")) {
-            evt.consume(); // Consumir el evento si no cumple con los requisitos de contenido
-        }*/
     }//GEN-LAST:event_txtPasswordKeyTyped
 
     private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
