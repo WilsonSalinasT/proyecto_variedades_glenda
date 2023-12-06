@@ -46,15 +46,19 @@ public class IngresodeCompra extends javax.swing.JFrame {
     public IngresodeCompra() {
         initComponents();
 
-        // Establecer la fecha mínima como dos meses atrás desde la fecha actual
-        Calendar minDate = Calendar.getInstance();
-        minDate.add(Calendar.MONTH, -1); // Resta dos meses a la fecha actual
-        txtfecha.setMinSelectableDate(minDate.getTime());
+    // Obtener la fecha actual
+Calendar currentDate = Calendar.getInstance();
 
-        // Establecer la fecha máxima como dos meses en el futuro desde la fecha actual
-        Calendar maxDate = Calendar.getInstance();
-        maxDate.add(Calendar.MONTH, 2); // Suma dos meses a la fecha actual
-        txtfecha.setMaxSelectableDate(maxDate.getTime());
+// Establecer la fecha mínima como 8 días atrás desde la fecha actual
+Calendar minDate = (Calendar) currentDate.clone(); // Clonar para evitar modificar la fecha actual
+minDate.add(Calendar.DAY_OF_MONTH, -8);
+txtfecha.setMinSelectableDate(minDate.getTime());
+
+// Establecer la fecha máxima como dos meses en el futuro desde la fecha actual
+Calendar maxDate = (Calendar) currentDate.clone(); // Clonar para evitar modificar la fecha actual
+maxDate.add(Calendar.MONTH, 2);
+txtfecha.setMaxSelectableDate(maxDate.getTime());
+
 
         tablecompras.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 12));
         tablecompras.getTableHeader().setOpaque(false);
