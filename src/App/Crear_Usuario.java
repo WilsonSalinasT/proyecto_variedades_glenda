@@ -10,6 +10,7 @@ import java.awt.event.WindowEvent;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -322,59 +323,62 @@ public class Crear_Usuario extends javax.swing.JFrame {
 
         StringBuilder camposVacios = new StringBuilder("Los siguientes campos están vacíos:");
 
-        if (nombreUsuario.isEmpty())
-        {
+        if (nombreUsuario.isEmpty()) {
             camposVacios.append("\n - Nombre de Usuario");
         }
 
-        if (contrasena.isEmpty())
-        {
+        if (contrasena.isEmpty()) {
             camposVacios.append("\n - Contraseña");
-        } else
-        {
+        } else {
             // Verificar si la contraseña no cumple con las especificaciones
-            if (!contrasena.matches("[a-zA-Z0-9]{8}"))
-            {
+            if (!contrasena.matches("[a-zA-Z0-9]{8}")) {
                 camposVacios.append("\n - La contraseña debe ser de exactamente 8 caracteres");
             }
         }
 
-        if (contrasena1.isEmpty())
-        {
+        if (contrasena1.isEmpty()) {
             camposVacios.append("\n - Volver a introducir la contraseña");
         }
 
-        if (!contrasena.equals(contrasena1))
-        {
+        if (!contrasena.equals(contrasena1)) {
             camposVacios.append("\n - Las contraseñas no coinciden");
         }
 
-        if (!"Los siguientes campos están vacíos:".equals(camposVacios.toString()))
-        {
+        if (!"Los siguientes campos están vacíos:".equals(camposVacios.toString())) {
             JOptionPane.showMessageDialog(null, camposVacios.toString(), "Campos Vacíos", JOptionPane.ERROR_MESSAGE);
-        } else
-        {
-            try
-            {
+        } else {
+            try {
                 Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
                 Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
 
-                PreparedStatement insertPs = conn.prepareStatement("INSERT INTO Usuarios (nombre_usuario, contrasena) VALUES (?, ?)");
-                insertPs.setString(1, nombreUsuario);
-                insertPs.setString(2, contrasena);
+                // Verificar si el nombre de usuario ya existe
+                PreparedStatement verificaUsuarioPs = conn.prepareStatement("SELECT COUNT(*) FROM Usuarios WHERE nombre_usuario = ?");
+                verificaUsuarioPs.setString(1, nombreUsuario);
+                ResultSet resultSet = verificaUsuarioPs.executeQuery();
 
-                insertPs.executeUpdate();
-                JOptionPane.showMessageDialog(null, "Registro guardado");
+                resultSet.next();
+                int count = resultSet.getInt(1);
 
-                dispose(); // Cierra la ventana
+                if (count > 0) {
+                    JOptionPane.showMessageDialog(null, "El nombre de usuario ya existe", "Error", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    // Insertar el nuevo usuario
+                    PreparedStatement insertPs = conn.prepareStatement("INSERT INTO Usuarios (nombre_usuario, contrasena) VALUES (?, ?)");
+                    insertPs.setString(1, nombreUsuario);
+                    insertPs.setString(2, contrasena);
 
-                // Resto del código para limpiar campos y actualizar la interfaz gráfica
-                // ...
-            } catch (SQLException e)
-            {
+                    insertPs.executeUpdate();
+                    JOptionPane.showMessageDialog(null, "Registro guardado");
+
+                    dispose(); // Cierra la ventana
+
+                    // Resto del código para limpiar campos y actualizar la interfaz gráfica
+                    // ...
+                }
+
+            } catch (SQLException e) {
                 JOptionPane.showMessageDialog(null, e.toString(), "Error de SQL", JOptionPane.ERROR_MESSAGE);
-            } catch (ClassNotFoundException ex)
-            {
+            } catch (ClassNotFoundException ex) {
                 JOptionPane.showMessageDialog(null, "Error de conexión a la base de datos", "Error de Conexión", JOptionPane.ERROR_MESSAGE);
             }
         }
