@@ -11,6 +11,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.event.DocumentEvent;
@@ -84,13 +85,15 @@ public class Crear_Usuario extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         txtNombre = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        txtcontrasena1 = new javax.swing.JTextField();
-        txtcontrasena2 = new javax.swing.JTextField();
         btnGuardar = new javax.swing.JButton();
         btnvolver = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         contra1 = new javax.swing.JLabel();
+        txtcontrasena1 = new javax.swing.JPasswordField();
+        Mostrar_Ocultar = new javax.swing.JLabel();
+        txtcontrasena2 = new javax.swing.JPasswordField();
+        Mostrar_Ocultar1 = new javax.swing.JLabel();
 
         jLabel5.setText("jLabel5");
 
@@ -126,23 +129,6 @@ public class Crear_Usuario extends javax.swing.JFrame {
 
         jLabel6.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel6.setText("Dale seguridad.");
-
-        txtcontrasena1.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                txtcontrasena1FocusLost(evt);
-            }
-        });
-        txtcontrasena1.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtcontrasena1KeyTyped(evt);
-            }
-        });
-
-        txtcontrasena2.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtcontrasena2KeyTyped(evt);
-            }
-        });
 
         btnGuardar.setBackground(new java.awt.Color(240, 128, 128));
         btnGuardar.setFont(new java.awt.Font("Arial", 3, 14)); // NOI18N
@@ -189,6 +175,46 @@ public class Crear_Usuario extends javax.swing.JFrame {
         contra1.setForeground(new java.awt.Color(255, 0, 0));
         contra1.setText("La contraseña debe tener exactamente 8 caracteres, compuestos únicamente por letras y números.");
 
+        txtcontrasena1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        txtcontrasena1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtcontrasena1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtcontrasena1ActionPerformed(evt);
+            }
+        });
+        txtcontrasena1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtcontrasena1KeyTyped(evt);
+            }
+        });
+
+        Mostrar_Ocultar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/eye_key.png"))); // NOI18N
+        Mostrar_Ocultar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Mostrar_OcultarMouseClicked(evt);
+            }
+        });
+
+        txtcontrasena2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        txtcontrasena2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtcontrasena2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtcontrasena2ActionPerformed(evt);
+            }
+        });
+        txtcontrasena2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtcontrasena2KeyTyped(evt);
+            }
+        });
+
+        Mostrar_Ocultar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/eye_key.png"))); // NOI18N
+        Mostrar_Ocultar1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Mostrar_Ocultar1MouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -209,18 +235,22 @@ public class Crear_Usuario extends javax.swing.JFrame {
                             .addComponent(jLabel2)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(14, 14, 14)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel6)
-                                    .addComponent(jLabel4))))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(jLabel4)))
+                        .addContainerGap(122, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(txtcontrasena2, javax.swing.GroupLayout.PREFERRED_SIZE, 387, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(Mostrar_Ocultar1))
+                            .addComponent(jLabel6)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(txtcontrasena1, javax.swing.GroupLayout.PREFERRED_SIZE, 387, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(Mostrar_Ocultar))
                             .addComponent(contra1)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(txtcontrasena2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 387, Short.MAX_VALUE)
-                                .addComponent(txtcontrasena1, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txtNombre, javax.swing.GroupLayout.Alignment.LEADING)))
-                        .addGap(0, 199, Short.MAX_VALUE))))
+                            .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 387, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -234,13 +264,19 @@ public class Crear_Usuario extends javax.swing.JFrame {
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(24, 24, 24)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtcontrasena1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12)
-                .addComponent(txtcontrasena2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(txtcontrasena1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
+                        .addComponent(txtcontrasena2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(Mostrar_Ocultar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
+                        .addComponent(Mostrar_Ocultar1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(contra1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -269,9 +305,11 @@ public class Crear_Usuario extends javax.swing.JFrame {
     }//GEN-LAST:event_btnvolverActionPerformed
 
     private void showWarning() {
-        if (txtcontrasena1.getText().isEmpty()) {
+        if (txtcontrasena1.getText().isEmpty())
+        {
             contra1.setVisible(false);
-        } else {
+        } else
+        {
             contra1.setVisible(true);
         }
     }
@@ -284,31 +322,40 @@ public class Crear_Usuario extends javax.swing.JFrame {
 
         StringBuilder camposVacios = new StringBuilder("Los siguientes campos están vacíos:");
 
-        if (nombreUsuario.isEmpty()) {
+        if (nombreUsuario.isEmpty())
+        {
             camposVacios.append("\n - Nombre de Usuario");
         }
 
-        if (contrasena.isEmpty()) {
+        if (contrasena.isEmpty())
+        {
             camposVacios.append("\n - Contraseña");
-        } else {
+        } else
+        {
             // Verificar si la contraseña no cumple con las especificaciones
-            if (!contrasena.matches("[a-zA-Z0-9]{8}")) {
+            if (!contrasena.matches("[a-zA-Z0-9]{8}"))
+            {
                 camposVacios.append("\n - La contraseña debe ser de exactamente 8 caracteres");
             }
         }
 
-        if (contrasena1.isEmpty()) {
+        if (contrasena1.isEmpty())
+        {
             camposVacios.append("\n - Volver a introducir la contraseña");
         }
 
-        if (!contrasena.equals(contrasena1)) {
+        if (!contrasena.equals(contrasena1))
+        {
             camposVacios.append("\n - Las contraseñas no coinciden");
         }
 
-        if (!"Los siguientes campos están vacíos:".equals(camposVacios.toString())) {
+        if (!"Los siguientes campos están vacíos:".equals(camposVacios.toString()))
+        {
             JOptionPane.showMessageDialog(null, camposVacios.toString(), "Campos Vacíos", JOptionPane.ERROR_MESSAGE);
-        } else {
-            try {
+        } else
+        {
+            try
+            {
                 Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
                 Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=GlendaDB;encrypt=true;trustServerCertificate=true;", "sa", "123456789");
 
@@ -323,9 +370,11 @@ public class Crear_Usuario extends javax.swing.JFrame {
 
                 // Resto del código para limpiar campos y actualizar la interfaz gráfica
                 // ...
-            } catch (SQLException e) {
+            } catch (SQLException e)
+            {
                 JOptionPane.showMessageDialog(null, e.toString(), "Error de SQL", JOptionPane.ERROR_MESSAGE);
-            } catch (ClassNotFoundException ex) {
+            } catch (ClassNotFoundException ex)
+            {
                 JOptionPane.showMessageDialog(null, "Error de conexión a la base de datos", "Error de Conexión", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -336,49 +385,98 @@ public class Crear_Usuario extends javax.swing.JFrame {
         // TODO add your handling code here:
         char c = evt.getKeyChar(); // Obtener el carácter ingresado
 
-        if (txtNombre.getText().isEmpty() && (Character.isWhitespace(c) || !Character.isLetter(c))) {
+        if (txtNombre.getText().isEmpty() && (Character.isWhitespace(c) || !Character.isLetter(c)))
+        {
             evt.consume(); // Consumir el evento si es un espacio en blanco o no es una letra en la primera posición
-        } else if (txtNombre.getText().length() >= 50) {
+        } else if (txtNombre.getText().length() >= 50)
+        {
             evt.consume(); // Consumir el evento si se ha alcanzado la longitud máxima
         }
 
     }//GEN-LAST:event_txtNombreKeyTyped
 
-    private void txtcontrasena1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtcontrasena1KeyTyped
-
-        String contrasena = txtcontrasena1.getText();
-        char c = evt.getKeyChar(); // Obtener el carácter ingresado
-
-        if (contrasena.isEmpty() && Character.isWhitespace(c)) {
-            evt.consume(); // Consumir el evento si es un espacio en blanco en la primera posición
-        } else if (contrasena.length() >= 8 || !Character.isLetterOrDigit(c)) {
-            evt.consume(); // Consumir el evento si se ha alcanzado la longitud máxima o si el carácter no es una letra o número
-        }
-
-
-    }//GEN-LAST:event_txtcontrasena1KeyTyped
-
-    private void txtcontrasena2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtcontrasena2KeyTyped
-
-        String contrasena = txtcontrasena2.getText();
-        char c = evt.getKeyChar(); // Obtener el carácter ingresado
-
-        if (contrasena.isEmpty() && Character.isWhitespace(c)) {
-            evt.consume(); // Consumir el evento si es un espacio en blanco en la primera posición
-        } else if (contrasena.length() >= 8 || !Character.isLetterOrDigit(c)) {
-            evt.consume(); // Consumir el evento si se ha alcanzado la longitud máxima o si el carácter no es una letra o número
-        }
-
-
-    }//GEN-LAST:event_txtcontrasena2KeyTyped
-
-    private void txtcontrasena1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtcontrasena1FocusLost
-        //validatePassword();
-    }//GEN-LAST:event_txtcontrasena1FocusLost
-
     private void txtcontrasena1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtcontrasena1FocusGained
 
     }//GEN-LAST:event_txtcontrasena1FocusGained
+
+    private void txtcontrasena1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtcontrasena1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtcontrasena1ActionPerformed
+
+    private void txtcontrasena1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtcontrasena1KeyTyped
+        // TODO add your handling code here:
+
+        char[] contrasena = txtcontrasena1.getPassword();
+        char c = evt.getKeyChar(); // Obtener el carácter ingresado
+
+        if (contrasena.length == 0 && Character.isWhitespace(c))
+        {
+            evt.consume(); // Consumir el evento si es un espacio en blanco en la primera posición
+        } else if (contrasena.length >= 8 || !Character.isLetterOrDigit(c))
+        {
+            evt.consume(); // Consumir el evento si se ha alcanzado la longitud máxima o si el carácter no es una letra o número
+        }
+    }//GEN-LAST:event_txtcontrasena1KeyTyped
+
+       boolean passwordVisible = false;
+    String imagePath = "/img/eye_key.png";
+
+    java.net.URL imgUrl = recuperarContra.class.getResource(imagePath);
+    // Crear un ImageIcon con la ruta de la imagen
+    ImageIcon icon = new ImageIcon(imgUrl);
+
+   
+    String imagePath1 = "/img/eye_password.png";
+
+     java.net.URL imgUr2 = recuperarContra.class.getResource(imagePath1);
+    // Crear un ImageIcon con la ruta de la imagen
+    ImageIcon icon1 = new ImageIcon(imgUr2);
+
+       boolean passwordVisible1 = false;
+    private void Mostrar_OcultarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Mostrar_OcultarMouseClicked
+        if (passwordVisible1)
+        {
+            txtcontrasena1.setEchoChar('*');
+            Mostrar_Ocultar.setIcon(icon);
+        } else
+        {
+            txtcontrasena1.setEchoChar((char) 0); // Muestra la contraseña
+            Mostrar_Ocultar.setIcon(icon1);
+        }
+        passwordVisible1 = !passwordVisible1;
+    }//GEN-LAST:event_Mostrar_OcultarMouseClicked
+
+    private void txtcontrasena2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtcontrasena2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtcontrasena2ActionPerformed
+
+    private void txtcontrasena2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtcontrasena2KeyTyped
+
+        char[] contrasena = txtcontrasena2.getPassword();
+        char c = evt.getKeyChar(); // Obtener el carácter ingresado
+
+        if (contrasena.length == 0 && Character.isWhitespace(c))
+        {
+            evt.consume(); // Consumir el evento si es un espacio en blanco en la primera posición
+        } else if (contrasena.length >= 8 || !Character.isLetterOrDigit(c))
+        {
+            evt.consume(); // Consumir el evento si se ha alcanzado la longitud máxima o si el carácter no es una letra o número
+        }
+    }//GEN-LAST:event_txtcontrasena2KeyTyped
+
+    private void Mostrar_Ocultar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Mostrar_Ocultar1MouseClicked
+    
+        if (passwordVisible1)
+        {
+            txtcontrasena2.setEchoChar('*');
+            Mostrar_Ocultar1.setIcon(icon);
+        } else
+        {
+            txtcontrasena2.setEchoChar((char) 0); // Muestra la contraseña
+            Mostrar_Ocultar1.setIcon(icon1);
+        }
+        passwordVisible1 = !passwordVisible1;
+    }//GEN-LAST:event_Mostrar_Ocultar1MouseClicked
 
     /**
      * @param args the command line arguments
@@ -403,6 +501,8 @@ public class Crear_Usuario extends javax.swing.JFrame {
         return specialCharacters.indexOf(c) != -1;
     }*/
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Mostrar_Ocultar;
+    private javax.swing.JLabel Mostrar_Ocultar1;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnvolver;
     private javax.swing.JLabel contra1;
@@ -416,7 +516,7 @@ public class Crear_Usuario extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     public javax.swing.JTextField txtNombre;
-    private javax.swing.JTextField txtcontrasena1;
-    private javax.swing.JTextField txtcontrasena2;
+    private javax.swing.JPasswordField txtcontrasena1;
+    private javax.swing.JPasswordField txtcontrasena2;
     // End of variables declaration//GEN-END:variables
 }
