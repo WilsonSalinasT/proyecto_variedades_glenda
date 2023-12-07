@@ -141,7 +141,9 @@ public class Crear_Usuario extends javax.swing.JFrame {
             }
         });
 
+        btnvolver.setBackground(new java.awt.Color(240, 128, 128));
         btnvolver.setFont(new java.awt.Font("Arial", 3, 14)); // NOI18N
+        btnvolver.setForeground(new java.awt.Color(255, 255, 255));
         btnvolver.setText("Volver");
         btnvolver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
