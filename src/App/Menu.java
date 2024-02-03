@@ -4,33 +4,32 @@
  */
 package App;
 
-import Paneles.GalleryProduct;
-import Paneles.IngresarCompra;
-import Paneles.Inventario;
-import Paneles.Listado_Citas;
-import Paneles.Listado_Compras;
+import Paneles.Galeria.GalleryProduct;
 
-import Paneles.Listado_Empleados;
-import Paneles.Listado_Pedidos_Arreglos;
-import Paneles.Listado_Pedidos_Entregado_Sastreria;
-import Paneles.Listado_Pedidos_Pendientes;
-import Paneles.Listado_Prod;
+import Paneles.Listados.Listado_Inventario;
+import Paneles.Listados.Listado_Citas;
+import Paneles.Listados.Listado_Compras;
+import Paneles.Listados.Listado_Empleados;
+import Paneles.Listados.Listado_Pedidos_Arreglos;
+import Paneles.Listados.Listado_Pedidos_Entregado_Sastreria;
+import Paneles.Listados.Listado_Pedidos_Sastreria;
 
-import Paneles.Listado_Productos;
-import Paneles.Listado_Sublimacion;
-import Paneles.Listado_Ventas;
-import Paneles.Listado_de_Precios;
-import Paneles.Listado_de_envios;
-import Paneles.Listado_pedido_entregado;
+
+import Paneles.Listados.Listado_Productos;
+import Paneles.Listados.Listado_Pedidos_Sublimacion;
+import Paneles.Listados.Listado_Ventas;
+import Paneles.Listados.Listado_de_Precios_Historial;
+import Paneles.Listados.Listado_de_envios;
+
 import Paneles.MenuImagen;
 
-import Paneles.clientes;
-import Paneles.crear_envio;
-import Paneles.crear_proveedor;
-import Paneles.editar_envio;
-import Paneles.listado_proveedores;
+import Paneles.Listados.Listado_Clientes;
+import Paneles.Crear.Crear_Envio;
+import Paneles.Crear.Crear_Proveedor;
+import Paneles.Editar.Editar_Envio;
+import Paneles.Listados.Listado_Proveedores;
 
-import Paneles.ventas;
+
 import java.awt.BorderLayout;
 import java.awt.Window;
 import javax.swing.ImageIcon;
@@ -341,7 +340,7 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_nueva_ventaActionPerformed
 
     private void ListadoclientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ListadoclientesActionPerformed
-        clientes p2 = new clientes();
+        Listado_Clientes p2 = new Listado_Clientes();
         p2.setSize(1024, 640);
         p2.setLocation(0, 0);
 
@@ -352,7 +351,7 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_ListadoclientesActionPerformed
 
     private void proveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_proveedorActionPerformed
-        listado_proveedores p2 = new listado_proveedores();
+        Listado_Proveedores p2 = new Listado_Proveedores();
         p2.setSize(1024, 640);
         p2.setLocation(0, 0);
 
@@ -377,7 +376,7 @@ public class Menu extends javax.swing.JFrame {
 
     private void pedidoSastreriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pedidoSastreriaActionPerformed
 
-        Listado_Pedidos_Pendientes p2 = new Listado_Pedidos_Pendientes();
+        Listado_Pedidos_Sastreria p2 = new Listado_Pedidos_Sastreria();
         p2.setSize(1024, 640);
         p2.setLocation(0, 0);
 
@@ -414,7 +413,7 @@ public class Menu extends javax.swing.JFrame {
 
     private void pedidoSublimacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pedidoSublimacionActionPerformed
         // TODO add your handling code here:
-        Listado_Sublimacion p1 = new Listado_Sublimacion();
+        Listado_Pedidos_Sublimacion p1 = new Listado_Pedidos_Sublimacion();
         p1.setSize(1024, 640);
         p1.setLocation(0, 0);
 
@@ -451,7 +450,7 @@ public class Menu extends javax.swing.JFrame {
 
     private void productosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clientes1ActionPerformed
         // TODO add your handling code here:
-        Inventario p2 = new Inventario();
+        Listado_Inventario p2 = new Listado_Inventario();
         p2.setSize(1024, 640);
         p2.setLocation(0, 0);
 
@@ -473,7 +472,7 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_pedidoSublimacion3ActionPerformed
 
     private void inventarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inventarioActionPerformed
-        Inventario p2 = new Inventario();
+        Listado_Inventario p2 = new Listado_Inventario();
         p2.setSize(1024, 640);
         p2.setLocation(0, 0);
 
@@ -519,7 +518,7 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_empleadosActionPerformed
 
     private void proveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_proveedoresActionPerformed
-        listado_proveedores p2 = new listado_proveedores();
+        Listado_Proveedores p2 = new Listado_Proveedores();
         p2.setSize(1024, 640);
         p2.setLocation(0, 0);
 

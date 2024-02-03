@@ -4,6 +4,7 @@
  */
 package Paneles;
 
+import Paneles.OperacionesGaleria.ProductosClase;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;

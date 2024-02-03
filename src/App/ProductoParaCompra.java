@@ -8,10 +8,10 @@ import static App.IngresodeCompra.tablecompras;
 import static App.IngresodeCompra.Tsum;
 import static App.Menu.panelprincipal;
 
-import Paneles.Crear_Pedido_arreglo;
-import Paneles.IngresarCompra;
+import Paneles.Crear.Crear_Pedido_arreglo;
+
 import Paneles.TextPrompt;
-import Paneles.crear_producto;
+import Paneles.Crear.Crear_Producto;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -39,7 +39,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JFrame;
 import static App.IngresodeCompra.panelcompra;
-import static Paneles.Crear_Pedido_Sublimacion.txtPrecio;
+import static Paneles.Crear.Crear_Pedido_Sublimacion.txtPrecio;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 

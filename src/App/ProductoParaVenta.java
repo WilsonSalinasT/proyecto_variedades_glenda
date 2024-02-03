@@ -6,10 +6,10 @@ package App;
 
 import static App.IngresodeVenta.Tsum;
 import static App.Menu.panelprincipal;
-import Paneles.Crear_Pedido_arreglo;
-import Paneles.IngresarCompra;
+import Paneles.Crear.Crear_Pedido_arreglo;
+
 import Paneles.TextPrompt;
-import Paneles.crear_producto;
+import Paneles.Crear.Crear_Producto;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
